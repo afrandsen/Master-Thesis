@@ -1,0 +1,51 @@
+---
+site: bookdown::bookdown_site
+pagetitle: "Master's Thesis -- Andreas Kracht Frandsen"
+documentclass: memoir
+classoption: [a4paper,oneside]
+bibliography: [references.bib]
+biblio-style: apalike
+link-citations: yes
+fontfamily: mathpazo
+github-repo: afrandsen/afrandsen
+colorlinks: yes
+urlcolor: magenta
+citecolor: magenta
+linkcolor: magenta
+nocite: '@*'
+description: "Master's Theis of Andreas Kracht Frandsen, Aarhus University."
+---
+
+\pagenumbering{roman}
+
+\tableofcontents
+
+\newpage
+
+\listoffigures
+
+\listoftables
+
+\newpage
+
+# Forord {-}
+
+Dette dokument findes interaktivt og i statisk format.
+
+`r if (knitr::is_latex_output()) '
+For at se en interaktiv HTML version af dokumentet, med mulighed for at redigere fejl eller skrive kommentarer, gå da til denne hjemmeside [afrandsen.rbind.io/bare/thesis/](https://afrandsen.rbind.io/bare/thesis/). Siden vil blive opdateret kontinuerligt, hvis jeg selv finder fejl gennem GitHub.
+'`
+
+`r if (knitr::is_html_output()) '
+Dette er den interaktive HTML version af dokumentet, du kan redigere fejl ved at trykke på &#x1F589; knappen i menubaren.
+
+Til venstre finder du indholdsfortegnelsen. God fornøjelse!
+<p align="center">
+<img src="latex/ausegl_sort.png" width="200">
+</p>
+
+Copyright &#x00A9; 2019 $\\TeX$nician and useR Andreas Kracht Frandsen
+
+Alt indhold er licenseret under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+'`
+\newpage
