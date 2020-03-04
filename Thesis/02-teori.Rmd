@@ -1,5 +1,45 @@
 # Teori
 
+## Den myopiske investor
+Den myopiske investor vælger -- som navnet ligger op til -- sin portefølje under et én-periodes perspektiv, og foretager dermed et statisk bindende valg. Investoren forsøger at maksimere sin terminal formue, ved samtidig at forholde sig til sin risiko aversion. Dette foresager, at alle efterfølgende perioder bliver ignoreret af investoren. Ergo skal han løse det statiske portefølje problem fra tidspunkt $t$ til tidspunkt $t+1$. I denne ene periode er investeringsmulighederne: et risikobærende aktiv samt et risikofrit aktiv. Afkastene over den førstkommende periode for disse aktivklasser vil blive noteret som hhv. $R_{t+1}$ med betinget middelværdi $\mathbb{E}_t(R_{t+1})$^[Her benyttes den gængse notation $\mathbb{E}(R_{t+1}\mid \mathcal{F}_t)=\mathbb{E}_t(R_{t+1})$ for filteret $\mathcal{F}_t$.] samt betinget varians $\mathbb{V}_t(R_{t+1})=\sigma_t^2$ og $R_{0,t+1}$.
+
+Det antages at investorens formue er fuldt allokeret når en del $\alpha_t$ bliver placeret i det risikobærende aktiv og $(1-\alpha_t)$ i det risikofrie aktiv. Hermed bliver hans porteføljeafkast givet ved
+\begin{equation}
+R_{p,t+1}=\alpha_t R_{t+1}+(1-\alpha_t)R_{0,t+1}. (\#eq:Portafk)
+\end{equation}
+
+Den betingede middelværdi af porteføljeafkastet bliver dermed
+$$\mathbb{E}_t(R_{p,t+1})=\alpha_t\mathbb{E}_t(R_{t+1})+(1-\alpha_t)R_{0,t+1},$$
+
+og endeligt den betingede varians af porteføljeafkastet
+$$\mathbb{V}_t(R_{p,t+1})=\alpha_t^2\sigma_t^2.$$
+
+Den simplificerende antagelse i [@Markowitz1952] er at investorer kun forholder sig til de første to momenter, hvis vi modellerer denne afvejning lineært, opnår vi følgende maksimeringsproblem
+\begin{equation}
+\max_{\alpha_t} \mathbb{E}_t(R_{p,t+1}) -\frac{k}{2} \mathbb{V}_t(R_{p,t+1}), (\#eq:Statmaks)
+\end{equation}
+
+hvor $k$ er en skalering, som repræsenterer investorens risiko aversion. Ved at modellere ovenstående relation som lineær og kun afhængig af de første to momenter restringerer vi investoren til at foretrække et højt afkast, lav volatilitet og ignorerer alle højere momenter, såsom skævhed og kurtosis. Ved indsættelse af Ligning \@ref(eq:Portafk) i Maksimeringsproblemet \@ref(eq:Statmaks) og dernæst differentation opnåes førsteordensbetingelsen, løsningen til optimalitetsproblemet bliver dermed
+\begin{equation}
+\alpha_t = \frac{\mathbb{E}_t(R_{t+1})-R_{0,t+1}}{k\sigma_t^2}. (\#eq:Løsning)
+\end{equation}
+
+Altså er vægtningen i det risikobærende aktiv et forhold mellem: det forventede risikobærende merafkast over det risikofrie aktiv samt en skalering af det risikobærende aktivs varians. Vi kan uden problemer opskrive ovenstående løsning til tilfældet, hvor investoren står overfor $N>1$ risikobærende aktiver. $\bm{R}_{t+1}$ repræsenterer en $N\times 1$ vektor af afkast for risikobærende aktiver, fra $t$ til $t+1$. Den betingede middelværdi bliver $\mathbb{E}_t(\bm{R}_{t+1})$ og den betingede kovariansmatrix noteres som $\mathbb{V}_t(\bm{R}_{t+1})=\bm{\Sigma}_t$. Herudover er $\bm{\alpha}_t$ nu en $N\times 1$ vektor af vægte i de risikobærende aktiver. Vi kan nu opskrive maksimeringsproblemet
+\begin{equation}
+\max_{\alpha_t} \bm{\alpha}_t'(\mathbb{E}_t(\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}) - \frac{k}{2}\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t, (\#eq:MultStatmaks)
+\end{equation}
+
+Den optimale porteføljestrategi, givet som løsningen til Maksimeringsproblemet \@ref(eq:MultStatmaks) findes til at være
+$$\bm{\alpha}_t=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t(\bm{R}_{t+1})-R_{0,t+1}\bm{\ell}).$$
+
+Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det værd at bemærke, at løsningen er karakteriseret af \textit{The Mutual Fund Seperation Theorem}, Tobin??, som var en af mange videnskabelige bidrag James Tobin fik sin Nobelpris for i 1981. Essen af teoremet er, at alle investorer vil holde den eksakt samme portefølje af risikobærende aktiver samt en del i det risikofrie aktiv. Det eneste som adskiller investorer fra hinanden, er deres relative fordeling af total formue i den optimale risikobærende portefølje, som er fastsat ud fra deres egne risikopræferencer. Figur ?? viser de optimale porteføljestrategier i et afkast-volatilitets spektrum.
+
+## Nytte over formue
+
+## Fordeling af afkast
+
+## VAR
+
 I dette kapitel fastsættes den teoretiske ramme for den empiriske analyse. Dette gøres hovedsageligt ud fra teorien bag [@Userguide2004] s. 2-22 med enkelte dele, som varierer.
 \section{Sættet af investeringsmuligheder}
 Først etableres en model, som kan modellere forventet afkast og risiko af aktier på tværs af investeringshorisonter.
@@ -132,14 +172,14 @@ ved at anvende denne matrix på den betingede middelværdi fås da
     \begin{equation}
         \frac{1}{k}\begin{pmatrix}
         \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
-        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\ell} \right)
+        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}} \right)
         \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k}).
     \end{equation}
 Anvender vi den på den betingede varians fås
     \begin{equation}
         \frac{1}{k}\mathbb{V}_t\begin{pmatrix}
         r_{0,t+1}^{(k)}\\
-        \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\ell}
+        \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}}
         \end{pmatrix}=\frac{1}{k}\begin{pmatrix}
         \sigma_0^2(k) & \bm{\sigma}_{0x}(k)'\\
         \bm{\sigma}_{0x}(k) & \bm{\Sigma}_{xx}(k)
@@ -149,7 +189,7 @@ Den anden selektionsmatrix vi vil benytte kan udtrække netto $k$-periode log-af
     \begin{equation}
         \bm{M}_r=\begin{pmatrix}
         1 & \bm{0}_{1\times n} & \bm{0}_{1\times (m-n-1)}\\
-        \bm{\ell}_n & \bm{I}_n & \bm{0}_{m-n-1}
+        \bm{\bm{\ell}}_n & \bm{I}_n & \bm{0}_{m-n-1}
         \end{pmatrix}.\label{eq:sel}
     \end{equation}
 Anvender vi den på den betingede middelværdi fås
