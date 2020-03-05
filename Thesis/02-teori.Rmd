@@ -24,6 +24,14 @@ hvor $k$ er en skalering, som repræsenterer investorens risiko aversion. Ved at
 \alpha_t = \frac{\mathbb{E}_t(R_{t+1})-R_{0,t+1}}{k\sigma_t^2}. (\#eq:Løsning)
 \end{equation}
 
+Porteføljeanalyse benytter ofte nøgletallet Sharpe Ratio, også kendt som *Market Price of Risk* i stokastisk finansiering, Bjork??. I porteføljeteori er det kendt som et performancemål, som fortæller investoren om merafkastet i sin portefølje relativt til den risiko han har påtaget sig, altså
+$$S_t=\frac{\mathbb{E}(R_{t+1})-R_{0,t+1}}{\sigma_t}.$$
+
+Dette tillader, at vi kan omskrive Ligning \@ref(eq:Løsning) til
+$$\alpha_t=\frac{S_t}{k\sigma_t}.$$
+
+Forholdet mellem middelværdien og variansen er $\tfrac{1}{k}$, eftersom vi kan udlede, at merafkastet på porteføljen er $\tfrac{S_t^2}{k}$ og variansen er $\tfrac{S_t^2}{k^2}$. Sharpe Ratioen på porteføljen er $S_t$, og alle tænkelige porteføljer (afhængig af $k$) vil have samme Sharpe Ratio, fordi de er eksponeret til det risikobærende aktiv, men stadig i større eller mindre grad.
+
 Altså er vægtningen i det risikobærende aktiv et forhold mellem: det forventede risikobærende merafkast over det risikofrie aktiv samt en skalering af det risikobærende aktivs varians. Vi kan uden problemer opskrive ovenstående løsning til tilfældet, hvor investoren står overfor $N>1$ risikobærende aktiver. $\bm{R}_{t+1}$ repræsenterer en $N\times 1$ vektor af afkast for risikobærende aktiver, fra $t$ til $t+1$. Den betingede middelværdi bliver $\mathbb{E}_t(\bm{R}_{t+1})$ og den betingede kovariansmatrix noteres som $\mathbb{V}_t(\bm{R}_{t+1})=\bm{\Sigma}_t$. Herudover er $\bm{\alpha}_t$ nu en $N\times 1$ vektor af vægte i de risikobærende aktiver. Vi kan nu opskrive maksimeringsproblemet
 \begin{equation}
 \max_{\alpha_t} \bm{\alpha}_t'(\mathbb{E}_t(\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}) - \frac{k}{2}\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t, (\#eq:MultStatmaks)
@@ -35,6 +43,14 @@ $$\bm{\alpha}_t=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t(\bm{R}_{t+1})-R_{0,t+
 Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det værd at bemærke, at løsningen er karakteriseret af \textit{The Mutual Fund Seperation Theorem}, Tobin??, som var en af mange videnskabelige bidrag James Tobin fik sin Nobelpris for i 1981. Essen af teoremet er, at alle investorer vil holde den eksakt samme portefølje af risikobærende aktiver samt en del i det risikofrie aktiv. Det eneste som adskiller investorer fra hinanden, er deres relative fordeling af total formue i den optimale risikobærende portefølje, som er fastsat ud fra deres egne risikopræferencer. Figur ?? viser de optimale porteføljestrategier i et afkast-volatilitets spektrum.
 
 ## Nytte over formue
+
+I Sektion ??, introducerede vi bl.a. den bærende antagelse i [@Markowitz1952]: at investorer kun forholder sig til middelværdien og variansen af porteføljeafkast, og ikke højere momenter. Vi kan tilsvarende antage, at investorer definerer Deres nytte via formue på terminaltidspunktet. Dette tillader os at redefinere Maksimeringsproblemet ?? til nedenstående
+\begin{align*}
+&\max\mathbb {E}_t(U(W_{t+1}))\\
+&\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.
+\end{align*}
+
+Hvor $U(W_{t+1})$ er en konkav nyttefunktion. Investoren vil givet nyttefunktions konkave krumning være risikoaverse. 
 
 ## Fordeling af afkast
 
