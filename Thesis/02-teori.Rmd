@@ -19,12 +19,12 @@ Den simplificerende antagelse i [@Markowitz1952] er at investorer kun forholder 
 \max_{\alpha_t} \mathbb{E}_t(R_{p,t+1}) -\frac{k}{2} \mathbb{V}_t(R_{p,t+1}), (\#eq:Statmaks)
 \end{equation}
 
-hvor $k$ er en skalering, som repræsenterer investorens risiko aversion. Ved at modellere ovenstående relation som lineær og kun afhængig af de første to momenter restringerer vi investoren til at foretrække et højt afkast, lav volatilitet og ignorerer alle højere momenter, såsom skævhed og kurtosis. Ved indsættelse af Ligning \@ref(eq:Portafk) i Maksimeringsproblemet \@ref(eq:Statmaks) og dernæst differentation opnåes førsteordensbetingelsen, løsningen til optimalitetsproblemet bliver dermed
+hvor $k$ er en skalering, som repræsenterer investorens risiko aversion. Ved at modellere ovenstående relation som lineær og kun afhængig af de første to momenter restringerer vi investoren til at foretrække et højt afkast, lav volatilitet og ignorerer alle højere momenter, såsom skævhed og kurtosis. Ved indsættelse af Ligning \@ref(eq:Portafk) i Maksimeringsproblemet \@ref(eq:Statmaks) og dernæst differentation opnåes førsteordensbetingelsen, se Appendiks ??, løsningen til optimalitetsproblemet bliver dermed
 \begin{equation}
 \alpha_t = \frac{\mathbb{E}_t(R_{t+1})-R_{0,t+1}}{k\sigma_t^2}. (\#eq:Løsning)
 \end{equation}
 
-Porteføljeanalyse benytter ofte nøgletallet Sharpe Ratio, også kendt som *Market Price of Risk* i stokastisk finansiering, Bjork??. I porteføljeteori er det kendt som et performancemål, som fortæller investoren om merafkastet i sin portefølje relativt til den risiko han har påtaget sig, altså
+Porteføljeanalyse benytter ofte nøgletallet Sharpe Ratio, også kendt som *Market Price of Risk* i stokastisk finansiering, [@Bjork2009]. I porteføljeteori er det kendt som et performance-mål, som fortæller investoren om merafkastet i sin portefølje relativt til den risiko han har påtaget sig, altså
 $$S_t=\frac{\mathbb{E}(R_{t+1})-R_{0,t+1}}{\sigma_t}.$$
 
 Dette tillader, at vi kan omskrive Ligning \@ref(eq:Løsning) til
@@ -40,17 +40,84 @@ Altså er vægtningen i det risikobærende aktiv et forhold mellem: det forvente
 Den optimale porteføljestrategi, givet som løsningen til Maksimeringsproblemet \@ref(eq:MultStatmaks) findes til at være
 $$\bm{\alpha}_t=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t(\bm{R}_{t+1})-R_{0,t+1}\bm{\ell}).$$
 
-Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det værd at bemærke, at løsningen er karakteriseret af \textit{The Mutual Fund Seperation Theorem}, Tobin??, som var en af mange videnskabelige bidrag James Tobin fik sin Nobelpris for i 1981. Essen af teoremet er, at alle investorer vil holde den eksakt samme portefølje af risikobærende aktiver samt en del i det risikofrie aktiv. Det eneste som adskiller investorer fra hinanden, er deres relative fordeling af total formue i den optimale risikobærende portefølje, som er fastsat ud fra deres egne risikopræferencer. Figur ?? viser de optimale porteføljestrategier i et afkast-volatilitets spektrum.
+Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det værd at bemærke, at løsningen er karakteriseret af \textit{The Mutual Fund Seperation Theorem}, [@Tobin1958], som var en af mange videnskabelige bidrag James Tobin fik sin Nobelpris for i 1981, [@Nobel2020]. Essencen af teoremet er, at alle investorer vil holde den eksakt samme portefølje af risikobærende aktiver samt en del i det risikofrie aktiv. Det eneste som adskiller investorer fra hinanden, er deres relative fordeling af total formue i den optimale risikobærende portefølje, som er fastsat ud fra deres egne risikopræferencer. Figur \@ref(fig:AfkVol) viser de optimale porteføljestrategier i et afkast-volatilitets spektrum.
 
-## Nytte over formue
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1]
+\begin{axis}[
+  xticklabel={$\pgfmathprintnumber{\tick}\,\%$},
+  yticklabel={$\pgfmathprintnumber{\tick}\,\%$},
+  height=7cm, width=12cm,
+  axis x line=bottom, axis y line=left,
+  xlabel = Standard afvigelse, ylabel = Forventet afkast,
+  ymin=0, ymax=25, xmin=0, xmax=60,
+  extra x ticks={65}, extra x tick labels={$\sigma$},
+  extra x tick style={major tick length=0mm, grid=none},
+  extra y ticks={25}, extra y tick labels={$\mu$},
+  extra y tick style={major tick length=0mm, grid=none},
+  enlargelimits=true,
+  scatter/classes={
+    a={mark=o,draw=black, mark size = 3pt},
+    b={mark=*, mark size = 3pt,draw=magenta, fill = magenta},
+    c={mark=*, mark size = 3pt,draw=black, fill = black}
+  }
+]
 
-I Sektion ??, introducerede vi bl.a. den bærende antagelse i [@Markowitz1952]: at investorer kun forholder sig til middelværdien og variansen af porteføljeafkast, og ikke højere momenter. Vi kan tilsvarende antage, at investorer definerer Deres nytte via formue på terminaltidspunktet. Dette tillader os at redefinere Maksimeringsproblemet ?? til nedenstående
+\addplot[scatter,only marks, scatter src=explicit symbolic]
+  coordinates {
+    (30, 11)     [c]
+    (19, 5)      [c]
+    (40, 15)     [c]
+    (16, 10)     [b]
+  };
+\node at (axis cs:19, 5) [anchor=north west] {Aktiv 1};
+\node at (axis cs:30,11) [anchor=north west] {Aktiv 2};
+\node at (axis cs:40,15) [anchor=north west] {Aktiv 3};
+\addplot[magenta, very thick,  domain=-1:2.5, samples=200, variable=\t](
+   {(20^2*t^2 + 12^2*(1-t)^2)^(0.5) }, %{(t^2 * 20^2 + (1-t)^2 * 12)},
+   {11 * t + (1-t) * 5}
+ );
+\node[color=magenta] at (axis cs:30, 0) [anchor=south west] {\textbf{Den efficiente rand}};
+\addplot[black, very thick, domain=-10:50, samples=100, variable=\x](
+  ({x}, {4 + 0.37 * x});
+\node[rotate = 25, color=black] at (axis cs:30, 15) [anchor=south west] {\textbf{CAL}};
+\node[pin={[pin edge={thick}, text width=3cm, pin distance=2cm]90:{{\centering Tangensporteføljen}}}] at (axis cs:16, 10.5) {};
+\end{axis}
+\end{tikzpicture}
+\caption{Afkast-volatilitets spektrummet.}
+\label{fig:AfkVol}
+\end{figure}
+
+Altså vil 
+
+## Præferencer for risiko
+For et fast formueniveau $w\in \mathbb{R}_+$ betragter vi en stokastisk variabel $X$, hvor $\mathbb{E}(X)=0$. Derfor kan også $w+X$ betragtes som en stokastisk variabel, der repræsenterer en fremtidig formueplan med realiseret formue $w+\mathbb{E}(X)$, hvis $X$ bliver realiseret. Derfor kaldes $X$ undertiden også et fair spil, derudover haves at $\mathbb{E}(w+X)=w$.
+
+En (strengt) risikoavers investor vil for alle $w\in \mathbb{R}_+$ og alle $X$ (strengt) foretrække den sikre formue $w$ fremfor $w+X$. Ergo vil investoren altid afslå ethvert fair spil. Omvendt vil en (strengt) risikoelskende investor foretrække spillet og dermed $w+X$ fremfor $w$. Endeligt findes risikoneutrale investorer, som er indifferent mellem den sikre formue $w$ og formuen $w+X$. I realiteten er investorer ingen af delene, f.eks. vil nogle afslå fair spil i et ikke-tilfældigt nabolag rundt om værdien af $w$. Dette betegnes undertiden som at være lokalt risikoavers, lokalt risikoelskende og lokalt risikoneutral.
+
+Generelt anses investorer (og andre individer for den sags skyld) at være risikoaverse, derfor vil fokus være på denne risikopræference.
+
+## Nytte defineret over formue
+
+I Sektion \@ref(den-myopiske-investor), introducerede vi bl.a. den bærende antagelse i [@Markowitz1952]: at investorer kun forholder sig til middelværdien og variansen af porteføljeafkast, og ikke højere momenter. Vi kan tilsvarende antage, at investorer definerer Deres nytte via formue på terminaltidspunktet. Dette tillader os at redefinere Maksimeringsproblemet \@ref(eq:Statmaks) til nedenstående
 \begin{align*}
 &\max\mathbb {E}_t(U(W_{t+1}))\\
 &\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.
 \end{align*}
 
-Hvor $U(W_{t+1})$ er en konkav nyttefunktion. Investoren vil givet nyttefunktions konkave krumning være risikoaverse. 
+Hvor $U(W_{t+1})\in\mathbb{R}_+$ er en konkav nyttefunktion. Investoren vil givet nyttefunktionens konkave krumning være risikoavers. Netop dette aspekt gør, at vi kan inkorporere risikoaversion, når investorens porteføljevalg skal foretages. For at fastlægge denne investorspecifikke risikoaversion benyttes derfor skalerede krumningsmål. Disse fundamentale risikoaversionsmål er kendt som *Arrow-Pratt Målene for Risikoaversion*, [@Arrow1965; @Pratt1964]. Når nytte skal belyses, kan riskoaversion mht. den fremtidige formue $W_{t+1}$ benyttes. Graden af krumningen på nyttefunktion giver os information om investorens risikopræferencer introduceret ovenfor. Vi antager at investorens nyttefunktion er strengt voksende i terminial formue -- altså er investoren grådig og foretrækker høj formue frem for en lav formue -- men i en faldende rate. Nyttefunktion vil altså have følgende karakteristika
+$$U'(W)>0\quad U'(W)<0.$$
+
+Hvor $U'(W)$ og $U''(W)$ er den hhv. første- og anden afledte mht. formue $W$. Når vi skal kvantificere denne risikoaversion, skal vi sikre, at målet er invariant overfor strengt positive affine transformationer. Dette er bl.a. opfyldt ved brug af *Coefficient of Absolut Risk Aversion*, [@Arrow1965; @Pratt1964]. ARA er defineret som den negative anden afledte af nyttefunktionen mht. formue, skaleret med den første afledte
+$$\text{ARA}(W)=-\frac{U''(W)}{U'(W)}.$$
+
+Selvom den andenafledte af nyttefunktionen er et mål for krumningen af nyttefunktionen, bliver vi nød til at skalere for at eliminere afhængigheden af abitrære størrelser, som relaterer sig til målbarheden af nytte. ARA måler investorens absolutte dollar værdi, som han er villig til at købe, for at undgå et tab på samme absolutte størrelse. Hvis ARA er faldende medfører det at desto mere formue en investor har, desto mere risikosøgende bliver han, altså haves at $\text{ARA}(W)<0$, og så fremdeles. Almindeligt menes det, at ARA burde falde, eller i det mindste ikke stige, med formue. Et relateret mål er *Coefficient of Relative Risk Aversion*, RRA, som er samtidig tager højde for investorens formue
+$$\text{RRA}(W)=-\frac{WU''(W)}{U'(W)}.$$
+
+Her måles marginal nytten og dermed investorens risikoaversion over en procentdel af formuen. Samme inferens som for ARA kan blive udtænkt for RRA. RRA måler den del af formuen, som investoren vil betale for at undgå et spil på en given størrelse relativt til formuen.
+
+De tilsvarende reciprokke af ovenstående mål kaldes hhv. *Coefficeint of Absolute Risk Tolerance* samt *Coefficeint of Relative Risk Tolerance*.
 
 ## Fordeling af afkast
 

@@ -16,6 +16,24 @@ nocite: '@*'
 description: "Master's Theis of Andreas Kracht Frandsen, Aarhus University."
 ---
 
+\tikzset{%
+  block/.style    = {draw, thick, rectangle, minimum height = 3em,
+    minimum width = 3em},
+  sum/.style      = {draw, circle, node distance = 2cm}, % Adder
+  input/.style    = {coordinate}, % Input
+  output/.style   = {coordinate}, % Output
+  >={Latex[width=2mm,length=2mm]},
+  % Specifications for style of nodes:
+            base/.style = {rectangle, rounded corners, draw=black,
+                           minimum width=4cm, minimum height=1cm,
+                           text centered, font=\sffamily},
+  activityStarts/.style = {base, fill=blue!30},
+       startstop/.style = {base, fill=red!30},
+    activityRuns/.style = {base, fill=green!30},
+         process/.style = {base, minimum width=2.5cm, fill=orange!15,
+                           font=\ttfamily}
+}
+
 \pagenumbering{roman}
 
 \tableofcontents
