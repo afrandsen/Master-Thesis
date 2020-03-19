@@ -1,0 +1,18 @@
+# Empirisk analyse
+
+## Problemer ved estimation
+
+Middelværdi-varians optimering har vist sig meget sensitiv overfor den kvantitative størrelse af parametrene som indgår i vægtelsesberegningen for den relevante portefølje, dvs. forventede afkast, varianser, kovarianser. Som også er tilfældet i denne afhandling, er disse parametre estimeret via en tidsserie af afkast, men forventningen til disse estimater skal anskues skeptisk, i det de indeholder en væsentlig mængde usikkerhed.
+
+Simuleringsforsøg har vist at porteføljer udvalgt på baggrund af Markowitz teorien med estimerede input har værre performance og er mindre efficient end en $\tfrac{1}{n}$ (ligevægtet) portefølje, [@Frankfurter1971]. Ligeledes viser [@Chopra1993] at det er afgørende i en porteføljeanalyse at estimere forventede afkast præcist, men forventede afkast er alt andet lige svært prædiktable, [@Merton1980]. Videnskabelige artikler har foreslået ændringer til de statistiske metoder som ligger bag estimaterne, heriblandt foreslår [@Jorion1986] at benytte en Bayesian estimator i stedet for det aritmetiske gennemsnit, se evt. også [@MacKinlay2000; Garlappi2007; Kan2007; Tu2011].
+
+I det følgende, vil vi lave et illustrativt simuleringseksempel, hvor vi tager udgangspunkt i tre risikobærende aktiver, hvis kvartalvise afkast alle er normalfordelt med de første to momenter som set i Tabel ??. Afkastene er identisk fordelte i alle kvartaler. Det årlige forventede afkast er hhv. $8\%$, $10\%$ og $12\%$. Standardafvigelsen er hhv. ??, ?? og ??. Vi antager der er ens positiv korrelation mellem hvert aktiv, på $0.5$. Derudover står investoren overfor et risikofrit aktiv med et kvartalvist afkast på $0.001\%$, og dermed et årligt risikofrit afkast på ??. Disse er de korrekte parameterværdier, som givetvis er skjult information for investoren til en hvis grad. Investoren skal dermed estimere værdierne fra en tidsserie af observationer trukket fra den korrekte fordeling. Tre tidsserier af afkastsobservationer er blevet simuleret fra den fælles fordeling. Hver observation er hhv. beregnet som
+\begin{align}
+r_1 &= \mu_1 + \sigma_1\varepsilon_1\\
+r_2 &= \mu_2 + \sigma_2(\rho_{1,2}\varepsilon_1 + \sqrt{1-\rho_{1,2}^2}\varepsilon_2)\\
+r_3 &= \mu_3 + \sigma_3 ( \rho_{1,3} \varepsilon_1+ \frac{ \rho_{2,3}-\rho_{1,2}\rho_{1,3} }{\sqrt{1-\rho_{1,2}^2}}\varepsilon_2+\sqrt{1-\rho_{1,3}^2 -\frac{(\rho_{2,3}-\rho_{1,2}\rho_{1,3})^2}{1-\rho_{1,2}^2}}\varepsilon_3),
+\end{align}
+
+hvor $\varepsilon_i\sim N(0,1)$, for $i=1,2,3$. Hver tidsserie er baseret på $200$ observationer, svarende til en 50-årig periode med kvartalvise observationer. For hver tidsserie er de første to momenter estimeret ud fra hhv. det aritmetiske gennemsnit osv. ??
+
+Disse tre sæt af estimerede parametre baseret på de tre tidsserier er blevet udvalgt til følgende illustrative formål. Se Tabel ?? for en sammenligning ift. de sande parametre. Ud fra de sande parametre samt de estimerede parametre fra de tre tidsserier er global minimum varians porteføljen, tangensporteføljen og den optimale portefølje for en investor med CARA lig hhv. $1$, $5$ og $10$.
