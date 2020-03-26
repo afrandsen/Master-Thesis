@@ -16,3 +16,9 @@ r_3 &= \mu_3 + \sigma_3 ( \rho_{1,3} \varepsilon_1+ \frac{ \rho_{2,3}-\rho_{1,2}
 hvor $\varepsilon_i\sim N(0,1)$, for $i=1,2,3$. Hver tidsserie er baseret på $200$ observationer, svarende til en 50-årig periode med kvartalvise observationer. For hver tidsserie er de første to momenter estimeret ud fra hhv. det aritmetiske gennemsnit osv. ??
 
 Disse tre sæt af estimerede parametre baseret på de tre tidsserier er blevet udvalgt til følgende illustrative formål. Se Tabel ?? for en sammenligning ift. de sande parametre. Ud fra de sande parametre samt de estimerede parametre fra de tre tidsserier er global minimum varians porteføljen, tangensporteføljen og den optimale portefølje for en investor med CARA lig hhv. $1$, $5$ og $10$.
+
+Porteføljen for CARA-investoren er beregnet som
+
+ved brug af de estimerede forventede afkast og variansen af tangensporteføljen, som er beregnet via de estimerede momenter af hvert aktiv. Positionen i det risikofrie aktiv, bliver beregnet residuerligt som
+
+Herudover er det sande forventede afkast og den sande standardafvigelse beregnet for hver portefølje, ved brug af de sande momenter introduceret ovenfor.

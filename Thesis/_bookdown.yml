@@ -1,3 +1,19 @@
 book_filename: "Master_Thesis_Andreas_Kracht_Frandsen"
 delete_merged_file: true
 edit: https://github.com/afrandsen/master-thesis/edit/master/thesis/%s
+language:
+  label:
+    fig: 'Figur '
+    tab: 'Tabel '
+    eq: 'Ligning '
+    thm: 'Sætning '
+    lem: 'Lemma '
+    cor: 'Korollar '
+    prp: 'Proposition '
+    cnj: 'Conjecture '
+    def: 'Definition '
+    exm: 'Eksempel '
+    exr: 'Opgave '
+    proof: 'Bevis. '
+    remark: 'Remark. '
+    solution: 'Løsning. '
