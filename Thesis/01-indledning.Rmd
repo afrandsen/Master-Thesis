@@ -2,11 +2,17 @@
 
 \setcounter{secnumdepth}{3}
 
-# Introduktion
+\part{Introduktion og litterært overblik}
 
-# Afgrænsning
+# Indledning
 
-# Eksisterende litteratur
+
+
+## Problemformulering
+
+## Afgrænsning
+
+## Eksisterende litteratur
 
 En langsigtet porteføljestrategi forsøger at optimere bytteforholdet mellem risiko og afkast. En sådan strategi er i sagens natur optimal på lang sigt og ikke nødvendigvis på kort sigt. Den moderne teori bag dette bytteforhold, for den langsigtede investor, blev først beskrevet af Nobelpris modtageren Harry Markowitz, [@Markowitz1952]. Hans arbejde tager udgangspunkt i en investor på tidspunkt $t$, som kun bekymrer sig om fordelingen af sin formue på et givet fremtidigt tidspunkt $t+K$, hvor $K$ er investeringshorisonten. Dette problem bliver undertiden beskrevet som det statiske portefølje problem. [@Markowitz1952] understreger vigtigheden af diversifikation af risiko, men den bærende antagelse om en køb og hold investor, findes særdeles urealistisk. Investorer vælger ofte porteføljestrategier, som kræver rebalancering før eller siden og er på den måde dynamiske i deres strategi.
 
@@ -21,6 +27,8 @@ Derudover er numeriske metoder blevet foreslået af bl.a. [@BalLyn1999], [@Lyn20
 Ovenstående modeller tillader ikke den risikofrie rente og merafkastet af aktiver at ændre sig over tid, på samme tid, og mangler dermed det tidsvarierende perspektiv af alle aktiver. En ny metode præsenteret af [@CampVic2003], giver approksimative analytiske metoder i et ikke-tilfældigt nabolag af specialtilfælde, hvor løsninger på lukket form er mulige. Her tager de udgangspunkt i en investor, som opnår nytte af forbrug i stedet for formue. [@CampVicCha2003] benytter samme metode til et problem involverende flere risikofyldte aktivklasser, hvor de samtidig tillader tidsvarierende investeringsmuligheder.
 
 Mit arbejde vil være en validering af [@JurVic2011] ved anvendelse af deres teori samt analytiske løsninger til det dynamiske porteføljeproblem for en privat investor med et opdateret datagrundlag. Jeg bidrager til det dynamiske porteføljeproblem ved en længere statistisk analyse af potentielle variable, som kan benyttes til det prædiktive afspekt af flere aktivers afkast.
+
+## Opbygning samt tekniske specifikationer
 
 
 

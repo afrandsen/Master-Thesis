@@ -1,11 +1,13 @@
-# Teori
+\part{Den teoretiske ramme}
+
+# Underlæggende teori
 
 ## Den myopiske investor
 Den myopiske investor vælger -- som navnet ligger op til -- sin portefølje under et én-periodes perspektiv, og foretager dermed et statisk bindende valg. Investoren forsøger at maksimere sin terminal formue, ved samtidig at forholde sig til sin risikoaversion. Dette forsager, at alle efterfølgende perioder bliver ignoreret af investoren. Ergo skal han løse det statiske portefølje problem fra tidspunkt $t$ til tidspunkt $t+1$. I denne ene periode er investeringsmulighederne: et risikobærende aktiv samt et risikofrit aktiv. Afkastene over den førstkommende periode for disse aktivklasser vil blive noteret som hhv. $R_{t+1}$ med betinget middelværdi $\mathbb{E}_t(R_{t+1})$^[Her benyttes den gængse notation $\mathbb{E}(R_{t+1}\mid \mathcal{F}_t)=\mathbb{E}_t(R_{t+1})$ for filteret $\mathcal{F}_t$.] samt betinget varians $\mathbb{V}_t(R_{t+1})=\sigma_t^2$ og $R_{0,t+1}$.
 
 Det antages at investorens formue er fuldt allokeret når en del $\alpha_t$ bliver placeret i det risikobærende aktiv og $(1-\alpha_t)$ i det risikofrie aktiv. Hermed bliver hans porteføljeafkast givet ved
 \begin{equation}
-R_{p,t+1}=\alpha_t R_{t+1}+(1-\alpha_t)R_{0,t+1}. (\#eq:Portafk)
+R_{p,t+1}=\alpha_t R_{t+1}+\left(1-\alpha_t\right)R_{0,t+1}.(\#eq:Portafk)
 \end{equation}
 
 Den betingede middelværdi af porteføljeafkastet bliver dermed
@@ -16,12 +18,12 @@ $$\mathbb{V}_t(R_{p,t+1})=\alpha_t^2\sigma_t^2.$$
 
 Den simplificerende antagelse i [@Markowitz1952] er at investorer kun forholder sig til de første to momenter, hvis vi modellerer denne afvejning lineært, opnår vi følgende maksimeringsproblem
 \begin{equation}
-\max_{\alpha_t} \mathbb{E}_t(R_{p,t+1}) -\frac{k}{2} \mathbb{V}_t(R_{p,t+1}), (\#eq:Statmaks)
+\max_{\alpha_t} \mathbb{E}_t\left(R_{p,t+1}\right) -\frac{k}{2} \mathbb{V}_t\left(R_{p,t+1}\right),(\#eq:Statmaks)
 \end{equation}
 
 hvor $k$ er en skalering, som repræsenterer investorens risiko aversion. Ved at modellere ovenstående relation som lineær og kun afhængig af de første to momenter restringerer vi investoren til at foretrække et højt afkast, lav volatilitet og ignorerer alle højere momenter, såsom skævhed og kurtosis. Ved indsættelse af Ligning \@ref(eq:Portafk) i Maksimeringsproblemet \@ref(eq:Statmaks) og dernæst differentiation opnåes førsteordensbetingelsen, se Appendiks ??, løsningen til optimalitetsproblemet bliver dermed
 \begin{equation}
-\alpha_t = \frac{\mathbb{E}_t(R_{t+1})-R_{0,t+1}}{k\sigma_t^2}. (\#eq:Løsning)
+\alpha_t = \frac{\mathbb{E}_t\left(R_{t+1}\right)-R_{0,t+1}}{k\sigma_t^2}.(\#eq:Løsning)
 \end{equation}
 
 Porteføljeanalyse benytter ofte nøgletallet Sharpe Ratio, også kendt som *Market Price of Risk* i stokastisk finansiering, [@Bjork2009]. I porteføljeteori er det kendt som et performance-mål, som fortæller investoren om merafkastet i sin portefølje relativt til den risiko han har påtaget sig, altså
@@ -89,7 +91,9 @@ Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det 
 \label{fig:AfkVol}
 \end{figure}
 
-Altså vil 
+Altså vil investorer vælge en portefølje på den efficiente rand, som opnår en efficient porteføljevægtning langs *Capital Market Line*.
+
+Selvom Markowitz' model er en hjørnesten inden for moderne porteføljeteori, er der flere mangler i den opsatte teoretiske ramme. Først og fremmest medfører Markwotiz' antagelse om en lineær afvejning mellem kovarianser og afkast, implicit antagelsen, at investorenes nyttefunktioner kan approksimeres af en anden ordens Taylor udvidelse over en bredt sprektrum af afkast. Derudover findes ingen beskrivelse for, hvordan parameteren $k$ er koblet til investorens nyttefunktion. Disse mangler kan blive afhjulpet ved samtidig brug af specifikke nyttefunktioner og afkastfordelinger, som opfylder Taylor udvidelsen. Dette medfører at middelværdi-varians analysen kan benyttes for tre forskellige opsætninger, som bliver præsenteret i Sektion \@ref(typer-af-nyttefunktioner), [@CampVic2003].
 
 ## Præferencer for risiko
 For et fast formueniveau $w\in \mathbb{R}_+$ betragter vi en stokastisk variabel $X$, hvor $\mathbb{E}(X)=0$. Derfor kan også $w+X$ betragtes som en stokastisk variabel, der repræsenterer en fremtidig formueplan med realiseret formue $w+\mathbb{E}(X)$, hvis $X$ bliver realiseret. Derfor kaldes $X$ undertiden også et fair spil, derudover haves at $\mathbb{E}(w+X)=w$.
@@ -100,7 +104,7 @@ Generelt anses investorer (og andre individer for den sags skyld) at være risik
 
 ## Nytte defineret over formue
 
-I Sektion \@ref(den-myopiske-investor), introducerede vi bl.a. den bærende antagelse i [@Markowitz1952]: at investorer kun forholder sig til middelværdien og variansen af porteføljeafkast, og ikke højere momenter. Vi kan tilsvarende antage, at investorer definerer deres nytte via formue på terminaltidspunktet. Dette tillader os at redefinere Maksimeringsproblemet \@ref(eq:Statmaks) til nedenstående
+I Sektion \@ref(den-myopiske-investor), introducerede vi en af de bærende antagelser i [@Markowitz1952]: at investorer kun forholder sig til middelværdien og variansen af porteføljeafkast, og ikke højere momenter. Vi kan tilsvarende antage, at investorer definerer deres nytte via formue på terminaltidspunktet. Dette tillader os at redefinere Maksimeringsproblemet \@ref(eq:Statmaks) til nedenstående
 \begin{align}
 &\max\mathbb {E}_t(U(W_{t+1})) (\#eq:Nyttemaks)\\
 &\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
@@ -127,14 +131,14 @@ Antagelser omhandlende: formen af nyttefunktioner og fordelingen af afkast, er p
 
 Generelt vil en investors nytte -- defineret over formue -- afhænge af samtlige momenter relateret til formue. For at se dette laves en Taylor udvidelse af $U(W_{t+1})$ omkring den forventede formue, $\mathbb{E}(W_{t+1})$
 \begin{align}
-U(W_{t+1})=&U(\mathbb{E}(W_{t+1}))+U'(\mathbb{E}(W_{t+1}))+\frac{1}{2}U''(\mathbb{E}(W_{t+1}))(W_{t+1}-\mathbb{E}(W_{t+1}))^2\\
-&+\sum_{n=3}^\infty \frac{1}{n!}U^{(n)}(\mathbb{E}(W_{t+1}))(W_{t+1}-\mathbb{E}(W_{t+1})),
+U\left(W_{t+1}\right)=&U\left(\mathbb{E}\left(W_{t+1}\right)\right)+U'\left(\mathbb{E}\left(W_{t+1}\right)\right)+\frac{1}{2}U''\left(\mathbb{E}\left(W_{t+1}\right)\right)\left(W_{t+1}-\mathbb{E}\left(W_{t+1}\right)\right)^2\\
+&+\sum_{n=3}^\infty \frac{1}{n!}U^{\left(n\right)}\left(\mathbb{E}\left(W_{t+1}\right)\right)\left(W_{t+1}-\mathbb{E}\left(W_{t+1}\right)\right),
 \end{align}
 
 hvor $U^{(n)}$ er den $n$'te afledte af $U(\cdot)$. Tager vi nu den forventede værdi fås
 \begin{align}
-\mathbb{E}(U(W_{t+1}))=&U(\mathbb{E}(W_{t+1}))+\frac{1}{2}U''(\mathbb{E}(W_{t+1}))\mathbb{V}(W_{t+1})\\
-&+\sum_{n=3}^\infty \frac{1}{n!} U^{(n)}(\mathbb{E}(W_{t+1}))\mathbb{E}((W_{t+1}-\mathbb{E}(W_{t+1}))^n),
+\mathbb{E}\left(U\left(W_{t+1}\right)\right)=&U\left(\mathbb{E}\left(W_{t+1}\right)\right)+\frac{1}{2}U''\left(\mathbb{E}\left(W_{t+1}\right)\right)\mathbb{V}\left(W_{t+1}\right)\\
+&+\sum_{n=3}^\infty \frac{1}{n!} U^{\left(n\right)}\left(\mathbb{E}\left(W_{t+1}\right)\right)\mathbb{E}\left(\left(W_{t+1}-\mathbb{E}\left(W_{t+1}\right)\right)^n\right),
 \end{align}
 
 hvor $\mathbb{E}((W_{t+1}-\mathbb{E}(W_{t+1}))^n)$ er det centrale moment af orden $n$. Fælles for disse momenter er, at de kvantificere en investors villighed til at afgive eller optage diverse risici. Givetvis vil en grådig investor foretrække højere forventet formue end lavere, for faste centrale momenter af anden orden eller større. En risikoavers investor, altså $U''(W)<0$, vil foretrække lavere varians af formue fremfor højere, for fast forventet formue samt faste centrale momenter af tredje orden eller højere. Problemet opstår når de centrale momenter højere end eller lig tredje orden ikke er ens for alle alternativer. I så fald ville vi ikke kunne evaluere dem på baggrund af middelværdi og varians.
@@ -146,7 +150,7 @@ Kvadratisk nytte definerer nyttefunktionen som kvadratisk over formue. Den er fu
 U(W_{t+1})=aW_{t+1}-bW_{t+1}^2. (\#eq:Kvadnytte)
 \end{equation}
 
-Til forskel for nedenstående nyttefunktioner kræver kvadratisk nytte ikke fordelingsmæssige antagelser vedr. afkast af aktivgrupperne. 
+Til forskel for nedenstående nyttefunktioner kræver kvadratisk nytte ikke fordelingsmæssige antagelser vedr. afkast af aktiverne. 
 
 Under kvadratisk nytte vil maksimering af forventet nytte, som i Maksimeringsproblemet \@ref(eq:Nyttemaks), være ækvivalent til at maksimere en lineær kombination af middelværdi og varians, som i Maksimeringsproblemet \@ref(eq:Statmaks). Middelværdien af Ligning \@ref(eq:Kvadnytte) giver den forventede nytte
 $$\mathbb{E}(U(W_{t+1}))=\mathbb{E}(W_{t+1})-b(\mathbb{V}(W_{t+1}+\mathbb{E}(W_{t+1}))),$$
@@ -157,14 +161,14 @@ og er dermed en funktion afhængende af både forventet formue og variansen af f
 
 Eksponentiel nytte antager at variablene i modellen er normalfordelt. Lad $\theta\in\mathbb{R}$ være parametren i modellen, da vil eksponentiel nytte være defineret ved
 \begin{equation}
-U(W_{t+1})=-\exp(-\theta W_{t+1}). (\#eq:Ekspnytte)
+U(W_{t+1})=-\exp\left(-\theta W_{t+1}\right). (\#eq:Ekspnytte)
 \end{equation}
 
-Eksponentiel nytte antager, at ARA er konstant lig $\theta$, mens RRA kan stige med formue. Dette aspekt gør også eksponentiel nytte foretrukket ift. kvadratisk nytte. Eksponentiel nytte er også kendt under navnet *Constant Absolute Risk Aversion*. For en eksplicit opskrivning af forventningen af Ligning \@ref(eq:Ekspnytte), kræver det, at vi splitter formuen, $W_{t+1}$, op i to led
-$$W_{t+1}=\theta W_{t+1}+\varepsilon_{t+1},$$
+Eksponentiel nytte antager, at ARA er konstant lig $\theta$, mens RRA kan stige med formue. Dette aspekt gør også eksponentiel nytte foretrukket ift. kvadratisk nytte. Eksponentiel nytte er også kendt under navnet *Constant Absolute Risk Aversion*. For en eksplicit opskrivning af forventningen af Ligning \@ref(eq:Ekspnytte) bemærker vi følgende
+$$W_{t+1}\sim N(\mu_p,\sigma_p^2)$$
 
-hvor $\varepsilon\sim N(\mu,\sigma^2)$. Dette tillader omskrivningen til
-$$\mathbb{E}(U(W_{t+1}))=1-\exp(-\theta W_{t+1})\exp(-\theta \varepsilon_{t+1}+\frac{\theta^2}{2}\sigma^2).$$
+altså er terminalnytten normalfordelt for enhver mulig portefølje, $p$, givet at afkastene er normalfordelt. Regner vi derfor på forventningen, får vi
+$$\mathbb{E}(U(W_{t+1}))=-\exp\left(-\theta\mu_p+\frac{\theta^2}{2}\sigma_p^2\right).$$
 
 ### Potens nytte
 
@@ -175,22 +179,32 @@ $$U(W_{t+1})=\begin{cases} \frac{W_{t+1}^{1-\gamma}-1}{1-\gamma},\quad \gamma\ne
 For $\gamma\neq 1$ fås den forventede nytte til
 $$\log(\mathbb{E}(W_{t+1}))=\mathbb{E}(\log(W_{t+1}))+\frac{1}{2}\mathbb{V}(\log(W_{t+1})),$$
 
-hvor vi har anvendt det bærende resultat vedr. middelværdien af en lognormalfordelt stokastisk variabel, se evt. Appendiks ??. Log-funktionen er en konkav funktion, dette betyder at middelværdien af log af en stokastisk variabel er mindre end log af middelværdien, og forskellen er stigende i variabiliteten af den stokastiske variabel. For $\gamma \rightarrow 1$ haves
+hvor vi har anvendt det bærende resultat vedr. middelværdien af en lognormalfordelt stokastisk variabel, se evt. Appendiks ??. Logaritmefunktionen er en konkav funktion, dette betyder at middelværdien af log af en stokastisk variabel er mindre end log af middelværdien, og forskellen er stigende i variabiliteten af den stokastiske variabel. For $\gamma \rightarrow 1$ haves
 $$\mathbb{E}(U(W_{t+1}))=\mathbb{E}(\log(W_{t+1})).$$
 
 ### Sammenligning af nyttefunktioner
 
-Som pointeret flere gange i ovenstående, burde ARA være faldende, eller under alle omstændigheder, ikke stige med formue. Dermed kan vi se bort fra kvadratisk nytte, og samtidig gøre potens nytte mere favorabel end eksponentiel nytte. Derudover er det konstante aspekt af RRA attraktivt under potens nytte. I og med, at det er nødvendigt ift. inferensen vedr. stabiliteten af finansielle variable under sekulær økonomisk vækst, [@CampVic2003].
+Som pointeret flere gange i ovenstående, burde ARA være faldende, eller under alle omstændigheder, ikke stige med formue. Dermed kan vi se bort fra kvadratisk nytte, og samtidig gøre potens nytte mere favorabel end eksponentiel nytte. Derudover er det konstante aspekt af RRA attraktivt under potens nytte, i og med, at det er nødvendigt ift. inferensen vedr. stabiliteten af finansielle variable under sekulær økonomisk vækst, [@CampVic2003].
 
-Derudover vil valget mellem potens nytte og eksponentiel nytte også skabe de ovennævnte forskellige fordelingsmæssige antagelser. Eksponentiel nytte resulterer i simple afkast, hvis afkastene af aktiverne er normalfordelt, hvorimod, at potens nytte resulterer i simple afkast, hvis afkastene af aktiverne er lognormalfordelt.
+Derudover vil valget mellem potens nytte og eksponentiel nytte også skabe de ovennævnte forskellige fordelingsmæssige antagelser. Eksponentiel nytte resulterer i simple afkast, hvis afkastene af aktiverne er normalfordelte, hvorimod, at potens nytte resulterer i simple afkast, hvis afkastene af aktiverne er lognormalfordelte.
 
-Antagelsen om normalfordelte afkast er tiltalende, men begrænser sig til et kortsigtet perspektiv, i det, at antagelsen ikke kan holde mere end én periode. F.eks. kan vi antage at kvartalvise afkast er normalfordelte, men så vil to-kvartals afkastet ikke være normalfordelt. Dette kommer sig af at de er produktet af to succesive normalfordelte afkast, og kun summen af normalfordelte variable er selv normalfordelte, ikke produktet. En antagelse om lognormalfordelte afkast vil modsat holde i en hver tidshorisont, siden produktet af to lognormale stokastiske variable selv er lognormal. Derudover vil en lognormal stokastisk variabel aldrig blive negativ, og dette er konsistent med de fleste finansielle aktivers begrænsede gældsforpligtelser.
+Antagelsen om normalfordelte afkast er tiltalende, men begrænser sig til et kortsigtet perspektiv, i det, at antagelsen ikke kan holde mere end én periode. F.eks. kan vi antage, at kvartalvise afkast er normalfordelte, men så vil afkastet over to kvartaler ikke være normalfordelt. Dette kommer sig af at de er produktet af to succesive normalfordelte afkast, og kun summen af normalfordelte variable er selv normalfordelt, ikke produktet. En antagelse om lognormalfordelte afkast vil modsat holde i en hver tidshorisont, siden produktet af to lognormale stokastiske variable selv er lognormal. Derudover vil en lognormal stokastisk variabel aldrig blive negativ, og dette er konsistent med de fleste finansielle aktivers begrænsede gældsforpligtelser.
 
-Lognormale afkast vil til gengæld ikke nemt kunne flyttes fra aktivniveau til porteføljeniveau. Dette kommer sig af, at en portefølje givetvis er en lineær kombination af individuelle aktiver. Hvis disse individuelle aktiver antages at have lognormale afkast, vil porteføljeafkastet være et vægtet gennemsnit af lognormale afkast, men et sådant gennemsnit er ikke selv lognormalt. Vi overkommer imidlertidigt dette problem ved at arbejde med korte intervaller. Ikke-lognormaliteten af porteføljeafkastet formindskes ved at anskue smallere og smallere intervaller. I kontinuert tid vil problemet forsvinde i grænsen, [@CampVic2003].
+Lognormale afkast vil til gengæld ikke nemt kunne flyttes fra aktivniveau til porteføljeniveau. Dette kommer sig af, at en portefølje givetvis er en lineær kombination af individuelle aktiver. Hvis disse individuelle aktiver antages at have lognormale afkast, vil porteføljeafkastet være et vægtet gennemsnit af lognormale afkast, men et sådant gennemsnit er ikke selv lognormalt. Vi overkommer imidlertidigt dette problem ved at arbejde med korte intervaller. Ikke-lognormaliteten af porteføljeafkastet formindskes ved at benytte kortere og kortere intervaller. I kontinuert tid vil problemet forsvinde i grænsen, [@CampVic2003].
 
 ## Fordeling af afkast
 
-Brugen af afkast fremfor priser på aktiver, kommer sig af markedsinvariansen af afkast. Priser siges derimod at være kontrære, eller modsat rettede, [@Meucci2005]. I bund og grund er priser *unit root* processer, dvs. stød til tidsserien af priser har permant effekt, dette kaldes undertiden også for ikke-stationære processer. *Unit root* processer siges også at have integration af orden $1$, $I(1)$. Afkast er derimod stationære processer, de har integration af orden $0$, $I(0)$. For en ikke-stationær tidsserie vil momenterne ændre sig over tid, f.eks. vil middelværdien og variansen af en prisprocess på tidspunkt $t$, afhænge af den foregående periodes pris, altså på tidspunkt $t-1$.
+Brugen af afkast fremfor priser på aktiver, kommer sig af markedsinvariansen af afkast. Priser siges derimod at være kontrære, eller modsat rettede, [@Jondeau2007]. I bund og grund er priser *unit root* processer, dvs. stød til tidsserien af priser har permant effekt, dette kaldes undertiden også for ikke-stationære processer. *Unit root* processer siges også at have integration af orden $1$, $I(1)$. Afkast er derimod stationære processer, de har integration af orden $0$, $I(0)$. For en ikke-stationær tidsserie vil momenterne ændre sig over tid, f.eks. vil middelværdien og variansen af en prisprocess på tidspunkt $t$, afhænge af den foregående periodes pris, altså på tidspunkt $t-1$. Den manglende markedsinvarians af prisprocesser holder dem ude af ligningen, da de grundet ovenstående ikke vil kunne producere *i.i.d.* stokatiske variable.
+
+I det følgende vil vi adskille simple afkast og log^[Gennem resten af denne afhandling vil log referer til den naturlige logaritme.] afkast gennem notation. Vi lader os notere det simple afkast som $R_{t+1}$, som følger den gængse notation i litteraturen. Vi lader det simple brutto afkast være defineret som
+$$R_{t+1}\equiv\frac{P_{t+1}}{P_t},$$
+
+hvor $P_t\in\mathbb{R}_+$ er prisen på et aktiv, på tidspunkt $t$, og dermed $R_t\in\mathbb{R}$. Det simple afkast $R_t-1$ er den procentvise ændring over den respektive tidsperiode. Empiriske resultater har påvist, at simple afkast af aktiver udviser assymmetri og resulterer i højreskæve fordelinger bl.a. pga. de bagvedliggende virksomheder og/eller institutioneres begrænsede gældsforpligtelser. Derudover kan højreskævheden af simple afkast fremkomme på lang sigt grundet, at de er produktet af afkast over én-periode, som argumenteret for ovenfor.
+
+For at overkomme disse faldgruber af simple afkast, benyttes log afkastet. Log afkastet noteres som $r_{t+1}$, og defineres som
+$$r_{t+1}\equiv\log(1+R_{t+1}),$$
+
+hvilket er en geometrisk og kontinuert følge. Logafkastet af aktiver vil skabe symmetriske fordelinger, som overholder dermed overholder markedsinvariansen.
 
 ## Afkast
 
@@ -366,17 +380,11 @@ Slutteligt anvendes den på den betingede varians
     \end{equation}
     
 ## VAR BIAS
-Ved brug af den analytiske middelværdirette formel foreslået af [@Pope1990], viser [@Engsted2012] at justering for ikke-middelværdirette estimatorer i det multivariate setup kan producerer forskellige parametre estimater i den givne VAR(1) model. Benyttelse af ordinær lineær regressions estimater kan resultere i finite sample bias og af den årsag mislede inferensen taget på baggrund af VAR(1) estimaterne. Herudover kan variablene vise autokorrelation, hvis de er highly persistent. Den analytiske bias af OLS estimatoren, $\bm{Phi}_1$, er udledt på baggrund af en Taylor udvidelse af højere orden. Dermed lader vi den analytiske bias, $\bm{B}_T$, ved givet ved, [@Pope1990]
-
+Ved brug af den analytiske middelværdi bias formel foreslået af [@Pope1990], viser [@Engsted2012] at justering for bias i middelværdi estimatorene i det multivariate setup kan producerer forskellige parametre estimater i den givne VAR(1) model. Benyttelse af ordinær lineær regressionsestimater kan resultere i bias pga.den begrænsede stikprøvestørrelse og af den årsag mislede inferensen gjort på baggrund af VAR(1) estimaterne. Herudover kan variablene vise autokorrelation, hvis de er stærkt vedvarende. Den analytiske bias af OLS estimatoren, $\bm{\Phi}_1$, er udledt på baggrund af en Taylor udvidelse af højere orden. Dermed lader vi den analytiske bias, $\bm{B}_T$, ved givet ved, [@Pope1990]
 $$\bm{B}_T=-\frac{\bm{b}}{T}+ O(T^{-\frac{3}{2}}),$$
 
- 
-
 hvor $T$ er sample size og tælleren er lig
-
-$$\bm{b}=\bm{\Sigma}_v((\bm{I}-\bm{Phi}_1')^{-1}+\bm{Phi}_1'(\bm{I}-(\bm{Phi}_1')^2)+\sum_{i=1}^m \lambda (\bm{I}-\lambda\bm{Phi}_1')^{-1})\bm{\Sigma}_z^{-1}.$$
-
- 
+$$\bm{b}=\bm{\Sigma}_v((\bm{I}-\bm{\Phi}_1')^{-1}+\bm{\Phi}_1'(\bm{I}-(\bm{\Phi}_1')^2)+\sum_{i=1}^m \lambda (\bm{I}-\lambda\bm{\Phi}_1')^{-1})\bm{\Sigma}_z^{-1}.$$
 
 Her er $\bm{\Sigma}_v$ den betingede kovariansmatrix af $v_t$, $\lambda$ er vektoren af eigenvalues af $\bm{\Phi}_1$, $\bm{I}$ er identitetsvektoren og $m$ er antallet af tilstandsvariable i $\bm{z}$. Bias'en i Ligning ?? falder med raten $T^{-\frac{3}{2}}$, som $T\rightarrow \infty$. Den analytiske formel af [@Pope1990] giver ikke bias justerede afskæringer, $\bm{\Phi}_0$, men som [@Engsted2012] pointerer vil dette problem automatisk blive løst af de bias justerede hældninger...
 

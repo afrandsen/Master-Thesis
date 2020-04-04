@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.9)  26 MAR 2020 23:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.9)  2 APR 2020 23:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1286,29 +1286,134 @@ librarypgfplots.groupplots.code.tex
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/
 tikz/libraries/tikzlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-)) (./Master_Thesis_Andreas_Kracht_Frandsen.aux)
+))
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.st
+y
+Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
+\multirow@colwidth=\skip258
+\multirow@cntb=\count365
+\multirow@dima=\skip259
+\bigstrutjot=\dimen332
+) (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.st
+y
+\wrapoverhang=\dimen333
+\WF@size=\dimen334
+\c@WF@wrappedlines=\count366
+\WF@box=\box90
+\WF@everypar=\toks51
+Package: wrapfig 2003/01/31  v 3.6
+) (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count367
+\float@exts=\toks52
+\float@box=\box91
+\@float@everytoks=\toks53
+\@floatcapt=\box92
+)
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.st
+y
+Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
+\everycr=\toks54
+\minrowclearance=\skip260
+)
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.
+sty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+) (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tabu/tabu.sty
+Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
+
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.st
+y
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box93
+\sift@deathcycles=\count368
+\@vwid@loff=\dimen335
+\@vwid@roff=\dimen336
+)
+\c@taburow=\count369
+\tabu@nbcols=\count370
+\tabu@cnt=\count371
+\tabu@Xcol=\count372
+\tabu@alloc=\count373
+\tabu@nested=\count374
+\tabu@target=\dimen337
+\tabu@spreadtarget=\dimen338
+\tabu@naturalX=\dimen339
+\tabucolX=\dimen340
+\tabu@Xsum=\dimen341
+\extrarowdepth=\dimen342
+\abovetabulinesep=\dimen343
+\belowtabulinesep=\dimen344
+\tabustrutrule=\dimen345
+\tabu@thebody=\toks55
+\tabu@footnotes=\toks56
+\tabu@box=\box94
+\tabu@arstrutbox=\box95
+\tabu@hleads=\box96
+\tabu@vleads=\box97
+\tabu@cellskip=\skip261
+)
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttable/three
+parttable.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box98
+)
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttablex/thre
+eparttablex.sty
+Package: threeparttablex 2013/07/23 v0.3 by daleif
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/trimspaces/trimspace
+s.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+\TPTL@width=\skip262
+) (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box99
+\UL@hyphenbox=\box100
+\UL@skip=\skip263
+\UL@hook=\toks57
+\UL@height=\dimen346
+\UL@pe=\count375
+\UL@pixel=\dimen347
+\ULC@box=\box101
+Package: ulem 2019/11/18
+\ULdepth=\dimen348
+)
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/makecell/makecell.st
+y
+Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
+\rotheadsize=\dimen349
+\c@nlinenum=\count376
+\TeXr@lab=\toks58
+) (./Master_Thesis_Andreas_Kracht_Frandsen.aux)
 \openout1 = `Master_Thesis_Andreas_Kracht_Frandsen.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-\AtBeginShipoutBox=\box90
-Package hyperref Info: Link coloring ON on input line 125.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 139.
+LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 139.
+LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 139.
+LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 139.
+LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 139.
+LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 139.
+LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 139.
+LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 139.
+LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 139.
+LaTeX Font Info:    ... okay on input line 139.
+\AtBeginShipoutBox=\box102
+Package hyperref Info: Link coloring ON on input line 139.
 
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -1321,14 +1426,14 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 titlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count365
+\c@section@level=\count377
 )
 Redoing nameref's sectioning
 Redoing nameref's label
-LaTeX Info: Redefining \nameref on input line 125.
-LaTeX Info: Redefining \ref on input line 125.
-LaTeX Info: Redefining \pageref on input line 125.
-LaTeX Info: Redefining \nameref on input line 125.
+LaTeX Info: Redefining \nameref on input line 139.
+LaTeX Info: Redefining \ref on input line 139.
+LaTeX Info: Redefining \pageref on input line 139.
+LaTeX Info: Redefining \nameref on input line 139.
 (./Master_Thesis_Andreas_Kracht_Frandsen.out) (./Master_Thesis_Andreas_Kracht_F
 randsen.out)
 \@outlinefile=\write5
@@ -1385,68 +1490,68 @@ Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.16}).
 
 LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 1
-42.
+56.
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
 LaTeX Font Info:    Trying to load font information for OML+zplm on input line 
-142.
+156.
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 
-142.
+156.
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 
-142.
+156.
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 
-142.
+156.
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 142.
+(Font)              scaled to size 12.50409pt on input line 156.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 142.
+(Font)              scaled to size 9.37807pt on input line 156.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 142.
+(Font)              scaled to size 7.29405pt on input line 156.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 142.
+(Font)              scaled to size 12.50409pt on input line 156.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 142.
+(Font)              scaled to size 9.37807pt on input line 156.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 142.
+(Font)              scaled to size 7.29405pt on input line 156.
 LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 1
-42.
+56.
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 142.
+(Font)              scaled to size 5.21004pt on input line 156.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 142.
-<latex/ausegl_sort.png, id=125, 569.12625pt x 569.12625pt>
+(Font)              scaled to size 5.21004pt on input line 156.
+<latex/ausegl_sort.png, id=169, 569.12625pt x 569.12625pt>
 File: latex/ausegl_sort.png Graphic file (type png)
 <use latex/ausegl_sort.png>
-Package pdftex.def Info: latex/ausegl_sort.png  used on input line 159.
+Package pdftex.def Info: latex/ausegl_sort.png  used on input line 173.
 (pdftex.def)             Requested size: 176.40126pt x 176.40126pt.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 168.
+(Font)              scaled to size 10.42007pt on input line 182.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 168.
+(Font)              scaled to size 7.91925pt on input line 182.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 168.
+(Font)              scaled to size 6.25204pt on input line 182.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 168.
+(Font)              scaled to size 10.42007pt on input line 182.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 168.
+(Font)              scaled to size 7.91925pt on input line 182.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 168.
+(Font)              scaled to size 6.25204pt on input line 182.
 [1
 
 {c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.
@@ -1454,119 +1559,169 @@ map} <./latex/ausegl_sort.png>]pdfTeX warning (ext4): destination with the same
  identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.182 \newpage
+l.196 \newpage
                [1
 
-] (./Master_Thesis_Andreas_Kracht_Frandsen.toc) [1] (./Master_Thesis_Andreas_Kr
-acht_Frandsen.lof) (./Master_Thesis_Andreas_Kracht_Frandsen.lot) [2] [3
+] (./Master_Thesis_Andreas_Kracht_Frandsen.toc
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 6.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 6.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 6.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 6.
+[1]) [2] (./Master_Thesis_Andreas_Kracht_Frandsen.lof) (./Master_Thesis_Andreas
+_Kracht_Frandsen.lot) [3] [4
 
 ] [1
 
 ] [2
 
-] [3
+] [3] [4
 
-] [4]
+]
 LaTeX Font Info:    Trying to load font information for U+fplmbb on input line 
-259.
+283.
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ufplmbb.fd
 File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
-)
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 259.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 259.
-[5
+) [5
 
-] [6] [7] [8] [9]
+] [6pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+1}) has been already used, duplicate ignored
 
-Package natbib Warning: Citation `Meucci2005' on page 10 undefined on input lin
-e 457.
-
-[10]
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 11.40997pt on input line 546.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 11.40997pt on input line 546.
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.374 
+      ] [7] [8] [9] [10] [11]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 546.
+(hyperref)                removing `math shift' on input line 582.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 546.
+(hyperref)                removing `math shift' on input line 582.
 
 
-Overfull \hbox (6.94882pt too wide) detected at line 554
+Overfull \hbox (6.94882pt too wide) detected at line 590
 []
  []
 
-[11]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 591.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 591.
-
 [12]
 
-Package natbib Warning: Citation `Pope1990' on page 13 undefined on input line 
-643.
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 627.
 
 
-Package natbib Warning: Citation `Engsted2012' on page 13 undefined on input li
-ne 643.
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 627.
 
-
-Package natbib Warning: Citation `Pope1990' on page 13 undefined on input line 
-643.
-
-
-Package natbib Warning: Citation `Pope1990' on page 13 undefined on input line 
-651.
-
-
-Package natbib Warning: Citation `Engsted2012' on page 13 undefined on input li
-ne 651.
-
-
-Package natbib Warning: Citation `Engsted2012' on page 13 undefined on input li
-ne 653.
-
-[13]
-
-Package natbib Warning: Citation `Frankfurter1971' on page 14 undefined on inpu
-t line 663.
-
-
-Package natbib Warning: Citation `Chopra1993' on page 14 undefined on input lin
-e 663.
-
-
-Package natbib Warning: Citation `Merton1980' on page 14 undefined on input lin
-e 663.
-
-
-Package natbib Warning: Citation `Jorion1986' on page 14 undefined on input lin
-e 663.
-
-
-Package natbib Warning: Citation `MacKinlay2000' on page 14 undefined on input 
-line 663.
-
-[14
-
-] (./Master_Thesis_Andreas_Kracht_Frandsen.bbl [15
+[13] [14] [15
 
 ] [16
 
-])
+] [17
 
-Package natbib Warning: There were undefined citations.
+] [18
 
-[17]
+] [19
+
+] [20
+
+]
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf, id=57
+3, 1300.86pt x 1084.05pt>
+File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf G
+raphic file (type pdf)
+<use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf>
+Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
+ex/sim-tids-1.pdf  used on input line 727.
+(pdftex.def)             Requested size: 441.01619pt x 367.51349pt.
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-hist-1.pdf, id=57
+4, 1300.86pt x 1084.05pt>
+File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-hist-1.pdf G
+raphic file (type pdf)
+<use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-hist-1.pdf>
+Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
+ex/sim-hist-1.pdf  used on input line 736.
+(pdftex.def)             Requested size: 441.01619pt x 367.51349pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[21
+
+pdfTeX warning (ext4): destination with the same identifier (name{table.8.1}) h
+as been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.806 
+      ]
+
+LaTeX Warning: Text page 22 contains only floats.
+
+[22pdfTeX warning (ext4): destination with the same identifier (name{figure.8.1
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.806 
+      pdfTeX warning (ext4): destination with the same identifier (name{table.8
+.2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.806 
+      pdfTeX warning (ext4): destination with the same identifier (name{table.8
+.3}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.806 
+      pdfTeX warning (ext4): destination with the same identifier (name{table.8
+.4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.806 
+       <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.p
+df>]
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp-1.pdf, id=
+614, 1300.86pt x 519.9425pt>
+File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp-1.pdf
+ Graphic file (type pdf)
+<use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp-1.pdf>
+
+Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
+ex/weight-exp-1.pdf  used on input line 817.
+(pdftex.def)             Requested size: 441.01619pt x 176.27036pt.
+[23pdfTeX warning (ext4): destination with the same identifier (name{figure.8.2
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.828 \part
+           {Appendiks} <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-la
+tex/sim-hist-1.pdf>] [24pdfTeX warning (ext4): destination with the same identi
+fier (name{figure.8.3}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.828 \part
+           {Appendiks} <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-la
+tex/weight-exp-1.pdf>] [25
+
+] (./Master_Thesis_Andreas_Kracht_Frandsen.bbl [26
+
+] [27
+
+]) [28]
 \tf@toc=\write6
 \openout6 = `Master_Thesis_Andreas_Kracht_Frandsen.toc'.
 
@@ -1576,26 +1731,29 @@ Package natbib Warning: There were undefined citations.
 \tf@lot=\write8
 \openout8 = `Master_Thesis_Andreas_Kracht_Frandsen.lot'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 694.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 694.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 838.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 838.
 (./Master_Thesis_Andreas_Kracht_Frandsen.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 694.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 694.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 838.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 838.
 Package rerunfilecheck Info: File `Master_Thesis_Andreas_Kracht_Frandsen.out' h
 as not changed.
-(rerunfilecheck)             Checksum: 7B5A912550B398864A07B873E5028871;4037.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 694.
+(rerunfilecheck)             Checksum: 2CFE2B56706AE945B94666EB75D9B59B;5816.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 838.
  ) 
 Here is how much of TeX's memory you used:
- 39276 strings out of 482923
- 889658 string characters out of 5958132
- 1509121 words of memory out of 5000000
- 53714 multiletter control sequences out of 15000+600000
- 606544 words of font info for 202 fonts, out of 8000000 for 9000
+ 40739 strings out of 482923
+ 912297 string characters out of 5958132
+ 1540283 words of memory out of 5000000
+ 55063 multiletter control sequences out of 15000+600000
+ 609030 words of font info for 206 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 78i,12n,136p,1034b,2092s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exi
+ 78i,12n,136p,1056b,2096s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exi
 st, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exist
+, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist
 , replaced by a fixed one
@@ -1621,11 +1779,11 @@ nts/type1/urw/palatino/uplbi8a.pfb><c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-
 dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/AKF/AppData/Roaming/TinyTeX/
 texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/AKF/AppData/Roaming/Ti
 nyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on Master_Thesis_Andreas_Kracht_Frandsen.pdf (22 pages, 236865 b
+Output written on Master_Thesis_Andreas_Kracht_Frandsen.pdf (34 pages, 327800 b
 ytes).
 PDF statistics:
- 522 PDF objects out of 1000 (max. 8388607)
- 476 compressed objects within 5 object streams
- 128 named destinations out of 1000 (max. 500000)
- 250 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 764 PDF objects out of 1000 (max. 8388607)
+ 689 compressed objects within 7 object streams
+ 181 named destinations out of 1000 (max. 500000)
+ 353 words of extra memory for PDF output out of 10000 (max. 10000000)
 

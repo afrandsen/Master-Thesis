@@ -1,24 +1,203 @@
-# Empirisk analyse
+```{r setup, include=FALSE}
+library(tidyverse)
+if (knitr::is_html_output()) {
+  options(knitr.table.format = "html")
+} else {
+  options(knitr.table.format = "latex") 
+}
+```
+
+```{r setup-plots, include=FALSE}
+if (knitr::is_html_output()) {
+  knitr::opts_chunk$set(out.width = '100%') 
+} else {
+  knitr::opts_chunk$set(out.width = '100%')
+}
+```
+
+\part{Den empiriske analyse}
+
+# Data beskrivelse
+
+# Prædiktabilitet
+
+# Underlæggende model
+
+# Allokering af aktiver
+
+# Diskussion
+
+# Konklusion
+
+```{r script1, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Speciale.R"), include=FALSE, cache=TRUE}
+```
 
 ## Problemer ved estimation
 
 Middelværdi-varians optimering har vist sig meget sensitiv overfor den kvantitative størrelse af parametrene som indgår i vægtelsesberegningen for den relevante portefølje, dvs. forventede afkast, varianser, kovarianser. Som også er tilfældet i denne afhandling, er disse parametre estimeret via en tidsserie af afkast, men forventningen til disse estimater skal anskues skeptisk, i det de indeholder en væsentlig mængde usikkerhed.
 
-Simuleringsforsøg har vist at porteføljer udvalgt på baggrund af Markowitz teorien med estimerede input har værre performance og er mindre efficient end en $\tfrac{1}{n}$ (ligevægtet) portefølje, [@Frankfurter1971]. Ligeledes viser [@Chopra1993] at det er afgørende i en porteføljeanalyse at estimere forventede afkast præcist, men forventede afkast er alt andet lige svært prædiktable, [@Merton1980]. Videnskabelige artikler har foreslået ændringer til de statistiske metoder som ligger bag estimaterne, heriblandt foreslår [@Jorion1986] at benytte en Bayesian estimator i stedet for det aritmetiske gennemsnit, se evt. også [@MacKinlay2000; Garlappi2007; Kan2007; Tu2011].
+Simuleringsforsøg har vist at porteføljer udvalgt på baggrund af Markowitz teorien med estimerede input har værre performance og er mindre efficient end en $\tfrac{1}{n}$ (ligevægtet) portefølje, [@Frankfurter1971]. Ligeledes viser [@Chopra1993] at det er afgørende i en porteføljeanalyse at estimere forventede afkast præcist, men forventede afkast er alt andet lige svært prædiktable, [@Merton1980]. Videnskabelige artikler har foreslået ændringer til de statistiske metoder som ligger bag estimaterne, heriblandt foreslår [@Jorion1986] at benytte en Bayesian estimator i stedet for det aritmetiske gennemsnit, se evt. også [@MacKinlay2000; @Garlappi2007; @Kan2007; @Tu2011].
 
-I det følgende, vil vi lave et illustrativt simuleringseksempel, hvor vi tager udgangspunkt i tre risikobærende aktiver, hvis kvartalvise afkast alle er normalfordelt med de første to momenter som set i Tabel ??. Afkastene er identisk fordelte i alle kvartaler. Det årlige forventede afkast er hhv. $8\%$, $10\%$ og $12\%$. Standardafvigelsen er hhv. ??, ?? og ??. Vi antager der er ens positiv korrelation mellem hvert aktiv, på $0.5$. Derudover står investoren overfor et risikofrit aktiv med et kvartalvist afkast på $0.001\%$, og dermed et årligt risikofrit afkast på ??. Disse er de korrekte parameterværdier, som givetvis er skjult information for investoren til en hvis grad. Investoren skal dermed estimere værdierne fra en tidsserie af observationer trukket fra den korrekte fordeling. Tre tidsserier af afkastsobservationer er blevet simuleret fra den fælles fordeling. Hver observation er hhv. beregnet som
+I det følgende, vil vi lave et illustrativt simuleringseksempel, hvor vi tager udgangspunkt i tre risikobærende aktiver, hvis kvartalvise afkast alle er normalfordelt med de første to momenter som set i Tabel \@ref(tab:true). Afkastene er identisk fordelte i alle kvartaler. Det årlige forventede afkast er hhv. $9\%$, $15.76\%$ og $5.12\%$. Standardafvigelsen er hhv. $20.694\%$, $25.794\%$ og $17.320\%$. Vi antager der er ens positiv korrelation mellem hvert aktiv, på $0.5$. Derudover står investoren overfor et risikofrit aktiv med et kvartalvist afkast på $0.125\%$, og dermed et årligt risikofrit afkast på $0.5\%$. Disse er de korrekte parameterværdier, som givetvis er skjult information for investoren til en hvis grad. Investoren skal dermed estimere værdierne fra en tidsserie af observationer trukket fra den korrekte fordeling. Tre tidsserier af afkastsobservationer er blevet simuleret fra den fælles fordeling. Hver observation er hhv. beregnet som
 \begin{align}
 r_1 &= \mu_1 + \sigma_1\varepsilon_1\\
-r_2 &= \mu_2 + \sigma_2(\rho_{1,2}\varepsilon_1 + \sqrt{1-\rho_{1,2}^2}\varepsilon_2)\\
-r_3 &= \mu_3 + \sigma_3 ( \rho_{1,3} \varepsilon_1+ \frac{ \rho_{2,3}-\rho_{1,2}\rho_{1,3} }{\sqrt{1-\rho_{1,2}^2}}\varepsilon_2+\sqrt{1-\rho_{1,3}^2 -\frac{(\rho_{2,3}-\rho_{1,2}\rho_{1,3})^2}{1-\rho_{1,2}^2}}\varepsilon_3),
+r_2 &= \mu_2 + \sigma_2\left(\rho_{1,2}\varepsilon_1 + \sqrt{1-\rho_{1,2}^2}\varepsilon_2\right)\\
+r_3 &= \mu_3 + \sigma_3 \left( \rho_{1,3} \varepsilon_1+ \frac{ \rho_{2,3}-\rho_{1,2}\rho_{1,3} }{\sqrt{1-\rho_{1,2}^2}}\varepsilon_2+\sqrt{1-\rho_{1,3}^2 -\frac{\left(\rho_{2,3}-\rho_{1,2}\rho_{1,3}\right)^2}{1-\rho_{1,2}^2}}\varepsilon_3\right),
 \end{align}
 
-hvor $\varepsilon_i\sim N(0,1)$, for $i=1,2,3$. Hver tidsserie er baseret på $200$ observationer, svarende til en 50-årig periode med kvartalvise observationer. For hver tidsserie er de første to momenter estimeret ud fra hhv. det aritmetiske gennemsnit osv. ??
+hvor $\varepsilon_i\sim N(0,1)$, for $i=1,2,3$. 
 
-Disse tre sæt af estimerede parametre baseret på de tre tidsserier er blevet udvalgt til følgende illustrative formål. Se Tabel ?? for en sammenligning ift. de sande parametre. Ud fra de sande parametre samt de estimerede parametre fra de tre tidsserier er global minimum varians porteføljen, tangensporteføljen og den optimale portefølje for en investor med CARA lig hhv. $1$, $5$ og $10$.
+```{r sim-tids, echo=FALSE, fig.align='center', fig.cap='i) Aktiv 1, ii) Aktiv 2, iii) Aktiv 3.', fig.width=18, fig.height=15, fig.pos='htbp!'}
+par(mfrow=c(3,1))
 
-Porteføljen for CARA-investoren er beregnet som
+plot(data_1[, 1],
+     type = 'l',
+     xaxs = "i",
+     yaxs = "i",
+     xlab = 'Kvartal',
+     ylab = 'Afkast',
+     main = 'i) Aktiv 1')
 
-ved brug af de estimerede forventede afkast og variansen af tangensporteføljen, som er beregnet via de estimerede momenter af hvert aktiv. Positionen i det risikofrie aktiv, bliver beregnet residuerligt som
+abline(h = mu_a, col = 'cyan', lty = 'dotted')
+abline(h = mean(data_1[, 1]), col = 'magenta', lty = 'dashed')
+
+plot(data_1[, 2],
+     type = 'l',
+     xaxs = "i",
+     yaxs = "i",
+     xlab = 'Kvartal',
+     ylab = 'Afkast',
+     main = 'ii) Aktiv 2')
+
+abline(h = mu_b, col = 'cyan', lty = 'dotted')
+abline(h = mean(data_1[, 3]), col = 'magenta', lty = 'dashed')
+
+plot(data_1[, 3],
+     type = 'l',
+     xaxs = "i",
+     yaxs = "i",
+     xlab = 'Kvartal',
+     ylab = 'Afkast',
+     main = 'iii) Aktiv 3')
+
+abline(h = mu_c, col = 'cyan', lty = 'dotted')
+abline(h = mean(data_1[, 2]), col = 'magenta', lty = 'dashed')
+```
+
+
+```{r sim-hist, echo=FALSE, fig.align='center', fig.cap='i) Aktiv 1, ii) Aktiv 2, iii) Aktiv 3.', fig.width=18, fig.height=15, fig.pos='htbp!'}
+hist(data_1[, 1], probability = TRUE)
+
+```
+
+
+Hver tidsserie er baseret på $200$ observationer, svarende til en 50-årig periode med kvartalvise observationer. For hver tidsserie er de første to momenter estimeret ud fra de gængse statistiske metoder
+
+```{r true, echo=FALSE}
+data <- round(data.frame(Expect = return*100, Std = std*100, Corr = corr), digits = 3)
+rownames(data) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3')
+
+
+data %>% 
+  knitr::kable(caption = 'Gengivelse af de sande afkast.',
+               booktabs=TRUE,
+               align = c('r', 'r', 'r' ,'r', 'r'),
+               row.names = T,
+               col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "Forv. afkast" = 1, "Volatilitet" = 1, "Korrelationer" = 3))
+```
+
+```{r sim1, echo=FALSE}
+
+data_1 <- round(data.frame(Expect = data_1_mean*100, Std = data_1_sd*100, Corr = data_1_cor), digits = 3)
+
+rownames(data_1) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3')
+
+data_1 %>% 
+  knitr::kable(caption = 'Gengivelse af første simulation af afkast.',
+               booktabs=TRUE,
+               align = c('r','r', 'r' ,'r', 'r'),
+               row.names = T,
+               col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "Forv. afkast" = 1, "Volatilitet" = 1, "Korrelationer" = 3))
+
+```
+
+```{r sim2, echo=FALSE}
+data_2 <- round(data.frame(Expect = data_2_mean*100, Std = data_2_sd*100, Corr = data_2_cor), digits = 3)
+
+rownames(data_2) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3')
+
+data_2 %>% 
+  knitr::kable(caption = 'Gengivelse af anden simulation af afkast.',
+               booktabs=TRUE,
+               align = c('r','r', 'r' ,'r', 'r'),
+               row.names = T,
+               col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "Forv. afkast" = 1, "Volatilitet" = 1, "Korrelationer" = 3))
+```
+
+```{r sim3, echo=FALSE}
+data_3 <- round(data.frame(Expect = data_3_mean*100, Std = data_3_sd*100, Corr = data_3_cor), digits = 3)
+
+rownames(data_3) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3')
+
+data_3 %>% 
+  knitr::kable(caption = 'Gengivelse af tredje simulation af afkast.',
+               booktabs=TRUE,
+               align = c('r','r', 'r' ,'r', 'r'),
+               row.names = T,
+               col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "Forv. afkast" = 1, "Volatilitet" = 1, "Korrelationer" = 3))
+
+```
+
+
+Disse tre sæt af estimerede parametre baseret på de tre tidsserier er blevet udvalgt til følgende illustrative formål. Se Tabel \@ref(tab:sim1), Tabel \@ref(tab:sim2) og Tabel \@ref(tab:sim3) for en sammenligning ift. de sande parametre. Ud fra de sande parametre samt de estimerede parametre fra de tre tidsserier er global minimum varians porteføljen, tangensporteføljen og den optimale portefølje for en investor med *CARA* lig hhv. $1$, $5$ og $10$.
+
+Porteføljen for *CARA*-investoren er beregnet som
+$$w^*=\frac{\mu_{\text{tan}}-r_0}{(aW_0)\sigma_{\text{tan}}^2},$$
+
+hvor $w^*$ er den del af formuen som investoren skal investere i tangensporteføljen. Det estimerede forventede afkast, $\mu_{\text{tan}}$, og variansen af tangensporteføljen, $\sigma_{\text{tan}}^2$, er beregnet via de estimerede momenter af hvert aktiv. Delen som skal investeres i det risikofrie aktiv, bliver beregnet residuerligt som
+$$w_{r_0}^*=1-w^*.$$
 
 Herudover er det sande forventede afkast og den sande standardafvigelse beregnet for hver portefølje, ved brug af de sande momenter introduceret ovenfor.
+
+```{r weight-exp, echo=FALSE, fig.align='center', fig.cap='Global minimum varians portføljen, tangensporteføljen samt *CARA* porteføljen for hhv. $a=1$, $a=4$ og $a=8$, beregnet ud for hhv. de sande og simulerede afkast.', fig.pos='htbp!', fig.width=18, fig.asp=0.4}
+par(mfrow=c(1,1))
+plot(sort(sd),
+     sort(r),
+     type ='l',
+     xlim=c(0,max(c(sd, sd_1, sd_2, sd_3))+0.01),
+     ylim=c(0,max(c(r, r_1, r_2, r_3))+0.01),
+     xaxs = "i",
+     yaxs = "i",
+     xlab = 'Volatilitet',
+     ylab = 'Forventet afkast',
+     main = 'Porteføljer.'
+     )
+points(sort(sd), sort(r))
+lines(sort(sd_3), sort(r_3), col='red')
+points(sort(sd_3), sort(r_3), col='red')
+lines(sort(sd_2), sort(r_2), col='magenta')
+points(sort(sd_2), sort(r_2), col='magenta')
+lines(sort(sd_1), sort(r_1), col='blue')
+points(sort(sd_1), sort(r_1), col='blue')
+```
+

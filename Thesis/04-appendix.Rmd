@@ -1,3 +1,5 @@
-# (APPENDIX) Appendix {-} 
+# (APPENDIX) Appendiks {-} 
 
-# Appendix A
+\part{Appendiks}
+
+# Appendiks A
