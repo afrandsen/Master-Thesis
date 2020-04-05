@@ -34,6 +34,10 @@ calc.portfolio <- function(r, cov, rf, a = c(1, 4, 8)){
   cara_r  <- c()
   cara_sd <- c()
   
+  crra    <- matrix(0, nrow = length(a), ncol = length(c(r, rf)))
+  crra_r  <- c()
+  crra_sd <- c()
+  
   for (i in seq_along(a)) {
     cara[i, ]  <- c(tan$weights*(tan$er-rf)/(a[i]*tan$sd^2), 1-(tan$er-rf)/(a[i]*tan$sd^2))
     
@@ -44,6 +48,16 @@ calc.portfolio <- function(r, cov, rf, a = c(1, 4, 8)){
     port[[paste('cara', a[i], sep = '_')]] <- list("er" = as.vector(cara_r[i]),
                                                    "sd" = as.vector(cara_sd[i]),
                                                    "weights" = cara[i,])
+    
+    crra[i, ] <- c((r - rf + (diag(cov)/2))/(a[i]*diag(cov)), 1 - sum((r - rf + (diag(cov)/2))/(a[i]*diag(cov))))
+  
+    crra_r[i]  <- sum(crra[i, ] * c(r, rf))
+    
+    crra_sd[i] <- sqrt(t(crra[i, 1:length(r)]) %*% cov %*% crra[i, 1:length(r)])
+    
+    port[[paste('crra', a[i], sep = '_')]] <- list("er" = as.vector(crra_r[i]),
+                                                   "sd" = as.vector(crra_sd[i]),
+                                                   "weights" = crra[i,])
   }
   
   return(port)
@@ -92,21 +106,42 @@ port_3    <- calc.portfolio(data_3_mean, data_3_cov, rf)
 
 
 combine <- function(port){
-  r <- c(port$gmv$er, port$tan$er, port$cara_1$er, port$cara_4$er, port$cara_8$er)
-  sd <- c(port$gmv$sd, port$tan$sd, port$cara_1$sd, port$cara_4$sd, port$cara_8$sd)
+  r <- c(port$gmv$er, port$tan$er, port$crra_1$er, port$crra_4$er, port$crra_8$er, port$cara_1$er, port$cara_4$er, port$cara_8$er)
+  sd <- c(port$gmv$sd, port$tan$sd, port$crra_1$sd, port$crra_4$sd, port$crra_8$sd, port$cara_1$sd, port$cara_4$sd, port$cara_8$sd)
+  
+  return(matrix(c(r, sd), ncol = 2))
+}
+
+combine_sim <- function(port, return, rf, cov){
+  r <- c(sum(port$gmv$weights*return),
+         sum(port$tan$weights*return),
+         sum(port$crra_1$weights*c(return, rf)),
+         sum(port$crra_4$weights*c(return, rf)),
+         sum(port$crra_8$weights*c(return, rf)),
+         sum(port$cara_1$weights*c(return, rf)),
+         sum(port$cara_4$weights*c(return, rf)),
+         sum(port$cara_8$weights*c(return, rf)))
+  sd <- c(sqrt(t(port$gmv$weights[1:3]) %*% cov %*% port$gmv$weights[1:3]),
+          sqrt(t(port$tan$weights[1:3]) %*% cov %*% port$tan$weights[1:3]),
+          sqrt(t(port$crra_1$weights[1:3]) %*% cov %*% port$crra_1$weights[1:3]),
+          sqrt(t(port$crra_4$weights[1:3]) %*% cov %*% port$crra_4$weights[1:3]),
+          sqrt(t(port$crra_8$weights[1:3]) %*% cov %*% port$crra_8$weights[1:3]),
+          sqrt(t(port$cara_1$weights[1:3]) %*% cov %*% port$cara_1$weights[1:3]),
+          sqrt(t(port$cara_4$weights[1:3]) %*% cov %*% port$cara_4$weights[1:3]),
+          sqrt(t(port$cara_8$weights[1:3]) %*% cov %*% port$cara_8$weights[1:3]))
   
   return(matrix(c(r, sd), ncol = 2))
 }
 
 r <- combine(port_true)[, 1]
-r_1 <- combine(port_1)[, 1]
-r_2 <- combine(port_2)[, 1]
-r_3 <- combine(port_3)[, 1]
+r_1 <- combine_sim(port_1, return, rf, cov)[, 1]
+r_2 <- combine_sim(port_2, return, rf, cov)[, 1]
+r_3 <- combine_sim(port_3, return, rf, cov)[, 1]
 
 sd <- combine(port_true)[, 2]
-sd_1 <- combine(port_1)[, 2]
-sd_2 <- combine(port_2)[, 2]
-sd_3 <- combine(port_3)[, 2]
+sd_1 <- combine_sim(port_1, return, rf, cov)[, 2]
+sd_2 <- combine_sim(port_2, return, rf, cov)[, 2]
+sd_3 <- combine_sim(port_3, return, rf, cov)[, 2]
 
 # par(mfrow=c(1,1))
 # plot(sort(sd), sort(r), type ='l', xlim=c(0,max(c(sd, sd_1, sd_2, sd_3))), ylim=c(0,max(c(r, r_1, r_2, r_3))))
@@ -117,7 +152,7 @@ sd_3 <- combine(port_3)[, 2]
 # points(sort(sd_2), sort(r_2), col='magenta')
 # lines(sort(sd_1), sort(r_1), col='blue')
 # points(sort(sd_1), sort(r_1), col='blue')
-# 
+# # 
 # par(mfrow=c(4,5))
 # barplot(port_true$gmv$weights, xlab = 'Assets', ylab = 'Weight', main = 'GMV of TRUE')
 # barplot(port_true$tan$weights, xlab = 'Assets', ylab = 'Weight', main = 'TAN of TRUE')

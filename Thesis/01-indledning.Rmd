@@ -5,12 +5,26 @@
 \part{Introduktion og litterært overblik}
 
 # Indledning
-
-
+Denne afhandling har til formål at undersøge langsigtet investering i aktiver under antagelsen om periodisk rebalancering. Dette gøres ved anvendelse af den analytiske løsning, til det dynamiske porteføljeproblem, først beskrevet af [@JurVic2011]. Denne løsning anvendes for en institutionel investor med endelig investeringshorisont, tidsvarienede investeringsmuligheder og under antagelsen om potens nytte, *CRRA*, som er defineret over deres intertemporale budget constraint. Sættet af tidsvarierende investeringsmuligheder er konstante under hele investeringshorisonten, dette tillader at vi kan lave sammenligning af investorer med en kort og langinvesteringshorisont samt for forskellige risiko tolerancer. Investeringssættet, som spænder fra 1960 1. kvartal til 2014 4 kvartal, består af en 90-dages amerikansk *T-Bill* -- som samtidig repræsenterer benchmark aktivet -- et aktieindeks, som repræsenterer samtlige aktier handlet på *NYSE*, *AMEX* og *NASDAQ*, den 10-årige amerikanske statsobligation samt et virksomhedsbaseret obligationsindeks. Før modellering af merafkastene på ovenstående aktiver undersøges prædiktabiliteten af afkastene ved benyttelse af de oftest anvendte variable, som før har vist prædiktablitetsegenskaber i litteraturen. Selve modellering af tilstandsvariablene antages at følge en første-ordens *Vector Autoregressive Process*. Analysen  viser at bm, yield spread og ??, udviser størst statistisk signifikans. Derudover findes der evidens for, at afkastene på de risikobærende aktiver specielt er tidsvarierende. Afkastet på aktieindekset viser sig, at være sværest prædiktabelt, mens stats- og virksomhedsobligationerne bevæger sig procyklisk med yield spread. Porteføljevalget for investoren afhænger kraftigt af disse afkastbevægelser, da han udnytter denne information til at lave periodiske reblancereringer ift. sin risikoaversion. Ved undersøgelse af både investeringshorisontlængdens effekt, risiko tolerancer og betydningen af kortsalg kan vi effektivt måle forskellen mellem en lang type investorer.
 
 ## Problemformulering
+Ved analytisk behandling af det dynamiske portefølje problem, vil denne afhandling undersøge, hvordan porteføljeallokeringer adskiller sig: på tværs af investeringshorisonter, ved kortsalgs restriktioner og ved forskellige tolerancer for risiko.
+
+\begin{center}
+\textit{Hvordan adskiller porteføljeallokeringen sig over investeringshorisonter, for den institutionelle og/eller private investor, under antagelsen, at der er mulighed for periodisk rebalancering?}
+\end{center}
+
+De underliggende spørgsmål som ligger i forlængelse af det ovenstående grundlæggende spørgsmål, vil undervejs i afhandlingen ligeledes blive behandlet og undersøgt, heriblandt, hvordan risikotolerancer hos individuelle investorer påvirker allokeringen mellem risikobærende aktiver.
 
 ## Afgrænsning
+Denne afhandling forsøger at svare ovenstående hovedspørgsmål ved benyttelse af empirisk data. I forlængelse af søgen efter et sådan svar, vil en teoretisk afgrænsning være nødvendig.  
+
+
+As a consequence, consumption, household finance, and human capital are not of interest in our thesis. Hence an AM and
+an ALM investor’s budget constraints are determined by financial wealth and funding ratio as
+approximations for this, respectively. Both institutional investors’ are assumed to have CRRAutility. To utilize this, we propose discrete-time models with approximate analytical solutions
+to analyze long-term portfolio choice when conditions for the myopic portfolio choice becomes
+stall. 
 
 ## Eksisterende litteratur
 
@@ -29,7 +43,7 @@ Ovenstående modeller tillader ikke den risikofrie rente og merafkastet af aktiv
 Mit arbejde vil være en validering af [@JurVic2011] ved anvendelse af deres teori samt analytiske løsninger til det dynamiske porteføljeproblem for en privat investor med et opdateret datagrundlag. Jeg bidrager til det dynamiske porteføljeproblem ved en længere statistisk analyse af potentielle variable, som kan benyttes til det prædiktive afspekt af flere aktivers afkast.
 
 ## Opbygning samt tekniske specifikationer
+Opbygningen af denne afhandling tager udgangspunkt i dele. Første del fungerede som en introduktion til litteraturen og afhandlingens formål. I Del 2 ?? af afhandlingen fastlægges det teoretiske fundament. Kapitel 3 ?? giver et overblik over den underlæggende porteføljeteori for en institutionel investor. Kapitel 4 ?? afkast... . Kapitel 5 ?? bygger videre fra teorien i Kapitel 3 ?? og medtager rebalanceringsperspektivet. Kapitel 6 ?? opbygger VAR-processen i for vores investeringssæt. Del 3 ?? består af den empiriske analyse, hvor teorien fra Del 2 ?? benyttes på virkeligt data. Kapitel 7 ?? beskriver data samt kilder. Kapitel 8 ?? består af univariate- og multivariate regressioner, som benyttes til udvælgelse af variable med bedste prædiktabilitetsegenskaber til den endelige VAR-model. Kapitel 9 ?? har til formål at præsentere et overblik over den endelige VAR-model. Kapitel 10 ?? foretager analysen af samtlige porteføljeallokeringer. Kapitel 11 ?? indeholder en diskussion og reflektion over fundende i Kapitel 10 ??. Til slut afslutter Kapitel 12 ?? afhandlingen med en konklusion. 
 
-
-
+Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet **R** 3.6.0 *"Planting of a Tree"*. Teoretisk dokumenterede **R**-pakker er anvendt ved estimation af VAR-processen samt for de univariate- og multivariate regressioner, for yderligere information henvises til dokumentationen i litteraturlisten.
 \newpage
