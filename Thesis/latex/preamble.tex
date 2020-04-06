@@ -1,31 +1,27 @@
 \usepackage{booktabs}
 \usepackage[danish]{babel}
 
-\setlength{\bibhang}{0pt}
-
 \usepackage{footnote}
 
 \usepackage{bm}
+
+\usepackage[format=plain,
+            labelfont=it,
+            textfont=it]{caption}
+            
+\usepackage{lipsum}
+
+\setlength{\bibhang}{0pt}
 
 \usepackage[hang]{footmisc}
 \setlength\footnotemargin{5pt}
 
 \chapterstyle{hangnum}
 
-\setcounter{tocdepth}{3}
-
-\usepackage[a4paper,width=155mm,top=25mm,bottom=25mm]{geometry}
-
-\pagenumbering{gobble}
-
-\usepackage{lipsum}
-
 \usepackage{amsmath}
 \usepackage{textcomp}
 \usepackage{tikz}
 \usepackage{pgfplots}
-
-% --------------------------------------------------------
 \usetikzlibrary{shapes, arrows}
 \usetikzlibrary{positioning}
 \usetikzlibrary{matrix}
@@ -33,3 +29,9 @@
 \usetikzlibrary{arrows.meta}
 \usepgfplotslibrary{groupplots}
 \pgfplotsset{compat=newest}
+
+\setcounter{tocdepth}{3}
+
+\usepackage[a4paper,width=155mm,top=25mm,bottom=25mm]{geometry}
+
+\pagenumbering{gobble}

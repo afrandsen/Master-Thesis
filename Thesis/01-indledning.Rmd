@@ -17,14 +17,15 @@ Ved analytisk behandling af det dynamiske portefølje problem, vil denne afhandl
 De underliggende spørgsmål som ligger i forlængelse af det ovenstående grundlæggende spørgsmål, vil undervejs i afhandlingen ligeledes blive behandlet og undersøgt, heriblandt, hvordan risikotolerancer hos individuelle investorer påvirker allokeringen mellem risikobærende aktiver.
 
 ## Afgrænsning
-Denne afhandling forsøger at svare ovenstående hovedspørgsmål ved benyttelse af empirisk data. I forlængelse af søgen efter et sådan svar, vil en teoretisk afgrænsning være nødvendig.  
+Denne afhandling forsøger at svare ovenstående hovedspørgsmål ved benyttelse af empirisk data. I forlængelse af søgen efter et sådan svar, vil en teoretisk afgrænsning være nødvendig. Menneskelig kapital samt forbrug vil af den grund ikke være en del af den empiriske analyse. Dette er også ensbetydende med at budgetbegrænsningen for hver institutionelle og/eller private investor er fuldstændig fastsat ud fra deres finansielle formue.
 
+Investorerne antages at have deres nytte defineret via *CRRA*-nytte. For at anvende *CRRA*-nytte i porteføljeproblemet benyttes modellen fra [@JurVic2011], som er defineret i diskrettid, med approksimative analytiske løsninger. Dette medfører bl.a. at porteføljevalget i kontinuert tid bliver tilsidesat, da hovedformålet med afhandlingen er at undersøge det langsigtede portefølgevalg på forskellige tidspunkter over investorens investeringshorisont. Derudover ville en kontinuert behandling af det dynamiske porteføljeproblem ligeledes kræve en diskretisering af observationsrummet for anvendelse i et analytisk empirisk øjemed. Ved anvendelse af den teoretiske ramme foreslået af [@JurVic2011] antages det samtidigt, at investorens nytte kun er defineret over hans budgetbegrænsning og over en fastlagt investeringshorisont med tidsvarierende investeringsmuligheder, som er modelleret via en VAR$(1)$-process.
 
-As a consequence, consumption, household finance, and human capital are not of interest in our thesis. Hence an AM and
-an ALM investor’s budget constraints are determined by financial wealth and funding ratio as
-approximations for this, respectively. Both institutional investors’ are assumed to have CRRAutility. To utilize this, we propose discrete-time models with approximate analytical solutions
-to analyze long-term portfolio choice when conditions for the myopic portfolio choice becomes
-stall. 
+In sample bla. Data bla.
+
+Transaction costs.
+
+En analyse af kortsalgsrestriktion på porteføljeproblemet er ligeledes medtaget i afhandlingen, men omkostningerne ved lån/gearing af den optimale portefølje er udeladt.
 
 ## Eksisterende litteratur
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.9)  5 APR 2020 16:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.9)  6 APR 2020 12:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -676,12 +676,65 @@ Package: bm 2019/07/24 v1.2d Bold Symbol Support (DPC/FMi)
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
 LaTeX Info: Redefining \bm on input line 209.
 )
+
+Class memoir Warning: For the caption package to function properly with memoir,
+ we will now reset\caption and friends to kernel defaults and then let the capt
+ion package take over. Remember: all caption configuration now goves via the ca
+ption package interface, not the interface from the memoir class. .
+
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/01/03 v3.4h Customizing captions (AR)
+
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 61.
+\captionmargin=\dimen197
+\captionmargin@=\dimen198
+\captionwidth=\dimen256
+\caption@tempdima=\dimen257
+\caption@indent=\dimen258
+\caption@parindent=\dimen259
+\caption@hangindent=\dimen260
+Package caption Info: memoir document class detected.
+)
+\c@caption@flags=\count325
+\c@continuedfloat=\count326
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/ltcaption.st
+y
+Package: ltcaption 2018/08/26 v1.4a longtable captions (AR)
+)) (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lipsum/lipsum.sty
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2020-02-25 L3 programming layer (loader) 
+
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-
+pdfmode.def
+File: l3backend-pdfmode.def 2020-02-23 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count327
+\l__pdf_internal_box=\box57
+))
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xp
+arse.sty
+Package: xparse 2020-02-25 L3 Experimental document command parser
+\l__xparse_current_arg_int=\count328
+\g__xparse_grabber_int=\count329
+\l__xparse_m_args_int=\count330
+\l__xparse_v_nesting_int=\count331
+)
+Package: lipsum 2019/01/02 v2.2 150 paragraphs of Lorem Ipsum dummy text
+
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lipsum/lipsum.ltd.te
+x
+File: lipsum.ltd.tex 2019/01/02 v2.2 The Lorem ipsum dummy text
+))
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/footmisc/footmisc.st
 y
 Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
 \FN@temptoken=\toks33
-\footnotemargin=\dimen197
-\c@pp@next@reset=\count325
+\footnotemargin=\dimen261
+\c@pp@next@reset=\count332
 Package footmisc Info: Declaring symbol style bringhurst on input line 855.
 Package footmisc Info: Declaring symbol style chicago on input line 863.
 Package footmisc Info: Declaring symbol style wiley on input line 872.
@@ -692,50 +745,8 @@ Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
 .
 )
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 101.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 107.
 
-(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry.st
-y
-Package: geometry 2020/01/02 v5.9 Page Geometry
-(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
-Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
-)
-\Gm@cnth=\count326
-\Gm@cntv=\count327
-\c@Gm@tempcnt=\count328
-\Gm@bindingoffset=\dimen198
-\Gm@wd@mp=\dimen256
-\Gm@odd@mp=\dimen257
-\Gm@even@mp=\dimen258
-\Gm@layoutwidth=\dimen259
-\Gm@layoutheight=\dimen260
-\Gm@layouthoffset=\dimen261
-\Gm@layoutvoffset=\dimen262
-\Gm@dimlist=\toks34
-) (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lipsum/lipsum.sty 
-(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2020-02-25 L3 programming layer (loader) 
-
-(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-
-pdfmode.def
-File: l3backend-pdfmode.def 2020-02-23 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count329
-\l__pdf_internal_box=\box57
-))
-(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xp
-arse.sty
-Package: xparse 2020-02-25 L3 Experimental document command parser
-\l__xparse_current_arg_int=\count330
-\g__xparse_grabber_int=\count331
-\l__xparse_m_args_int=\count332
-\l__xparse_v_nesting_int=\count333
-)
-Package: lipsum 2019/01/02 v2.2 150 paragraphs of Lorem Ipsum dummy text
-
-(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lipsum/lipsum.ltd.te
-x
-File: lipsum.ltd.tex 2019/01/02 v2.2 The Lorem ipsum dummy text
-))
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/frontendlayer/ti
 kz.sty
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgf.s
@@ -744,9 +755,9 @@ ty
 .sty
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfu
 til-common.tex
-\pgfutil@everybye=\toks35
-\pgfutil@tempdima=\dimen263
-\pgfutil@tempdimb=\dimen264
+\pgfutil@everybye=\toks34
+\pgfutil@tempdima=\dimen262
+\pgfutil@tempdimb=\dimen263
 
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfu
 til-common-lists.tex))
@@ -774,33 +785,33 @@ Package: pgfsys 2020/01/08 v3.1.5b (3.1.5b)
 
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfk
 eys.code.tex
-\pgfkeys@pathtoks=\toks36
-\pgfkeys@temptoks=\toks37
+\pgfkeys@pathtoks=\toks35
+\pgfkeys@temptoks=\toks36
 
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfk
 eysfiltered.code.tex
-\pgfkeys@tmptoks=\toks38
+\pgfkeys@tmptoks=\toks37
 ))
-\pgf@x=\dimen265
-\pgf@y=\dimen266
-\pgf@xa=\dimen267
-\pgf@ya=\dimen268
-\pgf@xb=\dimen269
-\pgf@yb=\dimen270
-\pgf@xc=\dimen271
-\pgf@yc=\dimen272
-\pgf@xd=\dimen273
-\pgf@yd=\dimen274
+\pgf@x=\dimen264
+\pgf@y=\dimen265
+\pgf@xa=\dimen266
+\pgf@ya=\dimen267
+\pgf@xb=\dimen268
+\pgf@yb=\dimen269
+\pgf@xc=\dimen270
+\pgf@yc=\dimen271
+\pgf@xd=\dimen272
+\pgf@yd=\dimen273
 \w@pgf@writea=\write4
 \r@pgf@reada=\read4
-\c@pgf@counta=\count334
-\c@pgf@countb=\count335
-\c@pgf@countc=\count336
-\c@pgf@countd=\count337
-\t@pgf@toka=\toks39
-\t@pgf@tokb=\toks40
-\t@pgf@tokc=\toks41
-\pgf@sys@id@count=\count338
+\c@pgf@counta=\count333
+\c@pgf@countb=\count334
+\c@pgf@countc=\count335
+\c@pgf@countd=\count336
+\t@pgf@toka=\toks38
+\t@pgf@tokb=\toks39
+\t@pgf@tokc=\toks40
+\pgf@sys@id@count=\count337
 
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pg
 f.cfg
@@ -819,8 +830,8 @@ File: pgfsys-common-pdf.def 2020/01/08 v3.1.5b (3.1.5b)
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pg
 fsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfsyssoftpath@smallbuffer@items=\count339
-\pgfsyssoftpath@bigbuffer@items=\count340
+\pgfsyssoftpath@smallbuffer@items=\count338
+\pgfsyssoftpath@bigbuffer@items=\count339
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pg
 fsysprotocol.code.tex
@@ -855,12 +866,12 @@ lc.code.tex
 il.code.tex)
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathpa
 rser.code.tex
-\pgfmath@dimen=\dimen275
-\pgfmath@count=\count341
+\pgfmath@dimen=\dimen274
+\pgfmath@count=\count340
 \pgfmath@box=\box59
-\pgfmath@toks=\toks42
-\pgfmath@stack@operand=\toks43
-\pgfmath@stack@operation=\toks44
+\pgfmath@toks=\toks41
+\pgfmath@stack@operand=\toks42
+\pgfmath@stack@operation=\toks43
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfu
 nctions.code.tex
@@ -882,39 +893,39 @@ nctions.misc.code.tex)
 nctions.integerarithmetics.code.tex)))
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfl
 oat.code.tex
-\c@pgfmathroundto@lastzeros=\count342
+\c@pgfmathroundto@lastzeros=\count341
 ))
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfint.co
 de.tex)
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgf
 corepoints.code.tex
 File: pgfcorepoints.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@picminx=\dimen276
-\pgf@picmaxx=\dimen277
-\pgf@picminy=\dimen278
-\pgf@picmaxy=\dimen279
-\pgf@pathminx=\dimen280
-\pgf@pathmaxx=\dimen281
-\pgf@pathminy=\dimen282
-\pgf@pathmaxy=\dimen283
-\pgf@xx=\dimen284
-\pgf@xy=\dimen285
-\pgf@yx=\dimen286
-\pgf@yy=\dimen287
-\pgf@zx=\dimen288
-\pgf@zy=\dimen289
+\pgf@picminx=\dimen275
+\pgf@picmaxx=\dimen276
+\pgf@picminy=\dimen277
+\pgf@picmaxy=\dimen278
+\pgf@pathminx=\dimen279
+\pgf@pathmaxx=\dimen280
+\pgf@pathminy=\dimen281
+\pgf@pathmaxy=\dimen282
+\pgf@xx=\dimen283
+\pgf@xy=\dimen284
+\pgf@yx=\dimen285
+\pgf@yy=\dimen286
+\pgf@zx=\dimen287
+\pgf@zy=\dimen288
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgf
 corepathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@path@lastx=\dimen290
-\pgf@path@lasty=\dimen291
+\pgf@path@lastx=\dimen289
+\pgf@path@lasty=\dimen290
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgf
 corepathusage.code.tex
 File: pgfcorepathusage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@shorten@end@additional=\dimen292
-\pgf@shorten@start@additional=\dimen293
+\pgf@shorten@end@additional=\dimen291
+\pgf@shorten@start@additional=\dimen292
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgf
 corescopes.code.tex
@@ -922,19 +933,19 @@ File: pgfcorescopes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgfpic=\box60
 \pgf@hbox=\box61
 \pgf@layerbox@main=\box62
-\pgf@picture@serial@count=\count343
+\pgf@picture@serial@count=\count342
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgf
 coregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgflinewidth=\dimen294
+\pgflinewidth=\dimen293
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgf
 coretransformations.code.tex
 File: pgfcoretransformations.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@pt@x=\dimen295
-\pgf@pt@y=\dimen296
-\pgf@pt@temp=\dimen297
+\pgf@pt@x=\dimen294
+\pgf@pt@y=\dimen295
+\pgf@pt@temp=\dimen296
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgf
 corequick.code.tex
@@ -951,14 +962,14 @@ File: pgfcorepathprocessing.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgf
 corearrows.code.tex
 File: pgfcorearrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfarrowsep=\dimen298
+\pgfarrowsep=\dimen297
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgf
 coreshade.code.tex
 File: pgfcoreshade.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@max=\dimen299
-\pgf@sys@shading@range@num=\count344
-\pgf@shadingcount=\count345
+\pgf@max=\dimen298
+\pgf@sys@shading@range@num=\count343
+\pgf@shadingcount=\count344
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgf
 coreimage.code.tex
@@ -997,8 +1008,8 @@ File: pgfmoduleplot.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pg
 fcomp-version-0-65.sty
 Package: pgfcomp-version-0-65 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@nodesepstart=\dimen300
-\pgf@nodesepend=\dimen301
+\pgf@nodesepstart=\dimen299
+\pgf@nodesepend=\dimen300
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pg
 fcomp-version-1-18.sty
@@ -1020,10 +1031,10 @@ Package: pgffor 2020/01/08 v3.1.5b (3.1.5b)
 
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.c
 ode.tex)
-\pgffor@iter=\dimen302
-\pgffor@skip=\dimen303
-\pgffor@stack=\toks45
-\pgffor@toks=\toks46
+\pgffor@iter=\dimen301
+\pgffor@skip=\dimen302
+\pgffor@stack=\toks44
+\pgffor@toks=\toks45
 ))
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/
 tikz/tikz.code.tex
@@ -1032,34 +1043,34 @@ Package: tikz 2020/01/08 v3.1.5b (3.1.5b)
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgfl
 ibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@plot@mark@count=\count346
-\pgfplotmarksize=\dimen304
+\pgf@plot@mark@count=\count345
+\pgfplotmarksize=\dimen303
 )
-\tikz@lastx=\dimen305
-\tikz@lasty=\dimen306
-\tikz@lastxsaved=\dimen307
-\tikz@lastysaved=\dimen308
-\tikz@lastmovetox=\dimen309
-\tikz@lastmovetoy=\dimen310
-\tikzleveldistance=\dimen311
-\tikzsiblingdistance=\dimen312
+\tikz@lastx=\dimen304
+\tikz@lasty=\dimen305
+\tikz@lastxsaved=\dimen306
+\tikz@lastysaved=\dimen307
+\tikz@lastmovetox=\dimen308
+\tikz@lastmovetoy=\dimen309
+\tikzleveldistance=\dimen310
+\tikzsiblingdistance=\dimen311
 \tikz@figbox=\box65
 \tikz@figbox@bg=\box66
 \tikz@tempbox=\box67
 \tikz@tempbox@bg=\box68
-\tikztreelevel=\count347
-\tikznumberofchildren=\count348
-\tikznumberofcurrentchild=\count349
-\tikz@fig@count=\count350
+\tikztreelevel=\count346
+\tikznumberofchildren=\count347
+\tikznumberofcurrentchild=\count348
+\tikz@fig@count=\count349
 
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmod
 ulematrix.code.tex
 File: pgfmodulematrix.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfmatrixcurrentrow=\count351
-\pgfmatrixcurrentcolumn=\count352
-\pgf@matrix@numberofcolumns=\count353
+\pgfmatrixcurrentrow=\count350
+\pgfmatrixcurrentcolumn=\count351
+\pgf@matrix@numberofcolumns=\count352
 )
-\tikz@expandcount=\count354
+\tikz@expandcount=\count353
 
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/
 tikz/libraries/tikzlibrarytopaths.code.tex
@@ -1075,12 +1086,12 @@ Package: pgfplots 2018/03/28 v1.16 Data Visualization (1.16)
 code.tex
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotsc
 ore.code.tex
-\t@pgfplots@toka=\toks47
-\t@pgfplots@tokb=\toks48
-\t@pgfplots@tokc=\toks49
-\pgfplots@tmpa=\dimen313
-\c@pgfplots@coordindex=\count355
-\c@pgfplots@scanlineindex=\count356
+\t@pgfplots@toka=\toks46
+\t@pgfplots@tokb=\toks47
+\t@pgfplots@tokc=\toks48
+\pgfplots@tmpa=\dimen312
+\c@pgfplots@coordindex=\count354
+\c@pgfplots@scanlineindex=\count355
 
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/sys/pgfpl
 otssysgeneric.code.tex))
@@ -1098,14 +1109,14 @@ ture/pgfplotsliststructure.code.tex)
 ture/pgfplotsliststructureext.code.tex)
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/liststruc
 ture/pgfplotsarray.code.tex
-\c@pgfplotsarray@tmp=\count357
+\c@pgfplotsarray@tmp=\count356
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/liststruc
 ture/pgfplotsmatrix.code.tex)
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/numtable/
 pgfplotstableshared.code.tex
-\c@pgfplotstable@counta=\count358
-\t@pgfplotstable@a=\toks50
+\c@pgfplotstable@counta=\count357
+\t@pgfplotstable@a=\toks49
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/liststruc
 ture/pgfplotsdeque.code.tex)
@@ -1117,7 +1128,7 @@ lotsbinary.data.code.tex))
 lotsutil.verb.code.tex)
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/libs/pgfl
 ibrarypgfplots.surfshading.code.tex
-\c@pgfplotslibrarysurf@no=\count359
+\c@pgfplotslibrarysurf@no=\count358
 
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/sys/pgfli
 brarypgfplots.surfshading.pgfsys-pdftex.def)))
@@ -1149,14 +1160,14 @@ paths.code.tex)
 tikz/libraries/tikzlibrarydecorations.code.tex
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmod
 uledecorations.code.tex
-\pgfdecoratedcompleteddistance=\dimen314
-\pgfdecoratedremainingdistance=\dimen315
-\pgfdecoratedinputsegmentcompleteddistance=\dimen316
-\pgfdecoratedinputsegmentremainingdistance=\dimen317
-\pgf@decorate@distancetomove=\dimen318
-\pgf@decorate@repeatstate=\count360
-\pgfdecorationsegmentamplitude=\dimen319
-\pgfdecorationsegmentlength=\dimen320
+\pgfdecoratedcompleteddistance=\dimen313
+\pgfdecoratedremainingdistance=\dimen314
+\pgfdecoratedinputsegmentcompleteddistance=\dimen315
+\pgfdecoratedinputsegmentremainingdistance=\dimen316
+\pgf@decorate@distancetomove=\dimen317
+\pgf@decorate@repeatstate=\count359
+\pgfdecorationsegmentamplitude=\dimen318
+\pgfdecorationsegmentlength=\dimen319
 )
 \tikz@lib@dec@box=\box69
 )
@@ -1168,13 +1179,13 @@ rations/pgflibrarydecorations.pathmorphing.code.tex))
 tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/deco
 rations/pgflibrarydecorations.pathreplacing.code.tex))
-\pgfplots@numplots=\count361
-\pgfplots@xmin@reg=\dimen321
-\pgfplots@xmax@reg=\dimen322
-\pgfplots@ymin@reg=\dimen323
-\pgfplots@ymax@reg=\dimen324
-\pgfplots@zmin@reg=\dimen325
-\pgfplots@zmax@reg=\dimen326
+\pgfplots@numplots=\count360
+\pgfplots@xmin@reg=\dimen320
+\pgfplots@xmax@reg=\dimen321
+\pgfplots@ymin@reg=\dimen322
+\pgfplots@ymax@reg=\dimen323
+\pgfplots@zmin@reg=\dimen324
+\pgfplots@zmax@reg=\dimen325
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/
 tikz/libraries/tikzlibraryplotmarks.code.tex
@@ -1259,7 +1270,7 @@ File: tikzlibraryarrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgfl
 ibraryarrows.code.tex
 File: pgflibraryarrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\arrowsize=\dimen327
+\arrowsize=\dimen326
 ))
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/
 tikz/libraries/tikzlibrarypositioning.code.tex
@@ -1272,39 +1283,58 @@ File: tikzlibrarymatrix.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgfl
 ibraryarrows.meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfarrowinset=\dimen328
-\pgfarrowlength=\dimen329
-\pgfarrowwidth=\dimen330
-\pgfarrowlinewidth=\dimen331
+\pgfarrowinset=\dimen327
+\pgfarrowlength=\dimen328
+\pgfarrowwidth=\dimen329
+\pgfarrowlinewidth=\dimen330
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/libs/tikz
 librarypgfplots.groupplots.code.tex
-\pgfplots@group@current@plot=\count362
-\pgfplots@group@current@row=\count363
-\pgfplots@group@current@column=\count364
+\pgfplots@group@current@plot=\count361
+\pgfplots@group@current@row=\count362
+\pgfplots@group@current@column=\count363
 
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/
 tikz/libraries/tikzlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ))
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry.st
+y
+Package: geometry 2020/01/02 v5.9 Page Geometry
+(c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count364
+\Gm@cntv=\count365
+\c@Gm@tempcnt=\count366
+\Gm@bindingoffset=\dimen331
+\Gm@wd@mp=\dimen332
+\Gm@odd@mp=\dimen333
+\Gm@even@mp=\dimen334
+\Gm@layoutwidth=\dimen335
+\Gm@layoutheight=\dimen336
+\Gm@layouthoffset=\dimen337
+\Gm@layoutvoffset=\dimen338
+\Gm@dimlist=\toks50
+)
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.st
 y
 Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
 \multirow@colwidth=\skip258
-\multirow@cntb=\count365
+\multirow@cntb=\count367
 \multirow@dima=\skip259
-\bigstrutjot=\dimen332
+\bigstrutjot=\dimen339
 ) (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.st
 y
-\wrapoverhang=\dimen333
-\WF@size=\dimen334
-\c@WF@wrappedlines=\count366
+\wrapoverhang=\dimen340
+\WF@size=\dimen341
+\c@WF@wrappedlines=\count368
 \WF@box=\box90
 \WF@everypar=\toks51
 Package: wrapfig 2003/01/31  v 3.6
 ) (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count367
+\c@float@type=\count369
 \float@exts=\toks52
 \float@box=\box91
 \@float@everytoks=\toks53
@@ -1330,25 +1360,25 @@ Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
 y
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box93
-\sift@deathcycles=\count368
-\@vwid@loff=\dimen335
-\@vwid@roff=\dimen336
+\sift@deathcycles=\count370
+\@vwid@loff=\dimen342
+\@vwid@roff=\dimen343
 )
-\c@taburow=\count369
-\tabu@nbcols=\count370
-\tabu@cnt=\count371
-\tabu@Xcol=\count372
-\tabu@alloc=\count373
-\tabu@nested=\count374
-\tabu@target=\dimen337
-\tabu@spreadtarget=\dimen338
-\tabu@naturalX=\dimen339
-\tabucolX=\dimen340
-\tabu@Xsum=\dimen341
-\extrarowdepth=\dimen342
-\abovetabulinesep=\dimen343
-\belowtabulinesep=\dimen344
-\tabustrutrule=\dimen345
+\c@taburow=\count371
+\tabu@nbcols=\count372
+\tabu@cnt=\count373
+\tabu@Xcol=\count374
+\tabu@alloc=\count375
+\tabu@nested=\count376
+\tabu@target=\dimen344
+\tabu@spreadtarget=\dimen345
+\tabu@naturalX=\dimen346
+\tabucolX=\dimen347
+\tabu@Xsum=\dimen348
+\extrarowdepth=\dimen349
+\abovetabulinesep=\dimen350
+\belowtabulinesep=\dimen351
+\tabustrutrule=\dimen352
 \tabu@thebody=\toks55
 \tabu@footnotes=\toks56
 \tabu@box=\box94
@@ -1378,42 +1408,42 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \UL@hyphenbox=\box100
 \UL@skip=\skip263
 \UL@hook=\toks57
-\UL@height=\dimen346
-\UL@pe=\count375
-\UL@pixel=\dimen347
+\UL@height=\dimen353
+\UL@pe=\count377
+\UL@pixel=\dimen354
 \ULC@box=\box101
 Package: ulem 2019/11/18
-\ULdepth=\dimen348
+\ULdepth=\dimen355
 )
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/makecell/makecell.st
 y
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen349
-\c@nlinenum=\count376
+\rotheadsize=\dimen356
+\c@nlinenum=\count378
 \TeXr@lab=\toks58
 ) (./Master_Thesis_Andreas_Kracht_Frandsen.aux)
 \openout1 = `Master_Thesis_Andreas_Kracht_Frandsen.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 139.
-LaTeX Font Info:    ... okay on input line 139.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 139.
-LaTeX Font Info:    ... okay on input line 139.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 139.
-LaTeX Font Info:    ... okay on input line 139.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 139.
-LaTeX Font Info:    ... okay on input line 139.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 139.
-LaTeX Font Info:    ... okay on input line 139.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 139.
-LaTeX Font Info:    ... okay on input line 139.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 139.
-LaTeX Font Info:    ... okay on input line 139.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 139.
-LaTeX Font Info:    ... okay on input line 139.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 139.
-LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 141.
+LaTeX Font Info:    ... okay on input line 141.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 141.
+LaTeX Font Info:    ... okay on input line 141.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 141.
+LaTeX Font Info:    ... okay on input line 141.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 141.
+LaTeX Font Info:    ... okay on input line 141.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 141.
+LaTeX Font Info:    ... okay on input line 141.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 141.
+LaTeX Font Info:    ... okay on input line 141.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 141.
+LaTeX Font Info:    ... okay on input line 141.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 141.
+LaTeX Font Info:    ... okay on input line 141.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 141.
+LaTeX Font Info:    ... okay on input line 141.
 \AtBeginShipoutBox=\box102
-Package hyperref Info: Link coloring ON on input line 139.
+Package hyperref Info: Link coloring ON on input line 141.
 
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -1426,14 +1456,14 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 titlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count377
+\c@section@level=\count379
 )
 Redoing nameref's sectioning
 Redoing nameref's label
-LaTeX Info: Redefining \nameref on input line 139.
-LaTeX Info: Redefining \ref on input line 139.
-LaTeX Info: Redefining \pageref on input line 139.
-LaTeX Info: Redefining \nameref on input line 139.
+LaTeX Info: Redefining \nameref on input line 141.
+LaTeX Info: Redefining \ref on input line 141.
+LaTeX Info: Redefining \pageref on input line 141.
+LaTeX Info: Redefining \nameref on input line 141.
 (./Master_Thesis_Andreas_Kracht_Frandsen.out) (./Master_Thesis_Andreas_Kracht_F
 randsen.out)
 \@outlinefile=\write5
@@ -1451,6 +1481,15 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: threeparttable package is loaded.
+Package caption Info: wrapfig package is loaded.
+Package caption Info: End \AtBeginDocument code.
+ABD: EveryShipout initializing macros
+Package pgfplots notification 'compat/show suggested version=true': document ha
+s been generated with the most recent feature set (\pgfplotsset{compat=1.16}).
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -1485,73 +1524,69 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-ABD: EveryShipout initializing macros
-Package pgfplots notification 'compat/show suggested version=true': document ha
-s been generated with the most recent feature set (\pgfplotsset{compat=1.16}).
-
 LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 1
-56.
+58.
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
 LaTeX Font Info:    Trying to load font information for OML+zplm on input line 
-156.
+158.
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 
-156.
+158.
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 
-156.
+158.
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 
-156.
+158.
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 156.
+(Font)              scaled to size 12.50409pt on input line 158.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 156.
+(Font)              scaled to size 9.37807pt on input line 158.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 156.
+(Font)              scaled to size 7.29405pt on input line 158.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 156.
+(Font)              scaled to size 12.50409pt on input line 158.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 156.
+(Font)              scaled to size 9.37807pt on input line 158.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 156.
+(Font)              scaled to size 7.29405pt on input line 158.
 LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 1
-56.
+58.
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 156.
+(Font)              scaled to size 5.21004pt on input line 158.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 156.
+(Font)              scaled to size 5.21004pt on input line 158.
 <latex/ausegl_sort.png, id=169, 569.12625pt x 569.12625pt>
 File: latex/ausegl_sort.png Graphic file (type png)
 <use latex/ausegl_sort.png>
-Package pdftex.def Info: latex/ausegl_sort.png  used on input line 173.
+Package pdftex.def Info: latex/ausegl_sort.png  used on input line 175.
 (pdftex.def)             Requested size: 176.40126pt x 176.40126pt.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 182.
+(Font)              scaled to size 10.42007pt on input line 184.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 182.
+(Font)              scaled to size 7.91925pt on input line 184.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 182.
+(Font)              scaled to size 6.25204pt on input line 184.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 182.
+(Font)              scaled to size 10.42007pt on input line 184.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 182.
+(Font)              scaled to size 7.91925pt on input line 184.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 182.
+(Font)              scaled to size 6.25204pt on input line 184.
 [1
 
 {c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.
@@ -1559,7 +1594,7 @@ map} <./latex/ausegl_sort.png>]pdfTeX warning (ext4): destination with the same
  identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.196 \newpage
+l.198 \newpage
                [1
 
 ] (./Master_Thesis_Andreas_Kracht_Frandsen.toc
@@ -1582,39 +1617,33 @@ _Kracht_Frandsen.lot) [3] [4
 
 ]
 LaTeX Font Info:    Trying to load font information for U+fplmbb on input line 
-304.
+308.
 (c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ufplmbb.fd
 File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
 ) [6
 
-] [7pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
-1}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.395 
-      ] [8] [9] [10] [11] [12]
+] [7] [8] [9] [10] [11] [12]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 603.
+(hyperref)                removing `math shift' on input line 607.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 603.
+(hyperref)                removing `math shift' on input line 607.
 
 
-Overfull \hbox (6.94882pt too wide) detected at line 611
+Overfull \hbox (6.94882pt too wide) detected at line 615
 []
  []
 
 [13]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 648.
+(hyperref)                removing `math shift' on input line 652.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 648.
+(hyperref)                removing `math shift' on input line 652.
 
 [14] [15] [16
 
@@ -1630,12 +1659,12 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 ]
 <Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf, id=59
-1, 1300.86pt x 1084.05pt>
+8, 1300.86pt x 1084.05pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf G
 raphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/sim-tids-1.pdf  used on input line 748.
+ex/sim-tids-1.pdf  used on input line 752.
 (pdftex.def)             Requested size: 441.01619pt x 367.51349pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1648,42 +1677,12 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [22
 
-pdfTeX warning (ext4): destination with the same identifier (name{table.8.1}) h
-as been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.818 
-      ]
+]
 
 LaTeX Warning: Text page 23 contains only floats.
 
-[23pdfTeX warning (ext4): destination with the same identifier (name{figure.8.1
-}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.818 
-      pdfTeX warning (ext4): destination with the same identifier (name{table.8
-.2}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.818 
-      pdfTeX warning (ext4): destination with the same identifier (name{table.8
-.3}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.818 
-      pdfTeX warning (ext4): destination with the same identifier (name{table.8
-.4}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.818 
-       <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.p
-df>]
+[23 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf>
+]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -1691,46 +1690,16 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 <Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp-1.pdf, id=
-631, 1300.86pt x 519.9425pt>
+638, 1300.86pt x 519.9425pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp-1.pdf
  Graphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp-1.pdf>
 
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/weight-exp-1.pdf  used on input line 909.
+ex/weight-exp-1.pdf  used on input line 921.
 (pdftex.def)             Requested size: 441.01619pt x 176.27036pt.
-[24pdfTeX warning (ext4): destination with the same identifier (name{table.8.5}
-) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.920 \part
-           {Appendiks}pdfTeX warning (ext4): destination with the same identifi
-er (name{table.8.6}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.920 \part
-           {Appendiks}] [25pdfTeX warning (ext4): destination with the same ide
-ntifier (name{table.8.7}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.920 \part
-           {Appendiks}pdfTeX warning (ext4): destination with the same identifi
-er (name{table.8.8}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.920 \part
-           {Appendiks}pdfTeX warning (ext4): destination with the same identifi
-er (name{figure.8.2}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.920 \part
-           {Appendiks} <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-la
-tex/weight-exp-1.pdf>] [26
+[24] [25 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp
+-1.pdf>] [26
 
 ] (./Master_Thesis_Andreas_Kracht_Frandsen.bbl [27
 
@@ -1746,24 +1715,24 @@ tex/weight-exp-1.pdf>] [26
 \tf@lot=\write8
 \openout8 = `Master_Thesis_Andreas_Kracht_Frandsen.lot'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 930.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 930.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 942.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 942.
 (./Master_Thesis_Andreas_Kracht_Frandsen.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 930.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 930.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 942.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 942.
 Package rerunfilecheck Info: File `Master_Thesis_Andreas_Kracht_Frandsen.out' h
 as not changed.
-(rerunfilecheck)             Checksum: BCD997E12C90959B669879227440EE68;5894.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 930.
+(rerunfilecheck)             Checksum: FCDF26EF87B69C39C2C7FA10BC7C4BF4;5895.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 942.
  ) 
 Here is how much of TeX's memory you used:
- 40768 strings out of 482923
- 912320 string characters out of 5958132
- 1545789 words of memory out of 5000000
- 55081 multiletter control sequences out of 15000+600000
+ 41833 strings out of 482923
+ 932363 string characters out of 5958132
+ 1567221 words of memory out of 5000000
+ 56139 multiletter control sequences out of 15000+600000
  609030 words of font info for 206 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 78i,12n,136p,2180b,2096s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 78i,12n,136p,2180b,2123s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.5} has been referenced but does not exi
 st, replaced by a fixed one
 
@@ -1797,11 +1766,11 @@ nts/type1/urw/palatino/uplbi8a.pfb><c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-
 dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/AKF/AppData/Roaming/TinyTeX/
 texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/AKF/AppData/Roaming/Ti
 nyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on Master_Thesis_Andreas_Kracht_Frandsen.pdf (35 pages, 315680 b
+Output written on Master_Thesis_Andreas_Kracht_Frandsen.pdf (35 pages, 320801 b
 ytes).
 PDF statistics:
- 777 PDF objects out of 1000 (max. 8388607)
- 705 compressed objects within 8 object streams
+ 784 PDF objects out of 1000 (max. 8388607)
+ 712 compressed objects within 8 object streams
  193 named destinations out of 1000 (max. 500000)
  348 words of extra memory for PDF output out of 10000 (max. 10000000)
 

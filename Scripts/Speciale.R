@@ -48,8 +48,9 @@ calc.portfolio <- function(r, cov, rf, a = c(1, 4, 8)){
     port[[paste('cara', a[i], sep = '_')]] <- list("er" = as.vector(cara_r[i]),
                                                    "sd" = as.vector(cara_sd[i]),
                                                    "weights" = cara[i,])
+    crra[i, ] <- c((1/a[i]) * solve(cov) %*% (r - c(rf, rf, rf) + diag(cov) / 2), 1 - sum((1/a[i]) * solve(cov) %*% (r - c(rf, rf, rf) + diag(cov) / 2)))
     
-    crra[i, ] <- c((r - rf + (diag(cov)/2))/(a[i]*diag(cov)), 1 - sum((r - rf + (diag(cov)/2))/(a[i]*diag(cov))))
+    #crra[i, ] <- c((r - rf + (diag(cov)/2))/(a[i]*diag(cov)), 1 - sum((r - rf + (diag(cov)/2))/(a[i]*diag(cov))))
   
     crra_r[i]  <- sum(crra[i, ] * c(r, rf))
     

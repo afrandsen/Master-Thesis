@@ -185,22 +185,27 @@ data <- round(data.frame(Min = c(port_true$gmv$weights,0,port_true$gmv$er*100, N
                          Tan = c(port_true$tan$weights,0,port_true$tan$er*100, NA, port_true$tan$sd*100, NA),
                          Crra_1 = c(port_true$crra_1$weights, port_true$crra_1$er*100, NA, port_true$crra_1$sd*100, NA),
                          Crra_4 = c(port_true$crra_4$weights, port_true$crra_4$er*100, NA, port_true$crra_4$sd*100, NA),
-                         Crra_8 = c(port_true$crra_8$weights, port_true$crra_8$er*100, NA, port_true$crra_8$sd*100, NA)), digits = 3)
+                         Crra_8 = c(port_true$crra_8$weights, port_true$crra_8$er*100, NA, port_true$crra_8$sd*100, NA),
+                         cara_1 = c(port_true$cara_1$weights, port_true$cara_1$er*100, NA, port_true$cara_1$sd*100, NA),
+                         cara_4 = c(port_true$cara_4$weights, port_true$cara_4$er*100, NA, port_true$cara_4$sd*100, NA),
+                         cara_8 = c(port_true$cara_8$weights, port_true$cara_8$er*100, NA, port_true$cara_8$sd*100, NA)), digits = 3)
 
 rownames(data) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3', 'Risikofri', 'Forv. Afkast', 'Estimeret afkast', 'Volatilitet', 'Estimeret volatilitet')
-
+colnames(data) <- c(" "," ","$\\gamma=1$", "$\\gamma=4$", "$\\gamma=8$", "$a=1$", "$a=4$", "$a=8$")
 
 data %>% 
-  knitr::kable(caption = 'Gengivelse af de sande afkast.',
+  knitr::kable(caption = 'Gengivelse af de beregnede porteføljer ved brug af de sande afkast.',
                booktabs=TRUE,
                align = c('r', 'r', 'r' ,'r', 'r'),
                row.names = T,
-               col.names = NULL,
+               escape = FALSE,
+               #col.names = NULL,
                linesep = "") %>% 
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
-  kableExtra::add_header_above(c(" ", "GMV" = 1, "Tan" = 1, "a=1" = 1, "a=4" = 1, "a=8" = 1))
+  kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
+  kableExtra::row_spec(c(6, 8), italic = T)
 ```
 
 ```{r sum-1, echo=FALSE}
@@ -231,22 +236,39 @@ data <- round(data.frame(Min = c(port_1$gmv$weights,
                                  sum(port_1$crra_8$weights*c(return, rf))*100,
                                  port_1$crra_8$er*100,
                                  sqrt(t(port_1$crra_8$weights[1:3]) %*% cov %*% port_1$crra_8$weights[1:3])*100,
-                                 port_1$crra_8$sd*100)), digits = 3)
+                                 port_1$crra_8$sd*100),
+                         cara_1 = c(port_1$cara_1$weights,
+                                 sum(port_1$cara_1$weights*c(return, rf))*100,
+                                 port_1$cara_1$er*100,
+                                 sqrt(t(port_1$cara_1$weights[1:3]) %*% cov %*% port_1$cara_1$weights[1:3])*100,
+                                 port_1$cara_1$sd*100),
+                         cara_4 = c(port_1$cara_4$weights,
+                                 sum(port_1$cara_4$weights*c(return, rf))*100,
+                                 port_1$cara_4$er*100,
+                                 sqrt(t(port_1$cara_4$weights[1:3]) %*% cov %*% port_1$cara_4$weights[1:3])*100,
+                                 port_1$cara_4$sd*100),
+                         cara_8 = c(port_1$cara_8$weights,
+                                 sum(port_1$cara_8$weights*c(return, rf))*100,
+                                 port_1$cara_8$er*100,
+                                 sqrt(t(port_1$cara_8$weights[1:3]) %*% cov %*% port_1$cara_8$weights[1:3])*100,
+                                 port_1$cara_8$sd*100)), digits = 3)
 
 rownames(data) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3', 'Risikofri', 'Forv. Afkast', 'Estimeret afkast', 'Volatilitet', 'Estimeret volatilitet')
-
+colnames(data) <- c(" "," ","$\\gamma=1$", "$\\gamma=4$", "$\\gamma=8$", "$a=1$", "$a=4$", "$a=8$")
 
 data %>% 
-  knitr::kable(caption = 'Gengivelse af de sande afkast.',
+  knitr::kable(caption = 'Gengivelse af de beregnede porteføljer ved brug af de simulerede afkast, fra første simulering.',
                booktabs=TRUE,
                align = c('r', 'r', 'r' ,'r', 'r'),
                row.names = T,
-               col.names = NULL,
+               escape = FALSE,
+               #col.names = NULL,
                linesep = "") %>% 
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
-  kableExtra::add_header_above(c(" ", "GMV" = 1, "Tan" = 1, "a=1" = 1, "a=4" = 1, "a=8" = 1))
+  kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
+  kableExtra::row_spec(c(6, 8), italic = T)
 ```
 
 ```{r sum-2, echo=FALSE}
@@ -277,22 +299,39 @@ data <- round(data.frame(Min = c(port_2$gmv$weights,
                                  sum(port_2$crra_8$weights*c(return, rf))*100,
                                  port_2$crra_8$er*100,
                                  sqrt(t(port_2$crra_8$weights[1:3]) %*% cov %*% port_2$crra_8$weights[1:3])*100,
-                                 port_2$crra_8$sd*100)), digits = 3)
+                                 port_2$crra_8$sd*100),
+                         cara_1 = c(port_2$cara_1$weights,
+                                 sum(port_2$cara_1$weights*c(return, rf))*100,
+                                 port_2$cara_1$er*100,
+                                 sqrt(t(port_2$cara_1$weights[1:3]) %*% cov %*% port_2$cara_1$weights[1:3])*100,
+                                 port_2$cara_1$sd*100),
+                         cara_4 = c(port_2$cara_4$weights,
+                                 sum(port_2$cara_4$weights*c(return, rf))*100,
+                                 port_2$cara_4$er*100,
+                                 sqrt(t(port_2$cara_4$weights[1:3]) %*% cov %*% port_2$cara_4$weights[1:3])*100,
+                                 port_2$cara_4$sd*100),
+                         cara_8 = c(port_2$cara_8$weights,
+                                 sum(port_2$cara_8$weights*c(return, rf))*100,
+                                 port_2$cara_8$er*100,
+                                 sqrt(t(port_2$cara_8$weights[1:3]) %*% cov %*% port_2$cara_8$weights[1:3])*100,
+                                 port_2$cara_8$sd*100)), digits = 3)
 
 rownames(data) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3', 'Risikofri', 'Forv. Afkast', 'Estimeret afkast', 'Volatilitet', 'Estimeret volatilitet')
-
+colnames(data) <- c(" "," ","$\\gamma=1$", "$\\gamma=4$", "$\\gamma=8$", "$a=1$", "$a=4$", "$a=8$")
 
 data %>% 
-  knitr::kable(caption = 'Gengivelse af de sande afkast.',
+  knitr::kable(caption = 'Gengivelse af de beregnede porteføljer ved brug af de simulerede afkast, fra anden simulering.',
                booktabs=TRUE,
                align = c('r', 'r', 'r' ,'r', 'r'),
                row.names = T,
-               col.names = NULL,
+               escape = FALSE,
+               #col.names = NULL,
                linesep = "") %>% 
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
-  kableExtra::add_header_above(c(" ", "GMV" = 1, "Tan" = 1, "a=1" = 1, "a=4" = 1, "a=8" = 1))
+  kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
+  kableExtra::row_spec(c(6, 8), italic = T)
 ```
 
 ```{r sum-3, echo=FALSE}
@@ -323,22 +362,39 @@ data <- round(data.frame(Min = c(port_3$gmv$weights,
                                  sum(port_3$crra_8$weights*c(return, rf))*100,
                                  port_3$crra_8$er*100,
                                  sqrt(t(port_3$crra_8$weights[1:3]) %*% cov %*% port_3$crra_8$weights[1:3])*100,
-                                 port_3$crra_8$sd*100)), digits = 3)
+                                 port_3$crra_8$sd*100),
+                         cara_1 = c(port_3$cara_1$weights,
+                                 sum(port_3$cara_1$weights*c(return, rf))*100,
+                                 port_3$cara_1$er*100,
+                                 sqrt(t(port_3$cara_1$weights[1:3]) %*% cov %*% port_3$cara_1$weights[1:3])*100,
+                                 port_3$cara_1$sd*100),
+                         cara_4 = c(port_3$cara_4$weights,
+                                 sum(port_3$cara_4$weights*c(return, rf))*100,
+                                 port_3$cara_4$er*100,
+                                 sqrt(t(port_3$cara_4$weights[1:3]) %*% cov %*% port_3$cara_4$weights[1:3])*100,
+                                 port_3$cara_4$sd*100),
+                         cara_8 = c(port_3$cara_8$weights,
+                                 sum(port_3$cara_8$weights*c(return, rf))*100,
+                                 port_3$cara_8$er*100,
+                                 sqrt(t(port_3$cara_8$weights[1:3]) %*% cov %*% port_3$cara_8$weights[1:3])*100,
+                                 port_3$cara_8$sd*100)), digits = 3)
 
 rownames(data) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3', 'Risikofri', 'Forv. Afkast', 'Estimeret afkast', 'Volatilitet', 'Estimeret volatilitet')
-
+colnames(data) <- c(" "," ","$\\gamma=1$", "$\\gamma=4$", "$\\gamma=8$", "$a=1$", "$a=4$", "$a=8$")
 
 data %>% 
-  knitr::kable(caption = 'Gengivelse af de sande afkast.',
+  knitr::kable(caption = 'Gengivelse af de beregnede porteføljer ved brug af de simulerede afkast, fra tredje simulering.',
                booktabs=TRUE,
                align = c('r', 'r', 'r' ,'r', 'r'),
                row.names = T,
-               col.names = NULL,
+               escape = FALSE,
+               #col.names = NULL,
                linesep = "") %>% 
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
-  kableExtra::add_header_above(c(" ", "GMV" = 1, "Tan" = 1, "a=1" = 1, "a=4" = 1, "a=8" = 1))
+  kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
+  kableExtra::row_spec(c(6, 8), italic = T)
 ```
 
 ```{r weight-exp, echo=FALSE, fig.align='center', fig.cap='Global minimum varians portføljen, tangensporteføljen samt for CRRA- og CARA-porteføljen for hhv. $a=1$, $a=4$ og $a=8$, beregnet ud for hhv. de sande og simulerede afkast.', fig.pos='htbp!', fig.width=18, fig.asp=0.4}
