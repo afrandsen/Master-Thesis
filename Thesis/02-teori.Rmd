@@ -56,7 +56,7 @@ Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det 
   ymin=0, ymax=25, xmin=0, xmax=60,
   extra x ticks={65}, extra x tick labels={$\sigma$},
   extra x tick style={major tick length=0mm, grid=none},
-  extra y ticks={25}, extra y tick labels={$\mu$},
+  extra y ticks={27}, extra y tick labels={$\mu$},
   extra y tick style={major tick length=0mm, grid=none},
   enlargelimits=true,
   scatter/classes={
@@ -122,6 +122,38 @@ $$\text{RRA}(W)=-\frac{WU''(W)}{U'(W)}.$$
 Her måles marginal nytten og dermed investorens risikoaversion over en procentdel af formuen. Samme inferens som for ARA kan blive udtænkt for RRA. RRA måler den del af formuen, som investoren vil betale for at undgå et spil på en given størrelse relativt til formuen.
 
 De tilsvarende reciprokke af ovenstående mål kaldes hhv. *Coefficeint of Absolute Risk Tolerance* samt *Coefficeint of Relative Risk Tolerance*.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1]
+\begin{axis}[
+  height=7cm, width=12cm,
+  axis x line=bottom, axis y line=left,
+  xlabel = Formue, ylabel = Nytte,
+  ymin=0, ymax=25, xmin=0, xmax=60,
+  xtick={5, 15, 30}, xticklabels={$W_{t}-G$, $W_t$, $W_t+G$},
+  ytick={9.7, 16.3, 20.5}, yticklabels={$U(W_{t}-G)$, $U(W_{t})$, $U(W_{t}+G)$},
+    extra x ticks={65}, extra x tick labels={$W_{t+1}$},
+  extra x tick style={major tick length=0mm, grid=none},
+  extra y ticks={27}, extra y tick labels={$U(W_{t+1})$},
+  extra y tick style={major tick length=0mm, grid=none},
+  enlargelimits=true,
+]
+\addplot[black, thick, smooth, domain=-10:50, samples=100, variable=\x](
+  ({x}, {6*ln(\x)});
+  \draw [dashed] (5,-2.5) -- (5,9.7);
+  \draw [dashed] (-6,9.7) -- (5,9.7);
+  
+  \draw [dashed] (15, -2.5) -- (15, 16.3);
+  \draw [dashed] (-6, 16.3) -- (15, 16.3);
+  
+  \draw [dashed] (30, -2.5) -- (30, 20.5);
+  \draw [dashed] (-6, 20.5) -- (30, 20.5);
+\end{axis}
+\end{tikzpicture}
+\caption{Konkav nytte af formue.}
+\label{fig:Nyt}
+\end{figure}
 
 Som redegjort ovenfor, er både ARA samt RRA essientielle mål til kvantificering af risikopræferencer og dermed til at opnå forståelse for nyttefunktionen hos den enkelte investor. Konstateringer udledt fra den langsigtede økonomiske adfærd fastslår at RRA ikke kan afhænge alene af formue. Dette kommer sig af, at formue og per capita forbrug er steget henover de seneste to århundreder. Det absolutte forhold mellem finansielle risici er ligeledes forøget -- siden disse risici er multiplikative -- mens den relative risici har været konstant [@CampVic2003]. Samtidigt er der ikke fundet evidens baseret på afkast og renter, der har påvist langsigtet vækst i per capita forbrug og formue. Altså vil investorer betale de samme relative omkostninger for at undgå en given finansiel risiko uanset om de er velhavende eller ej. Dette foranlediger en til at tænke tanken, at RRA er uafhængig af formue.
 
@@ -206,11 +238,11 @@ $$r_{t+1}\equiv\log(1+R_{t+1}),$$
 
 hvilket er en geometrisk og kontinuert følge. Logafkastet af aktiver vil skabe symmetriske fordelinger, som overholder dermed overholder markedsinvariansen.
 
-## Afkast
+# Afkast
 
-## Porteføljeteori
+# Porteføljeteori
 
-## VAR
+# VAR
 
 I dette kapitel fastsættes den teoretiske ramme for den empiriske analyse. Dette gøres hovedsageligt ud fra teorien bag [@Userguide2004] s. 2-22 med enkelte dele, som varierer.
 \section{Sættet af investeringsmuligheder}

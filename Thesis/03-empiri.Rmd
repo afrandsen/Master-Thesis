@@ -18,6 +18,15 @@ if (knitr::is_html_output()) {
 \part{Den empiriske analyse}
 
 # Data beskrivelse
+Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 1. kvartal, hvor rente fik lov at variere frit blablabla, til 2018 4. kvartal grundet dataophør. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion ?? beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik. Sektion ?? indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion ??. Sektion ?? giver en opsummering af kapitlets statistiske fund.
+
+## Beskrivelse af aktivklasser
+
+## Tilstandsvariable
+
+## Korrelation
+
+## Opsummering
 
 # Prædiktabilitet
 
@@ -47,7 +56,7 @@ r_3 &= \mu_3 + \sigma_3 \left( \rho_{1,3} \varepsilon_1+ \frac{ \rho_{2,3}-\rho_
 
 hvor $\varepsilon_i\sim N(0,1)$, for $i=1,2,3$. 
 
-```{r sim-tids, echo=FALSE, fig.align='center', fig.cap='i) Aktiv 1, ii) Aktiv 2, iii) Aktiv 3.', fig.width=18, fig.height=15, fig.pos='htbp!'}
+```{r sim-tids2, echo=FALSE, fig.align='center', fig.cap='i) Aktiv 1, ii) Aktiv 2, iii) Aktiv 3.', fig.width=18, fig.height=15, fig.pos='htbp!'}
 par(mfrow=c(3,1))
 
 plot(data_1[, 1],
@@ -84,11 +93,26 @@ abline(h = mu_c, col = 'red', lty = 'dotted')
 abline(h = mean(data_1[, 2]), col = 'magenta', lty = 'dashed')
 ```
 
+```{r sim-tids, echo=FALSE, fig.align='center', fig.cap='i) Aktiv 1, ii) Aktiv 2, iii) Aktiv 3.', fig.width=18, fig.height=15, fig.pos='htbp!'}
+data <- c(data_1[,1], data_1[,2], data_1[,3])
+data <- data.frame(sim=data, type = c(rep(1, 200), rep(2,200), rep(3,200)))
+data <- data.frame(data, index = seq(1,200))
 
-```{r sim-hist, echo=FALSE, fig.align='center', fig.cap='i) Aktiv 1, ii) Aktiv 2, iii) Aktiv 3.', fig.width=18, fig.height=15, fig.pos='htbp!'}
-# hist(data_1[, 1], probability = TRUE)
-
+ggplot(data, aes(index, sim)) +
+geom_line() + facet_wrap(~type, scales = "free_y", ncol = 1)+
+  expand_limits(x = 0, y = 0)+
+  xlab(expression(italic("Indeks")))+
+  ylab(expression(italic("Afkast")))+
+  scale_x_continuous(expand = c(0,0))+
+  scale_y_continuous(expand = c(0,0))+
+  theme_classic()+
+  theme(legend.position = "none",
+        panel.background = element_rect(fill = "transparent", colour = NA),
+        plot.background = element_rect(fill = "transparent", colour = NA),
+        panel.grid = element_blank(),
+        plot.margin = margin(10, 14, 0, 0))
 ```
+
 
 
 Hver tidsserie er baseret på $200$ observationer, svarende til en 50-årig periode med kvartalvise observationer. For hver tidsserie er de første to momenter estimeret ud fra de gængse statistiske metoder
@@ -408,7 +432,7 @@ Tredje simulering overestimerer Aktiv 1 samt 2 og underestimerer Aktiv 3. Ranger
 
 
 
-```{r weight-exp, echo=FALSE, fig.align='center', fig.cap='Global minimum varians portføljen, tangensporteføljen samt for CRRA- og CARA-porteføljen for hhv. $a=1$, $a=4$ og $a=8$, beregnet ud for hhv. de sande og simulerede afkast.', fig.pos='htbp!', fig.width=18, fig.asp=0.4}
+```{r weight-exp2, echo=FALSE, fig.align='center', fig.cap='Global minimum varians portføljen, tangensporteføljen samt for CRRA- og CARA-porteføljen for hhv. $a=1$, $a=4$ og $a=8$, beregnet ud for hhv. de sande og simulerede afkast.', fig.pos='htbp!', fig.width=18, fig.asp=0.4}
 par(mfrow=c(1,1))
 plot(sort(sd),
      sort(r),
@@ -428,5 +452,26 @@ lines(sort(sd_2), sort(r_2), col='magenta')
 points(sort(sd_2), sort(r_2), col='magenta')
 lines(sort(sd_1), sort(r_1), col='blue')
 points(sort(sd_1), sort(r_1), col='blue')
+```
+
+```{r weight-exp, echo=FALSE, fig.align='center', fig.cap='Global minimum varians portføljen, tangensporteføljen samt for CRRA- og CARA-porteføljen for hhv. $a=1$, $a=4$ og $a=8$, beregnet ud for hhv. de sande og simulerede afkast.', fig.pos='htbp!', fig.width=18, fig.asp=0.4}
+data <- data.frame(sd=c(sd, sd_1, sd_2, sd_3), r = c(r, r_1, r_2, r_3), type = c(rep(0, 8), rep(1, 8), rep(2, 8), rep(3, 8)))
+
+ggplot(data, aes(sd, r))+
+  geom_point(aes(color = type, group = type))+
+  geom_line(aes(color = type, group = type))+
+  expand_limits(x = 0, y = 0)+
+  xlab(expression(italic("Volatilitet")))+
+  ylab(expression(italic("Forventet Afkast")))+
+  coord_cartesian(ylim = c(0, max(data$r)+0.05), xlim = c(0,max(data$sd)+0.05))+
+  scale_x_continuous(expand = c(0,0))+
+  scale_y_continuous(expand = c(0,0))+
+  theme_classic()+
+  theme(legend.position = "none",
+        panel.background = element_rect(fill = "transparent", colour = NA),
+        plot.background = element_rect(fill = "transparent", colour = NA),
+        panel.grid = element_blank(),
+        plot.margin = margin(10, 14, 0, 0)
+)
 ```
 

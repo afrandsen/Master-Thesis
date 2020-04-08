@@ -21,11 +21,12 @@ Denne afhandling forsøger at svare ovenstående hovedspørgsmål ved benyttelse
 
 Investorerne antages at have deres nytte defineret via *CRRA*-nytte. For at anvende *CRRA*-nytte i porteføljeproblemet benyttes modellen fra [@JurVic2011], som er defineret i diskrettid, med approksimative analytiske løsninger. Dette medfører bl.a. at porteføljevalget i kontinuert tid bliver tilsidesat, da hovedformålet med afhandlingen er at undersøge det langsigtede portefølgevalg på forskellige tidspunkter over investorens investeringshorisont. Derudover ville en kontinuert behandling af det dynamiske porteføljeproblem ligeledes kræve en diskretisering af observationsrummet for anvendelse i et analytisk empirisk øjemed. Ved anvendelse af den teoretiske ramme foreslået af [@JurVic2011] antages det samtidigt, at investorens nytte kun er defineret over hans budgetbegrænsning og over en fastlagt investeringshorisont med tidsvarierende investeringsmuligheder, som er modelleret via en VAR$(1)$-process.
 
-In sample bla. Data bla.
+Robustheden af den empiriske analyse er begrænset da ekstern stikprøvekontrol ikke bliver udført. Undersøgelsen indebærer kvartalsvise finansielle, demografiske og makroøkonomiske data fra 1954 1. kvartal til 2018 4. kvartal, dette betyder også, at de endelige resultater kan være signifikant forskellige fra analytiske metoder, som indebærer månedlige eller årlige data. Analysen vil ikke indebærer transaktions omkostninger, hvilket før har vist at have væsentlige betydninger for de endelige portefølgevalg, specielt for den myopiske investor, [@BalLyn1999]. Afhandlingen vil ikke indeholde en performance-mæssig evaluering -- på baggrund af porteføljevalgene -- ift. investeringsomkostninger. Derudover begrænses analysen af, at den ignorerer problemerne ved at investere til pension og dermed undgår kompleksiteterne ved levetid, aldring og ændringer i karakteristika af markedsdeltagere og demografiske forhold, som indgår i det såkaldte *life-cycle* problem.
 
-Transaction costs.
-
+Til forskel for ovenstående begrænsninger vil denne afhandling fokusere på, hvordan porteføljeallokeringer adskiller sig: på tværs af investeringshorisonter og ved forskellige tolerancer for risiko. Givet at investoren står overfor endelige investeringshorisonter og tidsvarierende investeringsmuligheder.
 En analyse af kortsalgsrestriktion på porteføljeproblemet er ligeledes medtaget i afhandlingen, men omkostningerne ved lån/gearing af den optimale portefølje er udeladt.
+
+Ved at begrænse analysen for porteføljevalget, kan vi evaluere porteføljeallokeringerne baseret på de samme antagelser, hvor kun budgetbegrænsningen og/eller risikoaversionen adskiller hver enkelt investor.
 
 ## Eksisterende litteratur
 
