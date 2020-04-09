@@ -139,7 +139,7 @@ De tilsvarende reciprokke af ovenstående mål kaldes hhv. *Coefficeint of Absol
   extra y tick style={major tick length=0mm, grid=none},
   enlargelimits=true,
 ]
-\addplot[black, thick, smooth, domain=-10:50, samples=100, variable=\x](
+\addplot[black, very thick, smooth, domain=-10:50, samples=100, variable=\x](
   ({x}, {6*ln(\x)});
   \draw [dashed] (5,-2.5) -- (5,9.7);
   \draw [dashed] (-6,9.7) -- (5,9.7);

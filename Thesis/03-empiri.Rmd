@@ -17,10 +17,88 @@ if (knitr::is_html_output()) {
 
 \part{Den empiriske analyse}
 
+```{r script1, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Input/Script.R"), include=FALSE, cache=TRUE}
+```
+
+```{r script2, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Speciale.R"), include=FALSE, cache=TRUE}
+```
+
 # Data beskrivelse
 Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 1. kvartal, hvor rente fik lov at variere frit blablabla, til 2018 4. kvartal grundet dataophør. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion ?? beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik. Sektion ?? indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion ??. Sektion ?? giver en opsummering af kapitlets statistiske fund.
 
 ## Beskrivelse af aktivklasser
+Mængden af aktivklasser, som pt. er tilgængelige på finansmarkedet har aldrig været større. Udover aktier og obligationer, findes et væld af eksponeringsområder og/eller finansielle produkter heriblandt ejendom, derivater, futures, forwards, kryptovaluta, valuta mm. For at holde denne analyse på et simpelt niveau medtages de mest anvendte aktivklasser for institutionelle og private investorer. Hvilket også er de mest anvendte i eksisterende litteratur, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. I det følgende vil egenskaberne for aktivklasserne: risikofri afkast, merafkast på aktier, merafkast på statsobligationer og merafkast på virksomhedsobligationer beskrives og derudover vil den tilhørende beskrivende statistik for hvert aktiv belyses.
+
+### Det risikofrie afkast -- $r_{t+1}^{(\textnormal{rf})}$
+Essencen af et risikofrit aktiv er at repræsentere et afkast med varians lig $0$. Dette betegnes undertiden også som et sikkert afkast. Udover at give investoren muligheder for indlån, kan investoren også udvide sine investeringsmuligheder ved at låne til den risikofrie rente, dvs. have en kort position i det risikofrie aktiv. Et ofte valgt aktiv i litteraturen, som en proxy for det risikofrie aktiv, er de kortefristede statsværdipapirer, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. Disse betegnes i U.S.A. som *T-Bills*. Valget af netop dette aktiv sker på baggrund af den historiske og nuværende meget lave risiko for statskonkurser, [@Beers2017]. Eksempelvis gik den danske stat tilnærmelsesvis senest bankerot under *Statsbankerotten* i 1813 efter *Napoleonskrigene*. Derfor benyttes det amerikanske statspapir med kort løbetid, mere præcist anvendes den 90-dags amerikanske *T-Bill*, som en proxy for det risikofrie aktiv. Data over afkast er fra [@CRSPt90] hentet gennem [@WRDSt90]. Log netto afkastet af det risikofrie afkast beregnes som log forskellen mellem det kvartalsvise brutto afkast på den amerikanske 90-dags *T-Bill* og den kvartalsvise inflationsrate, målt via *CPI*. Nettoafkastet har et kvartalsvist justeret afkast på $0.3108298 \%$ med en kvartalsvis volatilitet på $0.8583203 \%$. Som det kan ses på kvantilerne har det risikofrie afkast givet negativt afkast sommetider. Et histogram indikerer en højreskæv fordeling af afkast, hvilket også underbygges af en skævhed på $0.3618611$. Med en kurtosis på $5.015913$ haves en leptokurtisk fordeling, med tykkere/længere haler og et smallere samt højere cetrum.
+
+### Merafkastet på aktier -- $r_{t+1}^{(\textnormal{a})}$
+
+### Merafkastet på statsobligationer -- $r_{t+1}^{(\textnormal{s})}$
+
+### Merafkastet på virksomhedsobligatione -- $r_{t+1}^{(\textnormal{v})}$
+
+\begin{landscape}
+```{r DES-AKTIVKLASSE, echo=FALSE}
+DESCRIPTIVE <- round(DESCRIPTIVE, digits = 3)
+
+colnames(DESCRIPTIVE) <- c('Middelværdi', 'Standard afvigelse', 'Skævhed', 'Kurtosis', 'Min', '$25 \\%$', 'Median', '$75 \\%$', 'Max')
+
+rownames(DESCRIPTIVE) <- c("$r_t^{(\\text{b})}$", "$r_t^{(\\text{rf})}$", "$r_t^{(\\text{a})}$", "$r_t^{(\\text{s})}$", "$r_t^{(\\text{v})}$")
+
+DESCRIPTIVE %>% 
+  knitr::kable(caption = 'G',
+               booktabs=TRUE,
+               align = c(rep('r', 9)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F)
+```
+
+```{r DES-TILSTANDSVARIABLE, echo=FALSE}
+DESCRIPTIVE_T <- round(DESCRIPTIVE_T, digits = 3)
+
+colnames(DESCRIPTIVE_T) <- c('Middelværdi', 'Standard afvigelse', 'Skævhed', 'Kurtosis', 'Min', '$25 \\%$', 'Median', '$75 \\%$', 'Max')
+
+rownames(DESCRIPTIVE_T) <- c("$INF$", "$EP$", "$DP$", "$BM$", "$AKT VAR$", "$SMB$", "$HML$", "$FR$", "$T SPREAD$", "$Y SPREAD$", "$C SPREAD$", "$D SPREAD$")
+
+DESCRIPTIVE_T %>% 
+  knitr::kable(caption = 'G',
+               booktabs=TRUE,
+               align = c(rep('r', 9)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F)
+```
+
+```{r DES-KOR, echo=FALSE}
+DES_COR <- round(cor(data), digits = 3)
+
+colnames(DES_COR) <- c('TB', 'NET TB', 'AKT', 'S OBL', 'V OBL', 'EP', 'DP', 'BM', 'AKT VAR', 'T SPREAD', 'Y SPREAD', 'C SPREAD', 'D SPREAD', 'FR', 'HML', 'SMB')
+
+rownames(DES_COR) <- c('TB', 'NET TB', 'AKT', 'S OBL', 'V OBL', 'EP', 'DP', 'BM', 'AKT VAR', 'T SPREAD', 'Y SPREAD', 'C SPREAD', 'D SPREAD', 'FR', 'HML', 'SMB')
+
+DES_COR %>% 
+  knitr::kable(caption = 'G',
+               booktabs=TRUE,
+               align = c(rep('r', ncol(cor(data)))),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F)
+```
+\end{landscape}
 
 ## Tilstandsvariable
 
@@ -37,9 +115,6 @@ Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte d
 # Diskussion
 
 # Konklusion
-
-```{r script1, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Speciale.R"), include=FALSE, cache=TRUE}
-```
 
 ## Problemer ved estimation
 
