@@ -9,7 +9,6 @@ input <- zoo::read.csv.zoo('C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Se
 
 # AKTIVKLASSER
 INF <- log(1+input$cpiret)
-
 TB  <- log(1+input$t90ret)
 NET_TB <- TB - INF
 AKT    <- log(1 + input$vwretd) - TB
@@ -17,24 +16,16 @@ S_OBL  <- log(1 + input$b10ret) - TB
 V_OBL  <- log(1 + input$corpr) - TB
 
 # FINANSIELLE INDIKATORER
-N <- length(input$b10ret)
-
-div <- (1 + as.numeric(input$vwretd[2:N])) * as.numeric(input$vwindx[1:(N-1)]) - as.numeric(input$vwindx[2:N])
-
-logDiv <- c()
-
-for (i in c(4:length(div))) {
-  logDiv[i - 3] <- log(sum(div[(i-3):i]))
-}
-
-divPrice <- logDiv - log(as.numeric(input$vwindx[5:N]))
-
+DP <- input$dp
 EP <- log(input$earn) - log(as.numeric(input$vwindx))
-DP <- xts::xts(divPrice, index(input$vwretd[5:N]))
+
 BM <- input$bm
 AKT_VAR <- log(1 + input$svar)
 SMB <- input$smb
 HML <- input$hml
+EP_J <- EP + (var(EP, na.rm = TRUE)/2)
+DP_J <- DP + (var(DP, na.rm = TRUE)/2)
+
 
 # TERM STRUCTURE
 T_SPREAD <- input$t10y/100 - input$t90y/100
@@ -46,6 +37,7 @@ D_SPREAD <- input$baa/100 - input$aaa/100
 FR <- input$fedfund/100
 
 # JUSTERING
+
 TB_J     <- TB + (var(TB, na.rm = TRUE)/2)
 NET_TB_J <- NET_TB + (var(NET_TB, na.rm = TRUE)/2)
 AKT_J    <- AKT + (var(AKT, na.rm = TRUE)/2)
@@ -55,8 +47,8 @@ V_OBL_J  <- V_OBL + (var(V_OBL, na.rm = TRUE)/2)
 # BESKRIVENDE STATISTIK
 
 ## AKTIVKLASSER
-DATA <- data.frame(TB, NET_TB, AKT, S_OBL, V_OBL)
-DATA_J <- data.frame(TB_J, NET_TB_J, AKT_J, S_OBL_J, V_OBL_J)
+DATA <- data.frame(NET_TB, AKT, S_OBL, V_OBL)
+DATA_J <- data.frame(NET_TB_J, AKT_J, S_OBL_J, V_OBL_J)
 
 ADJ_DATA_MEAN <- colMeans(DATA_J)
 DATA_STD <- apply(DATA, 2, sd)
@@ -66,14 +58,18 @@ DATA_KURTOSIS <- apply(DATA, 2, kurtosis)
 
 DESCRIPTIVE <- data.frame(adj_mean=ADJ_DATA_MEAN,
                           sd=DATA_STD,
+                          sr=ADJ_DATA_MEAN/DATA_STD,
                           skew=DATA_SKEWNESS,
                           kurt=DATA_KURTOSIS,
                           quantile=t(DATA_QUANTILE))
+DESCRIPTIVE$sr[1] <- NA
 
 ## TILSTANDSVARIABLE
-DATA_T <- xts::xts(merge(INF, EP, DP, BM, AKT_VAR, SMB, HML, FR, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD), index(INF))
-DATA_T <- data.frame(na.omit(DATA_T))
+DATA_T <- xts::xts(merge(TB, EP, DP, BM, AKT_VAR, SMB, HML, FR, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD), index(TB))
 
+DATA_T_J <- xts::xts(merge(TB_J, EP_J, DP_J), index(TB_J))
+
+ADJ_DATA_T_MEAN <- colMeans(DATA_T_J)
 DATA_T_MEAN <- colMeans(DATA_T)
 DATA_T_STD <- apply(DATA_T, 2, sd)
 DATA_T_QUANTILE <- apply(DATA_T, 2, quantile)
@@ -86,8 +82,44 @@ DESCRIPTIVE_T <- data.frame(mean=DATA_T_MEAN,
                           kurt=DATA_T_KURTOSIS,
                           quantile=t(DATA_T_QUANTILE))
 
-data <- xts::xts(merge(TB, NET_TB, AKT, S_OBL, V_OBL, EP, DP, BM, AKT_VAR, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR, HML, SMB), index(NET_TB))
-data <- na.omit(data)
+
+DESCRIPTIVE_T$mean[1:3] <- ADJ_DATA_T_MEAN
+
+data <- xts::xts(merge(NET_TB, AKT, S_OBL, V_OBL, TB, EP, DP, BM, AKT_VAR, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR, HML, SMB), index(NET_TB))
+
+# UNIVARIATE
+FIT_AKT <- lapply(5:ncol(data), function(x) lm(xts::lag.xts(data$AKT,-1) ~ data[,x], data=data))
+FIT_AKT_SUMMARY <- lapply(FIT_AKT, summary)
+
+FIT_TABLE <- data.frame(coef=sapply(FIT_AKT, coef)[2,],
+                        sd=sapply(FIT_AKT_SUMMARY, coef)[4,],
+                        t=sapply(FIT_AKT_SUMMARY, coef)[6,],
+                        p=sapply(FIT_AKT_SUMMARY, coef)[8,],
+                        rsq=unlist(lapply(1:length(FIT_AKT), function(x) FIT_AKT_SUMMARY[[x]]$r.squared)))
+
+FIT_S_OBL <- lapply(5:ncol(data), function(x) lm(xts::lag.xts(data$S_OBL, -1) ~ data[,x], data=data))
+FIT_S_OBL_SUMMARY <- lapply(FIT_S_OBL, summary)
+
+FIT_S_TABLE <- data.frame(coef=sapply(FIT_S_OBL, coef)[2,],
+                        sd=sapply(FIT_S_OBL_SUMMARY, coef)[4,],
+                        t=sapply(FIT_S_OBL_SUMMARY, coef)[6,],
+                        p=sapply(FIT_S_OBL_SUMMARY, coef)[8,],
+                        rsq=unlist(lapply(1:length(FIT_S_OBL), function(x) FIT_S_OBL_SUMMARY[[x]]$r.squared)))
+
+FIT_V_OBL <- lapply(5:ncol(data), function(x) lm(xts::lag.xts(data$V_OBL, -1) ~ data[,x], data=data))
+FIT_S_OBL_SUMMARY <- lapply(FIT_V_OBL, summary)
+
+FIT_V_TABLE <- data.frame(coef=sapply(FIT_V_OBL, coef)[2,],
+                        sd=sapply(FIT_S_OBL_SUMMARY, coef)[4,],
+                        t=sapply(FIT_S_OBL_SUMMARY, coef)[6,],
+                        p=sapply(FIT_S_OBL_SUMMARY, coef)[8,],
+                        rsq=unlist(lapply(1:length(FIT_V_OBL), function(x) FIT_S_OBL_SUMMARY[[x]]$r.squared)))
+
+# MULTIPLE REGRESSION 
+
+
+
+
 
 
 # # KITCHEN SINK
@@ -100,4 +132,4 @@ data <- na.omit(data)
 # 
 # library(vars)
 # 
-# var <- VAR(data, p = 1)
+# var <- VAR(data, p = 1, ic = 'AIC')

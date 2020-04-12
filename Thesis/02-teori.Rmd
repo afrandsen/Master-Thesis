@@ -113,13 +113,13 @@ I Sektion \@ref(den-myopiske-investor), introducerede vi en af de bærende antag
 Hvor $U(W_{t+1})\in\mathbb{R}_+$ er en konkav nyttefunktion. Investoren vil givet nyttefunktionens konkave krumning være risikoavers. Netop dette aspekt gør, at vi kan inkorporere risikoaversion, når investorens porteføljevalg skal foretages. For at fastlægge denne investorspecifikke risikoaversion benyttes derfor skalerede krumningsmål. Disse fundamentale risikoaversionsmål er kendt som *Arrow-Pratt Målene for Risikoaversion*, [@Arrow1965; @Pratt1964]. Når nytte skal belyses, kan risikoaversion mht. den fremtidige formue $W_{t+1}$ benyttes. Graden af krumningen på nyttefunktion giver os information om investorens risikopræferencer introduceret ovenfor. Vi antager at investorens nyttefunktion er strengt voksende i terminial formue -- altså er investoren grådig og foretrækker høj formue frem for en lav formue -- men i en faldende rate. Nyttefunktion vil altså have følgende karakteristika
 $$U'(W)>0\quad\text{og}\quad U''(W)<0.$$
 
-Hvor $U'(W)$ og $U''(W)$ er den hhv. første- og anden afledte mht. formue $W$. Når vi skal kvantificere denne risikoaversion, skal vi sikre, at målet er invariant overfor strengt positive affine transformationer. Dette er bl.a. opfyldt ved brug af *Coefficient of Absolut Risk Aversion*, [@Arrow1965; @Pratt1964]. ARA er defineret som den negative anden afledte af nyttefunktionen mht. formue, skaleret med den første afledte
+Hvor $U'(W)$ og $U''(W)$ er den hhv. første- og anden afledte mht. formue $W$. Når vi skal kvantificere denne risikoaversion, skal vi sikre, at målet er invariant overfor strengt positive affine transformationer. Dette er bl.a. opfyldt ved brug af *Coefficient of Absolut Risk Aversion*, [@Arrow1965; @Pratt1964]. *ARA* er defineret som den negative anden afledte af nyttefunktionen mht. formue, skaleret med den første afledte
 $$\text{ARA}(W)=-\frac{U''(W)}{U'(W)}.$$
 
-Selvom den andenafledte af nyttefunktionen er et mål for krumningen af nyttefunktionen, bliver vi nødt til at skalere for at eliminere afhængigheden af abitrære størrelser, som relaterer sig til målbarheden af nytte. ARA måler investorens absolutte dollar værdi, som han er villig til at købe, for at undgå et tab på samme absolutte størrelse. Hvis ARA er faldende medfører det at desto mere formue en investor har, desto mere risikosøgende bliver han, altså haves at $\text{ARA}(W)<0$, og så fremdeles. Almindeligt menes det, at ARA burde falde, eller i det mindste ikke stige, med formue. Et relateret mål er *Coefficient of Relative Risk Aversion*, RRA, som er samtidig tager højde for investorens formue
+Selvom den andenafledte af nyttefunktionen er et mål for krumningen af nyttefunktionen, bliver vi nødt til at skalere for at eliminere afhængigheden af abitrære størrelser, som relaterer sig til målbarheden af nytte. *ARA* måler investorens absolutte dollar værdi, som han er villig til at købe, for at undgå et tab på samme absolutte størrelse. Hvis *ARA* er faldende medfører det at desto mere formue en investor har, desto mere risikosøgende bliver han, altså haves at $\text{ARA}(W)<0$, og så fremdeles. Almindeligt menes det, at *ARA* burde falde, eller i det mindste ikke stige, med formue. Et relateret mål er *Coefficient of Relative Risk Aversion*, *RRA*, som er samtidig tager højde for investorens formue
 $$\text{RRA}(W)=-\frac{WU''(W)}{U'(W)}.$$
 
-Her måles marginal nytten og dermed investorens risikoaversion over en procentdel af formuen. Samme inferens som for ARA kan blive udtænkt for RRA. RRA måler den del af formuen, som investoren vil betale for at undgå et spil på en given størrelse relativt til formuen.
+Her måles marginal nytten og dermed investorens risikoaversion over en procentdel af formuen. Samme inferens som for *ARA* kan blive udtænkt for *RRA*. *RRA* måler den del af formuen, som investoren vil betale for at undgå et spil på en given størrelse relativt til formuen.
 
 De tilsvarende reciprokke af ovenstående mål kaldes hhv. *Coefficeint of Absolute Risk Tolerance* samt *Coefficeint of Relative Risk Tolerance*.
 
@@ -155,7 +155,7 @@ De tilsvarende reciprokke af ovenstående mål kaldes hhv. *Coefficeint of Absol
 \label{fig:Nyt}
 \end{figure}
 
-Som redegjort ovenfor, er både ARA samt RRA essientielle mål til kvantificering af risikopræferencer og dermed til at opnå forståelse for nyttefunktionen hos den enkelte investor. Konstateringer udledt fra den langsigtede økonomiske adfærd fastslår at RRA ikke kan afhænge alene af formue. Dette kommer sig af, at formue og per capita forbrug er steget henover de seneste to århundreder. Det absolutte forhold mellem finansielle risici er ligeledes forøget -- siden disse risici er multiplikative -- mens den relative risici har været konstant [@CampVic2003]. Samtidigt er der ikke fundet evidens baseret på afkast og renter, der har påvist langsigtet vækst i per capita forbrug og formue. Altså vil investorer betale de samme relative omkostninger for at undgå en given finansiel risiko uanset om de er velhavende eller ej. Dette foranlediger en til at tænke tanken, at RRA er uafhængig af formue.
+Som redegjort ovenfor, er både *ARA* samt *RRA* essientielle mål til kvantificering af risikopræferencer og dermed til at opnå forståelse for nyttefunktionen hos den enkelte investor. Konstateringer udledt fra den langsigtede økonomiske adfærd fastslår at *RRA* ikke kan afhænge alene af formue. Dette kommer sig af, at formue og per capita forbrug er steget henover de seneste to århundreder. Det absolutte forhold mellem finansielle risici er ligeledes forøget -- siden disse risici er multiplikative -- mens den relative risici har været konstant [@CampVic2003]. Samtidigt er der ikke fundet evidens baseret på afkast og renter, der har påvist langsigtet vækst i per capita forbrug og formue. Altså vil investorer betale de samme relative omkostninger for at undgå en given finansiel risiko uanset om de er velhavende eller ej. Dette foranlediger en til at tænke tanken, at *RRA* er uafhængig af formue.
 
 ## Typer af nyttefunktioner
 
@@ -187,7 +187,7 @@ Til forskel for nedenstående nyttefunktioner kræver kvadratisk nytte ikke ford
 Under kvadratisk nytte vil maksimering af forventet nytte, som i Maksimeringsproblemet \@ref(eq:Nyttemaks), være ækvivalent til at maksimere en lineær kombination af middelværdi og varians, som i Maksimeringsproblemet \@ref(eq:Statmaks). Middelværdien af Ligning \@ref(eq:Kvadnytte) giver den forventede nytte
 $$\mathbb{E}(U(W_{t+1}))=\mathbb{E}(W_{t+1})-b(\mathbb{V}(W_{t+1}+\mathbb{E}(W_{t+1}))),$$
 
-og er dermed en funktion afhængende af både forventet formue og variansen af formue [@Munk2017]. Herudover vil ARA samt RRA begge være stigende i formue under kvadratisk nytte. Som argumenteret ovenfor vil stigende ARA være uhensigtmæssigt. 
+og er dermed en funktion afhængende af både forventet formue og variansen af formue [@Munk2017]. Herudover vil *ARA* samt *RRA* begge være stigende i formue under kvadratisk nytte. Som argumenteret ovenfor vil stigende *ARA* være uhensigtmæssigt. 
 
 ### Eksponentiel nytte
 
@@ -196,7 +196,7 @@ Eksponentiel nytte antager at variablene i modellen er normalfordelt. Lad $\thet
 U(W_{t+1})=-\exp\left(-\theta W_{t+1}\right). (\#eq:Ekspnytte)
 \end{equation}
 
-Eksponentiel nytte antager, at ARA er konstant lig $\theta$, mens RRA kan stige med formue. Dette aspekt gør også eksponentiel nytte foretrukket ift. kvadratisk nytte. Eksponentiel nytte er også kendt under navnet *Constant Absolute Risk Aversion*. For en eksplicit opskrivning af forventningen af Ligning \@ref(eq:Ekspnytte) bemærker vi følgende
+Eksponentiel nytte antager, at *ARA* er konstant lig $\theta$, mens *RRA* kan stige med formue. Dette aspekt gør også eksponentiel nytte foretrukket ift. kvadratisk nytte. Eksponentiel nytte er også kendt under navnet *Constant Absolute Risk Aversion*. For en eksplicit opskrivning af forventningen af Ligning \@ref(eq:Ekspnytte) bemærker vi følgende
 $$W_{t+1}\sim N(\mu_p,\sigma_p^2)$$
 
 altså er terminalnytten normalfordelt for enhver mulig portefølje, $p$, givet at afkastene er normalfordelt. Regner vi derfor på forventningen, får vi
@@ -204,7 +204,7 @@ $$\mathbb{E}(U(W_{t+1}))=-\exp\left(-\theta\mu_p+\frac{\theta^2}{2}\sigma_p^2\ri
 
 ### Potens nytte
 
-Potens nytte kræver, at afkast af aktiverne og formue er lognormalfordelt. ARA er faldende i formue og RRA er antaget til at være en konstant $\gamma\in\mathbb{R}$, [@CampVic2003]. Potens nytte er mere kendt under navnet *Constant Relative Risk Aversion*. Nyttefunktionen er defineret for $W_{t+1}\geq 0$, som
+Potens nytte kræver, at afkast af aktiverne og formue er lognormalfordelt. *ARA* er faldende i formue og *RRA* er antaget til at være en konstant $\gamma\in\mathbb{R}$, [@CampVic2003]. Potens nytte er mere kendt under navnet *Constant Relative Risk Aversion*. Nyttefunktionen er defineret for $W_{t+1}\geq 0$, som
 $$U(W_{t+1})=\begin{cases} \frac{W_{t+1}^{1-\gamma}-1}{1-\gamma},\quad \gamma\neq 1\\
 \log(W_{t+1}),\quad \gamma = 1. \end{cases}$$
 
@@ -216,7 +216,7 @@ $$\mathbb{E}(U(W_{t+1}))=\mathbb{E}(\log(W_{t+1})).$$
 
 ### Sammenligning af nyttefunktioner
 
-Som pointeret flere gange i ovenstående, burde ARA være faldende, eller under alle omstændigheder, ikke stige med formue. Dermed kan vi se bort fra kvadratisk nytte, og samtidig gøre potens nytte mere favorabel end eksponentiel nytte. Derudover er det konstante aspekt af RRA attraktivt under potens nytte, i og med, at det er nødvendigt ift. inferensen vedr. stabiliteten af finansielle variable under sekulær økonomisk vækst, [@CampVic2003].
+Som pointeret flere gange i ovenstående, burde *ARA* være faldende, eller under alle omstændigheder, ikke stige med formue. Dermed kan vi se bort fra kvadratisk nytte, og samtidig gøre potens nytte mere favorabel end eksponentiel nytte. Derudover er det konstante aspekt af *RRA* attraktivt under potens nytte, i og med, at det er nødvendigt ift. inferensen vedr. stabiliteten af finansielle variable under sekulær økonomisk vækst, [@CampVic2003].
 
 Derudover vil valget mellem potens nytte og eksponentiel nytte også skabe de ovennævnte forskellige fordelingsmæssige antagelser. Eksponentiel nytte resulterer i simple afkast, hvis afkastene af aktiverne er normalfordelte, hvorimod, at potens nytte resulterer i simple afkast, hvis afkastene af aktiverne er lognormalfordelte.
 

@@ -2,4 +2,12 @@
 
 \part{Appendiks}
 
-# Appendiks A
+# Lognormal
+
+# Nytte
+
+# Porteføljeteori Markowitz
+
+# Portefølje Jurek
+
+# Shiller

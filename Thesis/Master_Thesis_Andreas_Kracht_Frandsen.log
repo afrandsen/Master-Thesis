@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.9)  9 APR 2020 21:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.9)  12 APR 2020 23:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1424,7 +1424,14 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \rotheadsize=\dimen356
 \c@nlinenum=\count379
 \TeXr@lab=\toks58
-) (./Master_Thesis_Andreas_Kracht_Frandsen.aux)
+) (./Master_Thesis_Andreas_Kracht_Frandsen.aux
+
+LaTeX Warning: Label `tab:UNI' multiply defined.
+
+
+LaTeX Warning: Label `tab:UNI' multiply defined.
+
+)
 \openout1 = `Master_Thesis_Andreas_Kracht_Frandsen.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 134.
@@ -1573,11 +1580,11 @@ LaTeX Font Info:    Font shape `U/msa/m/n' will be
 (Font)              scaled to size 5.21004pt on input line 151.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 5.21004pt on input line 151.
-<latex/ausegl_sort.png, id=201, 569.12625pt x 569.12625pt>
-File: latex/ausegl_sort.png Graphic file (type png)
-<use latex/ausegl_sort.png>
-Package pdftex.def Info: latex/ausegl_sort.png  used on input line 168.
-(pdftex.def)             Requested size: 176.40126pt x 176.40126pt.
+<latex/ausegl_sort.pdf, id=266, 569.05598pt x 569.05598pt>
+File: latex/ausegl_sort.pdf Graphic file (type pdf)
+<use latex/ausegl_sort.pdf>
+Package pdftex.def Info: latex/ausegl_sort.pdf  used on input line 168.
+(pdftex.def)             Requested size: 176.40553pt x 176.40553pt.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
 (Font)              scaled to size 10.42007pt on input line 177.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
@@ -1593,7 +1600,7 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 [1
 
 {c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.
-map} <./latex/ausegl_sort.png>]pdfTeX warning (ext4): destination with the same
+map} <./latex/ausegl_sort.pdf>]pdfTeX warning (ext4): destination with the same
  identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
@@ -1694,41 +1701,46 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 ] [20
 
 ]
-Overfull \hbox (90.88373pt too wide) in paragraph at lines 812--834
- [][] 
- []
 
+Package natbib Warning: Citation `TradingEconomics' on page 21 undefined on inp
+ut line 765.
+
+[21]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[21
+[22
 
-] [22] [23
-
-] [24
-
-] [25
-
-] [26
-
-] [27
+] [23] [24
 
 ]
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids2-1.pdf, id=7
-22, 1300.86pt x 1084.05pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[25
+
+] [26] [27
+
+] [28
+
+] [29
+
+]
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids2-1.pdf, id=8
+69, 1300.86pt x 1084.05pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids2-1.pdf 
 Graphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids2-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/sim-tids2-1.pdf  used on input line 879.
+ex/sim-tids2-1.pdf  used on input line 1000.
 (pdftex.def)             Requested size: 441.01619pt x 367.51349pt.
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf, id=72
-3, 1300.86pt x 1084.05pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf, id=87
+0, 1300.86pt x 1084.05pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf G
 raphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/sim-tids-1.pdf  used on input line 888.
+ex/sim-tids-1.pdf  used on input line 1009.
 (pdftex.def)             Requested size: 441.01619pt x 367.51349pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1739,13 +1751,13 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[28
+[30
 
 ]
 
-LaTeX Warning: Text page 29 contains only floats.
+LaTeX Warning: Text page 31 contains only floats.
 
-[29 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids2-1.pdf
+[31 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids2-1.pdf
 >]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1759,39 +1771,57 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[30 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf>
+[32 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf>
 ]
 
-LaTeX Warning: Text page 31 contains only floats.
+LaTeX Warning: Text page 33 contains only floats.
 
-[31]
+[33]
 <Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp2-1.pdf, id
-=786, 1300.86pt x 519.9425pt>
+=933, 1300.86pt x 519.9425pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp2-1.pd
 f Graphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp2-1.pdf
 >
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/weight-exp2-1.pdf  used on input line 1066.
+ex/weight-exp2-1.pdf  used on input line 1187.
 (pdftex.def)             Requested size: 441.01619pt x 176.27036pt.
 <Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp-1.pdf, id=
-787, 1300.86pt x 519.9425pt>
+934, 1300.86pt x 519.9425pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp-1.pdf
  Graphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp-1.pdf>
 
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/weight-exp-1.pdf  used on input line 1075.
+ex/weight-exp-1.pdf  used on input line 1196.
 (pdftex.def)             Requested size: 441.01619pt x 176.27036pt.
-[32 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp2-1.p
-df>] [33 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp
--1.pdf>] [34
+[34 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp2-1.p
+df>] [35 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp
+-1.pdf>] [36
 
-] (./Master_Thesis_Andreas_Kracht_Frandsen.bbl [35
+] [37
 
-] [36
+] [38
 
-] [37]) [38]
+] [39
+
+] [40
+
+] (./Master_Thesis_Andreas_Kracht_Frandsen.bbl [41
+
+] [42
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 251--254
+[]\T1/ppl/m/n/10 Wharton Re-search Da-ta Ser-vi-ces (2020b).  US Trea-sury and 
+In-f-la-tion In-de-xes.
+ []
+
+[43])
+
+Package natbib Warning: There were undefined citations.
+
+[44]
 \tf@toc=\write6
 \openout6 = `Master_Thesis_Andreas_Kracht_Frandsen.toc'.
 
@@ -1801,25 +1831,28 @@ df>] [33 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp
 \tf@lot=\write8
 \openout8 = `Master_Thesis_Andreas_Kracht_Frandsen.lot'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1095.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1095.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1228.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1228.
 (./Master_Thesis_Andreas_Kracht_Frandsen.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1095.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1095.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1228.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1228.
 
 Package rerunfilecheck Info: File `Master_Thesis_Andreas_Kracht_Frandsen.out' h
 as not changed.
-(rerunfilecheck)             Checksum: D5629202FFDF8007E30ADF869E4F8084;8028.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1095.
+(rerunfilecheck)             Checksum: F15684F9E635169B73A7090F4FB0CD3C;11813.
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1228.
  ) 
 Here is how much of TeX's memory you used:
- 42333 strings out of 482923
- 940305 string characters out of 5958132
- 1583532 words of memory out of 5000000
- 56589 multiletter control sequences out of 15000+600000
- 610710 words of font info for 208 fonts, out of 8000000 for 9000
+ 42429 strings out of 482923
+ 942016 string characters out of 5958132
+ 1586919 words of memory out of 5000000
+ 56636 multiletter control sequences out of 15000+600000
+ 613524 words of font info for 212 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 78i,14n,136p,2180b,2123s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 78i,15n,136p,2180b,2123s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.5} has been referenced but does not exi
 st, replaced by a fixed one
 
@@ -1853,11 +1886,11 @@ nts/type1/urw/palatino/uplbi8a.pfb><c:/Users/AKF/AppData/Roaming/TinyTeX/texmf-
 dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/AKF/AppData/Roaming/TinyTeX/
 texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/AKF/AppData/Roaming/Ti
 nyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on Master_Thesis_Andreas_Kracht_Frandsen.pdf (44 pages, 381113 b
+Output written on Master_Thesis_Andreas_Kracht_Frandsen.pdf (50 pages, 659363 b
 ytes).
 PDF statistics:
- 961 PDF objects out of 1000 (max. 8388607)
- 869 compressed objects within 9 object streams
- 228 named destinations out of 1000 (max. 500000)
- 422 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1140 PDF objects out of 1200 (max. 8388607)
+ 1026 compressed objects within 11 object streams
+ 274 named destinations out of 1000 (max. 500000)
+ 550 words of extra memory for PDF output out of 10000 (max. 10000000)
 
