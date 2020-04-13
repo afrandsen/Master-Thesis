@@ -1,7 +1,9 @@
 ```{r setup, include=FALSE}
+Sys.setlocale("LC_TIME", "Danish")
 library(tidyverse)
 library(quantmod)
 library(kableExtra)
+library(ggfortify)
 if (knitr::is_html_output()) {
   options(knitr.table.format = "html")
 } else {
@@ -23,19 +25,54 @@ if (knitr::is_html_output()) {
 ```
 
 # Data beskrivelse
-Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 1. kvartal, hvor rente fik lov at variere frit blablabla, til 2018 4. kvartal grundet dataophør. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion ?? beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik. Sektion ?? indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion ??. Sektion ?? giver en opsummering af kapitlets statistiske fund.
+Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 1. kvartal, hvor rente fik lov at variere frit blablabla, til 2018 4. kvartal grundet dataophør. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion ?? beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik. Sektion ?? indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion ??. Sektion ?? giver en opsummering af kapitlets statistiske fund. Tidsserien for hver aktivklasse og prædiktionsvariabel visualiseres med tilhørende recessionsperioder som defineret af [@NBER2020].
 
 ## Beskrivelse af aktivklasser
 Mængden af aktivklasser, som pt. er tilgængelige på finansmarkedet har aldrig været større. Udover aktier og obligationer, findes et væld af eksponeringsområder og/eller finansielle produkter heriblandt ejendom, derivater, futures, forwards, kryptovaluta, valuta mm. For at holde denne analyse på et simpelt niveau medtages de mest anvendte aktivklasser for institutionelle og private investorer. Hvilket også er de mest anvendte i eksisterende litteratur, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. I det følgende vil egenskaberne for aktivklasserne: risikofri afkast, merafkast på aktier, merafkast på statsobligationer og merafkast på virksomhedsobligationer beskrives og derudover vil den tilhørende beskrivende statistik for hvert aktiv belyses.
 
 ### Det risikofrie afkast -- $r_{t+1}^{\textnormal{rf}}$
-Essencen af et risikofrit aktiv er at repræsentere et afkast med varians lig $0$. Dette betegnes undertiden også som et sikkert afkast. Udover at give investoren muligheder for indlån, kan investoren også udvide sine investeringsmuligheder ved at låne til den risikofrie rente, dvs. have en kort position i det risikofrie aktiv. Et ofte valgt aktiv i litteraturen, som en proxy for det risikofrie aktiv, er de kortefristede statsværdipapirer, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. Disse betegnes i U.S.A. som *T-Bills*. Valget af netop dette aktiv sker på baggrund af den historiske og nuværende meget lave risiko for statskonkurser, [@Beers2017]. Eksempelvis gik den danske stat tilnærmelsesvis senest bankerot under *Statsbankerotten* i 1813 efter *Napoleonskrigene*. Derfor benyttes det amerikanske statspapir med kort løbetid, mere præcist anvendes den 90-dages amerikanske *T-Bill*, som en proxy for det risikofrie aktiv. Data over afkast er fra [@CRSPt90] hentet gennem [@WRDSt90]. Log netto afkastet af det risikofrie afkast beregnes som log forskellen mellem det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill* og den kvartalsvise inflationsrate, målt via *CPI*. Nettoafkastet har et kvartalsvist justeret afkast på `r round(DESCRIPTIVE$adj_mean[1]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[1]*100, 1)`$\%$. Som det kan ses på kvantilerne har det risikofrie afkast givet negativt afkast sommetider. Et histogram indikerer en højreskæv fordeling af afkast, hvilket også underbygges af en skævhed på `r round(DESCRIPTIVE$skew[1], 3)`. Med en kurtosis på `r round(DESCRIPTIVE$kurt[1], 3)` haves en leptokurtisk fordeling, med tykkere/længere haler og et smallere samt højere cetrum.
+Essencen af et risikofrit aktiv er at repræsentere et afkast med varians lig $0$. Dette betegnes undertiden også som et sikkert afkast. Udover at give investoren muligheder for indlån, kan investoren også udvide sine investeringsmuligheder ved at låne til den risikofrie rente, dvs. have en kort position i det risikofrie aktiv. Et ofte valgt aktiv i litteraturen, som en proxy for det risikofrie aktiv, er de kortefristede statsværdipapirer, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. Disse betegnes i U.S.A. som *T-Bills*. Valget af netop dette aktiv sker på baggrund af den historiske og nuværende meget lave risiko for statskonkurser, [@Beers2017]. Eksempelvis gik den danske stat tilnærmelsesvis senest bankerot under *Statsbankerotten* i 1813 efter *Napoleonskrigene*. Derfor benyttes det amerikanske statspapir med kort løbetid, mere præcist anvendes den 90-dages amerikanske *T-Bill*, som en proxy for det risikofrie aktiv. Data over afkast er fra [@CRSPt90] hentet gennem [@WRDSt90]. Log netto afkastet af det risikofrie aktiv beregnes som log forskellen mellem det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill* og den kvartalsvise inflationsrate, målt via *CPI*. Nettoafkastet har et kvartalsvist justeret afkast på `r round(DESCRIPTIVE$adj_mean[1]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[1]*100, 1)`$\%$. Som det kan ses på kvantilerne har det risikofrie afkast givet negativt afkast sommetider. Et histogram indikerer en højreskæv fordeling af afkast, hvilket også underbygges af en skævhed på `r round(DESCRIPTIVE$skew[1], 3)`. Med en kurtosis på `r round(DESCRIPTIVE$kurt[1], 3)` haves en leptokurtisk fordeling, med tykkere/længere haler og et smallere samt højere cetrum. Disse tal er konsistente med [@CampVic2003].
+
+```{r NET-TB-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$NET_TB))+
+  geom_line(aes(x=index(data), y=NET_TB)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$NET_TB), max(data$NET_TB))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
 
 ### Merafkastet på aktier -- $r_{t+1}^{\textnormal{a}}$
-For aktivklassen, som skal repræsentere børshandlede aktier, benyttes et markedsværdi-vægtet afkast over et repræsentativt indeks for samtlige handlede aktier på *New York Stock Exchange*, *National Association of Securities Dealers Automated Quotations* og *American Stock Exchange*. Det vægtede afkast er inklusiv dividender, aktiesplits og ny emissioner for de foregående 12 måneder ledende op til kvartalet. Ved at benytte et sådant forholdsvist bredt indeks, vil delanalysen for aktier være repræsentativt for det globale aktiemarked. Derudover er det ikke kun børsnoterede ameriansk baserede selskaber, som handles via *NYSE*, *NASDAQ* og *AMEX*, men i stadig større grad også virksomheder uden for U.S.A. Data over afkast er fra [@CRSPakt] og hentet gennem [@WRDSakt]. Log netto merafkastet af aktier beregnes som det kvartalsvise log brutto aktieafkastet fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*. Det ses at aktier har det klart højeste kvartalvise justerede merafkast på `r round(DESCRIPTIVE$adj_mean[2]*100, 1)`$\%$ ift. de andre aktivklasser. Dette høje merafkast følges af en ligeledes høj relativ volatilitet på `r round(DESCRIPTIVE$sd[2]*100, 1)`$\%$. Historisk set har det største negativ markedsudsving givet et merafkast/tab på $-30.4\%$, mens det største positive markedsudsving har været på $20\%$. Et histogram sammenholdt med en skævhed på `r round(DESCRIPTIVE$skew[2], 3)` afslører moderat til høj venstreskævhed. Altså har der oftere været negative merafkast ift. positive. Kurtosis på `r round(DESCRIPTIVE$kurt[2], 3)` medører en moderat leptokurtisk fordeling med en anelse tykkere haler, og at ekstreme observationer sker oftere end normalt.
+For aktivklassen, som skal repræsentere børshandlede aktier, benyttes et markedsværdi-vægtet afkast over et repræsentativt indeks for samtlige handlede aktier på *New York Stock Exchange*, *National Association of Securities Dealers Automated Quotations* og *American Stock Exchange*. Det vægtede afkast er inklusiv dividender, aktiesplits og ny emissioner for de foregående 12 måneder ledende op til kvartalet. Ved at benytte et sådant forholdsvist bredt indeks, vil delanalysen for aktier være repræsentativt for det globale aktiemarked. Derudover er det ikke kun børsnoterede ameriansk baserede selskaber, som handles via *NYSE*, *NASDAQ* og *AMEX*, men i stadig større grad også virksomheder uden for U.S.A. Data over afkast er fra [@CRSPakt] og hentet gennem [@WRDSakt]. Log netto merafkastet af aktier beregnes som det kvartalsvise log brutto aktieafkastet fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*. Det ses at aktier har det klart højeste kvartalvise justerede merafkast på `r round(DESCRIPTIVE$adj_mean[2]*100, 1)`$\%$ ift. de andre aktivklasser. Dette høje merafkast følges af en ligeledes høj relativ volatilitet på `r round(DESCRIPTIVE$sd[2]*100, 1)`$\%$. Historisk set har det største negativ markedsudsving givet et merafkast/tab på $-30.4\%$, mens det største positive markedsudsving har været på $20\%$. Et histogram sammenholdt med en skævhed på `r round(DESCRIPTIVE$skew[2], 3)` afslører moderat til høj venstreskævhed. Altså har der oftere været negative merafkast ift. positive. Kurtosis på `r round(DESCRIPTIVE$kurt[2], 3)` medører en moderat leptokurtisk fordeling med en anelse tykkere haler, og at ekstreme observationer sker oftere end normalt. Disse tal er konsistente med [@CampVic2003].
+
+```{r AKT-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log netto merafkastet af aktier.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+par(mfrow=c(1,1))
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$AKT))+
+  geom_line(aes(x=index(data), y=AKT)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$AKT), max(data$AKT))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
 
 ### Merafkastet på statsobligationer -- $r_{t+1}^{\textnormal{s}}$
-Statsobligationer er gældsinstrumenter udstedet af staten i det respektive udstedelsesland, de har til formål at finansiere offentlige udgifter og anses også for at være en substitution for skatter. Siden udstedelsen sker af staten, antages det ofte, at statsobligationer er relativt mindre risikobærende and aktier. Undertiden betegnes statsobligationer fra visse ilande som et *safe haven* for investorer. Eksempelvis har den danske stat pt. en kreditvurdering på AAA, Aaa, AAA af hhv. *Standard \& Poor's*, *Moody's* og *Fitch*., [@TradingEconomics]. Til formålet at repræsentere afkastet på statsobligationer anvendes derfor den 10-årige amerikanske statsobligation med konstant løbetid. Data over afkast er fra [@CRSPt90] og hentet gennem [@WRDSt90]. Log netto merafkastet af statsobligationener beregnes som det kvartalsvise log brutto afkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*. Netto merafkastet har et justeret kvartalsvist afkast på `r round(DESCRIPTIVE$adj_mean[3]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[3]*100, 1)`$\%$. Statsobligationen har den laveste *Sharpe Ratio* af de tre aktivklasser, hvilket også er forventeligt. Med en skævhed på `r round(DESCRIPTIVE$skew[3], 3)` og kurtosis på `r round(DESCRIPTIVE$kurt[3], 3)` haves en forholdsvis symmetrisk fordeling, men med en anelse tykkere haler.
+Statsobligationer er gældsinstrumenter udstedet af staten i det respektive udstedelsesland, de har til formål at finansiere offentlige udgifter og anses også for at være en substitution for skatter. Siden udstedelsen sker af staten, antages det ofte, at statsobligationer er relativt mindre risikobærende and aktier. Undertiden betegnes statsobligationer fra visse ilande som et *safe haven* for investorer. Eksempelvis har den danske stat pt. en kreditvurdering på AAA, Aaa, AAA af hhv. *Standard \& Poor's*, *Moody's* og *Fitch*., [@TradingEconomics]. Til formålet at repræsentere afkastet på statsobligationer anvendes derfor den 10-årige amerikanske statsobligation med konstant løbetid. Data over afkast er fra [@CRSPt90] og hentet gennem [@WRDSt90]. Log netto merafkastet af statsobligationener beregnes som det kvartalsvise log brutto afkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*. Netto merafkastet har et justeret kvartalsvist afkast på `r round(DESCRIPTIVE$adj_mean[3]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[3]*100, 1)`$\%$. Statsobligationen har den laveste *Sharpe Ratio* af de tre aktivklasser, hvilket også er forventeligt. Med en skævhed på `r round(DESCRIPTIVE$skew[3], 3)` og kurtosis på `r round(DESCRIPTIVE$kurt[3], 3)` haves en forholdsvis symmetrisk fordeling, men med en anelse tykkere haler. Disse tal er konsistente med [@CampVic2003].
+
+```{r S-OBL-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log netto merafkastet på statsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+par(mfrow=c(1,1))
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$S_OBL))+
+  geom_line(aes(x=index(data), y=S_OBL)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$S_OBL), max(data$S_OBL))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
 
 ### Merafkastet på virksomhedsobligationer -- $r_{t+1}^{\textnormal{v}}$
 På samme vis som stater kan finansiere deres aktiviteter via statsobligationer, kan virksomheder udstede gæld via obligationer, vis formål er at finansiere fremtidige investeringer og/eller projekter. Sikkerheden bag en virksomhedsobligation afhænger af virksomhedens betalingsevne. Af og til sætter virksomheden fysiske aktiver som kollateral for obligationerne i tilfælde af konkurser. Ift. statsobligationer bærer virksomhedsobligationer på en langt større risiko givet kreditrisikoen i virksomheden og/eller markedet. For at påtage sig denne risiko, forlanger investorerne derfor en højere præmie i form af en højere rente tilhørende virksomhedsobligationerne. For at repræsentere virksomhedsobligationer anvendes en indeksserie af virksomhedsobligationer med lang løbetid. Data er fra [@Ibbotson2019] og hentet via [@Goyal2007]. Det specifikke grundlag for tidsserien er tvetydigt, men [@Ibbotson2019] skriver følgende.
@@ -43,6 +80,18 @@ På samme vis som stater kan finansiere deres aktiviteter via statsobligationer,
 \textit{A corporate bond series with a long maturity is used to describe fixed-income securities that contain risk of default.}
 \end{center}
 Log netto merafkastet af virksomhedsobligationenerne beregnes som det kvartalsvise log brutto afkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*. Som forventet ses den højere afkastpræmie med et justeret kvartalsvist afkast på `r round(DESCRIPTIVE$adj_mean[4]*100, 1)`$\%$ og en tilhørende volatilitet på `r round(DESCRIPTIVE$sd[4]*100, 1)`$\%$, som investoren får, for at påtage sig den ekstra kreditrisiko. Afkastfordelingen anses som værende relativt mest symmetrisk ift. de andre aktivklasser, hvilket også ses i en skævhedsværdi på `r round(DESCRIPTIVE$skew[4], 3)`. Med en kurtosis på mere end $3$, har fordelingen tykkere haler og med mere masse centralt i fordelingen. Det bemærkes ligeledes at virksomhedsobligationer har haft de største positive markedsudsving af de tre aktivklasser med et positivt afkast på $20.8 \%$.
+
+```{r V-OBL-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log netto merafkastet på virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+par(mfrow=c(1,1))
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$V_OBL))+
+  geom_line(aes(x=index(data), y=V_OBL)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$V_OBL), max(data$V_OBL))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
 
 Tabel \@ref(tab:DES-AKTIVKLASSE) opsummere ovenstående beskrivende statistik for de tre aktivkasser og derudover for det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*, undertiden også betegnet som det nominelle afkast.
 
@@ -68,34 +117,13 @@ DESCRIPTIVE %>%
                              latex_options = c("striped", "hold_position"),
                              full_width = F)
 ```
-
-```{r DES-TILSTANDSVARIABLE, echo=FALSE}
-DESCRIPTIVE_T <- format(round(DESCRIPTIVE_T, digits = 3), nsmall = 3)
-
-colnames(DESCRIPTIVE_T) <- c('Middelværdi', 'Standard afvigelse', 'Skævhed', 'Kurtosis', 'Minimum', '$25 \\%$', 'Median', '$75 \\%$', 'Maksimum')
-
-rownames(DESCRIPTIVE_T) <- c('$x_t^{\\text{b}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{dp}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$')
-
-DESCRIPTIVE_T %>% 
-  knitr::kable(caption = 'G',
-               booktabs=TRUE,
-               align = c(rep('r', 9)),
-               row.names = TRUE,
-               escape = FALSE,
-               #col.names = NULL,
-               linesep = "") %>% 
-   kableExtra::kable_styling(bootstrap_options = "striped",
-                             latex_options = c("striped", "hold_position"),
-                             full_width = F)
-```
-
 ```{r DES-KOR, echo=FALSE}
 DES_COR <- format(round(cor(data), digits = 2), nsmall = 2)
 DES_COR[lower.tri(DES_COR)] <- NA
 
-colnames(DES_COR) <- c("$r_t^{\\text{rf}}$", "$r_t^{\\text{a}}$", "$r_t^{\\text{s}}$", "$r_t^{\\text{v}}$", '$x_t^{\\text{b}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{dp}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$')
+colnames(DES_COR) <- c("$r_t^{\\text{rf}}$", "$r_t^{\\text{a}}$", "$r_t^{\\text{s}}$", "$r_t^{\\text{v}}$", '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
 
-rownames(DES_COR) <- c("$r_t^{\\text{rf}}$", "$r_t^{\\text{a}}$", "$r_t^{\\text{s}}$", "$r_t^{\\text{v}}$", '$x_t^{\\text{b}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{dp}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$')
+rownames(DES_COR) <- c("$r_t^{\\text{rf}}$", "$r_t^{\\text{a}}$", "$r_t^{\\text{s}}$", "$r_t^{\\text{v}}$", '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
 
 DES_COR %>% 
   knitr::kable(caption = 'G',
@@ -112,30 +140,188 @@ DES_COR %>%
 \end{landscape}
 
 ## Tilstandsvariable
+Denne sektion har til formål at beskrive datagrundlaget for prædiktionsvariablene, som blev beskrevet i Sektion ??. Disse variable består af en række finansielle indikatorer: *Dividend-Price Ratio*, *Price-Earnings Ratio*, *Book-to-market Ratio*, *High Minus Low*, *Small Minus Big*, og variansen af aktieafkast. Derudover haves rentestruktursprædiktionsvariable: den nominelle rente, *Term Spread*, *Yield Spread*, *Credit Spread* og *Default Spread*. De makroøkonomiske variable udgør de sidste prædiktionsvariable: *Federal Funds Rate*. Udover beskrivelsen og begrundelsen for hver variabel, vil den tilhørende beskrivende statistik for hver variabel belyses.
 
-### Nominel rente -- $x_t^{(\text{b})}$
+### *Dividend-Price Ratio* -- $x_t^{\text{dp}}$
+Repræsentativet for priserne til forholdet mellem udbytte og priser er indeksniveauet, eksklusiv udbytte, over det brede indeks som beskrevet i Sektion ??. Udbyttet stammer ligeledes fra aktieindekset, og er beregnet som en rullende sum over de seneste fire kvartaler. Log udbyttet er logaritmen til tidsserien over de rullende summer af udbytte. Log *Dividend-Price Ratio* bliver da beregnet som forskellen mellem det rullende kvartalsvise log udbytte og de kvartalsvise log priser. Data er fra [@CRSPakt] og hentet gennem [@WRDSakt]. Den justerede middelværdi er `r round(DESCRIPTIVE_T$mean[1], 3)`$\%$, og betyder altså at forholdet mellem udbytte og priser historisk har været omtrent $1$:$34$. Det andet moment er `r round(DESCRIPTIVE_T$sd[1], 3)`$\%$. Forholdet er en næsten symmetrisk med et tredje moment på `r round(DESCRIPTIVE_T$skew[1], 3)`. En kurtosis på `r round(DESCRIPTIVE_T$kurt[1], 3)` indebærer at log *Dividend Price Ratio* har en platykurtisk fordeling med sjældne ekstreme observationer. Den `r format(index(DP[which.max(DP)]), '%d %B, %Y')` var det sande forhold på sidst højeste, da det nåede `r round(exp(max(DP)), 3)*100`$\%$. Over de følgende $18$ år, dalede forholdet til `r round(exp(min(DP)), 3)*100`$\%$ den `r format(index(DP[which.min(DP)]), '%d %B, %Y')`, fordi aktieprisernes værdi steg hurtigere end udbyttebetalingerne fra indtjeningen i virksomhederne. Derudover steg offentlige virksomheders indtjening langsommere end aktiepriserne. Disse tal er konsistente med [@CampVic2003].
 
-### *Price-Earnings Ratio* -- $x_t^{(\text{PE})}$
+```{r DP-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log *Dividend Price Ratio*.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+par(mfrow=c(1,1))
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$DP))+
+  geom_line(aes(x=index(data), y=DP)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$DP), max(data$DP))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
 
-### *Dividend-Price Ratio* -- $x_t^{(\text{DP})}$
+### *Price-Earnings Ratio* -- $x_t^{\text{pe}}$
+Priserne for forholdet mellem priser og indtjening er som ovenstående indeksniveauet fra Sektion ??, ekslusiv udbytte. Indtjeningen er en rullende sum repræsenterende indtjening på *S\&P 500* indekset. Data er dermed fra hhv. [@CRSPakt], hentet gennem [@WRDSakt] og [@Shiller2020], hentet gennem [@Goyal2007]. At indtjeningen benytter et andet datagrundlag end aktieindekset kan skabe tvetydigheder i resultaterne, men prædiktabiltetsegenskaben for variablen er stadig intakt. Log *Price Earnings Ratio* bliver da beregnet som forskellen mellem de kvartalsvise log priser og de kvartalvise log indtjeninger. Den justerede middelværdi er `r round(DESCRIPTIVE_T$mean[2], 3)`$\%$. Standardafvigelsen er på `r round(DESCRIPTIVE_T$sd[2], 3)`$\%$. Derudover haves en højreskæv leptokurtisk fordeling med hhv. skævhed på `r round(DESCRIPTIVE_T$skew[2], 3)` og kurtosis på `r round(DESCRIPTIVE_T$kurt[2], 3)`.
 
-### *Book-to-Market Ratio* -- $x_t^{(\text{BM})}$
+```{r PE-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log *Price Earnings Ratio*.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$EP))+
+  geom_line(aes(x=index(data), y=EP)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$EP), max(data$EP))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
 
-### Aktievarians -- $x_t^{(\sigma_{\text{a}}^2)}$
+### *Book-to-Market Ratio* -- $x_t^{\text{bm}}$
 
-### *Small-Minus-Big* -- $x_t^{(\text{BM})}$
+```{r BM-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af *Book-to-market Ratio*.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$BM))+
+  geom_line(aes(x=index(data), y=BM)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$BM), max(data$BM))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
 
-### *High-Minus-Low* -- $x_t^{(\text{BM})}$
+### Aktievarians -- $x_t^{\sigma_{\text{a}}^2}$
 
-### *Federal Funds Rate* -- $x_t^{(\text{BM})}$
+```{r AV-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af aktievariansen.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$AKT_VAR))+
+  geom_line(aes(x=index(data), y=AKT_VAR)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$AKT_VAR), max(data$AKT_VAR))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
 
-### *Term Spread* -- $x_t^{(\text{TS})}$
+### *High Minus Low* -- $x_t^{\text{hml}}$
 
-### *Yield Spread* -- $x_t^{(\text{YS})}$
+```{r HML-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af *High Minus Low*.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$HML))+
+  geom_line(aes(x=index(data), y=HML)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$HML), max(data$HML))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
 
-### *Credit Spread* -- $x_t^{(\text{CS})}$
+### *Small Minus Big* -- $x_t^{\text{smb}}$
 
-### *Default Spread* -- $x_t^{(\text{DS})}$
+```{r SMB-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af *Small Minus Big*.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$SMB))+
+  geom_line(aes(x=index(data), y=SMB)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$SMB), max(data$SMB))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
+
+### Nominel rente -- $x_t^{\text{b}}$
+
+```{r B-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log brutto afkastet på det risikofrie aktiv.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$TB))+
+  geom_line(aes(x=index(data), y=TB)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$TB), max(data$TB))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
+
+### *Term Spread* -- $x_t^{\text{ts}}$
+
+```{r TS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af *Term Spread*.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$T_SPREAD))+
+  geom_line(aes(x=index(data), y=T_SPREAD)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$T_SPREAD), max(data$T_SPREAD))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
+
+### *Yield Spread* -- $x_t^{\text{ys}}$
+
+```{r YS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af *Yield Spread*.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$Y_SPREAD))+
+  geom_line(aes(x=index(data), y=Y_SPREAD)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$Y_SPREAD), max(data$Y_SPREAD))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
+
+### *Credit Spread* -- $x_t^{\text{cs}}$
+
+```{r CS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af *Credit Spread*.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$C_SPREAD))+
+  geom_line(aes(x=index(data), y=C_SPREAD)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$C_SPREAD), max(data$C_SPREAD))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
+
+### *Default Spread* -- $x_t^{\text{ds}}$
+
+```{r DS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af *Default Spread*.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$D_SPREAD))+
+  geom_line(aes(x=index(data), y=D_SPREAD)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$D_SPREAD), max(data$D_SPREAD))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
+
+### *Federal Funds Rate* -- $x_t^{\text{fr}}$
+
+```{r FR-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af *Federal Funds Rate*.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$FR))+
+  geom_line(aes(x=index(data), y=FR)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$FR), max(data$FR))) +
+  scale_x_date(expand = c(0,0))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()
+```
+
+\begin{landscape}
+```{r DES-TILSTANDSVARIABLE, echo=FALSE}
+DESCRIPTIVE_T <- format(round(DESCRIPTIVE_T, digits = 3), nsmall = 3)
+
+colnames(DESCRIPTIVE_T) <- c('Middelværdi', 'Standard afvigelse', 'Skævhed', 'Kurtosis', 'Minimum', '$25 \\%$', 'Median', '$75 \\%$', 'Maksimum')
+
+rownames(DESCRIPTIVE_T) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+DESCRIPTIVE_T %>% 
+  knitr::kable(caption = 'G',
+               booktabs=TRUE,
+               align = c(rep('r', 9)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F)
+```
+\end{landscape}
 
 ## Korrelation
 
@@ -153,7 +339,7 @@ FIT_TABLE <- FIT_TABLE %>%
   
 colnames(FIT_TABLE) <- c('Koefficient', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
 
-rownames(FIT_TABLE) <- c('$x_t^{\\text{b}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{dp}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$')
+rownames(FIT_TABLE) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
 
 FIT_S_TABLE <- format(round(FIT_S_TABLE, digits = 3), nsmall = 3)
 
@@ -162,7 +348,7 @@ FIT_S_TABLE <- FIT_S_TABLE %>%
 
 colnames(FIT_S_TABLE) <- c('Koefficient', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
 
-rownames(FIT_S_TABLE) <- c('$x_t^{\\text{b}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{dp}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$')
+rownames(FIT_S_TABLE) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
 
 FIT_V_TABLE <- format(round(FIT_V_TABLE, digits = 3), nsmall = 3)
 
@@ -171,7 +357,7 @@ FIT_V_TABLE <- FIT_V_TABLE %>%
 
 colnames(FIT_V_TABLE) <- c('Koefficient', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
 
-rownames(FIT_V_TABLE) <- c('$x_t^{\\text{b}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{dp}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$')
+rownames(FIT_V_TABLE) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
 
 FIT_TABLE %>% 
   knitr::kable(caption = 'G',
@@ -236,61 +422,29 @@ r_3 &= \mu_3 + \sigma_3 \left( \rho_{1,3} \varepsilon_1+ \frac{ \rho_{2,3}-\rho_
 
 hvor $\varepsilon_i\sim N(0,1)$, for $i=1,2,3$. 
 
-```{r sim-tids2, echo=FALSE, fig.align='center', fig.cap='i) Aktiv 1, ii) Aktiv 2, iii) Aktiv 3.', fig.width=18, fig.height=15, fig.pos='htbp!'}
-par(mfrow=c(3,1))
-
-plot(data_1[, 1],
-     type = 'l',
-     xaxs = "i",
-     yaxs = "i",
-     xlab = 'Kvartal',
-     ylab = 'Afkast',
-     main = 'i) Aktiv 1')
-
-abline(h = mu_a, col = 'red', lty = 'dotted')
-abline(h = mean(data_1[, 1]), col = 'magenta', lty = 'dashed')
-
-plot(data_1[, 2],
-     type = 'l',
-     xaxs = "i",
-     yaxs = "i",
-     xlab = 'Kvartal',
-     ylab = 'Afkast',
-     main = 'ii) Aktiv 2')
-
-abline(h = mu_b, col = 'red', lty = 'dotted')
-abline(h = mean(data_1[, 3]), col = 'magenta', lty = 'dashed')
-
-plot(data_1[, 3],
-     type = 'l',
-     xaxs = "i",
-     yaxs = "i",
-     xlab = 'Kvartal',
-     ylab = 'Afkast',
-     main = 'iii) Aktiv 3')
-
-abline(h = mu_c, col = 'red', lty = 'dotted')
-abline(h = mean(data_1[, 2]), col = 'magenta', lty = 'dashed')
-```
-
 ```{r sim-tids, echo=FALSE, fig.align='center', fig.cap='i) Aktiv 1, ii) Aktiv 2, iii) Aktiv 3.', fig.width=18, fig.height=15, fig.pos='htbp!'}
 data <- c(data_1[,1], data_1[,2], data_1[,3])
 data <- data.frame(sim=data, type = c(rep(1, 200), rep(2,200), rep(3,200)))
 data <- data.frame(data, index = seq(1,200))
 
-ggplot(data, aes(index, sim)) +
-geom_line() + facet_wrap(~type, scales = "free_y", ncol = 1)+
-  expand_limits(x = 0, y = 0)+
+data2 <- data.frame(trueval=c(return), simval=data_1_mean, type = c(1,2,3))
+
+ggplot(data, aes(index, sim)) + 
+  geom_hline(data=data2, aes(yintercept = trueval, color = "A", linetype = "A")) +
+  geom_hline(data=data2, aes(yintercept = simval, color = "B", linetype = "B")) +
+  geom_line() +
+  facet_wrap(~type, scales = "free_y", ncol = 1) +
   xlab(expression(italic("Indeks")))+
   ylab(expression(italic("Afkast")))+
   scale_x_continuous(expand = c(0,0))+
   scale_y_continuous(expand = c(0,0))+
-  theme_classic()+
-  theme(legend.position = "none",
-        panel.background = element_rect(fill = "transparent", colour = NA),
-        plot.background = element_rect(fill = "transparent", colour = NA),
-        panel.grid = element_blank(),
-        plot.margin = margin(10, 14, 0, 0))
+  theme_bw()+
+  scale_colour_brewer(palette = "Dark2") +
+  scale_linetype_manual(values=c("dashed", "dotted"))+
+  theme(
+    strip.background = element_blank(),
+    strip.text.x = element_blank()
+  )
 ```
 
 
@@ -610,49 +764,30 @@ For anden simulering er de estimerede forventede afkast alle underestimeret rela
 
 Tredje simulering overestimerer Aktiv 1 samt 2 og underestimerer Aktiv 3. Rangeringen ift. *Sharpe Ratio* følger den sande rangering, men eksponeringen i Aktiv 1 og 2 er forhøjet, oftest sammensat med en kort position i Aktiv 3. De sande forventede afkast på porteføljerne er generelt noget lavere end de estimerede forventede afkast. Den sande volatilitet og den estimerede volatilitet ligger tæt op af hinanden. Den fjerde og sidste linje på Figur ?? viser bytteforholdet for porteføljerne baseret på tredje simulering.
 
-
-
-```{r weight-exp2, echo=FALSE, fig.align='center', fig.cap='Global minimum varians portføljen, tangensporteføljen samt for CRRA- og CARA-porteføljen for hhv. $a=1$, $a=4$ og $a=8$, beregnet ud for hhv. de sande og simulerede afkast.', fig.pos='htbp!', fig.width=18, fig.asp=0.4}
-par(mfrow=c(1,1))
-plot(sort(sd),
-     sort(r),
-     type ='l',
-     xlim=c(0,max(c(sd, sd_1, sd_2, sd_3))+0.0001),
-     ylim=c(0,max(c(r, r_1, r_2, r_3))+0.0001),
-     xaxs = "i",
-     yaxs = "i",
-     xlab = 'Volatilitet',
-     ylab = 'Forventet afkast',
-     main = 'Porteføljer.',
-     lwd = 2
-     )
-points(sort(sd), sort(r), pch = 19)
-lines(sort(sd_3), sort(r_3), lwd = 2, lty = 'dashed', col='red')
-points(sort(sd_3), sort(r_3), pch = 19, col='red')
-lines(sort(sd_2), sort(r_2), lwd = 2, lty = 'dotted', col='magenta')
-points(sort(sd_2), sort(r_2), pch = 19, col='magenta')
-lines(sort(sd_1), sort(r_1), lwd = 2, lty = 'dotdash', col='blue')
-points(sort(sd_1), sort(r_1), pch = 19, col='blue')
-```
-
-```{r weight-exp, echo=FALSE, fig.align='center', fig.cap='Global minimum varians portføljen, tangensporteføljen samt for CRRA- og CARA-porteføljen for hhv. $a=1$, $a=4$ og $a=8$, beregnet ud for hhv. de sande og simulerede afkast.', fig.pos='htbp!', fig.width=18, fig.asp=0.4}
-data <- data.frame(sd=c(sd, sd_1, sd_2, sd_3), r = c(r, r_1, r_2, r_3), type = c(rep(0, 8), rep(1, 8), rep(2, 8), rep(3, 8)))
+```{r weight-exp, echo=FALSE, fig.align='center', fig.cap='Global minimum varians portføljen, tangensporteføljen samt for CRRA- og CARA-porteføljen for hhv. $a=1$, $a=4$ og $a=8$, beregnet ud for hhv. de sande og simulerede afkast.', fig.pos='htbp!', fig.width=18, fig.asp=0.5}
+data <- data.frame(sd=c(sd, sd_1, sd_2, sd_3), r = c(r, r_1, r_2, r_3), type = c(rep("Sande momenter", 8), rep("1. Simulering", 8), rep("2. Simulering", 8), rep("3. Simulering", 8)))
 
 ggplot(data, aes(sd, r))+
-  geom_point(aes(color = type, group = type))+
-  geom_line(aes(color = type, group = type))+
+  geom_point(aes(color = factor(type), group = factor(type), shape = factor(type), size = factor(type)))+
+  geom_line(aes(color = factor(type), group = factor(type), linetype=factor(type)))+
   expand_limits(x = 0, y = 0)+
   xlab(expression(italic("Volatilitet")))+
   ylab(expression(italic("Forventet Afkast")))+
-  coord_cartesian(ylim = c(0, max(data$r)+0.05), xlim = c(0,max(data$sd)+0.05))+
-  scale_x_continuous(expand = c(0,0))+
-  scale_y_continuous(expand = c(0,0))+
-  theme_classic()+
-  theme(legend.position = "none",
-        panel.background = element_rect(fill = "transparent", colour = NA),
-        plot.background = element_rect(fill = "transparent", colour = NA),
-        panel.grid = element_blank(),
-        plot.margin = margin(10, 14, 0, 0)
-)
+  coord_cartesian(ylim = c(0, max(data$r)+0.010), xlim = c(0,max(data$sd)+0.005))+
+  scale_x_continuous(expand = c(0,0), minor_breaks = seq(0, 0.5, 0.05), breaks = seq(0, 0.5, 0.05))+
+  scale_y_continuous(expand = c(0,0), minor_breaks = seq(0 , 0.15, 0.025), breaks = seq(0, 0.15, 0.025))+
+  theme_bw()+
+  scale_colour_brewer(palette = "Dark2") +
+  scale_linetype_manual(values=c("solid", "dashed", "dotted", "twodash"))+
+  scale_shape_manual(values=c(15, 16, 17, 18))+
+  scale_size_manual(values=c(3,3,3,3))+
+  theme(
+    legend.background = element_rect(fill = "white", linetype="solid", size = 0.1, colour = "black"),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size=20)
+  ) +
+  labs(color = "Grundlag", linetype = "Grundlag", shape = "Grundlag", size = "Grundlag")
 ```
 

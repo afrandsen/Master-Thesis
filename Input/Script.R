@@ -17,7 +17,7 @@ V_OBL  <- log(1 + input$corpr) - TB
 
 # FINANSIELLE INDIKATORER
 DP <- input$dp
-EP <- log(input$earn) - log(as.numeric(input$vwindx))
+EP <- log(as.numeric(input$vwindx)) - log(input$earn)
 
 BM <- input$bm
 AKT_VAR <- log(1 + input$svar)
@@ -65,9 +65,9 @@ DESCRIPTIVE <- data.frame(adj_mean=ADJ_DATA_MEAN,
 DESCRIPTIVE$sr[1] <- NA
 
 ## TILSTANDSVARIABLE
-DATA_T <- xts::xts(merge(TB, EP, DP, BM, AKT_VAR, SMB, HML, FR, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD), index(TB))
+DATA_T <- xts::xts(merge(DP, EP, BM, AKT_VAR, HML, SMB, TB, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR), index(TB))
 
-DATA_T_J <- xts::xts(merge(TB_J, EP_J, DP_J), index(TB_J))
+DATA_T_J <- xts::xts(merge(DP_J, EP_J, TB_J), index(TB_J))
 
 ADJ_DATA_T_MEAN <- colMeans(DATA_T_J)
 DATA_T_MEAN <- colMeans(DATA_T)
@@ -83,12 +83,13 @@ DESCRIPTIVE_T <- data.frame(mean=DATA_T_MEAN,
                           quantile=t(DATA_T_QUANTILE))
 
 
-DESCRIPTIVE_T$mean[1:3] <- ADJ_DATA_T_MEAN
+DESCRIPTIVE_T$mean[1:2] <- ADJ_DATA_T_MEAN[1:2]
+DESCRIPTIVE_T$mean[7] <- ADJ_DATA_T_MEAN[3]
 
-data <- xts::xts(merge(NET_TB, AKT, S_OBL, V_OBL, TB, EP, DP, BM, AKT_VAR, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR, HML, SMB), index(NET_TB))
+data <- xts::xts(merge(NET_TB, AKT, S_OBL, V_OBL, DP, EP, BM, AKT_VAR, HML, SMB, TB, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR), index(NET_TB))
 
 # UNIVARIATE
-FIT_AKT <- lapply(5:ncol(data), function(x) lm(xts::lag.xts(data$AKT,-1) ~ data[,x], data=data))
+FIT_AKT <- lapply(5:ncol(data), function(x) lm(xts::lag.xts(data$AKT,-1, na.pad = FALSE) ~ head(data[,x], -1), data=data))
 FIT_AKT_SUMMARY <- lapply(FIT_AKT, summary)
 
 FIT_TABLE <- data.frame(coef=sapply(FIT_AKT, coef)[2,],
@@ -97,7 +98,7 @@ FIT_TABLE <- data.frame(coef=sapply(FIT_AKT, coef)[2,],
                         p=sapply(FIT_AKT_SUMMARY, coef)[8,],
                         rsq=unlist(lapply(1:length(FIT_AKT), function(x) FIT_AKT_SUMMARY[[x]]$r.squared)))
 
-FIT_S_OBL <- lapply(5:ncol(data), function(x) lm(xts::lag.xts(data$S_OBL, -1) ~ data[,x], data=data))
+FIT_S_OBL <- lapply(5:ncol(data), function(x) lm(xts::lag.xts(data$S_OBL, -1, na.pad = FALSE) ~ head(data[,x], -1), data=data))
 FIT_S_OBL_SUMMARY <- lapply(FIT_S_OBL, summary)
 
 FIT_S_TABLE <- data.frame(coef=sapply(FIT_S_OBL, coef)[2,],
@@ -106,7 +107,7 @@ FIT_S_TABLE <- data.frame(coef=sapply(FIT_S_OBL, coef)[2,],
                         p=sapply(FIT_S_OBL_SUMMARY, coef)[8,],
                         rsq=unlist(lapply(1:length(FIT_S_OBL), function(x) FIT_S_OBL_SUMMARY[[x]]$r.squared)))
 
-FIT_V_OBL <- lapply(5:ncol(data), function(x) lm(xts::lag.xts(data$V_OBL, -1) ~ data[,x], data=data))
+FIT_V_OBL <- lapply(5:ncol(data), function(x) lm(xts::lag.xts(data$V_OBL, -1, na.pad = FALSE) ~ head(data[,x], -1), data=data))
 FIT_S_OBL_SUMMARY <- lapply(FIT_V_OBL, summary)
 
 FIT_V_TABLE <- data.frame(coef=sapply(FIT_V_OBL, coef)[2,],
@@ -114,6 +115,45 @@ FIT_V_TABLE <- data.frame(coef=sapply(FIT_V_OBL, coef)[2,],
                         t=sapply(FIT_S_OBL_SUMMARY, coef)[6,],
                         p=sapply(FIT_S_OBL_SUMMARY, coef)[8,],
                         rsq=unlist(lapply(1:length(FIT_V_OBL), function(x) FIT_S_OBL_SUMMARY[[x]]$r.squared)))
+
+recessions.df = read.table(textConnection(
+  "Peak, Trough
+1857-06-01, 1858-12-01
+1860-10-01, 1861-06-01
+1865-04-01, 1867-12-01
+1869-06-01, 1870-12-01
+1873-10-01, 1879-03-01
+1882-03-01, 1885-05-01
+1887-03-01, 1888-04-01
+1890-07-01, 1891-05-01
+1893-01-01, 1894-06-01
+1895-12-01, 1897-06-01
+1899-06-01, 1900-12-01
+1902-09-01, 1904-08-01
+1907-05-01, 1908-06-01
+1910-01-01, 1912-01-01
+1913-01-01, 1914-12-01
+1918-08-01, 1919-03-01
+1920-01-01, 1921-07-01
+1923-05-01, 1924-07-01
+1926-10-01, 1927-11-01
+1929-08-01, 1933-03-01
+1937-05-01, 1938-06-01
+1945-02-01, 1945-10-01
+1948-11-01, 1949-10-01
+1953-07-01, 1954-05-01
+1957-08-01, 1958-04-01
+1960-04-01, 1961-02-01
+1969-12-01, 1970-11-01
+1973-11-01, 1975-03-01
+1980-01-01, 1980-07-01
+1981-07-01, 1982-11-01
+1990-07-01, 1991-03-01
+2001-03-01, 2001-11-01
+2007-12-01, 2009-06-01"), sep=',',
+  colClasses=c('Date', 'Date'), header=TRUE)
+
+recessions.trim = subset(recessions.df, Peak >= min(index(data)) )
 
 # MULTIPLE REGRESSION 
 
