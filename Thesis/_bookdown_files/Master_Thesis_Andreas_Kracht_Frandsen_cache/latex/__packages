@@ -15,3 +15,11 @@ quantmod
 moments
 IntroCompFinR
 kableExtra
+ggfortify
+VAR.etp
+MASS
+sandwich
+strucchange
+urca
+lmtest
+vars

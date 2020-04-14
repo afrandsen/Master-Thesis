@@ -1,5 +1,8 @@
 library(quantmod)
 library(moments)
+library(VAR.etp)
+library(vars)
+library(MASS)
 
 # LOAD DATA.
 input <- zoo::read.csv.zoo('C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Input/Samling.csv', format = "%Y%m%d")
@@ -157,19 +160,49 @@ recessions.trim = subset(recessions.df, Peak >= min(index(data)) )
 
 # MULTIPLE REGRESSION 
 
+data_mult_akt <- as.xts(merge(xts::lag.xts(data$AKT, -1, na.pad = FALSE), head(data, -1)))
+data_mult_akt <- subset(data_mult_akt, select = -AKT.1)
+
+data_mult_s <- as.xts(merge(xts::lag.xts(data$S_OBL, -1, na.pad = FALSE), head(data, -1)))
+data_mult_s <- subset(data_mult_s, select = -S_OBL.1)
+
+data_mult_v <- as.xts(merge(xts::lag.xts(data$V_OBL, -1, na.pad = FALSE), head(data, -1)))
+data_mult_v <- subset(data_mult_v, select = -V_OBL.1)
+
+# KITCHEN SINK
+fit_AKT <- lm(AKT ~ ., data=data_mult_akt)
+
+test <- lm(AKT~NET_TB + S_OBL + V_OBL + TB + BM + T_SPREAD + FR, data = data_mult_akt)
+
+step_AKT_model <- step(fit_AKT, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=AKT ~ NET_TB + S_OBL + V_OBL + TB, upper=fit_AKT))
+
+summary(step_AKT_model)
+
+fit_S_OBL <- lm(S_OBL ~ ., data=data_mult_s)
+
+step_S_OBL_model <- step(fit_S_OBL, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=S_OBL ~ NET_TB + AKT + V_OBL + TB, upper=fit_S_OBL))
+
+summary(step_S_OBL_model)
+
+fit_V_OBL <- lm(V_OBL ~ ., data=data_mult_v)
+
+step_V_OBL_model <- step(fit_V_OBL, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=V_OBL ~ NET_TB + AKT + S_OBL + TB, upper=fit_V_OBL))
+
+summary(step_V_OBL_model)
 
 
-
-
-
-# # KITCHEN SINK
-# fit_AKT <- lm(lag(AKT, -1) ~ DP + BM + AKT_VAR + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data = data)
-# fit_S_OBL <- lm(lag(S_OBL, -1) ~ DP + BM + AKT_VAR + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data = data)
-# fit_V_OBL <- lm(lag(V_OBL, -1) ~ DP + BM + AKT_VAR + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data = data)
-# 
 # m_fit <- lm(cbind(AKT, S_OBL, V_OBL) ~ lag(DP, 1) + lag(BM, 1) + lag(AKT_VAR, 1) + lag(T_SPREAD, 1) + lag(Y_SPREAD, 1) + lag(C_SPREAD, 1) + lag(D_SPREAD, 1) + lag(FR, 1), data = data)
 # 
+
+# VAR
+# data <- as.ts(data)
 # 
-# library(vars)
+# data_sub <- subset(data, select = -c(DP, EP, AKT_VAR, HML, Y_SPREAD, C_SPREAD, D_SPREAD, FR))
 # 
-# var <- VAR(data, p = 1, ic = 'AIC')
+# var <- VAR(data_sub, p = 1)
+# VAR.select(data_sub,p=1)
+
+
+# var <- VAR.etp::VAR.est(data, p=1)
+# 
+# pope_var <- VAR.Pope(data, p = 1)

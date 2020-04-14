@@ -83,7 +83,7 @@ Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det 
 \node[color=magenta] at (axis cs:30, 0) [anchor=south west] {\textbf{Den efficiente rand}};
 \addplot[black, very thick, domain=-10:50, samples=100, variable=\x](
   ({x}, {4 + 0.37 * x});
-\node[rotate = 25, color=black] at (axis cs:30, 15) [anchor=south west] {\textbf{CAL}};
+\node[rotate = 25, color=black] at (axis cs:30, 15) [anchor=south west] {\textbf{CML}};
 \node[pin={[pin edge={thick}, text width=3cm, pin distance=2cm]90:{{\centering Tangensporteføljen}}}] at (axis cs:16, 10.5) {};
 \end{axis}
 \end{tikzpicture}
@@ -110,10 +110,10 @@ I Sektion \@ref(den-myopiske-investor), introducerede vi en af de bærende antag
 &\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
 \end{align}
 
-Hvor $U(W_{t+1})\in\mathbb{R}_+$ er en konkav nyttefunktion. Investoren vil givet nyttefunktionens konkave krumning være risikoavers. Netop dette aspekt gør, at vi kan inkorporere risikoaversion, når investorens porteføljevalg skal foretages. For at fastlægge denne investorspecifikke risikoaversion benyttes derfor skalerede krumningsmål. Disse fundamentale risikoaversionsmål er kendt som *Arrow-Pratt Målene for Risikoaversion*, [@Arrow1965; @Pratt1964]. Når nytte skal belyses, kan risikoaversion mht. den fremtidige formue $W_{t+1}$ benyttes. Graden af krumningen på nyttefunktion giver os information om investorens risikopræferencer introduceret ovenfor. Vi antager at investorens nyttefunktion er strengt voksende i terminial formue -- altså er investoren grådig og foretrækker høj formue frem for en lav formue -- men i en faldende rate. Nyttefunktion vil altså have følgende karakteristika
+Hvor $U(W_{t+1})\in\mathbb{R}_+$ er en konkav nyttefunktion. Investoren vil givet nyttefunktionens konkave krumning være risikoavers. Netop dette aspekt gør, at vi kan inkorporere risikoaversion, når investorens porteføljevalg skal foretages. For at fastlægge denne investorspecifikke risikoaversion benyttes derfor skalerede krumningsmål. Disse fundamentale risikoaversionsmål er kendt som *Arrow-Pratt Målene for Risikoaversion*, [@Arrow1965] og [@Pratt1964]. Når nytte skal belyses, kan risikoaversion mht. den fremtidige formue $W_{t+1}$ benyttes. Graden af krumningen på nyttefunktion giver os information om investorens risikopræferencer introduceret ovenfor. Vi antager at investorens nyttefunktion er strengt voksende i terminial formue -- altså er investoren grådig og foretrækker høj formue frem for en lav formue -- men i en faldende rate. Nyttefunktion vil altså have følgende karakteristika
 $$U'(W)>0\quad\text{og}\quad U''(W)<0.$$
 
-Hvor $U'(W)$ og $U''(W)$ er den hhv. første- og anden afledte mht. formue $W$. Når vi skal kvantificere denne risikoaversion, skal vi sikre, at målet er invariant overfor strengt positive affine transformationer. Dette er bl.a. opfyldt ved brug af *Coefficient of Absolut Risk Aversion*, [@Arrow1965; @Pratt1964]. *ARA* er defineret som den negative anden afledte af nyttefunktionen mht. formue, skaleret med den første afledte
+Hvor $U'(W)$ og $U''(W)$ er den hhv. første- og anden afledte mht. formue $W$. Når vi skal kvantificere denne risikoaversion, skal vi sikre, at målet er invariant overfor strengt positive affine transformationer. Dette er bl.a. opfyldt ved brug af *Coefficient of Absolut Risk Aversion*, [@Arrow1965] og [@Pratt1964]. *ARA* er defineret som den negative anden afledte af nyttefunktionen mht. formue, skaleret med den første afledte
 $$\text{ARA}(W)=-\frac{U''(W)}{U'(W)}.$$
 
 Selvom den andenafledte af nyttefunktionen er et mål for krumningen af nyttefunktionen, bliver vi nødt til at skalere for at eliminere afhængigheden af abitrære størrelser, som relaterer sig til målbarheden af nytte. *ARA* måler investorens absolutte dollar værdi, som han er villig til at købe, for at undgå et tab på samme absolutte størrelse. Hvis *ARA* er faldende medfører det at desto mere formue en investor har, desto mere risikosøgende bliver han, altså haves at $\text{ARA}(W)<0$, og så fremdeles. Almindeligt menes det, at *ARA* burde falde, eller i det mindste ikke stige, med formue. Et relateret mål er *Coefficient of Relative Risk Aversion*, *RRA*, som er samtidig tager højde for investorens formue
@@ -155,23 +155,23 @@ De tilsvarende reciprokke af ovenstående mål kaldes hhv. *Coefficeint of Absol
 \label{fig:Nyt}
 \end{figure}
 
-Som redegjort ovenfor, er både *ARA* samt *RRA* essientielle mål til kvantificering af risikopræferencer og dermed til at opnå forståelse for nyttefunktionen hos den enkelte investor. Konstateringer udledt fra den langsigtede økonomiske adfærd fastslår at *RRA* ikke kan afhænge alene af formue. Dette kommer sig af, at formue og per capita forbrug er steget henover de seneste to århundreder. Det absolutte forhold mellem finansielle risici er ligeledes forøget -- siden disse risici er multiplikative -- mens den relative risici har været konstant [@CampVic2003]. Samtidigt er der ikke fundet evidens baseret på afkast og renter, der har påvist langsigtet vækst i per capita forbrug og formue. Altså vil investorer betale de samme relative omkostninger for at undgå en given finansiel risiko uanset om de er velhavende eller ej. Dette foranlediger en til at tænke tanken, at *RRA* er uafhængig af formue.
+Som redegjort ovenfor, er både *ARA* samt *RRA* essientielle mål til kvantificering af risikopræferencer og dermed til at opnå forståelse for nyttefunktionen hos den enkelte investor. Konstateringer udledt fra den langsigtede økonomiske adfærd fastslår at *RRA* ikke kan afhænge alene af formue. Dette kommer sig af, at formue og per capita forbrug er steget henover de seneste to århundreder. Det absolutte forhold mellem finansielle risici er ligeledes forøget -- siden disse risici er multiplikative -- mens den relative risici har været konstant. Samtidigt er der ikke fundet evidens baseret på afkast og renter, der har påvist en langsigtet tendens, som respons til denne vækst. Altså vil investorer betale de samme relative omkostninger for at undgå en given finansiel risiko uanset om de er velhavende eller ej, [@CampVic2003]. Dette foranlediger en til at tænke tanken, at *RRA* er uafhængig af formue og bør være konstant.
 
 ## Typer af nyttefunktioner
 
 Antagelser omhandlende: formen af nyttefunktioner og fordelingen af afkast, er påkrævet, for at kunne skabe en traktabel model. Flere nyttefunktioner har vist sig relevante inden for middelværdi-varians analyse, [@CampVic2003]. Nogle af disse er eksponentiel nytte, potens nytte samt kvadratisk nytte. Fælles for disse er, at de definerer nytte over formue, udover disse findes andre mere eksotiske nyttefunktioner såsom Epstein-Zin nytte. I denne Sektion vil vi undersøge ovenstående nærmere, og ud fra et kvantitativt aspekt vælge nyttefunktionen, som denne afhandling vil arbejde videre med.
 
 Generelt vil en investors nytte -- defineret over formue -- afhænge af samtlige momenter relateret til formue. For at se dette laves en Taylor udvidelse af $U(W_{t+1})$ omkring den forventede formue, $\mathbb{E}(W_{t+1})$
-\begin{align}
+\begin{align*}
 U\left(W_{t+1}\right)=&U\left(\mathbb{E}\left(W_{t+1}\right)\right)+U'\left(\mathbb{E}\left(W_{t+1}\right)\right)+\frac{1}{2}U''\left(\mathbb{E}\left(W_{t+1}\right)\right)\left(W_{t+1}-\mathbb{E}\left(W_{t+1}\right)\right)^2\\
 &+\sum_{n=3}^\infty \frac{1}{n!}U^{\left(n\right)}\left(\mathbb{E}\left(W_{t+1}\right)\right)\left(W_{t+1}-\mathbb{E}\left(W_{t+1}\right)\right),
-\end{align}
+\end{align*}
 
 hvor $U^{(n)}$ er den $n$'te afledte af $U(\cdot)$. Tager vi nu den forventede værdi fås
-\begin{align}
+\begin{align*}
 \mathbb{E}\left(U\left(W_{t+1}\right)\right)=&U\left(\mathbb{E}\left(W_{t+1}\right)\right)+\frac{1}{2}U''\left(\mathbb{E}\left(W_{t+1}\right)\right)\mathbb{V}\left(W_{t+1}\right)\\
 &+\sum_{n=3}^\infty \frac{1}{n!} U^{\left(n\right)}\left(\mathbb{E}\left(W_{t+1}\right)\right)\mathbb{E}\left(\left(W_{t+1}-\mathbb{E}\left(W_{t+1}\right)\right)^n\right),
-\end{align}
+\end{align*}
 
 hvor $\mathbb{E}((W_{t+1}-\mathbb{E}(W_{t+1}))^n)$ er det centrale moment af orden $n$. Fælles for disse momenter er, at de kvantificere en investors villighed til at afgive eller optage diverse risici. Givetvis vil en grådig investor foretrække højere forventet formue end lavere, for faste centrale momenter af anden orden eller større. En risikoavers investor, altså $U''(W)<0$, vil foretrække lavere varians af formue fremfor højere, for fast forventet formue samt faste centrale momenter af tredje orden eller højere. Problemet opstår når de centrale momenter højere end eller lig tredje orden ikke er ens for alle alternativer. I så fald ville vi ikke kunne evaluere dem på baggrund af middelværdi og varians.
 
@@ -412,14 +412,12 @@ Slutteligt anvendes den på den betingede varians
     \end{equation}
     
 ## Bias justeret VAR-model
-Ved brug af den analytiske middelværdi bias formel foreslået af [@Pope1990], viser [@Engsted2012] at justering for bias i middelværdi estimatorene i det multivariate setup kan producerer forskellige parametre estimater i den givne VAR(1) model. Benyttelse af ordinær lineær regressionsestimater kan resultere i bias pga.den begrænsede stikprøvestørrelse og af den årsag mislede inferensen gjort på baggrund af VAR(1) estimaterne. Herudover kan variablene vise autokorrelation, hvis de er stærkt vedvarende. Den analytiske bias af OLS estimatoren, $\bm{\Phi}_1$, er udledt på baggrund af en Taylor udvidelse af højere orden. Dermed lader vi den analytiske bias, $\bm{B}_T$, ved givet ved, [@Pope1990]
-$$\bm{B}_T=-\frac{\bm{b}}{T}+ O(T^{-\frac{3}{2}}),$$
+Ved brug af den analytiske middelværdirette estimator foreslået af [@Pope1990], viser [@Engsted2012] at justering for bias i estimatorerne af middelværdi, i det multivariate setup, kan producere forskellige parametre estimater i den givne VAR(1) model. Benyttelse af ordinær lineær regressionsestimater kan resultere i bias pga. den begrænsede stikprøvestørrelse og af den årsag mislede inferensen gjort på baggrund af VAR(1) estimaterne. Herudover kan variablene vise autokorrelation, hvis de er udviser vedvarende effekter pga. stød til tidsserien. Den analytiske bias af OLS estimatoren, $\bm{\Phi}_1$, er udledt på baggrund af en Taylor udvidelse af høj orden. Dermed lader vi den analytiske bias, $\bm{B}_T$, være givet ved
+$$\bm{B}_T=-\frac{\bm{b}}{T}+ O\left(T^{-\frac{3}{2}}\right),$$
 
 hvor $T$ er sample size og tælleren er lig
-$$\bm{b}=\bm{\Sigma}_v((\bm{I}-\bm{\Phi}_1')^{-1}+\bm{\Phi}_1'(\bm{I}-(\bm{\Phi}_1')^2)+\sum_{i=1}^m \lambda (\bm{I}-\lambda\bm{\Phi}_1')^{-1})\bm{\Sigma}_z^{-1}.$$
+$$\bm{b}=\bm{\Sigma}_v\left(\left(\bm{I}-\bm{\Phi}_1'\right)^{-1}+\bm{\Phi}_1'\left(\bm{I}-\left(\bm{\Phi}_1'\right)^2\right)+\sum_{i=1}^m \lambda \left(\bm{I}-\lambda\bm{\Phi}_1'\right)^{-1}\right)\bm{\Sigma}_z^{-1}.$$
 
-Her er $\bm{\Sigma}_v$ den betingede kovariansmatrix af $v_t$, $\lambda$ er vektoren af eigenvalues af $\bm{\Phi}_1$, $\bm{I}$ er identitetsvektoren og $m$ er antallet af tilstandsvariable i $\bm{z}$. Bias'en i Ligning ?? falder med raten $T^{-\frac{3}{2}}$, som $T\rightarrow \infty$. Den analytiske formel af [@Pope1990] giver ikke bias justerede afskæringer, $\bm{\Phi}_0$, men som [@Engsted2012] pointerer vil dette problem automatisk blive løst af de bias justerede hældninger. Dette sker eftersom det ubetingede aritmetiske gennemsnit af en stationær variabel er et ikke-biased estimat af den sande middelværdi, og samtidig fitter OLS præcis middelværdien af variablene i VAR-modellen, ved at fjerne første observation. Altså vil en bias justeret hældnings VAR-model medføre ikke-biased estimater af $\bm{\Phi}_0$, givet modelrestriktionen, at de ubetingede middelværdier af variablene udledt fra VAR koefficienterne, er lig deres aritmetiske gennemsnit
-
+Her er $\bm{\Sigma}_v$ den betingede kovariansmatrix af $v_t$, $\lambda$ er vektoren af egenværdier af $\bm{\Phi}_1$, $\bm{I}$ er identitetsvektoren og $m$ er antallet af tilstandsvariable i $\bm{z}$. Bias'en i Ligning ?? falder med raten $T^{-\frac{3}{2}}$, som $T\rightarrow \infty$. Den analytiske formel af [@Pope1990] giver ikke bias justerede afskæringer, $\bm{\Phi}_0$, men som [@Engsted2012] pointerer vil dette problem automatisk blive løst af de bias justerede hældninger. Dette sker eftersom det ubetingede aritmetiske gennemsnit af en stationær variabel, er et ikke-biased estimat af den sande middelværdi, og samtidig estimerer OLS præcis middelværdien af variablene i VAR-modellen, ved at fjerne første observation. Altså vil en VAR-model med bias justerede hældninger medføre ikke-biased estimater af $\bm{\Phi}_0$, givet modelrestriktionen, at de ubetingede middelværdier af variablene -- udledt fra VAR koefficienterne -- er lig deres aritmetiske gennemsnit
  
-
-[@Engsted2012] finder både kvantitative og kvalitative effekter ved brug af bias justerede variable ift. de regulere OLS estimater. De viser bl.a. hvordan hedging komponentet af porteføljeallokeringen ændrer sig for et kontinuum af risikoaversioner, hvor specielt mellemliggende risikoaversions værdier ($\gamma=2$) er særligt påvirket af biasjusteringen.^[Se evt. Figur 1 i [@Engsted2012].] Her bliver det optimale portefølgevalg påvirket, eftersom biasjusteringen afstedkommer reducerede positioner for obligationer og aktier, gennem det intertemporale hedging demand, mens positionen for kontanter forøges.
+[@Engsted2012] finder både kvantitative og kvalitative effekter ved brug af bias justerede koefficienter ift. de regulere OLS estimater. De viser bl.a. hvordan hedging komponentet af porteføljeallokeringen ændrer sig for et kontinuum af risikoaversioner, hvor specielt mellemliggende risikoaversions værdier ($\gamma=2$) er særligt påvirket af biasjusteringen.^[Se evt. Figur 1 i [@Engsted2012].] Her bliver det optimale portefølgevalg påvirket, eftersom biasjusteringen afstedkommer reducerede positioner for obligationer og aktier, gennem det intertemporale hedging demand, mens positionen for kontanter forøges.
