@@ -195,11 +195,34 @@ summary(step_V_OBL_model)
 # 
 
 # VAR
-# data <- as.ts(data)
+data_v <- as.ts(data)
 # 
-# data_sub <- subset(data, select = -c(DP, EP, AKT_VAR, HML, Y_SPREAD, C_SPREAD, D_SPREAD, FR))
+data_sub <- subset(data_v, select = -c(DP, EP, AKT_VAR, HML, Y_SPREAD, C_SPREAD, D_SPREAD, FR))
 # 
-# var <- VAR(data_sub, p = 1)
+var <- VAR(data_sub, p = 1)
+
+coef <- Bcoef(var)
+coef1 <- coef(var)
+cov <- summary(var)$covres
+cor <- summary(var)$corres
+
+# fileName_var <- 'varAM.xlsx'
+# 
+# excel_var <- createWorkbook(fileName_var)
+# 
+# addWorksheet(excel_var,'Coef')
+# addWorksheet(excel_var,'CoefStdTp')
+# addWorksheet(excel_var,'Cov')
+# addWorksheet(excel_var,'Corr')
+# 
+# 
+# writeData(excel_var, sheet = 1, coef)
+# writeData(excel_var, sheet = 2, coef1)
+# writeData(excel_var, sheet = 3, cov)
+# writeData(excel_var, sheet = 4, cor)
+# 
+# saveWorkbook(excel_var, fileName_var, overwrite = T)
+
 # VAR.select(data_sub,p=1)
 
 

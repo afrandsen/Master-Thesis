@@ -22,7 +22,7 @@ if (knitr::is_html_output()) {
 
 \part{Den empiriske analyse}
 
-```{r script1, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Input/Script.R"), include=FALSE, cache=TRUE}
+```{r script1, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Script.R"), include=FALSE, cache=TRUE}
 ```
 
 # Data beskrivelse
@@ -256,8 +256,7 @@ ggplot(data) +
 ```
 
 ### Nominel rente -- $x_t^{\text{b}}$
-
-Figur \@ref(fig:B-tids) viser et plot over tidsserien.
+Det kvartalsvise log brutto afkast på den amerikanske 90-dages *T-Bill* benyttes som en proxy for den nominelle rente. Ved at inkludere både brutto og netto log renten, inkorporeres inflation. Eftersom log inflation er forskellen mellem log brutto renten og log netto renten. Data er fra [@CRSPt90] og hentet gennem [@WRDSt90]. Den justerede middelværdi estimeres til `r round(DESCRIPTIVE_T$mean[7]*100, 3)`$\%$. Volatiliteten estimeres til `r round(DESCRIPTIVE_T$sd[7]*100, 3)`$\%$. Tredje og fjerde moment estimeres til hhv. `r round(DESCRIPTIVE_T$skew[7], 3)` og `r round(DESCRIPTIVE_T$kurt[7], 3)`. Figur \@ref(fig:B-tids) viser et plot over tidsserien.
 
 ```{r B-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log brutto afkastet på det risikofrie aktiv.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -274,8 +273,10 @@ ggplot(data) +
 ```
 
 ### Term Spread -- $x_t^{\text{ts}}$
+For at beregne *Term Spread* (rentespændet for den lange rente), benyttes den amerikanske $10$-årige effektive rente med konstant løbetid samt den 90-dages *T-Bill* *Secondary Market Rate*. Kvartalsvise data er hentet fra [@FRED102020] og [@FRED902020], derudover er data ikke blevet sæsonjusteret. Spændet beregnes da som
+$$x_t^{\text{ts}}=Y_t^{10}-Y_t^{90},$$
 
-Figur \@ref(fig:TS-tids) viser et plot over tidsserien.
+hvor $Y_t^{10}$ og $Y_t^{90}$ er de to effektive renter. Dette følger metoden fra [@Campbell1991], som også argumenterer for at ethvert rentespænd for renter med løbetider mellem $1$ måned og $10$ år, kan prædiktere rentestrukturen. Middelværdien for det lange rentespænd estimeres til `r round(DESCRIPTIVE_T$mean[8]*100, 3)`$\%$. Volatiliteten estimeres til `r round(DESCRIPTIVE_T$sd[8]*100, 3)`$\%$. Fordelingen er forholdsvis symmetrisk med skævhed og kurtosis på hhv. `r round(DESCRIPTIVE_T$skew[8], 3)` og `r round(DESCRIPTIVE_T$kurt[8], 3)`. Figur \@ref(fig:TS-tids) viser et plot over tidsserien.
 
 ```{r TS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Term Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -292,8 +293,10 @@ ggplot(data) +
 ```
 
 ### Yield Spread -- $x_t^{\text{ys}}$
+Datagrundlaget for *Yield Spread* (rentespændet for den korte rente) er den amerikanske $10$-årige effektive rente med konstant løbetid samt den 90-dages *T-Bill* *Secondary Market Rate*. Kvartalsvise data er hentet fra [@FRED52020] og [@FRED902020], og er ikke sæsonjusteret. Spændet beregnes da som
+$$x_t^{\text{ts}}=Y_t^{5}-Y_t^{90},$$
 
-Figur \@ref(fig:YS-tids) viser et plot over tidsserien.
+hvor $Y_t^{5}$ og $Y_t^{90}$ er de to effektive renter. Middelværdien, `r round(DESCRIPTIVE_T$mean[9]*100, 3)`$\%$, er som forventet en anelse mindre end middelværdien for *Term Spread*. Det samme er volatiliteten, `r round(DESCRIPTIVE_T$sd[9]*100, 3)`$\%$. Fordelingen er en anelse leptokurtisk med kurtosis på  `r round(DESCRIPTIVE_T$kurt[9], 3)`. Skævheden er `r round(DESCRIPTIVE_T$skew[9], 3)`. Figur \@ref(fig:YS-tids) viser et plot over tidsserien. 
 
 ```{r YS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Yield Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -310,8 +313,10 @@ ggplot(data) +
 ```
 
 ### Credit Spread -- $x_t^{\text{cs}}$
+Beregningen til *Credit Spread* (kreditspændet) benytter den 90-dages *T-Bill* *Secondary Market Rate* samt den effektive rente fra *Moody's Seasoned BAA Cortporate Bond*, og baserer sig på instrumenter med løbetider på $20$ år eller mere. Data er hentet fra hhv. [@FRED902020] samt [@Goyal2007]. Metoden følger fra [@Keim1986], og kreditspændet beregnes da som
+$$x_t^{\text{cs}}=Y_t^{\text{BAA}}-Y_t^{90},$$
 
-Figur \@ref(fig:CS-tids) viser et plot over tidsserien.
+hvor $Y_t^{\text{BAA}}$ og $Y_t^{90}$ er de to effektive renter. Af de fem rentrestrukturs variable ses det, at kreditspændet har den højeste middelværdi på `r round(DESCRIPTIVE_T$mean[10]*100, 3)`$\%$, og en standardafvigelse på `r round(DESCRIPTIVE_T$sd[10]*100, 3)`$\%$. Tredje og fjerde moment estimeres til hhv. `r round(DESCRIPTIVE_T$skew[10], 3)` og `r round(DESCRIPTIVE_T$kurt[10], 3)`. Figur \@ref(fig:CS-tids) viser et plot over tidsserien.
 
 ```{r CS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Credit Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -328,8 +333,10 @@ ggplot(data) +
 ```
 
 ### Default Spread -- $x_t^{\text{ds}}$
+For at beregne *Default Spread* (konkursspændet) benyttes den den effektive rente fra *Moody's Seasoned AAA Cortporate Bond* samt den effektive rente fra *Moody's Seasoned BAA Cortporate Bond*, og baserer sig begge på instrumenter med løbetider på $20$ år eller mere. Data er hentet via [@Goyal2007]. Konkursspændet beregnes da som
+$$x_t^{\text{ds}}=Y_t^{\text{BAA}}-Y_t^{\text{AAA}},$$
 
-Figur \@ref(fig:DS-tids) viser et plot over tidsserien.
+hvor $Y_t^{\text{BAA}}$ og $Y_t^{\text{AAA}}$ er de to effektive renter. Til forskel for kreditspændet har konkursspændet den laveste middelværdi, `r round(DESCRIPTIVE_T$mean[11]*100, 3)`$\%$, også på tværs af de andre klasser af prædiktionsvariable. Standardafvigelsen er `r round(DESCRIPTIVE_T$sd[11]*100, 3)`$\%$. Af rentestrukturs variablene har konkursspændet også den hhv. mest esktreme skævhed og kurtosis. Disse er hhv. `r round(DESCRIPTIVE_T$skew[11], 3)` og `r round(DESCRIPTIVE_T$kurt[11], 3)`, hvilket indebærer en højreskæv fordeling med tykke haler. Figur \@ref(fig:DS-tids) viser et plot over tidsserien.
 
 ```{r DS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Default Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -346,8 +353,7 @@ ggplot(data) +
 ```
 
 ### Federal Funds Rate -- $x_t^{\text{fr}}$
-
-Figur \@ref(fig:FR-tids) viser et plot over tidsserien.
+I U.S.A. er *Federal Funds Rate*, renten som private finansinstitutioner tager for at låne uden sikkerhed, sædvanligvis over natten, af finansinstitutions reserver i *Federal Reserve Bank*. Data er hentet fra [@FREDF2020]. De kvartalsvis observationer er baseret på et gennemsnit af daglige observationer. Middelværdien er på `r round(DESCRIPTIVE_T$mean[12]*100, 3)`$\%$, og standardafvigelsen er på `r round(DESCRIPTIVE_T$sd[12]*100, 3)`$\%$. Tredje og fjerde moment estimeres til hhv. `r round(DESCRIPTIVE_T$skew[12], 3)` og `r round(DESCRIPTIVE_T$kurt[12], 3)`. Figur \@ref(fig:FR-tids) viser et plot over tidsserien.
 
 ```{r FR-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Federal Funds Rate.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -484,6 +490,28 @@ FIT_V_TABLE %>%
 # Underliggende model
 
 # Allokering af aktiver
+```{r script2, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Portfolio.R"), include=FALSE, cache=TRUE}
+```
+
+```{r AL-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af allokeringer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+alpha <- xts::xts(t(alphafixedT), index(NET_TB))
+
+ggplot(alpha) +
+  expand_limits(x = min(index(alpha)), y = min(alpha))+
+  geom_line(aes(x=index(alpha), y=A, color = 'A')) +
+  geom_line(aes(x=index(alpha), y=B, color = 'B')) +
+  geom_line(aes(x=index(alpha), y=C, color = 'C')) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(alpha), max(alpha))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(alpha)), max(index(alpha))))+
+  scale_y_continuous(expand=c(0,0))+
+  scale_colour_brewer(palette = "Dark2") +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
 
 # Diskussion
 
