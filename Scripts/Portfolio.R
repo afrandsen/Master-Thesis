@@ -4,7 +4,7 @@ Phi0_temp <- coef[ , ncol(coef)]
 Phi1_temp <- coef[ , 1:(ncol(coef)-1)]
 
 gamma <- 5
-K <- 300
+K <- 100
 n <- 4
 
 z <- data_sub[ , 1:(ncol(data_sub))]
@@ -138,3 +138,31 @@ for (t in (2:ncol(z2))){
 }
 
 GMV <- -solve(SigmaXX)%*%SigmaX1
+
+alphafixedT <- rbind(alphafixedT, 1-colSums(alphafixedT))
+
+res_alphafixedT <- matrix(0, nrow = n, ncol = ncol(z2))
+
+for (t in (2:ncol(z2))) {
+  res_alphafixedT[, t] <- c(max(0, alphafixedT[1, t])/sum(max(0, alphafixedT[1,t]),
+                                        max(0, alphafixedT[2,t]),
+                                        max(0, alphafixedT[3,t]),
+                                        max(0, alphafixedT[4,t])),
+                            
+                            max(0, alphafixedT[2, t])/sum(max(0, alphafixedT[1,t]),
+                                                 max(0, alphafixedT[2,t]),
+                                                 max(0, alphafixedT[3,t]),
+                                                 max(0, alphafixedT[4,t])),
+                            
+                            max(0, alphafixedT[3, t])/sum(max(0, alphafixedT[1,t]),
+                                                 max(0, alphafixedT[2,t]),
+                                                 max(0, alphafixedT[3,t]),
+                                                 max(0, alphafixedT[4,t])),
+                            
+                            max(0, alphafixedT[4, t])/sum(max(0, alphafixedT[1,t]),
+                                                          max(0, alphafixedT[2,t]),
+                                                          max(0, alphafixedT[3,t]),
+                                                          max(0, alphafixedT[4,t]))
+                          )
+  print(res_alphafixedT[, t])
+}
