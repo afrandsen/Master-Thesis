@@ -2,9 +2,99 @@
 
 \part{Appendiks}
 
-# Lognormal
+# Underliggende teoretiske resultater
 
-# Nytte
+## Udledning af den optimale myopiske portefølje
+I denne Sektion udledes den optimale portefølje på tidspunkt $t$ givet ved: Ligning \@ref(eq:Løsning) og Ligning \@ref(eq:Multalpha) for hhv. tilfældet med et risikobærende aktiv, $n=1$, samt tilfældet med flere risikobærende aktiver, $n>1$. Ved indsættelse af den betingede middelværdi, Ligning \@ref(eq:Forvport), samt den betingede varians, Ligning \@ref(eq:Varport). Kan Maksimeringsproblemet \@ref(eq:Statmaks) omskrives til
+$$\max_{\alpha_t} \mathcal{L}=\alpha_t\left(R_{t+1} - R_{0,t+1}\right)-\frac{k}{2}\alpha_t^2\sigma_t^2.$$
+
+I ovenstående er det ekstra led $R_{0,t+1}$ undladt idet, at det ikke ændrer maksimeringsproblemet.
+
+Ved differentiation af ovenstående funktion, $\mathcal{L}(\cdot)$, mht. $\alpha_t$ opnåes førsteordensbetingelsen
+\begin{align*}
+\frac{\partial \mathcal{L}}{\partial \alpha_t} &= \mathbb{E}_t(R_{t+1}) - R_{0,t+1} - \frac{k}{2}2\alpha\sigma_t^2=0\\
+&\Updownarrow\\
+\alpha&=\frac{\mathbb{E}_t\left(R_{t+1}\right)-R_{0,t+1}}{k\sigma_t^2}.
+\end{align*}
+
+Dermed er den optimale portefølje udledt, for tilfældet med ét risikobærende aktiv. For udledningen af den optimale portefølje på tidspunkt $t$ i tilfældet med flere risikobærende aktiver, differentieres funktionen, fra Maksimeringsproblemet \@ref(eq:MultStatmaks) mht. $\bm{\alpha}_t$, dermed fås
+\begin{align*}
+\frac{\partial \mathcal{L}}{\partial \bm{\alpha}_t} &= (\mathbb{E}_t(\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}) - \frac{k}{2}2\bm{\Sigma_t}\bm{\alpha}_t = 0\\
+&\Updownarrow\\
+\bm{\alpha}_t&=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t(\bm{R}_{t+1})-R_{0,t+1}\bm{\ell}).
+\end{align*}
+
+Her er de gængse regler for matrix differentiation og manipulation benyttet. 
+
+## Udledning af *ARA* samt *RRA*
+I denne Sektion udledes *Absolute Risk Aversion* samt *Relative Risk Aversion* målene for de tre præsenterede nyttefunktioner: kvadratisk nytte, eksponentiel nytte (*CARA*) og potens nytte (*CRRA*). Fælles for alle nyttefunktionerne er, at de er fuldstændigt defineret over formue.
+
+### Kvadratisk nytte
+For parametrene $a,b\in\mathbb{R}$ er kvadratisk nytte defineret som
+\begin{equation*}
+U(W_{t+1})=aW_{t+1}-bW_{t+1}^2.
+\end{equation*}
+
+*Absolute Risk Aversion* er defineret ved
+$$\text{ARA}(W)=-\frac{U''(W)}{U'(W)}.$$
+
+Altså vil kvadratisk nytte have følgende *ARA*
+$$\text{ARA}_k(W_{t+1})=\frac{2b}{a-2bW_{t+1}},$$
+
+hvor $k$ er notationen for kvadratisk. Fra ovenstående kan det ses, at *ARA* for kvadratisk nytte er stigende i $W_{t+1}$. Hvilket ikke er retsmæssigt, ift. den generelle holdning blandt emprisk litteratur. 
+
+*Relative Risk Aversion* er defineret ved
+$$\text{RRA}(W)=-\frac{WU''(W)}{U'(W)}.$$
+
+Altså vil kvadratisk nytte have følgende *RRA*
+$$\text{RRA}_k(W_{t+1})= \frac{2bW_{t+1}}{a-2bW_{t+1}}.$$
+
+Endnu engang bemærkes det, at også *RRA* for kvadratisk nytte er stigende i $W_{t+1}$. 
+
+### Eksponentiel nytte
+Eksponentiel nytte betegnes undertiden *Constant Absolute Risk Aversion*. Eksponentiel nytte antager at variablene i modellen er normalfordelt. Lad $\theta\in\mathbb{R}$ være parametren i modellen, da vil eksponentiel nytte være defineret ved
+\begin{equation*}
+U(W_{t+1})=-\exp\left(-\theta W_{t+1}\right).
+\end{equation*}
+
+Eksponential nytte har følgende *ARA*
+$$\text{ARA}_e(W_{t+1})=\frac{\theta^2\exp\left(-\theta W_{t+1}\right)}{\theta\exp\left(-\theta W_{t+1}\right)}=\theta,$$
+
+hvor $e$ er notationen for eksponentiel. Fra ovenstående kan det ses, at *ARA* for eksponentiel nytte er konstant, som *CARA*-betegnelsen dækker over. Eksponentiel nytte har følgende *RRA*
+$$\text{RRA}_e(W_{t+1})= \theta W_{t+1}.$$
+
+Fra ovenstående ses det, at *RRA* for eksponentiel nytte er proportional til $W_{t+1}$.
+
+### Potens nytte
+Potens nytte kræver, at afkast af aktiverne og formue er lognormal fordelt. Potens nytte er bedre kendt under betegnelsen *Constant Relative Risk Aversion*. Lad parameteren $\gamma\in\mathbb{R}$ være givet, da er nyttefunktionen defineret for $W_{t+1}\geq 0$, som
+$$U(W_{t+1})=\begin{cases} \frac{W_{t+1}^{1-\gamma}-1}{1-\gamma},\quad \gamma\neq 1\\
+\log(W_{t+1}),\quad \gamma = 1. \end{cases}$$
+
+Potens nytte har følgende *ARA*
+$$\text{ARA}_p(W_{t+1})= \frac{\gamma W_{t+1}^{-\gamma-1}}{W_{t+1}^{-\gamma}}=\frac{\gamma}{W_{t+1}},$$
+
+hvor $e$ er betegnelsen for eksponentiel. Det ses at *ARA* er faldende i $W_{t+1}$. Potens nytte har følgende *RRA*
+$$\text{RRA}_p(W_{t+1})= \gamma,$$
+
+som altså er konstant, dette ligger også til grund for *CRRA*-betegnelsen.
+
+## Udledning af specialtilfældet for potens nytte
+I denne Sektion udledes specialtilfældet af Ligning \@ref(eq:Potnytte), dvs. nyttefunktions form for risikoaversion, $\gamma$, lig $1$. Ved brug af *l'Hôpital*'s regel. Reglen er defineret for to funktioner, $f(\cdot)$ og $g(\cdot)$, som er differentiable på et åbent interval $I$, undtagen for et fast punkt $c\in I$. Hvis
+$$\lim_{x\to c} f(x)=\lim_{x\to c}g(x)=0\,\text{eller} \pm \infty,$$
+
+samt
+$$g'(x)\neq 0,\quad \forall X\in I,\,x\neq c$$
+
+og grænsen
+$$\lim_{x\to c} \frac{f'(x)}{g'(x)},$$
+
+eksisterer, da gælder følgende lighed
+$$\lim_{x\to c}\frac{f(x)}{g(x)}=\lim_{x\to c}\frac{f'(x)}{g'(x)}.$$
+
+Altså kan der opnåes et udtryk for grænsen, som kan evalueres. For $\gamma\rightarrow 1$ fås da
+$$\lim_{\gamma\to 1}\frac{W_{t+1}^{1-\gamma}-1}{1-\gamma}=\lim_{\gamma\to 1}\frac{-W_{t+1}^{1-\gamma}\log\left(W_{t+1}\right)}{-1}=\log\left(W_{t+1}\right).$$
+
+Dermed er tilfældet udledt.
 
 # Porteføljeteori Markowitz
 

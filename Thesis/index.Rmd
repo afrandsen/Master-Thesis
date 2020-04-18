@@ -53,6 +53,10 @@ Dette dokument findes interaktivt og i statisk format.
 `r if (knitr::is_latex_output()) '
 For at se en interaktiv HTML version af dokumentet, med mulighed for at redigere fejl eller skrive kommentarer, gå da til denne hjemmeside [afrandsen.rbind.io/bare/thesis/](https://afrandsen.rbind.io/bare/thesis/). Siden vil blive opdateret kontinuerligt, hvis jeg selv finder fejl gennem GitHub.
 
+\\vfill
+
+Kreditering: [starlogs.net/#afrandsen/master-thesis](http://starlogs.net/#afrandsen/master-thesis).
+
 Lavet med Color Brewer, virker i sort hvid, farveblind vil også kunne se.
 '`
 

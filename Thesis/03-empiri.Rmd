@@ -27,7 +27,7 @@ if (knitr::is_html_output()) {
 ```
 
 # Data beskrivelse
-Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 2. kvartal til 2018 4. kvartal grundet dataophør. Startkvartalet er valgt på baggrund af, at den amerikanske centralbank, *Federal Reserve System*, kort tid forinden, havde givet den amerikanske korte rente, lov til at variere frit i markedet. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion \@ref(aktivklasser) beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik. Sektion \@ref(pvariable) indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion . Sektion \@ref(korr) giver en opsummering af kapitlets statistiske fund. Tidsserien for hver aktivklasse og prædiktionsvariabel visualiseres med tilhørende recessionsperioder som defineret af [@NBER2020].
+Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 2. kvartal til 2018 4. kvartal grundet dataophør. Startkvartalet er valgt på baggrund af, at den amerikanske centralbank, *Federal Reserve System*, kort tid forinden, havde givet den amerikanske korte rente, lov til at variere frit i markedet. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion \@ref(aktivklasser) beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik. Sektion \@ref(pvariable) indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion \@ref(korr). Sektion \@ref(ops) giver en opsummering af kapitlets statistiske fund. Tidsserien for hver aktivklasse og prædiktionsvariabel visualiseres med tilhørende recessionsperioder som defineret af [@NBER2020].
 
 ## Beskrivelse af aktivklasser{#aktivklasser}
 Mængden af aktivklasser, som pt. er tilgængelige på finansmarkedet har aldrig været større. Udover aktier og obligationer, findes et væld af eksponeringsområder og/eller finansielle produkter heriblandt ejendom, derivater, futures, forwards, kryptovaluta, valuta mm. For at holde denne analyse på et simpelt niveau medtages de mest anvendte aktivklasser for institutionelle og private investorer. Hvilket også er de mest anvendte i eksisterende litteratur, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. I det følgende vil egenskaberne for aktivklasserne: det risikofrie afkast, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer beskrives og derudover vil den tilhørende beskrivende statistik for hvert aktiv belyses.
@@ -142,7 +142,7 @@ colnames(DESCRIPTIVE) <- c('Middelværdi', 'Standard afvigelse', 'Sharpe Ratio',
 rownames(DESCRIPTIVE) <- c("$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$")
 
 DESCRIPTIVE %>% 
-  knitr::kable(caption = 'Beskrivende statistik for de fire aktivklasser: Det risikofrie aktiv, merafkastet på aktier, merfafkastet på statsobligationer og merafkastet på virksomhedsobligationer.',
+  knitr::kable(caption = 'Beskrivende statistik for de fire aktivklasser.',
                booktabs=TRUE,
                align = c(rep('r', 10)),
                row.names = TRUE,
@@ -151,7 +151,8 @@ DESCRIPTIVE %>%
                linesep = "") %>% 
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
-                             full_width = F)
+                             full_width = F) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merfafkastet på statsobligationer og merafkastet på virksomhedsobligationer. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for alle aktivklasser.}", threeparttable = T, escape = FALSE)
 ```
 \end{landscape}
 
@@ -396,7 +397,7 @@ colnames(DESCRIPTIVE_T) <- c('Middelværdi', 'Standard afvigelse', 'Skævhed', '
 rownames(DESCRIPTIVE_T) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
 
 DESCRIPTIVE_T %>% 
-  knitr::kable(caption = 'Beskrivende statistik for de prædiktionsvariablene: Dividend-Price Ratio, Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate',
+  knitr::kable(caption = 'Beskrivende statistik for prædiktionsvariablene.',
                booktabs=TRUE,
                align = c(rep('r', 9)),
                row.names = TRUE,
@@ -405,7 +406,8 @@ DESCRIPTIVE_T %>%
                linesep = "") %>% 
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
-                             full_width = F)
+                             full_width = F) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for prædiktionsvariablene: log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for log Dividend-Price ratio, log Earnings-Price Ratio samt log afkastet af den nominelle rente.}", threeparttable = T, escape = FALSE)
 ```
 \end{landscape}
 
@@ -434,7 +436,7 @@ DES_COR %>%
 ```
 \end{landscape}
 
-## Opsummering
+## Opsummering{#ops}
 
 # Prædiktabilitet
 

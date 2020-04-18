@@ -11,10 +11,15 @@ R_{p,t+1}=\alpha_t R_{t+1}+\left(1-\alpha_t\right)R_{0,t+1}.(\#eq:Portafk)
 \end{equation}
 
 Den betingede middelværdi af porteføljeafkastet bliver dermed
-$$\mathbb{E}_t(R_{p,t+1})=\alpha_t\mathbb{E}_t(R_{t+1})+(1-\alpha_t)R_{0,t+1},$$
+\begin{align}
+\mathbb{E}_t(R_{p,t+1})&=\alpha_t\mathbb{E}_t(R_{t+1})+(1-\alpha_t)R_{0,t+1} \notag\\ 
+&=R_{0,t+1}+ \alpha_t\left(R_{t+1} - R_{0,t+1}\right),(\#eq:Forvport)
+\end{align}
 
 og endeligt den betingede varians af porteføljeafkastet
-$$\mathbb{V}_t(R_{p,t+1})=\alpha_t^2\sigma_t^2.$$
+\begin{equation}
+\mathbb{V}_t(R_{p,t+1})=\alpha_t^2\sigma_t^2.(\#eq:Varport)
+\end{equation}
 
 Den simplificerende antagelse i [@Markowitz1952] er at investorer kun forholder sig til de første to momenter, hvis vi modellerer denne afvejning lineært, opnår vi følgende maksimeringsproblem
 \begin{equation}
@@ -34,13 +39,27 @@ $$\alpha_t=\frac{S_t}{k\sigma_t}.$$
 
 Forholdet mellem middelværdien og variansen er $\tfrac{1}{k}$, eftersom vi kan udlede, at merafkastet på porteføljen er $\tfrac{S_t^2}{k}$ og variansen er $\tfrac{S_t^2}{k^2}$. *Sharpe Ratio*'en på porteføljen er $S_t$, og alle tænkelige porteføljer (afhængig af $k$) vil have samme *Sharpe Ratio*, fordi de er eksponeret til det risikobærende aktiv, men stadig i større eller mindre grad.
 
-Altså er vægtningen i det risikobærende aktiv et forhold mellem: det forventede risikobærende merafkast over det risikofrie aktiv samt en skalering af det risikobærende aktivs varians. Vi kan uden problemer opskrive ovenstående løsning til tilfældet, hvor investoren står overfor $n>1$ risikobærende aktiver. $\bm{R}_{t+1}$ repræsenterer en $n\times 1$ vektor af afkast for risikobærende aktiver, fra $t$ til $t+1$. Den betingede middelværdi bliver $\mathbb{E}_t(\bm{R}_{t+1})$ og den betingede kovariansmatrix noteres som $\mathbb{V}_t(\bm{R}_{t+1})=\bm{\Sigma}_t$. Herudover er $\bm{\alpha}_t$ nu en $n\times 1$ vektor af vægte i de risikobærende aktiver. Vi kan nu opskrive maksimeringsproblemet
+Altså er vægtningen i det risikobærende aktiv et forhold mellem: det forventede risikobærende merafkast over det risikofrie aktiv samt en skalering af det risikobærende aktivs varians. Vi kan uden problemer opskrive ovenstående løsning til tilfældet, hvor investoren står overfor $n>1$ risikobærende aktiver. $\bm{R}_{t+1}$ repræsenterer en $n\times 1$ vektor af afkast for risikobærende aktiver, fra $t$ til $t+1$. Den betingede middelværdi bliver $\mathbb{E}_t(\bm{R}_{t+1})$ og den betingede kovariansmatrix noteres som $\mathbb{V}_t(\bm{R}_{t+1})=\bm{\Sigma}_t$. Herudover er $\bm{\alpha}_t$ nu en $n\times 1$ vektor af vægte i de risikobærende aktiver.
+
+Den betingede middelværdi af porteføljeafkastet bliver dermed nu
+\begin{equation}
+\mathbb{E}_t(R_{p,t+1})=R_{0,t+1}+\bm{\alpha}_t'(\mathbb{E}_t(\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}),
+\end{equation}
+
+den betingede varians af porteføljeafkastet bliver
+\begin{equation}
+\mathbb{V}_t(R_{p,t+1})=\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t.
+\end{equation}
+
+Vi kan nu opskrive maksimeringsproblemet
 \begin{equation}
 \max_{\alpha_t} \bm{\alpha}_t'(\mathbb{E}_t(\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}) - \frac{k}{2}\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t, (\#eq:MultStatmaks)
 \end{equation}
 
 Den optimale porteføljestrategi, givet som løsningen til Maksimeringsproblemet \@ref(eq:MultStatmaks) findes til at være
-$$\bm{\alpha}_t=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t(\bm{R}_{t+1})-R_{0,t+1}\bm{\ell}).$$
+\begin{equation}
+\bm{\alpha}_t=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t(\bm{R}_{t+1})-R_{0,t+1}\bm{\ell}).(\#eq:Multalpha)
+\end{equation}
 
 Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det værd at bemærke, at løsningen er karakteriseret af \textit{The Mutual Fund Seperation Theorem}, [@Tobin1958], som var en af mange videnskabelige bidrag James Tobin fik sin Nobelpris for i 1981, [@Nobel2020]. Essencen af Sætningen er, at alle investorer vil holde den eksakt samme portefølje af risikobærende aktiver samt en del i det risikofrie aktiv. Det eneste som adskiller investorer fra hinanden, er deres relative fordeling af total formue i den optimale risikobærende portefølje, som er fastsat ud fra deres egne risikopræferencer. Figur \@ref(fig:AfkVol) viser de optimale porteføljestrategier i et afkast-volatilitets spektrum.
 
@@ -155,7 +174,7 @@ De tilsvarende reciprokke af ovenstående mål kaldes hhv. *Coefficeint of Absol
 \label{fig:Nyt}
 \end{figure}
 
-Som redegjort ovenfor, er både *ARA* samt *RRA* essientielle mål til kvantificering af risikopræferencer og dermed til at opnå forståelse for nyttefunktionen hos den enkelte investor. Konstateringer udledt fra den langsigtede økonomiske adfærd fastslår, at *RRA* ikke kan afhænge alene af formue. Dette kommer sig af, at formue og per capita forbrug er steget henover de seneste to århundreder. Det absolutte forhold mellem finansielle risici er ligeledes forøget -- siden disse risici er multiplikative -- mens den relative risici har været konstant. Samtidigt er der ikke fundet evidens baseret på afkast og renter, der har påvist en langsigtet tendens, som respons til denne vækst. Altså vil investorer betale de samme relative omkostninger for at undgå en given finansiel risiko uanset om de er velhavende eller ej, [@CampVic2003]. Dette foranlediger en til at tænke tanken, at *RRA* er uafhængig af formue og bør være konstant.
+Som redegjort ovenfor, er både *ARA* samt *RRA* essientielle mål til kvantificering af risikopræferencer og dermed til at opnå forståelse for nyttefunktionen hos den enkelte investor. Konstateringer udledt fra den langsigtede økonomiske adfærd fastslår, at *RRA* ikke kan afhænge alene af formue. Dette kommer sig af, at formue og per capita forbrug er steget henover de seneste to århundreder. Det absolutte forhold mellem finansielle risici er ligeledes forøget -- siden disse risici er multiplikative -- mens den relative risici har været konstant. Samtidigt er der ikke fundet evidens baseret på afkast og renter, der har påvist en langsigtet tendens, som respons til denne vækst. Altså vil investorer betale de samme relative omkostninger for at undgå en given finansiel risiko uanset om de er velhavende eller ej, [@CampVic2003]. Dette foranlediger en til at tænke tanken, at *RRA* er uafhængig af formue og bør være konstant, [@Chiappori2008].
 
 ## Typer af nyttefunktioner
 
@@ -177,7 +196,7 @@ hvor $\mathbb{E}((W_{t+1}-\mathbb{E}(W_{t+1}))^n)$ er det centrale moment af ord
 
 ### Kvadratisk nytte
 
-Kvadratisk nytte definerer nyttefunktionen som kvadratisk over formue. Den er fuldstændig defineret af dets første og anden afledte mht. formue. Alle dets højere momenter bliver $0$, og skaber dermed ikke problemer i et middelværdi-varians setup, som argumenteret for ovenfor. For parametre $a,b\in\mathbb{R}$ er kvadratisk nytte defineret som
+Kvadratisk nytte definerer nyttefunktionen som kvadratisk over formue. Den er fuldstændig defineret af dets første og anden afledte mht. formue. Alle dets højere momenter bliver $0$, og skaber dermed ikke problemer i et middelværdi-varians setup, som argumenteret for ovenfor. For parametrene $a,b\in\mathbb{R}$ er kvadratisk nytte defineret som
 \begin{equation}
 U(W_{t+1})=aW_{t+1}-bW_{t+1}^2. (\#eq:Kvadnytte)
 \end{equation}
@@ -190,7 +209,6 @@ $$\mathbb{E}(U(W_{t+1}))=\mathbb{E}(W_{t+1})-b(\mathbb{V}(W_{t+1}+\mathbb{E}(W_{
 og er dermed en funktion afhængende af både forventet formue og variansen af formue [@Munk2017]. Herudover vil *ARA* samt *RRA* begge være stigende i formue under kvadratisk nytte. Som argumenteret ovenfor vil stigende *ARA* være uhensigtmæssigt. 
 
 ### Eksponentiel nytte
-
 Eksponentiel nytte antager at variablene i modellen er normalfordelt. Lad $\theta\in\mathbb{R}$ være parametren i modellen, da vil eksponentiel nytte være defineret ved
 \begin{equation}
 U(W_{t+1})=-\exp\left(-\theta W_{t+1}\right). (\#eq:Ekspnytte)
@@ -203,10 +221,11 @@ altså er terminalnytten normalfordelt for enhver mulig portefølje, $p$, givet 
 $$\mathbb{E}(U(W_{t+1}))=-\exp\left(-\theta\mu_p+\frac{\theta^2}{2}\sigma_p^2\right).$$
 
 ### Potens nytte
-
 Potens nytte kræver, at afkast af aktiverne og formue er lognormal fordelt. *ARA* er faldende i formue og *RRA* er antaget til at være en konstant $\gamma\in\mathbb{R}$, [@CampVic2003]. Potens nytte er mere kendt under navnet *Constant Relative Risk Aversion*. Nyttefunktionen er defineret for $W_{t+1}\geq 0$, som
-$$U(W_{t+1})=\begin{cases} \frac{W_{t+1}^{1-\gamma}-1}{1-\gamma},\quad \gamma\neq 1\\
-\log(W_{t+1}),\quad \gamma = 1. \end{cases}$$
+\begin{align}
+U(W_{t+1})=\begin{cases} \frac{W_{t+1}^{1-\gamma}-1}{1-\gamma},\quad &\gamma\neq 1\\
+\log(W_{t+1}),\quad &\gamma = 1. \end{cases} (\#eq:Potnytte)
+\end{align}
 
 For $\gamma\neq 1$ fås den forventede nytte til
 $$\log(\mathbb{E}(W_{t+1}))=\mathbb{E}(\log(W_{t+1}))+\frac{1}{2}\mathbb{V}(\log(W_{t+1})),$$
@@ -215,7 +234,6 @@ hvor vi har anvendt det bærende resultat vedr. middelværdien af en lognormalfo
 $$\mathbb{E}(U(W_{t+1}))=\mathbb{E}(\log(W_{t+1})).$$
 
 ### Sammenligning af nyttefunktioner
-
 Som pointeret flere gange i ovenstående, burde *ARA* være faldende, eller under alle omstændigheder, ikke stige med formue. Dermed kan vi se bort fra kvadratisk nytte. Samtidigt vil det gøre potens nytte mere favorabel end eksponentiel nytte. Derudover er det konstante aspekt af *RRA* attraktivt under potens nytte, i og med, at det er nødvendigt ift. inferensen vedr. stabiliteten af finansielle variable under sekulær økonomisk vækst, [@CampVic2003].
 
 Derudover vil valget mellem potens nytte og eksponentiel nytte også skabe de ovennævnte forskellige fordelingsmæssige antagelser. Eksponentiel nytte resulterer i simple afkast, hvis afkastene af aktiverne er normalfordelte, hvorimod, at potens nytte resulterer i simple afkast, hvis afkastene af aktiverne er lognormalfordelte.
