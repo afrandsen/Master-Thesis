@@ -64,14 +64,31 @@ ggplot(INF) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$rx_{t}^{inf}$"))
+  ylab(TeX("$x_{t}^{inf}$")) +
+  xlab("År")
 ```
 
 
-### Merafkastet på aktier -- $rx_{t+1}^{\textnormal{a}}${#dataak}
-For aktivklassen, som skal repræsentere børshandlede aktier, benyttes et markedsværdi-vægtet afkast over et repræsentativt indeks for samtlige handlede aktier på *New York Stock Exchange*, *National Association of Securities Dealers Automated Quotations* og *American Stock Exchange*. Det vægtede afkast er inklusiv udbytte, aktiesplits og ny emissioner for de foregående 12 måneder ledende op til kvartalet. Ved at benytte et sådant forholdsvist bredt indeks, vil delanalysen for aktier være repræsentativt for det globale aktiemarked. Derudover er det ikke kun børsnoterede amerikanskbaserede selskaber, som handles via *NYSE*, *NASDAQ* og *AMEX*, men i stadig større grad også virksomheder uden for U.S.A. Data over afkast er fra [@CRSPakt] og hentet gennem [@WRDSakt]. Log  merafkastet af aktier beregnes som det kvartalsvise log brutto aktieafkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*. Det ses at aktier har det klart højeste kvartalvise justerede merafkast på `r round(DESCRIPTIVE$adj_mean[2]*100, 1)`$\%$ ift. de andre aktivklasser. Dette høje merafkast følges af en ligeledes høj relativ volatilitet på `r round(DESCRIPTIVE$sd[2]*100, 1)`$\%$. Historisk set har det største negative markedsudsving givet et merafkast/tab på $-30.4\%$, mens det største positive markedsudsving har været på $20\%$. Et histogram sammenholdt med en skævhed på `r round(DESCRIPTIVE$skew[2], 3)` afslører moderat til høj venstreskævhed. Altså har der oftere været negative merafkast ift. positive. Kurtosis på `r round(DESCRIPTIVE$kurt[2], 3)` medører en moderat leptokurtisk fordeling med en anelse tykkere haler, og at ekstreme observationer sker oftere end normalt. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:AKT-tids) viser et plot over tidsserien.
+```{r NET-TB-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(NET_TB), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
 
-```{r AKT-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log  merafkastet af aktier.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Merafkastet på aktier -- $rx_{t+1}^{\textnormal{a}}${#dataak}
+For aktivklassen, som skal repræsentere børshandlede aktier, benyttes et markedsværdi-vægtet afkast over et repræsentativt indeks for samtlige handlede aktier på *New York Stock Exchange*, *National Association of Securities Dealers Automated Quotations* og *American Stock Exchange*. Det vægtede afkast er inklusiv udbytte, aktiesplits og nyemissioner for de foregående 12 måneder ledende op til kvartalet. Ved at benytte et sådant forholdsvist bredt indeks, vil delanalysen for aktier være repræsentativt for det globale aktiemarked. Derudover er det ikke kun børsnoterede amerikanskbaserede selskaber, som handles via *NYSE*, *NASDAQ* og *AMEX*, men i stadig større grad også virksomheder uden for U.S.A. Data over afkast er fra [@CRSPakt] og hentet gennem [@WRDSakt]. Log  merafkastet af aktier beregnes som det kvartalsvise log brutto aktieafkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*. Det ses at aktier har det klart højeste kvartalvise justerede merafkast på `r round(DESCRIPTIVE$adj_mean[2]*100, 1)`$\%$ ift. de andre aktivklasser. Dette høje merafkast følges af en ligeledes høj relativ volatilitet på `r round(DESCRIPTIVE$sd[2]*100, 1)`$\%$. Historisk set har det største negative markedsudsving givet et merafkast/tab på $-30.4\%$, mens det største positive markedsudsving har været på $20\%$. Et histogram sammenholdt med en skævhed på `r round(DESCRIPTIVE$skew[2], 3)` afslører moderat til høj venstreskævhed. Altså har der oftere været negative merafkast ift. positive. Kurtosis på `r round(DESCRIPTIVE$kurt[2], 3)` medører en moderat leptokurtisk fordeling med en anelse tykkere haler, og at ekstreme observationer sker oftere end normalt. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:AKT-tids) viser et plot over tidsserien.
+
+```{r AKT-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log merafkastet af aktier.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 par(mfrow=c(1,1))
 ggplot(data) +
   expand_limits(x = min(index(data)), y = min(data$AKT))+
@@ -85,6 +102,22 @@ ggplot(data) +
     panel.grid.minor = element_blank()
   ) + 
   ylab(TeX("$rx_{t}^{a}$"))
+```
+
+```{r AKT-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af aktier.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(AKT), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
 ```
 
 ### Merafkastet på statsobligationer -- $rx_{t+1}^{\textnormal{s}}$
@@ -104,6 +137,22 @@ ggplot(data) +
     panel.grid.minor = element_blank()
   ) + 
   ylab(TeX("$rx_{t}^{s}$"))
+```
+
+```{r S-OBL-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af statsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(S_OBL), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
 ```
 
 ### Merafkastet på virksomhedsobligationer -- $rx_{t+1}^{\textnormal{v}}$
@@ -129,6 +178,22 @@ ggplot(data) +
   ylab(TeX("$rx_{t}^{v}$"))
 ```
 
+```{r V-OBL-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(V_OBL), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
 Tabel \@ref(tab:DES-AKTIVKLASSE) opsummerer ovenstående beskrivende statistik for de fire aktivkasser.
 
 \begin{landscape}
@@ -137,7 +202,7 @@ options(knitr.kable.NA = '')
 DESCRIPTIVE <- format(round(DESCRIPTIVE, digits = 3), nsmall = 3)
 DESCRIPTIVE$sr[1] <- NA
 
-colnames(DESCRIPTIVE) <- c('Middelværdi', 'Standard afvigelse', 'Sharpe Ratio', 'Skævhed', 'Kurtosis', 'Minimum', '$25 \\%$', 'Median', '$75 \\%$', 'Maksimum')
+colnames(DESCRIPTIVE) <- c('Middelværdi', 'Standard afvigelse', 'Sharpe Ratio', 'Skævhed', 'Kurtosis', 'Minimum', '$25 \\%$', 'Median', '$75 \\%$', 'Maksimum', 'AK(1)')
 
 rownames(DESCRIPTIVE) <- c("$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$")
 
@@ -152,7 +217,7 @@ DESCRIPTIVE %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merfafkastet på statsobligationer og merafkastet på virksomhedsobligationer. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for alle aktivklasser.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for alle aktivklasser.}", threeparttable = T, escape = FALSE)
 ```
 \end{landscape}
 
@@ -392,7 +457,7 @@ ggplot(data) +
 ```{r DES-TILSTANDSVARIABLE, echo=FALSE}
 DESCRIPTIVE_T <- format(round(DESCRIPTIVE_T, digits = 3), nsmall = 3)
 
-colnames(DESCRIPTIVE_T) <- c('Middelværdi', 'Standard afvigelse', 'Skævhed', 'Kurtosis', 'Minimum', '$25 \\%$', 'Median', '$75 \\%$', 'Maksimum')
+colnames(DESCRIPTIVE_T) <- c('Middelværdi', 'Standard afvigelse', 'Skævhed', 'Kurtosis', 'Minimum', '$25 \\%$', 'Median', '$75 \\%$', 'Maksimum', 'AK(1)')
 
 rownames(DESCRIPTIVE_T) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
 
@@ -432,13 +497,18 @@ DES_COR %>%
                linesep = "") %>% 
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
-                             full_width = F)
+                             full_width = F) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den øvre triangulære korrelationsmatrix mellem alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE)
 ```
 \end{landscape}
 
 ## Opsummering{#ops}
 
 # Prædiktabilitet
+
+## Stationaritet
+
+## Univariat
 
 ```{r UNI-ak, echo=FALSE}
 options(knitr.kable.NA = '')
@@ -448,7 +518,7 @@ FIT_TABLE <- format(round(FIT_TABLE, digits = 3), nsmall = 3)
 FIT_TABLE <- FIT_TABLE %>%
   mutate(coef = cell_spec(coef,"latex", bold = ifelse(p <= 0.05, T, F)))
   
-colnames(FIT_TABLE) <- c('Koefficient', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
+colnames(FIT_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
 
 rownames(FIT_TABLE) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
 
@@ -462,7 +532,8 @@ FIT_TABLE %>%
                linesep = "") %>% 
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
-                             full_width = F)
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", " " = 1, "Konfidensinterval" = 2, " " = 4))
 ```
 
 ```{r UNI-s, echo=FALSE}
@@ -473,7 +544,7 @@ FIT_S_TABLE <- format(round(FIT_S_TABLE, digits = 3), nsmall = 3)
 FIT_S_TABLE <- FIT_S_TABLE %>%
   mutate(coef = cell_spec(coef, "latex", bold = ifelse(p <= 0.05, T, F)))
 
-colnames(FIT_S_TABLE) <- c('Koefficient', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
+colnames(FIT_S_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
 
 rownames(FIT_S_TABLE) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
 
@@ -487,7 +558,8 @@ FIT_S_TABLE %>%
                linesep = "") %>% 
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
-                             full_width = F)
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", " " = 1, "Konfidensinterval" = 2, " " = 4))
 ```
 
 ```{r UNI-v, echo=FALSE}
@@ -497,7 +569,7 @@ FIT_V_TABLE <- format(round(FIT_V_TABLE, digits = 3), nsmall = 3)
 FIT_V_TABLE <- FIT_V_TABLE %>%
   mutate(coef = cell_spec(coef, "latex", bold = ifelse(p <= 0.05, T, F)))
 
-colnames(FIT_V_TABLE) <- c('Koefficient', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
+colnames(FIT_V_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
 
 rownames(FIT_V_TABLE) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
 
@@ -511,7 +583,8 @@ FIT_V_TABLE %>%
                linesep = "") %>% 
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
-                             full_width = F)
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", " " = 1, "Konfidensinterval" = 2, " " = 4))
 ```
 
 # Underliggende model
@@ -525,14 +598,14 @@ Middelværdi-varians optimering har vist sig meget sensitiv overfor den kvantita
 
 Simuleringsforsøg har vist at porteføljer udvalgt på baggrund af Markowitz teorien med estimerede input har værre performance og er mindre efficiente end en $\tfrac{1}{n}$ (ligevægtet) portefølje, [@Frankfurter1971]. Ligeledes viser [@Chopra1993], at det er afgørende i en porteføljeanalyse at estimere forventede afkast præcist, men forventede afkast er alt andet lige svært prædiktable, [@Merton1980]. Videnskabelige artikler har foreslået ændringer til de statistiske metoder som ligger bag estimaterne, heriblandt foreslår [@Jorion1986] at benytte en Bayes-estimator i stedet for det aritmetiske gennemsnit, se evt. også [@MacKinlay2000], [@Garlappi2007], [@Kan2007], [@Tu2011].
 
-I det følgende, vil et illustrativt simuleringseksempel blive foretaget, hvor der tages udgangspunkt i tre risikobærende aktiver, hvis kvartalvise afkast alle er normalfordelt med de første to momenter som set i Tabel \@ref(tab:true). Afkastene er identisk fordelte i alle kvartaler. Det årlige forventede afkast er hhv. $9\%$, $15.76\%$ og $5.12\%$. Standardafvigelsen er hhv. $20.694\%$, $25.794\%$ og $17.320\%$. Det antages, at der er ens positiv korrelation mellem hvert aktiv, på $0.5$. Derudover står investoren overfor et risikofrit aktiv med et kvartalvist afkast på $0.125\%$, og dermed et årligt risikofrit afkast på $0.5\%$. Disse er de sande parameterværdier, som givetvis er skjult information for investoren til en hvis grad. Investoren skal dermed estimere værdierne fra en tidsserie af observationer trukket fra den korrekte fordeling. Tre tidsserier af afkastsobservationer er blevet simuleret fra den relevante multivariate fordeling. Hver observation er hhv. beregnet som
+I det følgende, vil et illustrativt *Monte Carlo* simuleringseksempel blive foretaget, hvor der tages udgangspunkt i tre risikobærende aktiver, hvis kvartalvise afkast alle er normalfordelt med de første to momenter som set i Tabel \@ref(tab:true). Afkastene er identisk fordelte i alle kvartaler. Det årlige forventede afkast er hhv. $9\%$, $15.76\%$ og $5.12\%$. Standardafvigelsen er hhv. $20.694\%$, $25.794\%$ og $17.320\%$. Det antages, at der er ens positiv korrelation mellem hvert aktiv, på $0.5$. Derudover står investoren overfor et risikofrit aktiv med et kvartalvist afkast på $0.125\%$, og dermed et årligt risikofrit afkast på $0.5\%$. Disse er de sande parameterværdier, som givetvis er skjult information for investoren til en hvis grad. Investoren skal dermed estimere værdierne fra en tidsserie af observationer trukket fra den korrekte fordeling. Tre tidsserier af afkastsobservationer er blevet simuleret fra den relevante multivariate fordeling. Hver observation er hhv. beregnet som
 \begin{align*}
-r_1 &= \mu_1 + \sigma_1\varepsilon_1\\
-r_2 &= \mu_2 + \sigma_2\left(\rho_{1,2}\varepsilon_1 + \sqrt{1-\rho_{1,2}^2}\varepsilon_2\right)\\
-r_3 &= \mu_3 + \sigma_3 \left( \rho_{1,3} \varepsilon_1+ \frac{ \rho_{2,3}-\rho_{1,2}\rho_{1,3} }{\sqrt{1-\rho_{1,2}^2}}\varepsilon_2+\sqrt{1-\rho_{1,3}^2 -\frac{\left(\rho_{2,3}-\rho_{1,2}\rho_{1,3}\right)^2}{1-\rho_{1,2}^2}}\varepsilon_3\right),
+r_1 &= \mu_1 + \sigma_1\nu_1\\
+r_2 &= \mu_2 + \sigma_2\left(\rho_{1,2}\nu_1 + \sqrt{1-\rho_{1,2}^2}\nu_2\right)\\
+r_3 &= \mu_3 + \sigma_3 \left( \rho_{1,3} \nu_1+ \frac{ \rho_{2,3}-\rho_{1,2}\rho_{1,3} }{\sqrt{1-\rho_{1,2}^2}}\nu_2+\sqrt{1-\rho_{1,3}^2 -\frac{\left(\rho_{2,3}-\rho_{1,2}\rho_{1,3}\right)^2}{1-\rho_{1,2}^2}}\nu_3\right),
 \end{align*}
 
-hvor $\mu_i$ er middelværdien, $\sigma_i$ er standardafvigelsen og $\varepsilon_i\sim N(0,1)$ er stød til tidsserien, for $i=1,2,3$.
+hvor $\mu_i$ er middelværdien, $\sigma_i$ er standardafvigelsen og $\nu_i\sim N(0,1)$ er stød til tidsserien, for $i=1,2,3$.
 
 ```{r sim-tids, echo=FALSE, fig.align='center', fig.cap='Simulerede afkast fra første simulering.', fig.width=18, fig.height=15, fig.pos='htbp!'}
 data <- c(data_1[,1], data_1[,2], data_1[,3])
@@ -590,7 +663,7 @@ data %>%
 
 ```{r sim1, echo=FALSE}
 
-data_1 <- round(data.frame(Expect = data_1_mean*100, Std = data_1_sd*100, Corr = data_1_cor), digits = 3)
+data_1 <- round(data.frame(Expect = data_1_mean*100, Std = data_1_sd*100, Rele = (qnorm(0.025, lower.tail = F)*data_1_sd)/(sqrt(200)*data_1_mean), Corr = data_1_cor), digits = 3)
 
 rownames(data_1) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3')
 
@@ -604,12 +677,12 @@ data_1 %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
-  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Korrelationer" = 3))
+  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3))
 
 ```
 
 ```{r sim2, echo=FALSE}
-data_2 <- round(data.frame(Expect = data_2_mean*100, Std = data_2_sd*100, Corr = data_2_cor), digits = 3)
+data_2 <- round(data.frame(Expect = data_2_mean*100, Std = data_2_sd*100, Rele = (qnorm(0.025, lower.tail = F)*data_2_sd)/(sqrt(200)*data_2_mean), Corr = data_2_cor), digits = 3)
 
 rownames(data_2) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3')
 
@@ -623,11 +696,11 @@ data_2 %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
-  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Korrelationer" = 3))
+  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3))
 ```
 
 ```{r sim3, echo=FALSE}
-data_3 <- round(data.frame(Expect = data_3_mean*100, Std = data_3_sd*100, Corr = data_3_cor), digits = 3)
+data_3 <- round(data.frame(Expect = data_3_mean*100, Std = data_3_sd*100, Rele = (qnorm(0.025, lower.tail = F)*data_3_sd)/(sqrt(200)*data_3_mean), Corr = data_3_cor), digits = 3)
 
 rownames(data_3) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3')
 
@@ -641,11 +714,16 @@ data_3 %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
-  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Korrelationer" = 3))
+  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3))
 
 ```
 
-Disse tre sæt af estimerede parametre, baseret på de tre tidsserier, er blevet udvalgt til det følgende illustrative formål. Se Tabel \@ref(tab:sim1), Tabel \@ref(tab:sim2) og Tabel \@ref(tab:sim3) for en sammenligning ift. de sande parametre. Ud fra de sande parametre samt de estimerede parametre fra de tre tidsserier er global minimum varians porteføljen, tangensporteføljen, den optimale portefølje for en *CRRA* investor med risikoaversions parameter lig hhv. $1$, $5$ og $10$, samt den optimale portefølje for en *CARA* investor med risikoaversions parameter lig hhv. $1$, $5$ og $10$.
+Disse tre sæt af estimerede parametre, baseret på de tre tidsserier, er blevet udvalgt til det følgende illustrative formål. Se Tabel \@ref(tab:sim1), Tabel \@ref(tab:sim2) og Tabel \@ref(tab:sim3) for en sammenligning ift. de sande parametre. De relative fejl for hver simulering er ligedes rapporteret, [@Asmussen2007]. Disse beregnes som
+$$\varepsilon_{i,j} = \frac{z_{0.975}\hat{\sigma}_{i,j}}{\sqrt{R}\hat{\mu}_{i,j}},$$
+
+hvor $i=1,2,3$ repræsenterer aktiverne og $j=1,2,3$ repræsenterer simuleringen. $z_{0.975}$ er fraktilfunktionen fra standard normal fordelingen, for et signifikansniveau på $\alpha=0.05$. $R$ er antallet af observationer fra hver simulering, i dette forsøg er $R=200$.
+
+Ud fra de sande parametre samt de estimerede parametre fra de tre tidsserier er global minimum varians porteføljen, tangensporteføljen, den optimale portefølje for en *CRRA* investor med risikoaversions parameter lig hhv. $1$, $5$ og $10$, samt den optimale portefølje for en *CARA* investor med risikoaversions parameter lig hhv. $1$, $5$ og $10$.
 
 Porteføljen for *CARA*-investoren er beregnet som
 $$w^*=\frac{\mu_{\text{tan}}-r_0}{(\theta W_0)\sigma_{\text{tan}}^2},$$

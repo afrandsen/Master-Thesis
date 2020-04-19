@@ -64,7 +64,8 @@ DESCRIPTIVE <- data.frame(adj_mean=ADJ_DATA_MEAN,
                           sr=ADJ_DATA_MEAN/DATA_STD,
                           skew=DATA_SKEWNESS,
                           kurt=DATA_KURTOSIS,
-                          quantile=t(DATA_QUANTILE))
+                          quantile=t(DATA_QUANTILE),
+                          ac=unlist(lapply(1:ncol(DATA), function(x) acf(DATA[,x], plot = FALSE, lag.max = 1)$acf))[c(rep(FALSE,1),TRUE)])
 DESCRIPTIVE$sr[1] <- NA
 
 ## TILSTANDSVARIABLE
@@ -83,7 +84,8 @@ DESCRIPTIVE_T <- data.frame(mean=DATA_T_MEAN,
                           sd=DATA_T_STD,
                           skew=DATA_T_SKEWNESS,
                           kurt=DATA_T_KURTOSIS,
-                          quantile=t(DATA_T_QUANTILE))
+                          quantile=t(DATA_T_QUANTILE),
+                          ac=unlist(lapply(1:ncol(DATA_T), function(x) acf(DATA_T[,x], plot = FALSE, lag.max = 1)$acf))[c(rep(FALSE,1),TRUE)])
 
 
 DESCRIPTIVE_T$mean[1:2] <- ADJ_DATA_T_MEAN[1:2]
@@ -92,32 +94,35 @@ DESCRIPTIVE_T$mean[7] <- ADJ_DATA_T_MEAN[3]
 data <- xts::xts(merge(NET_TB, AKT, S_OBL, V_OBL, DP, EP, BM, AKT_VAR, HML, SMB, TB, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR), index(NET_TB))
 
 # UNIVARIATE
-FIT_AKT <- lapply(5:ncol(data), function(x) lm(xts::lag.xts(data$AKT,-1, na.pad = FALSE) ~ head(data[,x], -1), data=data))
+FIT_AKT <- lapply(5:ncol(data), function(x) lm(as.numeric(xts::lag.xts(data$AKT,-1, na.pad = FALSE)) ~ as.numeric(head(data[,x], -1)), data=data))
 FIT_AKT_SUMMARY <- lapply(FIT_AKT, summary)
 
 FIT_TABLE <- data.frame(coef=sapply(FIT_AKT, coef)[2,],
-                        sd=sapply(FIT_AKT_SUMMARY, coef)[4,],
-                        t=sapply(FIT_AKT_SUMMARY, coef)[6,],
-                        p=sapply(FIT_AKT_SUMMARY, coef)[8,],
+                        cf=data.frame(unlist(lapply(1:length(FIT_AKT), function(x) coefci(FIT_AKT[[x]], vcov. = NeweyWest(FIT_AKT[[x]]), parm = 2)))[c(rep(TRUE,1),FALSE)], unlist(lapply(1:length(FIT_AKT), function(x) coefci(FIT_AKT[[x]], vcov. = NeweyWest(FIT_AKT[[x]]), parm = 2)))[c(rep(FALSE,1),TRUE)]),
+                        sd=unlist(lapply(1:length(FIT_AKT), function(x) sqrt(diag(NeweyWest(FIT_AKT[[x]])))[2])),
+                        t=unlist(lapply(1:length(FIT_AKT), function(x) coeftest(FIT_AKT[[x]], vcov. = NeweyWest(FIT_AKT[[x]]))[6])),
+                        p=unlist(lapply(1:length(FIT_AKT), function(x) coeftest(FIT_AKT[[x]], vcov. = NeweyWest(FIT_AKT[[x]]))[8])),
                         rsq=unlist(lapply(1:length(FIT_AKT), function(x) FIT_AKT_SUMMARY[[x]]$r.squared)))
 
-FIT_S_OBL <- lapply(5:ncol(data), function(x) lm(xts::lag.xts(data$S_OBL, -1, na.pad = FALSE) ~ head(data[,x], -1), data=data))
+FIT_S_OBL <- lapply(5:ncol(data), function(x) lm(as.numeric(xts::lag.xts(data$S_OBL, -1, na.pad = FALSE)) ~ as.numeric(head(data[,x], -1)), data=data))
 FIT_S_OBL_SUMMARY <- lapply(FIT_S_OBL, summary)
 
 FIT_S_TABLE <- data.frame(coef=sapply(FIT_S_OBL, coef)[2,],
-                        sd=sapply(FIT_S_OBL_SUMMARY, coef)[4,],
-                        t=sapply(FIT_S_OBL_SUMMARY, coef)[6,],
-                        p=sapply(FIT_S_OBL_SUMMARY, coef)[8,],
-                        rsq=unlist(lapply(1:length(FIT_S_OBL), function(x) FIT_S_OBL_SUMMARY[[x]]$r.squared)))
+                          cf=data.frame(unlist(lapply(1:length(FIT_S_OBL), function(x) coefci(FIT_S_OBL[[x]], vcov. = NeweyWest(FIT_S_OBL[[x]]), parm = 2)))[c(rep(TRUE,1),FALSE)], unlist(lapply(1:length(FIT_S_OBL), function(x) coefci(FIT_S_OBL[[x]], vcov. = NeweyWest(FIT_S_OBL[[x]]), parm = 2)))[c(rep(FALSE,1),TRUE)]),
+                          sd=unlist(lapply(1:length(FIT_S_OBL), function(x) sqrt(diag(NeweyWest(FIT_S_OBL[[x]])))[2])),
+                          t=unlist(lapply(1:length(FIT_S_OBL), function(x) coeftest(FIT_S_OBL[[x]], vcov. = NeweyWest(FIT_S_OBL[[x]]))[6])),
+                          p=unlist(lapply(1:length(FIT_S_OBL), function(x) coeftest(FIT_S_OBL[[x]], vcov. = NeweyWest(FIT_S_OBL[[x]]))[8])),
+                          rsq=unlist(lapply(1:length(FIT_S_OBL), function(x) FIT_S_OBL_SUMMARY[[x]]$r.squared)))
 
-FIT_V_OBL <- lapply(5:ncol(data), function(x) lm(xts::lag.xts(data$V_OBL, -1, na.pad = FALSE) ~ head(data[,x], -1), data=data))
-FIT_S_OBL_SUMMARY <- lapply(FIT_V_OBL, summary)
+FIT_V_OBL <- lapply(5:ncol(data), function(x) lm(as.numeric(xts::lag.xts(data$V_OBL, -1, na.pad = FALSE)) ~ as.numeric(head(data[,x], -1)), data=data))
+FIT_V_OBL_SUMMARY <- lapply(FIT_V_OBL, summary)
 
 FIT_V_TABLE <- data.frame(coef=sapply(FIT_V_OBL, coef)[2,],
-                        sd=sapply(FIT_S_OBL_SUMMARY, coef)[4,],
-                        t=sapply(FIT_S_OBL_SUMMARY, coef)[6,],
-                        p=sapply(FIT_S_OBL_SUMMARY, coef)[8,],
-                        rsq=unlist(lapply(1:length(FIT_V_OBL), function(x) FIT_S_OBL_SUMMARY[[x]]$r.squared)))
+                          cf=data.frame(unlist(lapply(1:length(FIT_V_OBL), function(x) coefci(FIT_V_OBL[[x]], vcov. = NeweyWest(FIT_V_OBL[[x]]), parm = 2)))[c(rep(TRUE,1),FALSE)], unlist(lapply(1:length(FIT_V_OBL), function(x) coefci(FIT_V_OBL[[x]], vcov. = NeweyWest(FIT_V_OBL[[x]]), parm = 2)))[c(rep(FALSE,1),TRUE)]),
+                          sd=unlist(lapply(1:length(FIT_V_OBL), function(x) sqrt(diag(NeweyWest(FIT_V_OBL[[x]])))[2])),
+                          t=unlist(lapply(1:length(FIT_V_OBL), function(x) coeftest(FIT_V_OBL[[x]], vcov. = NeweyWest(FIT_V_OBL[[x]]))[6])),
+                          p=unlist(lapply(1:length(FIT_V_OBL), function(x) coeftest(FIT_V_OBL[[x]], vcov. = NeweyWest(FIT_V_OBL[[x]]))[8])),
+                          rsq=unlist(lapply(1:length(FIT_V_OBL), function(x) FIT_V_OBL_SUMMARY[[x]]$r.squared)))
 
 recessions.df = read.table(textConnection(
   "Peak, Trough

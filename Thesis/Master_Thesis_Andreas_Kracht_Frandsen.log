@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.9)  19 APR 2020 00:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.9)  19 APR 2020 23:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1573,7 +1573,7 @@ LaTeX Font Info:    Font shape `U/msa/m/n' will be
 (Font)              scaled to size 5.21004pt on input line 151.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 5.21004pt on input line 151.
-<latex/ausegl_sort.pdf, id=286, 569.05598pt x 569.05598pt>
+<latex/ausegl_sort.pdf, id=294, 569.05598pt x 569.05598pt>
 File: latex/ausegl_sort.pdf Graphic file (type pdf)
 <use latex/ausegl_sort.pdf>
 Package pdftex.def Info: latex/ausegl_sort.pdf  used on input line 168.
@@ -1698,7 +1698,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 ]
 <Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/NET-TB-tids-1.pdf, id
-=848, 1300.86pt x 361.35pt>
+=866, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/NET-TB-tids-1.pd
 f Graphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/NET-TB-tids-1.pdf
@@ -1706,24 +1706,32 @@ f Graphic file (type pdf)
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
 ex/NET-TB-tids-1.pdf  used on input line 896.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/INF-tids-1.pdf, id=85
-0, 1300.86pt x 361.35pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/INF-tids-1.pdf, id=86
+8, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/INF-tids-1.pdf G
 raphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/INF-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
 ex/INF-tids-1.pdf  used on input line 907.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/NET-TB-AK-1.pdf, id=8
+69, 1300.86pt x 361.35pt>
+File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/NET-TB-AK-1.pdf 
+Graphic file (type pdf)
+<use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/NET-TB-AK-1.pdf>
+Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
+ex/NET-TB-AK-1.pdf  used on input line 916.
+(pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
 [22
 
 ]
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AKT-tids-1.pdf, id=87
-7, 1300.86pt x 361.35pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AKT-tids-1.pdf, id=89
+6, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AKT-tids-1.pdf G
 raphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AKT-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/AKT-tids-1.pdf  used on input line 921.
+ex/AKT-tids-1.pdf  used on input line 930.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
 [23 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/NET-TB-tids-1.p
 df> <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/INF-tids-1.pdf
@@ -1731,117 +1739,158 @@ df> <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/INF-tids-1.pdf
 pdfTeX warning: pdflatex.exe (file ./Master_Thesis_Andreas_Kracht_Frandsen_file
 s/figure-latex/INF-tids-1.pdf): PDF inclusion: multiple pdfs with page group in
 cluded in a single page
+> <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/NET-TB-AK-1.pdf
+
+pdfTeX warning: pdflatex.exe (file ./Master_Thesis_Andreas_Kracht_Frandsen_file
+s/figure-latex/NET-TB-AK-1.pdf): PDF inclusion: multiple pdfs with page group i
+ncluded in a single page
 >]
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AKT-AK-1.pdf, id=925,
+ 1300.86pt x 361.35pt>
+File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AKT-AK-1.pdf Gra
+phic file (type pdf)
+<use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AKT-AK-1.pdf>
+Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
+ex/AKT-AK-1.pdf  used on input line 939.
+(pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
 <Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/S-OBL-tids-1.pdf, id=
-911, 1300.86pt x 361.35pt>
+935, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/S-OBL-tids-1.pdf
  Graphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/S-OBL-tids-1.pdf>
 
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/S-OBL-tids-1.pdf  used on input line 935.
+ex/S-OBL-tids-1.pdf  used on input line 953.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/S-OBL-AK-1.pdf, id=93
+6, 1300.86pt x 361.35pt>
+File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/S-OBL-AK-1.pdf G
+raphic file (type pdf)
+<use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/S-OBL-AK-1.pdf>
+Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
+ex/S-OBL-AK-1.pdf  used on input line 962.
+(pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
+[24 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AKT-tids-1.pdf>
+ <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AKT-AK-1.pdf
+
+pdfTeX warning: pdflatex.exe (file ./Master_Thesis_Andreas_Kracht_Frandsen_file
+s/figure-latex/AKT-AK-1.pdf): PDF inclusion: multiple pdfs with page group incl
+uded in a single page
+> <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/S-OBL-tids-1.pdf
+
+pdfTeX warning: pdflatex.exe (file ./Master_Thesis_Andreas_Kracht_Frandsen_file
+s/figure-latex/S-OBL-tids-1.pdf): PDF inclusion: multiple pdfs with page group 
+included in a single page
+>]
 <Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/V-OBL-tids-1.pdf, id=
-922, 1300.86pt x 361.35pt>
+978, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/V-OBL-tids-1.pdf
  Graphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/V-OBL-tids-1.pdf>
 
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/V-OBL-tids-1.pdf  used on input line 955.
+ex/V-OBL-tids-1.pdf  used on input line 982.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
-[24 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AKT-tids-1.pdf>
- <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/S-OBL-tids-1.pdf
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/V-OBL-AK-1.pdf, id=97
+9, 1300.86pt x 361.35pt>
+File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/V-OBL-AK-1.pdf G
+raphic file (type pdf)
+<use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/V-OBL-AK-1.pdf>
+Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
+ex/V-OBL-AK-1.pdf  used on input line 991.
+(pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
+[25 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/S-OBL-AK-1.pdf>
+ <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/V-OBL-tids-1.pdf
 
 pdfTeX warning: pdflatex.exe (file ./Master_Thesis_Andreas_Kracht_Frandsen_file
-s/figure-latex/S-OBL-tids-1.pdf): PDF inclusion: multiple pdfs with page group 
+s/figure-latex/V-OBL-tids-1.pdf): PDF inclusion: multiple pdfs with page group 
 included in a single page
->] [25 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/V-OBL-tids-1
-.pdf>] [26
+>] [26 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/V-OBL-AK-1.p
+df>] [27
 
 ]
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/DP-tids-1.pdf, id=974
-, 1300.86pt x 361.35pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/DP-tids-1.pdf, id=103
+0, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/DP-tids-1.pdf Gr
 aphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/DP-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/DP-tids-1.pdf  used on input line 1000.
+ex/DP-tids-1.pdf  used on input line 1036.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/PE-tids-1.pdf, id=985
-, 1300.86pt x 361.35pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/PE-tids-1.pdf, id=104
+1, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/PE-tids-1.pdf Gr
 aphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/PE-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/PE-tids-1.pdf  used on input line 1014.
+ex/PE-tids-1.pdf  used on input line 1050.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
-[27
+[28
 
  <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/DP-tids-1.pdf>]
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/BM-tids-1.pdf, id=101
-6, 1300.86pt x 361.35pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/BM-tids-1.pdf, id=107
+1, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/BM-tids-1.pdf Gr
 aphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/BM-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/BM-tids-1.pdf  used on input line 1028.
+ex/BM-tids-1.pdf  used on input line 1064.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AV-tids-1.pdf, id=102
-2, 1300.86pt x 361.35pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AV-tids-1.pdf, id=107
+7, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AV-tids-1.pdf Gr
 aphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AV-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/AV-tids-1.pdf  used on input line 1042.
+ex/AV-tids-1.pdf  used on input line 1078.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
-[28 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/PE-tids-1.pdf> 
+[29 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/PE-tids-1.pdf> 
 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/BM-tids-1.pdf
 
 pdfTeX warning: pdflatex.exe (file ./Master_Thesis_Andreas_Kracht_Frandsen_file
 s/figure-latex/BM-tids-1.pdf): PDF inclusion: multiple pdfs with page group inc
 luded in a single page
 >]
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/HML-tids-1.pdf, id=10
-58, 1300.86pt x 361.35pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/HML-tids-1.pdf, id=11
+14, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/HML-tids-1.pdf G
 raphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/HML-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/HML-tids-1.pdf  used on input line 1056.
+ex/HML-tids-1.pdf  used on input line 1092.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/SMB-tids-1.pdf, id=10
-67, 1300.86pt x 361.35pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/SMB-tids-1.pdf, id=11
+23, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/SMB-tids-1.pdf G
 raphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/SMB-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/SMB-tids-1.pdf  used on input line 1070.
+ex/SMB-tids-1.pdf  used on input line 1106.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/B-tids-1.pdf, id=1073
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/B-tids-1.pdf, id=1129
 , 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/B-tids-1.pdf Gra
 phic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/B-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/B-tids-1.pdf  used on input line 1084.
+ex/B-tids-1.pdf  used on input line 1120.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
-[29 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AV-tids-1.pdf> 
+[30 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AV-tids-1.pdf> 
 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/HML-tids-1.pdf
 
 pdfTeX warning: pdflatex.exe (file ./Master_Thesis_Andreas_Kracht_Frandsen_file
 s/figure-latex/HML-tids-1.pdf): PDF inclusion: multiple pdfs with page group in
 cluded in a single page
 >]
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/TS-tids-1.pdf, id=110
-8, 1300.86pt x 361.35pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/TS-tids-1.pdf, id=116
+4, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/TS-tids-1.pdf Gr
 aphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/TS-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/TS-tids-1.pdf  used on input line 1101.
+ex/TS-tids-1.pdf  used on input line 1137.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
-[30 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/SMB-tids-1.pdf>
+[31 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/SMB-tids-1.pdf>
  <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/B-tids-1.pdf
 
 pdfTeX warning: pdflatex.exe (file ./Master_Thesis_Andreas_Kracht_Frandsen_file
@@ -1853,75 +1902,75 @@ pdfTeX warning: pdflatex.exe (file ./Master_Thesis_Andreas_Kracht_Frandsen_file
 s/figure-latex/TS-tids-1.pdf): PDF inclusion: multiple pdfs with page group inc
 luded in a single page
 >]
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/YS-tids-1.pdf, id=114
-5, 1300.86pt x 361.35pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/YS-tids-1.pdf, id=120
+0, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/YS-tids-1.pdf Gr
 aphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/YS-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/YS-tids-1.pdf  used on input line 1118.
+ex/YS-tids-1.pdf  used on input line 1154.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/CS-tids-1.pdf, id=115
-3, 1300.86pt x 361.35pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/CS-tids-1.pdf, id=120
+8, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/CS-tids-1.pdf Gr
 aphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/CS-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/CS-tids-1.pdf  used on input line 1135.
+ex/CS-tids-1.pdf  used on input line 1171.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
-[31 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/YS-tids-1.pdf> 
+[32 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/YS-tids-1.pdf> 
 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/CS-tids-1.pdf
 
 pdfTeX warning: pdflatex.exe (file ./Master_Thesis_Andreas_Kracht_Frandsen_file
 s/figure-latex/CS-tids-1.pdf): PDF inclusion: multiple pdfs with page group inc
 luded in a single page
 >]
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/DS-tids-1.pdf, id=118
-0, 1300.86pt x 361.35pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/DS-tids-1.pdf, id=123
+6, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/DS-tids-1.pdf Gr
 aphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/DS-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/DS-tids-1.pdf  used on input line 1152.
+ex/DS-tids-1.pdf  used on input line 1188.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/FR-tids-1.pdf, id=118
-4, 1300.86pt x 361.35pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/FR-tids-1.pdf, id=124
+0, 1300.86pt x 361.35pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/FR-tids-1.pdf Gr
 aphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/FR-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/FR-tids-1.pdf  used on input line 1166.
+ex/FR-tids-1.pdf  used on input line 1202.
 (pdftex.def)             Requested size: 441.01619pt x 122.50449pt.
-[32 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/DS-tids-1.pdf> 
+[33 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/DS-tids-1.pdf> 
 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/FR-tids-1.pdf
 
 pdfTeX warning: pdflatex.exe (file ./Master_Thesis_Andreas_Kracht_Frandsen_file
 s/figure-latex/FR-tids-1.pdf): PDF inclusion: multiple pdfs with page group inc
 luded in a single page
->] [33
-
-] [34
+>] [34
 
 ] [35
 
 ] [36
 
+] [37
+
 ]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[37
+[38
 
-] [38] [39
+] [39] [40
 
 ]
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf, id=12
-60, 1300.86pt x 1084.05pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf, id=13
+18, 1300.86pt x 1084.05pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf G
 raphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/sim-tids-1.pdf  used on input line 1337.
+ex/sim-tids-1.pdf  used on input line 1391.
 (pdftex.def)             Requested size: 441.01619pt x 367.51349pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1932,13 +1981,13 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[40
+[41
 
 ]
 
-LaTeX Warning: Text page 41 contains only floats.
+LaTeX Warning: Text page 42 contains only floats.
 
-[41 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf>
+[42 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/sim-tids-1.pdf>
 ]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1946,36 +1995,36 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[42]
+[43]
 <Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp-1.pdf, id=
-1307, 1300.86pt x 650.43pt>
+1369, 1300.86pt x 650.43pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp-1.pdf
  Graphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp-1.pdf>
 
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/weight-exp-1.pdf  used on input line 1515.
+ex/weight-exp-1.pdf  used on input line 1574.
 (pdftex.def)             Requested size: 441.01619pt x 220.50809pt.
-[43] [44 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp
+[44] [45 <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/weight-exp
 -1.pdf>]
-<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AL-tids-1.pdf, id=133
-2, 1300.86pt x 650.43pt>
+<Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AL-tids-1.pdf, id=139
+3, 1300.86pt x 650.43pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AL-tids-1.pdf Gr
 aphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AL-tids-1.pdf>
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/AL-tids-1.pdf  used on input line 1527.
+ex/AL-tids-1.pdf  used on input line 1586.
 (pdftex.def)             Requested size: 441.01619pt x 220.50809pt.
 <Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AL-RES-tids-1.pdf, id
-=1333, 1300.86pt x 650.43pt>
+=1394, 1300.86pt x 650.43pt>
 File: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AL-RES-tids-1.pd
 f Graphic file (type pdf)
 <use Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AL-RES-tids-1.pdf
 >
 Package pdftex.def Info: Master_Thesis_Andreas_Kracht_Frandsen_files/figure-lat
-ex/AL-RES-tids-1.pdf  used on input line 1536.
+ex/AL-RES-tids-1.pdf  used on input line 1595.
 (pdftex.def)             Requested size: 441.01619pt x 220.50809pt.
-[45
+[46
 
  <./Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AL-tids-1.pdf> <./
 Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AL-RES-tids-1.pdf
@@ -1983,23 +2032,23 @@ Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AL-RES-tids-1.pdf
 pdfTeX warning: pdflatex.exe (file ./Master_Thesis_Andreas_Kracht_Frandsen_file
 s/figure-latex/AL-RES-tids-1.pdf): PDF inclusion: multiple pdfs with page group
  included in a single page
->] [46
-
-] [47
+>] [47
 
 ] [48
 
 ] [49
 
-] [50] [51] [52
+] [50
 
-] [53
+] [51] [52] [53
 
-] (./Master_Thesis_Andreas_Kracht_Frandsen.bbl [54
+] [54
 
-] [55
+] (./Master_Thesis_Andreas_Kracht_Frandsen.bbl [55
 
-] [56]) [57] [58]
+] [56
+
+] [57]) [58] [59]
 \tf@toc=\write6
 \openout6 = `Master_Thesis_Andreas_Kracht_Frandsen.toc'.
 
@@ -2009,22 +2058,22 @@ s/figure-latex/AL-RES-tids-1.pdf): PDF inclusion: multiple pdfs with page group
 \tf@lot=\write8
 \openout8 = `Master_Thesis_Andreas_Kracht_Frandsen.lot'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1675.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1675.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1734.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1734.
 (./Master_Thesis_Andreas_Kracht_Frandsen.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1675.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1675.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1734.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1734.
 
 Package rerunfilecheck Info: File `Master_Thesis_Andreas_Kracht_Frandsen.out' h
 as not changed.
-(rerunfilecheck)             Checksum: E02063E4C7A81B90FCC3D2ED1EA58053;12888.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1675.
+(rerunfilecheck)             Checksum: 3CA00EEB581FD131C816EC2AA5AD6D7A;13108.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1734.
  ) 
 Here is how much of TeX's memory you used:
- 42726 strings out of 482923
- 953210 string characters out of 5958132
- 1589610 words of memory out of 5000000
- 56845 multiletter control sequences out of 15000+600000
+ 42772 strings out of 482923
+ 955361 string characters out of 5958132
+ 1590291 words of memory out of 5000000
+ 56877 multiletter control sequences out of 15000+600000
  616035 words of font info for 217 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  78i,16n,136p,2304b,2123s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2071,11 +2120,11 @@ fonts/type1/urw/palatino/uplb8a.pfb><c:/Users/AKF/AppData/Roaming/TinyTeX/texmf
 X/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/AKF/AppData/Roaming/
 TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/AKF/AppData/Ro
 aming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on Master_Thesis_Andreas_Kracht_Frandsen.pdf (65 pages, 997657 b
-ytes).
+Output written on Master_Thesis_Andreas_Kracht_Frandsen.pdf (66 pages, 1058554 
+bytes).
 PDF statistics:
- 1644 PDF objects out of 1728 (max. 8388607)
- 1400 compressed objects within 14 object streams
- 338 named destinations out of 1000 (max. 500000)
- 675 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1706 PDF objects out of 1728 (max. 8388607)
+ 1448 compressed objects within 15 object streams
+ 348 named destinations out of 1000 (max. 500000)
+ 711 words of extra memory for PDF output out of 10000 (max. 10000000)
 
