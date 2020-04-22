@@ -4,7 +4,7 @@
 
 # Underliggende teoretiske resultater
 
-## Udledning af den optimale myopiske portefølje
+## Udledning af den optimale myopiske portefølje {#udlmyo}
 I denne Sektion udledes den optimale portefølje på tidspunkt $t$ givet ved: Ligning \@ref(eq:Løsning) og Ligning \@ref(eq:Multalpha) for hhv. tilfældet med et risikobærende aktiv, $n=1$, samt tilfældet med flere risikobærende aktiver, $n>1$. Ved indsættelse af den betingede middelværdi, Ligning \@ref(eq:Forvport), samt den betingede varians, Ligning \@ref(eq:Varport). Kan Maksimeringsproblemet \@ref(eq:Statmaks) omskrives til
 $$\max_{\alpha_t} \mathcal{L}=\alpha_t\left(R_{t+1} - R_{0,t+1}\right)-\frac{k}{2}\alpha_t^2\sigma_t^2.$$
 
@@ -79,7 +79,7 @@ $$\text{RRA}_p(W_{t+1})= \gamma,$$
 som altså er konstant, dette ligger også til grund for *CRRA*-betegnelsen.
 
 ## Udledning af specialtilfældet for potens nytte
-I denne Sektion udledes specialtilfældet af Ligning \@ref(eq:Potnytte), dvs. nyttefunktions form for risikoaversion, $\gamma$, lig $1$. Ved brug af *l'Hôpital*'s regel. Reglen er defineret for to funktioner, $f(\cdot)$ og $g(\cdot)$, som er differentiable på et åbent interval $I$, undtagen for et fast punkt $c\in I$. Hvis
+I denne Sektion udledes specialtilfældet af Ligning \@ref(eq:Potnytte), dvs. nyttefunktions form for risikoaversion, $\gamma$, lig $1$. Ved brug af *l'Hôpital's regel*. Reglen er defineret for to funktioner, $f(\cdot)$ og $g(\cdot)$, som er differentiable på et åbent interval $I$, undtagen for et fast punkt $c\in I$. Hvis
 $$\lim_{x\to c} f(x)=\lim_{x\to c}g(x)=0\,\text{eller} \pm \infty,$$
 
 samt

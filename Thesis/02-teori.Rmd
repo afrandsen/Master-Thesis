@@ -1,8 +1,8 @@
 \part{Den teoretiske ramme}
 
-# Underliggende teori
+# Underliggende teori {#unteo}
 
-## Den myopiske investor
+## Den myopiske investor{#myoinv}
 Den myopiske investor vælger -- som navnet ligger op til -- sin portefølje under et én-periodes perspektiv, og foretager dermed et statisk bindende valg. Investoren forsøger at maksimere sin terminal formue, ved samtidig at forholde sig til sin risikoaversion. Dette forsager, at alle efterfølgende perioder bliver ignoreret af investoren. Ergo skal han løse det statiske portefølje problem fra tidspunkt $t$ til tidspunkt $t+1$. I denne ene periode er investeringsmulighederne: et risikobærende aktiv samt et risikofrit aktiv. Afkastene over den førstkommende periode for disse aktivklasser vil blive noteret som hhv. $R_{t+1}$ med betinget middelværdi $\mathbb{E}_t(R_{t+1})$^[Her benyttes den gængse notation $\mathbb{E}(R_{t+1}\mid \mathcal{F}_t)=\mathbb{E}_t(R_{t+1})$ for filteret $\mathcal{F}_t$.] samt betinget varians $\mathbb{V}_t(R_{t+1})=\sigma_t^2$ og $R_{0,t+1}$.
 
 Det antages at investorens formue er fuldt allokeret når en del $\alpha_t$ bliver placeret i det risikobærende aktiv og $(1-\alpha_t)$ i det risikofrie aktiv. Hermed bliver hans porteføljeafkast givet ved
@@ -26,7 +26,7 @@ Den simplificerende antagelse i [@Markowitz1952] er at investorer kun forholder 
 \max_{\alpha_t} \mathbb{E}_t\left(R_{p,t+1}\right) -\frac{k}{2} \mathbb{V}_t\left(R_{p,t+1}\right),(\#eq:Statmaks)
 \end{equation}
 
-hvor $k$ er en skalering, som repræsenterer investorens risiko aversion. Ved at modellere ovenstående relation som lineær og kun afhængig af de første to momenter restringerer vi investoren til at foretrække et højt afkast, lav volatilitet og ignorerer alle højere momenter, såsom skævhed og kurtosis. Ved indsættelse af Ligning \@ref(eq:Portafk) i Maksimeringsproblemet \@ref(eq:Statmaks) og dernæst differentiation opnåes førsteordensbetingelsen, se Appendiks ??, løsningen til optimalitetsproblemet bliver dermed
+hvor $k$ er en skalering, som repræsenterer investorens risiko aversion. Ved at modellere ovenstående relation som lineær og kun afhængig af de første to momenter restringerer vi investoren til at foretrække et højt afkast, lav volatilitet og ignorerer alle højere momenter, såsom skævhed og kurtosis. Ved indsættelse af Ligning \@ref(eq:Portafk) i Maksimeringsproblemet \@ref(eq:Statmaks) og dernæst differentiation opnåes førsteordensbetingelsen, se Appendiks \@ref(udlmyo), løsningen til optimalitetsproblemet bliver dermed
 \begin{equation}
 \alpha_t = \frac{\mathbb{E}_t\left(R_{t+1}\right)-R_{0,t+1}}{k\sigma_t^2}.(\#eq:Løsning)
 \end{equation}
@@ -99,7 +99,7 @@ Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det 
    {(20^2*t^2 + 12^2*(1-t)^2)^(0.5) }, %{(t^2 * 20^2 + (1-t)^2 * 12)},
    {11 * t + (1-t) * 5}
  );
-\node[color=magenta] at (axis cs:30, 0) [anchor=south west] {\textbf{Den efficiente rand}};
+\node[color=red] at (axis cs:30, 0) [anchor=south west] {\textbf{Den efficiente rand}};
 \addplot[black, very thick, domain=-10:50, samples=100, variable=\x](
   ({x}, {4 + 0.37 * x});
 \node[rotate = 25, color=black] at (axis cs:30, 15) [anchor=south west] {\textbf{CML}};
@@ -112,7 +112,7 @@ Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det 
 
 Altså vil investorer vælge en portefølje på den efficiente rand, som opnår en efficient porteføljevægtning langs *Capital Market Line*. Derudover skal det nævnes, at det kun er den øvre halvdel af den efficiente rand, som reelt set er efficient. Dette kommer sig af at porteføljer på den nederste del har en identisk påhæftet volatilitet, men med et lavere forventet afkast end den symmetrisk modsatte portefølje.
 
-Selvom Markowitz' model er en hjørnesten inden for moderne porteføljeteori, er der flere mangler i den opsatte teoretiske ramme. Først og fremmest medfører Markowitz' antagelse om en lineær afvejning mellem kovarianser og afkast, implicit antagelsen, at investorenes nyttefunktioner kan approksimeres af en anden ordens Taylor udvidelse over en bredt sprektrum af afkast. Derudover findes ingen beskrivelse for, hvordan parameteren $k$ er koblet til investorens nyttefunktion. Disse mangler kan blive afhjulpet ved samtidig brug af specifikke nyttefunktioner og afkastfordelinger, som opfylder Taylor udvidelsen. Dette medfører at middelværdi-varians analysen kan benyttes for tre forskellige opsætninger, som bliver præsenteret i Sektion \@ref(typer-af-nyttefunktioner), [@CampVic2003].
+Selvom Markowitz' model er en hjørnesten inden for moderne porteføljeteori, er der flere mangler i den opsatte teoretiske ramme. Først og fremmest medfører Markowitz' antagelse om en lineær afvejning mellem kovarianser og afkast, implicit antagelsen, at investorenes nyttefunktioner kan approksimeres af en anden ordens Taylor udvidelse over en bredt sprektrum af afkast. Derudover findes ingen beskrivelse for, hvordan parameteren $k$ er koblet til investorens nyttefunktion. Disse mangler kan blive afhjulpet ved samtidig brug af specifikke nyttefunktioner og afkastfordelinger, som opfylder Taylor udvidelsen. Dette medfører at middelværdi-varians analysen kan benyttes for tre forskellige opsætninger, som bliver præsenteret i Sektion \@ref(typnyt), [@CampVic2003].
 
 ## Præferencer for risiko
 For et fast formueniveau $w\in \mathbb{R}_+$ betragter vi en stokastisk variabel $X$, hvor $\mathbb{E}(X)=0$. Derfor kan også $w+X$ betragtes som en stokastisk variabel, der repræsenterer en fremtidig formueplan med realiseret formue $w+\mathbb{E}(X)$, hvis $X$ bliver realiseret. Derfor kaldes $X$ undertiden også et fair spil, derudover haves at $\mathbb{E}(w+X)=w$.
@@ -123,7 +123,7 @@ Generelt anses investorer (og andre individer for den sags skyld) at være risik
 
 ## Nytte defineret over formue
 
-I Sektion \@ref(den-myopiske-investor), introducerede vi en af de bærende antagelser i [@Markowitz1952]: at investorer kun forholder sig til middelværdien og variansen af porteføljeafkast, og ikke højere momenter. Vi kan tilsvarende antage, at investorer definerer deres nytte via formue på terminaltidspunktet. Dette tillader os at redefinere Maksimeringsproblemet \@ref(eq:Statmaks) til nedenstående
+I Sektion \@ref(myoinv), introducerede vi en af de bærende antagelser i [@Markowitz1952]: at investorer kun forholder sig til middelværdien og variansen af porteføljeafkast, og ikke højere momenter. Vi kan tilsvarende antage, at investorer definerer deres nytte via formue på terminaltidspunktet. Dette tillader os at redefinere Maksimeringsproblemet \@ref(eq:Statmaks) til nedenstående
 \begin{align}
 &\max\mathbb {E}_t(U(W_{t+1})) (\#eq:Nyttemaks)\\
 &\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
@@ -176,7 +176,7 @@ De tilsvarende reciprokke af ovenstående mål kaldes hhv. *Coefficeint of Absol
 
 Som redegjort ovenfor, er både *ARA* samt *RRA* essientielle mål til kvantificering af risikopræferencer og dermed til at opnå forståelse for nyttefunktionen hos den enkelte investor. Konstateringer udledt fra den langsigtede økonomiske adfærd fastslår, at *RRA* ikke kan afhænge alene af formue. Dette kommer sig af, at formue og per capita forbrug er steget henover de seneste to århundreder. Det absolutte forhold mellem finansielle risici er ligeledes forøget -- siden disse risici er multiplikative -- mens den relative risici har været konstant. Samtidigt er der ikke fundet evidens baseret på afkast og renter, der har påvist en langsigtet tendens, som respons til denne vækst. Altså vil investorer betale de samme relative omkostninger for at undgå en given finansiel risiko uanset om de er velhavende eller ej, [@CampVic2003]. Dette foranlediger en til at tænke tanken, at *RRA* er uafhængig af formue og bør være konstant, [@Chiappori2008].
 
-## Typer af nyttefunktioner
+## Typer af nyttefunktioner{#typnyt}
 
 Antagelser omhandlende: formen af nyttefunktioner og fordelingen af afkast, er påkrævet, for at kunne skabe en traktabel model. Flere nyttefunktioner har vist sig relevante inden for middelværdi-varians analyse, [@CampVic2003]. Nogle af disse er eksponentiel nytte, potens nytte samt kvadratisk nytte. Fælles for disse er, at de definerer nytte over formue, udover disse findes andre mere eksotiske nyttefunktioner såsom Epstein-Zin nytte. I denne Sektion vil vi undersøge ovenstående nærmere, og ud fra et kvantitativt aspekt vælge nyttefunktionen, som denne afhandling vil arbejde videre med.
 
@@ -259,6 +259,62 @@ hvilket er en geometrisk og kontinuert følge. Logafkastet af aktiver vil skabe 
 # Afkast
 
 # Porteføljeteori
+I dette kapitel udvides teorien fra Kapitel \@ref(unteo). Mere specifikt sammenkobles porteføljeteorien fra Sektion \@ref(myoinv) og nytteteorien fra Sektion \@ref(typnyt). Dette gøres på baggrund af *CRRA*-nytte, i tilfældet, hvor investoren kan rebalancere sin portefølje periodisk, og i det restringerede tilfælde, hvor ingen rebalancering er tilladt. Herefter beskrives den analytiske løsning til det dynamiske porteføljeproblem foreslået af [@JurVic2011].
+
+## CRRA Portefølje
+I det følgende vil porteføljevalget under antagelsen, at investoren har potens nytte, dvs. *CRRA*-nytte samt at afkastene på alle aktivklasser er lognormale.
+
+Først antages, at afkastet på investorens portefølje er lognormal, dette betyder at $W_{t+1}$ ligeledes er lognormal. Under antagelsen om potens nytte, kan vi omskrive Maksimeringsproblemet \@ref(eq:Nyttemaks) til
+\begin{align}
+&\max\mathbb{E}_t(\frac{W_{t+1}^{1-\gamma}-1}{1-\gamma}) (\#eq:CRRAmaks)\\
+&\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
+\end{align}
+
+Maksimering af ovenstående forventning er ækvivalent til at maksimere log af forventningen, eftersom log-funktionen er strent voksende, se evt. Figur \@ref(fig:Nyt), som er tegnet på baggrund af log-funktionen. Derudover kan: $\tfrac{1}{1-\gamma}$ og $-1$ fjernes fra Maksimeringsproblemet, eftersom de er konstante og derfor ikke vil påvirke optimum. Givet af $W_{t+1}$ er lognormal, kan resultatet fra Appendiks ?? anvendes, og dermed opnå
+\begin{align}
+&\max \log\left(\mathbb{E}_t(W_{t+1}^{1-\gamma})\right)=(1-\gamma){E}_t(w_{t+1})+\frac{1}{2}(1-\gamma)^2\sigma_{wt}^2 (\#eq:CRRAmakslog)\\
+&\text{ubb.}\,\,w_{t+1}=r_{p,t+1} + w_t.\notag
+\end{align}
+
+hvor $\sigma_{wt}^2$ er den betingede varians af log formuen, $w_{t+1}$. Derudover er budgetbegrænsningen ligeledes omskrevet til log-form. Her er $r_{p,t+1}=\log(1+R_{p,t+1})$, dvs. logafkastet på porteføljen, også kendt som det kontinuert tilskrevne porteføljeafkast. Ved division af $(1-\gamma)$ og samtidig substitution af budgetbegrænsningen ind i objektfunktionen, opnåes følgende ubetingede maksimeringsproblem.
+\begin{equation}
+\max\mathbb{E}_t(r_{p,t+1}) + \frac{1}{2}(1-\gamma)\sigma_{pt}^2, (\#eq:CRRAmakslog2)
+\end{equation}
+
+hvor $\sigma_{pt}^2$ er den betingede varians af det kontinuert tilskrevne porteføljeafkast. Dette benytter faktummet at $\mathbb{E}(w_t)=w_t$ er deterministisk og ikke påvirker optimum eller variansleddet. Her kan det bemærkes, at
+\begin{equation}
+\mathbb{E}(r_{p,t+1})+\frac{1}{2}\sigma_{pt}^2=\log(\mathbb{E}(1+R_{p,t+1})), (\#eq:portafkls)
+\end{equation}
+
+fordi porteføljeafkastet er antaget til at være lognormal. Altså kan Maksimeringsproblemet \@ref(eq:CRRAmakslog2) omskrives til
+\begin{equation}
+\max\mathbb{E}_t(1+R_{p,t+1}) - \frac{1}{2}\gamma\sigma_{pt}^2. (\#eq:CRRAmakslog3)
+\end{equation}
+
+Dermed opnåes det familiære maksimeringsproblem fra middelværdi-varians analysen, Sektion \@ref(myoinv). Altså vil investoren maksimere bytteforholdet mellem den forventede middelværdi og variansen på porteføljen. Denne afvejning er igen lineær, og *RRA*-koefficienten $\gamma$ spiller samme rolle som parameteren $k$ i middelværdi-varians analysen. Fra ovenstående ses også, at variansen på porteføljen bliver straffet af en faktor på $\tfrac{\text{RRA}}{2}$.
+
+Risikoaversion kan også analyseres på baggrund af \@ref(eq:CRRAmakslog2).
+
+  - For $\gamma>1$, vil investoren søge en mere sikker portefølje ved at straffe variansen af portefølje afkastet. Her er den positive effekt af det forventede afkast mere end opvejet af den negative effekt af variansen.
+ 
+  - For $\gamma<1$, vil investoren søge en mere risikobærende portefølje ved at søge variansen af portefølje afkastet. Her er den positive effekt af det forventede afkast mere end opvejet af den negative effekt af variansen. Dette kommer sig af, at en højere varians, for det samme forventede log afkast, vil medføre et højere forventet simpelt afkast, se evt. Ligning \@ref(eq:portafkls).
+  
+  - For $\gamma=1$, vil investoren have log nyttefunktionen, og vælger porteføljen med det højeste log afkast. Denne portefølje betegnes undertiden som *Growth-Optimal*, siden det kan udledes at denne portefølje har højeste forventede afkast på lang sigt under visse antagelser, [@Kelly1956]. 
+
+For at kunne løse Maksimeringsproblemet \@ref(eq:CRRAmakslog3), må et nyttigt approksimationsresultat tages i brug. Som tidligere nævnt er porteføljeafkastet en lineær kombination af vægtede afkast på aktiver. Log afkastet på porteføljen er log af denne lineære kombination, men ikke lig den lineære kombination af aktivernes log afkast. For at repræsentere log porteføljeafkastet på baggrund af log aktivafkast, over korte tidsintervaller, kan den følgende Taylor approksimation af den ikke-lineære funktion benyttes
+$$r_{p,t+1}-r_{0,t+1}\approx \alpha_t (r_{t+1}-r_{0,t+1})+\frac{1}{2}\alpha_t(1-\alpha_t)\sigma_t^2.$$
+
+Her epræsenterer $r_{t+1}$ log afkastet på det ene risikobærende aktiv, og $r_{0,t+1}$ repræsenterer log afkastet på det risikofrie aktiv. Forskellen mellem log porteføljeafkastet og den lineære kombination af de individuelle logafkast er givet ved $\alpha_t(1-\alpha_t)\tfrac{1}{2}\sigma_t^2$. Forskellen vil forsvinde, hvis vægtningen i det risikobærende aktiv er nul, eller hvis vægtningen i det risikofrie aktiv er nul. Ovenstående approksimation er eksakt i grænsen, ved benyttelse af kontinuerte *diffusion processes* for priserne på aktiverne, og kan udledes ved brug af *Itô's Lemma*, [@CampVicCha2003]. Ovenstående approksimation kan nu benyttes, og dermed kan Maksimeringsproblemet \@ref(eq:CRRAmakslog2) skrives i form af merafkast på porteføljen.
+\begin{equation}
+\max\alpha_t(\mathbb{E}_t(r_{t+1}) - r_{0,t+1}) + \frac{1}{2}\alpha_t(1-\alpha_t)\sigma_t^2 + \frac{1}{2}(1-\gamma)\alpha_t^2\sigma_t^2, (\#eq:CRRAmakslog4)
+\end{equation}
+
+med den tilhørende løsning
+\begin{equation}
+\alpha_t=\frac{\mathbb{E}(r_{t+1}) - r_{0,t+1}+\frac{1}{2}\sigma_t^2}{\gamma\sigma_t^2}.
+\end{equation}
+
+Som tilmed er ækvivalent til den optimale vægtning, Ligning \@ref(eq:Statmaks), fra middelværdi-varians analysen.
 
 # VAR
 

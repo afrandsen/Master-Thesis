@@ -3,6 +3,7 @@ library(moments)
 library(VAR.etp)
 library(vars)
 library(MASS)
+library(tseries)
 
 # LOAD DATA.
 input <- zoo::read.csv.zoo('C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Input/Samling.csv', format = "%Y%m%d")
@@ -68,6 +69,9 @@ DESCRIPTIVE <- data.frame(adj_mean=ADJ_DATA_MEAN,
                           ac=unlist(lapply(1:ncol(DATA), function(x) acf(DATA[,x], plot = FALSE, lag.max = 1)$acf))[c(rep(FALSE,1),TRUE)])
 DESCRIPTIVE$sr[1] <- NA
 
+JB <- data.frame(teststat = unlist(lapply(1:ncol(DATA), function(x) jarque.bera.test(DATA[,x])$statistic)),
+                 p = unlist(lapply(1:ncol(DATA), function(x) jarque.bera.test(DATA[,x])$p.value)))
+
 ## TILSTANDSVARIABLE
 DATA_T <- xts::xts(merge(DP, EP, BM, AKT_VAR, HML, SMB, TB, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR), index(TB))
 
@@ -91,7 +95,32 @@ DESCRIPTIVE_T <- data.frame(mean=DATA_T_MEAN,
 DESCRIPTIVE_T$mean[1:2] <- ADJ_DATA_T_MEAN[1:2]
 DESCRIPTIVE_T$mean[7] <- ADJ_DATA_T_MEAN[3]
 
+JB_T <- data.frame(teststat = unlist(lapply(1:ncol(DATA_T), function(x) jarque.bera.test(DATA_T[,x])$statistic)),
+                 p = unlist(lapply(1:ncol(DATA_T), function(x) jarque.bera.test(DATA_T[,x])$p.value)))
+
+# STATIONARITET
 data <- xts::xts(merge(NET_TB, AKT, S_OBL, V_OBL, DP, EP, BM, AKT_VAR, HML, SMB, TB, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR), index(NET_TB))
+
+STAT_TABLE <- data.frame(teststat_1=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=1)$statistic)),
+                         p_1=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=1)$p.value)),
+                         teststat_2=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=2)$statistic)),
+                         p_2=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=2)$p.value)),
+                         teststat_3=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=3)$statistic)),
+                         p_3=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=3)$p.value)),
+                         teststat_4=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=4)$statistic)),
+                         p_4=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=4)$p.value)),
+                         teststat_5=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=5)$statistic)),
+                         p_5=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=5)$p.value)))
+
+STAT_TABLE_KPSS <- data.frame(teststat_l=unlist(lapply(1:ncol(data), function(x) kpss.test(data[,x], null = "L")$statistic)),
+                              p_l=unlist(lapply(1:ncol(data), function(x) kpss.test(data[,x], null = "L")$p.value)),
+                              teststat_t=unlist(lapply(1:ncol(data), function(x) kpss.test(data[,x], null = "T")$statistic)),
+                              p_t=unlist(lapply(1:ncol(data), function(x) kpss.test(data[,x], null = "T")$p.value)))
+
+STAT_TABLE_PP <- data.frame(teststat_a=unlist(lapply(1:ncol(data), function(x) pp.test(data[,x], type = "Z(alpha)")$statistic)),
+                            p_a=unlist(lapply(1:ncol(data), function(x) pp.test(data[,x], type = "Z(alpha)")$p.value)),
+                            teststat_at=unlist(lapply(1:ncol(data), function(x) pp.test(data[,x], type = "Z(t_alpha)")$statistic)),
+                            p_at=unlist(lapply(1:ncol(data), function(x) pp.test(data[,x], type = "Z(t_alpha)")$p.value)))
 
 # UNIVARIATE
 FIT_AKT <- lapply(5:ncol(data), function(x) lm(as.numeric(xts::lag.xts(data$AKT,-1, na.pad = FALSE)) ~ as.numeric(head(data[,x], -1)), data=data))

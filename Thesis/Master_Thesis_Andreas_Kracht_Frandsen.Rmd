@@ -1,0 +1,2403 @@
+---
+site: bookdown::bookdown_site
+pagetitle: "Master's Thesis -- Andreas Kracht Frandsen"
+documentclass: memoir
+classoption: [a4paper,oneside]
+bibliography: [references.bib]
+biblio-style: apalike
+link-citations: yes
+fontfamily: mathpazo
+github-repo: afrandsen/afrandsen
+colorlinks: yes
+urlcolor: magenta
+citecolor: magenta
+linkcolor: magenta
+nocite: '@*'
+description: "Master's Theis of Andreas Kracht Frandsen, Aarhus University."
+---
+
+\pagenumbering{roman}
+
+\tableofcontents
+
+\newpage
+
+\listoffigures
+
+\listoftables
+
+\newpage
+
+# Forord {-}
+
+Dette dokument findes interaktivt og i statisk format.
+
+`r if (knitr::is_latex_output()) '
+For at se en interaktiv HTML version af dokumentet, med mulighed for at redigere fejl eller skrive kommentarer, gå da til denne hjemmeside [afrandsen.rbind.io/bare/thesis/](https://afrandsen.rbind.io/bare/thesis/). Siden vil blive opdateret kontinuerligt, hvis jeg selv finder fejl gennem GitHub.
+
+\\vfill
+
+Kreditering: [starlogs.net/#afrandsen/master-thesis](http://starlogs.net/#afrandsen/master-thesis).
+
+Lavet med Color Brewer, virker i sort hvid, farveblind vil også kunne se.
+'`
+
+`r if (knitr::is_html_output()) '
+Dette er den interaktive HTML version af dokumentet, du kan redigere fejl ved at trykke på &#x1F589; knappen i menubaren.
+
+Til venstre finder du indholdsfortegnelsen. God fornøjelse!
+<p align="center">
+<img src="latex/ausegl_sort.png" width="200">
+</p>
+
+Copyright &#x00A9; 2019 $\\TeX$nician and useR Andreas Kracht Frandsen
+
+Alt indhold er licenseret under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+'`
+\newpage
+
+<!--chapter:end:index.Rmd-->
+
+\pagenumbering{arabic}
+
+\setcounter{secnumdepth}{3}
+
+\part{Introduktion og litterært overblik}
+
+# Indledning
+Denne afhandling har til formål at undersøge langsigtet investering i aktiver under antagelsen om periodisk rebalancering. Dette gøres ved anvendelse af den analytiske løsning, til det dynamiske porteføljeproblem, først beskrevet af [@JurVic2011]. Denne løsning anvendes for en institutionel/privat investor med endelig investeringshorisont, tidsvarienede investeringsmuligheder og under antagelsen om potens nytte, *CRRA*, defineret over deres intertemporale budgetbegræsning gennem formue. Sættet af tidsvarierende investeringsmuligheder er konstante under hele investeringshorisonten, dette gør, at en sammenligning af investorer, med en kort og en lang investeringshorisont samt for forskellige risiko tolerancer, kan udarbejdes. Investeringssættet, som spænder fra 1952 2. kvartal til 2018 4. kvartal, består af en 90-dages amerikansk *T-Bill* -- som samtidig repræsenterer benchmarkaktivet -- et aktieindeks, som repræsenterer samtlige aktier handlet på *NYSE*, *AMEX* og *NASDAQ*, den 10-årige amerikanske statsobligation samt et virksomhedsbaseret obligationsindeks. Før modellering af merafkastene over benchmarkaktivet på ovenstående aktiver undersøges prædiktabiliteten af afkastene, ved benyttelse af relevante finansielle, rentestruktur og makroøkonomiske variable, som før har vist prædiktablitetsegenskaber i eksisterende litteratur. Selve modellering af tilstandsvariablene antages at følge en første-ordens *Vector Autoregressive Process*. Analysen  viser at ??, ?? og ??, generelt for alle aktivklasser udviser størst statistisk signifikans. Derudover findes der evidens for, at afkastene på de risikobærende aktiver specielt er tidsvarierende. Afkastet på aktieindekset viser sig, at være sværest prædiktabelt, mens stats- og virksomhedsobligationerne bevæger sig procyklisk med yield spread. Porteføljevalget for investoren afhænger kraftigt af disse afkastbevægelser, da han udnytter denne information til at lave periodiske reblancereringer ift. sin risikoaversion. Ved undersøgelse af både investeringshorisontlængdens effekt, risikotolerancer og effekten af korte posisitoner kan forskellen mellem en lang række af investorer effektivt måles.
+
+## Problemformulering
+Ved analytisk behandling af det dynamiske porteføljeproblem, vil denne afhandling undersøge, hvordan porteføljeallokeringer adskiller sig: på tværs af investeringshorisonter, ved restriktioner af korte positioner i aktiver og ved forskellige tolerancer for risiko.
+
+\begin{center}
+\textit{Hvordan adskiller porteføljeallokeringen sig over investeringshorisonter, for den institutionelle og/eller private investor, under antagelsen, at der er mulighed for periodisk rebalancering?}
+\end{center}
+
+De underliggende spørgsmål, som ligger i forlængelse af det ovenstående grundlæggende spørgsmål vil undervejs i afhandlingen ligeledes blive behandlet og undersøgt, heriblandt, hvordan risikotolerancer hos individuelle investorer påvirker allokeringen mellem risikobærende aktiver.
+
+## Afgrænsning
+Denne afhandling forsøger at svare på ovenstående hovedspørgsmål ved benyttelse af empirisk data. I forlængelse af søgen efter et sådant svar, vil en teoretisk afgrænsning være nødvendig. Menneskelig kapital samt forbrug vil af den grund ikke være en del af den empiriske analyse. Dette er også ensbetydende med at budgetbegrænsningen for hver institutionelle og/eller private investor er fuldstændig fastsat ud fra deres finansielle formue.
+
+Investorerne antages til at have deres nytte defineret via *CRRA*-nytte. For at anvende *CRRA*-nytte i porteføljeproblemet benyttes modellen fra [@JurVic2011], som er defineret i diskrettid, med approksimative analytiske løsninger. Dette medfører bl.a. at det dynamiske porteføljeproblem i kontinuert tid bliver tilsidesat, da hovedformålet med afhandlingen er at undersøge det langsigtede porteføljevalg på diskrete tidspunkter over investorens investeringshorisont. Derudover ville en kontinuert behandling af det dynamiske porteføljeproblem ligeledes kræve en diskretisering af observationsrummet for anvendelse i et analytisk empirisk øjemed. Ved anvendelse af den teoretiske ramme foreslået af [@JurVic2011] antages det samtidigt, at investorens nytte kun er defineret over hans intertemporale budgetbegrænsning og over en fastlagt investeringshorisont med tidsvarierende investeringsmuligheder, som er modelleret via en VAR$(1)$-process.
+
+Robustheden af den empiriske analyse er begrænset, eftersom eksogen stikprøvekontrol ikke bliver udført. Undersøgelsen indebærer kvartalsvise finansielle, demografiske og makroøkonomiske data fra 1954 2. kvartal til 2018 4. kvartal, dette betyder også, at de endelige resultater kan være signifikant forskellige fra analytiske metoder, som indebærer månedlige eller årlige data. Analysen vil ikke indebære transaktionsomkostninger, hvilket før har vist at have væsentlige betydninger for de endelige porteføljevalg, specielt for den myopiske investor, [@BalLyn1999]. Afhandlingen vil ikke indeholde en performance-mæssig evaluering -- på baggrund af porteføljevalgene -- ift. investeringsomkostninger. Derudover begrænses analysen af, at den ignorerer problemerne ved at investere til pension og dermed undgår kompleksiteterne ved levetid, aldring og tidsafhængige ændringer i karakteristika af markedsdeltagere og demografiske forhold, som indgår i det såkaldte *life-cycle* problem.
+
+Til forskel for ovenstående begrænsninger vil denne afhandling fokusere på, hvordan porteføljeallokeringer adskiller sig: på tværs af investeringshorisonter og ved forskellige tolerancer for risiko. Givet at investoren står overfor endelige investeringshorisonter og tidsvarierende investeringsmuligheder.
+En analyse af kortsalgsrestriktion på porteføljeproblemet er ligeledes medtaget i afhandlingen, men omkostningerne ved lån/gearing af den optimale portefølje er udeladt.
+
+Ved at begrænse analysen for porteføljevalget, kan vi evaluere porteføljeallokeringerne baseret på de samme antagelser, hvor kun den intertemporale budgetbegrænsning og/eller risikoaversionen adskiller hver enkelt investor.
+
+## Eksisterende litteratur
+
+En langsigtet porteføljestrategi forsøger at optimere bytteforholdet mellem risiko og afkast. En sådan strategi er i sagens natur optimal på lang sigt og ikke nødvendigvis på kort sigt. Den moderne teori bag dette bytteforhold, for den langsigtede investor, blev først beskrevet af Nobelpris modtageren Harry Markowitz, [@Markowitz1952]. Hans arbejde tager udgangspunkt i en investor på tidspunkt $t$, som kun bekymrer sig om fordelingen af sin formue på et givet fremtidigt tidspunkt $t+K$, hvor $K$ er investeringshorisonten. Dette problem bliver undertiden beskrevet som det statiske portefølje problem. [@Markowitz1952] understreger vigtigheden af diversifikation af risiko, men den bærende antagelse om en køb og hold investor, findes generelt særdeles urealistisk. Investorer vælger ofte porteføljestrategier, som kræver rebalancering før eller siden, og er på den måde dynamiske i deres optimeringsstrategi.
+
+Mere generelt vil investorer altså rebalancere deres portefølje mellem tidspunkt $t$ og $t+K$, på en måde, som forholder sig til skiftende finansielle, demografiske og makroøkonomiske forhold over tid. Investoren vil altså i dette tilfælde vælge en dynamisk porteføljestrategi, som specificerer, hvordan allokeringen af en eller flere aktiver skal ændres i respons til de tidsafhængige bagvedliggende variable.
+
+Dynamisk programmering er før blevet brugt i litteraturen til at formulere en løsning, [@Samuelson1969] og [@Merton1969; @Merton1971; @Merton1973]. Udover de specialtilfælde, hvor den langsigtede porteføljestrategi består af en række optimale kortsigtede strategier, er ingen generel løsning på lukket form udledt, [@JurVic2011]. [@Samuelson1969] introducerer også en model, som medtager forbrugsfunktionen. [@Merton1969] beskriver den dynamiske allokering i kontinuert tid til forskel fra de tidligere diskrettidsmodeller af bl.a. [@Samuelson1969]. Derudover beskriver [@Merton1969], hvordan en flerdimensional stokastisk model -- hvor de underliggende variable er modelleret via en Wiener process -- giver en rigere og mere alsidig model.
+
+På baggrund af det svære løsningsproblem, var der over længere tid en faldende interesse for emnet, men nylig videnskabelig litteratur af finansielle økonomer har atter kastet lys på emnet. Disse foreslår alternative løsningsmetoder for det langsigtede porteføljeproblem med rebalancering, og har igen fundet eksakte analytiske løsninger for yderligere specialtilfælde, i kontinuert tid, end de tidligere beskrevne. Ved antagelse af en konstant risikofri rente og modellering af merafkastet gennem en Ornstein-Uhlenbeck process finder [@BrenXia2002], [@CampVic1999], [@KimOm1996] og [@Wachter2002] løsninger på lukket form for en lang række nyttefunktioner, heriblandt potens nytte over forbrug, potens nytte over terminal formue og for Epstein-Zin nytte med intertemporal substitutionselasticitet lig én, [@CampVic2003].
+
+Derudover er numeriske metoder blevet foreslået af bl.a. [@BalLyn1999], [@Lyn2001], [@Bar2000], [@BrenSchLag1997; @BrenSchLag1999], hvor de anvendte modeller enten har diskretiseret observationsrummet eller fundet numeriske løsninger til den partielle differentialligning hørende til det dynamiske problem. Disse -- til tider avancerede -- numeriske metoder har dog vist sig at være svært anvendelige. I praksis har det været komplekst at implementere selv for få variable.
+
+Ovenstående modeller tillader ikke den risikofrie rente og merafkastet af aktiver at ændre sig over tid, på samme tid, og mangler dermed det tidsvarierende perspektiv af alle aktiver. En ny metode præsenteret af [@CampVic1999; @CampVic2001; @CampVic2003], giver approksimative analytiske metoder i et ikke-tilfældigt nabolag af specialtilfælde, hvor løsninger på lukket form er mulige. Her tager de udgangspunkt i en investor, som opnår nytte af forbrug i stedet for formue. [@CampVicCha2003] benytter samme metode til et problem involverende flere risikofyldte aktivklasser, hvor de samtidig tillader tidsvarierende investeringsmuligheder.
+
+Mit arbejde vil være en validering af [@JurVic2011] ved anvendelse af deres teori samt analytiske løsninger til det dynamiske porteføljeproblem for en institutionel/privat investor med et opdateret datagrundlag. Jeg bidrager til det dynamiske porteføljeproblem ved en længere statistisk analyse af potentielle variable, som kan benyttes til det prædiktive afspekt af flere aktivers afkast.
+
+## Opbygning samt tekniske specifikationer
+Opbygningen af denne afhandling tager udgangspunkt i dele. Første del fungerede som en introduktion til litteraturen og afhandlingens formål. I Del 2 af afhandlingen fastlægges det teoretiske fundament. Kapitel 2 giver et overblik over den underliggende porteføljeteori for en institutionel investor. Kapitel 3 præsenterer aktivklasserne og deres indbyrdes relationer samt opbygningen af afkast. Derudover præsenterer kapitlet en lang række potentielle prædiktionsvariable. Kapitel 4 bygger videre fra teorien i Kapitel 3, og fastlægger den analytiske løsning til det dynamiske porteføljeproblem og medtager dermed rebalanceringsperspektivet. Kapitel 5 opbygger den dynamiske ramme i form af VAR-processen for vores investeringssæt. Del 3 består af den empiriske analyse, hvor teorien fra Del 2 benyttes på virkeligt data. Kapitel 6 beskriver data samt kilder. Kapitel 7 består af univariate- og multiple regressioner, som benyttes til udvælgelse af variable med bedste prædiktabilitetsegenskaber til den endelige VAR-model. Kapitel 8 har til formål at præsentere et overblik over den endelige VAR-model. Kapitel 9 undersøger problemerne ved estimation. Kapitel 10 foretager analysen af samtlige porteføljeallokeringer. Kapitel 11 indeholder en diskussion og reflektion over fundende i Kapitel 10. Til slut afslutter Kapitel 12 afhandlingen med en konklusion. 
+
+Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet **R** 3.6.0 *"Planting of a Tree"*. **R**-pakker med teoretisk dokumentation er anvendt ved estimation af VAR-processen samt for de univariate- og multiple regressioner, for yderligere information henvises til dokumentationen i litteraturlisten. Denne version af afhandlingen blev bygget med:
+
+```{r pakker, include=FALSE, echo=FALSE}
+library(quantmod)
+library(moments)
+library(VAR.etp)
+library(vars)
+library(MASS)
+library(IntroCompFinR)
+library(tidyverse)
+library(RColorBrewer)
+library(ggfortify)
+library(stats)
+```
+
+
+```{r, echo=FALSE}
+devtools::session_info()
+```
+
+Litterær programmering er blevet anvendt til at skrive/programmere denne afhandling i tekstformattet *.Rmd*, for herefter at blive processeret af *knitr* til et *.md* format, denne fil føres videre til *pandoc*, som har til ansvar at danne den færdige fil. Denne to-trins operation tillader at danne afhandlingen i en lang række filformater. I den forbindelse er versionsstyring samtidig blevet anvendt gennem *GitHub*, af den grund er den fulde kildekode tilgængelig via [github.com/afrandsen/master-thesis](https://github.com/afrandsen/master-thesis).
+
+\newpage
+
+<!--chapter:end:01-indledning.Rmd-->
+
+\part{Den teoretiske ramme}
+
+# Underliggende teori {#unteo}
+
+## Den myopiske investor{#myoinv}
+Den myopiske investor vælger -- som navnet ligger op til -- sin portefølje under et én-periodes perspektiv, og foretager dermed et statisk bindende valg. Investoren forsøger at maksimere sin terminal formue, ved samtidig at forholde sig til sin risikoaversion. Dette forsager, at alle efterfølgende perioder bliver ignoreret af investoren. Ergo skal han løse det statiske portefølje problem fra tidspunkt $t$ til tidspunkt $t+1$. I denne ene periode er investeringsmulighederne: et risikobærende aktiv samt et risikofrit aktiv. Afkastene over den førstkommende periode for disse aktivklasser vil blive noteret som hhv. $R_{t+1}$ med betinget middelværdi $\mathbb{E}_t(R_{t+1})$^[Her benyttes den gængse notation $\mathbb{E}(R_{t+1}\mid \mathcal{F}_t)=\mathbb{E}_t(R_{t+1})$ for filteret $\mathcal{F}_t$.] samt betinget varians $\mathbb{V}_t(R_{t+1})=\sigma_t^2$ og $R_{0,t+1}$.
+
+Det antages at investorens formue er fuldt allokeret når en del $\alpha_t$ bliver placeret i det risikobærende aktiv og $(1-\alpha_t)$ i det risikofrie aktiv. Hermed bliver hans porteføljeafkast givet ved
+\begin{equation}
+R_{p,t+1}=\alpha_t R_{t+1}+\left(1-\alpha_t\right)R_{0,t+1}.(\#eq:Portafk)
+\end{equation}
+
+Den betingede middelværdi af porteføljeafkastet bliver dermed
+\begin{align}
+\mathbb{E}_t(R_{p,t+1})&=\alpha_t\mathbb{E}_t(R_{t+1})+(1-\alpha_t)R_{0,t+1} \notag\\ 
+&=R_{0,t+1}+ \alpha_t\left(R_{t+1} - R_{0,t+1}\right),(\#eq:Forvport)
+\end{align}
+
+og endeligt den betingede varians af porteføljeafkastet
+\begin{equation}
+\mathbb{V}_t(R_{p,t+1})=\alpha_t^2\sigma_t^2.(\#eq:Varport)
+\end{equation}
+
+Den simplificerende antagelse i [@Markowitz1952] er at investorer kun forholder sig til de første to momenter, hvis vi modellerer denne afvejning lineært, opnår vi følgende maksimeringsproblem
+\begin{equation}
+\max_{\alpha_t} \mathbb{E}_t\left(R_{p,t+1}\right) -\frac{k}{2} \mathbb{V}_t\left(R_{p,t+1}\right),(\#eq:Statmaks)
+\end{equation}
+
+hvor $k$ er en skalering, som repræsenterer investorens risiko aversion. Ved at modellere ovenstående relation som lineær og kun afhængig af de første to momenter restringerer vi investoren til at foretrække et højt afkast, lav volatilitet og ignorerer alle højere momenter, såsom skævhed og kurtosis. Ved indsættelse af Ligning \@ref(eq:Portafk) i Maksimeringsproblemet \@ref(eq:Statmaks) og dernæst differentiation opnåes førsteordensbetingelsen, se Appendiks \@ref(udlmyo), løsningen til optimalitetsproblemet bliver dermed
+\begin{equation}
+\alpha_t = \frac{\mathbb{E}_t\left(R_{t+1}\right)-R_{0,t+1}}{k\sigma_t^2}.(\#eq:Løsning)
+\end{equation}
+
+Porteføljeanalyse benytter ofte nøgletallet *Sharpe Ratio*, også kendt som *Market Price of Risk* i stokastisk finansiering, [@Bjork2009]. I porteføljeteori er det kendt som et performance-mål, som fortæller investoren om merafkastet i sin portefølje relativt til den risiko han har påtaget sig, altså
+$$S_t=\frac{\mathbb{E}_t(R_{t+1})-R_{0,t+1}}{\sigma_t}.$$
+
+Dette tillader, at vi kan omskrive Ligning \@ref(eq:Løsning) til
+$$\alpha_t=\frac{S_t}{k\sigma_t}.$$
+
+Forholdet mellem middelværdien og variansen er $\tfrac{1}{k}$, eftersom vi kan udlede, at merafkastet på porteføljen er $\tfrac{S_t^2}{k}$ og variansen er $\tfrac{S_t^2}{k^2}$. *Sharpe Ratio*'en på porteføljen er $S_t$, og alle tænkelige porteføljer (afhængig af $k$) vil have samme *Sharpe Ratio*, fordi de er eksponeret til det risikobærende aktiv, men stadig i større eller mindre grad.
+
+Altså er vægtningen i det risikobærende aktiv et forhold mellem: det forventede risikobærende merafkast over det risikofrie aktiv samt en skalering af det risikobærende aktivs varians. Vi kan uden problemer opskrive ovenstående løsning til tilfældet, hvor investoren står overfor $n>1$ risikobærende aktiver. $\bm{R}_{t+1}$ repræsenterer en $n\times 1$ vektor af afkast for risikobærende aktiver, fra $t$ til $t+1$. Den betingede middelværdi bliver $\mathbb{E}_t(\bm{R}_{t+1})$ og den betingede kovariansmatrix noteres som $\mathbb{V}_t(\bm{R}_{t+1})=\bm{\Sigma}_t$. Herudover er $\bm{\alpha}_t$ nu en $n\times 1$ vektor af vægte i de risikobærende aktiver.
+
+Den betingede middelværdi af porteføljeafkastet bliver dermed nu
+\begin{equation}
+\mathbb{E}_t(R_{p,t+1})=R_{0,t+1}+\bm{\alpha}_t'(\mathbb{E}_t(\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}),
+\end{equation}
+
+den betingede varians af porteføljeafkastet bliver
+\begin{equation}
+\mathbb{V}_t(R_{p,t+1})=\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t.
+\end{equation}
+
+Vi kan nu opskrive maksimeringsproblemet
+\begin{equation}
+\max_{\alpha_t} \bm{\alpha}_t'(\mathbb{E}_t(\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}) - \frac{k}{2}\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t, (\#eq:MultStatmaks)
+\end{equation}
+
+Den optimale porteføljestrategi, givet som løsningen til Maksimeringsproblemet \@ref(eq:MultStatmaks) findes til at være
+\begin{equation}
+\bm{\alpha}_t=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t(\bm{R}_{t+1})-R_{0,t+1}\bm{\ell}).(\#eq:Multalpha)
+\end{equation}
+
+Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det værd at bemærke, at løsningen er karakteriseret af \textit{The Mutual Fund Seperation Theorem}, [@Tobin1958], som var en af mange videnskabelige bidrag James Tobin fik sin Nobelpris for i 1981, [@Nobel2020]. Essencen af Sætningen er, at alle investorer vil holde den eksakt samme portefølje af risikobærende aktiver samt en del i det risikofrie aktiv. Det eneste som adskiller investorer fra hinanden, er deres relative fordeling af total formue i den optimale risikobærende portefølje, som er fastsat ud fra deres egne risikopræferencer. Figur \@ref(fig:AfkVol) viser de optimale porteføljestrategier i et afkast-volatilitets spektrum.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1]
+\begin{axis}[
+  xticklabel={$\pgfmathprintnumber{\tick}\,\%$},
+  yticklabel={$\pgfmathprintnumber{\tick}\,\%$},
+  height=7cm, width=12cm,
+  axis x line=bottom, axis y line=left,
+  xlabel = Standardafvigelse, ylabel = Forventet afkast,
+  ymin=0, ymax=25, xmin=0, xmax=60,
+  extra x ticks={65}, extra x tick labels={$\sigma$},
+  extra x tick style={major tick length=0mm, grid=none},
+  extra y ticks={27}, extra y tick labels={$\mu$},
+  extra y tick style={major tick length=0mm, grid=none},
+  enlargelimits=true,
+  scatter/classes={
+    a={mark=o,draw=black, mark size = 3pt},
+    b={mark=*, mark size = 3pt,draw=magenta, fill = magenta},
+    c={mark=*, mark size = 3pt,draw=black, fill = black}
+  }
+]
+
+\addplot[scatter,only marks, scatter src=explicit symbolic]
+  coordinates {
+    (30, 11)     [c]
+    (19, 5)      [c]
+    (40, 15)     [c]
+    (16, 10)     [b]
+  };
+\node at (axis cs:19, 5) [anchor=north west] {Aktiv 1};
+\node at (axis cs:30,11) [anchor=north west] {Aktiv 2};
+\node at (axis cs:40,15) [anchor=north west] {Aktiv 3};
+\addplot[magenta, very thick,  domain=-1:2.5, samples=200, variable=\t](
+   {(20^2*t^2 + 12^2*(1-t)^2)^(0.5) }, %{(t^2 * 20^2 + (1-t)^2 * 12)},
+   {11 * t + (1-t) * 5}
+ );
+\node[color=red] at (axis cs:30, 0) [anchor=south west] {\textbf{Den efficiente rand}};
+\addplot[black, very thick, domain=-10:50, samples=100, variable=\x](
+  ({x}, {4 + 0.37 * x});
+\node[rotate = 25, color=black] at (axis cs:30, 15) [anchor=south west] {\textbf{CML}};
+\node[pin={[pin edge={thick}, text width=3cm, pin distance=2cm]90:{{\centering Tangensporteføljen}}}] at (axis cs:16, 10.5) {};
+\end{axis}
+\end{tikzpicture}
+\caption{Afkast-volatilitets spektrummet.}
+\label{fig:AfkVol}
+\end{figure}
+
+Altså vil investorer vælge en portefølje på den efficiente rand, som opnår en efficient porteføljevægtning langs *Capital Market Line*. Derudover skal det nævnes, at det kun er den øvre halvdel af den efficiente rand, som reelt set er efficient. Dette kommer sig af at porteføljer på den nederste del har en identisk påhæftet volatilitet, men med et lavere forventet afkast end den symmetrisk modsatte portefølje.
+
+Selvom Markowitz' model er en hjørnesten inden for moderne porteføljeteori, er der flere mangler i den opsatte teoretiske ramme. Først og fremmest medfører Markowitz' antagelse om en lineær afvejning mellem kovarianser og afkast, implicit antagelsen, at investorenes nyttefunktioner kan approksimeres af en anden ordens Taylor udvidelse over en bredt sprektrum af afkast. Derudover findes ingen beskrivelse for, hvordan parameteren $k$ er koblet til investorens nyttefunktion. Disse mangler kan blive afhjulpet ved samtidig brug af specifikke nyttefunktioner og afkastfordelinger, som opfylder Taylor udvidelsen. Dette medfører at middelværdi-varians analysen kan benyttes for tre forskellige opsætninger, som bliver præsenteret i Sektion \@ref(typnyt), [@CampVic2003].
+
+## Præferencer for risiko
+For et fast formueniveau $w\in \mathbb{R}_+$ betragter vi en stokastisk variabel $X$, hvor $\mathbb{E}(X)=0$. Derfor kan også $w+X$ betragtes som en stokastisk variabel, der repræsenterer en fremtidig formueplan med realiseret formue $w+\mathbb{E}(X)$, hvis $X$ bliver realiseret. Derfor kaldes $X$ undertiden også et fair spil, derudover haves at $\mathbb{E}(w+X)=w$.
+
+En (strengt) risikoavers investor vil for alle $w\in \mathbb{R}_+$ og alle $X$ (strengt) foretrække den sikre formue $w$ fremfor $w+X$. Ergo vil investoren altid afslå ethvert fair spil. Omvendt vil en (strengt) risikoelskende investor foretrække spillet og dermed $w+X$ fremfor $w$. Endeligt findes risikoneutrale investorer, som er indifferent mellem den sikre formue $w$ og formuen $w+X$. I realiteten er investorer ingen af delene, f.eks. vil nogle afslå fair spil i et ikke-tilfældigt nabolag rundt om værdien af $w$. Dette betegnes undertiden som at være lokalt risikoavers, lokalt risikoelskende og lokalt risikoneutral.
+
+Generelt anses investorer (og andre individer for den sags skyld) at være risikoaverse, derfor vil fokus være på denne risikopræference.
+
+## Nytte defineret over formue
+
+I Sektion \@ref(myoinv), introducerede vi en af de bærende antagelser i [@Markowitz1952]: at investorer kun forholder sig til middelværdien og variansen af porteføljeafkast, og ikke højere momenter. Vi kan tilsvarende antage, at investorer definerer deres nytte via formue på terminaltidspunktet. Dette tillader os at redefinere Maksimeringsproblemet \@ref(eq:Statmaks) til nedenstående
+\begin{align}
+&\max\mathbb {E}_t(U(W_{t+1})) (\#eq:Nyttemaks)\\
+&\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
+\end{align}
+
+Hvor $U(W_{t+1})\in\mathbb{R}_+$ er en konkav nyttefunktion. Investoren vil givet nyttefunktionens konkave krumning være risikoavers. Netop dette aspekt gør, at vi kan inkorporere risikoaversion, når investorens porteføljevalg skal foretages. For at fastlægge denne investorspecifikke risikoaversion benyttes derfor skalerede krumningsmål. Disse fundamentale risikoaversionsmål er kendt som *Arrow-Pratt Målene for Risikoaversion*, [@Arrow1965] og [@Pratt1964]. Når nytte skal belyses, kan risikoaversion mht. den fremtidige formue $W_{t+1}$ benyttes. Graden af krumningen på nyttefunktion giver os information om investorens risikopræferencer introduceret ovenfor. Vi antager at investorens nyttefunktion er strengt voksende i terminal formue -- altså er investoren grådig og foretrækker høj formue frem for en lav formue -- men i en faldende rate. Nyttefunktion vil altså have følgende karakteristika
+$$U'(W)>0\quad\text{og}\quad U''(W)<0.$$
+
+Hvor $U'(W)$ og $U''(W)$ er den hhv. første- og anden afledte mht. formuen $W$. Når vi skal kvantificere denne risikoaversion, skal vi sikre, at målet er invariant overfor strengt positive affine transformationer. Dette er bl.a. opfyldt ved brug af *Coefficient of Absolut Risk Aversion*, [@Arrow1965] og [@Pratt1964]. *ARA* er defineret som den negative anden afledte af nyttefunktionen mht. formue, skaleret med den første afledte
+$$\text{ARA}(W)=-\frac{U''(W)}{U'(W)}.$$
+
+Selvom den anden afledte af nyttefunktionen er et mål for krumningen af nyttefunktionen, bliver vi nødt til at skalere for at eliminere afhængigheden af abitrære størrelser, som relaterer sig til målbarheden af nytte. *ARA* måler investorens absolutte dollar værdi, som han er villig til at købe, for at undgå et tab på samme absolutte størrelse. Hvis *ARA* er faldende medfører det at desto mere formue en investor har, desto mere risikosøgende bliver han, altså haves at $\text{ARA}(W)<0$, og så fremdeles. Almindeligt menes det, at *ARA* burde falde, eller i det mindste ikke stige, med formue. Et relateret mål er *Coefficient of Relative Risk Aversion*, *RRA*, som er samtidig tager højde for investorens formue
+$$\text{RRA}(W)=-\frac{WU''(W)}{U'(W)}.$$
+
+Her måles marginal nytten og dermed investorens risikoaversion over en procentdel af formuen. Samme inferens som for *ARA* kan blive udtænkt for *RRA*. *RRA* måler den del af formuen, som investoren vil betale for at undgå et spil på en given størrelse relativt til formuen.
+
+De tilsvarende reciprokke af ovenstående mål kaldes hhv. *Coefficeint of Absolute Risk Tolerance* samt *Coefficeint of Relative Risk Tolerance*.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1]
+\begin{axis}[
+  height=7cm, width=12cm,
+  axis x line=bottom, axis y line=left,
+  xlabel = Formue, ylabel = Nytte,
+  ymin=0, ymax=25, xmin=0, xmax=60,
+  xtick={5, 15, 30}, xticklabels={$W_{t}-G$, $W_t$, $W_t+G$},
+  ytick={9.7, 16.3, 20.5}, yticklabels={$U(W_{t}-G)$, $U(W_{t})$, $U(W_{t}+G)$},
+    extra x ticks={65}, extra x tick labels={$W_{t+1}$},
+  extra x tick style={major tick length=0mm, grid=none},
+  extra y ticks={27}, extra y tick labels={$U(W_{t+1})$},
+  extra y tick style={major tick length=0mm, grid=none},
+  enlargelimits=true,
+]
+\addplot[black, very thick, smooth, domain=-10:50, samples=100, variable=\x](
+  ({x}, {6*ln(\x)});
+  \draw [dashed] (5,-2.5) -- (5,9.7);
+  \draw [dashed] (-6,9.7) -- (5,9.7);
+  
+  \draw [dashed] (15, -2.5) -- (15, 16.3);
+  \draw [dashed] (-6, 16.3) -- (15, 16.3);
+  
+  \draw [dashed] (30, -2.5) -- (30, 20.5);
+  \draw [dashed] (-6, 20.5) -- (30, 20.5);
+\end{axis}
+\end{tikzpicture}
+\caption{Konkav nytte af formue.}
+\label{fig:Nyt}
+\end{figure}
+
+Som redegjort ovenfor, er både *ARA* samt *RRA* essientielle mål til kvantificering af risikopræferencer og dermed til at opnå forståelse for nyttefunktionen hos den enkelte investor. Konstateringer udledt fra den langsigtede økonomiske adfærd fastslår, at *RRA* ikke kan afhænge alene af formue. Dette kommer sig af, at formue og per capita forbrug er steget henover de seneste to århundreder. Det absolutte forhold mellem finansielle risici er ligeledes forøget -- siden disse risici er multiplikative -- mens den relative risici har været konstant. Samtidigt er der ikke fundet evidens baseret på afkast og renter, der har påvist en langsigtet tendens, som respons til denne vækst. Altså vil investorer betale de samme relative omkostninger for at undgå en given finansiel risiko uanset om de er velhavende eller ej, [@CampVic2003]. Dette foranlediger en til at tænke tanken, at *RRA* er uafhængig af formue og bør være konstant, [@Chiappori2008].
+
+## Typer af nyttefunktioner{#typnyt}
+
+Antagelser omhandlende: formen af nyttefunktioner og fordelingen af afkast, er påkrævet, for at kunne skabe en traktabel model. Flere nyttefunktioner har vist sig relevante inden for middelværdi-varians analyse, [@CampVic2003]. Nogle af disse er eksponentiel nytte, potens nytte samt kvadratisk nytte. Fælles for disse er, at de definerer nytte over formue, udover disse findes andre mere eksotiske nyttefunktioner såsom Epstein-Zin nytte. I denne Sektion vil vi undersøge ovenstående nærmere, og ud fra et kvantitativt aspekt vælge nyttefunktionen, som denne afhandling vil arbejde videre med.
+
+Generelt vil en investors nytte -- defineret over formue -- afhænge af samtlige momenter relateret til formue. For at se dette laves en Taylor udvidelse af $U(W_{t+1})$ omkring den forventede formue, $\mathbb{E}(W_{t+1})$
+\begin{align*}
+U\left(W_{t+1}\right)=&U\left(\mathbb{E}\left(W_{t+1}\right)\right)+U'\left(\mathbb{E}\left(W_{t+1}\right)\right)+\frac{1}{2}U''\left(\mathbb{E}\left(W_{t+1}\right)\right)\left(W_{t+1}-\mathbb{E}\left(W_{t+1}\right)\right)^2\\
+&+\sum_{n=3}^\infty \frac{1}{n!}U^{\left(n\right)}\left(\mathbb{E}\left(W_{t+1}\right)\right)\left(W_{t+1}-\mathbb{E}\left(W_{t+1}\right)\right),
+\end{align*}
+
+hvor $U^{(n)}$ er den $n$'te afledte af $U(\cdot)$. Tager vi nu den forventede værdi fås
+\begin{align*}
+\mathbb{E}\left(U\left(W_{t+1}\right)\right)=&U\left(\mathbb{E}\left(W_{t+1}\right)\right)+\frac{1}{2}U''\left(\mathbb{E}\left(W_{t+1}\right)\right)\mathbb{V}\left(W_{t+1}\right)\\
+&+\sum_{n=3}^\infty \frac{1}{n!} U^{\left(n\right)}\left(\mathbb{E}\left(W_{t+1}\right)\right)\mathbb{E}\left(\left(W_{t+1}-\mathbb{E}\left(W_{t+1}\right)\right)^n\right),
+\end{align*}
+
+hvor $\mathbb{E}((W_{t+1}-\mathbb{E}(W_{t+1}))^n)$ er det centrale moment af orden $n$. Fælles for disse momenter er, at de kvantificerer en investors villighed til at afgive eller optage diverse risici. Givetvis vil en grådig investor foretrække højere forventet formue end lavere, for faste centrale momenter af anden orden eller højere. En risikoavers investor, altså $U''(W)<0$, vil foretrække lavere varians af formue fremfor højere, for fast forventet formue samt faste centrale momenter af tredje orden eller højere. Problemet opstår når de centrale momenter højere end eller lig tredje orden ikke er ens for alle alternativer. I så fald ville vi ikke kunne evaluere dem på baggrund af middelværdi og varians.
+
+### Kvadratisk nytte
+
+Kvadratisk nytte definerer nyttefunktionen som kvadratisk over formue. Den er fuldstændig defineret af dets første og anden afledte mht. formue. Alle dets højere momenter bliver $0$, og skaber dermed ikke problemer i et middelværdi-varians setup, som argumenteret for ovenfor. For parametrene $a,b\in\mathbb{R}$ er kvadratisk nytte defineret som
+\begin{equation}
+U(W_{t+1})=aW_{t+1}-bW_{t+1}^2. (\#eq:Kvadnytte)
+\end{equation}
+
+Til forskel for nedenstående nyttefunktioner kræver kvadratisk nytte ikke fordelingsmæssige antagelser vedr. afkast af aktiverne. 
+
+Under kvadratisk nytte vil maksimering af forventet nytte, som i Maksimeringsproblemet \@ref(eq:Nyttemaks), være ækvivalent til at maksimere en lineær kombination af middelværdi og varians, som i Maksimeringsproblemet \@ref(eq:Statmaks). Middelværdien af Ligning \@ref(eq:Kvadnytte) giver den forventede nytte
+$$\mathbb{E}(U(W_{t+1}))=\mathbb{E}(W_{t+1})-b(\mathbb{V}(W_{t+1}+\mathbb{E}(W_{t+1}))),$$
+
+og er dermed en funktion afhængende af både forventet formue og variansen af formue [@Munk2017]. Herudover vil *ARA* samt *RRA* begge være stigende i formue under kvadratisk nytte. Som argumenteret ovenfor vil stigende *ARA* være uhensigtmæssigt. 
+
+### Eksponentiel nytte
+Eksponentiel nytte antager at variablene i modellen er normalfordelt. Lad $\theta\in\mathbb{R}$ være parametren i modellen, da vil eksponentiel nytte være defineret ved
+\begin{equation}
+U(W_{t+1})=-\exp\left(-\theta W_{t+1}\right). (\#eq:Ekspnytte)
+\end{equation}
+
+Eksponentiel nytte antager, at *ARA* er konstant lig $\theta$, mens *RRA* kan stige med formue. Dette aspekt gør også eksponentiel nytte foretrukket ift. kvadratisk nytte. Eksponentiel nytte er også kendt under navnet *Constant Absolute Risk Aversion*. For en eksplicit opskrivning af forventningen af Ligning \@ref(eq:Ekspnytte) bemærker vi følgende
+$$W_{t+1}\sim N(\mu_p,\sigma_p^2)$$
+
+altså er terminalnytten normalfordelt for enhver mulig portefølje, $p$, givet at afkastene er normalfordelt. Regner vi derfor på forventningen, får vi
+$$\mathbb{E}(U(W_{t+1}))=-\exp\left(-\theta\mu_p+\frac{\theta^2}{2}\sigma_p^2\right).$$
+
+### Potens nytte
+Potens nytte kræver, at afkast af aktiverne og formue er lognormal fordelt. *ARA* er faldende i formue og *RRA* er antaget til at være en konstant $\gamma\in\mathbb{R}$, [@CampVic2003]. Potens nytte er mere kendt under navnet *Constant Relative Risk Aversion*. Nyttefunktionen er defineret for $W_{t+1}\geq 0$, som
+\begin{align}
+U(W_{t+1})=\begin{cases} \frac{W_{t+1}^{1-\gamma}-1}{1-\gamma},\quad &\gamma\neq 1\\
+\log(W_{t+1}),\quad &\gamma = 1. \end{cases} (\#eq:Potnytte)
+\end{align}
+
+For $\gamma\neq 1$ fås den forventede nytte til
+$$\log(\mathbb{E}(W_{t+1}))=\mathbb{E}(\log(W_{t+1}))+\frac{1}{2}\mathbb{V}(\log(W_{t+1})),$$
+
+hvor vi har anvendt det bærende resultat vedr. middelværdien af en lognormalfordelt stokastisk variabel, se evt. Appendiks ??. Logaritmefunktionen er en konkav funktion, dette betyder at middelværdien af log af en stokastisk variabel er mindre end log af middelværdien, og forskellen er stigende i variabiliteten af den stokastiske variabel. For $\gamma \rightarrow 1$ haves
+$$\mathbb{E}(U(W_{t+1}))=\mathbb{E}(\log(W_{t+1})).$$
+
+### Sammenligning af nyttefunktioner
+Som pointeret flere gange i ovenstående, burde *ARA* være faldende, eller under alle omstændigheder, ikke stige med formue. Dermed kan vi se bort fra kvadratisk nytte. Samtidigt vil det gøre potens nytte mere favorabel end eksponentiel nytte. Derudover er det konstante aspekt af *RRA* attraktivt under potens nytte, i og med, at det er nødvendigt ift. inferensen vedr. stabiliteten af finansielle variable under sekulær økonomisk vækst, [@CampVic2003].
+
+Derudover vil valget mellem potens nytte og eksponentiel nytte også skabe de ovennævnte forskellige fordelingsmæssige antagelser. Eksponentiel nytte resulterer i simple afkast, hvis afkastene af aktiverne er normalfordelte, hvorimod, at potens nytte resulterer i simple afkast, hvis afkastene af aktiverne er lognormalfordelte.
+
+Antagelsen om normalfordelte afkast er tiltalende, men begrænser sig til et kortsigtet perspektiv, i det, at antagelsen ikke kan holde mere end én periode. F.eks. kan vi antage, at kvartalvise afkast er normalfordelte, men så vil afkastet over to kvartaler ikke være normalfordelt. Dette kommer sig af at de er produktet af to succesive normalfordelte afkast, og kun summen af normalfordelte variable er selv normalfordelt, ikke produktet. En antagelse om lognormalfordelte afkast vil modsat holde i en hver tidshorisont, siden produktet af to lognormale stokastiske variable selv er lognormal. Derudover vil en lognormal stokastisk variabel aldrig blive negativ, og dette er konsistent med de fleste finansielle aktivers begrænsede gældsforpligtelser.
+
+Lognormale afkast vil til gengæld ikke nemt kunne flyttes fra aktivniveau til porteføljeniveau. Dette kommer sig af, at en portefølje givetvis er en lineær kombination af individuelle aktiver. Hvis disse individuelle aktiver antages at have lognormale afkast, vil porteføljeafkastet være et vægtet gennemsnit af lognormale afkast, men et sådant gennemsnit er ikke selv lognormalt. Vi overkommer imidlertidigt dette problem ved at arbejde med korte intervaller. Ikke-lognormaliteten af porteføljeafkastet formindskes ved at benytte kortere og kortere intervaller. I kontinuert tid vil problemet forsvinde i grænsen, [@CampVic2003].
+
+## Fordeling af afkast
+
+Brugen af afkast fremfor priser på aktiver, kommer sig af markedsinvariansen af afkast. Priser siges derimod at være kontrære, eller modsat rettede, [@Jondeau2007]. I bund og grund er priser *unit root* processer, dvs. stød til tidsserien af priser har permant effekt, dette kaldes undertiden også for ikke-stationære processer. *Unit root* processer siges også at have integration af orden $1$, $I(1)$. Afkast er derimod stationære processer, de har integration af orden $0$, $I(0)$, [@Verbeek2017]. For en ikke-stationær tidsserie vil momenterne ændre sig over tid, f.eks. vil middelværdien og variansen af en prisprocess på tidspunkt $t$, afhænge af den foregående periodes pris, altså på tidspunkt $t-1$. Den manglende markedsinvarians af prisprocesser holder dem ude af ligningen, da de grundet ovenstående ikke vil kunne producere *i.i.d.* stokatiske variable.
+
+I det følgende vil vi adskille simple afkast og log^[Gennem resten af denne afhandling vil log referer til den naturlige logaritme.] afkast gennem notation. Vi lader os notere det simple afkast som $R_{t+1}$, som følger den gængse notation i litteraturen. Vi lader det simple brutto afkast være defineret som
+$$R_{t+1}\equiv\frac{P_{t+1}}{P_t},$$
+
+hvor $P_t\in\mathbb{R}_+$ er prisen på et aktiv, på tidspunkt $t$, og dermed $R_t\in\mathbb{R}$. Det simple afkast $R_t-1$ er den procentvise ændring over den respektive tidsperiode. Empiriske resultater har påvist, at simple afkast af aktiver udviser assymmetri og resulterer i højreskæve fordelinger bl.a. pga. de bagvedliggende virksomheder og/eller institutioneres begrænsede gældsforpligtelser. Derudover kan højreskævheden af simple afkast fremkomme på lang sigt grundet, at de er produktet af afkast over én-periode, som argumenteret for ovenfor.
+
+For at overkomme disse faldgruber af simple afkast, benyttes log afkastet. Log afkastet noteres som $r_{t+1}$, og defineres som
+$$r_{t+1}\equiv\log(1+R_{t+1}),$$
+
+hvilket er en geometrisk og kontinuert følge. Logafkastet af aktiver vil skabe symmetriske fordelinger, som overholder dermed overholder markedsinvariansen.
+
+# Afkast
+
+# Porteføljeteori
+I dette kapitel udvides teorien fra Kapitel \@ref(unteo). Mere specifikt sammenkobles porteføljeteorien fra Sektion \@ref(myoinv) og nytteteorien fra Sektion \@ref(typnyt). Dette gøres på baggrund af *CRRA*-nytte, i tilfældet, hvor investoren kan rebalancere sin portefølje periodisk, og i det restringerede tilfælde, hvor ingen rebalancering er tilladt. Herefter beskrives den analytiske løsning til det dynamiske porteføljeproblem foreslået af [@JurVic2011].
+
+## CRRA Portefølje
+I det følgende vil porteføljevalget under antagelsen, at investoren har potens nytte, dvs. *CRRA*-nytte samt at afkastene på alle aktivklasser er lognormale.
+
+Først antages, at afkastet på investorens portefølje er lognormal, dette betyder at $W_{t+1}$ ligeledes er lognormal. Under antagelsen om potens nytte, kan vi omskrive Maksimeringsproblemet \@ref(eq:Nyttemaks) til
+\begin{align}
+&\max\mathbb{E}_t(\frac{W_{t+1}^{1-\gamma}-1}{1-\gamma}) (\#eq:CRRAmaks)\\
+&\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
+\end{align}
+
+Maksimering af ovenstående forventning er ækvivalent til at maksimere log af forventningen, eftersom log-funktionen er strent voksende, se evt. Figur \@ref(fig:Nyt), som er tegnet på baggrund af log-funktionen. Derudover kan: $\tfrac{1}{1-\gamma}$ og $-1$ fjernes fra Maksimeringsproblemet, eftersom de er konstante og derfor ikke vil påvirke optimum. Givet af $W_{t+1}$ er lognormal, kan resultatet fra Appendiks ?? anvendes, og dermed opnå
+\begin{align}
+&\max \log\left(\mathbb{E}_t(W_{t+1}^{1-\gamma})\right)=(1-\gamma){E}_t(w_{t+1})+\frac{1}{2}(1-\gamma)^2\sigma_{wt}^2 (\#eq:CRRAmakslog)\\
+&\text{ubb.}\,\,w_{t+1}=r_{p,t+1} + w_t.\notag
+\end{align}
+
+hvor $\sigma_{wt}^2$ er den betingede varians af log formuen, $w_{t+1}$. Derudover er budgetbegrænsningen ligeledes omskrevet til log-form. Her er $r_{p,t+1}=\log(1+R_{p,t+1})$, dvs. logafkastet på porteføljen, også kendt som det kontinuert tilskrevne porteføljeafkast. Ved division af $(1-\gamma)$ og samtidig substitution af budgetbegrænsningen ind i objektfunktionen, opnåes følgende ubetingede maksimeringsproblem.
+\begin{equation}
+\max\mathbb{E}_t(r_{p,t+1}) + \frac{1}{2}(1-\gamma)\sigma_{pt}^2, (\#eq:CRRAmakslog2)
+\end{equation}
+
+hvor $\sigma_{pt}^2$ er den betingede varians af det kontinuert tilskrevne porteføljeafkast. Dette benytter faktummet at $\mathbb{E}(w_t)=w_t$ er deterministisk og ikke påvirker optimum eller variansleddet. Her kan det bemærkes, at
+\begin{equation}
+\mathbb{E}(r_{p,t+1})+\frac{1}{2}\sigma_{pt}^2=\log(\mathbb{E}(1+R_{p,t+1})), (\#eq:portafkls)
+\end{equation}
+
+fordi porteføljeafkastet er antaget til at være lognormal. Altså kan Maksimeringsproblemet \@ref(eq:CRRAmakslog2) omskrives til
+\begin{equation}
+\max\mathbb{E}_t(1+R_{p,t+1}) - \frac{1}{2}\gamma\sigma_{pt}^2. (\#eq:CRRAmakslog3)
+\end{equation}
+
+Dermed opnåes det familiære maksimeringsproblem fra middelværdi-varians analysen, Sektion \@ref(myoinv). Altså vil investoren maksimere bytteforholdet mellem den forventede middelværdi og variansen på porteføljen. Denne afvejning er igen lineær, og *RRA*-koefficienten $\gamma$ spiller samme rolle som parameteren $k$ i middelværdi-varians analysen. Fra ovenstående ses også, at variansen på porteføljen bliver straffet af en faktor på $\tfrac{\text{RRA}}{2}$.
+
+Risikoaversion kan også analyseres på baggrund af \@ref(eq:CRRAmakslog2).
+
+  - For $\gamma>1$, vil investoren søge en mere sikker portefølje ved at straffe variansen af portefølje afkastet. Her er den positive effekt af det forventede afkast mere end opvejet af den negative effekt af variansen.
+ 
+  - For $\gamma<1$, vil investoren søge en mere risikobærende portefølje ved at søge variansen af portefølje afkastet. Her er den positive effekt af det forventede afkast mere end opvejet af den negative effekt af variansen. Dette kommer sig af, at en højere varians, for det samme forventede log afkast, vil medføre et højere forventet simpelt afkast, se evt. Ligning \@ref(eq:portafkls).
+  
+  - For $\gamma=1$, vil investoren have log nyttefunktionen, og vælger porteføljen med det højeste log afkast. Denne portefølje betegnes undertiden som *Growth-Optimal*, siden det kan udledes at denne portefølje har højeste forventede afkast på lang sigt under visse antagelser, [@Kelly1956]. 
+
+For at kunne løse Maksimeringsproblemet \@ref(eq:CRRAmakslog3), må et nyttigt approksimationsresultat tages i brug. Som tidligere nævnt er porteføljeafkastet en lineær kombination af vægtede afkast på aktiver. Log afkastet på porteføljen er log af denne lineære kombination, men ikke lig den lineære kombination af aktivernes log afkast. For at repræsentere log porteføljeafkastet på baggrund af log aktivafkast, over korte tidsintervaller, kan den følgende Taylor approksimation af den ikke-lineære funktion benyttes
+$$r_{p,t+1}-r_{0,t+1}\approx \alpha_t (r_{t+1}-r_{0,t+1})+\frac{1}{2}\alpha_t(1-\alpha_t)\sigma_t^2.$$
+
+Her epræsenterer $r_{t+1}$ log afkastet på det ene risikobærende aktiv, og $r_{0,t+1}$ repræsenterer log afkastet på det risikofrie aktiv. Forskellen mellem log porteføljeafkastet og den lineære kombination af de individuelle logafkast er givet ved $\alpha_t(1-\alpha_t)\tfrac{1}{2}\sigma_t^2$. Forskellen vil forsvinde, hvis vægtningen i det risikobærende aktiv er nul, eller hvis vægtningen i det risikofrie aktiv er nul. Ovenstående approksimation er eksakt i grænsen, ved benyttelse af kontinuerte *diffusion processes* for priserne på aktiverne, og kan udledes ved brug af *Itô's Lemma*, [@CampVicCha2003]. Ovenstående approksimation kan nu benyttes, og dermed kan Maksimeringsproblemet \@ref(eq:CRRAmakslog2) skrives i form af merafkast på porteføljen.
+\begin{equation}
+\max\alpha_t(\mathbb{E}_t(r_{t+1}) - r_{0,t+1}) + \frac{1}{2}\alpha_t(1-\alpha_t)\sigma_t^2 + \frac{1}{2}(1-\gamma)\alpha_t^2\sigma_t^2, (\#eq:CRRAmakslog4)
+\end{equation}
+
+med den tilhørende løsning
+\begin{equation}
+\alpha_t=\frac{\mathbb{E}(r_{t+1}) - r_{0,t+1}+\frac{1}{2}\sigma_t^2}{\gamma\sigma_t^2}.
+\end{equation}
+
+Som tilmed er ækvivalent til den optimale vægtning, Ligning \@ref(eq:Statmaks), fra middelværdi-varians analysen.
+
+# VAR
+
+I dette kapitel fastsættes den teoretiske ramme for den empiriske analyse. Dette gøres hovedsageligt ud fra teorien bag [@Userguide2004] s. 2-22 med enkelte dele, som varierer.
+\section{Sættet af investeringsmuligheder}
+Først etableres en model, som kan modellere forventet afkast og risiko af aktier på tværs af investeringshorisonter.
+
+\subsection{Afkastdynamikken}
+
+Lad $\bm{z}_{t+1}$ være en $m\times 1$ vektor, hvis indgange er afkastet på alle aktiver som vi vil undersøge samt værdierne af tilstandsvariablene på tidspunkt $t+1$. Denne vektor opskrives som
+    \begin{equation}
+        \bm{z}_{t+1}\equiv
+        \begin{bmatrix}
+        r_{0,t+1}\\
+        \bm{r}_{t+1}-r_{0,t+1}\\
+        \bm{s}_{t+1}
+        \end{bmatrix}\equiv
+        \begin{bmatrix}
+        r_{0,t+1}\\
+        \bm{x}_{t+1}\\
+        \bm{s}_{t+1}
+        \end{bmatrix},
+    \end{equation}
+hvor $r_{0,t+1}$ er netto log-afkastet af det aktiv, som vores merafkast for de andre aktiver regnes ud fra, $\bm{x}_{t+1}$ er en vektor af netto log-merafkast for alle andre aktiver, og $\bm{s}_{t+1}$ er en vektor indeholdende realisationerne af tilstandsvariablene. Vi antager samtidig, at der eksisterer $n+1$ klasser af aktiver og $m-n-1$ tilstandsvariable.
+
+\vspace{5mm}
+
+Nu viser vi, hvordan momenterne af netto afkastene fremkommer ved brug af en VAR process. Vi antager, at aktivernes afkast samt tilstandsvariablene følger en $\text{VAR}(1)$ process
+    \begin{equation}
+        z_{i,t+1}=\varphi_0+\varphi_1 z_{1,t}+\dots+\varphi_i z_{i,t}+\dots+v_{i,t+1},
+    \end{equation}
+hvor hver variabel, $z_{i,t+1}$, afhænger lineært af en konstant, værdien af variablen på tidspunkt $t$, værdien af alle andre variable på tidspunkt $t$ samt et fejlled.
+
+\vspace{5mm}
+
+I matrixnotation får vi da følgende kompakteopskrivning
+    \begin{equation}\label{eq:1}
+        \bm{z}_{t+1}=\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_t+\bm{v}_{t+1},
+    \end{equation}
+hvor $\bm{\Phi}$ er en vektor af afskæringer, $\bm{\Phi}_1$ er en kvadratisk matrix, som indeholder hældningskoefficienterne og $\bm{v}_{t+1}$ er en vektor fejlled til: realisationerne af afkast samt alle afkast variable i vores model, med middelværdi $0$.
+
+\vspace{5mm}
+
+For at få stationalitetsbetingelsen opfyldt i vores model, antager vi, at
+    \begin{equation*}
+        |\bm{\Phi}_1|\in(-1,1).
+    \end{equation*}
+Dvs. at determinanten af vores matrix -- bestående af hældningskoefficienter -- er begrænset mellem $-1$ og $1$.
+
+\vspace{5mm}
+
+Slutteligt antager vi, at fejlleddet er normalfordelt
+    \begin{equation}\label{eq:2}
+        \bm{v}_{t+1}\overset{\text{i.i.d.}}{\sim}N(0,\bm{\Sigma}_v),
+    \end{equation}
+hvor middelværdien er $0$, som tidligere nævnt, og $\bm{\Sigma}_v$ er kovariansmatricen, som tillige er symmetrisk. For notationens skyld sætter vi
+    \begin{equation*}
+        \bm{\Sigma}_v\equiv \mathbb{V}_t(\bm{v}_{t+1})=
+        \begin{bmatrix}
+        \bm{\sigma}_0^2 & \bm{\sigma}_{0x} & \bm{\sigma}_{0s}\\
+        \bm{\sigma}_{0x} & \bm{\Sigma}_{xx} & \bm{\Sigma}_{xs}\\
+        \bm{\sigma}_{0s} & \bm{\Sigma}_{xs} & \bm{\Sigma}_{s}\\
+        \end{bmatrix},
+    \end{equation*}
+hvor indgangene på diagonalen er: variansen af netto afkastet på vores benchmark aktiv, kovariansmatricen af uventede merafkast og kovariansmatricen af tilstandsvariablene. Uden for diagonalen består indgangene af: kovariansen mellem netto afkastet af benchmark aktivet og hhv. merafkastet for alle andre aktiver samt fejlledene til tilstandsvariablene.
+
+\vspace{5mm}
+
+Vi antager, at kovariansmatricen ikke ændrer sig med tiden, eftersom empiriske undersøgelser viser, at ændringer i risiko er kortvarige fænomener [@Camp1987] s. 32-33, men kovariansmatricen kan stadig ændre sig på tværs af investeringshorisonter.
+
+\vspace{5mm}
+
+Den ubetingede middelværdi og kovariansmatrix af $\bm{z}_{t+1}$ er givet ved
+    \begin{align*}
+        \mathbb{E}_t(\bm{z}_{t+1}) &= (\bm{I}_m-\bm{\Phi}_1)^{-1}\bm{\Phi}_0\\
+        \text{vec}(\bm{\Sigma}_{zz}) &= (\bm{I}_{m^2}-\bm{\Phi}_1\otimes\bm{\Phi}_1)^{-1}\text{vec}(\bm{\Sigma}_v).
+    \end{align*}
+Ovenstående ligninger ligger også til grund for determinantbetingelsen: hvis ikke determinanten af $\bm{\Phi}_1$ var begrænset af $-1$ og $1$, ville den ubetingede middelværdi og varians af $\bm{z}_{t+1}$ ikke være defineret.
+
+\subsection{Betingede momenter for $k$-perioder}
+Nu udledes den betingede middelværdi og kovariansmatrix af $(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})$ for enhver horisont $k$. Dette gøres eftersom det akkumulerede $k$-periode afkast fremkommer ved at addere én-periode log-afkast over $k$ perioder. Ved rekursion af \eqref{eq:1} fås
+    \begin{align*}
+        \bm{z}_{t+1}&=\bm{\Phi}_0+\bm{\Phi}_1 \bm{z}_t+\bm{v}_{t+1}\\
+        \bm{z}_{t+2}&=\bm{\Phi}_0+\bm{\Phi}_1 \bm{z}_{t+1}+\bm{v}_{t+2}=\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_1 \bm{z}_t +\bm{\Phi}_1 \bm{v}_{t+1}+\bm{v}_{t+2}\\
+        &\vdots\\
+        \bm{z}_{t+k}&=\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_0+\bm{\Phi}_1^2\bm{\Phi}_0+\dots+\bm{\Phi}_1^{k-1}\bm{\Phi}_0+\bm{\Phi}_1^k \bm{z}_t+\bm{\Phi}_1^{k-1}\bm{v}_{t+1}+\bm{\Phi}_1^{k-2}\bm{v}_{t+2}+\dots+\bm{\Phi}_1 \bm{v}_{t+k-1}+\bm{v}_{t+k}.
+    \end{align*}
+Herefter adderer vi udtrykkene for $\bm{z}_{t+1}$, $\bm{z}_{t+2},\dots,\bm{z}_{t+k}$ og får
+    \begin{align*}
+        \bm{z}_{t+1}+\dots+\bm{z}_{t+k}=&\left(k+(k-1)\bm{\Phi}_1+(k-2)\bm{\Phi}_1^2+\dots+\bm{\Phi}_1^{k-1}\right)\Phi_0\\
+        &+\left(\bm{\Phi}_1^k+\bm{\Phi}_1^{k-1}+\dots+\bm{\Phi}_1\right)\bm{z}_t\\
+        &+\left(1+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\right)\bm{v}_{t+1}\\
+        &+\left(1+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\right)\bm{v}_{t+2}\\
+        &+\dots\\
+        &+(I+\bm{\Phi}_1)\bm{v}_{t+k-1}+\bm{v}_{t+k}.
+    \end{align*}
+Ved brug af sumoperatoren kan vi skrive ovenstående i kompaktform
+    \begin{equation}
+        \bm{z}_{t+1}+\dots+\bm{z}_{t+k}=\left(\sum_{i=0}^{k-1} (k-i)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_1^j\right)\bm{z}_t+\sum_{q=1}^k\left(\sum_{p=0}^{k-q} \bm{\Phi}_1^p \bm{v}_{t+q}\right).
+    \end{equation}
+Nu kan vi beregne de betingede $k$-periode momenter af tilstandsvektoren. Den betingende middelværdi er
+    \begin{equation}
+        \mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})=\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t,
+    \end{equation}
+hvor vi benytter antagelsen i \eqref{eq:2}.
+
+\vspace{5mm}
+
+Den betingede varians er
+    \begin{align}
+        \mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})
+        &=\mathbb{V}_t\left(\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t +\sum_{q=1}^k\left(\sum_{p=0}^{k-q}\bm{\Phi}_1^p \bm{v}_{t+q}\right)\right) \nonumber\\
+        &=\mathbb{V}_t\left(\sum_{q=1}^k\left(\sum_{p=0}^{k-q} \bm{\Phi}_1^p \bm{v}_{t+q}\right)\right) \label{eq:3},
+    \end{align}
+hvor de første to led i variansen forsvinder, da de er konstante eller kendte på tidspunkt $t$. Ved omskrivning af \eqref{eq:3} fås
+    \begin{align*}
+        \mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})&=\mathbb{V}_t\big(\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\bm{v}_{t+1}+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\big)\bm{v}_{t+2}\\
+        &\hphantom{=}+\dots+\big(I+\Phi_1\big)\bm{v}_{t+k-1}+\bm{v}_{t+k}\big)\\
+        &=\Sigma_v+\big(I+\bm{\Phi}_1\big)\Sigma_v(I+\bm{\Phi}_1)'+\big(I+\bm{\Phi}_1+\bm{\Phi}_1\bm{\Phi}_1\big)\Sigma_v\big(I+\bm{\Phi}_1+\bm{\Phi}_1\bm{\Phi}_1\big)'\\
+        &\hphantom{=}+\dots+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\Sigma_v\big(I+\bm{\Phi}_1'+\dots+\bm{\Phi}_1^{k-1}\big)',
+    \end{align*}
+som følger af omskrivning af leddene, og at den betingede kovariansmatrix af $v_{t+i}$ er den samme for alle $i$.
+\subsection{Betingede momenter for $k$-periode afkast}
+Eftersom vi kun er interesserede i den del af vores VAR process, som indeholder afkast, benytter vi de såkaldte selektionsmatricer.
+
+\vspace{5mm}
+
+Vil vi have det forventede $k$-periode log-afkast pr. periode, kan vi benytte
+    \begin{equation*}
+        \bm{H}_r=\begin{pmatrix}\bm{I}_{n+1} & \bm{0}_{m-n}\end{pmatrix},
+    \end{equation*}
+ved at anvende denne matrix på den betingede middelværdi fås da
+    \begin{equation}
+        \frac{1}{k}\begin{pmatrix}
+        \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
+        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}} \right)
+        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k}).
+    \end{equation}
+Anvender vi den på den betingede varians fås
+    \begin{equation}
+        \frac{1}{k}\mathbb{V}_t\begin{pmatrix}
+        r_{0,t+1}^{(k)}\\
+        \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}}
+        \end{pmatrix}=\frac{1}{k}\begin{pmatrix}
+        \sigma_0^2(k) & \bm{\sigma}_{0x}(k)'\\
+        \bm{\sigma}_{0x}(k) & \bm{\Sigma}_{xx}(k)
+        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})\bm{H}_r'.
+    \end{equation}
+Den anden selektionsmatrix vi vil benytte kan udtrække netto $k$-periode log-afkastet pr. periode
+    \begin{equation}
+        \bm{M}_r=\begin{pmatrix}
+        1 & \bm{0}_{1\times n} & \bm{0}_{1\times (m-n-1)}\\
+        \bm{\bm{\ell}}_n & \bm{I}_n & \bm{0}_{m-n-1}
+        \end{pmatrix}.\label{eq:sel}
+    \end{equation}
+Anvender vi den på den betingede middelværdi fås
+    \begin{equation}
+        \frac{1}{k}\begin{pmatrix}
+        \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
+        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)} \right)=\frac{1}{k}\bm{M}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})
+        \end{pmatrix}.
+    \end{equation}
+Slutteligt anvendes den på den betingede varians
+    \begin{equation}
+        \frac{1}{k}\mathbb{V}_t\begin{pmatrix}
+        r_{0,t+1}^{(k)}\\
+        \bm{r}_{t+1}^{(k)}
+        \end{pmatrix}=\frac{1}{k}\bm{\Sigma}_{rr}(k)=\frac{1}{k}\bm{M}_r\mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})\bm{M}_r'.\label{eq:bv}
+    \end{equation}
+    
+## Bias justeret VAR-model
+Ved brug af den analytiske middelværdirette estimator foreslået af [@Pope1990], viser [@Engsted2012] at justering for bias i estimatorerne af middelværdi, i det multivariate setup, kan producere forskellige parameter estimater i den givne VAR($1$)-model. Benyttelse af ordinær lineær regressionsestimater kan resultere i bias pga. den begrænsede stikprøvestørrelse og af den årsag mislede inferensen gjort på baggrund af VAR($1$) estimaterne. Herudover kan variablene besidde autokorrelation, hvis de er udviser vedvarende effekter pga. stød til tidsserien. Den analytiske bias af OLS estimatoren, $\bm{\Phi}_1$, er udledt på baggrund af en Taylor udvidelse af høj orden. Dermed lader vi den analytiske bias, $\bm{B}_T$, være givet ved
+\begin{equation}
+\bm{B}_T=-\frac{\bm{b}}{T}+ O\left(T^{-\frac{3}{2}}\right), \label{eq:bias}
+\end{equation}
+
+hvor $T$ er sample size og tælleren er lig
+$$\bm{b}=\bm{\Sigma}_v\left(\left(\bm{I}-\bm{\Phi}_1'\right)^{-1}+\bm{\Phi}_1'\left(\bm{I}-\left(\bm{\Phi}_1'\right)^2\right)+\sum_{i=1}^m \lambda \left(\bm{I}-\lambda\bm{\Phi}_1'\right)^{-1}\right)\bm{\Sigma}_z^{-1}.$$
+
+Her er $\bm{\Sigma}_v$ den betingede kovariansmatrix af $v_t$, $\lambda$ er vektoren af egenværdier af $\bm{\Phi}_1$, $\bm{I}$ er identitetsvektoren og $m$ er antallet af tilstandsvariable i $\bm{z}$. Bias'en i Ligning \@ref(eq:bias) falder med raten $T^{-\frac{3}{2}}$, som $T\rightarrow \infty$. Den analytiske formel af [@Pope1990] giver ikke bias justerede afskæringer, $\bm{\Phi}_0$, men som [@Engsted2012] pointerer vil dette problem automatisk blive løst af de bias justerede hældninger. Dette sker eftersom det ubetingede aritmetiske gennemsnit af en stationær variabel, er et ikke-biased estimat af den sande middelværdi, og samtidig estimerer OLS præcis middelværdien af variablene i VAR-modellen, ved at fjerne første observation. Altså vil en VAR-model med bias justerede hældninger medføre ikke-biased estimater af $\bm{\Phi}_0$, givet modelrestriktionen, at de ubetingede middelværdier af variablene -- udledt fra VAR koefficienterne -- er lig deres aritmetiske gennemsnit
+ 
+[@Engsted2012] finder både kvantitative og kvalitative effekter ved brug af bias justerede koefficienter ift. de regulere OLS estimater. De viser bl.a. hvordan *hedging* komponentet af porteføljeallokeringen ændrer sig for et kontinuum af risikoaversioner, hvor specielt mellemliggende risikoaversions værdier ($\gamma=2$) er særligt påvirket af biasjusteringen.^[Se evt. Figur 1 i [@Engsted2012].] Her bliver det optimale portefølgevalg påvirket, eftersom bias justeringen afstedkommer reducerede positioner for obligationer og aktier, gennem det intertemporale *hedging demand*, mens positionen for kontanter forøges.
+
+<!--chapter:end:02-teori.Rmd-->
+
+```{r setup, include=FALSE}
+Sys.setlocale("LC_TIME", "Danish")
+library(tidyverse)
+library(quantmod)
+library(kableExtra)
+library(ggfortify)
+library(latex2exp)
+
+if (knitr::is_html_output()) {
+  options(knitr.table.format = "html")
+} else {
+  options(knitr.table.format = "latex") 
+}
+```
+
+```{r setup-plots, include=FALSE}
+if (knitr::is_html_output()) {
+  knitr::opts_chunk$set(out.width = '100%') 
+} else {
+  knitr::opts_chunk$set(out.width = '100%')
+}
+```
+
+\part{Den empiriske analyse}
+
+```{r script1, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Script.R"), include=FALSE, cache=TRUE}
+```
+
+# Data beskrivelse
+Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 2. kvartal til 2018 4. kvartal grundet dataophør. Startkvartalet er valgt på baggrund af, at den amerikanske centralbank, *Federal Reserve System*, kort tid forinden, havde givet den amerikanske korte rente, lov til at variere frit i markedet. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion \@ref(aktivklasser) beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik. Sektion \@ref(pvariable) indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion \@ref(korr). Sektion \@ref(ops) giver en opsummering af kapitlets statistiske fund. Tidsserien for hver aktivklasse og prædiktionsvariabel visualiseres med tilhørende recessionsperioder som defineret af [@NBER2020].
+
+## Beskrivelse af aktivklasser{#aktivklasser}
+Mængden af aktivklasser, som pt. er tilgængelige på finansmarkedet har aldrig været større. Udover aktier og obligationer, findes et væld af eksponeringsområder og/eller finansielle produkter heriblandt ejendom, derivater, futures, forwards, kryptovaluta, valuta mm. For at holde denne analyse på et simpelt niveau medtages de mest anvendte aktivklasser for institutionelle og private investorer. Hvilket også er de mest anvendte i eksisterende litteratur, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. I det følgende vil egenskaberne for aktivklasserne: det risikofrie afkast, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer beskrives og derudover vil den tilhørende beskrivende statistik for hvert aktiv belyses.
+
+### Det risikofrie afkast -- $r_{t+1}^{\textnormal{rf}}$
+Essencen af et risikofrit aktiv er at repræsentere et afkast med varians lig $0$. Dette betegnes undertiden også som et sikkert afkast. Udover at give investoren muligheder for indlån, kan investoren også udvide sine investeringsmuligheder ved at låne til den risikofrie rente, dvs. have en kort position i det risikofrie aktiv. Et ofte valgt aktiv i litteraturen, som en proxy for det risikofrie aktiv, er de kortefristede statsværdipapirer, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. Disse betegnes i U.S.A. som *T-Bills*. Valget af netop dette aktiv sker på baggrund af den historiske og nuværende meget lave risiko for statskonkurser, [@Beers2017]. Eksempelvis gik den danske stat tilnærmelsesvis senest bankerot under *Statsbankerotten* i 1813 efter *Napoleonskrigene*. Derfor benyttes det amerikanske statspapir med kort løbetid, mere præcist anvendes den 90-dages amerikanske *T-Bill*, som en proxy for det risikofrie aktiv. Data over afkast er fra [@CRSPt90] hentet gennem [@WRDSt90]. Log netto afkastet af det risikofrie aktiv beregnes som log forskellen mellem det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill* og den kvartalsvise inflationsrate, målt via *Consumer Price Index*. Nettoafkastet har et kvartalsvist justeret afkast på `r round(DESCRIPTIVE$adj_mean[1]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[1]*100, 1)`$\%$. Som det kan ses på kvantilerne har det risikofrie afkast givet negativt afkast sommetider. Et histogram indikerer en højreskæv fordeling af afkast, hvilket også underbygges af en skævhed på `r round(DESCRIPTIVE$skew[1], 3)`. Med en kurtosis på `r round(DESCRIPTIVE$kurt[1], 3)` haves en leptokurtisk fordeling, med tykkere/længere haler og et smallere samt højere cetrum. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:NET-TB-tids) viser et plot over tidsserien.
+```{r, echo=FALSE, include=FALSE}
+
+x <- paste("A",
+    "\\\\\\raggedright Note:",
+    "\\\\\\hspace{\\textwidth}",
+    "\\\\\\raggedright Blablalba." )
+```
+
+```{r NET-TB-tids, echo=FALSE, fig.align='center', fig.cap=x, fig.scap="short", fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$NET_TB))+
+  geom_line(aes(x=index(data), y=NET_TB)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$NET_TB), max(data$NET_TB))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$r_{t}^{rf}$"))
+```
+
+I forlængelse af beskrivelsen af det risikofrie aktiv, viser Figur \@ref(fig:INF-tids) et plot over tidsserien hørende til inflationsraten.
+
+```{r INF-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af inflationsraten, målt via Consumer Price Index.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(INF) +
+  expand_limits(x = min(index(INF)), y = min(INF))+
+  geom_line(aes(x=index(INF), y=INF)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(INF), max(INF))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(INF)), max(index(INF))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$x_{t}^{inf}$")) +
+  xlab("År")
+```
+
+```{r NET-TB-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(NET_TB), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r NET-TB-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = NET_TB)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.005, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(DATA_J$NET_TB_J), sd = sqrt(var(data$NET_TB)))) + 
+  geom_vline(data=DATA_J, aes(xintercept=mean(NET_TB_J)), linetype="dashed", color ="red") +
+  expand_limits(x = 0, y = 0)+
+  coord_cartesian(ylim = c(0, ceiling(max(density(data$NET_TB)$y)))) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Merafkastet på aktier -- $rx_{t+1}^{\textnormal{a}}${#dataak}
+For aktivklassen, som skal repræsentere børshandlede aktier, benyttes et markedsværdi-vægtet afkast over et repræsentativt indeks for samtlige handlede aktier på *New York Stock Exchange*, *National Association of Securities Dealers Automated Quotations* og *American Stock Exchange*. Det vægtede afkast er inklusiv udbytte, aktiesplits og nyemissioner for de foregående 12 måneder ledende op til kvartalet. Ved at benytte et sådant forholdsvist bredt indeks, vil delanalysen for aktier være repræsentativt for det globale aktiemarked. Derudover er det ikke kun børsnoterede amerikanskbaserede selskaber, som handles via *NYSE*, *NASDAQ* og *AMEX*, men i stadig større grad også virksomheder uden for U.S.A. Data over afkast er fra [@CRSPakt] og hentet gennem [@WRDSakt]. Log  merafkastet af aktier beregnes som det kvartalsvise log brutto aktieafkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*. Det ses at aktier har det klart højeste kvartalvise justerede merafkast på `r round(DESCRIPTIVE$adj_mean[2]*100, 1)`$\%$ ift. de andre aktivklasser. Dette høje merafkast følges af en ligeledes høj relativ volatilitet på `r round(DESCRIPTIVE$sd[2]*100, 1)`$\%$. Historisk set har det største negative markedsudsving givet et merafkast/tab på $-30.4\%$, mens det største positive markedsudsving har været på $20\%$. Et histogram sammenholdt med en skævhed på `r round(DESCRIPTIVE$skew[2], 3)` afslører moderat til høj venstreskævhed. Altså har der oftere været negative merafkast ift. positive. Kurtosis på `r round(DESCRIPTIVE$kurt[2], 3)` medører en moderat leptokurtisk fordeling med en anelse tykkere haler, og at ekstreme observationer sker oftere end normalt. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:AKT-tids) viser et plot over tidsserien.
+
+```{r AKT-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log merafkastet af aktier.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+par(mfrow=c(1,1))
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$AKT))+
+  geom_line(aes(x=index(data), y=AKT)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$AKT), max(data$AKT))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$rx_{t}^{a}$"))
+```
+
+```{r AKT-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af aktier.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(AKT), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r AKT-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = AKT)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.05, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(DATA_J$AKT_J), sd = sqrt(var(data$AKT)))) + 
+  geom_vline(data=DATA_J, aes(xintercept=mean(AKT_J)), linetype="dashed", color ="red") +
+  expand_limits(x = 0, y = 0)+
+  coord_cartesian(ylim = c(0, 7.5)) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Merafkastet på statsobligationer -- $rx_{t+1}^{\textnormal{s}}$
+Statsobligationer er gældsinstrumenter udstedt af staten i det respektive udstedelsesland, de har til formål at finansiere offentlige udgifter og anses også for at være en substitution for skatter. Siden udstedelsen sker af staten, antages det ofte, at statsobligationer er relativt mindre risikobærende and aktier. Undertiden betegnes statsobligationer fra visse ilande som et *safe haven* for investorer. Eksempelvis har den danske stat pt. en kreditvurdering på AAA, Aaa, AAA af hhv. *Standard \& Poor's*, *Moody's* og *Fitch*, [@TradingEconomics2020]. Til formålet at repræsentere afkastet på statsobligationer anvendes derfor den 10-årige amerikanske statsobligation med konstant løbetid. Data over afkast er fra [@CRSPt90] og hentet gennem [@WRDSt90]. Log  merafkastet af statsobligationener beregnes som det kvartalsvise log brutto afkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*.  merafkastet har et justeret kvartalsvist afkast på `r round(DESCRIPTIVE$adj_mean[3]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[3]*100, 1)`$\%$. Statsobligationen har den laveste *Sharpe Ratio* af de tre aktivklasser, hvilket også er forventeligt. Med en skævhed på `r round(DESCRIPTIVE$skew[3], 3)` og kurtosis på `r round(DESCRIPTIVE$kurt[3], 3)` haves en forholdsvis symmetrisk fordeling, men med en anelse tykkere haler. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:S-OBL-tids) viser et plot over tidsserien.
+
+```{r S-OBL-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log  merafkastet på statsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+par(mfrow=c(1,1))
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$S_OBL))+
+  geom_line(aes(x=index(data), y=S_OBL)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$S_OBL), max(data$S_OBL))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$rx_{t}^{s}$"))
+```
+
+```{r S-OBL-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af statsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(S_OBL), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r S-OBL-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = S_OBL)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.025, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(DATA_J$S_OBL_J), sd = sqrt(var(data$S_OBL)))) + 
+  geom_vline(data=DATA_J, aes(xintercept=mean(S_OBL_J)), linetype="dashed", color ="red") + 
+  expand_limits(x = 0, y = 0)+
+  coord_cartesian(ylim = c(0, ceiling(max(density(data$S_OBL)$y)))) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Merafkastet på virksomhedsobligationer -- $rx_{t+1}^{\textnormal{v}}$
+På samme vis som stater kan finansiere deres aktiviteter via statsobligationer, kan virksomheder udstede gæld via obligationer, hvis formål er at finansiere fremtidige investeringer og/eller projekter. Sikkerheden bag en virksomhedsobligation afhænger af virksomhedens betalingsevne. Af og til sætter virksomheden fysiske aktiver som kollateral for obligationerne i tilfælde af konkurser. Ift. statsobligationer bærer virksomhedsobligationer på en langt større risiko givet kreditrisikoen i virksomheden og/eller markedet. For at påtage sig denne risiko, forlanger investorerne derfor en højere præmie i form af en højere rente tilhørende virksomhedsobligationerne. For at repræsentere virksomhedsobligationer anvendes en indeksserie af virksomhedsobligationer med lang løbetid. Data er fra [@Ibbotson2019] og hentet via [@Goyal2007]^[Mere specifickt via *Amit Goyals* hjemmeside, hvor der findes en opdateret version af dataet, som der benyttes i artiklen, se evt. [@Goyal2020].]. Det specifikke grundlag for tidsserien er tvetydigt, men [@Ibbotson2019] skriver følgende.
+\begin{center}
+\textit{A corporate bond series with a long maturity is used to describe fixed-income securities that contain risk of default.}
+\end{center}
+Log  merafkastet af virksomhedsobligationenerne beregnes som det kvartalsvise log brutto afkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*. Som forventet ses den højere afkastpræmie med et justeret kvartalsvist afkast på `r round(DESCRIPTIVE$adj_mean[4]*100, 1)`$\%$ og en tilhørende volatilitet på `r round(DESCRIPTIVE$sd[4]*100, 1)`$\%$, som investoren får, for at påtage sig den ekstra kreditrisiko. Afkastfordelingen anses som værende relativt mest symmetrisk ift. de andre aktivklasser, hvilket også ses i en skævhedsværdi på `r round(DESCRIPTIVE$skew[4], 3)`. Med en kurtosis på mere end $3$, har fordelingen tykkere haler og med mere masse centralt i fordelingen. Det bemærkes ligeledes at virksomhedsobligationer har haft de største positive markedsudsving af de tre aktivklasser med et positivt afkast på $20.8 \%$. Figur \@ref(fig:V-OBL-tids) viser et plot over tidsserien.
+
+```{r V-OBL-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log  merafkastet på virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+par(mfrow=c(1,1))
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$V_OBL))+
+  geom_line(aes(x=index(data), y=V_OBL)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$V_OBL), max(data$V_OBL))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$rx_{t}^{v}$"))
+```
+
+```{r V-OBL-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(V_OBL), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r V-OBL-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = V_OBL)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.05, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(DATA_J$V_OBL_J), sd = sqrt(var(data$V_OBL)))) + 
+  geom_vline(data=DATA_J, aes(xintercept=mean(V_OBL_J)), linetype="dashed", color ="red") + 
+  expand_limits(x = 0, y = 0)+
+  coord_cartesian(ylim = c(0, ceiling(max(density(data$V_OBL)$y)))) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+Tabel \@ref(tab:DES-AKTIVKLASSE) opsummerer ovenstående beskrivende statistik for de fire aktivkasser.
+
+(ref:jb1980) [@Jarque1980]
+
+\begin{landscape}
+```{r DES-AKTIVKLASSE, echo=FALSE}
+options(knitr.kable.NA = '')
+DESCRIPTIVE <- format(round(DESCRIPTIVE, digits = 3), nsmall = 3)
+DESCRIPTIVE$sr[1] <- NA
+
+colnames(DESCRIPTIVE) <- c('Middelværdi', 'Standard afvigelse', 'Sharpe Ratio', 'Skævhed', 'Kurtosis', 'Minimum', '$25 \\%$', 'Median', '$75 \\%$', 'Maksimum', 'AK(1)')
+
+rownames(DESCRIPTIVE) <- c("$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$")
+
+DESCRIPTIVE %>% 
+  knitr::kable(caption = 'Beskrivende statistik for de fire aktivklasser.',
+               booktabs=TRUE,
+               align = c(rep('r', 10)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for alle aktivklasser.}", threeparttable = T, escape = FALSE)
+```
+
+```{r JB-AKTIVKLASSE, echo=FALSE}
+options(knitr.kable.NA = '')
+JB <- format(round(JB, digits = 3), nsmall = 3)
+
+colnames(JB) <- c('Teststørrelse', '$p$-værdi')
+
+rownames(JB) <- c("$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$")
+
+JB %>% 
+  knitr::kable(caption = 'Jarque-Bera test.',
+               booktabs=TRUE,
+               align = c(rep('r', 2)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Jarque-Beta teststørrelser og $p$-værdier for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer, (ref:jb1980). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE)
+```
+\end{landscape}
+
+## Prædiktionsvariable{#pvariable}
+Denne sektion har til formål at beskrive datagrundlaget for prædiktionsvariablene, som først blev beskrevet i Sektion ??. Disse variable består af en række finansielle indikatorer: *Dividend-Price Ratio*, *Price-Earnings Ratio*, *Book-to-market Ratio*, *High Minus Low*, *Small Minus Big*, og variansen af aktieafkast. Derudover haves rentestruktursprædiktionsvariable: den nominelle rente, *Term Spread*, *Yield Spread*, *Credit Spread* og *Default Spread*. Én makroøkonomisk variabel udgør den sidste prædiktionsvariabel: *Federal Funds Rate*. Udover beskrivelsen og begrundelsen beregningsmetoden for hver variabel, vil den tilhørende beskrivende statistik for hver variabel belyses.
+
+### Dividend-Price Ratio -- $x_t^{\text{dp}}$
+Repræsentativet for priserne til forholdet mellem udbytte og priser er indeksniveauet, eksklusiv udbytte, over det brede indeks som blev beskrevet i Sektion \@ref(dataak). Udbyttet stammer ligeledes fra aktieindekset, og er beregnet som en rullende sum over de seneste fire kvartaler. Log udbyttet er logaritmen til tidsserien over de rullende summer af udbytte. Log *Dividend-Price Ratio* bliver da beregnet som forskellen mellem det rullende kvartalsvise log udbytte og de kvartalsvise log priser. Data er fra [@CRSPakt] og hentet gennem [@WRDSakt]. Den justerede middelværdi er `r round(DESCRIPTIVE_T$mean[1], 3)`$\%$, og betyder altså at det sande forhold mellem udbytte og priser historisk har været omtrent $1$:$34$. Det andet moment er `r round(DESCRIPTIVE_T$sd[1], 3)`$\%$. Forholdet er en næsten symmetrisk med et tredje moment på `r round(DESCRIPTIVE_T$skew[1], 3)`. En kurtosis på `r round(DESCRIPTIVE_T$kurt[1], 3)` indebærer at log *Dividend Price Ratio* har en platykurtisk fordeling med sjældne ekstreme observationer. Den `r format(index(DP[which.max(DP)]), '%d %B, %Y')` var det sande forhold på sidst højeste, da det nåede `r round(exp(max(DP)), 3)*100`$\%$. Over de følgende $18$ år, dalede forholdet til `r round(exp(min(DP)), 3)*100`$\%$ den `r format(index(DP[which.min(DP)]), '%d %B, %Y')`, fordi aktieprisernes værdi steg hurtigere end udbyttebetalingerne fra indtjeningen i virksomhederne. Derudover steg offentlige virksomheders indtjening langsommere end aktiepriserne. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:DP-tids) viser et plot over tidsserien.
+
+```{r DP-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log Dividend Price Ratio.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+par(mfrow=c(1,1))
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$DP))+
+  geom_line(aes(x=index(data), y=DP)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$DP), max(data$DP))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$x_{t}^{inf}$"))
+```
+
+```{r DP-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(DP), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r DP-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = DP)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.25, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(DATA_T_J$DP_J), sd = sqrt(var(data$DP)))) + 
+  geom_vline(aes(xintercept=mean(DATA_T_J$DP_J)), linetype="dashed", color ="red") +
+  coord_cartesian(ylim = c(0, 1.2)) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Price-Earnings Ratio -- $x_t^{\text{pe}}$
+Priserne for forholdet mellem priser og indtjening er som ovenstående indeksniveauet fra Sektion \@ref(dataak), ekslusiv udbytte. Indtjeningen er en rullende sum repræsenterende indtjeningen på *S\&P 500* indekset. Data er dermed fra hhv. [@CRSPakt], hentet gennem [@WRDSakt] og [@Shiller2020], hentet gennem [@Goyal2007]. At indtjeningen benytter et andet datagrundlag end aktieindekset kan skabe tvetydigheder i resultaterne, men prædiktabiltetsegenskaben for variablen er stadig intakt. Log *Price Earnings Ratio* bliver da beregnet som forskellen mellem de kvartalsvise log priser og de kvartalvise log indtjeninger. Den justerede middelværdi er `r round(DESCRIPTIVE_T$mean[2], 3)`$\%$. Standardafvigelsen er på `r round(DESCRIPTIVE_T$sd[2], 3)`$\%$. Derudover haves en højreskæv leptokurtisk fordeling med hhv. skævhed på `r round(DESCRIPTIVE_T$skew[2], 3)` og kurtosis på `r round(DESCRIPTIVE_T$kurt[2], 3)`. Figur \@ref(fig:PE-tids) viser et plot over tidsserien.
+
+```{r PE-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log Price Earnings Ratio.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$EP))+
+  geom_line(aes(x=index(data), y=EP)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$EP), max(data$EP))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$x_{t}^{pe}$"))
+```
+
+```{r PE-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(EP), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r PE-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = EP)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.25, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(DATA_T_J$EP_J), sd = sqrt(var(data$EP)))) + 
+  geom_vline(aes(xintercept=mean(DATA_T_J$EP_J)), linetype="dashed", color ="red") +
+  coord_cartesian(ylim = c(0, 1.6)) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Book-to-Market Ratio -- $x_t^{\text{bm}}$
+*Book-to-market Ratio* er hentet gennem [@Goyal2007]. Bogførte værdier samt markedsværdier stammer fra *Value Line*'s hjemmeside, mere specifikt gennem deres *Long-Term Perspective Chart* af indekset *Dow Jones Industrial Average*. Beregningsmetoden er oprindeligt månedsbaseret og for månederne marts til december beregnes forholdet som den bogførte værdi fra slutningen af sidste år, delt med prisen fra seneste månedsultimo. For januar og februar beregnes det som den bogførte værdi fra slutningen af for to år siden, delt med prisen fra seneste månedsultimo. Beregningsmetoden er sammenlignelig med [@Kothari1997] og [@Pontiff1998]. Det første og andet moment er hhv. `r round(DESCRIPTIVE_T$mean[3], 3)` og `r round(DESCRIPTIVE_T$sd[3], 3)`. Fra tredje og fjerde moment ses højreskævhed og en mesokurtisk fordeling. [@Pontiff1998] finder første og andet moment til hhv. $0.505$ og $0.252$, hvilket validerer estimaterne. Efter 1982 ses det, at forholdet aftager kraftigt, og efter en kort tiltagning har det de seneste år stabiliseret sig. Dette kommer sig bl.a. af, at amerikanske virksomheder i stigende grad har bogført en negativ værdi, se evt. *Historical Book Equity Data* fra [@French2020]. Figur \@ref(fig:BM-tids) viser et plot over tidsserien.
+
+```{r BM-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Book-to-market Ratio.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$BM))+
+  geom_line(aes(x=index(data), y=BM)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$BM), max(data$BM))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$x_{t}^{bm}$"))
+```
+
+```{r BM-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(BM), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r BM-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = BM)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.1, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(data$BM), sd = sqrt(var(data$BM)))) + 
+  geom_vline(aes(xintercept=mean(BM)), linetype="dashed", color ="red") +
+  coord_cartesian(ylim = c(0, 2.4)) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Aktievarians -- $x_t^{\text{avar}}$
+Aktievariansen består af den kvartalsvise kvadratsum af afkast, samt summen af produktet mellem to tilstødende kvartalsvise afkast. Beregningsmetoden er fra [@Schwert1987] og data er hentet gennem [@Goyal2007], som baserer estimaterne på afkast fra *S\&P 500* indekset. Selve metoden tager udgangspunkt i daglige priser fremfor kvartalsvise, for at måle det kvartalsvise aktieafkast $r_{it}$. De kvartalsvise afkast er herefter kvadreret for at etablere variansen. Herefter justeres for autokorrelation, ved at addere to gange summen af produkterne mellem alle par af foreløbende kvartalsafkast. Middelværdien estimeres til `r round(DESCRIPTIVE_T$mean[4], 3)` og med en standardafvigelse på `r round(DESCRIPTIVE_T$sd[4], 3)`. Givet ikke-negativiteten af variansen, ses forventeligt en meget højreskæv fordeling med tilhørende høj kurtosis på hhv. `r round(DESCRIPTIVE_T$skew[4], 3)` og `r round(DESCRIPTIVE_T$kurt[4], 3)`. Figur \@ref(fig:AV-tids) viser et plot over tidsserien.
+
+```{r AV-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af aktievariansen.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$AKT_VAR))+
+  geom_line(aes(x=index(data), y=AKT_VAR)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$AKT_VAR), max(data$AKT_VAR))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$x_{t}^{avar}$"))
+```
+
+```{r AV-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(AKT_VAR), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r AV-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = AKT_VAR)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.01, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(data$AKT_VAR), sd = sqrt(var(data$AKT_VAR)))) + 
+  geom_vline(aes(xintercept=mean(AKT_VAR)), linetype="dashed", color ="red") +
+  coord_cartesian(ylim = c(0, ceiling(max(density(data$AKT_VAR)$y)))) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### High Minus Low -- $x_t^{\text{hml}}${#datahml}
+Den første af de to *Fama-French* faktorer. Månedlige værdier er fra [@CRSPakt] og hentet gennem [@French2020], det er herefter omdannet til kvartalsvise værdier via et kvartalsvist rullende tre-måneders gennemsnit. Selve faktoren er baseret på: to porteføljer baseret på størrelse, hvor skillelinjen er markedsmedianen på *NYSE*, tre porteføljer baseret på *Book-to-Market Ratio*, hvor skilningerne er $30$- og $70$-percentilerne af *Book-to-Market Ratio* på *NYSE*. Herefter eksisterer der seks fællesmængder, som dermed udgør grundlaget for porteføljerne til *High Minus Low*. Selve faktoren beregnes som gennemsnittet på de to værdi-porteføljer^[Virksomheder i værdi-porteføljerne har høj *Book-to-market Ratio* og er hhv. store og små.] fratrukket det gennemsnitlige afkast på de to vækst-porteføljer^[Virksomheder i vækst-porteføljerne har lav *Book-to-market Ratio* og er hhv. store og små.]. En positiv *High Minus Low* faktor medfører, at værdi-virksomheder er mere efficiente end vækst virksomheder på lang sigt, [@French1993]. Det første og andet moment er hhv. `r round(DESCRIPTIVE_T$mean[5], 3)` og `r round(DESCRIPTIVE_T$sd[5], 3)`. Skævhed på `r round(DESCRIPTIVE_T$skew[5], 3)` og kurtosis på `r round(DESCRIPTIVE_T$kurt[5], 3)`, indikerer en forholdsvis symmetrisk fordeling. Figur \@ref(fig:HML-tids) viser et plot over tidsserien.
+
+```{r HML-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af High Minus Low.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$HML))+
+  geom_line(aes(x=index(data), y=HML)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$HML), max(data$HML))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$x_{t}^{hml}$"))
+```
+
+```{r HML-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(HML), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r HML-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = HML)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 1, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(data$HML), sd = sqrt(var(data$HML)))) + 
+  geom_vline(aes(xintercept=mean(HML)), linetype="dashed", color ="red") +
+  coord_cartesian(ylim = c(0, 0.35)) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Small Minus Big -- $x_t^{\text{smb}}${#datasmb}
+Den anden *Fama-French* faktor. Månedlige værdier er fra [@CRSPakt] og hentet gennem [@French2020], det er herefter omdannet til kvartalsvise værdier via et kvartalsvist rullende tre-måneders gennemsnit. Selve faktoren er baseret på de samme porteføljer som beskrevet i ovenstående Sektion \@ref(datahml). Selve faktoren beregnes som forskellen mellem de ligevægtede gennemsnitlige afkast af de små porteføljer og de store porteføljer. En positiv *Small Minus Big* faktor er også kendt som *Small Firm Effect*, og medfører, at små virksomheder er mere efficiente end store virksomheder på lang sigt, [@French1993]. Det første og andet moment er hhv. `r round(DESCRIPTIVE_T$mean[6], 3)` og `r round(DESCRIPTIVE_T$sd[6], 3)`. En skævhed på `r round(DESCRIPTIVE_T$skew[6], 3)` og kurtosis på `r round(DESCRIPTIVE_T$kurt[6], 3)`, indikerer en meget symmetrisk fordeling. Figur \@ref(fig:SMB-tids) viser et plot over tidsserien.
+
+```{r SMB-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Small Minus Big.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$SMB))+
+  geom_line(aes(x=index(data), y=SMB)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$SMB), max(data$SMB))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$x_{t}^{smb}$"))
+```
+
+```{r SMB-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(SMB), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r SMB-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = SMB)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 1, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(data$SMB), sd = sqrt(var(data$SMB)))) + 
+  geom_vline(aes(xintercept=mean(SMB)), linetype="dashed", color ="red") +
+  coord_cartesian(ylim = c(0, 0.35)) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Nominel rente -- $x_t^{\text{b}}$
+Det kvartalsvise log brutto afkast på den amerikanske 90-dages *T-Bill* benyttes som en proxy for den nominelle rente. Ved at inkludere både brutto og netto log renten, inkorporeres inflation. Eftersom log inflation er forskellen mellem log brutto renten og log netto renten. Data er fra [@CRSPt90] og hentet gennem [@WRDSt90]. Den justerede middelværdi estimeres til `r round(DESCRIPTIVE_T$mean[7]*100, 3)`$\%$. Volatiliteten estimeres til `r round(DESCRIPTIVE_T$sd[7]*100, 3)`$\%$. Tredje og fjerde moment estimeres til hhv. `r round(DESCRIPTIVE_T$skew[7], 3)` og `r round(DESCRIPTIVE_T$kurt[7], 3)`. Figur \@ref(fig:B-tids) viser et plot over tidsserien.
+
+```{r B-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log brutto afkastet på det risikofrie aktiv.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$TB))+
+  geom_line(aes(x=index(data), y=TB)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$TB), max(data$TB))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$x_{t}^{b}$"))
+```
+
+```{r B-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(TB), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r B-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = TB)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.005, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(DATA_T_J$TB_J), sd = sqrt(var(data$TB)))) + 
+  geom_vline(aes(xintercept=mean(DATA_T_J$TB_J)), linetype="dashed", color ="red") +
+  coord_cartesian(ylim = c(0, 60)) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Term Spread -- $x_t^{\text{ts}}$
+For at beregne *Term Spread* (rentespændet for den lange rente), benyttes den amerikanske $10$-årige effektive rente med konstant løbetid samt den 90-dages *T-Bill* *Secondary Market Rate*. Kvartalsvise data er hentet fra [@FRED102020] og [@FRED902020], derudover er data ikke blevet sæsonjusteret. Spændet beregnes da som
+$$x_t^{\text{ts}}=Y_t^{10}-Y_t^{90},$$
+
+hvor $Y_t^{10}$ og $Y_t^{90}$ er de to effektive renter. Dette følger metoden fra [@Campbell1991], som også argumenterer for, at ethvert rentespænd for renter med løbetider mellem $1$ måned og $10$ år, kan prædiktere rentestrukturen. Middelværdien for det lange rentespænd estimeres til `r round(DESCRIPTIVE_T$mean[8]*100, 3)`$\%$. Volatiliteten estimeres til `r round(DESCRIPTIVE_T$sd[8]*100, 3)`$\%$. Fordelingen er forholdsvis symmetrisk med skævhed og kurtosis på hhv. `r round(DESCRIPTIVE_T$skew[8], 3)` og `r round(DESCRIPTIVE_T$kurt[8], 3)`. Figur \@ref(fig:TS-tids) viser et plot over tidsserien.
+
+```{r TS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Term Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$T_SPREAD))+
+  geom_line(aes(x=index(data), y=T_SPREAD)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$T_SPREAD), max(data$T_SPREAD))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$x_{t}^{ts}$"))
+```
+
+```{r TS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(T_SPREAD), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r TS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = T_SPREAD)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.01, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(data$T_SPREAD), sd = sqrt(var(data$T_SPREAD)))) + 
+  geom_vline(aes(xintercept=mean(T_SPREAD)), linetype="dashed", color ="red") +
+  coord_cartesian(ylim = c(0, 35)) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Yield Spread -- $x_t^{\text{ys}}$
+Datagrundlaget for *Yield Spread* (rentespændet for den korte rente) er den amerikanske $10$-årige effektive rente med konstant løbetid samt den 90-dages *T-Bill* *Secondary Market Rate*. Kvartalsvise data er hentet fra [@FRED52020] og [@FRED902020], og er ikke sæsonjusteret. Spændet beregnes da som
+$$x_t^{\text{ts}}=Y_t^{5}-Y_t^{90},$$
+
+hvor $Y_t^{5}$ og $Y_t^{90}$ er de to effektive renter. Middelværdien, `r round(DESCRIPTIVE_T$mean[9]*100, 3)`$\%$, er som forventet en anelse mindre end middelværdien for *Term Spread*. Det samme er volatiliteten, `r round(DESCRIPTIVE_T$sd[9]*100, 3)`$\%$. Fordelingen er en anelse leptokurtisk med kurtosis på  `r round(DESCRIPTIVE_T$kurt[9], 3)`. Skævheden er `r round(DESCRIPTIVE_T$skew[9], 3)`. Figur \@ref(fig:YS-tids) viser et plot over tidsserien. 
+
+```{r YS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Yield Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$Y_SPREAD))+
+  geom_line(aes(x=index(data), y=Y_SPREAD)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$Y_SPREAD), max(data$Y_SPREAD))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$x_{t}^{ys}$"))
+```
+
+```{r YS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(Y_SPREAD), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r YS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = Y_SPREAD)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.005, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(data$Y_SPREAD), sd = sqrt(var(data$Y_SPREAD)))) + 
+  geom_vline(aes(xintercept=mean(Y_SPREAD)), linetype="dashed", color ="red") +
+  coord_cartesian(ylim = c(0, 45)) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Credit Spread -- $x_t^{\text{cs}}$
+Beregningen til *Credit Spread* (kreditspændet) benytter den 90-dages *T-Bill* *Secondary Market Rate* samt den effektive rente fra *Moody's Seasoned BAA Corporate Bond*, og baserer sig på instrumenter med løbetider på $20$ år eller mere. Data er hentet fra hhv. [@FRED902020] samt [@Goyal2007]. Metoden følger fra [@Keim1986], og kreditspændet beregnes da som
+$$x_t^{\text{cs}}=Y_t^{\text{BAA}}-Y_t^{90},$$
+
+hvor $Y_t^{\text{BAA}}$ og $Y_t^{90}$ er de to effektive renter. Af de fem rentrestruktursvariable ses det, at kreditspændet har den højeste middelværdi på `r round(DESCRIPTIVE_T$mean[10]*100, 3)`$\%$, og en standardafvigelse på `r round(DESCRIPTIVE_T$sd[10]*100, 3)`$\%$. Tredje og fjerde moment estimeres til hhv. `r round(DESCRIPTIVE_T$skew[10], 3)` og `r round(DESCRIPTIVE_T$kurt[10], 3)`. Figur \@ref(fig:CS-tids) viser et plot over tidsserien.
+
+```{r CS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Credit Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$C_SPREAD))+
+  geom_line(aes(x=index(data), y=C_SPREAD)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$C_SPREAD), max(data$C_SPREAD))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$x_{t}^{cs}$"))
+```
+
+```{r CS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(C_SPREAD), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r CS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = C_SPREAD)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.01, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(data$C_SPREAD), sd = sqrt(var(data$C_SPREAD)))) + 
+  geom_vline(aes(xintercept=mean(C_SPREAD)), linetype="dashed", color ="red") +
+  coord_cartesian(ylim = c(0, 25)) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Default Spread -- $x_t^{\text{ds}}$
+For at beregne *Default Spread* (konkursspændet) benyttes den effektive rente fra *Moody's Seasoned AAA Corporate Bond* samt den effektive rente fra *Moody's Seasoned BAA Corporate Bond*, og baserer sig begge på instrumenter med løbetider på $20$ år eller mere. Data er hentet via [@Goyal2007]. Konkursspændet beregnes da som
+$$x_t^{\text{ds}}=Y_t^{\text{BAA}}-Y_t^{\text{AAA}},$$
+
+hvor $Y_t^{\text{BAA}}$ og $Y_t^{\text{AAA}}$ er de to effektive renter. Til forskel for kreditspændet har konkursspændet den laveste middelværdi, `r round(DESCRIPTIVE_T$mean[11]*100, 3)`$\%$, også på tværs af de andre klasser af prædiktionsvariable. Standardafvigelsen er `r round(DESCRIPTIVE_T$sd[11]*100, 3)`$\%$. Af rentestruktursvariablene har konkursspændet også den hhv. mest ekstreme skævhed og kurtosis. Disse er hhv. `r round(DESCRIPTIVE_T$skew[11], 3)` og `r round(DESCRIPTIVE_T$kurt[11], 3)`, hvilket indebærer en højreskæv fordeling med tykke haler. Figur \@ref(fig:DS-tids) viser et plot over tidsserien.
+
+```{r DS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Default Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$D_SPREAD))+
+  geom_line(aes(x=index(data), y=D_SPREAD)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$D_SPREAD), max(data$D_SPREAD))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$x_{t}^{ds}$"))
+```
+
+```{r DS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(D_SPREAD), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r DS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = D_SPREAD)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.0025, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(data$D_SPREAD), sd = sqrt(var(data$D_SPREAD)))) + 
+  geom_vline(aes(xintercept=mean(D_SPREAD)), linetype="dashed", color ="red") +
+  coord_cartesian(ylim = c(0, 150)) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Federal Funds Rate -- $x_t^{\text{fr}}$
+I U.S.A. er *Federal Funds Rate*, renten som private finansinstitutioner tager for at låne uden sikkerhed, sædvanligvis over natten, af finansinstitutions reserver i *Federal Reserve Bank*. Data er hentet fra [@FREDF2020]. De kvartalsvis observationer er baseret på et gennemsnit af daglige observationer. Middelværdien er på `r round(DESCRIPTIVE_T$mean[12]*100, 3)`$\%$, og standardafvigelsen er på `r round(DESCRIPTIVE_T$sd[12]*100, 3)`$\%$. Tredje og fjerde moment estimeres til hhv. `r round(DESCRIPTIVE_T$skew[12], 3)` og `r round(DESCRIPTIVE_T$kurt[12], 3)`. Figur \@ref(fig:FR-tids) viser et plot over tidsserien.
+
+```{r FR-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Federal Funds Rate.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$FR))+
+  geom_line(aes(x=index(data), y=FR)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$FR), max(data$FR))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$x_{t}^{fr}$"))
+```
+
+```{r FR-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+a  <- acf(as.numeric(FR), plot=FALSE)
+ba <- with(a, data.frame(lag, acf))
+
+ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(breaks = seq(0, 25, 1)) +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r FR-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+ggplot(data, aes(x = FR)) +
+  geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.025, alpha = 0.4) +
+  geom_density() +
+  stat_function(fun = dnorm, colour = "red", args = list(mean = mean(data$FR), sd = sqrt(var(data$FR)))) + 
+  geom_vline(aes(xintercept=mean(FR)), linetype="dashed", color ="red") +
+  coord_cartesian(ylim = c(0, 14)) +
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+\begin{landscape}
+```{r DES-TILSTANDSVARIABLE, echo=FALSE}
+DESCRIPTIVE_T <- format(round(DESCRIPTIVE_T, digits = 3), nsmall = 3)
+
+colnames(DESCRIPTIVE_T) <- c('Middelværdi', 'Standard afvigelse', 'Skævhed', 'Kurtosis', 'Minimum', '$25 \\%$', 'Median', '$75 \\%$', 'Maksimum', 'AK(1)')
+
+rownames(DESCRIPTIVE_T) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+DESCRIPTIVE_T %>% 
+  knitr::kable(caption = 'Beskrivende statistik for prædiktionsvariablene.',
+               booktabs=TRUE,
+               align = c(rep('r', 9)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for prædiktionsvariablene: log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for log Dividend-Price ratio, log Earnings-Price Ratio samt log afkastet af den nominelle rente.}", threeparttable = T, escape = FALSE)
+```
+
+```{r JB-TILSTANDSVARIABLE, echo=FALSE}
+options(knitr.kable.NA = '')
+JB_T <- format(round(JB_T, digits = 3), nsmall = 3)
+
+colnames(JB_T) <- c('Teststørrelse', '$p$-værdi')
+
+rownames(JB_T) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+JB_T %>% 
+  knitr::kable(caption = 'Jarque-Bera test.',
+               booktabs=TRUE,
+               align = c(rep('r', 2)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Jarque-Beta teststørrelser og $p$-værdier for prædiktionsvariablene: log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:jb1980). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE)
+```
+\end{landscape}
+
+## Korrelation{#korr}
+
+\begin{landscape}
+```{r DES-KOR, echo=FALSE}
+DES_COR <- format(round(cor(data), digits = 2), nsmall = 2)
+DES_COR[lower.tri(DES_COR)] <- NA
+
+colnames(DES_COR) <- c("$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$", '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+rownames(DES_COR) <- c("$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$", '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+DES_COR %>% 
+  knitr::kable(caption = 'Korrelationsmatricen mellem alle aktivklasser og prædiktionsvariable.',
+               booktabs=TRUE,
+               align = c(rep('r', ncol(cor(data)))),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den øvre triangulære korrelationsmatrix mellem alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE)
+```
+\end{landscape}
+
+## Opsummering{#ops}
+
+# Prædiktabilitet
+
+## Stationaritet
+
+(ref:df1979) [@Dickey1979]
+(ref:kpss1992) [@Kwiatkowski1992]
+(ref:pp1988) [@Phillips1988]
+(ref:sc1989) [@Schwert1989]
+
+\begin{landscape}
+```{r STAT, echo=FALSE}
+options(knitr.kable.NA = '')
+
+STAT_TABLE <- format(round(STAT_TABLE, digits = 3), nsmall = 3)
+
+colnames(STAT_TABLE) <- rep(c('Teststørrelse', '$p$-værdi'),5)
+
+rownames(STAT_TABLE) <- c("$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$", '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+STAT_TABLE %>% 
+  knitr::kable(caption = 'Augmented Dickey Fuller.',
+               booktabs=TRUE,
+               align = c(rep('r', 8)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "$\\\\delta=1$" = 2, "$\\\\delta=2$" = 2, "$\\\\delta=3$" = 2, "$\\\\delta=4$" = 2, "$\\\\delta=5$"=2), escape = FALSE) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Augmented Dickey Fuller teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:df1979). Testen er udført for forskellige lags, samt et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE)
+```
+\end{landscape}
+
+```{r STAT-KPSS, echo=FALSE}
+options(knitr.kable.NA = '')
+
+STAT_TABLE_KPSS <- format(round(STAT_TABLE_KPSS, digits = 3), nsmall = 3)
+
+colnames(STAT_TABLE_KPSS) <- rep(c('Teststørrelse (LM)', '$p$-værdi'), 2)
+
+rownames(STAT_TABLE_KPSS) <- c("$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$", '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+STAT_TABLE_KPSS %>% 
+  knitr::kable(caption = 'Kwiatkowski-Phillips-Schmidt-Shin Test.',
+               booktabs=TRUE,
+               align = c(rep('r', 4)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "Level" = 2, "Trend" = 2)) %>% 
+  kableExtra::add_header_above(c(" ", "$l=5$" = 4), escape = FALSE) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Kwiatkowski-Phillips-Schmidt-Shin teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:kpss1992). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Testen er udført for et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$.}", threeparttable = T, escape = FALSE)
+```
+
+```{r STAT-PP, echo=FALSE}
+options(knitr.kable.NA = '')
+
+STAT_TABLE_PP <- format(round(STAT_TABLE_PP, digits = 3), nsmall = 3)
+
+colnames(STAT_TABLE_PP) <- rep(c('Teststørrelse', '$p$-værdi'), 2)
+
+rownames(STAT_TABLE_PP) <- c("$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$", '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+STAT_TABLE_PP %>% 
+  knitr::kable(caption = 'Phillips-Perron Test.',
+               booktabs=TRUE,
+               align = c(rep('r', 2)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "$Z(\\\\hat{\\\\alpha})$" = 2, "$Z(t_{\\\\hat{\\\\alpha}})$" = 2), escape = FALSE) %>% 
+  kableExtra::add_header_above(c(" ", "$l=5$" = 4), escape = FALSE) %>% 
+  kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Phillips-Perron teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:pp1988). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Testen er udført for et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$.}", threeparttable = T, escape = FALSE)
+```
+
+## Univariat
+
+(ref:nw1987) [@Newey1987]
+
+```{r UNI-ak, echo=FALSE}
+options(knitr.kable.NA = '')
+
+FIT_TABLE <- format(round(FIT_TABLE, digits = 3), nsmall = 3)
+
+FIT_TABLE <- FIT_TABLE %>%
+  mutate(coef = cell_spec(coef,"latex", bold = ifelse(p <= 0.05, T, F)))
+  
+colnames(FIT_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
+
+rownames(FIT_TABLE) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+FIT_TABLE %>% 
+  knitr::kable(caption = 'Univariat prædiktabilitet af merafkastet på aktier.',
+               booktabs=TRUE,
+               align = c(rep('r', 5)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", " " = 1, "Konfidensinterval" = 2, " " = 4)) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af de univariate regressioner ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række svarer til én selvstændig regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE)
+```
+
+```{r UNI-s, echo=FALSE}
+options(knitr.kable.NA = '')
+
+FIT_S_TABLE <- format(round(FIT_S_TABLE, digits = 3), nsmall = 3)
+
+FIT_S_TABLE <- FIT_S_TABLE %>%
+  mutate(coef = cell_spec(coef, "latex", bold = ifelse(p <= 0.05, T, F)))
+
+colnames(FIT_S_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
+
+rownames(FIT_S_TABLE) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+FIT_S_TABLE %>% 
+  knitr::kable(caption = 'Univariat prædiktabilitet af merafkastet på statsobligationer.',
+               booktabs=TRUE,
+               align = c(rep('r', 5)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", " " = 1, "Konfidensinterval" = 2, " " = 4)) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af de univariate regressioner ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\\\\text{s}}$. Hver række svarer til én selvstændig regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE)
+```
+
+```{r UNI-v, echo=FALSE}
+options(knitr.kable.NA = '')
+FIT_V_TABLE <- format(round(FIT_V_TABLE, digits = 3), nsmall = 3)
+
+FIT_V_TABLE <- FIT_V_TABLE %>%
+  mutate(coef = cell_spec(coef, "latex", bold = ifelse(p <= 0.05, T, F)))
+
+colnames(FIT_V_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
+
+rownames(FIT_V_TABLE) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+FIT_V_TABLE %>% 
+  knitr::kable(caption = 'Univariat prædiktabilitet af merafkastet på virksomhedsobligationer',
+               booktabs=TRUE,
+               align = c(rep('r', 5)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", " " = 1, "Konfidensinterval" = 2, " " = 4)) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af de univariate regressioner ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\\\\text{v}}$. Hver række svarer til én selvstændig regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE)
+```
+
+# Underliggende model
+
+# Problemer ved estimation
+
+```{r script2, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Speciale.R"), include=FALSE, cache=TRUE}
+```
+
+Middelværdi-varians optimering har vist sig meget sensitiv overfor den kvantitative størrelse af parametrene som indgår i vægtelsesberegningen for den relevante portefølje, dvs. forventede afkast, varianser og kovarianser. Som også er tilfældet i denne afhandling, er disse parametre estimeret via en tidsserie af afkast, men forventningen til disse estimater skal anskues skeptisk, idet de indeholder en væsentlig mængde usikkerhed.
+
+Simuleringsforsøg har vist at porteføljer udvalgt på baggrund af Markowitz teorien med estimerede input har værre performance og er mindre efficiente end en $\tfrac{1}{n}$ (ligevægtet) portefølje, [@Frankfurter1971]. Ligeledes viser [@Chopra1993], at det er afgørende i en porteføljeanalyse at estimere forventede afkast præcist, men forventede afkast er alt andet lige svært prædiktable, [@Merton1980]. Videnskabelige artikler har foreslået ændringer til de statistiske metoder som ligger bag estimaterne, heriblandt foreslår [@Jorion1986] at benytte en Bayes-estimator i stedet for det aritmetiske gennemsnit, se evt. også [@MacKinlay2000], [@Garlappi2007], [@Kan2007], [@Tu2011].
+
+I det følgende, vil et illustrativt *Monte Carlo* simuleringseksempel blive foretaget, hvor der tages udgangspunkt i tre risikobærende aktiver, hvis kvartalvise afkast alle er normalfordelt med de første to momenter som set i Tabel \@ref(tab:true). Afkastene er identisk fordelte i alle kvartaler. Det årlige forventede afkast er hhv. $9\%$, $15.76\%$ og $5.12\%$. Standardafvigelsen er hhv. $20.694\%$, $25.794\%$ og $17.320\%$. Det antages, at der er ens positiv korrelation mellem hvert aktiv, på $0.5$. Derudover står investoren overfor et risikofrit aktiv med et kvartalvist afkast på $0.125\%$, og dermed et årligt risikofrit afkast på $0.5\%$. Disse er de sande parameterværdier, som givetvis er skjult information for investoren til en hvis grad. Investoren skal dermed estimere værdierne fra en tidsserie af observationer trukket fra den korrekte fordeling. Tre tidsserier af afkastsobservationer er blevet simuleret fra den relevante multivariate fordeling. Hver observation er hhv. beregnet som
+\begin{align*}
+r_1 &= \mu_1 + \sigma_1\nu_1\\
+r_2 &= \mu_2 + \sigma_2\left(\rho_{1,2}\nu_1 + \sqrt{1-\rho_{1,2}^2}\nu_2\right)\\
+r_3 &= \mu_3 + \sigma_3 \left( \rho_{1,3} \nu_1+ \frac{ \rho_{2,3}-\rho_{1,2}\rho_{1,3} }{\sqrt{1-\rho_{1,2}^2}}\nu_2+\sqrt{1-\rho_{1,3}^2 -\frac{\left(\rho_{2,3}-\rho_{1,2}\rho_{1,3}\right)^2}{1-\rho_{1,2}^2}}\nu_3\right),
+\end{align*}
+
+hvor $\mu_i$ er middelværdien, $\sigma_i$ er standardafvigelsen og $\nu_i\sim N(0,1)$ er stød til tidsserien, for $i=1,2,3$.
+
+```{r sim-tids, echo=FALSE, fig.align='center', fig.cap='Simulerede afkast fra første simulering.', fig.width=18, fig.height=15, fig.pos='htbp!'}
+data <- c(data_1[,1], data_1[,2], data_1[,3])
+data <- data.frame(sim=data, type = c(rep(1, 200), rep(2,200), rep(3,200)))
+data <- data.frame(data, index = seq(1,200))
+
+data2 <- data.frame(trueval=c(return), simval=data_1_mean, type = c(1,2,3))
+
+ggplot(data, aes(index, sim)) + 
+  geom_hline(data=data2, aes(yintercept = trueval, color = "Sand middelværdi", linetype = "Sand middelværdi")) +
+  geom_hline(data=data2, aes(yintercept = simval, color = "Estimeret middelværdi", linetype = "Estimeret middelværdi")) +
+  geom_line() +
+  facet_wrap(~type, scales = "free_y", ncol = 1) +
+  xlab(expression(italic("Indeks")))+
+  ylab(expression(italic("Afkast")))+
+  scale_x_continuous(expand = c(0,0))+
+  scale_y_continuous(expand = c(0,0))+
+  theme_bw()+
+  scale_colour_brewer(palette = "Dark2") +
+  scale_linetype_manual(values=c("longdash", "dotted"))+
+  theme(
+    legend.background = element_rect(fill = "white",
+                                     linetype="solid",
+                                     size = 0.1,
+                                     colour = "black"),
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size=20)
+  ) +
+  labs(color = "Middelværdi", linetype = "Middelværdi")
+```
+
+Hver tidsserie er baseret på $200$ observationer, svarende til en 50-årig periode med kvartalvise observationer. For hver tidsserie er de første to momenter estimeret ud fra de gængse statistiske metoder
+
+```{r true, echo=FALSE}
+data <- round(data.frame(Expect = return*100, Std = std*100, Corr = corr), digits = 3)
+rownames(data) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3')
+
+
+data %>% 
+  knitr::kable(caption = 'Gengivelse af de sande afkast.',
+               booktabs=TRUE,
+               align = c('r', 'r', 'r' ,'r', 'r'),
+               row.names = T,
+               col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Korrelationer" = 3))
+```
+
+```{r sim1, echo=FALSE}
+
+data_1 <- round(data.frame(Expect = data_1_mean*100, Std = data_1_sd*100, Rele = (qnorm(0.025, lower.tail = F)*data_1_sd)/(sqrt(200)*data_1_mean), Corr = data_1_cor), digits = 3)
+
+rownames(data_1) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3')
+
+data_1 %>% 
+  knitr::kable(caption = 'Gengivelse af første simulation af afkast.',
+               booktabs=TRUE,
+               align = c('r','r', 'r' ,'r', 'r'),
+               row.names = T,
+               col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3))
+
+```
+
+```{r sim2, echo=FALSE}
+data_2 <- round(data.frame(Expect = data_2_mean*100, Std = data_2_sd*100, Rele = (qnorm(0.025, lower.tail = F)*data_2_sd)/(sqrt(200)*data_2_mean), Corr = data_2_cor), digits = 3)
+
+rownames(data_2) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3')
+
+data_2 %>% 
+  knitr::kable(caption = 'Gengivelse af anden simulation af afkast.',
+               booktabs=TRUE,
+               align = c('r','r', 'r' ,'r', 'r'),
+               row.names = T,
+               col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3))
+```
+
+```{r sim3, echo=FALSE}
+data_3 <- round(data.frame(Expect = data_3_mean*100, Std = data_3_sd*100, Rele = (qnorm(0.025, lower.tail = F)*data_3_sd)/(sqrt(200)*data_3_mean), Corr = data_3_cor), digits = 3)
+
+rownames(data_3) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3')
+
+data_3 %>% 
+  knitr::kable(caption = 'Gengivelse af tredje simulation af afkast.',
+               booktabs=TRUE,
+               align = c('r','r', 'r' ,'r', 'r'),
+               row.names = T,
+               col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3))
+
+```
+
+Disse tre sæt af estimerede parametre, baseret på de tre tidsserier, er blevet udvalgt til det følgende illustrative formål. Se Tabel \@ref(tab:sim1), Tabel \@ref(tab:sim2) og Tabel \@ref(tab:sim3) for en sammenligning ift. de sande parametre. De relative fejl for hver simulering er ligedes rapporteret, [@Asmussen2007]. Disse beregnes som
+$$\varepsilon_{i,j} = \frac{z_{0.975}\hat{\sigma}_{i,j}}{\sqrt{R}\hat{\mu}_{i,j}},$$
+
+hvor $i=1,2,3$ repræsenterer aktiverne og $j=1,2,3$ repræsenterer simuleringen. $z_{0.975}$ er fraktilfunktionen fra standard normal fordelingen, for et signifikansniveau på $\alpha=0.05$. $R$ er antallet af observationer fra hver simulering, i dette forsøg er $R=200$.
+
+Ud fra de sande parametre samt de estimerede parametre fra de tre tidsserier er global minimum varians porteføljen, tangensporteføljen, den optimale portefølje for en *CRRA* investor med risikoaversions parameter lig hhv. $1$, $5$ og $10$, samt den optimale portefølje for en *CARA* investor med risikoaversions parameter lig hhv. $1$, $5$ og $10$.
+
+Porteføljen for *CARA*-investoren er beregnet som
+$$w^*=\frac{\mu_{\text{tan}}-r_0}{(\theta W_0)\sigma_{\text{tan}}^2},$$
+
+hvor $w^*$ er den del af formuen som investoren skal investere i tangensporteføljen. Det estimerede forventede afkast, $\mu_{\text{tan}}$, og variansen af tangensporteføljen, $\sigma_{\text{tan}}^2$, er beregnet via de estimerede momenter af hvert aktiv. Delen som skal investeres i det risikofrie aktiv, bliver beregnet residuerligt som
+$$w_{r_0}^*=1-w^*.$$
+
+*CRRA* porteføljen er beregnet som i Sektion ??. Herudover er det sande forventede afkast og den sande standardafvigelse beregnet for hver portefølje, ved brug af de sande momenter præsenteret ovenfor.
+
+```{r sum-true, echo=FALSE}
+options(knitr.kable.NA = '')
+data <- round(data.frame(Min = c(port_true$gmv$weights,0,port_true$gmv$er*100, NA, port_true$gmv$sd*100, NA),
+                         Tan = c(port_true$tan$weights,0,port_true$tan$er*100, NA, port_true$tan$sd*100, NA),
+                         Crra_1 = c(port_true$crra_1$weights, port_true$crra_1$er*100, NA, port_true$crra_1$sd*100, NA),
+                         Crra_4 = c(port_true$crra_4$weights, port_true$crra_4$er*100, NA, port_true$crra_4$sd*100, NA),
+                         Crra_8 = c(port_true$crra_8$weights, port_true$crra_8$er*100, NA, port_true$crra_8$sd*100, NA),
+                         cara_1 = c(port_true$cara_1$weights, port_true$cara_1$er*100, NA, port_true$cara_1$sd*100, NA),
+                         cara_4 = c(port_true$cara_4$weights, port_true$cara_4$er*100, NA, port_true$cara_4$sd*100, NA),
+                         cara_8 = c(port_true$cara_8$weights, port_true$cara_8$er*100, NA, port_true$cara_8$sd*100, NA)), digits = 3)
+
+rownames(data) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3', 'Risikofri', 'Forv. Afkast', 'Estimeret afkast', 'Volatilitet', 'Estimeret volatilitet')
+colnames(data) <- c(" "," ","$\\gamma=1$", "$\\gamma=4$", "$\\gamma=8$", "$\\theta=1$", "$\\theta=4$", "$\\theta=8$")
+
+data %>% 
+  knitr::kable(caption = 'Gengivelse af de beregnede porteføljer ved brug af de sande afkast.',
+               booktabs=TRUE,
+               align = c('r', 'r', 'r' ,'r', 'r'),
+               row.names = T,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
+  kableExtra::row_spec(c(6, 8), italic = T)
+```
+
+```{r sum-1, echo=FALSE}
+options(knitr.kable.NA = '')
+data <- round(data.frame(Min = c(port_1$gmv$weights,
+                                 0,
+                                 sum(port_1$gmv$weights*return)*100,
+                                 port_1$gmv$er*100,
+                                 sqrt(t(port_1$gmv$weights) %*% cov %*% port_1$gmv$weights)*100,
+                                 port_1$gmv$sd*100),
+                         Tan = c(port_1$tan$weights,
+                                 0,
+                                 sum(port_1$tan$weights*return)*100,
+                                 port_1$tan$er*100,
+                                 sqrt(t(port_1$tan$weights) %*% cov %*% port_1$tan$weights)*100,
+                                 port_1$tan$sd*100),
+                         Crra_1 = c(port_1$crra_1$weights,
+                                 sum(port_1$crra_1$weights*c(return, rf))*100,
+                                 port_1$crra_1$er*100,
+                                 sqrt(t(port_1$crra_1$weights[1:3]) %*% cov %*% port_1$crra_1$weights[1:3])*100,
+                                 port_1$crra_1$sd*100),
+                         Crra_4 = c(port_1$crra_4$weights,
+                                 sum(port_1$crra_4$weights*c(return, rf))*100,
+                                 port_1$crra_4$er*100,
+                                 sqrt(t(port_1$crra_4$weights[1:3]) %*% cov %*% port_1$crra_4$weights[1:3])*100,
+                                 port_1$crra_4$sd*100),
+                         Crra_8 = c(port_1$crra_8$weights,
+                                 sum(port_1$crra_8$weights*c(return, rf))*100,
+                                 port_1$crra_8$er*100,
+                                 sqrt(t(port_1$crra_8$weights[1:3]) %*% cov %*% port_1$crra_8$weights[1:3])*100,
+                                 port_1$crra_8$sd*100),
+                         cara_1 = c(port_1$cara_1$weights,
+                                 sum(port_1$cara_1$weights*c(return, rf))*100,
+                                 port_1$cara_1$er*100,
+                                 sqrt(t(port_1$cara_1$weights[1:3]) %*% cov %*% port_1$cara_1$weights[1:3])*100,
+                                 port_1$cara_1$sd*100),
+                         cara_4 = c(port_1$cara_4$weights,
+                                 sum(port_1$cara_4$weights*c(return, rf))*100,
+                                 port_1$cara_4$er*100,
+                                 sqrt(t(port_1$cara_4$weights[1:3]) %*% cov %*% port_1$cara_4$weights[1:3])*100,
+                                 port_1$cara_4$sd*100),
+                         cara_8 = c(port_1$cara_8$weights,
+                                 sum(port_1$cara_8$weights*c(return, rf))*100,
+                                 port_1$cara_8$er*100,
+                                 sqrt(t(port_1$cara_8$weights[1:3]) %*% cov %*% port_1$cara_8$weights[1:3])*100,
+                                 port_1$cara_8$sd*100)), digits = 3)
+
+rownames(data) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3', 'Risikofri', 'Forv. Afkast', 'Estimeret afkast', 'Volatilitet', 'Estimeret volatilitet')
+colnames(data) <- c(" "," ","$\\gamma=1$", "$\\gamma=4$", "$\\gamma=8$", "$\\theta=1$", "$\\theta=4$", "$\\theta=8$")
+
+data %>% 
+  knitr::kable(caption = 'Gengivelse af de beregnede porteføljer ved brug af de simulerede afkast, fra første simulering.',
+               booktabs=TRUE,
+               align = c('r', 'r', 'r' ,'r', 'r'),
+               row.names = T,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
+  kableExtra::row_spec(c(6, 8), italic = T)
+```
+
+```{r sum-2, echo=FALSE}
+options(knitr.kable.NA = '')
+data <- round(data.frame(Min = c(port_2$gmv$weights,
+                                 0,
+                                 sum(port_2$gmv$weights*return)*100,
+                                 port_2$gmv$er*100,
+                                 sqrt(t(port_2$gmv$weights) %*% cov %*% port_2$gmv$weights)*100,
+                                 port_2$gmv$sd*100),
+                         Tan = c(port_2$tan$weights,
+                                 0,
+                                 sum(port_2$tan$weights*return)*100,
+                                 port_2$tan$er*100,
+                                 sqrt(t(port_2$tan$weights) %*% cov %*% port_2$tan$weights)*100,
+                                 port_2$tan$sd*100),
+                         Crra_1 = c(port_2$crra_1$weights,
+                                 sum(port_2$crra_1$weights*c(return, rf))*100,
+                                 port_2$crra_1$er*100,
+                                 sqrt(t(port_2$crra_1$weights[1:3]) %*% cov %*% port_2$crra_1$weights[1:3])*100,
+                                 port_2$crra_1$sd*100),
+                         Crra_4 = c(port_2$crra_4$weights,
+                                 sum(port_2$crra_4$weights*c(return, rf))*100,
+                                 port_2$crra_4$er*100,
+                                 sqrt(t(port_2$crra_4$weights[1:3]) %*% cov %*% port_2$crra_4$weights[1:3])*100,
+                                 port_2$crra_4$sd*100),
+                         Crra_8 = c(port_2$crra_8$weights,
+                                 sum(port_2$crra_8$weights*c(return, rf))*100,
+                                 port_2$crra_8$er*100,
+                                 sqrt(t(port_2$crra_8$weights[1:3]) %*% cov %*% port_2$crra_8$weights[1:3])*100,
+                                 port_2$crra_8$sd*100),
+                         cara_1 = c(port_2$cara_1$weights,
+                                 sum(port_2$cara_1$weights*c(return, rf))*100,
+                                 port_2$cara_1$er*100,
+                                 sqrt(t(port_2$cara_1$weights[1:3]) %*% cov %*% port_2$cara_1$weights[1:3])*100,
+                                 port_2$cara_1$sd*100),
+                         cara_4 = c(port_2$cara_4$weights,
+                                 sum(port_2$cara_4$weights*c(return, rf))*100,
+                                 port_2$cara_4$er*100,
+                                 sqrt(t(port_2$cara_4$weights[1:3]) %*% cov %*% port_2$cara_4$weights[1:3])*100,
+                                 port_2$cara_4$sd*100),
+                         cara_8 = c(port_2$cara_8$weights,
+                                 sum(port_2$cara_8$weights*c(return, rf))*100,
+                                 port_2$cara_8$er*100,
+                                 sqrt(t(port_2$cara_8$weights[1:3]) %*% cov %*% port_2$cara_8$weights[1:3])*100,
+                                 port_2$cara_8$sd*100)), digits = 3)
+
+rownames(data) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3', 'Risikofri', 'Forv. Afkast', 'Estimeret afkast', 'Volatilitet', 'Estimeret volatilitet')
+colnames(data) <- c(" "," ","$\\gamma=1$", "$\\gamma=4$", "$\\gamma=8$", "$\\theta=1$", "$\\theta=4$", "$\\theta=8$")
+
+data %>% 
+  knitr::kable(caption = 'Gengivelse af de beregnede porteføljer ved brug af de simulerede afkast, fra anden simulering.',
+               booktabs=TRUE,
+               align = c('r', 'r', 'r' ,'r', 'r'),
+               row.names = T,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
+  kableExtra::row_spec(c(6, 8), italic = T)
+```
+
+```{r sum-3, echo=FALSE}
+options(knitr.kable.NA = '')
+data <- round(data.frame(Min = c(port_3$gmv$weights,
+                                 0,
+                                 sum(port_3$gmv$weights*return)*100,
+                                 port_3$gmv$er*100,
+                                 sqrt(t(port_3$gmv$weights) %*% cov %*% port_3$gmv$weights)*100,
+                                 port_3$gmv$sd*100),
+                         Tan = c(port_3$tan$weights,
+                                 0,
+                                 sum(port_3$tan$weights*return)*100,
+                                 port_3$tan$er*100,
+                                 sqrt(t(port_3$tan$weights) %*% cov %*% port_3$tan$weights)*100,
+                                 port_3$tan$sd*100),
+                         Crra_1 = c(port_3$crra_1$weights,
+                                 sum(port_3$crra_1$weights*c(return, rf))*100,
+                                 port_3$crra_1$er*100,
+                                 sqrt(t(port_3$crra_1$weights[1:3]) %*% cov %*% port_3$crra_1$weights[1:3])*100,
+                                 port_3$crra_1$sd*100),
+                         Crra_4 = c(port_3$crra_4$weights,
+                                 sum(port_3$crra_4$weights*c(return, rf))*100,
+                                 port_3$crra_4$er*100,
+                                 sqrt(t(port_3$crra_4$weights[1:3]) %*% cov %*% port_3$crra_4$weights[1:3])*100,
+                                 port_3$crra_4$sd*100),
+                         Crra_8 = c(port_3$crra_8$weights,
+                                 sum(port_3$crra_8$weights*c(return, rf))*100,
+                                 port_3$crra_8$er*100,
+                                 sqrt(t(port_3$crra_8$weights[1:3]) %*% cov %*% port_3$crra_8$weights[1:3])*100,
+                                 port_3$crra_8$sd*100),
+                         cara_1 = c(port_3$cara_1$weights,
+                                 sum(port_3$cara_1$weights*c(return, rf))*100,
+                                 port_3$cara_1$er*100,
+                                 sqrt(t(port_3$cara_1$weights[1:3]) %*% cov %*% port_3$cara_1$weights[1:3])*100,
+                                 port_3$cara_1$sd*100),
+                         cara_4 = c(port_3$cara_4$weights,
+                                 sum(port_3$cara_4$weights*c(return, rf))*100,
+                                 port_3$cara_4$er*100,
+                                 sqrt(t(port_3$cara_4$weights[1:3]) %*% cov %*% port_3$cara_4$weights[1:3])*100,
+                                 port_3$cara_4$sd*100),
+                         cara_8 = c(port_3$cara_8$weights,
+                                 sum(port_3$cara_8$weights*c(return, rf))*100,
+                                 port_3$cara_8$er*100,
+                                 sqrt(t(port_3$cara_8$weights[1:3]) %*% cov %*% port_3$cara_8$weights[1:3])*100,
+                                 port_3$cara_8$sd*100)), digits = 3)
+
+rownames(data) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3', 'Risikofri', 'Forv. Afkast', 'Estimeret afkast', 'Volatilitet', 'Estimeret volatilitet')
+colnames(data) <- c(" "," ","$\\gamma=1$", "$\\gamma=4$", "$\\gamma=8$", "$\\theta=1$", "$\\theta=4$", "$\\theta=8$")
+
+data %>% 
+  knitr::kable(caption = 'Gengivelse af de beregnede porteføljer ved brug af de simulerede afkast, fra tredje simulering.',
+               booktabs=TRUE,
+               align = c('r', 'r', 'r' ,'r', 'r'),
+               row.names = T,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
+  kableExtra::row_spec(c(6, 8), italic = T)
+```
+
+Ved brug af de sande momenter, hælder minimum varians porteføljen mod Aktiv 3, med den relative laveste varians. Se Tabel \@ref(tab:sum-true). Omtrent en tredjedel af porteføljen er eksponeret i Aktiv 1 og Aktiv 2 har den laveste vægtning givet dens høje relative varians. Tangensporteføljen består af to lange positioner i Aktiv 1 og Aktiv 2, tilsammen finansieret af en kort position i Aktiv 3, hvilket reflekterer rangeringen af aktiverne ift. deres *Sharpe Ratio*.
+Fælles for alle tre simuleringer er, at de estimerede standard afvigelser og korrelationer er relativt tæt på de sande værdier. Som det til gengæld kan ses, er de forventede afkast langt sværere at estimere præcist. Hvilket er en essentiel faldgrube for middelværdi-varians porteføljeanalysen, da disse værdier er centrale for de udledte porteføljevægte.
+
+For første simulering ses, i Tabel \@ref(tab:sum-1), at det forventede afkast på Aktiv 1 og specielt Aktiv 2 er overestimeret, mens det for Aktiv 3 er underestimeret. Dette medfører en ekstrem tangensportefølje med en overvægtet lang position i Aktiv 2, en lang position i Aktiv 1 og en kort position i det underestimerede Aktiv 3. De sande forventede afkast af tangensporteføljen og de optimale porteføljer for første simulering er signifikant lavere end det forventede afkast baseret på estimaterne. Omvendt ses at den sande volatilitet kun er en anelse højere end den estimerede volatilitet på porteføljerne. Som illustreret af den blå linje på Figur \@ref(fig:weight-exp), er det sande bytteforhold mellem middelværdi og volatilitet på de estimerede porteføljer ikke langt fra porteføljerne baseret på de sande parametre.
+
+For anden simulering er de estimerede forventede afkast alle underestimeret relativt meget, sammenlignet med første simuelering, se Tabel \@ref(tab:sum-2). Aktiv 2 er stadig mest attraktiv, men Aktiv 3 er nu mere attraktiv end Aktiv 1 grundet den højere *Sharpe Ratio*. Både den estimerede *CRRA*-portefølje, *CARA*-portefølje og tangensportefølje har en høj positiv vægt på Aktiv 2 og meget lave positioner i Aktiv 1 og 3. Alle disse porteføljer har et langt højere sandt forventet afkast og en relativt højere sand volatilitet end de forventede afkast og volatilitet baseret på estimaterne, grundet de store estimationsfejl. Den magenta farvede linje på Figur \@ref(fig:weight-exp), viser portefølje bytteforholdene baseret på anden simulering.
+
+Tredje simulering overestimerer Aktiv 1 samt 2 og underestimerer Aktiv 3. Rangeringen ift. *Sharpe Ratio* følger den sande rangering, men eksponeringen i Aktiv 1 og 2 er forhøjet, oftest sammensat med en kort position i Aktiv 3. De sande forventede afkast på porteføljerne er generelt noget lavere end de estimerede forventede afkast. Den sande volatilitet og den estimerede volatilitet ligger tæt op af hinanden. Den fjerde og sidste linje på Figur \@ref(fig:weight-exp) viser bytteforholdet for porteføljerne baseret på tredje simulering.
+
+```{r weight-exp, echo=FALSE, fig.align='center', fig.cap='Global minimum varians portføljen, tangensporteføljen samt for CRRA- og CARA-porteføljen for hhv. $\\gamma=1$, $\\gamma=4$ og $\\gamma=8$ samt $\\theta=1$, $\\theta=4$ og $\\theta=8$, beregnet ud for hhv. de sande og simulerede afkast. Bemærk at akserne er blevet $\\log_{10}$ transformeret.', fig.pos='htbp!', fig.width=18, fig.asp=0.5, warning=FALSE}
+data <- data.frame(sd=c(sd, sd_1, sd_2, sd_3), r = c(r, r_1, r_2, r_3), type = c(rep("Sande momenter", 8), rep("1. Simulering", 8), rep("2. Simulering", 8), rep("3. Simulering", 8)))
+
+ggplot(data, aes(sd, r)) +
+  geom_point(aes(color = factor(type),
+                 group = factor(type),
+                 shape = factor(type),
+                 size = factor(type))) +
+  geom_line(aes(color = factor(type),
+                group = factor(type),
+                linetype=factor(type))) +
+  expand_limits(x = 0, y = 0) +
+  xlab(expression(italic("Volatilitet"))) +
+  ylab(expression(italic("Forventet afkast"))) +
+  coord_cartesian(ylim = c(min(data$r)-0.0003,
+                           max(data$r)+0.010),
+                  xlim = c(min(data$sd)-0.001,
+                           max(data$sd)+0.015)) +
+  scale_x_continuous(expand = c(0,0),
+                     minor_breaks = seq(0, 0.5, 0.05),
+                     breaks = c(0.025, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+                     trans = "log10") +
+  scale_y_continuous(expand = c(0,0),
+                     minor_breaks = seq(0 , 0.15, 0.025),
+                     breaks = c(0.01, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15),
+                     trans = "log10") +
+  theme_bw() +
+  scale_colour_brewer(palette = "Dark2") +
+  scale_linetype_manual(values=c("solid", "dashed", "dotted", "twodash")) +
+  scale_shape_manual(values=c(15, 16, 17, 18)) +
+  scale_size_manual(values=c(3, 3, 3, 3)) +
+  theme(
+    legend.background = element_rect(fill = "white",
+                                     linetype="solid",
+                                     size = 0.1,
+                                     colour = "black"),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size = 20)
+  ) +
+  labs(color = "Grundlag",
+       linetype = "Grundlag",
+       shape = "Grundlag",
+       size = "Grundlag")
+```
+
+# Allokering af aktiver
+```{r script11, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Script.R"), include=FALSE, cache=TRUE}
+```
+
+```{r script2, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Portfolio.R"), include=FALSE, cache=TRUE}
+```
+
+```{r AL-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af allokeringer.', fig.width=18, fig.asp=0.5, fig.pos='htbp!'}
+alpha <- xts::xts(t(alphafixedT), index(NET_TB))
+
+colnames(alpha) <- c('A', 'B', 'C', 'D')
+
+ggplot(alpha) +
+  expand_limits(x = min(index(alpha)), y = min(alpha))+
+  geom_line(aes(x=index(alpha), y=A, color = 'Aktier', linetype = "Aktier")) +
+  geom_line(aes(x=index(alpha), y=B, color = 'Statsobligationer', linetype = "Statsobligationer")) +
+  geom_line(aes(x=index(alpha), y=C, color = 'Virksomhedsobligationer', linetype = "Virksomhedsobligationer")) +
+  geom_line(aes(x=index(alpha), y=D, color = 'T-Bills', linetype = "T-Bills")) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(alpha), max(alpha))) +
+  scale_linetype_manual(values=c("solid", "dashed", "dotted", "dotdash"))+
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(alpha)), max(index(alpha))))+
+  scale_y_continuous(expand=c(0,0))+
+  scale_colour_brewer(palette = "Dark2") +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill = "white",
+                                     linetype="solid",
+                                     size = 0.1,
+                                     colour = "black"),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size = 20)
+  ) +
+  labs(color = "Aktiv",
+       linetype = "Aktiv",
+       shape = "Aktiv",
+       size = "Aktiv")
+```
+
+```{r AL-RES-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af allokeringer, med restringeret kortsalg.', fig.width=18, fig.asp=0.5, fig.pos='htbp!'}
+alpha_res <- xts::xts(t(res_alphafixedT), index(NET_TB))
+
+colnames(alpha_res) <- c('A', 'B', 'C', 'D')
+
+ggplot(alpha_res) +
+  expand_limits(x = min(index(alpha_res)), y = min(alpha_res)-0.25)+
+  geom_line(aes(x=index(alpha_res), y=A, color = 'Aktier', linetype = "Aktier")) +
+  geom_line(aes(x=index(alpha_res), y=B, color = 'Statsobligationer', linetype = "Statsobligationer")) +
+  geom_line(aes(x=index(alpha_res), y=C, color = 'Virksomhedsobligationer', linetype = "Virksomhedsobligationer")) +
+  geom_line(aes(x=index(alpha_res), y=D, color = 'T-Bills', linetype = "T-Bills")) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(alpha_res)-0.25, max(alpha_res)+0.25)) +
+  scale_linetype_manual(values=c("solid", "dashed", "dotted", "dotdash"))+
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(alpha_res)), max(index(alpha_res))))+
+  scale_y_continuous(expand=c(0,0))+
+  scale_colour_brewer(palette = "Dark2") +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill = "white",
+                                     linetype="solid",
+                                     size = 0.1,
+                                     colour = "black"),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size = 20)
+  ) +
+  labs(color = "Aktiv",
+       linetype = "Aktiv",
+       shape = "Aktiv",
+       size = "Aktiv")
+```
+
+
+# Diskussion
+
+# Konklusion
+
+
+<!--chapter:end:03-empiri.Rmd-->
+
+# (APPENDIX) Appendiks {-} 
+
+\part{Appendiks}
+
+# Underliggende teoretiske resultater
+
+## Udledning af den optimale myopiske portefølje {#udlmyo}
+I denne Sektion udledes den optimale portefølje på tidspunkt $t$ givet ved: Ligning \@ref(eq:Løsning) og Ligning \@ref(eq:Multalpha) for hhv. tilfældet med et risikobærende aktiv, $n=1$, samt tilfældet med flere risikobærende aktiver, $n>1$. Ved indsættelse af den betingede middelværdi, Ligning \@ref(eq:Forvport), samt den betingede varians, Ligning \@ref(eq:Varport). Kan Maksimeringsproblemet \@ref(eq:Statmaks) omskrives til
+$$\max_{\alpha_t} \mathcal{L}=\alpha_t\left(R_{t+1} - R_{0,t+1}\right)-\frac{k}{2}\alpha_t^2\sigma_t^2.$$
+
+I ovenstående er det ekstra led $R_{0,t+1}$ undladt idet, at det ikke ændrer maksimeringsproblemet.
+
+Ved differentiation af ovenstående funktion, $\mathcal{L}(\cdot)$, mht. $\alpha_t$ opnåes førsteordensbetingelsen
+\begin{align*}
+\frac{\partial \mathcal{L}}{\partial \alpha_t} &= \mathbb{E}_t(R_{t+1}) - R_{0,t+1} - \frac{k}{2}2\alpha\sigma_t^2=0\\
+&\Updownarrow\\
+\alpha&=\frac{\mathbb{E}_t\left(R_{t+1}\right)-R_{0,t+1}}{k\sigma_t^2}.
+\end{align*}
+
+Dermed er den optimale portefølje udledt, for tilfældet med ét risikobærende aktiv. For udledningen af den optimale portefølje på tidspunkt $t$ i tilfældet med flere risikobærende aktiver, differentieres funktionen, fra Maksimeringsproblemet \@ref(eq:MultStatmaks) mht. $\bm{\alpha}_t$, dermed fås
+\begin{align*}
+\frac{\partial \mathcal{L}}{\partial \bm{\alpha}_t} &= (\mathbb{E}_t(\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}) - \frac{k}{2}2\bm{\Sigma_t}\bm{\alpha}_t = 0\\
+&\Updownarrow\\
+\bm{\alpha}_t&=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t(\bm{R}_{t+1})-R_{0,t+1}\bm{\ell}).
+\end{align*}
+
+Her er de gængse regler for matrix differentiation og manipulation benyttet. 
+
+## Udledning af *ARA* samt *RRA*
+I denne Sektion udledes *Absolute Risk Aversion* samt *Relative Risk Aversion* målene for de tre præsenterede nyttefunktioner: kvadratisk nytte, eksponentiel nytte (*CARA*) og potens nytte (*CRRA*). Fælles for alle nyttefunktionerne er, at de er fuldstændigt defineret over formue.
+
+### Kvadratisk nytte
+For parametrene $a,b\in\mathbb{R}$ er kvadratisk nytte defineret som
+\begin{equation*}
+U(W_{t+1})=aW_{t+1}-bW_{t+1}^2.
+\end{equation*}
+
+*Absolute Risk Aversion* er defineret ved
+$$\text{ARA}(W)=-\frac{U''(W)}{U'(W)}.$$
+
+Altså vil kvadratisk nytte have følgende *ARA*
+$$\text{ARA}_k(W_{t+1})=\frac{2b}{a-2bW_{t+1}},$$
+
+hvor $k$ er notationen for kvadratisk. Fra ovenstående kan det ses, at *ARA* for kvadratisk nytte er stigende i $W_{t+1}$. Hvilket ikke er retsmæssigt, ift. den generelle holdning blandt emprisk litteratur. 
+
+*Relative Risk Aversion* er defineret ved
+$$\text{RRA}(W)=-\frac{WU''(W)}{U'(W)}.$$
+
+Altså vil kvadratisk nytte have følgende *RRA*
+$$\text{RRA}_k(W_{t+1})= \frac{2bW_{t+1}}{a-2bW_{t+1}}.$$
+
+Endnu engang bemærkes det, at også *RRA* for kvadratisk nytte er stigende i $W_{t+1}$. 
+
+### Eksponentiel nytte
+Eksponentiel nytte betegnes undertiden *Constant Absolute Risk Aversion*. Eksponentiel nytte antager at variablene i modellen er normalfordelt. Lad $\theta\in\mathbb{R}$ være parametren i modellen, da vil eksponentiel nytte være defineret ved
+\begin{equation*}
+U(W_{t+1})=-\exp\left(-\theta W_{t+1}\right).
+\end{equation*}
+
+Eksponential nytte har følgende *ARA*
+$$\text{ARA}_e(W_{t+1})=\frac{\theta^2\exp\left(-\theta W_{t+1}\right)}{\theta\exp\left(-\theta W_{t+1}\right)}=\theta,$$
+
+hvor $e$ er notationen for eksponentiel. Fra ovenstående kan det ses, at *ARA* for eksponentiel nytte er konstant, som *CARA*-betegnelsen dækker over. Eksponentiel nytte har følgende *RRA*
+$$\text{RRA}_e(W_{t+1})= \theta W_{t+1}.$$
+
+Fra ovenstående ses det, at *RRA* for eksponentiel nytte er proportional til $W_{t+1}$.
+
+### Potens nytte
+Potens nytte kræver, at afkast af aktiverne og formue er lognormal fordelt. Potens nytte er bedre kendt under betegnelsen *Constant Relative Risk Aversion*. Lad parameteren $\gamma\in\mathbb{R}$ være givet, da er nyttefunktionen defineret for $W_{t+1}\geq 0$, som
+$$U(W_{t+1})=\begin{cases} \frac{W_{t+1}^{1-\gamma}-1}{1-\gamma},\quad \gamma\neq 1\\
+\log(W_{t+1}),\quad \gamma = 1. \end{cases}$$
+
+Potens nytte har følgende *ARA*
+$$\text{ARA}_p(W_{t+1})= \frac{\gamma W_{t+1}^{-\gamma-1}}{W_{t+1}^{-\gamma}}=\frac{\gamma}{W_{t+1}},$$
+
+hvor $e$ er betegnelsen for eksponentiel. Det ses at *ARA* er faldende i $W_{t+1}$. Potens nytte har følgende *RRA*
+$$\text{RRA}_p(W_{t+1})= \gamma,$$
+
+som altså er konstant, dette ligger også til grund for *CRRA*-betegnelsen.
+
+## Udledning af specialtilfældet for potens nytte
+I denne Sektion udledes specialtilfældet af Ligning \@ref(eq:Potnytte), dvs. nyttefunktions form for risikoaversion, $\gamma$, lig $1$. Ved brug af *l'Hôpital's regel*. Reglen er defineret for to funktioner, $f(\cdot)$ og $g(\cdot)$, som er differentiable på et åbent interval $I$, undtagen for et fast punkt $c\in I$. Hvis
+$$\lim_{x\to c} f(x)=\lim_{x\to c}g(x)=0\,\text{eller} \pm \infty,$$
+
+samt
+$$g'(x)\neq 0,\quad \forall X\in I,\,x\neq c$$
+
+og grænsen
+$$\lim_{x\to c} \frac{f'(x)}{g'(x)},$$
+
+eksisterer, da gælder følgende lighed
+$$\lim_{x\to c}\frac{f(x)}{g(x)}=\lim_{x\to c}\frac{f'(x)}{g'(x)}.$$
+
+Altså kan der opnåes et udtryk for grænsen, som kan evalueres. For $\gamma\rightarrow 1$ fås da
+$$\lim_{\gamma\to 1}\frac{W_{t+1}^{1-\gamma}-1}{1-\gamma}=\lim_{\gamma\to 1}\frac{-W_{t+1}^{1-\gamma}\log\left(W_{t+1}\right)}{-1}=\log\left(W_{t+1}\right).$$
+
+Dermed er tilfældet udledt.
+
+# Porteføljeteori Markowitz
+
+# Portefølje Jurek
+
+# Shiller
+
+<!--chapter:end:04-appendix.Rmd-->
+
+\nocite{*}
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:05-references.Rmd-->
+
