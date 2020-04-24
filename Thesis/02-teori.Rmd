@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 \part{Den teoretiske ramme}
 
 # Underliggende teori {#unteo}
@@ -306,7 +311,7 @@ $$r_{p,t+1}-r_{0,t+1}\approx \alpha_t (r_{t+1}-r_{0,t+1})+\frac{1}{2}\alpha_t(1-
 
 Her epræsenterer $r_{t+1}$ log afkastet på det ene risikobærende aktiv, og $r_{0,t+1}$ repræsenterer log afkastet på det risikofrie aktiv. Forskellen mellem log porteføljeafkastet og den lineære kombination af de individuelle logafkast er givet ved $\alpha_t(1-\alpha_t)\tfrac{1}{2}\sigma_t^2$. Forskellen vil forsvinde, hvis vægtningen i det risikobærende aktiv er nul, eller hvis vægtningen i det risikofrie aktiv er nul. Ovenstående approksimation er eksakt i grænsen, ved benyttelse af kontinuerte *diffusion processes* for priserne på aktiverne, og kan udledes ved brug af *Itô's Lemma*, [@CampVicCha2003]. Ovenstående approksimation kan nu benyttes, og dermed kan Maksimeringsproblemet \@ref(eq:CRRAmakslog2) skrives i form af merafkast på porteføljen.
 \begin{equation}
-\max\alpha_t(\mathbb{E}_t(r_{t+1}) - r_{0,t+1}) + \frac{1}{2}\alpha_t(1-\alpha_t)\sigma_t^2 + \frac{1}{2}(1-\gamma)\alpha_t^2\sigma_t^2, (\#eq:CRRAmakslog4)
+\max\alpha_t(\mathbb{E}_t(r_{t+1}) - r_{0,t+1}) + \frac{1}{2}\alpha_t(1-\alpha_t)\sigma_t^2 + \frac{1}{2}(1-\gamma)\alpha_t^2\sigma_t^2, (\#eq:CRRAmakslog4) 
 \end{equation}
 
 med den tilhørende løsning
@@ -314,7 +319,56 @@ med den tilhørende løsning
 \alpha_t=\frac{\mathbb{E}(r_{t+1}) - r_{0,t+1}+\frac{1}{2}\sigma_t^2}{\gamma\sigma_t^2}.
 \end{equation}
 
-Som tilmed er ækvivalent til den optimale vægtning, Ligning \@ref(eq:Statmaks), fra middelværdi-varians analysen.
+Som tilmed er ækvivalent til den optimale vægtning, Ligning \@ref(eq:Statmaks), fra middelværdi-varians analysen. I tilfældet, hvor investoren står overfor $n>1$ risikobærende aktiver, vil Taylor approksimationen af den ikke-lineære funktion være givet ved
+\begin{equation}
+r_{p,t+1}-r_{0,t+1}\approx \bm{\alpha}'_t (\bm{r}_{t+1}-r_{0,t+1}\bm{\ell})+\frac{1}{2}\bm{\alpha}'_t\bm{\sigma}_t^2 - \frac{1}{2} \bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t. (\#eq:Multtaylor)
+\end{equation}
+
+Den optimale løsning vil være givet ved
+\begin{equation}
+\bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t(\bm{r}_{t+1})-r_{0,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right).(\#eq:Potmultalpha)
+\end{equation}
+
+Som igen er ækvivalent med den optimale løsning, Ligning \@ref(eq:Multalpha), for middelværdi-varians analysen i det multiple tilfælde. På samme måde som i middelværdi-varians analysen, har løsningen egenskaben, at koefficienten for relativ risikoaversion, $\gamma$, kun påvirker den overordnede skalering af positionen i det risikobærende aktiv, men ikke kompositionen. Dette er ensbetydende med, at \textit{The Mutual Fund Seperation Theorem}, [@Tobin1958], også holder i den lognormale model med potens nytte. Et mere generelt tilfælde end ovenstående, er når der ikke eksisterer et risikofrit aktiv, og man da i stedet må benytte et risikobærende *benchmark*-afkast, $r_{b,t+1}$, da bliver løsningen
+\begin{equation}
+\bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t(\bm{r}_{t+1})-r_{b,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right)+(1-\frac{1}{\gamma})(-\bm{\Sigma}_t^{-1}\bm{\sigma}_{b,t}).
+\end{equation}
+
+## Model for $k$-perioder
+Analysen har indtil videre benyttet den restriktive antagelse, at investoren kun har en én-periodes investeringshorisont. Et mere realistisk tilfælde, er at antage, at investorens forventede nytte er udledt på baggrund af formuefordeling flere perioder fra nu. I den multiple-periode model, antages det at afkast på investeringer bliver geninvesteret, dette implicerer den nye budgetbegrænsning
+\begin{align}
+W_{t+k}&=R_{pk,t+k}W_t \notag\\
+&=R_{p,t+1}R_{p,t+2}\cdots R_{p,t+k}W_t.
+\end{align}
+
+hvor $k$ er investeringshorisonten og $R_{pK,t+k}$ noterer det kumulative afkast over perioderne fra $t$ til $t+k$. Ved brug af log, kan det kumulative $k$-periode afkast simplificeres til summen af $k$ én-periode log afkast
+\begin{equation}
+r_{pk,t+k}=r_{p,t+1}+\cdots+r_{p,t+k}.
+\end{equation}
+
+I de følgende sektioner vil flere specialtilfælde af det multiple-periode setup blive analyseret. Først tages hånd om tilfældet, hvor porteføljen på tidspunkt $t$ skal holdes i alle følgende perioder uden rebalancering.
+
+### Uden periodisk rebalancering
+I tilfældet uden periodisk rebalancering skal investoren evaluere $k$-periode afkastet, på samme måde som i tilfældet med én-periode. Udover antagelsen om lognormalitet og potens nytte, antages nu den restriktive betingelse, at alle aktivafkast er uafhængige og identisk fordelte over tid. Dette betyder, at det risikofrie $k$-periode logafkast er konstant lig $kr_{0}$, det $k$-periode forventede log afkast for de risikobærende aktiver er $k\mathbb{E}(\bm{r})$, kovariansmatricen af logafkastet på de risikobærende aktiver er konstant lig $\bm{\Sigma}$ og siden alle afkast er ukorrellerede bliver kovariansmatricen over en $k$-periode lig $k\bm{\Sigma}$. Givet at Taylor approksimationen, Ligning \@ref(eq:Multtaylor), er tilstrækkelig approksimerende for den givne respektive periode er løsningen, Ligning \@ref(eq:Potmultalpha), stadig optimal. Dette følger da alle middelværdier og kovarianserer skaleret med den samme faktor, $k$
+\begin{equation}
+\bm{\alpha}_t=\frac{1}{\gamma}(k\bm{\Sigma})^{-1}\left(k\mathbb{E}_t(\bm{r}_{t+1})-kr_{b,t+1}\bm{\ell}+\frac{1}{2}k\bm{\sigma}_t^2\right). (\#eq:Potmultalphak)
+\end{equation}
+
+Altså vil investoren vælge den samme portefølje over hele deres investeringshorisont givet, at der ikke er mulighed for periodisk rebalancering.
+
+### Med periodisk rebalancering
+Antagelsen om, at ingen rebalancering finder sted over tid, synes at være i modstrid med virkelige observationer. Derfor arbejdes videre med en teoretisk ramme, som tillader periodisk rebalancering af investorporteføljen. Den første som beskrev maksimering af nytte ift terminal formue var [@Mossin1968], som beskriver problemet i diskrettid. [@Mossin1968] noterede sig, at enhver følge af porteføljer beslutninger skal være betingede af resultatet fra tidligere perioder, men på samme tid tage hensyn til information vedr. de fremtidige fordelinger af afkast. [@Samuelson1969] udvidede denne teori til at medtage forbrug, mens [@Merton1969; @Merton1971] beskrev en forbrugsbaseret model i kontinuert tid. I det følgende vil to eksempler med traktable løsninger blive præsenteret. Disse eksempler medfører, at investoren handler myopisk, selvom der er mulighed for rebalancering.
+
+Først præsenteres den generelle potens nytte investor med *i.i.d.* afkast. Givet at investoren har potens nytte og at afkastene på aktiverne er *i.i.d.*, er det muligt at vise, at investorens porteføljevalg vil blive myopiske. Dette er også kendt som den første *Samuelson-Merton* betingelse. En intuitiv forklaring er som følger: Givet *i.i.d.* afkast vil investoren ikke opnå ny information vedr. log afkastfordelingen over tid. Dernæst haves at *RRA* er konstant, hvilket medfører at porteføljevalget er uafhængig af formueniveauet. Når forskellige porteføljestrategier, $\bm{\alpha}_t$ for $t=1,\dots,k$, tillades kan $2$-periode portefølje merafkastet omskrives til
+\begin{align}
+r_{p2,t+2}-2r_0&=(r_{p,t+1}-r_0)+(r_{p,t+2}-r_0)\\
+&= \bm{\alpha}_t'(\bm{r}_{t+1}-r_0\bm{\ell})+\frac{1}{2}\bm{\alpha}_t'\bm{\sigma}^2-\frac{1}{2} \bm{\alpha}_t'\bm{\Sigma}\bm{\alpha}_t + \bm{\alpha}_{t+1}'(\bm{r}_{t+2}-r_0\bm{\ell})+\frac{1}{2}\bm{\alpha}_{t+1}'\bm{\sigma}^2-\frac{1}{2} \bm{\alpha}_{t+1}'\bm{\Sigma}\bm{\alpha}_{t+1}
+\end{align}
+
+
+
+## Jurek Viceira
+
 
 # VAR
 
