@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 \part{Den teoretiske ramme}
 
 # Underliggende teori {#unteo}
@@ -85,7 +80,7 @@ Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det 
   enlargelimits=true,
   scatter/classes={
     a={mark=o,draw=black, mark size = 3pt},
-    b={mark=*, mark size = 3pt,draw=magenta, fill = magenta},
+    b={mark=*, mark size = 3pt,draw=magenta, fill = red},
     c={mark=*, mark size = 3pt,draw=black, fill = black}
   }
 ]
@@ -100,7 +95,7 @@ Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det 
 \node at (axis cs:19, 5) [anchor=north west] {Aktiv 1};
 \node at (axis cs:30,11) [anchor=north west] {Aktiv 2};
 \node at (axis cs:40,15) [anchor=north west] {Aktiv 3};
-\addplot[magenta, very thick,  domain=-1:2.5, samples=200, variable=\t](
+\addplot[red, very thick,  domain=-1:2.5, samples=200, variable=\t](
    {(20^2*t^2 + 12^2*(1-t)^2)^(0.5) }, %{(t^2 * 20^2 + (1-t)^2 * 12)},
    {11 * t + (1-t) * 5}
  );
@@ -343,7 +338,7 @@ W_{t+k}&=R_{pk,t+k}W_t \notag\\
 
 hvor $k$ er investeringshorisonten og $R_{pK,t+k}$ noterer det kumulative afkast over perioderne fra $t$ til $t+k$. Ved brug af log, kan det kumulative $k$-periode afkast simplificeres til summen af $k$ én-periode log afkast
 \begin{equation}
-r_{pk,t+k}=r_{p,t+1}+\cdots+r_{p,t+k}.
+r_{pk,t+k}=r_{p,t+1}+\cdots+r_{p,t+k}. (\#eq:sumportk)
 \end{equation}
 
 I de følgende sektioner vil flere specialtilfælde af det multiple-periode setup blive analyseret. Først tages hånd om tilfældet, hvor porteføljen på tidspunkt $t$ skal holdes i alle følgende perioder uden rebalancering.
@@ -365,7 +360,22 @@ r_{p2,t+2}-2r_0&=(r_{p,t+1}-r_0)+(r_{p,t+2}-r_0)\\
 &= \bm{\alpha}_t'(\bm{r}_{t+1}-r_0\bm{\ell})+\frac{1}{2}\bm{\alpha}_t'\bm{\sigma}^2-\frac{1}{2} \bm{\alpha}_t'\bm{\Sigma}\bm{\alpha}_t + \bm{\alpha}_{t+1}'(\bm{r}_{t+2}-r_0\bm{\ell})+\frac{1}{2}\bm{\alpha}_{t+1}'\bm{\sigma}^2-\frac{1}{2} \bm{\alpha}_{t+1}'\bm{\Sigma}\bm{\alpha}_{t+1}
 \end{align}
 
+Ovenstående kan generaliseres til $k$-perioder. Den betingede varians af $2$-periode log porteføljeafkastet bliver
+$$\mathbb{V}_t(r_{p2,t+2})=\bm{\alpha}_t'\bm{\Sigma}\bm{\alpha}_t+\bm{\alpha}_{t+1}'\bm{\Sigma}\bm{\alpha}_{t+1},$$
 
+eftersom $\bm{\alpha}_{t+1}$ også fastsættes på tidspunkt $t$. Middelværdien af log porteføljeafkastet er
+$$\mathbb{E}(r_{p2,t+2})+\frac{1}{2}\mathbb{V}(r_{p2,t+2})=2r_0 + (\bm{\alpha}_t'+\bm{\alpha}_{t+1}')(\mathbb{E}(r)-r_0\bm{\ell}+\frac{1}{2}\bm{\sigma}^2).$$
+
+Benyttelse af ovenstående momenter giver følgende maksimeringsproblem for $2$-periode porteføljeproblemet med periodisk rebalancering
+\begin{align}
+&\max\mathbb{E}_t(r_{p2,t+2}) + \frac{1}{2} \mathbb{V}_t(r_{p2,t+2})-\frac{1}{2}\gamma \mathbb{V}_t(r_{p2,t+2})\notag \\
+&=2r_0+(\bm{\alpha}_t'+\bm{\alpha}_{t+1}')(\mathbb{E}(r)-r_0\bm{\ell}+\frac{1}{2}\bm{\sigma}^2)-\frac{1}{2}\gamma (\bm{\alpha}_t'\bm{\Sigma}\bm{\alpha}_t+\bm{\alpha}_{t+1}'\bm{\Sigma}\bm{\alpha}_{t+1})
+(\#eq:CRRAmakslogk2periode)
+\end{align}
+
+Ovenstående medfører, at investorer med $\gamma>0$ vil vælge porteføljer med en lavere varians for et givet varians justeret forventet afkast. Men den justerede middelværdi afhænger kun af summen af de to vægte $(\bm{\alpha}_t'+\bm{\alpha}_{t+1}')$. Investorerne kan dermed justere de individuelle vægte og for den faste sum minimere variansen. I optimum vil variansen være minimeret ved at sætte $\bm{\alpha}_t=\bm{\alpha}_{t+1}$. Dette betyder, at ingen rebalancering er optimal på trods af muligheden i hver periode. Dette medfører altså, at den langsigtede investor handler myopisk, ***når*** afkastene på aktiverne er *i.i.d.* over tid. 
+
+Den anden Samuelson-Merton betingelse som foranlediger til det myopiske porteføljevalg er baseret på faktummet, at en investor har log nytte, dvs. potens nytte, hvor $\gamma=1$. Her vil porteføljevalget være myopisk, uanset om aktiv afkastene er *i.i.d.*. Argumenteret for dette er, at en log nytte investor vælger en portefølje, som maksimerer det forventede logafkast. Ligning \@ref(eq:sumportk) viser at $k$-periode log afkastet er summen af én-periode logafkast. Summen bliver maksimeret ved at maksimere hvert element seperat, siden at porteføljen frit kan blive valgt hver periode, altså vil hver én-periodes maksimering lede til det myopiske valg.
 
 ## Jurek Viceira
 

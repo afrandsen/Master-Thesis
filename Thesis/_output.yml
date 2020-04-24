@@ -14,6 +14,7 @@ bookdown::pdf_book:
     in_header: latex/preamble.tex
     before_body: latex/titlingpage.tex
   latex_engine: pdflatex
+  citation_package: natbib
   keep_tex: yes
   dev: "cairo_pdf"
   toc: no
