@@ -799,8 +799,34 @@ Ovenstående medfører, at investorer med \(\gamma>0\) vil vælge porteføljer m
 
 Den anden Samuelson-Merton betingelse som foranlediger til det myopiske porteføljevalg er baseret på faktummet, at en investor har log nytte, dvs. potens nytte, hvor \(\gamma=1\). Her vil porteføljevalget være myopisk, uanset om aktiv afkastene er \emph{i.i.d.}. Argumenteret for dette er, at en log nytte investor vælger en portefølje, som maksimerer det forventede logafkast. Ligning \eqref{eq:sumportk} viser at \(k\)-periode log afkastet er summen af én-periode logafkast. Summen bliver maksimeret ved at maksimere hvert element seperat, siden at porteføljen frit kan blive valgt hver periode, altså vil hver én-periodes maksimering lede til det myopiske valg.
 
-\hypertarget{jurek-viceira}{%
-\section{Jurek Viceira}\label{jurek-viceira}}
+\hypertarget{rekursiv-luxf8sning}{%
+\section{Rekursiv løsning}\label{rekursiv-luxf8sning}}
+
+I forlængelse af ovenstående modeller følges nu den analytiske løsning til det dynamiske porteføljeproblem foreslået af \citep{JurVic2011}. Her betragtes en investor med initial formue \(W_t\) på tidspunkt \(t\), som vælger en porteføljestrategi, der maksimerer den forventede nytte af formue \(k\) perioder frem i tiden, altså på tidspunkt \(t+k\). Investoren antages at have potens nytte med konstant risikoaversions parameter, \(\gamma\), og forbruger den akkumulerede nytte på terminaltidspunktet, \(t+k\).
+
+Investoren vælger altså vægte sådan, at
+\begin{align}
+\left\{\bm{\alpha}_{t+k-\tau}\right\}_{\tau=k}^{\tau=1}=
+\begin{cases}
+\arg\max\mathbb{E}_t(\frac{1}{1-\gamma}W_{t+k}^{1-\gamma}),\quad &\gamma\neq 1\\
+\arg\max\mathbb{E}_t(\log(W_{t+k})),\quad &\gamma=1.
+\end{cases}
+\end{align}
+
+Her er \(\tau\) den resterende tid til investeringshorisonten, \(t+k\). Altså indekseres vægtenes på det tidspunkt de bliver valgt med sunket skrift, og med hævet skrift for den resterende tid til investeringshorisonten. Risikopræferencen for investoren indebærer, at \((1+R_{p,t+i})>0\) for \(i=1,\dots,k\). For de optimale vægte haves derfor
+\begin{equation}
+W_{t+k}=W_t\exp(r_{p,t\to t+k}),\label{eq:formuetk}
+\end{equation}
+
+hvor \(r_{p,t\to t+k}=\sum_{i=1}^k r_{p,t+i}\) er \(k\)-periode log porteføljeafkastet mellem tidspunkt \(t\) og \(t+k\). Dette tillader at vægtene , kan omskrives til
+\begin{align}
+\left\{\bm{\alpha}_{t+k-\tau}\right\}_{\tau=k}^{\tau=1}=\begin{cases}
+\arg\max\mathbb{E}_t(\exp ((1-\gamma) r_{p,t\to t+k})),\quad &\gamma\neq 1\\
+\arg\max\mathbb{E}_t(r_{p,t\to t+k}),\quad &\gamma=1.
+\end{cases}
+\end{align}
+
+Som tidligere argumenteret vil en antagelse om rebalancering følge markedsobservationer, og det er ud fra denne antagelse at \citep{JurVic2011} løser det generelle \(k\)-periode porteføljeproblem ved benyttelse af baglæns optrævling. Løsningen er en diskretiseret version af \citep{Liu2007}, men mere fleksibel idet, at den kan håndtere et bredt spektrum af risikobærende aktiver og tilstandsvariable på samme tid.
 
 \hypertarget{var}{%
 \chapter{VAR}\label{var}}
