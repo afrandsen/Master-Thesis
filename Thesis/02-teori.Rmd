@@ -215,7 +215,7 @@ U(W_{t+1})=-\exp\left(-\theta W_{t+1}\right). (\#eq:Ekspnytte)
 \end{equation}
 
 Eksponentiel nytte antager, at *ARA* er konstant lig $\theta$, mens *RRA* kan stige med formue. Dette aspekt gør også eksponentiel nytte foretrukket ift. kvadratisk nytte. Eksponentiel nytte er også kendt under navnet *Constant Absolute Risk Aversion*. For en eksplicit opskrivning af forventningen af Ligning \@ref(eq:Ekspnytte) bemærker vi følgende
-$$W_{t+1}\sim N(\mu_p,\sigma_p^2)$$
+$$W_{t+1}\sim \mathcal{N}\mu_p,\sigma_p^2)$$
 
 altså er terminalnytten normalfordelt for enhver mulig portefølje, $p$, givet at afkastene er normalfordelt. Regner vi derfor på forventningen, får vi
 $$\mathbb{E}(U(W_{t+1}))=-\exp\left(-\theta\mu_p+\frac{\theta^2}{2}\sigma_p^2\right).$$
@@ -326,7 +326,7 @@ Den optimale løsning vil være givet ved
 
 Som igen er ækvivalent med den optimale løsning, Ligning \@ref(eq:Multalpha), for middelværdi-varians analysen i det multiple tilfælde. På samme måde som i middelværdi-varians analysen, har løsningen egenskaben, at koefficienten for relativ risikoaversion, $\gamma$, kun påvirker den overordnede skalering af positionen i det risikobærende aktiv, men ikke kompositionen. Dette er ensbetydende med, at \textit{The Mutual Fund Seperation Theorem}, [@Tobin1958], også holder i den lognormale model med potens nytte. Et mere generelt tilfælde end ovenstående, er når der ikke eksisterer et risikofrit aktiv, og man da i stedet må benytte et risikobærende *benchmark*-afkast, $r_{b,t+1}$, da bliver løsningen
 \begin{equation}
-\bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t(\bm{r}_{t+1})-r_{b,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right)+(1-\frac{1}{\gamma})(-\bm{\Sigma}_t^{-1}\bm{\sigma}_{b,t}).
+\bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t(\bm{r}_{t+1})-r_{0,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right)+(1-\frac{1}{\gamma})(-\bm{\Sigma}_t^{-1}\bm{\sigma}_{0,t}).
 \end{equation}
 
 ## Model for $k$-perioder
@@ -346,7 +346,7 @@ I de følgende sektioner vil flere specialtilfælde af det multiple-periode setu
 ### Uden periodisk rebalancering
 I tilfældet uden periodisk rebalancering skal investoren evaluere $k$-periode afkastet, på samme måde som i tilfældet med én-periode. Udover antagelsen om lognormalitet og potens nytte, antages nu den restriktive betingelse, at alle aktivafkast er uafhængige og identisk fordelte over tid. Dette betyder, at det risikofrie $k$-periode logafkast er konstant lig $kr_{0}$, det $k$-periode forventede log afkast for de risikobærende aktiver er $k\mathbb{E}(\bm{r})$, kovariansmatricen af logafkastet på de risikobærende aktiver er konstant lig $\bm{\Sigma}$ og siden alle afkast er ukorrellerede bliver kovariansmatricen over en $k$-periode lig $k\bm{\Sigma}$. Givet at Taylor approksimationen, Ligning \@ref(eq:Multtaylor), er tilstrækkelig approksimerende for den givne respektive periode er løsningen, Ligning \@ref(eq:Potmultalpha), stadig optimal. Dette følger da alle middelværdier og kovarianserer skaleret med den samme faktor, $k$
 \begin{equation}
-\bm{\alpha}_t=\frac{1}{\gamma}(k\bm{\Sigma})^{-1}\left(k\mathbb{E}_t(\bm{r}_{t+1})-kr_{b,t+1}\bm{\ell}+\frac{1}{2}k\bm{\sigma}_t^2\right). (\#eq:Potmultalphak)
+\bm{\alpha}_t=\frac{1}{\gamma}(k\bm{\Sigma})^{-1}\left(k\mathbb{E}_t(\bm{r}_{t+1})-kr_{0,t+1}\bm{\ell}+\frac{1}{2}k\bm{\sigma}_t^2\right). (\#eq:Potmultalphak)
 \end{equation}
 
 Altså vil investoren vælge den samme portefølje over hele deres investeringshorisont givet, at der ikke er mulighed for periodisk rebalancering.
@@ -383,7 +383,7 @@ I forlængelse af ovenstående modeller følges nu den analytiske løsning til d
 
 Investoren vælger altså vægte sådan, at
 \begin{align}
-\left\{\bm{\alpha}_{t+k-\tau}\right\}_{\tau=k}^{\tau=1}=
+\left\{\bm{\alpha}_{t+k-\tau}^\tau\right\}_{\tau=k}^{\tau=1}=
 \begin{cases}
 \arg\max\mathbb{E}_t(\frac{1}{1-\gamma}W_{t+k}^{1-\gamma}),\quad &\gamma\neq 1\\
 \arg\max\mathbb{E}_t(\log(W_{t+k})),\quad &\gamma=1.
@@ -395,15 +395,37 @@ Her er $\tau$ den resterende tid til investeringshorisonten, $t+k$. Altså indek
 W_{t+k}=W_t\exp(r_{p,t\to t+k}),(\#eq:formuetk)
 \end{equation}
 
-hvor $r_{p,t\to t+k}=\sum_{i=1}^k r_{p,t+i}$ er $k$-periode log porteføljeafkastet mellem tidspunkt $t$ og $t+k$. Dette tillader at vægtene , kan omskrives til
+hvor $r_{p,t\to t+k}=\sum_{i=1}^k r_{p,t+i}$ er $k$-periode log porteføljeafkastet mellem tidspunkt $t$ og $t+k$. Dette tillader at vægtene ??, kan omskrives til
 \begin{align}
-\left\{\bm{\alpha}_{t+k-\tau}\right\}_{\tau=k}^{\tau=1}=\begin{cases}
+\left\{\bm{\alpha}_{t+k-\tau}^\tau\right\}_{\tau=k}^{\tau=1}=\begin{cases}
 \arg\max\mathbb{E}_t(\exp ((1-\gamma) r_{p,t\to t+k})),\quad &\gamma\neq 1\\
 \arg\max\mathbb{E}_t(r_{p,t\to t+k}),\quad &\gamma=1.
 \end{cases}
 \end{align}
 
-Som tidligere argumenteret vil en antagelse om rebalancering følge markedsobservationer, og det er ud fra denne antagelse at [@JurVic2011] løser det generelle $k$-periode porteføljeproblem ved benyttelse af baglæns optrævling. Løsningen er en diskretiseret version af [@Liu2007], men mere fleksibel idet, at den kan håndtere et bredt spektrum af risikobærende aktiver og tilstandsvariable på samme tid.
+Som tidligere argumenteret vil en antagelse om rebalancering følge markedsobservationer, og det er ud fra denne antagelse at [@JurVic2011] løser det generelle $k$-periode porteføljeproblem ved benyttelse af baglæns optrævling. Løsningen er en diskretiseret version af [@Liu2007], men mere fleksibel idet, at den kan håndtere et bredt spektrum af risikobærende aktiver og tilstandsvariable på samme tid. Derudover vil løsningen være eksakt i kontinuert tid, grundet den loglineære approksimation. Først udledes porteføljestrategien for den sidste periode, $\tau=1$, da denne vægtning vil danne grundlaget for resten af rekursionen. Den optimale portefølje for sidste periode er den sædvanlige myopiske eller én-periode middelværdi-varians optimale portefølje, som tidligere præsenteret
+$$\bm{\alpha}_{t+k-1}^1=\frac{1}{\gamma}\bm{\Sigma}_{xx}^{-1}\left(\mathbb{E}_{t+k-1}(\bm{r}_{t+k}-r_{0,t+k}\bm{\ell})+\frac{1}{2}\bm{\sigma}_x^2 + (1-\gamma) \bm{\sigma}_{0x}\right),$$
+
+hvor, at
+$$\mathbb{E}_{t+k-1}(\bm{r}_{t+k}-r_{0,t+k}\bm{\ell})=\bm{H}_x(\bm{\Phi}_0 + \bm{\Phi}_1 \bm{z}_{t+k-1}),$$
+
+og $H_x$ er selektionsmatricen, som vælger rækkerne hørende til vektoren af merafkast $\bm{x}$ fra den relevante matrix. Den optimale portefølje kombinerer tangensporteføljen og global minimum varians porteføljen fra den efficiente rand, konstrueret af de én-periode forventede merafkast og kovariansmatricen af én-periode merafkastene. Tangensporteføljedelen er
+$$\bm{\Sigma}_{xx}^{-1}\mathbb{E}_{t+k-1}(\bm{r}_{t+k}-r_{0,t+k}\bm{\ell})+\frac{1}{2}\bm{\sigma}_x^2.$$
+
+Denne portefølje er afhængig af de tidsvarierende merafkast og kovariansmatricen af merafkastene, dette er ensbetydende med at porteføljen vil ændre sig over tid. Global minimum varians porteføljen består af den anden del
+$$\bm{\Sigma}_{xx}^{-1}\bm{\sigma}_{0x},$$
+
+og afhænger kun af kovariansmatricen af merafkast, som forventet. Givet antagelsen om, at kovariansmatricen er konstant over tid, vil én-periode global minimum varians porteføljen ikke ændre sig over tid. Disse to porteføljedele vil investeren kombinere ved brug af hhv. $\tfrac{1}{\gamma}$ og $1-\tfrac{1}{\gamma}$, alt afhængig af *RRA*-parameteren $\gamma$. Log nytte investorer ($\gamma=1$) vil kun holde tangensporteføljen, mens investorer med højere og højere risikoaversion ($\gamma\to\infty$) kun vil holde global minimums varians porteføljen. Alle andre investorer vil bevæge sig mellem disse to yderpunkter.
+
+Den generelle rekursive løsning til det dynamiske porteføljeproblem er givet ved
+\begin{align}
+\bm{\alpha}_{t+k-\tau}^\tau = &\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} \left( \mathbb{E}_{t+k-\tau} ( \bm{r}_{t+k-\tau+1} - r_{0,t+k-\tau+1} \bm{\ell} ) + \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma) \bm{\sigma}_{0x} \right) \notag\\
+&- (1-\frac{1}{\gamma} ) \bm{\Sigma}_{xx}^{-1} \bm{\Sigma}_x (B_1^{\tau-1'}+(B_2^{\tau-1}+B_3^{\tau-1'})\mathbb{E}_{t+k-\tau}(\bm{z}_{t+k-\tau+1})),(\#eq:jurvicalpha)
+\end{align}
+
+hvor $\bm{\Sigma}_x=\begin{pmatrix}\bm{\sigma}_0x & \bm{\Sigma} & \bm{\Sigma}_{xs}'\end{pmatrix}$ og $B_1^{\tau-1}$, $B_2^{\tau-1}$ samt $B_3^{\tau-1}$ er funktioner afhængende af: den resterende investeringshorisont, $\tau$, *RRA*-parameteren, $\gamma$, samt koefficeinterne fra VAR-modellen, [@JurVic2011].
+
+Ovenstående Ligning \@ref(eq:jurvicalpha) giver den fulde analytiske løsning til det intertemporale porteføljeproblem fra Ligning ??. Den optimale portefølje er en sum af to komponenter. Den første del af summen er identisk til den én-periode myopiske portefølje fra Ligning ??. Den anden del af summen, består af det såkaldte intertemporale *hedging demand* for risikobærende aktiver, [@Merton1969; @Merton1971; @Merton1973]. Herudover viser løsning at den myopiske del af det totale porteføljevalg er uafhængigt af den resterende tid til investeringshorisonten, $\tau$. Den viser også at den myopiske del er den totale porteføljedel for investorer med log nytte, $\gamma=1$. Hvilket også er konsistent med intutionen givet i Sektion ??, at log nytte investorer ikke forholder sig til investeringshorisonten.
 
 # VAR
 
@@ -457,7 +479,7 @@ Dvs. at determinanten af vores matrix -- bestående af hældningskoefficienter -
 
 Slutteligt antager vi, at fejlleddet er normalfordelt
     \begin{equation}\label{eq:2}
-        \bm{v}_{t+1}\overset{\text{i.i.d.}}{\sim}N(0,\bm{\Sigma}_v),
+        \bm{v}_{t+1}\overset{\text{i.i.d.}}{\sim}\mathcal{N}(0,\bm{\Sigma}_v),
     \end{equation}
 hvor middelværdien er $0$, som tidligere nævnt, og $\bm{\Sigma}_v$ er kovariansmatricen, som tillige er symmetrisk. For notationens skyld sætter vi
     \begin{equation*}

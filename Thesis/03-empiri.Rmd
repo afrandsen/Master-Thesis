@@ -33,7 +33,7 @@ Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte d
 Mængden af aktivklasser, som pt. er tilgængelige på finansmarkedet har aldrig været større. Udover aktier og obligationer, findes et væld af eksponeringsområder og/eller finansielle produkter heriblandt ejendom, derivater, futures, forwards, kryptovaluta, valuta mm. For at holde denne analyse på et simpelt niveau medtages de mest anvendte aktivklasser for institutionelle og private investorer. Hvilket også er de mest anvendte i eksisterende litteratur, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. I det følgende vil egenskaberne for aktivklasserne: det risikofrie afkast, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer beskrives og derudover vil den tilhørende beskrivende statistik for hvert aktiv belyses.
 
 ### Det risikofrie afkast -- $r_{t+1}^{\textnormal{rf}}$
-Essencen af et risikofrit aktiv er at repræsentere et afkast med varians lig $0$. Dette betegnes undertiden også som et sikkert afkast. Udover at give investoren muligheder for indlån, kan investoren også udvide sine investeringsmuligheder ved at låne til den risikofrie rente, dvs. have en kort position i det risikofrie aktiv. Et ofte valgt aktiv i litteraturen, som en proxy for det risikofrie aktiv, er de kortefristede statsværdipapirer, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. Disse betegnes i U.S.A. som *T-Bills*. Valget af netop dette aktiv sker på baggrund af den historiske og nuværende meget lave risiko for statskonkurser, [@Beers2017]. Eksempelvis gik den danske stat tilnærmelsesvis senest bankerot under *Statsbankerotten* i 1813 efter *Napoleonskrigene*. Derfor benyttes det amerikanske statspapir med kort løbetid, mere præcist anvendes den 90-dages amerikanske *T-Bill*, som en proxy for det risikofrie aktiv. Data over afkast er fra [@CRSPt90] hentet gennem [@WRDSt90]. Log netto afkastet af det risikofrie aktiv beregnes som log forskellen mellem det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill* og den kvartalsvise inflationsrate, målt via *Consumer Price Index*. Nettoafkastet har et kvartalsvist justeret afkast på `r round(DESCRIPTIVE$adj_mean[1]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[1]*100, 1)`$\%$. Som det kan ses på kvantilerne har det risikofrie afkast givet negativt afkast sommetider. Et histogram indikerer en højreskæv fordeling af afkast, hvilket også underbygges af en skævhed på `r round(DESCRIPTIVE$skew[1], 3)`. Med en kurtosis på `r round(DESCRIPTIVE$kurt[1], 3)` haves en leptokurtisk fordeling, med tykkere/længere haler og et smallere samt højere cetrum. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:NET-TB-tids) viser et plot over tidsserien.
+Essencen af et risikofrit aktiv er at repræsentere et afkast med varians lig $0$. Dette betegnes undertiden også som et sikkert afkast. Udover at give investoren muligheder for indlån, kan investoren også udvide sine investeringsmuligheder ved at låne til den risikofrie rente, dvs. have en kort position i det risikofrie aktiv. Et ofte valgt aktiv i litteraturen, som en proxy for det risikofrie aktiv, er de kortefristede statsværdipapirer, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. Disse betegnes i U.S.A. som *T-Bills*. Valget af netop dette aktiv sker på baggrund af den historiske og nuværende meget lave risiko for statskonkurser, [@Beers2017]. Eksempelvis gik den danske stat tilnærmelsesvis senest bankerot under *Statsbankerotten* i 1813 efter *Napoleonskrigene*. Derfor benyttes det amerikanske statspapir med kort løbetid, mere præcist anvendes den 90-dages amerikanske *T-Bill*, som en proxy for det risikofrie aktiv. Data over afkast er fra [@CRSPt90] hentet gennem [@WRDSt90]. Log netto afkastet af det risikofrie aktiv beregnes som log forskellen mellem det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill* og den kvartalsvise inflationsrate, målt via *Consumer Price Index*. Nettoafkastet har et kvartalsvist justeret afkast på `r round(DESCRIPTIVE$adj_mean[1]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[1]*100, 1)`$\%$. Som det kan ses på kvantilerne har det risikofrie afkast givet negativt afkast sommetider. Et histogram indikerer en højreskæv fordeling af afkast, hvilket også underbygges af en skævhed på `r round(DESCRIPTIVE$skew[1], 3)`. Med en kurtosis på `r round(DESCRIPTIVE$kurt[1], 3)` haves en leptokurtisk fordeling, med tykkere/længere haler og et smallere samt højere cetrum. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:NET-TB-tids) viser et plot over tidsserien, Figur \@ref(fig:NET-TB-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:NET-TB-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r NET-TB-tids, echo=FALSE, fig.align='center', fig.cap="Tidsserie af log netto renten \\\\\\raggedright Tidsserien spænder fra 2. kvartal 1954 til 4. kvartal 2018.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -100,7 +100,7 @@ ggplot(data, aes(x = NET_TB)) +
 ```
 
 ### Merafkastet på aktier -- $rx_{t+1}^{\textnormal{a}}${#dataak}
-For aktivklassen, som skal repræsentere børshandlede aktier, benyttes et markedsværdi-vægtet afkast over et repræsentativt indeks for samtlige handlede aktier på *New York Stock Exchange*, *National Association of Securities Dealers Automated Quotations* og *American Stock Exchange*. Det vægtede afkast er inklusiv udbytte, aktiesplits og nyemissioner for de foregående 12 måneder ledende op til kvartalet. Ved at benytte et sådant forholdsvist bredt indeks, vil delanalysen for aktier være repræsentativt for det globale aktiemarked. Derudover er det ikke kun børsnoterede amerikanskbaserede selskaber, som handles via *NYSE*, *NASDAQ* og *AMEX*, men i stadig større grad også virksomheder uden for U.S.A. Data over afkast er fra [@CRSPakt] og hentet gennem [@WRDSakt]. Log  merafkastet af aktier beregnes som det kvartalsvise log brutto aktieafkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*. Det ses at aktier har det klart højeste kvartalvise justerede merafkast på `r round(DESCRIPTIVE$adj_mean[2]*100, 1)`$\%$ ift. de andre aktivklasser. Dette høje merafkast følges af en ligeledes høj relativ volatilitet på `r round(DESCRIPTIVE$sd[2]*100, 1)`$\%$. Historisk set har det største negative markedsudsving givet et merafkast/tab på $-30.4\%$, mens det største positive markedsudsving har været på $20\%$. Et histogram sammenholdt med en skævhed på `r round(DESCRIPTIVE$skew[2], 3)` afslører moderat til høj venstreskævhed. Altså har der oftere været negative merafkast ift. positive. Kurtosis på `r round(DESCRIPTIVE$kurt[2], 3)` medører en moderat leptokurtisk fordeling med en anelse tykkere haler, og at ekstreme observationer sker oftere end normalt. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:AKT-tids) viser et plot over tidsserien.
+For aktivklassen, som skal repræsentere børshandlede aktier, benyttes et markedsværdi-vægtet afkast over et repræsentativt indeks for samtlige handlede aktier på *New York Stock Exchange*, *National Association of Securities Dealers Automated Quotations* og *American Stock Exchange*. Det vægtede afkast er inklusiv udbytte, aktiesplits og nyemissioner for de foregående 12 måneder ledende op til kvartalet. Ved at benytte et sådant forholdsvist bredt indeks, vil delanalysen for aktier være repræsentativt for det globale aktiemarked. Derudover er det ikke kun børsnoterede amerikanskbaserede selskaber, som handles via *NYSE*, *NASDAQ* og *AMEX*, men i stadig større grad også virksomheder uden for U.S.A. Data over afkast er fra [@CRSPakt] og hentet gennem [@WRDSakt]. Log  merafkastet af aktier beregnes som det kvartalsvise log brutto aktieafkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*. Det ses at aktier har det klart højeste kvartalvise justerede merafkast på `r round(DESCRIPTIVE$adj_mean[2]*100, 1)`$\%$ ift. de andre aktivklasser. Dette høje merafkast følges af en ligeledes høj relativ volatilitet på `r round(DESCRIPTIVE$sd[2]*100, 1)`$\%$. Historisk set har det største negative markedsudsving givet et merafkast/tab på $-30.4\%$, mens det største positive markedsudsving har været på $20\%$. Et histogram sammenholdt med en skævhed på `r round(DESCRIPTIVE$skew[2], 3)` afslører moderat til høj venstreskævhed. Altså har der oftere været negative merafkast ift. positive. Kurtosis på `r round(DESCRIPTIVE$kurt[2], 3)` medører en moderat leptokurtisk fordeling med en anelse tykkere haler, og at ekstreme observationer sker oftere end normalt. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:AKT-tids) viser et plot over tidsserien, Figur \@ref(fig:AKT-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:AKT-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r AKT-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log merafkastet af aktier.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 par(mfrow=c(1,1))
@@ -134,7 +134,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r AKT-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r AKT-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af aktier.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = AKT)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.05, alpha = 0.4) +
   geom_density() +
@@ -150,9 +150,9 @@ ggplot(data, aes(x = AKT)) +
 ```
 
 ### Merafkastet på statsobligationer -- $rx_{t+1}^{\textnormal{s}}$
-Statsobligationer er gældsinstrumenter udstedt af staten i det respektive udstedelsesland, de har til formål at finansiere offentlige udgifter og anses også for at være en substitution for skatter. Siden udstedelsen sker af staten, antages det ofte, at statsobligationer er relativt mindre risikobærende and aktier. Undertiden betegnes statsobligationer fra visse ilande som et *safe haven* for investorer. Eksempelvis har den danske stat pt. en kreditvurdering på AAA, Aaa, AAA af hhv. *Standard \& Poor's*, *Moody's* og *Fitch*, [@TradingEconomics2020]. Til formålet at repræsentere afkastet på statsobligationer anvendes derfor den 10-årige amerikanske statsobligation med konstant løbetid. Data over afkast er fra [@CRSPt90] og hentet gennem [@WRDSt90]. Log  merafkastet af statsobligationener beregnes som det kvartalsvise log brutto afkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*.  merafkastet har et justeret kvartalsvist afkast på `r round(DESCRIPTIVE$adj_mean[3]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[3]*100, 1)`$\%$. Statsobligationen har den laveste *Sharpe Ratio* af de tre aktivklasser, hvilket også er forventeligt. Med en skævhed på `r round(DESCRIPTIVE$skew[3], 3)` og kurtosis på `r round(DESCRIPTIVE$kurt[3], 3)` haves en forholdsvis symmetrisk fordeling, men med en anelse tykkere haler. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:S-OBL-tids) viser et plot over tidsserien.
+Statsobligationer er gældsinstrumenter udstedt af staten i det respektive udstedelsesland, de har til formål at finansiere offentlige udgifter og anses også for at være en substitution for skatter. Siden udstedelsen sker af staten, antages det ofte, at statsobligationer er relativt mindre risikobærende and aktier. Undertiden betegnes statsobligationer fra visse ilande som et *safe haven* for investorer. Eksempelvis har den danske stat pt. en kreditvurdering på AAA, Aaa, AAA af hhv. *Standard \& Poor's*, *Moody's* og *Fitch*, [@TradingEconomics2020]. Til formålet at repræsentere afkastet på statsobligationer anvendes derfor den 10-årige amerikanske statsobligation med konstant løbetid. Data over afkast er fra [@CRSPt90] og hentet gennem [@WRDSt90]. Log  merafkastet af statsobligationener beregnes som det kvartalsvise log brutto afkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*.  merafkastet har et justeret kvartalsvist afkast på `r round(DESCRIPTIVE$adj_mean[3]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[3]*100, 1)`$\%$. Statsobligationen har den laveste *Sharpe Ratio* af de tre aktivklasser, hvilket også er forventeligt. Med en skævhed på `r round(DESCRIPTIVE$skew[3], 3)` og kurtosis på `r round(DESCRIPTIVE$kurt[3], 3)` haves en forholdsvis symmetrisk fordeling, men med en anelse tykkere haler. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:S-OBL-tids) viser et plot over tidsserien, Figur \@ref(fig:S-OBL-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:S-OBL-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
-```{r S-OBL-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log  merafkastet på statsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r S-OBL-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log merafkastet på statsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 par(mfrow=c(1,1))
 ggplot(data) +
   expand_limits(x = min(index(data)), y = min(data$S_OBL))+
@@ -184,7 +184,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r S-OBL-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r S-OBL-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet på statsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = S_OBL)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.025, alpha = 0.4) +
   geom_density() +
@@ -204,9 +204,9 @@ På samme vis som stater kan finansiere deres aktiviteter via statsobligationer,
 \begin{center}
 \textit{A corporate bond series with a long maturity is used to describe fixed-income securities that contain risk of default.}
 \end{center}
-Log  merafkastet af virksomhedsobligationenerne beregnes som det kvartalsvise log brutto afkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*. Som forventet ses den højere afkastpræmie med et justeret kvartalsvist afkast på `r round(DESCRIPTIVE$adj_mean[4]*100, 1)`$\%$ og en tilhørende volatilitet på `r round(DESCRIPTIVE$sd[4]*100, 1)`$\%$, som investoren får, for at påtage sig den ekstra kreditrisiko. Afkastfordelingen anses som værende relativt mest symmetrisk ift. de andre aktivklasser, hvilket også ses i en skævhedsværdi på `r round(DESCRIPTIVE$skew[4], 3)`. Med en kurtosis på mere end $3$, har fordelingen tykkere haler og med mere masse centralt i fordelingen. Det bemærkes ligeledes at virksomhedsobligationer har haft de største positive markedsudsving af de tre aktivklasser med et positivt afkast på $20.8 \%$. Figur \@ref(fig:V-OBL-tids) viser et plot over tidsserien.
+Log  merafkastet af virksomhedsobligationenerne beregnes som det kvartalsvise log brutto afkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill*. Som forventet ses den højere afkastpræmie med et justeret kvartalsvist afkast på `r round(DESCRIPTIVE$adj_mean[4]*100, 1)`$\%$ og en tilhørende volatilitet på `r round(DESCRIPTIVE$sd[4]*100, 1)`$\%$, som investoren får, for at påtage sig den ekstra kreditrisiko. Afkastfordelingen anses som værende relativt mest symmetrisk ift. de andre aktivklasser, hvilket også ses i en skævhedsværdi på `r round(DESCRIPTIVE$skew[4], 3)`. Med en kurtosis på mere end $3$, har fordelingen tykkere haler og med mere masse centralt i fordelingen. Det bemærkes ligeledes at virksomhedsobligationer har haft de største positive markedsudsving af de tre aktivklasser med et positivt afkast på $20.8 \%$. Figur \@ref(fig:V-OBL-tids) viser et plot over tidsserien, Figur \@ref(fig:V-OBL-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:V-OBL-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
-```{r V-OBL-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log  merafkastet på virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r V-OBL-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log merafkastet på virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 par(mfrow=c(1,1))
 ggplot(data) +
   expand_limits(x = min(index(data)), y = min(data$V_OBL))+
@@ -238,7 +238,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r V-OBL-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r V-OBL-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet på virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = V_OBL)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.05, alpha = 0.4) +
   geom_density() +
@@ -308,7 +308,7 @@ JB %>%
 Denne sektion har til formål at beskrive datagrundlaget for prædiktionsvariablene, som først blev beskrevet i Sektion ??. Disse variable består af en række finansielle indikatorer: *Dividend-Price Ratio*, *Price-Earnings Ratio*, *Book-to-market Ratio*, *High Minus Low*, *Small Minus Big*, og variansen af aktieafkast. Derudover haves rentestruktursprædiktionsvariable: den nominelle rente, *Term Spread*, *Yield Spread*, *Credit Spread* og *Default Spread*. Én makroøkonomisk variabel udgør den sidste prædiktionsvariabel: *Federal Funds Rate*. Udover beskrivelsen og begrundelsen beregningsmetoden for hver variabel, vil den tilhørende beskrivende statistik for hver variabel belyses.
 
 ### Dividend-Price Ratio -- $x_t^{\text{dp}}$
-Repræsentativet for priserne til forholdet mellem udbytte og priser er indeksniveauet, eksklusiv udbytte, over det brede indeks som blev beskrevet i Sektion \@ref(dataak). Udbyttet stammer ligeledes fra aktieindekset, og er beregnet som en rullende sum over de seneste fire kvartaler. Log udbyttet er logaritmen til tidsserien over de rullende summer af udbytte. Log *Dividend-Price Ratio* bliver da beregnet som forskellen mellem det rullende kvartalsvise log udbytte og de kvartalsvise log priser. Data er fra [@CRSPakt] og hentet gennem [@WRDSakt]. Den justerede middelværdi er `r round(DESCRIPTIVE_T$mean[1], 3)`$\%$, og betyder altså at det sande forhold mellem udbytte og priser historisk har været omtrent $1$:$34$. Det andet moment er `r round(DESCRIPTIVE_T$sd[1], 3)`$\%$. Forholdet er en næsten symmetrisk med et tredje moment på `r round(DESCRIPTIVE_T$skew[1], 3)`. En kurtosis på `r round(DESCRIPTIVE_T$kurt[1], 3)` indebærer at log *Dividend Price Ratio* har en platykurtisk fordeling med sjældne ekstreme observationer. Den `r format(index(DP[which.max(DP)]), '%d %B, %Y')` var det sande forhold på sidst højeste, da det nåede `r round(exp(max(DP)), 3)*100`$\%$. Over de følgende $18$ år, dalede forholdet til `r round(exp(min(DP)), 3)*100`$\%$ den `r format(index(DP[which.min(DP)]), '%d %B, %Y')`, fordi aktieprisernes værdi steg hurtigere end udbyttebetalingerne fra indtjeningen i virksomhederne. Derudover steg offentlige virksomheders indtjening langsommere end aktiepriserne. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:DP-tids) viser et plot over tidsserien.
+Repræsentativet for priserne til forholdet mellem udbytte og priser er indeksniveauet, eksklusiv udbytte, over det brede indeks som blev beskrevet i Sektion \@ref(dataak). Udbyttet stammer ligeledes fra aktieindekset, og er beregnet som en rullende sum over de seneste fire kvartaler. Log udbyttet er logaritmen til tidsserien over de rullende summer af udbytte. Log *Dividend-Price Ratio* bliver da beregnet som forskellen mellem det rullende kvartalsvise log udbytte og de kvartalsvise log priser. Data er fra [@CRSPakt] og hentet gennem [@WRDSakt]. Den justerede middelværdi er `r round(DESCRIPTIVE_T$mean[1], 3)`$\%$, og betyder altså at det sande forhold mellem udbytte og priser historisk har været omtrent $1$:$34$. Det andet moment er `r round(DESCRIPTIVE_T$sd[1], 3)`$\%$. Forholdet er en næsten symmetrisk med et tredje moment på `r round(DESCRIPTIVE_T$skew[1], 3)`. En kurtosis på `r round(DESCRIPTIVE_T$kurt[1], 3)` indebærer at log *Dividend Price Ratio* har en platykurtisk fordeling med sjældne ekstreme observationer. Den `r format(index(DP[which.max(DP)]), '%d %B, %Y')` var det sande forhold på sidst højeste, da det nåede `r round(exp(max(DP)), 3)*100`$\%$. Over de følgende $18$ år, dalede forholdet til `r round(exp(min(DP)), 3)*100`$\%$ den `r format(index(DP[which.min(DP)]), '%d %B, %Y')`, fordi aktieprisernes værdi steg hurtigere end udbyttebetalingerne fra indtjeningen i virksomhederne. Derudover steg offentlige virksomheders indtjening langsommere end aktiepriserne. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:DP-tids) viser et plot over tidsserien, Figur \@ref(fig:DP-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:DP-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r DP-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log Dividend Price Ratio.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 par(mfrow=c(1,1))
@@ -326,7 +326,7 @@ ggplot(data) +
   ylab(TeX("$x_{t}^{inf}$"))
 ```
 
-```{r DP-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r DP-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log Dividend Price Ratio.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 a  <- acf(as.numeric(DP), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
@@ -342,7 +342,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r DP-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r DP-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log Dividend Price Ratio.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = DP)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.25, alpha = 0.4) +
   geom_density() +
@@ -357,7 +357,7 @@ ggplot(data, aes(x = DP)) +
 ```
 
 ### Price-Earnings Ratio -- $x_t^{\text{pe}}$
-Priserne for forholdet mellem priser og indtjening er som ovenstående indeksniveauet fra Sektion \@ref(dataak), ekslusiv udbytte. Indtjeningen er en rullende sum repræsenterende indtjeningen på *S\&P 500* indekset. Data er dermed fra hhv. [@CRSPakt], hentet gennem [@WRDSakt] og [@Shiller2020], hentet gennem [@Goyal2007]. At indtjeningen benytter et andet datagrundlag end aktieindekset kan skabe tvetydigheder i resultaterne, men prædiktabiltetsegenskaben for variablen er stadig intakt. Log *Price Earnings Ratio* bliver da beregnet som forskellen mellem de kvartalsvise log priser og de kvartalvise log indtjeninger. Den justerede middelværdi er `r round(DESCRIPTIVE_T$mean[2], 3)`$\%$. Standardafvigelsen er på `r round(DESCRIPTIVE_T$sd[2], 3)`$\%$. Derudover haves en højreskæv leptokurtisk fordeling med hhv. skævhed på `r round(DESCRIPTIVE_T$skew[2], 3)` og kurtosis på `r round(DESCRIPTIVE_T$kurt[2], 3)`. Figur \@ref(fig:PE-tids) viser et plot over tidsserien.
+Priserne for forholdet mellem priser og indtjening er som ovenstående indeksniveauet fra Sektion \@ref(dataak), ekslusiv udbytte. Indtjeningen er en rullende sum repræsenterende indtjeningen på *S\&P 500* indekset. Data er dermed fra hhv. [@CRSPakt], hentet gennem [@WRDSakt] og [@Shiller2020], hentet gennem [@Goyal2007]. At indtjeningen benytter et andet datagrundlag end aktieindekset kan skabe tvetydigheder i resultaterne, men prædiktabiltetsegenskaben for variablen er stadig intakt. Log *Price Earnings Ratio* bliver da beregnet som forskellen mellem de kvartalsvise log priser og de kvartalvise log indtjeninger. Den justerede middelværdi er `r round(DESCRIPTIVE_T$mean[2], 3)`$\%$. Standardafvigelsen er på `r round(DESCRIPTIVE_T$sd[2], 3)`$\%$. Derudover haves en højreskæv leptokurtisk fordeling med hhv. skævhed på `r round(DESCRIPTIVE_T$skew[2], 3)` og kurtosis på `r round(DESCRIPTIVE_T$kurt[2], 3)`. Figur \@ref(fig:PE-tids) viser et plot over tidsserien, Figur \@ref(fig:PE-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:PE-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r PE-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log Price Earnings Ratio.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -374,7 +374,7 @@ ggplot(data) +
   ylab(TeX("$x_{t}^{pe}$"))
 ```
 
-```{r PE-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r PE-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log Price Earnings Ratio.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 a  <- acf(as.numeric(EP), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
@@ -390,7 +390,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r PE-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r PE-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log Price Earnings Ratio.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = EP)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.25, alpha = 0.4) +
   geom_density() +
@@ -405,7 +405,7 @@ ggplot(data, aes(x = EP)) +
 ```
 
 ### Book-to-Market Ratio -- $x_t^{\text{bm}}$
-*Book-to-market Ratio* er hentet gennem [@Goyal2007]. Bogførte værdier samt markedsværdier stammer fra *Value Line*'s hjemmeside, mere specifikt gennem deres *Long-Term Perspective Chart* af indekset *Dow Jones Industrial Average*. Beregningsmetoden er oprindeligt månedsbaseret og for månederne marts til december beregnes forholdet som den bogførte værdi fra slutningen af sidste år, delt med prisen fra seneste månedsultimo. For januar og februar beregnes det som den bogførte værdi fra slutningen af for to år siden, delt med prisen fra seneste månedsultimo. Beregningsmetoden er sammenlignelig med [@Kothari1997] og [@Pontiff1998]. Det første og andet moment er hhv. `r round(DESCRIPTIVE_T$mean[3], 3)` og `r round(DESCRIPTIVE_T$sd[3], 3)`. Fra tredje og fjerde moment ses højreskævhed og en mesokurtisk fordeling. [@Pontiff1998] finder første og andet moment til hhv. $0.505$ og $0.252$, hvilket validerer estimaterne. Efter 1982 ses det, at forholdet aftager kraftigt, og efter en kort tiltagning har det de seneste år stabiliseret sig. Dette kommer sig bl.a. af, at amerikanske virksomheder i stigende grad har bogført en negativ værdi, se evt. *Historical Book Equity Data* fra [@French2020]. Figur \@ref(fig:BM-tids) viser et plot over tidsserien.
+*Book-to-market Ratio* er hentet gennem [@Goyal2007]. Bogførte værdier samt markedsværdier stammer fra *Value Line*'s hjemmeside, mere specifikt gennem deres *Long-Term Perspective Chart* af indekset *Dow Jones Industrial Average*. Beregningsmetoden er oprindeligt månedsbaseret og for månederne marts til december beregnes forholdet som den bogførte værdi fra slutningen af sidste år, delt med prisen fra seneste månedsultimo. For januar og februar beregnes det som den bogførte værdi fra slutningen af for to år siden, delt med prisen fra seneste månedsultimo. Beregningsmetoden er sammenlignelig med [@Kothari1997] og [@Pontiff1998]. Det første og andet moment er hhv. `r round(DESCRIPTIVE_T$mean[3], 3)` og `r round(DESCRIPTIVE_T$sd[3], 3)`. Fra tredje og fjerde moment ses højreskævhed og en mesokurtisk fordeling. [@Pontiff1998] finder første og andet moment til hhv. $0.505$ og $0.252$, hvilket validerer estimaterne. Efter 1982 ses det, at forholdet aftager kraftigt, og efter en kort tiltagning har det de seneste år stabiliseret sig. Dette kommer sig bl.a. af, at amerikanske virksomheder i stigende grad har bogført en negativ værdi, se evt. *Historical Book Equity Data* fra [@French2020]. Figur \@ref(fig:BM-tids) viser et plot over tidsserien, Figur \@ref(fig:BM-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:BM-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r BM-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Book-to-market Ratio.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -422,7 +422,7 @@ ggplot(data) +
   ylab(TeX("$x_{t}^{bm}$"))
 ```
 
-```{r BM-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r BM-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Book-to-market Ratio.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 a  <- acf(as.numeric(BM), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
@@ -438,7 +438,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r BM-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r BM-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Book-to-market Ratio.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = BM)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.1, alpha = 0.4) +
   geom_density() +
@@ -453,7 +453,7 @@ ggplot(data, aes(x = BM)) +
 ```
 
 ### Aktievarians -- $x_t^{\text{avar}}$
-Aktievariansen består af den kvartalsvise kvadratsum af afkast, samt summen af produktet mellem to tilstødende kvartalsvise afkast. Beregningsmetoden er fra [@Schwert1987] og data er hentet gennem [@Goyal2007], som baserer estimaterne på afkast fra *S\&P 500* indekset. Selve metoden tager udgangspunkt i daglige priser fremfor kvartalsvise, for at måle det kvartalsvise aktieafkast $r_{it}$. De kvartalsvise afkast er herefter kvadreret for at etablere variansen. Herefter justeres for autokorrelation, ved at addere to gange summen af produkterne mellem alle par af foreløbende kvartalsafkast. Middelværdien estimeres til `r round(DESCRIPTIVE_T$mean[4], 3)` og med en standardafvigelse på `r round(DESCRIPTIVE_T$sd[4], 3)`. Givet ikke-negativiteten af variansen, ses forventeligt en meget højreskæv fordeling med tilhørende høj kurtosis på hhv. `r round(DESCRIPTIVE_T$skew[4], 3)` og `r round(DESCRIPTIVE_T$kurt[4], 3)`. Figur \@ref(fig:AV-tids) viser et plot over tidsserien.
+Aktievariansen består af den kvartalsvise kvadratsum af afkast, samt summen af produktet mellem to tilstødende kvartalsvise afkast. Beregningsmetoden er fra [@Schwert1987] og data er hentet gennem [@Goyal2007], som baserer estimaterne på afkast fra *S\&P 500* indekset. Selve metoden tager udgangspunkt i daglige priser fremfor kvartalsvise, for at måle det kvartalsvise aktieafkast $r_{it}$. De kvartalsvise afkast er herefter kvadreret for at etablere variansen. Herefter justeres for autokorrelation, ved at addere to gange summen af produkterne mellem alle par af foreløbende kvartalsafkast. Middelværdien estimeres til `r round(DESCRIPTIVE_T$mean[4], 3)` og med en standardafvigelse på `r round(DESCRIPTIVE_T$sd[4], 3)`. Givet ikke-negativiteten af variansen, ses forventeligt en meget højreskæv fordeling med tilhørende høj kurtosis på hhv. `r round(DESCRIPTIVE_T$skew[4], 3)` og `r round(DESCRIPTIVE_T$kurt[4], 3)`. Figur \@ref(fig:AV-tids) viser et plot over tidsserien, Figur \@ref(fig:AV-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:AV-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r AV-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af aktievariansen.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -470,7 +470,7 @@ ggplot(data) +
   ylab(TeX("$x_{t}^{avar}$"))
 ```
 
-```{r AV-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r AV-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af aktievariansen.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 a  <- acf(as.numeric(AKT_VAR), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
@@ -486,7 +486,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r AV-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r AV-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af aktievariansen.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = AKT_VAR)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.01, alpha = 0.4) +
   geom_density() +
@@ -501,7 +501,7 @@ ggplot(data, aes(x = AKT_VAR)) +
 ```
 
 ### High Minus Low -- $x_t^{\text{hml}}${#datahml}
-Den første af de to *Fama-French* faktorer. Månedlige værdier er fra [@CRSPakt] og hentet gennem [@French2020], det er herefter omdannet til kvartalsvise værdier via et kvartalsvist rullende tre-måneders gennemsnit. Selve faktoren er baseret på: to porteføljer baseret på størrelse, hvor skillelinjen er markedsmedianen på *NYSE*, tre porteføljer baseret på *Book-to-Market Ratio*, hvor skilningerne er $30$- og $70$-percentilerne af *Book-to-Market Ratio* på *NYSE*. Herefter eksisterer der seks fællesmængder, som dermed udgør grundlaget for porteføljerne til *High Minus Low*. Selve faktoren beregnes som gennemsnittet på de to værdi-porteføljer^[Virksomheder i værdi-porteføljerne har høj *Book-to-market Ratio* og er hhv. store og små.] fratrukket det gennemsnitlige afkast på de to vækst-porteføljer^[Virksomheder i vækst-porteføljerne har lav *Book-to-market Ratio* og er hhv. store og små.]. En positiv *High Minus Low* faktor medfører, at værdi-virksomheder er mere efficiente end vækst virksomheder på lang sigt, [@French1993]. Det første og andet moment er hhv. `r round(DESCRIPTIVE_T$mean[5], 3)` og `r round(DESCRIPTIVE_T$sd[5], 3)`. Skævhed på `r round(DESCRIPTIVE_T$skew[5], 3)` og kurtosis på `r round(DESCRIPTIVE_T$kurt[5], 3)`, indikerer en forholdsvis symmetrisk fordeling. Figur \@ref(fig:HML-tids) viser et plot over tidsserien.
+Den første af de to *Fama-French* faktorer. Månedlige værdier er fra [@CRSPakt] og hentet gennem [@French2020], det er herefter omdannet til kvartalsvise værdier via et kvartalsvist rullende tre-måneders gennemsnit. Selve faktoren er baseret på: to porteføljer baseret på størrelse, hvor skillelinjen er markedsmedianen på *NYSE*, tre porteføljer baseret på *Book-to-Market Ratio*, hvor skilningerne er $30$- og $70$-percentilerne af *Book-to-Market Ratio* på *NYSE*. Herefter eksisterer der seks fællesmængder, som dermed udgør grundlaget for porteføljerne til *High Minus Low*. Selve faktoren beregnes som gennemsnittet på de to værdi-porteføljer^[Virksomheder i værdi-porteføljerne har høj *Book-to-market Ratio* og er hhv. store og små.] fratrukket det gennemsnitlige afkast på de to vækst-porteføljer^[Virksomheder i vækst-porteføljerne har lav *Book-to-market Ratio* og er hhv. store og små.]. En positiv *High Minus Low* faktor medfører, at værdi-virksomheder er mere efficiente end vækst virksomheder på lang sigt, [@French1993]. Det første og andet moment er hhv. `r round(DESCRIPTIVE_T$mean[5], 3)` og `r round(DESCRIPTIVE_T$sd[5], 3)`. Skævhed på `r round(DESCRIPTIVE_T$skew[5], 3)` og kurtosis på `r round(DESCRIPTIVE_T$kurt[5], 3)`, indikerer en forholdsvis symmetrisk fordeling. Figur \@ref(fig:HML-tids) viser et plot over tidsserien, Figur \@ref(fig:HML-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:HML-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r HML-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af High Minus Low.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -518,7 +518,7 @@ ggplot(data) +
   ylab(TeX("$x_{t}^{hml}$"))
 ```
 
-```{r HML-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r HML-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af High Minus Low.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 a  <- acf(as.numeric(HML), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
@@ -534,7 +534,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r HML-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r HML-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af High Minus Low.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = HML)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 1, alpha = 0.4) +
   geom_density() +
@@ -549,7 +549,7 @@ ggplot(data, aes(x = HML)) +
 ```
 
 ### Small Minus Big -- $x_t^{\text{smb}}${#datasmb}
-Den anden *Fama-French* faktor. Månedlige værdier er fra [@CRSPakt] og hentet gennem [@French2020], det er herefter omdannet til kvartalsvise værdier via et kvartalsvist rullende tre-måneders gennemsnit. Selve faktoren er baseret på de samme porteføljer som beskrevet i ovenstående Sektion \@ref(datahml). Selve faktoren beregnes som forskellen mellem de ligevægtede gennemsnitlige afkast af de små porteføljer og de store porteføljer. En positiv *Small Minus Big* faktor er også kendt som *Small Firm Effect*, og medfører, at små virksomheder er mere efficiente end store virksomheder på lang sigt, [@French1993]. Det første og andet moment er hhv. `r round(DESCRIPTIVE_T$mean[6], 3)` og `r round(DESCRIPTIVE_T$sd[6], 3)`. En skævhed på `r round(DESCRIPTIVE_T$skew[6], 3)` og kurtosis på `r round(DESCRIPTIVE_T$kurt[6], 3)`, indikerer en meget symmetrisk fordeling. Figur \@ref(fig:SMB-tids) viser et plot over tidsserien.
+Den anden *Fama-French* faktor. Månedlige værdier er fra [@CRSPakt] og hentet gennem [@French2020], det er herefter omdannet til kvartalsvise værdier via et kvartalsvist rullende tre-måneders gennemsnit. Selve faktoren er baseret på de samme porteføljer som beskrevet i ovenstående Sektion \@ref(datahml). Selve faktoren beregnes som forskellen mellem de ligevægtede gennemsnitlige afkast af de små porteføljer og de store porteføljer. En positiv *Small Minus Big* faktor er også kendt som *Small Firm Effect*, og medfører, at små virksomheder er mere efficiente end store virksomheder på lang sigt, [@French1993]. Det første og andet moment er hhv. `r round(DESCRIPTIVE_T$mean[6], 3)` og `r round(DESCRIPTIVE_T$sd[6], 3)`. En skævhed på `r round(DESCRIPTIVE_T$skew[6], 3)` og kurtosis på `r round(DESCRIPTIVE_T$kurt[6], 3)`, indikerer en meget symmetrisk fordeling. Figur \@ref(fig:SMB-tids) viser et plot over tidsserien, Figur \@ref(fig:SMB-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:SMB-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r SMB-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Small Minus Big.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -566,7 +566,7 @@ ggplot(data) +
   ylab(TeX("$x_{t}^{smb}$"))
 ```
 
-```{r SMB-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r SMB-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Small Minus Big.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 a  <- acf(as.numeric(SMB), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
@@ -582,7 +582,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r SMB-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r SMB-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Small Minus Big.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = SMB)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 1, alpha = 0.4) +
   geom_density() +
@@ -597,7 +597,7 @@ ggplot(data, aes(x = SMB)) +
 ```
 
 ### Nominel rente -- $x_t^{\text{b}}$
-Det kvartalsvise log brutto afkast på den amerikanske 90-dages *T-Bill* benyttes som en proxy for den nominelle rente. Ved at inkludere både brutto og netto log renten, inkorporeres inflation. Eftersom log inflation er forskellen mellem log brutto renten og log netto renten. Data er fra [@CRSPt90] og hentet gennem [@WRDSt90]. Den justerede middelværdi estimeres til `r round(DESCRIPTIVE_T$mean[7]*100, 3)`$\%$. Volatiliteten estimeres til `r round(DESCRIPTIVE_T$sd[7]*100, 3)`$\%$. Tredje og fjerde moment estimeres til hhv. `r round(DESCRIPTIVE_T$skew[7], 3)` og `r round(DESCRIPTIVE_T$kurt[7], 3)`. Figur \@ref(fig:B-tids) viser et plot over tidsserien.
+Det kvartalsvise log brutto afkast på den amerikanske 90-dages *T-Bill* benyttes som en proxy for den nominelle rente. Ved at inkludere både brutto og netto log renten, inkorporeres inflation. Eftersom log inflation er forskellen mellem log brutto renten og log netto renten. Data er fra [@CRSPt90] og hentet gennem [@WRDSt90]. Den justerede middelværdi estimeres til `r round(DESCRIPTIVE_T$mean[7]*100, 3)`$\%$. Volatiliteten estimeres til `r round(DESCRIPTIVE_T$sd[7]*100, 3)`$\%$. Tredje og fjerde moment estimeres til hhv. `r round(DESCRIPTIVE_T$skew[7], 3)` og `r round(DESCRIPTIVE_T$kurt[7], 3)`. Figur \@ref(fig:B-tids) viser et plot over tidsserien, Figur \@ref(fig:B-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:B-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r B-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af log brutto afkastet på det risikofrie aktiv.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -614,7 +614,7 @@ ggplot(data) +
   ylab(TeX("$x_{t}^{b}$"))
 ```
 
-```{r B-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r B-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log brutto afkastet på det risikofrie aktiv.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 a  <- acf(as.numeric(TB), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
@@ -630,7 +630,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r B-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r B-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log brutto afkastet på det risikofrie aktiv.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = TB)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.005, alpha = 0.4) +
   geom_density() +
@@ -648,7 +648,7 @@ ggplot(data, aes(x = TB)) +
 For at beregne *Term Spread* (rentespændet for den lange rente), benyttes den amerikanske $10$-årige effektive rente med konstant løbetid samt den 90-dages *T-Bill* *Secondary Market Rate*. Kvartalsvise data er hentet fra [@FRED102020] og [@FRED902020], derudover er data ikke blevet sæsonjusteret. Spændet beregnes da som
 $$x_t^{\text{ts}}=Y_t^{10}-Y_t^{90},$$
 
-hvor $Y_t^{10}$ og $Y_t^{90}$ er de to effektive renter. Dette følger metoden fra [@Campbell1991], som også argumenterer for, at ethvert rentespænd for renter med løbetider mellem $1$ måned og $10$ år, kan prædiktere rentestrukturen. Middelværdien for det lange rentespænd estimeres til `r round(DESCRIPTIVE_T$mean[8]*100, 3)`$\%$. Volatiliteten estimeres til `r round(DESCRIPTIVE_T$sd[8]*100, 3)`$\%$. Fordelingen er forholdsvis symmetrisk med skævhed og kurtosis på hhv. `r round(DESCRIPTIVE_T$skew[8], 3)` og `r round(DESCRIPTIVE_T$kurt[8], 3)`. Figur \@ref(fig:TS-tids) viser et plot over tidsserien.
+hvor $Y_t^{10}$ og $Y_t^{90}$ er de to effektive renter. Dette følger metoden fra [@Campbell1991], som også argumenterer for, at ethvert rentespænd for renter med løbetider mellem $1$ måned og $10$ år, kan prædiktere rentestrukturen. Middelværdien for det lange rentespænd estimeres til `r round(DESCRIPTIVE_T$mean[8]*100, 3)`$\%$. Volatiliteten estimeres til `r round(DESCRIPTIVE_T$sd[8]*100, 3)`$\%$. Fordelingen er forholdsvis symmetrisk med skævhed og kurtosis på hhv. `r round(DESCRIPTIVE_T$skew[8], 3)` og `r round(DESCRIPTIVE_T$kurt[8], 3)`. Figur \@ref(fig:TS-tids) viser et plot over tidsserien, Figur \@ref(fig:TS-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:TS-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r TS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Term Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -665,7 +665,7 @@ ggplot(data) +
   ylab(TeX("$x_{t}^{ts}$"))
 ```
 
-```{r TS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r TS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Term Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 a  <- acf(as.numeric(T_SPREAD), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
@@ -681,7 +681,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r TS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r TS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Term Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = T_SPREAD)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.01, alpha = 0.4) +
   geom_density() +
@@ -699,7 +699,7 @@ ggplot(data, aes(x = T_SPREAD)) +
 Datagrundlaget for *Yield Spread* (rentespændet for den korte rente) er den amerikanske $10$-årige effektive rente med konstant løbetid samt den 90-dages *T-Bill* *Secondary Market Rate*. Kvartalsvise data er hentet fra [@FRED52020] og [@FRED902020], og er ikke sæsonjusteret. Spændet beregnes da som
 $$x_t^{\text{ts}}=Y_t^{5}-Y_t^{90},$$
 
-hvor $Y_t^{5}$ og $Y_t^{90}$ er de to effektive renter. Middelværdien, `r round(DESCRIPTIVE_T$mean[9]*100, 3)`$\%$, er som forventet en anelse mindre end middelværdien for *Term Spread*. Det samme er volatiliteten, `r round(DESCRIPTIVE_T$sd[9]*100, 3)`$\%$. Fordelingen er en anelse leptokurtisk med kurtosis på  `r round(DESCRIPTIVE_T$kurt[9], 3)`. Skævheden er `r round(DESCRIPTIVE_T$skew[9], 3)`. Figur \@ref(fig:YS-tids) viser et plot over tidsserien. 
+hvor $Y_t^{5}$ og $Y_t^{90}$ er de to effektive renter. Middelværdien, `r round(DESCRIPTIVE_T$mean[9]*100, 3)`$\%$, er som forventet en anelse mindre end middelværdien for *Term Spread*. Det samme er volatiliteten, `r round(DESCRIPTIVE_T$sd[9]*100, 3)`$\%$. Fordelingen er en anelse leptokurtisk med kurtosis på  `r round(DESCRIPTIVE_T$kurt[9], 3)`. Skævheden er `r round(DESCRIPTIVE_T$skew[9], 3)`. Figur \@ref(fig:YS-tids) viser et plot over tidsserien, Figur \@ref(fig:YS-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:YS-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r YS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Yield Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -716,7 +716,7 @@ ggplot(data) +
   ylab(TeX("$x_{t}^{ys}$"))
 ```
 
-```{r YS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r YS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Yield Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 a  <- acf(as.numeric(Y_SPREAD), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
@@ -732,7 +732,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r YS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r YS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Yield Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = Y_SPREAD)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.005, alpha = 0.4) +
   geom_density() +
@@ -750,7 +750,7 @@ ggplot(data, aes(x = Y_SPREAD)) +
 Beregningen til *Credit Spread* (kreditspændet) benytter den 90-dages *T-Bill* *Secondary Market Rate* samt den effektive rente fra *Moody's Seasoned BAA Corporate Bond*, og baserer sig på instrumenter med løbetider på $20$ år eller mere. Data er hentet fra hhv. [@FRED902020] samt [@Goyal2007]. Metoden følger fra [@Keim1986], og kreditspændet beregnes da som
 $$x_t^{\text{cs}}=Y_t^{\text{BAA}}-Y_t^{90},$$
 
-hvor $Y_t^{\text{BAA}}$ og $Y_t^{90}$ er de to effektive renter. Af de fem rentrestruktursvariable ses det, at kreditspændet har den højeste middelværdi på `r round(DESCRIPTIVE_T$mean[10]*100, 3)`$\%$, og en standardafvigelse på `r round(DESCRIPTIVE_T$sd[10]*100, 3)`$\%$. Tredje og fjerde moment estimeres til hhv. `r round(DESCRIPTIVE_T$skew[10], 3)` og `r round(DESCRIPTIVE_T$kurt[10], 3)`. Figur \@ref(fig:CS-tids) viser et plot over tidsserien.
+hvor $Y_t^{\text{BAA}}$ og $Y_t^{90}$ er de to effektive renter. Af de fem rentrestruktursvariable ses det, at kreditspændet har den højeste middelværdi på `r round(DESCRIPTIVE_T$mean[10]*100, 3)`$\%$, og en standardafvigelse på `r round(DESCRIPTIVE_T$sd[10]*100, 3)`$\%$. Tredje og fjerde moment estimeres til hhv. `r round(DESCRIPTIVE_T$skew[10], 3)` og `r round(DESCRIPTIVE_T$kurt[10], 3)`. Figur \@ref(fig:CS-tids) viser et plot over tidsserien, Figur \@ref(fig:CS-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:CS-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r CS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Credit Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -767,7 +767,7 @@ ggplot(data) +
   ylab(TeX("$x_{t}^{cs}$"))
 ```
 
-```{r CS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r CS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Credit Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 a  <- acf(as.numeric(C_SPREAD), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
@@ -783,7 +783,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r CS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r CS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Credit Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = C_SPREAD)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.01, alpha = 0.4) +
   geom_density() +
@@ -801,7 +801,7 @@ ggplot(data, aes(x = C_SPREAD)) +
 For at beregne *Default Spread* (konkursspændet) benyttes den effektive rente fra *Moody's Seasoned AAA Corporate Bond* samt den effektive rente fra *Moody's Seasoned BAA Corporate Bond*, og baserer sig begge på instrumenter med løbetider på $20$ år eller mere. Data er hentet via [@Goyal2007]. Konkursspændet beregnes da som
 $$x_t^{\text{ds}}=Y_t^{\text{BAA}}-Y_t^{\text{AAA}},$$
 
-hvor $Y_t^{\text{BAA}}$ og $Y_t^{\text{AAA}}$ er de to effektive renter. Til forskel for kreditspændet har konkursspændet den laveste middelværdi, `r round(DESCRIPTIVE_T$mean[11]*100, 3)`$\%$, også på tværs af de andre klasser af prædiktionsvariable. Standardafvigelsen er `r round(DESCRIPTIVE_T$sd[11]*100, 3)`$\%$. Af rentestruktursvariablene har konkursspændet også den hhv. mest ekstreme skævhed og kurtosis. Disse er hhv. `r round(DESCRIPTIVE_T$skew[11], 3)` og `r round(DESCRIPTIVE_T$kurt[11], 3)`, hvilket indebærer en højreskæv fordeling med tykke haler. Figur \@ref(fig:DS-tids) viser et plot over tidsserien.
+hvor $Y_t^{\text{BAA}}$ og $Y_t^{\text{AAA}}$ er de to effektive renter. Til forskel for kreditspændet har konkursspændet den laveste middelværdi, `r round(DESCRIPTIVE_T$mean[11]*100, 3)`$\%$, også på tværs af de andre klasser af prædiktionsvariable. Standardafvigelsen er `r round(DESCRIPTIVE_T$sd[11]*100, 3)`$\%$. Af rentestruktursvariablene har konkursspændet også den hhv. mest ekstreme skævhed og kurtosis. Disse er hhv. `r round(DESCRIPTIVE_T$skew[11], 3)` og `r round(DESCRIPTIVE_T$kurt[11], 3)`, hvilket indebærer en højreskæv fordeling med tykke haler. Figur \@ref(fig:DS-tids) viser et plot over tidsserien, Figur \@ref(fig:DS-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:DS-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r DS-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Default Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -818,7 +818,7 @@ ggplot(data) +
   ylab(TeX("$x_{t}^{ds}$"))
 ```
 
-```{r DS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r DS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Default Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 a  <- acf(as.numeric(D_SPREAD), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
@@ -834,7 +834,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r DS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r DS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Default Spread.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = D_SPREAD)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.0025, alpha = 0.4) +
   geom_density() +
@@ -849,7 +849,7 @@ ggplot(data, aes(x = D_SPREAD)) +
 ```
 
 ### Federal Funds Rate -- $x_t^{\text{fr}}$
-I U.S.A. er *Federal Funds Rate*, renten som private finansinstitutioner tager for at låne uden sikkerhed, sædvanligvis over natten, af finansinstitutions reserver i *Federal Reserve Bank*. Data er hentet fra [@FREDF2020]. De kvartalsvis observationer er baseret på et gennemsnit af daglige observationer. Middelværdien er på `r round(DESCRIPTIVE_T$mean[12]*100, 3)`$\%$, og standardafvigelsen er på `r round(DESCRIPTIVE_T$sd[12]*100, 3)`$\%$. Tredje og fjerde moment estimeres til hhv. `r round(DESCRIPTIVE_T$skew[12], 3)` og `r round(DESCRIPTIVE_T$kurt[12], 3)`. Figur \@ref(fig:FR-tids) viser et plot over tidsserien.
+I U.S.A. er *Federal Funds Rate*, renten som private finansinstitutioner tager for at låne uden sikkerhed, sædvanligvis over natten, af finansinstitutions reserver i *Federal Reserve Bank*. Data er hentet fra [@FREDF2020]. De kvartalsvis observationer er baseret på et gennemsnit af daglige observationer. Middelværdien er på `r round(DESCRIPTIVE_T$mean[12]*100, 3)`$\%$, og standardafvigelsen er på `r round(DESCRIPTIVE_T$sd[12]*100, 3)`$\%$. Tredje og fjerde moment estimeres til hhv. `r round(DESCRIPTIVE_T$skew[12], 3)` og `r round(DESCRIPTIVE_T$kurt[12], 3)`. Figur \@ref(fig:FR-tids) viser et plot over tidsserien, Figur \@ref(fig:FR-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:FR-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r FR-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af Federal Funds Rate.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data) +
@@ -866,7 +866,7 @@ ggplot(data) +
   ylab(TeX("$x_{t}^{fr}$"))
 ```
 
-```{r FR-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r FR-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Federal Funds Rate.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 a  <- acf(as.numeric(FR), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
@@ -882,7 +882,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r FR-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='htbp!'}
+```{r FR-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Federal Funds Rate.', fig.width=18, fig.height=5, fig.pos='htbp!'}
 ggplot(data, aes(x = FR)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.025, alpha = 0.4) +
   geom_density() +
@@ -967,11 +967,8 @@ DES_COR %>%
 ```
 \end{landscape}
 
-## Opsummering{#ops}
-
-# Prædiktabilitet
-
 ## Stationaritet
+Som nævnt tidligere er stationaritet af de anvendte tidsserier et bærende element for validiteten af den endelige VAR(1)-model. I denne sektion vil en række testprocedure blive udført, for at kontrollere for stationaritet, på en mere formel måde end visuel inspektion. Tre forskellige test vil tilsammen skabe et grundlag for at afgøre om en eller flere af alle tilstandsvariablene skal ekskluderes fra den endelige VAR(1)-model. Disse er hhv. *Augmented Dickey-Fuller* test, *Phillips-Perron* test samt *Kwiatkowski-Phillips-Schmidt-Shin*.
 
 (ref:df1979) [@Dickey1979]
 (ref:kpss1992) [@Kwiatkowski1992]
@@ -989,7 +986,7 @@ colnames(STAT_TABLE) <- rep(c('Teststørrelse', '$p$-værdi'),5)
 rownames(STAT_TABLE) <- c("$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$", '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
 
 STAT_TABLE %>% 
-  knitr::kable(caption = 'Augmented Dickey Fuller.',
+  knitr::kable(caption = 'Augmented Dickey-Fuller.',
                booktabs=TRUE,
                align = c(rep('r', 8)),
                row.names = TRUE,
@@ -999,35 +996,10 @@ STAT_TABLE %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
-  kableExtra::add_header_above(c(" ", "$\\\\delta=1$" = 2, "$\\\\delta=2$" = 2, "$\\\\delta=3$" = 2, "$\\\\delta=4$" = 2, "$\\\\delta=5$"=2), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Augmented Dickey Fuller teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:df1979). Testen er udført for forskellige lags, samt et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE)
+  kableExtra::add_header_above(c(" ", "$\\\\delta=1$" = 2, "$\\\\delta=2$" = 2, "$\\\\delta=3$" = 2, "$\\\\delta=4$" = 2, "$\\\\delta^*=5$"=2), escape = FALSE) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Augmented Dickey-Fuller teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:df1979). Testen er udført for forskellige lags, samt et lag, $\\\\delta^*$, fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE)
 ```
 \end{landscape}
-
-```{r STAT-KPSS, echo=FALSE}
-options(knitr.kable.NA = '')
-
-STAT_TABLE_KPSS <- format(round(STAT_TABLE_KPSS, digits = 3), nsmall = 3)
-
-colnames(STAT_TABLE_KPSS) <- rep(c('Teststørrelse (LM)', '$p$-værdi'), 2)
-
-rownames(STAT_TABLE_KPSS) <- c("$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$", '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
-
-STAT_TABLE_KPSS %>% 
-  knitr::kable(caption = 'Kwiatkowski-Phillips-Schmidt-Shin Test.',
-               booktabs=TRUE,
-               align = c(rep('r', 4)),
-               row.names = TRUE,
-               escape = FALSE,
-               #col.names = NULL,
-               linesep = "") %>% 
-   kableExtra::kable_styling(bootstrap_options = "striped",
-                             latex_options = c("striped", "hold_position"),
-                             full_width = F) %>% 
-  kableExtra::add_header_above(c(" ", "Level" = 2, "Trend" = 2)) %>% 
-  kableExtra::add_header_above(c(" ", "$l=5$" = 4), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Kwiatkowski-Phillips-Schmidt-Shin teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:kpss1992). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Testen er udført for et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$.}", threeparttable = T, escape = FALSE)
-```
 
 ```{r STAT-PP, echo=FALSE}
 options(knitr.kable.NA = '')
@@ -1054,7 +1026,48 @@ STAT_TABLE_PP %>%
   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Phillips-Perron teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:pp1988). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Testen er udført for et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$.}", threeparttable = T, escape = FALSE)
 ```
 
-## Univariat
+```{r STAT-KPSS, echo=FALSE}
+options(knitr.kable.NA = '')
+
+STAT_TABLE_KPSS <- format(round(STAT_TABLE_KPSS, digits = 3), nsmall = 3)
+
+colnames(STAT_TABLE_KPSS) <- rep(c('Teststørrelse (LM)', '$p$-værdi'), 2)
+
+rownames(STAT_TABLE_KPSS) <- c("$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$", '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+STAT_TABLE_KPSS %>% 
+  knitr::kable(caption = 'Kwiatkowski-Phillips-Schmidt-Shin Test.',
+               booktabs=TRUE,
+               align = c(rep('r', 4)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "hold_position"),
+                             full_width = F) %>% 
+  kableExtra::add_header_above(c(" ", "Level" = 2, "Trend" = 2)) %>% 
+  kableExtra::add_header_above(c(" ", "$l=5$" = 4), escape = FALSE) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Kwiatkowski-Phillips-Schmidt-Shin teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:kpss1992). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Testen er udført for et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$.}", threeparttable = T, escape = FALSE)
+```
+
+## Opsummering{#ops}
+
+# Prædiktabilitet
+Dette kapitel har til formål at teste for prædiktabilitet af afkastene i de introducerede aktivklasser fra Sektion \@ref(aktivklasser), ved benyttelse af de introducerede mulige prædiktionsvariable fra Sektion \@ref(pvariable). Prædiktabiliteten bliver testet i både et univariat og et multipelt øjemed. Dette tillader at teste for robusthed på tværs af prædiktionsvariablene og drage inferens af den mulige linearitet imellem merafkastene på aktivklasserne og de forklarende variable. Derudover vil testene giver et fingerpeg om graden af variationsforklaring, som de individuelle prædiktionsvariable måtte have, ift. responsvariablene. Disse regressioner vil have til formål at bidrage til delmængden af variable, som senere skal indgå i variabeludvælgelsen for VAR(1)-modellen. Det primære fokus vil være på de fundamentale variable, som før har vist særlig prædiktabilitets evner. Sekundært vil koefficienter, fortegn samt signifikans for hver individuel variabel blive beskrevet.
+
+Kapitlets opbygning er som følger: Sektion \@ref(unireg) beskriver og diskuterer de univariate regressioner, Sektion \@ref(multreg) beskriver og diskuterer de multiple regressioner sidst vil Sektion \@ref(opsreg) en opsummering af kapitlets fund.
+
+## Univariate regressioner {#unireg}
+
+Denne sektion rapporterer de univariate regressioner af responsvariable fra Sektion \@ref(aktivklasser) på sættet af prædiktionsvariable fra Sektion \@ref(pvariable). Afskæringer bliver ikke rapporteret, eftersom det kun er den mulige prædiktabilitets evne, som har interesse for analysen. Standardfejl er justeret for heteroskedasticitet og autokorrelation, [@Newey1987]. $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. Signifikansniveauet fastholdes på niveauet $\alpha=0.05$. 
+
+Den univariate analyse består af følgende regressioner
+$$rx_{t+1}^j=\beta_{0}^i+\beta_{1}^ix_{t}^i+\varepsilon_{t+1}^i,$$
+
+hvor $j$ er notationen for de $3$ aktivklasser bestående af merafkast og $i$ er notationen for de $12$ prædiktionsvariable. Den statistiske signifikans for hver individuel koefficient vil kort blive vurderet, da dette vil give et fingerpeg om den mulige styrke, for hver forklarende variabel ift. prædiktion af fremtidige afkast. Mest opmærksomhed vil dog stadig være på aktivklassernes fundamentale relation til visse variable.
+
+Tabel \@ref(tab:UNI-ak) rapporterer de univariate regressions resultater af log merafkastet på aktier, $rx_{t+1}^a$, overfor den introducerede delmængde af mulige prædiktionsvariable. Det kendte nøgletal *Dividend-Price Ratio* er ikke signifikant for hverken et $5\%$ eller $10\%$ signifikansniveau, med en tilhørende $t$-størrelse på `r  round(FIT_TABLE$t[1], 3)`. Af de resterende finansielle variable er det kun *Price-Earnings Ratio*, *High Minus Low* og *Small Minus Big* som prædiktrer merafkastet på aktier negativt. Af disse er det kun *Small Minus Big* som påviser signifikan, med en $t$-størrelse på `r  round(FIT_TABLE$t[6], 3)`. Fortegnene for de finansielle variable er ækvivalente med tidligere i fund i litteraturen, eksempelvis [@Camp1987] og [@CampVicCha2003]. De andre signifikante variable er *Term-Spread* og *Federal Funds Rate* med $t$-størrelser på hhv. `r  round(FIT_TABLE$t[8], 3)` og `r  round(FIT_TABLE$t[12], 3)`. På et $10\%$ signifikansniveau vil også *Yield Spread* være statistisk signifikant, og kunne derfor også være en mulig variabel til prædiktion af merafkastet på aktier. Størstedelen af rentestrukturs variablene prædikterer merafkastet positivt, med undtagelse af den nominelle rente og *Default Spread*. Hvilket for rentespændende er ensbetydende med, at når spændet mellem langsigtede instrumenter og kortsigtede instrumenter stiger, vil en øgning i merafkastet på aktier, $rx_{t+1}^s$, ligeledes ske i den næstkommende periode.
 
 (ref:nw1987) [@Newey1987]
 
@@ -1085,6 +1098,8 @@ FIT_TABLE %>%
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af de univariate regressioner ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række svarer til én selvstændig regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE)
 ```
 
+Ligedes rapporterer Tabel \@ref(tab:UNI-s) de univariate regressions resultater af log merafkastet på statsobligationer, $rx_{t+1}^s$, overfor den introducerede delmængde af mulige prædiktionsvariable. Mest overraskende er, at *Yield Spread* ikke er signifikant, som den eneste af de fire rentespænds variablene. Til gengæld prædikterer *Yield Spread* merafkastet på statsobligationer positivt, hvilket også følger tidligere litteratur, [@Fama1987]. Dette er også tilfældet for de resterende rentespænd. Af alle rentestruktursvariablene er det kun *Term Spread*, *Credit Spread* og *Default Spread* som er signifikante for denne stikprøve, med $t$-størrelser på hhv. `r  round(FIT_S_TABLE$t[8], 3)`, `r  round(FIT_S_TABLE$t[10], 3)` og `r  round(FIT_S_TABLE$t[11], 3)`. En stigning i den nuværende *Term Spread* kommer eksempelvis enten fra en forøgelse af den lange effektive rente, $Y_t^10$, eller et fald i den korte effektive rente, $Y_t^90$, eller en kombination af begge vil lede til en stigning i det fremtidige log merafkast på statsobligationer. Ift. de finansielle variable er det kun *Small Minus Big*, som har statistisk styrke i den univariate opsætning, med en $t$-størrelse på `r  round(FIT_S_TABLE$t[6], 3)`. *Small Minus Big* prædikterer merafkastet negativt, hvilket *Dividend-Price Ratio*, *Book-to-Market Ratio* ligeledes gør. Den makroøkonomiske variabel *Federal Funds Rate* er signifikant på et $10\%$ signifikansniveau, og prædikterer merafkastet negativt.
+
 ```{r UNI-s, echo=FALSE}
 options(knitr.kable.NA = '')
 
@@ -1112,6 +1127,8 @@ FIT_S_TABLE %>%
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af de univariate regressioner ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\\\\text{s}}$. Hver række svarer til én selvstændig regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE)
 ```
 
+De statistiske resultater for de univariate regressioner på det fremtidige log merafkast på virksomhedsobligationer, $rx_{t+1}^v$, er rapporteret i Tabel \@ref(tab:UNI-v). Igen ses, at alle rentespænd prædikterer merafkastet positivt, og alle er signifikante på $5\%$-niveauet, specielt *Credit Spread* med en $t$-størrelse på `r  round(FIT_V_TABLE$t[10], 3)`. Den samme inferens for $rx_{t+1}^s$ kan blive udtænkt for $rx_{t+1}^v$. Alle de finansielle variable, med undtagelse af *Small Minus Big*, har ikke styrke til at forklare variationen i det fremtidige log merafkast på virksomhedsobligationer. Den makroøkonomiske variabel *Federal Funds Rate* prædikterer merafkastet negativt, som også var tilfældet for statsobligations merafkastet, men denne gang er koefficienten signifikant med en $t$-størrelse på `r  round(FIT_V_TABLE$t[12], 3)`.
+
 ```{r UNI-v, echo=FALSE}
 options(knitr.kable.NA = '')
 FIT_V_TABLE <- format(round(FIT_V_TABLE, digits = 3), nsmall = 3)
@@ -1137,6 +1154,12 @@ FIT_V_TABLE %>%
   kableExtra::add_header_above(c(" ", " " = 1, "Konfidensinterval" = 2, " " = 4)) %>% 
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af de univariate regressioner ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\\\\text{v}}$. Hver række svarer til én selvstændig regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
+
+De ovenstående præsenterede univariate regressioner kaster tvivl på validiteten af resultater i artikler, som taler for et bredt sæt af prædiktionsvariable. Derudover indikerer de univariate regressioner, at risikoen for stikprøveafhængighed også skal medtages i konstruktionen af den endelige VAR(1)-model, hvilket også bliver understreget af [@Goyal2007]. Samtidig kan disse simple regressioner ikke stå alene om en endelig konklusion, og derfor foretages en mere kompleks multipel regressions analyse i næste sektion, som foreslået af [@Goyal2007].
+
+## Multiple regressioner {#multreg}
+
+## Opsummering {#opsreg}
 
 # Underliggende model
 
@@ -1200,7 +1223,7 @@ rownames(data) <- c('Aktiv 1', 'Aktiv 2', 'Aktiv 3')
 
 
 data %>% 
-  knitr::kable(caption = 'Gengivelse af de sande afkast.',
+  knitr::kable(caption = 'Gengivelse af de sande momenter.',
                booktabs=TRUE,
                align = c('r', 'r', 'r' ,'r', 'r'),
                row.names = T,
@@ -1209,8 +1232,11 @@ data %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
-  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Korrelationer" = 3))
+  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Korrelationer" = 3)) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer det sande: forventede afkast og volatilitet for de tre fiktive aktiver samt de sande korrelationer mellem aktiverne. Momenterne er opgjort kvartalsvist.}", threeparttable = T, escape = FALSE)
 ```
+
+(ref:as2007) [@Asmussen2007]
 
 ```{r sim1, echo=FALSE}
 
@@ -1228,8 +1254,8 @@ data_1 %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
-  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3))
-
+  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3)) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer det estimerede: forventede afkast og volatilitet for de tre fiktive aktiver samt de estimerede korrelationer mellem aktiverne, ved brug af tidsserien fra første simulation af afkast. De relative fejl for hver simulation er ligeledes rapporteret, (ref:as2007). Momenterne er opgjort kvartalsvist.}", threeparttable = T, escape = FALSE)
 ```
 
 ```{r sim2, echo=FALSE}
@@ -1247,7 +1273,8 @@ data_2 %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
-  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3))
+  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3)) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer det estimerede: forventede afkast og volatilitet for de tre fiktive aktiver samt de estimerede korrelationer mellem aktiverne, ved brug af tidsserien fra anden simulation af afkast. De relative fejl for hver simulation er ligeledes rapporteret, (ref:as2007). Momenterne er opgjort kvartalsvist.}", threeparttable = T, escape = FALSE)
 ```
 
 ```{r sim3, echo=FALSE}
@@ -1265,8 +1292,8 @@ data_3 %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
-  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3))
-
+  kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3)) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer det estimerede: forventede afkast og volatilitet for de tre fiktive aktiver samt de estimerede korrelationer mellem aktiverne, ved brug af tidsserien fra tredje simulation af afkast. De relative fejl for hver simulation er ligeledes rapporteret, (ref:as2007). Momenterne er opgjort kvartalsvist.}", threeparttable = T, escape = FALSE)
 ```
 
 Disse tre sæt af estimerede parametre, baseret på de tre tidsserier, er blevet udvalgt til det følgende illustrative formål. Se Tabel \@ref(tab:sim1), Tabel \@ref(tab:sim2) og Tabel \@ref(tab:sim3) for en sammenligning ift. de sande parametre. De relative fejl for hver simulering er ligedes rapporteret, [@Asmussen2007]. Disse beregnes som
@@ -1310,7 +1337,8 @@ data %>%
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
-  kableExtra::row_spec(c(6, 8), italic = T)
+  kableExtra::row_spec(c(6, 8), italic = T) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de sande momenter. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for et delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE)
 ```
 
 ```{r sum-1, echo=FALSE}

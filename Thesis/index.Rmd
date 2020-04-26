@@ -18,13 +18,23 @@ description: "Master's Theis of Andreas Kracht Frandsen, Aarhus University."
 
 \pagenumbering{roman}
 
-\tableofcontents
+```{=latex}
+{
+  \hypersetup{linkcolor=black}
+  \tableofcontents
+}
+```
 
 \newpage
 
-\listoffigures
+```{=latex}
+{
+  \hypersetup{linkcolor=black}
+  \listoffigures
 
-\listoftables
+  \listoftables
+}
+```
 
 \newpage
 

@@ -78,6 +78,7 @@
 \setlength{\bibhang}{0pt}
 
 \usepackage{footnote}
+\usepackage{hyperref}
 
 \usepackage{bm}
 
@@ -192,13 +193,19 @@ Alt indhold er licenseret under CC BY-NC-SA 4.0
 
 \pagenumbering{roman}
 
-\tableofcontents
+{
+  \hypersetup{linkcolor=black}
+  \tableofcontents
+}
 
 \newpage
 
-\listoffigures
+{
+  \hypersetup{linkcolor=black}
+  \listoffigures
 
-\listoftables
+  \listoftables
+}
 
 \newpage
 
@@ -289,7 +296,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-04-25                  
+##  date     2020-04-27                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -618,7 +625,7 @@ U(W_{t+1})=-\exp\left(-\theta W_{t+1}\right). \label{eq:Ekspnytte}
 \end{equation}
 
 Eksponentiel nytte antager, at \emph{ARA} er konstant lig \(\theta\), mens \emph{RRA} kan stige med formue. Dette aspekt gør også eksponentiel nytte foretrukket ift. kvadratisk nytte. Eksponentiel nytte er også kendt under navnet \emph{Constant Absolute Risk Aversion}. For en eksplicit opskrivning af forventningen af Ligning \eqref{eq:Ekspnytte} bemærker vi følgende
-\[W_{t+1}\sim N(\mu_p,\sigma_p^2)\]
+\[W_{t+1}\sim \mathcal{N}\mu_p,\sigma_p^2)\]
 
 altså er terminalnytten normalfordelt for enhver mulig portefølje, \(p\), givet at afkastene er normalfordelt. Regner vi derfor på forventningen, får vi
 \[\mathbb{E}(U(W_{t+1}))=-\exp\left(-\theta\mu_p+\frac{\theta^2}{2}\sigma_p^2\right).\]
@@ -742,7 +749,7 @@ Den optimale løsning vil være givet ved
 
 Som igen er ækvivalent med den optimale løsning, Ligning \eqref{eq:Multalpha}, for middelværdi-varians analysen i det multiple tilfælde. På samme måde som i middelværdi-varians analysen, har løsningen egenskaben, at koefficienten for relativ risikoaversion, \(\gamma\), kun påvirker den overordnede skalering af positionen i det risikobærende aktiv, men ikke kompositionen. Dette er ensbetydende med, at \textit{The Mutual Fund Seperation Theorem}, \citep{Tobin1958}, også holder i den lognormale model med potens nytte. Et mere generelt tilfælde end ovenstående, er når der ikke eksisterer et risikofrit aktiv, og man da i stedet må benytte et risikobærende \emph{benchmark}-afkast, \(r_{b,t+1}\), da bliver løsningen
 \begin{equation}
-\bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t(\bm{r}_{t+1})-r_{b,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right)+(1-\frac{1}{\gamma})(-\bm{\Sigma}_t^{-1}\bm{\sigma}_{b,t}).
+\bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t(\bm{r}_{t+1})-r_{0,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right)+(1-\frac{1}{\gamma})(-\bm{\Sigma}_t^{-1}\bm{\sigma}_{0,t}).
 \end{equation}
 
 \hypertarget{model-for-k-perioder}{%
@@ -766,7 +773,7 @@ I de følgende sektioner vil flere specialtilfælde af det multiple-periode setu
 
 I tilfældet uden periodisk rebalancering skal investoren evaluere \(k\)-periode afkastet, på samme måde som i tilfældet med én-periode. Udover antagelsen om lognormalitet og potens nytte, antages nu den restriktive betingelse, at alle aktivafkast er uafhængige og identisk fordelte over tid. Dette betyder, at det risikofrie \(k\)-periode logafkast er konstant lig \(kr_{0}\), det \(k\)-periode forventede log afkast for de risikobærende aktiver er \(k\mathbb{E}(\bm{r})\), kovariansmatricen af logafkastet på de risikobærende aktiver er konstant lig \(\bm{\Sigma}\) og siden alle afkast er ukorrellerede bliver kovariansmatricen over en \(k\)-periode lig \(k\bm{\Sigma}\). Givet at Taylor approksimationen, Ligning \eqref{eq:Multtaylor}, er tilstrækkelig approksimerende for den givne respektive periode er løsningen, Ligning \eqref{eq:Potmultalpha}, stadig optimal. Dette følger da alle middelværdier og kovarianserer skaleret med den samme faktor, \(k\)
 \begin{equation}
-\bm{\alpha}_t=\frac{1}{\gamma}(k\bm{\Sigma})^{-1}\left(k\mathbb{E}_t(\bm{r}_{t+1})-kr_{b,t+1}\bm{\ell}+\frac{1}{2}k\bm{\sigma}_t^2\right). \label{eq:Potmultalphak}
+\bm{\alpha}_t=\frac{1}{\gamma}(k\bm{\Sigma})^{-1}\left(k\mathbb{E}_t(\bm{r}_{t+1})-kr_{0,t+1}\bm{\ell}+\frac{1}{2}k\bm{\sigma}_t^2\right). \label{eq:Potmultalphak}
 \end{equation}
 
 Altså vil investoren vælge den samme portefølje over hele deres investeringshorisont givet, at der ikke er mulighed for periodisk rebalancering.
@@ -806,7 +813,7 @@ I forlængelse af ovenstående modeller følges nu den analytiske løsning til d
 
 Investoren vælger altså vægte sådan, at
 \begin{align}
-\left\{\bm{\alpha}_{t+k-\tau}\right\}_{\tau=k}^{\tau=1}=
+\left\{\bm{\alpha}_{t+k-\tau}^\tau\right\}_{\tau=k}^{\tau=1}=
 \begin{cases}
 \arg\max\mathbb{E}_t(\frac{1}{1-\gamma}W_{t+k}^{1-\gamma}),\quad &\gamma\neq 1\\
 \arg\max\mathbb{E}_t(\log(W_{t+k})),\quad &\gamma=1.
@@ -818,15 +825,37 @@ Her er \(\tau\) den resterende tid til investeringshorisonten, \(t+k\). Altså i
 W_{t+k}=W_t\exp(r_{p,t\to t+k}),\label{eq:formuetk}
 \end{equation}
 
-hvor \(r_{p,t\to t+k}=\sum_{i=1}^k r_{p,t+i}\) er \(k\)-periode log porteføljeafkastet mellem tidspunkt \(t\) og \(t+k\). Dette tillader at vægtene , kan omskrives til
+hvor \(r_{p,t\to t+k}=\sum_{i=1}^k r_{p,t+i}\) er \(k\)-periode log porteføljeafkastet mellem tidspunkt \(t\) og \(t+k\). Dette tillader at vægtene ??, kan omskrives til
 \begin{align}
-\left\{\bm{\alpha}_{t+k-\tau}\right\}_{\tau=k}^{\tau=1}=\begin{cases}
+\left\{\bm{\alpha}_{t+k-\tau}^\tau\right\}_{\tau=k}^{\tau=1}=\begin{cases}
 \arg\max\mathbb{E}_t(\exp ((1-\gamma) r_{p,t\to t+k})),\quad &\gamma\neq 1\\
 \arg\max\mathbb{E}_t(r_{p,t\to t+k}),\quad &\gamma=1.
 \end{cases}
 \end{align}
 
-Som tidligere argumenteret vil en antagelse om rebalancering følge markedsobservationer, og det er ud fra denne antagelse at \citep{JurVic2011} løser det generelle \(k\)-periode porteføljeproblem ved benyttelse af baglæns optrævling. Løsningen er en diskretiseret version af \citep{Liu2007}, men mere fleksibel idet, at den kan håndtere et bredt spektrum af risikobærende aktiver og tilstandsvariable på samme tid.
+Som tidligere argumenteret vil en antagelse om rebalancering følge markedsobservationer, og det er ud fra denne antagelse at \citep{JurVic2011} løser det generelle \(k\)-periode porteføljeproblem ved benyttelse af baglæns optrævling. Løsningen er en diskretiseret version af \citep{Liu2007}, men mere fleksibel idet, at den kan håndtere et bredt spektrum af risikobærende aktiver og tilstandsvariable på samme tid. Derudover vil løsningen være eksakt i kontinuert tid, grundet den loglineære approksimation. Først udledes porteføljestrategien for den sidste periode, \(\tau=1\), da denne vægtning vil danne grundlaget for resten af rekursionen. Den optimale portefølje for sidste periode er den sædvanlige myopiske eller én-periode middelværdi-varians optimale portefølje, som tidligere præsenteret
+\[\bm{\alpha}_{t+k-1}^1=\frac{1}{\gamma}\bm{\Sigma}_{xx}^{-1}\left(\mathbb{E}_{t+k-1}(\bm{r}_{t+k}-r_{0,t+k}\bm{\ell})+\frac{1}{2}\bm{\sigma}_x^2 + (1-\gamma) \bm{\sigma}_{0x}\right),\]
+
+hvor, at
+\[\mathbb{E}_{t+k-1}(\bm{r}_{t+k}-r_{0,t+k}\bm{\ell})=\bm{H}_x(\bm{\Phi}_0 + \bm{\Phi}_1 \bm{z}_{t+k-1}),\]
+
+og \(H_x\) er selektionsmatricen, som vælger rækkerne hørende til vektoren af merafkast \(\bm{x}\) fra den relevante matrix. Den optimale portefølje kombinerer tangensporteføljen og global minimum varians porteføljen fra den efficiente rand, konstrueret af de én-periode forventede merafkast og kovariansmatricen af én-periode merafkastene. Tangensporteføljedelen er
+\[\bm{\Sigma}_{xx}^{-1}\mathbb{E}_{t+k-1}(\bm{r}_{t+k}-r_{0,t+k}\bm{\ell})+\frac{1}{2}\bm{\sigma}_x^2.\]
+
+Denne portefølje er afhængig af de tidsvarierende merafkast og kovariansmatricen af merafkastene, dette er ensbetydende med at porteføljen vil ændre sig over tid. Global minimum varians porteføljen består af den anden del
+\[\bm{\Sigma}_{xx}^{-1}\bm{\sigma}_{0x},\]
+
+og afhænger kun af kovariansmatricen af merafkast, som forventet. Givet antagelsen om, at kovariansmatricen er konstant over tid, vil én-periode global minimum varians porteføljen ikke ændre sig over tid. Disse to porteføljedele vil investeren kombinere ved brug af hhv. \(\tfrac{1}{\gamma}\) og \(1-\tfrac{1}{\gamma}\), alt afhængig af \emph{RRA}-parameteren \(\gamma\). Log nytte investorer (\(\gamma=1\)) vil kun holde tangensporteføljen, mens investorer med højere og højere risikoaversion (\(\gamma\to\infty\)) kun vil holde global minimums varians porteføljen. Alle andre investorer vil bevæge sig mellem disse to yderpunkter.
+
+Den generelle rekursive løsning til det dynamiske porteføljeproblem er givet ved
+\begin{align}
+\bm{\alpha}_{t+k-\tau}^\tau = &\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} \left( \mathbb{E}_{t+k-\tau} ( \bm{r}_{t+k-\tau+1} - r_{0,t+k-\tau+1} \bm{\ell} ) + \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma) \bm{\sigma}_{0x} \right) \notag\\
+&- (1-\frac{1}{\gamma} ) \bm{\Sigma}_{xx}^{-1} \bm{\Sigma}_x (B_1^{\tau-1'}+(B_2^{\tau-1}+B_3^{\tau-1'})\mathbb{E}_{t+k-\tau}(\bm{z}_{t+k-\tau+1})),\label{eq:jurvicalpha}
+\end{align}
+
+hvor \(\bm{\Sigma}_x=\begin{pmatrix}\bm{\sigma}_0x & \bm{\Sigma} & \bm{\Sigma}_{xs}'\end{pmatrix}\) og \(B_1^{\tau-1}\), \(B_2^{\tau-1}\) samt \(B_3^{\tau-1}\) er funktioner afhængende af: den resterende investeringshorisont, \(\tau\), \emph{RRA}-parameteren, \(\gamma\), samt koefficeinterne fra VAR-modellen, \citep{JurVic2011}.
+
+Ovenstående Ligning \eqref{eq:jurvicalpha} giver den fulde analytiske løsning til det intertemporale porteføljeproblem fra Ligning ??. Den optimale portefølje er en sum af to komponenter. Den første del af summen er identisk til den én-periode myopiske portefølje fra Ligning ??. Den anden del af summen, består af det såkaldte intertemporale \emph{hedging demand} for risikobærende aktiver, \citep{Merton1969, Merton1971, Merton1973}. Herudover viser løsning at den myopiske del af det totale porteføljevalg er uafhængigt af den resterende tid til investeringshorisonten, \(\tau\). Den viser også at den myopiske del er den totale porteføljedel for investorer med log nytte, \(\gamma=1\). Hvilket også er konsistent med intutionen givet i Sektion ??, at log nytte investorer ikke forholder sig til investeringshorisonten.
 
 \hypertarget{var}{%
 \chapter{VAR}\label{var}}
@@ -883,7 +912,7 @@ Dvs. at determinanten af vores matrix -- bestående af hældningskoefficienter -
 
 Slutteligt antager vi, at fejlleddet er normalfordelt
 \begin{equation}\label{eq:2}
-        \bm{v}_{t+1}\overset{\text{i.i.d.}}{\sim}N(0,\bm{\Sigma}_v),
+        \bm{v}_{t+1}\overset{\text{i.i.d.}}{\sim}\mathcal{N}(0,\bm{\Sigma}_v),
     \end{equation}
 hvor middelværdien er \(0\), som tidligere nævnt, og \(\bm{\Sigma}_v\) er kovariansmatricen, som tillige er symmetrisk. For notationens skyld sætter vi
 \begin{equation*}
@@ -1033,7 +1062,7 @@ Mængden af aktivklasser, som pt.~er tilgængelige på finansmarkedet har aldrig
 \hypertarget{det-risikofrie-afkast-r_t1textnormalrf}{%
 \subsection{\texorpdfstring{Det risikofrie afkast -- \(r_{t+1}^{\textnormal{rf}}\)}{Det risikofrie afkast -- r\_\{t+1\}\^{}\{\textbackslash textnormal\{rf\}\}}}\label{det-risikofrie-afkast-r_t1textnormalrf}}
 
-Essencen af et risikofrit aktiv er at repræsentere et afkast med varians lig \(0\). Dette betegnes undertiden også som et sikkert afkast. Udover at give investoren muligheder for indlån, kan investoren også udvide sine investeringsmuligheder ved at låne til den risikofrie rente, dvs. have en kort position i det risikofrie aktiv. Et ofte valgt aktiv i litteraturen, som en proxy for det risikofrie aktiv, er de kortefristede statsværdipapirer, \citep{CampVic2003, CampVic1999}, \citep{JurVic2011}, \citep{Engsted2012}, \citep{CampVicCha2003}. Disse betegnes i U.S.A. som \emph{T-Bills}. Valget af netop dette aktiv sker på baggrund af den historiske og nuværende meget lave risiko for statskonkurser, \citep{Beers2017}. Eksempelvis gik den danske stat tilnærmelsesvis senest bankerot under \emph{Statsbankerotten} i 1813 efter \emph{Napoleonskrigene}. Derfor benyttes det amerikanske statspapir med kort løbetid, mere præcist anvendes den 90-dages amerikanske \emph{T-Bill}, som en proxy for det risikofrie aktiv. Data over afkast er fra \citep{CRSPt90} hentet gennem \citep{WRDSt90}. Log netto afkastet af det risikofrie aktiv beregnes som log forskellen mellem det kvartalsvise brutto afkast på den amerikanske 90-dages \emph{T-Bill} og den kvartalsvise inflationsrate, målt via \emph{Consumer Price Index}. Nettoafkastet har et kvartalsvist justeret afkast på 0.3\(\%\) med en kvartalsvis volatilitet på 0.9\(\%\). Som det kan ses på kvantilerne har det risikofrie afkast givet negativt afkast sommetider. Et histogram indikerer en højreskæv fordeling af afkast, hvilket også underbygges af en skævhed på 0.362. Med en kurtosis på 5.016 haves en leptokurtisk fordeling, med tykkere/længere haler og et smallere samt højere cetrum. Disse tal er konsistente med \citep{CampVic2003}. Figur \ref{fig:NET-TB-tids} viser et plot over tidsserien.
+Essencen af et risikofrit aktiv er at repræsentere et afkast med varians lig \(0\). Dette betegnes undertiden også som et sikkert afkast. Udover at give investoren muligheder for indlån, kan investoren også udvide sine investeringsmuligheder ved at låne til den risikofrie rente, dvs. have en kort position i det risikofrie aktiv. Et ofte valgt aktiv i litteraturen, som en proxy for det risikofrie aktiv, er de kortefristede statsværdipapirer, \citep{CampVic2003, CampVic1999}, \citep{JurVic2011}, \citep{Engsted2012}, \citep{CampVicCha2003}. Disse betegnes i U.S.A. som \emph{T-Bills}. Valget af netop dette aktiv sker på baggrund af den historiske og nuværende meget lave risiko for statskonkurser, \citep{Beers2017}. Eksempelvis gik den danske stat tilnærmelsesvis senest bankerot under \emph{Statsbankerotten} i 1813 efter \emph{Napoleonskrigene}. Derfor benyttes det amerikanske statspapir med kort løbetid, mere præcist anvendes den 90-dages amerikanske \emph{T-Bill}, som en proxy for det risikofrie aktiv. Data over afkast er fra \citep{CRSPt90} hentet gennem \citep{WRDSt90}. Log netto afkastet af det risikofrie aktiv beregnes som log forskellen mellem det kvartalsvise brutto afkast på den amerikanske 90-dages \emph{T-Bill} og den kvartalsvise inflationsrate, målt via \emph{Consumer Price Index}. Nettoafkastet har et kvartalsvist justeret afkast på 0.3\(\%\) med en kvartalsvis volatilitet på 0.9\(\%\). Som det kan ses på kvantilerne har det risikofrie afkast givet negativt afkast sommetider. Et histogram indikerer en højreskæv fordeling af afkast, hvilket også underbygges af en skævhed på 0.362. Med en kurtosis på 5.016 haves en leptokurtisk fordeling, med tykkere/længere haler og et smallere samt højere cetrum. Disse tal er konsistente med \citep{CampVic2003}. Figur \ref{fig:NET-TB-tids} viser et plot over tidsserien, Figur \ref{fig:NET-TB-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:NET-TB-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1076,7 +1105,7 @@ I forlængelse af beskrivelsen af det risikofrie aktiv, viser Figur \ref{fig:INF
 \hypertarget{dataak}{%
 \subsection{\texorpdfstring{Merafkastet på aktier -- \(rx_{t+1}^{\textnormal{a}}\)}{Merafkastet på aktier -- rx\_\{t+1\}\^{}\{\textbackslash textnormal\{a\}\}}}\label{dataak}}
 
-For aktivklassen, som skal repræsentere børshandlede aktier, benyttes et markedsværdi-vægtet afkast over et repræsentativt indeks for samtlige handlede aktier på \emph{New York Stock Exchange}, \emph{National Association of Securities Dealers Automated Quotations} og \emph{American Stock Exchange}. Det vægtede afkast er inklusiv udbytte, aktiesplits og nyemissioner for de foregående 12 måneder ledende op til kvartalet. Ved at benytte et sådant forholdsvist bredt indeks, vil delanalysen for aktier være repræsentativt for det globale aktiemarked. Derudover er det ikke kun børsnoterede amerikanskbaserede selskaber, som handles via \emph{NYSE}, \emph{NASDAQ} og \emph{AMEX}, men i stadig større grad også virksomheder uden for U.S.A. Data over afkast er fra \citep{CRSPakt} og hentet gennem \citep{WRDSakt}. Log merafkastet af aktier beregnes som det kvartalsvise log brutto aktieafkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages \emph{T-Bill}. Det ses at aktier har det klart højeste kvartalvise justerede merafkast på 1.7\(\%\) ift. de andre aktivklasser. Dette høje merafkast følges af en ligeledes høj relativ volatilitet på 8.3\(\%\). Historisk set har det største negative markedsudsving givet et merafkast/tab på \(-30.4\%\), mens det største positive markedsudsving har været på \(20\%\). Et histogram sammenholdt med en skævhed på -0.946 afslører moderat til høj venstreskævhed. Altså har der oftere været negative merafkast ift. positive. Kurtosis på 4.624 medører en moderat leptokurtisk fordeling med en anelse tykkere haler, og at ekstreme observationer sker oftere end normalt. Disse tal er konsistente med \citep{CampVic2003}. Figur \ref{fig:AKT-tids} viser et plot over tidsserien.
+For aktivklassen, som skal repræsentere børshandlede aktier, benyttes et markedsværdi-vægtet afkast over et repræsentativt indeks for samtlige handlede aktier på \emph{New York Stock Exchange}, \emph{National Association of Securities Dealers Automated Quotations} og \emph{American Stock Exchange}. Det vægtede afkast er inklusiv udbytte, aktiesplits og nyemissioner for de foregående 12 måneder ledende op til kvartalet. Ved at benytte et sådant forholdsvist bredt indeks, vil delanalysen for aktier være repræsentativt for det globale aktiemarked. Derudover er det ikke kun børsnoterede amerikanskbaserede selskaber, som handles via \emph{NYSE}, \emph{NASDAQ} og \emph{AMEX}, men i stadig større grad også virksomheder uden for U.S.A. Data over afkast er fra \citep{CRSPakt} og hentet gennem \citep{WRDSakt}. Log merafkastet af aktier beregnes som det kvartalsvise log brutto aktieafkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages \emph{T-Bill}. Det ses at aktier har det klart højeste kvartalvise justerede merafkast på 1.7\(\%\) ift. de andre aktivklasser. Dette høje merafkast følges af en ligeledes høj relativ volatilitet på 8.3\(\%\). Historisk set har det største negative markedsudsving givet et merafkast/tab på \(-30.4\%\), mens det største positive markedsudsving har været på \(20\%\). Et histogram sammenholdt med en skævhed på -0.946 afslører moderat til høj venstreskævhed. Altså har der oftere været negative merafkast ift. positive. Kurtosis på 4.624 medører en moderat leptokurtisk fordeling med en anelse tykkere haler, og at ekstreme observationer sker oftere end normalt. Disse tal er konsistente med \citep{CampVic2003}. Figur \ref{fig:AKT-tids} viser et plot over tidsserien, Figur \ref{fig:AKT-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:AKT-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1102,13 +1131,13 @@ For aktivklassen, som skal repræsentere børshandlede aktier, benyttes et marke
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:AKT-HIST}
+\caption{Autokorrelation af log merafkastet af aktier.}\label{fig:AKT-HIST}
 \end{figure}
 
 \hypertarget{merafkastet-puxe5-statsobligationer-rx_t1textnormals}{%
 \subsection{\texorpdfstring{Merafkastet på statsobligationer -- \(rx_{t+1}^{\textnormal{s}}\)}{Merafkastet på statsobligationer -- rx\_\{t+1\}\^{}\{\textbackslash textnormal\{s\}\}}}\label{merafkastet-puxe5-statsobligationer-rx_t1textnormals}}
 
-Statsobligationer er gældsinstrumenter udstedt af staten i det respektive udstedelsesland, de har til formål at finansiere offentlige udgifter og anses også for at være en substitution for skatter. Siden udstedelsen sker af staten, antages det ofte, at statsobligationer er relativt mindre risikobærende and aktier. Undertiden betegnes statsobligationer fra visse ilande som et \emph{safe haven} for investorer. Eksempelvis har den danske stat pt.~en kreditvurdering på AAA, Aaa, AAA af hhv. \emph{Standard \& Poor's}, \emph{Moody's} og \emph{Fitch}, \citep{TradingEconomics2020}. Til formålet at repræsentere afkastet på statsobligationer anvendes derfor den 10-årige amerikanske statsobligation med konstant løbetid. Data over afkast er fra \citep{CRSPt90} og hentet gennem \citep{WRDSt90}. Log merafkastet af statsobligationener beregnes som det kvartalsvise log brutto afkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages \emph{T-Bill}. merafkastet har et justeret kvartalsvist afkast på 0.3\(\%\) med en kvartalsvis volatilitet på 3.8\(\%\). Statsobligationen har den laveste \emph{Sharpe Ratio} af de tre aktivklasser, hvilket også er forventeligt. Med en skævhed på 0.451 og kurtosis på 3.405 haves en forholdsvis symmetrisk fordeling, men med en anelse tykkere haler. Disse tal er konsistente med \citep{CampVic2003}. Figur \ref{fig:S-OBL-tids} viser et plot over tidsserien.
+Statsobligationer er gældsinstrumenter udstedt af staten i det respektive udstedelsesland, de har til formål at finansiere offentlige udgifter og anses også for at være en substitution for skatter. Siden udstedelsen sker af staten, antages det ofte, at statsobligationer er relativt mindre risikobærende and aktier. Undertiden betegnes statsobligationer fra visse ilande som et \emph{safe haven} for investorer. Eksempelvis har den danske stat pt.~en kreditvurdering på AAA, Aaa, AAA af hhv. \emph{Standard \& Poor's}, \emph{Moody's} og \emph{Fitch}, \citep{TradingEconomics2020}. Til formålet at repræsentere afkastet på statsobligationer anvendes derfor den 10-årige amerikanske statsobligation med konstant løbetid. Data over afkast er fra \citep{CRSPt90} og hentet gennem \citep{WRDSt90}. Log merafkastet af statsobligationener beregnes som det kvartalsvise log brutto afkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages \emph{T-Bill}. merafkastet har et justeret kvartalsvist afkast på 0.3\(\%\) med en kvartalsvis volatilitet på 3.8\(\%\). Statsobligationen har den laveste \emph{Sharpe Ratio} af de tre aktivklasser, hvilket også er forventeligt. Med en skævhed på 0.451 og kurtosis på 3.405 haves en forholdsvis symmetrisk fordeling, men med en anelse tykkere haler. Disse tal er konsistente med \citep{CampVic2003}. Figur \ref{fig:S-OBL-tids} viser et plot over tidsserien, Figur \ref{fig:S-OBL-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:S-OBL-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1116,7 +1145,7 @@ Statsobligationer er gældsinstrumenter udstedt af staten i det respektive udste
 
 }
 
-\caption{Tidsserie af log  merafkastet på statsobligationer.}\label{fig:S-OBL-tids}
+\caption{Tidsserie af log merafkastet på statsobligationer.}\label{fig:S-OBL-tids}
 \end{figure}
 
 \begin{figure}[htbp!]
@@ -1134,7 +1163,7 @@ Statsobligationer er gældsinstrumenter udstedt af staten i det respektive udste
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:S-OBL-HIST}
+\caption{Autokorrelation af log merafkastet på statsobligationer.}\label{fig:S-OBL-HIST}
 \end{figure}
 
 \hypertarget{merafkastet-puxe5-virksomhedsobligationer-rx_t1textnormalv}{%
@@ -1146,7 +1175,7 @@ På samme vis som stater kan finansiere deres aktiviteter via statsobligationer,
 \textit{A corporate bond series with a long maturity is used to describe fixed-income securities that contain risk of default.}
 \end{center}
 
-Log merafkastet af virksomhedsobligationenerne beregnes som det kvartalsvise log brutto afkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages \emph{T-Bill}. Som forventet ses den højere afkastpræmie med et justeret kvartalsvist afkast på 0.5\(\%\) og en tilhørende volatilitet på 4.7\(\%\), som investoren får, for at påtage sig den ekstra kreditrisiko. Afkastfordelingen anses som værende relativt mest symmetrisk ift. de andre aktivklasser, hvilket også ses i en skævhedsværdi på 0.216. Med en kurtosis på mere end \(3\), har fordelingen tykkere haler og med mere masse centralt i fordelingen. Det bemærkes ligeledes at virksomhedsobligationer har haft de største positive markedsudsving af de tre aktivklasser med et positivt afkast på \(20.8 \%\). Figur \ref{fig:V-OBL-tids} viser et plot over tidsserien.
+Log merafkastet af virksomhedsobligationenerne beregnes som det kvartalsvise log brutto afkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages \emph{T-Bill}. Som forventet ses den højere afkastpræmie med et justeret kvartalsvist afkast på 0.5\(\%\) og en tilhørende volatilitet på 4.7\(\%\), som investoren får, for at påtage sig den ekstra kreditrisiko. Afkastfordelingen anses som værende relativt mest symmetrisk ift. de andre aktivklasser, hvilket også ses i en skævhedsværdi på 0.216. Med en kurtosis på mere end \(3\), har fordelingen tykkere haler og med mere masse centralt i fordelingen. Det bemærkes ligeledes at virksomhedsobligationer har haft de største positive markedsudsving af de tre aktivklasser med et positivt afkast på \(20.8 \%\). Figur \ref{fig:V-OBL-tids} viser et plot over tidsserien, Figur \ref{fig:V-OBL-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:V-OBL-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1154,7 +1183,7 @@ Log merafkastet af virksomhedsobligationenerne beregnes som det kvartalsvise log
 
 }
 
-\caption{Tidsserie af log  merafkastet på virksomhedsobligationer.}\label{fig:V-OBL-tids}
+\caption{Tidsserie af log merafkastet på virksomhedsobligationer.}\label{fig:V-OBL-tids}
 \end{figure}
 
 \begin{figure}[htbp!]
@@ -1172,7 +1201,7 @@ Log merafkastet af virksomhedsobligationenerne beregnes som det kvartalsvise log
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:V-OBL-HIST}
+\caption{Autokorrelation af log merafkastet på virksomhedsobligationer.}\label{fig:V-OBL-HIST}
 \end{figure}
 
 Tabel \ref{tab:DES-AKTIVKLASSE} opsummerer ovenstående beskrivende statistik for de fire aktivkasser.
@@ -1233,7 +1262,7 @@ Denne sektion har til formål at beskrive datagrundlaget for prædiktionsvariabl
 \hypertarget{dividend-price-ratio-x_ttextdp}{%
 \subsection{\texorpdfstring{Dividend-Price Ratio -- \(x_t^{\text{dp}}\)}{Dividend-Price Ratio -- x\_t\^{}\{\textbackslash text\{dp\}\}}}\label{dividend-price-ratio-x_ttextdp}}
 
-Repræsentativet for priserne til forholdet mellem udbytte og priser er indeksniveauet, eksklusiv udbytte, over det brede indeks som blev beskrevet i Sektion \ref{dataak}. Udbyttet stammer ligeledes fra aktieindekset, og er beregnet som en rullende sum over de seneste fire kvartaler. Log udbyttet er logaritmen til tidsserien over de rullende summer af udbytte. Log \emph{Dividend-Price Ratio} bliver da beregnet som forskellen mellem det rullende kvartalsvise log udbytte og de kvartalsvise log priser. Data er fra \citep{CRSPakt} og hentet gennem \citep{WRDSakt}. Den justerede middelværdi er -3.516\(\%\), og betyder altså at det sande forhold mellem udbytte og priser historisk har været omtrent \(1\):\(34\). Det andet moment er 0.371\(\%\). Forholdet er en næsten symmetrisk med et tredje moment på -0.371. En kurtosis på 2.37 indebærer at log \emph{Dividend Price Ratio} har en platykurtisk fordeling med sjældne ekstreme observationer. Den 30 juni, 1982 var det sande forhold på sidst højeste, da det nåede 5.5\(\%\). Over de følgende \(18\) år, dalede forholdet til 1.1\(\%\) den 29 september, 2000, fordi aktieprisernes værdi steg hurtigere end udbyttebetalingerne fra indtjeningen i virksomhederne. Derudover steg offentlige virksomheders indtjening langsommere end aktiepriserne. Disse tal er konsistente med \citep{CampVic2003}. Figur \ref{fig:DP-tids} viser et plot over tidsserien.
+Repræsentativet for priserne til forholdet mellem udbytte og priser er indeksniveauet, eksklusiv udbytte, over det brede indeks som blev beskrevet i Sektion \ref{dataak}. Udbyttet stammer ligeledes fra aktieindekset, og er beregnet som en rullende sum over de seneste fire kvartaler. Log udbyttet er logaritmen til tidsserien over de rullende summer af udbytte. Log \emph{Dividend-Price Ratio} bliver da beregnet som forskellen mellem det rullende kvartalsvise log udbytte og de kvartalsvise log priser. Data er fra \citep{CRSPakt} og hentet gennem \citep{WRDSakt}. Den justerede middelværdi er -3.516\(\%\), og betyder altså at det sande forhold mellem udbytte og priser historisk har været omtrent \(1\):\(34\). Det andet moment er 0.371\(\%\). Forholdet er en næsten symmetrisk med et tredje moment på -0.371. En kurtosis på 2.37 indebærer at log \emph{Dividend Price Ratio} har en platykurtisk fordeling med sjældne ekstreme observationer. Den 30 juni, 1982 var det sande forhold på sidst højeste, da det nåede 5.5\(\%\). Over de følgende \(18\) år, dalede forholdet til 1.1\(\%\) den 29 september, 2000, fordi aktieprisernes værdi steg hurtigere end udbyttebetalingerne fra indtjeningen i virksomhederne. Derudover steg offentlige virksomheders indtjening langsommere end aktiepriserne. Disse tal er konsistente med \citep{CampVic2003}. Figur \ref{fig:DP-tids} viser et plot over tidsserien, Figur \ref{fig:DP-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:DP-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1250,7 +1279,7 @@ Repræsentativet for priserne til forholdet mellem udbytte og priser er indeksni
 
 }
 
-\caption{Autokorrelation af log merafkastet af virksomhedsobligationer.}\label{fig:DP-AK}
+\caption{Autokorrelation af log Dividend Price Ratio.}\label{fig:DP-AK}
 \end{figure}
 
 \begin{figure}[htbp!]
@@ -1259,13 +1288,13 @@ Repræsentativet for priserne til forholdet mellem udbytte og priser er indeksni
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:DP-HIST}
+\caption{Autokorrelation af log Dividend Price Ratio.}\label{fig:DP-HIST}
 \end{figure}
 
 \hypertarget{price-earnings-ratio-x_ttextpe}{%
 \subsection{\texorpdfstring{Price-Earnings Ratio -- \(x_t^{\text{pe}}\)}{Price-Earnings Ratio -- x\_t\^{}\{\textbackslash text\{pe\}\}}}\label{price-earnings-ratio-x_ttextpe}}
 
-Priserne for forholdet mellem priser og indtjening er som ovenstående indeksniveauet fra Sektion \ref{dataak}, ekslusiv udbytte. Indtjeningen er en rullende sum repræsenterende indtjeningen på \emph{S\&P 500} indekset. Data er dermed fra hhv. \citep{CRSPakt}, hentet gennem \citep{WRDSakt} og \citep{Shiller2020}, hentet gennem \citep{Goyal2007}. At indtjeningen benytter et andet datagrundlag end aktieindekset kan skabe tvetydigheder i resultaterne, men prædiktabiltetsegenskaben for variablen er stadig intakt. Log \emph{Price Earnings Ratio} bliver da beregnet som forskellen mellem de kvartalsvise log priser og de kvartalvise log indtjeninger. Den justerede middelværdi er 2.754\(\%\). Standardafvigelsen er på 0.407\(\%\). Derudover haves en højreskæv leptokurtisk fordeling med hhv. skævhed på 0.958 og kurtosis på 7.52. Figur \ref{fig:PE-tids} viser et plot over tidsserien.
+Priserne for forholdet mellem priser og indtjening er som ovenstående indeksniveauet fra Sektion \ref{dataak}, ekslusiv udbytte. Indtjeningen er en rullende sum repræsenterende indtjeningen på \emph{S\&P 500} indekset. Data er dermed fra hhv. \citep{CRSPakt}, hentet gennem \citep{WRDSakt} og \citep{Shiller2020}, hentet gennem \citep{Goyal2007}. At indtjeningen benytter et andet datagrundlag end aktieindekset kan skabe tvetydigheder i resultaterne, men prædiktabiltetsegenskaben for variablen er stadig intakt. Log \emph{Price Earnings Ratio} bliver da beregnet som forskellen mellem de kvartalsvise log priser og de kvartalvise log indtjeninger. Den justerede middelværdi er 2.754\(\%\). Standardafvigelsen er på 0.407\(\%\). Derudover haves en højreskæv leptokurtisk fordeling med hhv. skævhed på 0.958 og kurtosis på 7.52. Figur \ref{fig:PE-tids} viser et plot over tidsserien, Figur \ref{fig:PE-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:PE-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1282,7 +1311,7 @@ Priserne for forholdet mellem priser og indtjening er som ovenstående indeksniv
 
 }
 
-\caption{Autokorrelation af log merafkastet af virksomhedsobligationer.}\label{fig:PE-AK}
+\caption{Autokorrelation af log Price Earnings Ratio.}\label{fig:PE-AK}
 \end{figure}
 
 \begin{figure}[htbp!]
@@ -1291,13 +1320,13 @@ Priserne for forholdet mellem priser og indtjening er som ovenstående indeksniv
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:PE-HIST}
+\caption{Autokorrelation af log Price Earnings Ratio.}\label{fig:PE-HIST}
 \end{figure}
 
 \hypertarget{book-to-market-ratio-x_ttextbm}{%
 \subsection{\texorpdfstring{Book-to-Market Ratio -- \(x_t^{\text{bm}}\)}{Book-to-Market Ratio -- x\_t\^{}\{\textbackslash text\{bm\}\}}}\label{book-to-market-ratio-x_ttextbm}}
 
-\emph{Book-to-market Ratio} er hentet gennem \citep{Goyal2007}. Bogførte værdier samt markedsværdier stammer fra \emph{Value Line}'s hjemmeside, mere specifikt gennem deres \emph{Long-Term Perspective Chart} af indekset \emph{Dow Jones Industrial Average}. Beregningsmetoden er oprindeligt månedsbaseret og for månederne marts til december beregnes forholdet som den bogførte værdi fra slutningen af sidste år, delt med prisen fra seneste månedsultimo. For januar og februar beregnes det som den bogførte værdi fra slutningen af for to år siden, delt med prisen fra seneste månedsultimo. Beregningsmetoden er sammenlignelig med \citep{Kothari1997} og \citep{Pontiff1998}. Det første og andet moment er hhv. 0.505 og 0.248. Fra tredje og fjerde moment ses højreskævhed og en mesokurtisk fordeling. \citep{Pontiff1998} finder første og andet moment til hhv. \(0.505\) og \(0.252\), hvilket validerer estimaterne. Efter 1982 ses det, at forholdet aftager kraftigt, og efter en kort tiltagning har det de seneste år stabiliseret sig. Dette kommer sig bl.a. af, at amerikanske virksomheder i stigende grad har bogført en negativ værdi, se evt. \emph{Historical Book Equity Data} fra \citep{French2020}. Figur \ref{fig:BM-tids} viser et plot over tidsserien.
+\emph{Book-to-market Ratio} er hentet gennem \citep{Goyal2007}. Bogførte værdier samt markedsværdier stammer fra \emph{Value Line}'s hjemmeside, mere specifikt gennem deres \emph{Long-Term Perspective Chart} af indekset \emph{Dow Jones Industrial Average}. Beregningsmetoden er oprindeligt månedsbaseret og for månederne marts til december beregnes forholdet som den bogførte værdi fra slutningen af sidste år, delt med prisen fra seneste månedsultimo. For januar og februar beregnes det som den bogførte værdi fra slutningen af for to år siden, delt med prisen fra seneste månedsultimo. Beregningsmetoden er sammenlignelig med \citep{Kothari1997} og \citep{Pontiff1998}. Det første og andet moment er hhv. 0.505 og 0.248. Fra tredje og fjerde moment ses højreskævhed og en mesokurtisk fordeling. \citep{Pontiff1998} finder første og andet moment til hhv. \(0.505\) og \(0.252\), hvilket validerer estimaterne. Efter 1982 ses det, at forholdet aftager kraftigt, og efter en kort tiltagning har det de seneste år stabiliseret sig. Dette kommer sig bl.a. af, at amerikanske virksomheder i stigende grad har bogført en negativ værdi, se evt. \emph{Historical Book Equity Data} fra \citep{French2020}. Figur \ref{fig:BM-tids} viser et plot over tidsserien, Figur \ref{fig:BM-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:BM-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1314,7 +1343,7 @@ Priserne for forholdet mellem priser og indtjening er som ovenstående indeksniv
 
 }
 
-\caption{Autokorrelation af log merafkastet af virksomhedsobligationer.}\label{fig:BM-AK}
+\caption{Autokorrelation af Book-to-market Ratio.}\label{fig:BM-AK}
 \end{figure}
 
 \begin{figure}[htbp!]
@@ -1323,13 +1352,13 @@ Priserne for forholdet mellem priser og indtjening er som ovenstående indeksniv
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:BM-HIST}
+\caption{Autokorrelation af Book-to-market Ratio.}\label{fig:BM-HIST}
 \end{figure}
 
 \hypertarget{aktievarians-x_ttextavar}{%
 \subsection{\texorpdfstring{Aktievarians -- \(x_t^{\text{avar}}\)}{Aktievarians -- x\_t\^{}\{\textbackslash text\{avar\}\}}}\label{aktievarians-x_ttextavar}}
 
-Aktievariansen består af den kvartalsvise kvadratsum af afkast, samt summen af produktet mellem to tilstødende kvartalsvise afkast. Beregningsmetoden er fra \citep{Schwert1987} og data er hentet gennem \citep{Goyal2007}, som baserer estimaterne på afkast fra \emph{S\&P 500} indekset. Selve metoden tager udgangspunkt i daglige priser fremfor kvartalsvise, for at måle det kvartalsvise aktieafkast \(r_{it}\). De kvartalsvise afkast er herefter kvadreret for at etablere variansen. Herefter justeres for autokorrelation, ved at addere to gange summen af produkterne mellem alle par af foreløbende kvartalsafkast. Middelværdien estimeres til 0.006 og med en standardafvigelse på 0.01. Givet ikke-negativiteten af variansen, ses forventeligt en meget højreskæv fordeling med tilhørende høj kurtosis på hhv. 7.186 og 68.38. Figur \ref{fig:AV-tids} viser et plot over tidsserien.
+Aktievariansen består af den kvartalsvise kvadratsum af afkast, samt summen af produktet mellem to tilstødende kvartalsvise afkast. Beregningsmetoden er fra \citep{Schwert1987} og data er hentet gennem \citep{Goyal2007}, som baserer estimaterne på afkast fra \emph{S\&P 500} indekset. Selve metoden tager udgangspunkt i daglige priser fremfor kvartalsvise, for at måle det kvartalsvise aktieafkast \(r_{it}\). De kvartalsvise afkast er herefter kvadreret for at etablere variansen. Herefter justeres for autokorrelation, ved at addere to gange summen af produkterne mellem alle par af foreløbende kvartalsafkast. Middelværdien estimeres til 0.006 og med en standardafvigelse på 0.01. Givet ikke-negativiteten af variansen, ses forventeligt en meget højreskæv fordeling med tilhørende høj kurtosis på hhv. 7.186 og 68.38. Figur \ref{fig:AV-tids} viser et plot over tidsserien, Figur \ref{fig:AV-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:AV-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1346,7 +1375,7 @@ Aktievariansen består af den kvartalsvise kvadratsum af afkast, samt summen af 
 
 }
 
-\caption{Autokorrelation af log merafkastet af virksomhedsobligationer.}\label{fig:AV-AK}
+\caption{Autokorrelation af aktievariansen.}\label{fig:AV-AK}
 \end{figure}
 
 \begin{figure}[htbp!]
@@ -1355,13 +1384,13 @@ Aktievariansen består af den kvartalsvise kvadratsum af afkast, samt summen af 
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:AV-HIST}
+\caption{Autokorrelation af aktievariansen.}\label{fig:AV-HIST}
 \end{figure}
 
 \hypertarget{datahml}{%
 \subsection{\texorpdfstring{High Minus Low -- \(x_t^{\text{hml}}\)}{High Minus Low -- x\_t\^{}\{\textbackslash text\{hml\}\}}}\label{datahml}}
 
-Den første af de to \emph{Fama-French} faktorer. Månedlige værdier er fra \citep{CRSPakt} og hentet gennem \citep{French2020}, det er herefter omdannet til kvartalsvise værdier via et kvartalsvist rullende tre-måneders gennemsnit. Selve faktoren er baseret på: to porteføljer baseret på størrelse, hvor skillelinjen er markedsmedianen på \emph{NYSE}, tre porteføljer baseret på \emph{Book-to-Market Ratio}, hvor skilningerne er \(30\)- og \(70\)-percentilerne af \emph{Book-to-Market Ratio} på \emph{NYSE}. Herefter eksisterer der seks fællesmængder, som dermed udgør grundlaget for porteføljerne til \emph{High Minus Low}. Selve faktoren beregnes som gennemsnittet på de to værdi-porteføljer\footnote{Virksomheder i værdi-porteføljerne har høj \emph{Book-to-market Ratio} og er hhv. store og små.} fratrukket det gennemsnitlige afkast på de to vækst-porteføljer\footnote{Virksomheder i vækst-porteføljerne har lav \emph{Book-to-market Ratio} og er hhv. store og små.}. En positiv \emph{High Minus Low} faktor medfører, at værdi-virksomheder er mere efficiente end vækst virksomheder på lang sigt, \citep{French1993}. Det første og andet moment er hhv. 0.33 og 1.809. Skævhed på 0.447 og kurtosis på 4.858, indikerer en forholdsvis symmetrisk fordeling. Figur \ref{fig:HML-tids} viser et plot over tidsserien.
+Den første af de to \emph{Fama-French} faktorer. Månedlige værdier er fra \citep{CRSPakt} og hentet gennem \citep{French2020}, det er herefter omdannet til kvartalsvise værdier via et kvartalsvist rullende tre-måneders gennemsnit. Selve faktoren er baseret på: to porteføljer baseret på størrelse, hvor skillelinjen er markedsmedianen på \emph{NYSE}, tre porteføljer baseret på \emph{Book-to-Market Ratio}, hvor skilningerne er \(30\)- og \(70\)-percentilerne af \emph{Book-to-Market Ratio} på \emph{NYSE}. Herefter eksisterer der seks fællesmængder, som dermed udgør grundlaget for porteføljerne til \emph{High Minus Low}. Selve faktoren beregnes som gennemsnittet på de to værdi-porteføljer\footnote{Virksomheder i værdi-porteføljerne har høj \emph{Book-to-market Ratio} og er hhv. store og små.} fratrukket det gennemsnitlige afkast på de to vækst-porteføljer\footnote{Virksomheder i vækst-porteføljerne har lav \emph{Book-to-market Ratio} og er hhv. store og små.}. En positiv \emph{High Minus Low} faktor medfører, at værdi-virksomheder er mere efficiente end vækst virksomheder på lang sigt, \citep{French1993}. Det første og andet moment er hhv. 0.33 og 1.809. Skævhed på 0.447 og kurtosis på 4.858, indikerer en forholdsvis symmetrisk fordeling. Figur \ref{fig:HML-tids} viser et plot over tidsserien, Figur \ref{fig:HML-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:HML-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1378,7 +1407,7 @@ Den første af de to \emph{Fama-French} faktorer. Månedlige værdier er fra \ci
 
 }
 
-\caption{Autokorrelation af log merafkastet af virksomhedsobligationer.}\label{fig:HML-AK}
+\caption{Autokorrelation af High Minus Low.}\label{fig:HML-AK}
 \end{figure}
 
 \begin{figure}[htbp!]
@@ -1387,13 +1416,13 @@ Den første af de to \emph{Fama-French} faktorer. Månedlige værdier er fra \ci
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:HML-HIST}
+\caption{Autokorrelation af High Minus Low.}\label{fig:HML-HIST}
 \end{figure}
 
 \hypertarget{datasmb}{%
 \subsection{\texorpdfstring{Small Minus Big -- \(x_t^{\text{smb}}\)}{Small Minus Big -- x\_t\^{}\{\textbackslash text\{smb\}\}}}\label{datasmb}}
 
-Den anden \emph{Fama-French} faktor. Månedlige værdier er fra \citep{CRSPakt} og hentet gennem \citep{French2020}, det er herefter omdannet til kvartalsvise værdier via et kvartalsvist rullende tre-måneders gennemsnit. Selve faktoren er baseret på de samme porteføljer som beskrevet i ovenstående Sektion \ref{datahml}. Selve faktoren beregnes som forskellen mellem de ligevægtede gennemsnitlige afkast af de små porteføljer og de store porteføljer. En positiv \emph{Small Minus Big} faktor er også kendt som \emph{Small Firm Effect}, og medfører, at små virksomheder er mere efficiente end store virksomheder på lang sigt, \citep{French1993}. Det første og andet moment er hhv. 0.168 og 1.717. En skævhed på 0.125 og kurtosis på 3.025, indikerer en meget symmetrisk fordeling. Figur \ref{fig:SMB-tids} viser et plot over tidsserien.
+Den anden \emph{Fama-French} faktor. Månedlige værdier er fra \citep{CRSPakt} og hentet gennem \citep{French2020}, det er herefter omdannet til kvartalsvise værdier via et kvartalsvist rullende tre-måneders gennemsnit. Selve faktoren er baseret på de samme porteføljer som beskrevet i ovenstående Sektion \ref{datahml}. Selve faktoren beregnes som forskellen mellem de ligevægtede gennemsnitlige afkast af de små porteføljer og de store porteføljer. En positiv \emph{Small Minus Big} faktor er også kendt som \emph{Small Firm Effect}, og medfører, at små virksomheder er mere efficiente end store virksomheder på lang sigt, \citep{French1993}. Det første og andet moment er hhv. 0.168 og 1.717. En skævhed på 0.125 og kurtosis på 3.025, indikerer en meget symmetrisk fordeling. Figur \ref{fig:SMB-tids} viser et plot over tidsserien, Figur \ref{fig:SMB-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:SMB-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1410,7 +1439,7 @@ Den anden \emph{Fama-French} faktor. Månedlige værdier er fra \citep{CRSPakt} 
 
 }
 
-\caption{Autokorrelation af log merafkastet af virksomhedsobligationer.}\label{fig:SMB-AK}
+\caption{Autokorrelation af Small Minus Big.}\label{fig:SMB-AK}
 \end{figure}
 
 \begin{figure}[htbp!]
@@ -1419,13 +1448,13 @@ Den anden \emph{Fama-French} faktor. Månedlige værdier er fra \citep{CRSPakt} 
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:SMB-HIST}
+\caption{Autokorrelation af Small Minus Big.}\label{fig:SMB-HIST}
 \end{figure}
 
 \hypertarget{nominel-rente-x_ttextb}{%
 \subsection{\texorpdfstring{Nominel rente -- \(x_t^{\text{b}}\)}{Nominel rente -- x\_t\^{}\{\textbackslash text\{b\}\}}}\label{nominel-rente-x_ttextb}}
 
-Det kvartalsvise log brutto afkast på den amerikanske 90-dages \emph{T-Bill} benyttes som en proxy for den nominelle rente. Ved at inkludere både brutto og netto log renten, inkorporeres inflation. Eftersom log inflation er forskellen mellem log brutto renten og log netto renten. Data er fra \citep{CRSPt90} og hentet gennem \citep{WRDSt90}. Den justerede middelværdi estimeres til 1.173\(\%\). Volatiliteten estimeres til 0.837\(\%\). Tredje og fjerde moment estimeres til hhv. 0.903 og 4.313. Figur \ref{fig:B-tids} viser et plot over tidsserien.
+Det kvartalsvise log brutto afkast på den amerikanske 90-dages \emph{T-Bill} benyttes som en proxy for den nominelle rente. Ved at inkludere både brutto og netto log renten, inkorporeres inflation. Eftersom log inflation er forskellen mellem log brutto renten og log netto renten. Data er fra \citep{CRSPt90} og hentet gennem \citep{WRDSt90}. Den justerede middelværdi estimeres til 1.173\(\%\). Volatiliteten estimeres til 0.837\(\%\). Tredje og fjerde moment estimeres til hhv. 0.903 og 4.313. Figur \ref{fig:B-tids} viser et plot over tidsserien, Figur \ref{fig:B-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:B-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1442,7 +1471,7 @@ Det kvartalsvise log brutto afkast på den amerikanske 90-dages \emph{T-Bill} be
 
 }
 
-\caption{Autokorrelation af log merafkastet af virksomhedsobligationer.}\label{fig:B-AK}
+\caption{Autokorrelation af log brutto afkastet på det risikofrie aktiv.}\label{fig:B-AK}
 \end{figure}
 
 \begin{figure}[htbp!]
@@ -1451,7 +1480,7 @@ Det kvartalsvise log brutto afkast på den amerikanske 90-dages \emph{T-Bill} be
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:B-HIST}
+\caption{Autokorrelation af log brutto afkastet på det risikofrie aktiv.}\label{fig:B-HIST}
 \end{figure}
 
 \hypertarget{term-spread-x_ttextts}{%
@@ -1460,7 +1489,7 @@ Det kvartalsvise log brutto afkast på den amerikanske 90-dages \emph{T-Bill} be
 For at beregne \emph{Term Spread} (rentespændet for den lange rente), benyttes den amerikanske \(10\)-årige effektive rente med konstant løbetid samt den 90-dages \emph{T-Bill} \emph{Secondary Market Rate}. Kvartalsvise data er hentet fra \citep{FRED102020} og \citep{FRED902020}, derudover er data ikke blevet sæsonjusteret. Spændet beregnes da som
 \[x_t^{\text{ts}}=Y_t^{10}-Y_t^{90},\]
 
-hvor \(Y_t^{10}\) og \(Y_t^{90}\) er de to effektive renter. Dette følger metoden fra \citep{Campbell1991}, som også argumenterer for, at ethvert rentespænd for renter med løbetider mellem \(1\) måned og \(10\) år, kan prædiktere rentestrukturen. Middelværdien for det lange rentespænd estimeres til 1.469\(\%\). Volatiliteten estimeres til 1.186\(\%\). Fordelingen er forholdsvis symmetrisk med skævhed og kurtosis på hhv. -0.231 og 3.033. Figur \ref{fig:TS-tids} viser et plot over tidsserien.
+hvor \(Y_t^{10}\) og \(Y_t^{90}\) er de to effektive renter. Dette følger metoden fra \citep{Campbell1991}, som også argumenterer for, at ethvert rentespænd for renter med løbetider mellem \(1\) måned og \(10\) år, kan prædiktere rentestrukturen. Middelværdien for det lange rentespænd estimeres til 1.469\(\%\). Volatiliteten estimeres til 1.186\(\%\). Fordelingen er forholdsvis symmetrisk med skævhed og kurtosis på hhv. -0.231 og 3.033. Figur \ref{fig:TS-tids} viser et plot over tidsserien, Figur \ref{fig:TS-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:TS-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1477,7 +1506,7 @@ hvor \(Y_t^{10}\) og \(Y_t^{90}\) er de to effektive renter. Dette følger metod
 
 }
 
-\caption{Autokorrelation af log merafkastet af virksomhedsobligationer.}\label{fig:TS-AK}
+\caption{Autokorrelation af Term Spread.}\label{fig:TS-AK}
 \end{figure}
 
 \begin{figure}[htbp!]
@@ -1486,7 +1515,7 @@ hvor \(Y_t^{10}\) og \(Y_t^{90}\) er de to effektive renter. Dette følger metod
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:TS-HIST}
+\caption{Autokorrelation af Term Spread.}\label{fig:TS-HIST}
 \end{figure}
 
 \hypertarget{yield-spread-x_ttextys}{%
@@ -1495,7 +1524,7 @@ hvor \(Y_t^{10}\) og \(Y_t^{90}\) er de to effektive renter. Dette følger metod
 Datagrundlaget for \emph{Yield Spread} (rentespændet for den korte rente) er den amerikanske \(10\)-årige effektive rente med konstant løbetid samt den 90-dages \emph{T-Bill} \emph{Secondary Market Rate}. Kvartalsvise data er hentet fra \citep{FRED52020} og \citep{FRED902020}, og er ikke sæsonjusteret. Spændet beregnes da som
 \[x_t^{\text{ts}}=Y_t^{5}-Y_t^{90},\]
 
-hvor \(Y_t^{5}\) og \(Y_t^{90}\) er de to effektive renter. Middelværdien, 1.166\(\%\), er som forventet en anelse mindre end middelværdien for \emph{Term Spread}. Det samme er volatiliteten, 0.927\(\%\). Fordelingen er en anelse leptokurtisk med kurtosis på 3.828. Skævheden er -0.153. Figur \ref{fig:YS-tids} viser et plot over tidsserien.
+hvor \(Y_t^{5}\) og \(Y_t^{90}\) er de to effektive renter. Middelværdien, 1.166\(\%\), er som forventet en anelse mindre end middelværdien for \emph{Term Spread}. Det samme er volatiliteten, 0.927\(\%\). Fordelingen er en anelse leptokurtisk med kurtosis på 3.828. Skævheden er -0.153. Figur \ref{fig:YS-tids} viser et plot over tidsserien, Figur \ref{fig:YS-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:YS-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1512,7 +1541,7 @@ hvor \(Y_t^{5}\) og \(Y_t^{90}\) er de to effektive renter. Middelværdien, 1.16
 
 }
 
-\caption{Autokorrelation af log merafkastet af virksomhedsobligationer.}\label{fig:YS-AK}
+\caption{Autokorrelation af Yield Spread.}\label{fig:YS-AK}
 \end{figure}
 
 \begin{figure}[htbp!]
@@ -1521,7 +1550,7 @@ hvor \(Y_t^{5}\) og \(Y_t^{90}\) er de to effektive renter. Middelværdien, 1.16
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:YS-HIST}
+\caption{Autokorrelation af Yield Spread.}\label{fig:YS-HIST}
 \end{figure}
 
 \hypertarget{credit-spread-x_ttextcs}{%
@@ -1530,7 +1559,7 @@ hvor \(Y_t^{5}\) og \(Y_t^{90}\) er de to effektive renter. Middelværdien, 1.16
 Beregningen til \emph{Credit Spread} (kreditspændet) benytter den 90-dages \emph{T-Bill} \emph{Secondary Market Rate} samt den effektive rente fra \emph{Moody's Seasoned BAA Corporate Bond}, og baserer sig på instrumenter med løbetider på \(20\) år eller mere. Data er hentet fra hhv. \citep{FRED902020} samt \citep{Goyal2007}. Metoden følger fra \citep{Keim1986}, og kreditspændet beregnes da som
 \[x_t^{\text{cs}}=Y_t^{\text{BAA}}-Y_t^{90},\]
 
-hvor \(Y_t^{\text{BAA}}\) og \(Y_t^{90}\) er de to effektive renter. Af de fem rentrestruktursvariable ses det, at kreditspændet har den højeste middelværdi på 3.398\(\%\), og en standardafvigelse på 1.732\(\%\). Tredje og fjerde moment estimeres til hhv. 0.159 og 2.33. Figur \ref{fig:CS-tids} viser et plot over tidsserien.
+hvor \(Y_t^{\text{BAA}}\) og \(Y_t^{90}\) er de to effektive renter. Af de fem rentrestruktursvariable ses det, at kreditspændet har den højeste middelværdi på 3.398\(\%\), og en standardafvigelse på 1.732\(\%\). Tredje og fjerde moment estimeres til hhv. 0.159 og 2.33. Figur \ref{fig:CS-tids} viser et plot over tidsserien, Figur \ref{fig:CS-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:CS-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1547,7 +1576,7 @@ hvor \(Y_t^{\text{BAA}}\) og \(Y_t^{90}\) er de to effektive renter. Af de fem r
 
 }
 
-\caption{Autokorrelation af log merafkastet af virksomhedsobligationer.}\label{fig:CS-AK}
+\caption{Autokorrelation af Credit Spread.}\label{fig:CS-AK}
 \end{figure}
 
 \begin{figure}[htbp!]
@@ -1556,7 +1585,7 @@ hvor \(Y_t^{\text{BAA}}\) og \(Y_t^{90}\) er de to effektive renter. Af de fem r
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:CS-HIST}
+\caption{Autokorrelation af Credit Spread.}\label{fig:CS-HIST}
 \end{figure}
 
 \hypertarget{default-spread-x_ttextds}{%
@@ -1565,7 +1594,7 @@ hvor \(Y_t^{\text{BAA}}\) og \(Y_t^{90}\) er de to effektive renter. Af de fem r
 For at beregne \emph{Default Spread} (konkursspændet) benyttes den effektive rente fra \emph{Moody's Seasoned AAA Corporate Bond} samt den effektive rente fra \emph{Moody's Seasoned BAA Corporate Bond}, og baserer sig begge på instrumenter med løbetider på \(20\) år eller mere. Data er hentet via \citep{Goyal2007}. Konkursspændet beregnes da som
 \[x_t^{\text{ds}}=Y_t^{\text{BAA}}-Y_t^{\text{AAA}},\]
 
-hvor \(Y_t^{\text{BAA}}\) og \(Y_t^{\text{AAA}}\) er de to effektive renter. Til forskel for kreditspændet har konkursspændet den laveste middelværdi, 0.987\(\%\), også på tværs af de andre klasser af prædiktionsvariable. Standardafvigelsen er 0.439\(\%\). Af rentestruktursvariablene har konkursspændet også den hhv. mest ekstreme skævhed og kurtosis. Disse er hhv. 1.842 og 8.156, hvilket indebærer en højreskæv fordeling med tykke haler. Figur \ref{fig:DS-tids} viser et plot over tidsserien.
+hvor \(Y_t^{\text{BAA}}\) og \(Y_t^{\text{AAA}}\) er de to effektive renter. Til forskel for kreditspændet har konkursspændet den laveste middelværdi, 0.987\(\%\), også på tværs af de andre klasser af prædiktionsvariable. Standardafvigelsen er 0.439\(\%\). Af rentestruktursvariablene har konkursspændet også den hhv. mest ekstreme skævhed og kurtosis. Disse er hhv. 1.842 og 8.156, hvilket indebærer en højreskæv fordeling med tykke haler. Figur \ref{fig:DS-tids} viser et plot over tidsserien, Figur \ref{fig:DS-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:DS-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1582,7 +1611,7 @@ hvor \(Y_t^{\text{BAA}}\) og \(Y_t^{\text{AAA}}\) er de to effektive renter. Til
 
 }
 
-\caption{Autokorrelation af log merafkastet af virksomhedsobligationer.}\label{fig:DS-AK}
+\caption{Autokorrelation af Default Spread.}\label{fig:DS-AK}
 \end{figure}
 
 \begin{figure}[htbp!]
@@ -1591,13 +1620,13 @@ hvor \(Y_t^{\text{BAA}}\) og \(Y_t^{\text{AAA}}\) er de to effektive renter. Til
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:DS-HIST}
+\caption{Autokorrelation af Default Spread.}\label{fig:DS-HIST}
 \end{figure}
 
 \hypertarget{federal-funds-rate-x_ttextfr}{%
 \subsection{\texorpdfstring{Federal Funds Rate -- \(x_t^{\text{fr}}\)}{Federal Funds Rate -- x\_t\^{}\{\textbackslash text\{fr\}\}}}\label{federal-funds-rate-x_ttextfr}}
 
-I U.S.A. er \emph{Federal Funds Rate}, renten som private finansinstitutioner tager for at låne uden sikkerhed, sædvanligvis over natten, af finansinstitutions reserver i \emph{Federal Reserve Bank}. Data er hentet fra \citep{FREDF2020}. De kvartalsvis observationer er baseret på et gennemsnit af daglige observationer. Middelværdien er på 4.814\(\%\), og standardafvigelsen er på 3.606\(\%\). Tredje og fjerde moment estimeres til hhv. 1.053 og 4.625. Figur \ref{fig:FR-tids} viser et plot over tidsserien.
+I U.S.A. er \emph{Federal Funds Rate}, renten som private finansinstitutioner tager for at låne uden sikkerhed, sædvanligvis over natten, af finansinstitutions reserver i \emph{Federal Reserve Bank}. Data er hentet fra \citep{FREDF2020}. De kvartalsvis observationer er baseret på et gennemsnit af daglige observationer. Middelværdien er på 4.814\(\%\), og standardafvigelsen er på 3.606\(\%\). Tredje og fjerde moment estimeres til hhv. 1.053 og 4.625. Figur \ref{fig:FR-tids} viser et plot over tidsserien, Figur \ref{fig:FR-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:FR-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[htbp!]
 
@@ -1614,7 +1643,7 @@ I U.S.A. er \emph{Federal Funds Rate}, renten som private finansinstitutioner ta
 
 }
 
-\caption{Autokorrelation af log merafkastet af virksomhedsobligationer.}\label{fig:FR-AK}
+\caption{Autokorrelation af Federal Funds Rate.}\label{fig:FR-AK}
 \end{figure}
 
 \begin{figure}[htbp!]
@@ -1623,7 +1652,7 @@ I U.S.A. er \emph{Federal Funds Rate}, renten som private finansinstitutioner ta
 
 }
 
-\caption{Autokorrelation af log netto renten.}\label{fig:FR-HIST}
+\caption{Autokorrelation af Federal Funds Rate.}\label{fig:FR-HIST}
 \end{figure}
 
 \begin{landscape}
@@ -1727,14 +1756,10 @@ $x_t^{\text{fr}}$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 1.00\\
 \end{table}
 \end{landscape}
 
-\hypertarget{ops}{%
-\section{Opsummering}\label{ops}}
-
-\hypertarget{pruxe6diktabilitet}{%
-\chapter{Prædiktabilitet}\label{pruxe6diktabilitet}}
-
 \hypertarget{stationaritet}{%
 \section{Stationaritet}\label{stationaritet}}
+
+Som nævnt tidligere er stationaritet af de anvendte tidsserier et bærende element for validiteten af den endelige VAR(1)-model. I denne sektion vil en række testprocedure blive udført, for at kontrollere for stationaritet, på en mere formel måde end visuel inspektion. Tre forskellige test vil tilsammen skabe et grundlag for at afgøre om en eller flere af alle tilstandsvariablene skal ekskluderes fra den endelige VAR(1)-model. Disse er hhv. \emph{Augmented Dickey-Fuller} test, \emph{Phillips-Perron} test samt \emph{Kwiatkowski-Phillips-Schmidt-Shin}.
 
 
 
@@ -1744,12 +1769,12 @@ $x_t^{\text{fr}}$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 1.00\\
 \begin{landscape}
 \begin{table}[!h]
 
-\caption{\label{tab:STAT}Augmented Dickey Fuller.}
+\caption{\label{tab:STAT}Augmented Dickey-Fuller.}
 \centering
 \begin{threeparttable}
 \begin{tabular}[t]{lrrrrrrrrrr}
 \toprule
-\multicolumn{1}{c}{ } & \multicolumn{2}{c}{$\delta=1$} & \multicolumn{2}{c}{$\delta=2$} & \multicolumn{2}{c}{$\delta=3$} & \multicolumn{2}{c}{$\delta=4$} & \multicolumn{2}{c}{$\delta=5$} \\
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{$\delta=1$} & \multicolumn{2}{c}{$\delta=2$} & \multicolumn{2}{c}{$\delta=3$} & \multicolumn{2}{c}{$\delta=4$} & \multicolumn{2}{c}{$\delta^*=5$} \\
 \cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5} \cmidrule(l{3pt}r{3pt}){6-7} \cmidrule(l{3pt}r{3pt}){8-9} \cmidrule(l{3pt}r{3pt}){10-11}
   & Teststørrelse & $p$-værdi & Teststørrelse & $p$-værdi & Teststørrelse & $p$-værdi & Teststørrelse & $p$-værdi & Teststørrelse & $p$-værdi\\
 \midrule
@@ -1773,49 +1798,11 @@ $x_t^{\text{fr}}$ & -2.734 & 0.267 & -2.408 & 0.404 & -2.844 & 0.221 & -2.592 & 
 \end{tabular}
 \begin{tablenotes}
 \item \textit{Note: } 
-\item \textit{Denne tabel rapporterer Augmented Dickey Fuller teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, \citep{Dickey1979}. Testen er udført for forskellige lags, samt et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af \citep{Schwert1989} -- hvor $T=259$. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}
+\item \textit{Denne tabel rapporterer Augmented Dickey-Fuller teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, \citep{Dickey1979}. Testen er udført for forskellige lags, samt et lag, $\delta^*$, fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af \citep{Schwert1989} -- hvor $T=259$. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 \end{landscape}
-
-\begin{table}[!h]
-
-\caption{\label{tab:STAT-KPSS}Kwiatkowski-Phillips-Schmidt-Shin Test.}
-\centering
-\begin{threeparttable}
-\begin{tabular}[t]{lrrrr}
-\toprule
-\multicolumn{1}{c}{ } & \multicolumn{4}{c}{$l=5$} \\
-\cmidrule(l{3pt}r{3pt}){2-5}
-\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Level} & \multicolumn{2}{c}{Trend} \\
-\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5}
-  & Teststørrelse (LM) & $p$-værdi & Teststørrelse (LM) & $p$-værdi\\
-\midrule
-\rowcolor{gray!6}  $r_t^{\text{rf}}$ & 0.500 & 0.042 & 0.334 & 0.010\\
-$rx_t^{\text{a}}$ & 0.059 & 0.100 & 0.060 & 0.100\\
-\rowcolor{gray!6}  $rx_t^{\text{s}}$ & 0.469 & 0.049 & 0.039 & 0.100\\
-$rx_t^{\text{v}}$ & 0.581 & 0.024 & 0.037 & 0.100\\
-\rowcolor{gray!6}  $x_t^{\text{dp}}$ & 2.448 & 0.010 & 0.397 & 0.010\\
-$x_t^{\text{pe}}$ & 1.526 & 0.010 & 0.326 & 0.010\\
-\rowcolor{gray!6}  $x_t^{\text{bm}}$ & 2.102 & 0.010 & 0.501 & 0.010\\
-$x_t^{\text{avar}}$ & 0.626 & 0.020 & 0.046 & 0.100\\
-\rowcolor{gray!6}  $x_t^{\text{hml}}$ & 0.185 & 0.100 & 0.052 & 0.100\\
-$x_t^{\text{smb}}$ & 0.063 & 0.100 & 0.051 & 0.100\\
-\rowcolor{gray!6}  $x_t^{\text{b}}$ & 1.191 & 0.010 & 0.794 & 0.010\\
-$x_t^{\text{ts}}$ & 0.753 & 0.010 & 0.071 & 0.100\\
-\rowcolor{gray!6}  $x_t^{\text{ys}}$ & 0.331 & 0.100 & 0.132 & 0.075\\
-$x_t^{\text{cs}}$ & 1.671 & 0.010 & 0.079 & 0.100\\
-\rowcolor{gray!6}  $x_t^{\text{ds}}$ & 0.451 & 0.055 & 0.297 & 0.010\\
-$x_t^{\text{fr}}$ & 1.155 & 0.010 & 0.754 & 0.010\\
-\bottomrule
-\end{tabular}
-\begin{tablenotes}
-\item \textit{Note: } 
-\item \textit{Denne tabel rapporterer Kwiatkowski-Phillips-Schmidt-Shin teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, \citep{Kwiatkowski1992}. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Testen er udført for et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af \citep{Schwert1989} -- hvor $T=259$.}
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
 
 \begin{table}[!h]
 
@@ -1855,8 +1842,65 @@ $x_t^{\text{fr}}$ & -14.944 & 0.272 & -2.895 & 0.199\\
 \end{threeparttable}
 \end{table}
 
-\hypertarget{univariat}{%
-\section{Univariat}\label{univariat}}
+\begin{table}[!h]
+
+\caption{\label{tab:STAT-KPSS}Kwiatkowski-Phillips-Schmidt-Shin Test.}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{lrrrr}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{4}{c}{$l=5$} \\
+\cmidrule(l{3pt}r{3pt}){2-5}
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Level} & \multicolumn{2}{c}{Trend} \\
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5}
+  & Teststørrelse (LM) & $p$-værdi & Teststørrelse (LM) & $p$-værdi\\
+\midrule
+\rowcolor{gray!6}  $r_t^{\text{rf}}$ & 0.500 & 0.042 & 0.334 & 0.010\\
+$rx_t^{\text{a}}$ & 0.059 & 0.100 & 0.060 & 0.100\\
+\rowcolor{gray!6}  $rx_t^{\text{s}}$ & 0.469 & 0.049 & 0.039 & 0.100\\
+$rx_t^{\text{v}}$ & 0.581 & 0.024 & 0.037 & 0.100\\
+\rowcolor{gray!6}  $x_t^{\text{dp}}$ & 2.448 & 0.010 & 0.397 & 0.010\\
+$x_t^{\text{pe}}$ & 1.526 & 0.010 & 0.326 & 0.010\\
+\rowcolor{gray!6}  $x_t^{\text{bm}}$ & 2.102 & 0.010 & 0.501 & 0.010\\
+$x_t^{\text{avar}}$ & 0.626 & 0.020 & 0.046 & 0.100\\
+\rowcolor{gray!6}  $x_t^{\text{hml}}$ & 0.185 & 0.100 & 0.052 & 0.100\\
+$x_t^{\text{smb}}$ & 0.063 & 0.100 & 0.051 & 0.100\\
+\rowcolor{gray!6}  $x_t^{\text{b}}$ & 1.191 & 0.010 & 0.794 & 0.010\\
+$x_t^{\text{ts}}$ & 0.753 & 0.010 & 0.071 & 0.100\\
+\rowcolor{gray!6}  $x_t^{\text{ys}}$ & 0.331 & 0.100 & 0.132 & 0.075\\
+$x_t^{\text{cs}}$ & 1.671 & 0.010 & 0.079 & 0.100\\
+\rowcolor{gray!6}  $x_t^{\text{ds}}$ & 0.451 & 0.055 & 0.297 & 0.010\\
+$x_t^{\text{fr}}$ & 1.155 & 0.010 & 0.754 & 0.010\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item \textit{Note: } 
+\item \textit{Denne tabel rapporterer Kwiatkowski-Phillips-Schmidt-Shin teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, \citep{Kwiatkowski1992}. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Testen er udført for et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af \citep{Schwert1989} -- hvor $T=259$.}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\hypertarget{ops}{%
+\section{Opsummering}\label{ops}}
+
+\hypertarget{pruxe6diktabilitet}{%
+\chapter{Prædiktabilitet}\label{pruxe6diktabilitet}}
+
+Dette kapitel har til formål at teste for prædiktabilitet af afkastene i de introducerede aktivklasser fra Sektion \ref{aktivklasser}, ved benyttelse af de introducerede mulige prædiktionsvariable fra Sektion \ref{pvariable}. Prædiktabiliteten bliver testet i både et univariat og et multipelt øjemed. Dette tillader at teste for robusthed på tværs af prædiktionsvariablene og drage inferens af den mulige linearitet imellem merafkastene på aktivklasserne og de forklarende variable. Derudover vil testene giver et fingerpeg om graden af variationsforklaring, som de individuelle prædiktionsvariable måtte have, ift. responsvariablene. Disse regressioner vil have til formål at bidrage til delmængden af variable, som senere skal indgå i variabeludvælgelsen for VAR(1)-modellen. Det primære fokus vil være på de fundamentale variable, som før har vist særlig prædiktabilitets evner. Sekundært vil koefficienter, fortegn samt signifikans for hver individuel variabel blive beskrevet.
+
+Kapitlets opbygning er som følger: Sektion \ref{unireg} beskriver og diskuterer de univariate regressioner, Sektion \ref{multreg} beskriver og diskuterer de multiple regressioner sidst vil Sektion \ref{opsreg} en opsummering af kapitlets fund.
+
+\hypertarget{unireg}{%
+\section{Univariate regressioner}\label{unireg}}
+
+Denne sektion rapporterer de univariate regressioner af responsvariable fra Sektion \ref{aktivklasser} på sættet af prædiktionsvariable fra Sektion \ref{pvariable}. Afskæringer bliver ikke rapporteret, eftersom det kun er den mulige prædiktabilitets evne, som har interesse for analysen. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. \(t\)-værdierne og \(p\)-værdierne er ligedes dannet på baggrund af de justerede standardfejl. Signifikansniveauet fastholdes på niveauet \(\alpha=0.05\).
+
+Den univariate analyse består af følgende regressioner
+\[rx_{t+1}^j=\beta_{0}^i+\beta_{1}^ix_{t}^i+\varepsilon_{t+1}^i,\]
+
+hvor \(j\) er notationen for de \(3\) aktivklasser bestående af merafkast og \(i\) er notationen for de \(12\) prædiktionsvariable. Den statistiske signifikans for hver individuel koefficient vil kort blive vurderet, da dette vil give et fingerpeg om den mulige styrke, for hver forklarende variabel ift. prædiktion af fremtidige afkast. Mest opmærksomhed vil dog stadig være på aktivklassernes fundamentale relation til visse variable.
+
+Tabel \ref{tab:UNI-ak} rapporterer de univariate regressions resultater af log merafkastet på aktier, \(rx_{t+1}^a\), overfor den introducerede delmængde af mulige prædiktionsvariable. Det kendte nøgletal \emph{Dividend-Price Ratio} er ikke signifikant for hverken et \(5\%\) eller \(10\%\) signifikansniveau, med en tilhørende \(t\)-størrelse på 1.606. Af de resterende finansielle variable er det kun \emph{Price-Earnings Ratio}, \emph{High Minus Low} og \emph{Small Minus Big} som prædiktrer merafkastet på aktier negativt. Af disse er det kun \emph{Small Minus Big} som påviser signifikan, med en \(t\)-størrelse på -2.671. Fortegnene for de finansielle variable er ækvivalente med tidligere i fund i litteraturen, eksempelvis \citep{Camp1987} og \citep{CampVicCha2003}. De andre signifikante variable er \emph{Term-Spread} og \emph{Federal Funds Rate} med \(t\)-størrelser på hhv. 2.152 og -2.445. På et \(10\%\) signifikansniveau vil også \emph{Yield Spread} være statistisk signifikant, og kunne derfor også være en mulig variabel til prædiktion af merafkastet på aktier. Størstedelen af rentestrukturs variablene prædikterer merafkastet positivt, med undtagelse af den nominelle rente og \emph{Default Spread}. Hvilket for rentespændende er ensbetydende med, at når spændet mellem langsigtede instrumenter og kortsigtede instrumenter stiger, vil en øgning i merafkastet på aktier, \(rx_{t+1}^s\), ligeledes ske i den næstkommende periode.
 
 
 
@@ -1892,6 +1936,8 @@ $x_t^{\text{fr}}$ & \textbf{-0.386} & -0.697 & -0.075 & 0.158 & -2.445 & 0.015 &
 \end{threeparttable}
 \end{table}
 
+Ligedes rapporterer Tabel \ref{tab:UNI-s} de univariate regressions resultater af log merafkastet på statsobligationer, \(rx_{t+1}^s\), overfor den introducerede delmængde af mulige prædiktionsvariable. Mest overraskende er, at \emph{Yield Spread} ikke er signifikant, som den eneste af de fire rentespænds variablene. Til gengæld prædikterer \emph{Yield Spread} merafkastet på statsobligationer positivt, hvilket også følger tidligere litteratur, \citep{Fama1987}. Dette er også tilfældet for de resterende rentespænd. Af alle rentestruktursvariablene er det kun \emph{Term Spread}, \emph{Credit Spread} og \emph{Default Spread} som er signifikante for denne stikprøve, med \(t\)-størrelser på hhv. 2.466, 4.297 og 2.858. En stigning i den nuværende \emph{Term Spread} kommer eksempelvis enten fra en forøgelse af den lange effektive rente, \(Y_t^10\), eller et fald i den korte effektive rente, \(Y_t^90\), eller en kombination af begge vil lede til en stigning i det fremtidige log merafkast på statsobligationer. Ift. de finansielle variable er det kun \emph{Small Minus Big}, som har statistisk styrke i den univariate opsætning, med en \(t\)-størrelse på -2.702. \emph{Small Minus Big} prædikterer merafkastet negativt, hvilket \emph{Dividend-Price Ratio}, \emph{Book-to-Market Ratio} ligeledes gør. Den makroøkonomiske variabel \emph{Federal Funds Rate} er signifikant på et \(10\%\) signifikansniveau, og prædikterer merafkastet negativt.
+
 \begin{table}[!h]
 
 \caption{\label{tab:UNI-s}Univariat prædiktabilitet af merafkastet på statsobligationer.}
@@ -1924,6 +1970,8 @@ $x_t^{\text{fr}}$ & -0.139 & -0.280 & 0.003 & 0.072 & -1.934 & 0.054 & 0.017\\
 \end{threeparttable}
 \end{table}
 
+De statistiske resultater for de univariate regressioner på det fremtidige log merafkast på virksomhedsobligationer, \(rx_{t+1}^v\), er rapporteret i Tabel \ref{tab:UNI-v}. Igen ses, at alle rentespænd prædikterer merafkastet positivt, og alle er signifikante på \(5\%\)-niveauet, specielt \emph{Credit Spread} med en \(t\)-størrelse på 5.063. Den samme inferens for \(rx_{t+1}^s\) kan blive udtænkt for \(rx_{t+1}^v\). Alle de finansielle variable, med undtagelse af \emph{Small Minus Big}, har ikke styrke til at forklare variationen i det fremtidige log merafkast på virksomhedsobligationer. Den makroøkonomiske variabel \emph{Federal Funds Rate} prædikterer merafkastet negativt, som også var tilfældet for statsobligations merafkastet, men denne gang er koefficienten signifikant med en \(t\)-størrelse på -2.739.
+
 \begin{table}[!h]
 
 \caption{\label{tab:UNI-v}Univariat prædiktabilitet af merafkastet på virksomhedsobligationer}
@@ -1954,6 +2002,14 @@ $x_t^{\text{fr}}$ & \textbf{-0.282} & -0.484 & -0.079 & 0.103 & -2.739 & 0.007 &
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+
+De ovenstående præsenterede univariate regressioner kaster tvivl på validiteten af resultater i artikler, som taler for et bredt sæt af prædiktionsvariable. Derudover indikerer de univariate regressioner, at risikoen for stikprøveafhængighed også skal medtages i konstruktionen af den endelige VAR(1)-model, hvilket også bliver understreget af \citep{Goyal2007}. Samtidig kan disse simple regressioner ikke stå alene om en endelig konklusion, og derfor foretages en mere kompleks multipel regressions analyse i næste sektion, som foreslået af \citep{Goyal2007}.
+
+\hypertarget{multreg}{%
+\section{Multiple regressioner}\label{multreg}}
+
+\hypertarget{opsreg}{%
+\section{Opsummering}\label{opsreg}}
 
 \hypertarget{underliggende-model}{%
 \chapter{Underliggende model}\label{underliggende-model}}
@@ -1987,8 +2043,9 @@ Hver tidsserie er baseret på \(200\) observationer, svarende til en 50-årig pe
 
 \begin{table}[!h]
 
-\caption{\label{tab:true}Gengivelse af de sande afkast.}
+\caption{\label{tab:true}Gengivelse af de sande momenter.}
 \centering
+\begin{threeparttable}
 \begin{tabular}[t]{lrrrrr}
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{1}{c}{Forventet afkast} & \multicolumn{1}{c}{Volatilitet} & \multicolumn{3}{c}{Korrelationer} \\
@@ -1998,12 +2055,20 @@ Aktiv 2 & 3.94 & 12.899 & 0.5 & 1.0 & 0.5\\
 \rowcolor{gray!6}  Aktiv 3 & 1.28 & 8.660 & 0.5 & 0.5 & 1.0\\
 \bottomrule
 \end{tabular}
+\begin{tablenotes}
+\item \textit{Note: } 
+\item \textit{Denne tabel rapporterer det sande: forventede afkast og volatilitet for de tre fiktive aktiver samt de sande korrelationer mellem aktiverne. Momenterne er opgjort kvartalsvist.}
+\end{tablenotes}
+\end{threeparttable}
 \end{table}
+
+
 
 \begin{table}[!h]
 
 \caption{\label{tab:sim1}Gengivelse af første simulation af afkast.}
 \centering
+\begin{threeparttable}
 \begin{tabular}[t]{lrrrrrr}
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{1}{c}{Forventet afkast} & \multicolumn{1}{c}{Volatilitet} & \multicolumn{1}{c}{Relativ fejl} & \multicolumn{3}{c}{Korrelationer} \\
@@ -2013,12 +2078,18 @@ Aktiv 2 & 4.931 & 12.640 & 0.355 & 0.524 & 1.000 & 0.488\\
 \rowcolor{gray!6}  Aktiv 3 & 1.112 & 8.503 & 1.059 & 0.487 & 0.488 & 1.000\\
 \bottomrule
 \end{tabular}
+\begin{tablenotes}
+\item \textit{Note: } 
+\item \textit{Denne tabel rapporterer det estimerede: forventede afkast og volatilitet for de tre fiktive aktiver samt de estimerede korrelationer mellem aktiverne, ved brug af tidsserien fra første simulation af afkast. De relative fejl for hver simulation er ligeledes rapporteret, \citep{Asmussen2007}. Momenterne er opgjort kvartalsvist.}
+\end{tablenotes}
+\end{threeparttable}
 \end{table}
 
 \begin{table}[!h]
 
 \caption{\label{tab:sim2}Gengivelse af anden simulation af afkast.}
 \centering
+\begin{threeparttable}
 \begin{tabular}[t]{lrrrrrr}
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{1}{c}{Forventet afkast} & \multicolumn{1}{c}{Volatilitet} & \multicolumn{1}{c}{Relativ fejl} & \multicolumn{3}{c}{Korrelationer} \\
@@ -2028,12 +2099,18 @@ Aktiv 2 & 2.200 & 12.442 & 0.784 & 0.489 & 1.000 & 0.453\\
 \rowcolor{gray!6}  Aktiv 3 & 0.777 & 9.198 & 1.641 & 0.459 & 0.453 & 1.000\\
 \bottomrule
 \end{tabular}
+\begin{tablenotes}
+\item \textit{Note: } 
+\item \textit{Denne tabel rapporterer det estimerede: forventede afkast og volatilitet for de tre fiktive aktiver samt de estimerede korrelationer mellem aktiverne, ved brug af tidsserien fra anden simulation af afkast. De relative fejl for hver simulation er ligeledes rapporteret, \citep{Asmussen2007}. Momenterne er opgjort kvartalsvist.}
+\end{tablenotes}
+\end{threeparttable}
 \end{table}
 
 \begin{table}[!h]
 
 \caption{\label{tab:sim3}Gengivelse af tredje simulation af afkast.}
 \centering
+\begin{threeparttable}
 \begin{tabular}[t]{lrrrrrr}
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{1}{c}{Forventet afkast} & \multicolumn{1}{c}{Volatilitet} & \multicolumn{1}{c}{Relativ fejl} & \multicolumn{3}{c}{Korrelationer} \\
@@ -2043,6 +2120,11 @@ Aktiv 2 & 4.374 & 13.878 & 0.440 & 0.479 & 1.000 & 0.519\\
 \rowcolor{gray!6}  Aktiv 3 & 0.901 & 9.266 & 1.426 & 0.483 & 0.519 & 1.000\\
 \bottomrule
 \end{tabular}
+\begin{tablenotes}
+\item \textit{Note: } 
+\item \textit{Denne tabel rapporterer det estimerede: forventede afkast og volatilitet for de tre fiktive aktiver samt de estimerede korrelationer mellem aktiverne, ved brug af tidsserien fra tredje simulation af afkast. De relative fejl for hver simulation er ligeledes rapporteret, \citep{Asmussen2007}. Momenterne er opgjort kvartalsvist.}
+\end{tablenotes}
+\end{threeparttable}
 \end{table}
 
 Disse tre sæt af estimerede parametre, baseret på de tre tidsserier, er blevet udvalgt til det følgende illustrative formål. Se Tabel \ref{tab:sim1}, Tabel \ref{tab:sim2} og Tabel \ref{tab:sim3} for en sammenligning ift. de sande parametre. De relative fejl for hver simulering er ligedes rapporteret, \citep{Asmussen2007}. Disse beregnes som
@@ -2064,6 +2146,7 @@ hvor \(w^*\) er den del af formuen som investoren skal investere i tangensportef
 
 \caption{\label{tab:sum-true}Gengivelse af de beregnede porteføljer ved brug af de sande afkast.}
 \centering
+\begin{threeparttable}
 \begin{tabular}[t]{lrrrrrrrr}
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{1}{c}{GMV} & \multicolumn{1}{c}{Tangens} & \multicolumn{3}{c}{CRRA} & \multicolumn{3}{c}{CARA} \\
@@ -2080,6 +2163,11 @@ Risikofri & 0.000 & 0.000 & -2.136 & 0.216 & 0.608 & -1.447 & 0.388 & 0.694\\
 \em{Estimeret volatilitet} & \em{} & \em{} & \em{} & \em{} & \em{} & \em{} & \em{} & \em{}\\
 \bottomrule
 \end{tabular}
+\begin{tablenotes}
+\item \textit{Note: } 
+\item \textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de sande momenter. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for et delmængde af risikoaversioner.}
+\end{tablenotes}
+\end{threeparttable}
 \end{table}
 
 \begin{table}[!h]
