@@ -153,6 +153,76 @@ FIT_V_TABLE <- data.frame(coef=sapply(FIT_V_OBL, coef)[2,],
                           p=unlist(lapply(1:length(FIT_V_OBL), function(x) coeftest(FIT_V_OBL[[x]], vcov. = NeweyWest(FIT_V_OBL[[x]]))[8])),
                           rsq=unlist(lapply(1:length(FIT_V_OBL), function(x) FIT_V_OBL_SUMMARY[[x]]$r.squared)))
 
+
+# MULTIPLE REGRESSION 
+
+data_mult_akt <- as.xts(merge(xts::lag.xts(data$AKT, -1, na.pad = FALSE), head(data, -1)))
+data_mult_akt <- subset(data_mult_akt, select = -AKT.1)
+
+data_mult_s <- as.xts(merge(xts::lag.xts(data$S_OBL, -1, na.pad = FALSE), head(data, -1)))
+data_mult_s <- subset(data_mult_s, select = -S_OBL.1)
+
+data_mult_v <- as.xts(merge(xts::lag.xts(data$V_OBL, -1, na.pad = FALSE), head(data, -1)))
+data_mult_v <- subset(data_mult_v, select = -V_OBL.1)
+
+# KITCHEN SINK
+fit_AKT <- lm(AKT ~ DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_mult_akt)
+
+test <- lm(AKT~NET_TB + S_OBL + V_OBL + TB + BM + T_SPREAD + FR, data = data_mult_akt)
+
+step_AKT_model <- step(fit_AKT, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=AKT ~ TB, upper=fit_AKT))
+
+summary(step_AKT_model)
+
+FIT_M_TABLE <- data.frame(coef=coef(fit_AKT),
+                          cf=data.frame(coefci(fit_AKT, vcov. = NeweyWest(fit_AKT))[,1],
+                                        coefci(fit_AKT, vcov. = NeweyWest(fit_AKT))[,2]),
+                          sd=sqrt(diag(NeweyWest(fit_AKT))),
+                          t=coeftest(fit_AKT, vcov. = NeweyWest(fit_AKT))[,3],
+                          p=coeftest(fit_AKT, vcov. = NeweyWest(fit_AKT))[,4])
+
+fit_S_OBL <- lm(S_OBL ~ DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_mult_s)
+
+step_S_OBL_model <- step(fit_S_OBL, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=S_OBL ~ TB, upper=fit_S_OBL))
+
+summary(step_S_OBL_model)
+
+FIT_M_S_TABLE <- data.frame(coef=coef(fit_S_OBL),
+                          cf=data.frame(coefci(fit_S_OBL, vcov. = NeweyWest(fit_S_OBL))[,1],
+                                        coefci(fit_S_OBL, vcov. = NeweyWest(fit_S_OBL))[,2]),
+                          sd=sqrt(diag(NeweyWest(fit_S_OBL))),
+                          t=coeftest(fit_S_OBL, vcov. = NeweyWest(fit_S_OBL))[,3],
+                          p=coeftest(fit_S_OBL, vcov. = NeweyWest(fit_S_OBL))[,4])
+
+fit_V_OBL <- lm(V_OBL ~ DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_mult_v)
+
+step_V_OBL_model <- step(fit_V_OBL, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=V_OBL ~ TB, upper=fit_V_OBL))
+
+summary(step_V_OBL_model)
+
+FIT_M_V_TABLE <- data.frame(coef=coef(fit_V_OBL),
+                            cf=data.frame(coefci(fit_V_OBL, vcov. = NeweyWest(fit_V_OBL))[,1],
+                                          coefci(fit_V_OBL, vcov. = NeweyWest(fit_V_OBL))[,2]),
+                            sd=sqrt(diag(NeweyWest(fit_V_OBL))),
+                            t=coeftest(fit_V_OBL, vcov. = NeweyWest(fit_V_OBL))[,3],
+                            p=coeftest(fit_V_OBL, vcov. = NeweyWest(fit_V_OBL))[,4])
+
+# m_fit <- lm(cbind(AKT, S_OBL, V_OBL) ~ lag(DP, 1) + lag(BM, 1) + lag(AKT_VAR, 1) + lag(T_SPREAD, 1) + lag(Y_SPREAD, 1) + lag(C_SPREAD, 1) + lag(D_SPREAD, 1) + lag(FR, 1), data = data)
+# 
+
+# VAR
+data_v <- as.ts(data)
+# 
+data_sub <- subset(data_v, select = -c(DP, EP, AKT_VAR, HML, Y_SPREAD, C_SPREAD, D_SPREAD, FR))
+# 
+var <- VAR(data_sub, p = 1)
+
+coef <- Bcoef(var)
+coef1 <- coef(var)
+cov <- summary(var)$covres
+cor <- summary(var)$corres
+
+
 recessions.df = read.table(textConnection(
   "Peak, Trough
 1857-06-01, 1858-12-01
@@ -191,75 +261,3 @@ recessions.df = read.table(textConnection(
   colClasses=c('Date', 'Date'), header=TRUE)
 
 recessions.trim = subset(recessions.df, Peak >= min(index(data)) )
-
-# MULTIPLE REGRESSION 
-
-data_mult_akt <- as.xts(merge(xts::lag.xts(data$AKT, -1, na.pad = FALSE), head(data, -1)))
-data_mult_akt <- subset(data_mult_akt, select = -AKT.1)
-
-data_mult_s <- as.xts(merge(xts::lag.xts(data$S_OBL, -1, na.pad = FALSE), head(data, -1)))
-data_mult_s <- subset(data_mult_s, select = -S_OBL.1)
-
-data_mult_v <- as.xts(merge(xts::lag.xts(data$V_OBL, -1, na.pad = FALSE), head(data, -1)))
-data_mult_v <- subset(data_mult_v, select = -V_OBL.1)
-
-# KITCHEN SINK
-fit_AKT <- lm(AKT ~ ., data=data_mult_akt)
-
-test <- lm(AKT~NET_TB + S_OBL + V_OBL + TB + BM + T_SPREAD + FR, data = data_mult_akt)
-
-step_AKT_model <- step(fit_AKT, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=AKT ~ NET_TB + S_OBL + V_OBL + TB, upper=fit_AKT))
-
-summary(step_AKT_model)
-
-fit_S_OBL <- lm(S_OBL ~ ., data=data_mult_s)
-
-step_S_OBL_model <- step(fit_S_OBL, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=S_OBL ~ NET_TB + AKT + V_OBL + TB, upper=fit_S_OBL))
-
-summary(step_S_OBL_model)
-
-fit_V_OBL <- lm(V_OBL ~ ., data=data_mult_v)
-
-step_V_OBL_model <- step(fit_V_OBL, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=V_OBL ~ NET_TB + AKT + S_OBL + TB, upper=fit_V_OBL))
-
-summary(step_V_OBL_model)
-
-
-# m_fit <- lm(cbind(AKT, S_OBL, V_OBL) ~ lag(DP, 1) + lag(BM, 1) + lag(AKT_VAR, 1) + lag(T_SPREAD, 1) + lag(Y_SPREAD, 1) + lag(C_SPREAD, 1) + lag(D_SPREAD, 1) + lag(FR, 1), data = data)
-# 
-
-# VAR
-data_v <- as.ts(data)
-# 
-data_sub <- subset(data_v, select = -c(DP, EP, AKT_VAR, HML, Y_SPREAD, C_SPREAD, D_SPREAD, FR))
-# 
-var <- VAR(data_sub, p = 1)
-
-coef <- Bcoef(var)
-coef1 <- coef(var)
-cov <- summary(var)$covres
-cor <- summary(var)$corres
-
-# fileName_var <- 'varAM.xlsx'
-# 
-# excel_var <- createWorkbook(fileName_var)
-# 
-# addWorksheet(excel_var,'Coef')
-# addWorksheet(excel_var,'CoefStdTp')
-# addWorksheet(excel_var,'Cov')
-# addWorksheet(excel_var,'Corr')
-# 
-# 
-# writeData(excel_var, sheet = 1, coef)
-# writeData(excel_var, sheet = 2, coef1)
-# writeData(excel_var, sheet = 3, cov)
-# writeData(excel_var, sheet = 4, cor)
-# 
-# saveWorkbook(excel_var, fileName_var, overwrite = T)
-
-# VAR.select(data_sub,p=1)
-
-
-# var <- VAR.etp::VAR.est(data, p=1)
-# 
-# pope_var <- VAR.Pope(data, p = 1)
