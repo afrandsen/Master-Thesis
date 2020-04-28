@@ -221,7 +221,11 @@ For at se en interaktiv HTML version af dokumentet, med mulighed for at redigere
 
 Kreditering: \href{http://starlogs.net/\#afrandsen/master-thesis}{starlogs.net/\#afrandsen/master-thesis}.
 
-Lavet med Color Brewer, virker i sort hvid, farveblind vil også kunne se.
+Dokumentet er i farver, men kan printes i sort/hvid uden at skabe visuelle mangler på plots, da linjer samt punkter har hhv. forskellige linjetyper og symboler.
+
+Farver igennem hele dokumentet er sat via pakken \emph{RColorBrewer} og dens tilhørende farvepalete \emph{Dark2}. Denne farvepalette tillader, at personer med nedsat farvesyn uden problemer kan skelne linjer, punkter osv. fra samtlige plots. Derudover er paletten printervenlig samt LCD-venlig.
+
+Gennem hele dokumentet er der anvendt \emph{fictitious entry}, der fungerer som en \emph{copyright trap}.
 
 \newpage
 
@@ -296,7 +300,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-04-27                  
+##  date     2020-04-29                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -674,6 +678,204 @@ hvilket er en geometrisk og kontinuert følge. Logafkastet af aktiver vil skabe 
 \hypertarget{afkast}{%
 \chapter{Afkast}\label{afkast}}
 
+\hypertarget{var}{%
+\chapter{VAR}\label{var}}
+
+I dette kapitel fastsættes den teoretiske ramme for den empiriske analyse. Dette gøres hovedsageligt ud fra teorien bag \citep{Userguide2004} med enkelte dele, som varierer.
+
+\section{Sættet af investeringsmuligheder}
+
+Først etableres en model, som kan modellere forventet afkast og risiko af aktier på tværs af investeringshorisonter.
+
+\subsection{Afkastdynamikken}
+
+Lad \(\bm{z}_{t+1}\) være en \(m\times 1\) vektor, hvis indgange er afkastet på alle aktiver som vi vil undersøge samt værdierne af tilstandsvariablene på tidspunkt \(t+1\). Denne vektor opskrives som
+\begin{equation}
+        \bm{z}_{t+1}\equiv
+        \begin{bmatrix}
+        r_{0,t+1}\\
+        \bm{r}_{t+1}-r_{0,t+1}\bm{\ell}\\
+        \bm{s}_{t+1}
+        \end{bmatrix}\equiv
+        \begin{bmatrix}
+        r_{0,t+1}\\
+        \bm{x}_{t+1}\\
+        \bm{s}_{t+1}
+        \end{bmatrix},
+    \end{equation}
+hvor \(r_{0,t+1}\) er netto log-afkastet af det aktiv, som vores merafkast for de andre aktiver regnes ud fra, \(\bm{x}_{t+1}\) er en vektor af log merafkast for alle andre aktiver, og \(\bm{s}_{t+1}\) er en vektor indeholdende realisationerne af tilstandsvariablene. Vi antager samtidig, at der eksisterer \(n+1\) klasser af aktiver og \(m-n-1\) tilstandsvariable.
+
+\vspace{5mm}
+
+Nu vises, hvordan momenterne af afkastene fremkommer ved brug af en VAR process. Det antages, at aktivernes afkast samt tilstandsvariablene følger en \(\text{VAR}(1)\) process
+\begin{equation}
+        z_{i,t+1}=\varphi_0+\varphi_1 z_{1,t}+\dots+\varphi_i z_{i,t}+\dots+v_{i,t+1},
+    \end{equation}
+hvor hver variabel, \(z_{i,t+1}\), afhænger lineært af en konstant, værdien af variablen på tidspunkt \(t\), værdien af alle andre variable på tidspunkt \(t\) samt et fejlled.
+
+\vspace{5mm}
+
+I matrixnotation fås da følgende kompakteopskrivning
+\begin{equation}\label{eq:1}
+        \bm{z}_{t+1}=\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_t+\bm{v}_{t+1},
+    \end{equation}
+hvor \(\bm{\Phi}\) er en vektor af afskæringer, \(\bm{\Phi}_1\) er en kvadratisk matrix, som indeholder hældningskoefficienterne og \(\bm{v}_{t+1}\) er en vektor fejlled til: realisationerne af afkast samt alle afkast variable i modellen, med middelværdi \(0\).
+
+\vspace{5mm}
+
+For at få stationalitetsbetingelsen opfyldt modellen, antages, at
+\begin{equation*}
+        |\bm{\Phi}_1|\in(-1,1).
+    \end{equation*}
+Dvs. at determinanten matricen -- bestående af hældningskoefficienter -- er begrænset mellem \(-1\) og \(1\).
+
+\vspace{5mm}
+
+Slutteligt antages, at fejlleddet er normalfordelt
+\begin{equation}\label{eq:2}
+        \bm{v}_{t+1}\overset{\text{i.i.d.}}{\sim}\mathcal{N}(0,\bm{\Sigma}_v),
+    \end{equation}
+hvor middelværdien er \(0\), som tidligere nævnt, og \(\bm{\Sigma}_v\) er kovariansmatricen, som tillige er symmetrisk.
+
+For notationens skyld sættes
+\begin{equation*}
+        \bm{\Sigma}_v\equiv \mathbb{V}_t(\bm{v}_{t+1})=
+        \begin{bmatrix}
+        \bm{\sigma}_0^2 & \bm{\sigma}_{0x}' & \bm{\sigma}_{0s}'\\
+        \bm{\sigma}_{0x} & \bm{\Sigma}_{xx} & \bm{\Sigma}_{xs}'\\
+        \bm{\sigma}_{0s} & \bm{\Sigma}_{xs} & \bm{\Sigma}_{s}\\
+        \end{bmatrix},
+    \end{equation*}
+hvor indgangene på diagonalen er: variansen af netto afkastet på vores benchmark aktiv, kovariansmatricen af uventede merafkast og kovariansmatricen af stød til tilstandsvariablene. Uden for diagonalen består indgangene af: kovariansen mellem netto afkastet af benchmark aktivet og hhv. merafkastet for alle andre aktiver samt stødene til tilstandsvariablene.
+
+\vspace{5mm}
+
+På trods af den simplificerende antagelse om tidsinvariant varians ikke virker empirisk sandsynlig, er antagelsen relativt uproblematisk givet, at fokus er på det langsigtede porteføljevalg hos investoren. \citep{Chacko2005} argumenterer -- ved brug af en realistisk kalibreret model af aktieafkast volatilitet -- at størrelsenordenen af volatiliteten af risiko ikke er stor nok til at have indvirkning på porteføljevalget for investorer med en lang investeringshorisont, relativt til porteføljevalg af investorer med en kort investeringshorisont. Herudover viser empiriske undersøgelser, at ændringer i risiko er kortvarige fænomener, \citep{Camp1987}, men samtidig kan kovariansmatricen stadig ændre sig på tværs af investeringshorisonter.
+
+\vspace{5mm}
+
+Den ubetingede middelværdi og kovariansmatrix af \(\bm{z}_{t+1}\) er givet ved
+\begin{align*}
+        \mathbb{E}_t(\bm{z}_{t+1}) &= (\bm{I}_m-\bm{\Phi}_1)^{-1}\bm{\Phi}_0\\
+        \text{vec}(\bm{\Sigma}_{zz}) &= (\bm{I}_{m^2}-\bm{\Phi}_1\otimes\bm{\Phi}_1)^{-1}\text{vec}(\bm{\Sigma}_v).
+    \end{align*}
+Ovenstående ligninger ligger også til grund for determinantbetingelsen: hvis ikke determinanten af \(\bm{\Phi}_1\) var begrænset af \(-1\) og \(1\), ville den ubetingede middelværdi og varians af \(\bm{z}_{t+1}\) ikke være defineret.
+
+\subsection{Betingede momenter for $k$-perioder}
+
+Nu udledes den betingede middelværdi og kovariansmatrix af \((\bm{z}_{t+1}+\dots+\bm{z}_{t+k})\) for enhver horisont \(k\). Dette gøres eftersom det akkumulerede \(k\)-periode afkast fremkommer ved at addere én-periode log-afkast over \(k\) perioder. Ved rekursion af \eqref{eq:1} fås
+\begin{align*}
+        \bm{z}_{t+1}&=\bm{\Phi}_0+\bm{\Phi}_1 \bm{z}_t+\bm{v}_{t+1}\\
+        \bm{z}_{t+2}&=\bm{\Phi}_0+\bm{\Phi}_1 \bm{z}_{t+1}+\bm{v}_{t+2}=\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_1 \bm{z}_t +\bm{\Phi}_1 \bm{v}_{t+1}+\bm{v}_{t+2}\\
+        &\vdots\\
+        \bm{z}_{t+k}&=\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_0+\bm{\Phi}_1^2\bm{\Phi}_0+\dots+\bm{\Phi}_1^{k-1}\bm{\Phi}_0+\bm{\Phi}_1^k \bm{z}_t+\bm{\Phi}_1^{k-1}\bm{v}_{t+1}+\bm{\Phi}_1^{k-2}\bm{v}_{t+2}+\dots+\bm{\Phi}_1 \bm{v}_{t+k-1}+\bm{v}_{t+k}.
+    \end{align*}
+Herefter adderes udtrykkene for \(\bm{z}_{t+1}\), \(\bm{z}_{t+2},\dots,\bm{z}_{t+k}\) og det følger at
+\begin{align*}
+        \bm{z}_{t+1}+\dots+\bm{z}_{t+k}=&\left(k+(k-1)\bm{\Phi}_1+(k-2)\bm{\Phi}_1^2+\dots+\bm{\Phi}_1^{k-1}\right)\Phi_0\\
+        &+\left(\bm{\Phi}_1^k+\bm{\Phi}_1^{k-1}+\dots+\bm{\Phi}_1\right)\bm{z}_t\\
+        &+\left(1+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\right)\bm{v}_{t+1}\\
+        &+\left(1+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\right)\bm{v}_{t+2}\\
+        &+\dots\\
+        &+(I+\bm{\Phi}_1)\bm{v}_{t+k-1}+\bm{v}_{t+k}.
+    \end{align*}
+Ved brug af sumoperatoren kan ovenstående skrives på kompakt form
+\begin{equation}
+        \bm{z}_{t+1}+\dots+\bm{z}_{t+k}=\left(\sum_{i=0}^{k-1} (k-i)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_1^j\right)\bm{z}_t+\sum_{q=1}^k\left(\sum_{p=0}^{k-q} \bm{\Phi}_1^p \bm{v}_{t+q}\right).
+    \end{equation}
+Nu kan de betingede \(k\)-periode momenter af tilstandsvektoren beregnes. Den betingende middelværdi er
+\begin{equation}
+        \mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})=\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t,
+    \end{equation}
+hvor antagelsen i \eqref{eq:2} benyttes.
+
+\vspace{5mm}
+
+Den betingede varians er
+\begin{align}
+        \mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})
+        &=\mathbb{V}_t\left(\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t +\sum_{q=1}^k\left(\sum_{p=0}^{k-q}\bm{\Phi}_1^p \bm{v}_{t+q}\right)\right) \nonumber\\
+        &=\mathbb{V}_t\left(\sum_{q=1}^k\left(\sum_{p=0}^{k-q} \bm{\Phi}_1^p \bm{v}_{t+q}\right)\right) \label{eq:3},
+    \end{align}
+hvor de første to led i variansen forsvinder, da de er konstante eller kendte på tidspunkt \(t\). Ved omskrivning af \eqref{eq:3} fås
+\begin{align*}
+        \mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})&=\mathbb{V}_t\big(\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\bm{v}_{t+1}+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\big)\bm{v}_{t+2}\\
+        &\hphantom{=}+\dots+\big(I+\Phi_1\big)\bm{v}_{t+k-1}+\bm{v}_{t+k}\big)\\
+        &=\Sigma_v+\big(I+\bm{\Phi}_1\big)\Sigma_v(I+\bm{\Phi}_1)'+\big(I+\bm{\Phi}_1+\bm{\Phi}_1\bm{\Phi}_1\big)\Sigma_v\big(I+\bm{\Phi}_1+\bm{\Phi}_1\bm{\Phi}_1\big)'\\
+        &\hphantom{=}+\dots+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\Sigma_v\big(I+\bm{\Phi}_1'+\dots+\bm{\Phi}_1^{k-1}\big)',
+    \end{align*}
+som følger af omskrivning af leddene, og at den betingede kovariansmatrix af \(v_{t+i}\) er den samme for alle \(i\).
+
+\subsection{Betingede momenter for $k$-periode afkast}
+
+Eftersom interessen kun er i den del af VAR-processen, som indeholder afkast, benyttes de såkaldte selektionsmatricer.
+
+Vil vi have det forventede \(k\)-periode log-(mer)afkast pr. periode, kan følgende benyttes
+\begin{equation*}
+        \bm{H}_r=\begin{pmatrix}\bm{I}_{n+1} & \bm{0}_{m-n}\end{pmatrix},
+    \end{equation*}
+ved at anvende denne matrix på den betingede middelværdi fås da
+\begin{equation}
+        \frac{1}{k}\begin{pmatrix}
+        \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
+        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}} \right)
+        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k}).
+    \end{equation}
+Anvendes den på den betingede varians fås
+\begin{equation}
+        \frac{1}{k}\mathbb{V}_t\begin{pmatrix}
+        r_{0,t+1}^{(k)}\\
+        \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}}
+        \end{pmatrix}=\frac{1}{k}\begin{pmatrix}
+        \sigma_0^2(k) & \bm{\sigma}_{0x}(k)'\\
+        \bm{\sigma}_{0x}(k) & \bm{\Sigma}_{xx}(k)
+        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})\bm{H}_r'.
+    \end{equation}
+Den anden selektionsmatrix som benyttes kan udtrække \(k\)-periode log-afkastet pr. periode
+\begin{equation}
+        \bm{M}_r=\begin{pmatrix}
+        1 & \bm{0}_{1\times n} & \bm{0}_{1\times (m-n-1)}\\
+        \bm{\bm{\ell}}_n & \bm{I}_n & \bm{0}_{m-n-1}
+        \end{pmatrix}.\label{eq:sel}
+    \end{equation}
+Anvender vi den på den betingede middelværdi fås
+\begin{equation}
+        \frac{1}{k}\begin{pmatrix}
+        \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
+        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)} \right)
+        \end{pmatrix}=\frac{1}{k}\bm{M}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k}).
+    \end{equation}
+Slutteligt anvendes den på den betingede varians
+\begin{equation}
+        \frac{1}{k}\mathbb{V}_t\begin{pmatrix}
+        r_{0,t+1}^{(k)}\\
+        \bm{r}_{t+1}^{(k)}
+        \end{pmatrix}=\frac{1}{k}\bm{\Sigma}_{rr}(k)=\frac{1}{k}\bm{M}_r\mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})\bm{M}_r'.\label{eq:bv}
+    \end{equation}
+
+\subsection{Bytteforholdet for en VAR-investor}
+
+En investor, som bruger VAR-processen til at forudsige afkast, vil opfatte afkast-risiko bytteforholdet anderledes end en investor, som benytter den traditionelle metode (estimerer forventede afkast ud fra deres historiske gennemsnit). Mere specifikt benytter VAR-investoren den betingede forventning af afkast fremfor den ubetingede, som den traditionelle investor bruger.
+
+Herudover vil en VAR-investor måle risikoen for hvert aktiv -- på kort sigt -- ud fra dens varians relativt til hvert specifikke aktivs betingede forventning af afkast til forskel for den ubetingede forventning af afkast. En vigtig ting at notere sig, er at den betingede varians er forskellig fra den ubetingede varians. Dette kan lade sig gøre, selv når der arbejdes under antagelsen, at den betingede varians er konstant over tid. Denne antagelse er også den, som arbejdes videre med i analysen. Begrundelsen for, at de er forskellige kommer sig af, at VAR-investoren ved, at noget af den ubetingede volatilitet for hvert aktiv er forudsigelig tidsvariation i afkastet, der derfor ikke tæller som risiko.
+
+For det tredje vil VAR-investoren vide, at risikoen på lang sigt af hvert aktivs afkast vil være forskelligt fra hvert aktivs risiko på kort sigt. For den traditionelle investor med konstante forventede afkast (de historiske gennemsnit) vil variansen af hvert aktiv være proportional med den tid aktivet holdes i. Annualiserede varianser er uafhængige af tiden, som aktivet bliver holdt i, og derfor vil den traditionelle investor have et konstant tal, som sammenholder risikoen for alle perioder for aktivet. For VAR-investoren vil annualiserede varianser enten stige eller falde, når investeringsperioden øges. Et andet vigtig aspekt er, at annualiserede kovarianser også kan stige eller falde over investeringsperioden.
+
+\hypertarget{bias-justeret-var-model}{%
+\section{Bias justeret VAR-model}\label{bias-justeret-var-model}}
+
+Ved brug af den analytiske middelværdirette estimator foreslået af \citep{Pope1990}, viser \citep{Engsted2012} at justering for bias i estimatorerne af middelværdi, i det multivariate setup, kan producere forskellige parameter estimater i den givne VAR(\(1\))-model. Benyttelse af ordinær lineær regressionsestimater kan resultere i bias pga. den begrænsede stikprøvestørrelse og af den årsag mislede inferensen gjort på baggrund af VAR(\(1\)) estimaterne. Herudover kan variablene besidde autokorrelation, hvis de er udviser vedvarende effekter pga. stød til tidsserien. Den analytiske bias af OLS estimatoren, \(\bm{\Phi}_1\), er udledt på baggrund af en Taylor udvidelse af høj orden. Dermed lader vi den analytiske bias, \(\bm{B}_T\), være givet ved
+\begin{equation}
+\bm{B}_T=-\frac{\bm{b}}{T}+ O\left(T^{-\frac{3}{2}}\right), \label{eq:bias}
+\end{equation}
+
+hvor \(T\) er sample size og tælleren er lig
+\[\bm{b}=\bm{\Sigma}_v\left(\left(\bm{I}-\bm{\Phi}_1'\right)^{-1}+\bm{\Phi}_1'\left(\bm{I}-\left(\bm{\Phi}_1'\right)^2\right)+\sum_{i=1}^m \lambda \left(\bm{I}-\lambda\bm{\Phi}_1'\right)^{-1}\right)\bm{\Sigma}_z^{-1}.\]
+
+Her er \(\bm{\Sigma}_v\) den betingede kovariansmatrix af \(v_t\), \(\lambda\) er vektoren af egenværdier af \(\bm{\Phi}_1\), \(\bm{I}\) er identitetsvektoren og \(m\) er antallet af tilstandsvariable i \(\bm{z}\). Bias'en i Ligning \eqref{eq:bias} falder med raten \(T^{-\frac{3}{2}}\), som \(T\rightarrow \infty\). Den analytiske formel af \citep{Pope1990} giver ikke bias justerede afskæringer, \(\bm{\Phi}_0\), men som \citep{Engsted2012} pointerer vil dette problem automatisk blive løst af de bias justerede hældninger. Dette sker eftersom det ubetingede aritmetiske gennemsnit af en stationær variabel, er et ikke-biased estimat af den sande middelværdi, og samtidig estimerer OLS præcis middelværdien af variablene i VAR-modellen, ved at fjerne første observation. Altså vil en VAR-model med bias justerede hældninger medføre ikke-biased estimater af \(\bm{\Phi}_0\), givet modelrestriktionen, at de ubetingede middelværdier af variablene -- udledt fra VAR koefficienterne -- er lig deres aritmetiske gennemsnit
+
+\citep{Engsted2012} finder både kvantitative og kvalitative effekter ved brug af bias justerede koefficienter ift. de regulere OLS estimater. De viser bl.a. hvordan \emph{hedging} komponentet af porteføljeallokeringen ændrer sig for et kontinuum af risikoaversioner, hvor specielt mellemliggende risikoaversions værdier (\(\gamma=2\)) er særligt påvirket af biasjusteringen.\footnote{Se evt. Figur 1 i \citep{Engsted2012}.} Her bliver det optimale portefølgevalg påvirket, eftersom bias justeringen afstedkommer reducerede positioner for obligationer og aktier, gennem det intertemporale \emph{hedging demand}, mens positionen for kontanter forøges.
+
 \hypertarget{portefuxf8ljeteori}{%
 \chapter{Porteføljeteori}\label{portefuxf8ljeteori}}
 
@@ -856,196 +1058,6 @@ Den generelle rekursive løsning til det dynamiske porteføljeproblem er givet v
 hvor \(\bm{\Sigma}_x=\begin{pmatrix}\bm{\sigma}_0x & \bm{\Sigma} & \bm{\Sigma}_{xs}'\end{pmatrix}\) og \(B_1^{\tau-1}\), \(B_2^{\tau-1}\) samt \(B_3^{\tau-1}\) er funktioner afhængende af: den resterende investeringshorisont, \(\tau\), \emph{RRA}-parameteren, \(\gamma\), samt koefficeinterne fra VAR-modellen, \citep{JurVic2011}.
 
 Ovenstående Ligning \eqref{eq:jurvicalpha} giver den fulde analytiske løsning til det intertemporale porteføljeproblem fra Ligning ??. Den optimale portefølje er en sum af to komponenter. Den første del af summen er identisk til den én-periode myopiske portefølje fra Ligning ??. Den anden del af summen, består af det såkaldte intertemporale \emph{hedging demand} for risikobærende aktiver, \citep{Merton1969, Merton1971, Merton1973}. Herudover viser løsning at den myopiske del af det totale porteføljevalg er uafhængigt af den resterende tid til investeringshorisonten, \(\tau\). Den viser også at den myopiske del er den totale porteføljedel for investorer med log nytte, \(\gamma=1\). Hvilket også er konsistent med intutionen givet i Sektion ??, at log nytte investorer ikke forholder sig til investeringshorisonten.
-
-\hypertarget{var}{%
-\chapter{VAR}\label{var}}
-
-I dette kapitel fastsættes den teoretiske ramme for den empiriske analyse. Dette gøres hovedsageligt ud fra teorien bag \citep{Userguide2004} s. 2-22 med enkelte dele, som varierer.
-
-\section{Sættet af investeringsmuligheder}
-
-Først etableres en model, som kan modellere forventet afkast og risiko af aktier på tværs af investeringshorisonter.
-
-\subsection{Afkastdynamikken}
-
-Lad \(\bm{z}_{t+1}\) være en \(m\times 1\) vektor, hvis indgange er afkastet på alle aktiver som vi vil undersøge samt værdierne af tilstandsvariablene på tidspunkt \(t+1\). Denne vektor opskrives som
-\begin{equation}
-        \bm{z}_{t+1}\equiv
-        \begin{bmatrix}
-        r_{0,t+1}\\
-        \bm{r}_{t+1}-r_{0,t+1}\\
-        \bm{s}_{t+1}
-        \end{bmatrix}\equiv
-        \begin{bmatrix}
-        r_{0,t+1}\\
-        \bm{x}_{t+1}\\
-        \bm{s}_{t+1}
-        \end{bmatrix},
-    \end{equation}
-hvor \(r_{0,t+1}\) er netto log-afkastet af det aktiv, som vores merafkast for de andre aktiver regnes ud fra, \(\bm{x}_{t+1}\) er en vektor af netto log-merafkast for alle andre aktiver, og \(\bm{s}_{t+1}\) er en vektor indeholdende realisationerne af tilstandsvariablene. Vi antager samtidig, at der eksisterer \(n+1\) klasser af aktiver og \(m-n-1\) tilstandsvariable.
-
-\vspace{5mm}
-
-Nu viser vi, hvordan momenterne af netto afkastene fremkommer ved brug af en VAR process. Vi antager, at aktivernes afkast samt tilstandsvariablene følger en \(\text{VAR}(1)\) process
-\begin{equation}
-        z_{i,t+1}=\varphi_0+\varphi_1 z_{1,t}+\dots+\varphi_i z_{i,t}+\dots+v_{i,t+1},
-    \end{equation}
-hvor hver variabel, \(z_{i,t+1}\), afhænger lineært af en konstant, værdien af variablen på tidspunkt \(t\), værdien af alle andre variable på tidspunkt \(t\) samt et fejlled.
-
-\vspace{5mm}
-
-I matrixnotation får vi da følgende kompakteopskrivning
-\begin{equation}\label{eq:1}
-        \bm{z}_{t+1}=\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_t+\bm{v}_{t+1},
-    \end{equation}
-hvor \(\bm{\Phi}\) er en vektor af afskæringer, \(\bm{\Phi}_1\) er en kvadratisk matrix, som indeholder hældningskoefficienterne og \(\bm{v}_{t+1}\) er en vektor fejlled til: realisationerne af afkast samt alle afkast variable i vores model, med middelværdi \(0\).
-
-\vspace{5mm}
-
-For at få stationalitetsbetingelsen opfyldt i vores model, antager vi, at
-\begin{equation*}
-        |\bm{\Phi}_1|\in(-1,1).
-    \end{equation*}
-Dvs. at determinanten af vores matrix -- bestående af hældningskoefficienter -- er begrænset mellem \(-1\) og \(1\).
-
-\vspace{5mm}
-
-Slutteligt antager vi, at fejlleddet er normalfordelt
-\begin{equation}\label{eq:2}
-        \bm{v}_{t+1}\overset{\text{i.i.d.}}{\sim}\mathcal{N}(0,\bm{\Sigma}_v),
-    \end{equation}
-hvor middelværdien er \(0\), som tidligere nævnt, og \(\bm{\Sigma}_v\) er kovariansmatricen, som tillige er symmetrisk. For notationens skyld sætter vi
-\begin{equation*}
-        \bm{\Sigma}_v\equiv \mathbb{V}_t(\bm{v}_{t+1})=
-        \begin{bmatrix}
-        \bm{\sigma}_0^2 & \bm{\sigma}_{0x} & \bm{\sigma}_{0s}\\
-        \bm{\sigma}_{0x} & \bm{\Sigma}_{xx} & \bm{\Sigma}_{xs}\\
-        \bm{\sigma}_{0s} & \bm{\Sigma}_{xs} & \bm{\Sigma}_{s}\\
-        \end{bmatrix},
-    \end{equation*}
-hvor indgangene på diagonalen er: variansen af netto afkastet på vores benchmark aktiv, kovariansmatricen af uventede merafkast og kovariansmatricen af tilstandsvariablene. Uden for diagonalen består indgangene af: kovariansen mellem netto afkastet af benchmark aktivet og hhv. merafkastet for alle andre aktiver samt fejlledene til tilstandsvariablene.
-
-\vspace{5mm}
-
-Vi antager, at kovariansmatricen ikke ændrer sig med tiden, eftersom empiriske undersøgelser viser, at ændringer i risiko er kortvarige fænomener \citep{Camp1987} s. 32-33, men kovariansmatricen kan stadig ændre sig på tværs af investeringshorisonter.
-
-\vspace{5mm}
-
-Den ubetingede middelværdi og kovariansmatrix af \(\bm{z}_{t+1}\) er givet ved
-\begin{align*}
-        \mathbb{E}_t(\bm{z}_{t+1}) &= (\bm{I}_m-\bm{\Phi}_1)^{-1}\bm{\Phi}_0\\
-        \text{vec}(\bm{\Sigma}_{zz}) &= (\bm{I}_{m^2}-\bm{\Phi}_1\otimes\bm{\Phi}_1)^{-1}\text{vec}(\bm{\Sigma}_v).
-    \end{align*}
-Ovenstående ligninger ligger også til grund for determinantbetingelsen: hvis ikke determinanten af \(\bm{\Phi}_1\) var begrænset af \(-1\) og \(1\), ville den ubetingede middelværdi og varians af \(\bm{z}_{t+1}\) ikke være defineret.
-
-\subsection{Betingede momenter for $k$-perioder}
-
-Nu udledes den betingede middelværdi og kovariansmatrix af \((\bm{z}_{t+1}+\dots+\bm{z}_{t+k})\) for enhver horisont \(k\). Dette gøres eftersom det akkumulerede \(k\)-periode afkast fremkommer ved at addere én-periode log-afkast over \(k\) perioder. Ved rekursion af \eqref{eq:1} fås
-\begin{align*}
-        \bm{z}_{t+1}&=\bm{\Phi}_0+\bm{\Phi}_1 \bm{z}_t+\bm{v}_{t+1}\\
-        \bm{z}_{t+2}&=\bm{\Phi}_0+\bm{\Phi}_1 \bm{z}_{t+1}+\bm{v}_{t+2}=\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_1 \bm{z}_t +\bm{\Phi}_1 \bm{v}_{t+1}+\bm{v}_{t+2}\\
-        &\vdots\\
-        \bm{z}_{t+k}&=\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_0+\bm{\Phi}_1^2\bm{\Phi}_0+\dots+\bm{\Phi}_1^{k-1}\bm{\Phi}_0+\bm{\Phi}_1^k \bm{z}_t+\bm{\Phi}_1^{k-1}\bm{v}_{t+1}+\bm{\Phi}_1^{k-2}\bm{v}_{t+2}+\dots+\bm{\Phi}_1 \bm{v}_{t+k-1}+\bm{v}_{t+k}.
-    \end{align*}
-Herefter adderer vi udtrykkene for \(\bm{z}_{t+1}\), \(\bm{z}_{t+2},\dots,\bm{z}_{t+k}\) og får
-\begin{align*}
-        \bm{z}_{t+1}+\dots+\bm{z}_{t+k}=&\left(k+(k-1)\bm{\Phi}_1+(k-2)\bm{\Phi}_1^2+\dots+\bm{\Phi}_1^{k-1}\right)\Phi_0\\
-        &+\left(\bm{\Phi}_1^k+\bm{\Phi}_1^{k-1}+\dots+\bm{\Phi}_1\right)\bm{z}_t\\
-        &+\left(1+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\right)\bm{v}_{t+1}\\
-        &+\left(1+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\right)\bm{v}_{t+2}\\
-        &+\dots\\
-        &+(I+\bm{\Phi}_1)\bm{v}_{t+k-1}+\bm{v}_{t+k}.
-    \end{align*}
-Ved brug af sumoperatoren kan vi skrive ovenstående i kompaktform
-\begin{equation}
-        \bm{z}_{t+1}+\dots+\bm{z}_{t+k}=\left(\sum_{i=0}^{k-1} (k-i)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_1^j\right)\bm{z}_t+\sum_{q=1}^k\left(\sum_{p=0}^{k-q} \bm{\Phi}_1^p \bm{v}_{t+q}\right).
-    \end{equation}
-Nu kan vi beregne de betingede \(k\)-periode momenter af tilstandsvektoren. Den betingende middelværdi er
-\begin{equation}
-        \mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})=\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t,
-    \end{equation}
-hvor vi benytter antagelsen i \eqref{eq:2}.
-
-\vspace{5mm}
-
-Den betingede varians er
-\begin{align}
-        \mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})
-        &=\mathbb{V}_t\left(\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t +\sum_{q=1}^k\left(\sum_{p=0}^{k-q}\bm{\Phi}_1^p \bm{v}_{t+q}\right)\right) \nonumber\\
-        &=\mathbb{V}_t\left(\sum_{q=1}^k\left(\sum_{p=0}^{k-q} \bm{\Phi}_1^p \bm{v}_{t+q}\right)\right) \label{eq:3},
-    \end{align}
-hvor de første to led i variansen forsvinder, da de er konstante eller kendte på tidspunkt \(t\). Ved omskrivning af \eqref{eq:3} fås
-\begin{align*}
-        \mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})&=\mathbb{V}_t\big(\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\bm{v}_{t+1}+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\big)\bm{v}_{t+2}\\
-        &\hphantom{=}+\dots+\big(I+\Phi_1\big)\bm{v}_{t+k-1}+\bm{v}_{t+k}\big)\\
-        &=\Sigma_v+\big(I+\bm{\Phi}_1\big)\Sigma_v(I+\bm{\Phi}_1)'+\big(I+\bm{\Phi}_1+\bm{\Phi}_1\bm{\Phi}_1\big)\Sigma_v\big(I+\bm{\Phi}_1+\bm{\Phi}_1\bm{\Phi}_1\big)'\\
-        &\hphantom{=}+\dots+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\Sigma_v\big(I+\bm{\Phi}_1'+\dots+\bm{\Phi}_1^{k-1}\big)',
-    \end{align*}
-som følger af omskrivning af leddene, og at den betingede kovariansmatrix af \(v_{t+i}\) er den samme for alle \(i\).
-
-\subsection{Betingede momenter for $k$-periode afkast}
-
-Eftersom vi kun er interesserede i den del af vores VAR process, som indeholder afkast, benytter vi de såkaldte selektionsmatricer.
-
-\vspace{5mm}
-
-Vil vi have det forventede \(k\)-periode log-afkast pr. periode, kan vi benytte
-\begin{equation*}
-        \bm{H}_r=\begin{pmatrix}\bm{I}_{n+1} & \bm{0}_{m-n}\end{pmatrix},
-    \end{equation*}
-ved at anvende denne matrix på den betingede middelværdi fås da
-\begin{equation}
-        \frac{1}{k}\begin{pmatrix}
-        \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
-        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}} \right)
-        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k}).
-    \end{equation}
-Anvender vi den på den betingede varians fås
-\begin{equation}
-        \frac{1}{k}\mathbb{V}_t\begin{pmatrix}
-        r_{0,t+1}^{(k)}\\
-        \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}}
-        \end{pmatrix}=\frac{1}{k}\begin{pmatrix}
-        \sigma_0^2(k) & \bm{\sigma}_{0x}(k)'\\
-        \bm{\sigma}_{0x}(k) & \bm{\Sigma}_{xx}(k)
-        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})\bm{H}_r'.
-    \end{equation}
-Den anden selektionsmatrix vi vil benytte kan udtrække netto \(k\)-periode log-afkastet pr. periode
-\begin{equation}
-        \bm{M}_r=\begin{pmatrix}
-        1 & \bm{0}_{1\times n} & \bm{0}_{1\times (m-n-1)}\\
-        \bm{\bm{\ell}}_n & \bm{I}_n & \bm{0}_{m-n-1}
-        \end{pmatrix}.\label{eq:sel}
-    \end{equation}
-Anvender vi den på den betingede middelværdi fås
-\begin{equation}
-        \frac{1}{k}\begin{pmatrix}
-        \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
-        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)} \right)=\frac{1}{k}\bm{M}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})
-        \end{pmatrix}.
-    \end{equation}
-Slutteligt anvendes den på den betingede varians
-\begin{equation}
-        \frac{1}{k}\mathbb{V}_t\begin{pmatrix}
-        r_{0,t+1}^{(k)}\\
-        \bm{r}_{t+1}^{(k)}
-        \end{pmatrix}=\frac{1}{k}\bm{\Sigma}_{rr}(k)=\frac{1}{k}\bm{M}_r\mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})\bm{M}_r'.\label{eq:bv}
-    \end{equation}
-
-\hypertarget{bias-justeret-var-model}{%
-\section{Bias justeret VAR-model}\label{bias-justeret-var-model}}
-
-Ved brug af den analytiske middelværdirette estimator foreslået af \citep{Pope1990}, viser \citep{Engsted2012} at justering for bias i estimatorerne af middelværdi, i det multivariate setup, kan producere forskellige parameter estimater i den givne VAR(\(1\))-model. Benyttelse af ordinær lineær regressionsestimater kan resultere i bias pga. den begrænsede stikprøvestørrelse og af den årsag mislede inferensen gjort på baggrund af VAR(\(1\)) estimaterne. Herudover kan variablene besidde autokorrelation, hvis de er udviser vedvarende effekter pga. stød til tidsserien. Den analytiske bias af OLS estimatoren, \(\bm{\Phi}_1\), er udledt på baggrund af en Taylor udvidelse af høj orden. Dermed lader vi den analytiske bias, \(\bm{B}_T\), være givet ved
-\begin{equation}
-\bm{B}_T=-\frac{\bm{b}}{T}+ O\left(T^{-\frac{3}{2}}\right), \label{eq:bias}
-\end{equation}
-
-hvor \(T\) er sample size og tælleren er lig
-\[\bm{b}=\bm{\Sigma}_v\left(\left(\bm{I}-\bm{\Phi}_1'\right)^{-1}+\bm{\Phi}_1'\left(\bm{I}-\left(\bm{\Phi}_1'\right)^2\right)+\sum_{i=1}^m \lambda \left(\bm{I}-\lambda\bm{\Phi}_1'\right)^{-1}\right)\bm{\Sigma}_z^{-1}.\]
-
-Her er \(\bm{\Sigma}_v\) den betingede kovariansmatrix af \(v_t\), \(\lambda\) er vektoren af egenværdier af \(\bm{\Phi}_1\), \(\bm{I}\) er identitetsvektoren og \(m\) er antallet af tilstandsvariable i \(\bm{z}\). Bias'en i Ligning \eqref{eq:bias} falder med raten \(T^{-\frac{3}{2}}\), som \(T\rightarrow \infty\). Den analytiske formel af \citep{Pope1990} giver ikke bias justerede afskæringer, \(\bm{\Phi}_0\), men som \citep{Engsted2012} pointerer vil dette problem automatisk blive løst af de bias justerede hældninger. Dette sker eftersom det ubetingede aritmetiske gennemsnit af en stationær variabel, er et ikke-biased estimat af den sande middelværdi, og samtidig estimerer OLS præcis middelværdien af variablene i VAR-modellen, ved at fjerne første observation. Altså vil en VAR-model med bias justerede hældninger medføre ikke-biased estimater af \(\bm{\Phi}_0\), givet modelrestriktionen, at de ubetingede middelværdier af variablene -- udledt fra VAR koefficienterne -- er lig deres aritmetiske gennemsnit
-
-\citep{Engsted2012} finder både kvantitative og kvalitative effekter ved brug af bias justerede koefficienter ift. de regulere OLS estimater. De viser bl.a. hvordan \emph{hedging} komponentet af porteføljeallokeringen ændrer sig for et kontinuum af risikoaversioner, hvor specielt mellemliggende risikoaversions værdier (\(\gamma=2\)) er særligt påvirket af biasjusteringen.\footnote{Se evt. Figur 1 i \citep{Engsted2012}.} Her bliver det optimale portefølgevalg påvirket, eftersom bias justeringen afstedkommer reducerede positioner for obligationer og aktier, gennem det intertemporale \emph{hedging demand}, mens positionen for kontanter forøges.
 
 \part{Den empiriske analyse}
 
@@ -1900,7 +1912,7 @@ Den univariate analyse består af følgende regressioner
 
 hvor \(j\) er notationen for de \(3\) aktivklasser bestående af merafkast og \(i\) er notationen for de \(12\) prædiktionsvariable. Den statistiske signifikans for hver individuel koefficient vil kort blive vurderet, da dette vil give et fingerpeg om den mulige styrke, for hver forklarende variabel ift. prædiktion af fremtidige afkast. Mest opmærksomhed vil dog stadig være på aktivklassernes fundamentale relation til visse variable.
 
-Tabel \ref{tab:UNI-ak} rapporterer de univariate regressions resultater af log merafkastet på aktier, \(rx_{t+1}^a\), overfor den introducerede delmængde af mulige prædiktionsvariable. Det kendte nøgletal \emph{Dividend-Price Ratio} er ikke signifikant for hverken et \(5\%\) eller \(10\%\) signifikansniveau, med en tilhørende \(t\)-størrelse på 1.606. Af de resterende finansielle variable er det kun \emph{Price-Earnings Ratio}, \emph{High Minus Low} og \emph{Small Minus Big} som prædiktrer merafkastet på aktier negativt. Af disse er det kun \emph{Small Minus Big} som påviser signifikan, med en \(t\)-størrelse på -2.671. Fortegnene for de finansielle variable er ækvivalente med tidligere i fund i litteraturen, eksempelvis \citep{Camp1987} og \citep{CampVicCha2003}. De andre signifikante variable er \emph{Term-Spread} og \emph{Federal Funds Rate} med \(t\)-størrelser på hhv. 2.152 og -2.445. På et \(10\%\) signifikansniveau vil også \emph{Yield Spread} være statistisk signifikant, og kunne derfor også være en mulig variabel til prædiktion af merafkastet på aktier. Størstedelen af rentestrukturs variablene prædikterer merafkastet positivt, med undtagelse af den nominelle rente og \emph{Default Spread}. Hvilket for rentespændende er ensbetydende med, at når spændet mellem langsigtede instrumenter og kortsigtede instrumenter stiger, vil en øgning i merafkastet på aktier, \(rx_{t+1}^s\), ligeledes ske i den næstkommende periode.
+Tabel \ref{tab:UNI-ak} rapporterer de univariate regressions resultater af log merafkastet på aktier, \(rx_{t+1}^a\), overfor den introducerede delmængde af mulige prædiktionsvariable. Det kendte nøgletal \emph{Dividend-Price Ratio} er ikke signifikant for hverken et \(5\%\) eller \(10\%\) signifikansniveau, med en tilhørende \(t\)-størrelse på -1.049. Af de resterende finansielle variable er det kun \emph{Price-Earnings Ratio}, \emph{High Minus Low} og \emph{Small Minus Big} som prædiktrer merafkastet på aktier negativt. Af disse er det kun \emph{Small Minus Big} som påviser signifikan, med en \(t\)-størrelse på -2.671. Fortegnene for de finansielle variable er ækvivalente med tidligere i fund i litteraturen, eksempelvis \citep{Camp1987} og \citep{CampVicCha2003}. De andre signifikante variable er \emph{Term-Spread} og \emph{Federal Funds Rate} med \(t\)-størrelser på hhv. 2.152 og -1.321. På et \(10\%\) signifikansniveau vil også \emph{Yield Spread} være statistisk signifikant, og kunne derfor også være en mulig variabel til prædiktion af merafkastet på aktier. Størstedelen af rentestrukturs variablene prædikterer merafkastet positivt, med undtagelse af den nominelle rente og \emph{Default Spread}. Hvilket for rentespændende er ensbetydende med, at når spændet mellem langsigtede instrumenter og kortsigtede instrumenter stiger, vil en øgning i merafkastet på aktier, \(rx_{t+1}^s\), ligeledes ske i den næstkommende periode.
 
 
 
@@ -1915,18 +1927,18 @@ Tabel \ref{tab:UNI-ak} rapporterer de univariate regressions resultater af log m
 \cmidrule(l{3pt}r{3pt}){1-1} \cmidrule(l{3pt}r{3pt}){3-4}
   & Koefficient & Nedre & Øvre & Standardfejl & $t$-værdi & $p$ & $R^2$\\
 \midrule
-\rowcolor{gray!6}  $x_t^{\text{dp}}$ & 0.024 & -0.005 & 0.054 & 0.015 & 1.606 & 0.110 & 0.011\\
-$x_t^{\text{pe}}$ & -0.009 & -0.044 & 0.027 & 0.018 & -0.480 & 0.631 & 0.002\\
-\rowcolor{gray!6}  $x_t^{\text{bm}}$ & 0.016 & -0.024 & 0.056 & 0.020 & 0.779 & 0.437 & 0.002\\
+\rowcolor{gray!6}  $x_t^{\text{dp}_{\text{d}}}$ & -0.067 & -0.192 & 0.059 & 0.064 & -1.049 & 0.295 & 0.004\\
+$x_t^{\text{pe}_{\text{d}}}$ & -0.006 & -0.057 & 0.044 & 0.026 & -0.251 & 0.802 & 0.000\\
+\rowcolor{gray!6}  $x_t^{\text{bm}_{\text{d}}}$ & \textbf{-0.175} & -0.341 & -0.009 & 0.084 & -2.073 & 0.039 & 0.010\\
 $x_t^{\sigma_{\text{a}}^2}$ & 0.278 & -1.317 & 1.873 & 0.810 & 0.343 & 0.732 & 0.001\\
 \rowcolor{gray!6}  $x_t^{\text{hml}}$ & -0.004 & -0.009 & 0.001 & 0.003 & -1.496 & 0.136 & 0.007\\
 $x_t^{\text{smb}}$ & \textbf{-0.006} & -0.010 & -0.002 & 0.002 & -2.671 & 0.008 & 0.015\\
-\rowcolor{gray!6}  $x_t^{\text{b}}$ & -0.850 & -2.110 & 0.410 & 0.640 & -1.328 & 0.185 & 0.007\\
+\rowcolor{gray!6}  $x_t^{\text{b}_{\text{d}}}$ & -1.294 & -4.255 & 1.667 & 1.504 & -0.861 & 0.390 & 0.003\\
 $x_t^{\text{ts}}$ & \textbf{ 0.976} & 0.083 & 1.870 & 0.454 & 2.152 & 0.032 & 0.019\\
 \rowcolor{gray!6}  $x_t^{\text{ys}}$ & 1.014 & -0.035 & 2.062 & 0.532 & 1.904 & 0.058 & 0.013\\
 $x_t^{\text{cs}}$ & 0.312 & -0.502 & 1.126 & 0.413 & 0.755 & 0.451 & 0.004\\
 \rowcolor{gray!6}  $x_t^{\text{ds}}$ & -1.049 & -5.042 & 2.944 & 2.028 & -0.517 & 0.605 & 0.003\\
-$x_t^{\text{fr}}$ & \textbf{-0.386} & -0.697 & -0.075 & 0.158 & -2.445 & 0.015 & 0.028\\
+$x_t^{\text{fr}_{\text{d}}}$ & -0.668 & -1.664 & 0.328 & 0.506 & -1.321 & 0.188 & 0.008\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -1949,18 +1961,18 @@ Ligedes rapporterer Tabel \ref{tab:UNI-s} de univariate regressions resultater a
 \cmidrule(l{3pt}r{3pt}){1-1} \cmidrule(l{3pt}r{3pt}){3-4}
   & Koefficient & Nedre & Øvre & Standardfejl & $t$-værdi & $p$ & $R^2$\\
 \midrule
-\rowcolor{gray!6}  $x_t^{\text{dp}}$ & -0.006 & -0.019 & 0.008 & 0.007 & -0.852 & 0.395 & 0.003\\
-$x_t^{\text{pe}}$ & 0.001 & -0.010 & 0.013 & 0.006 & 0.196 & 0.845 & 0.000\\
-\rowcolor{gray!6}  $x_t^{\text{bm}}$ & -0.007 & -0.030 & 0.017 & 0.012 & -0.545 & 0.586 & 0.002\\
+\rowcolor{gray!6}  $x_t^{\text{dp}_{\text{d}}}$ & 0.046 & -0.010 & 0.103 & 0.029 & 1.605 & 0.110 & 0.009\\
+$x_t^{\text{pe}_{\text{d}}}$ & \textbf{-0.026} & -0.049 & -0.003 & 0.012 & -2.234 & 0.026 & 0.010\\
+\rowcolor{gray!6}  $x_t^{\text{bm}_{\text{d}}}$ & 0.064 & -0.046 & 0.174 & 0.056 & 1.143 & 0.254 & 0.007\\
 $x_t^{\sigma_{\text{a}}^2}$ & 0.107 & -0.178 & 0.391 & 0.145 & 0.738 & 0.461 & 0.001\\
 \rowcolor{gray!6}  $x_t^{\text{hml}}$ & 0.001 & -0.002 & 0.004 & 0.001 & 0.776 & 0.439 & 0.002\\
 $x_t^{\text{smb}}$ & \textbf{-0.004} & -0.007 & -0.001 & 0.001 & -2.702 & 0.007 & 0.031\\
-\rowcolor{gray!6}  $x_t^{\text{b}}$ & -0.012 & -0.864 & 0.840 & 0.433 & -0.028 & 0.978 & 0.000\\
+\rowcolor{gray!6}  $x_t^{\text{b}_{\text{d}}}$ & 0.119 & -2.067 & 2.304 & 1.110 & 0.107 & 0.915 & 0.000\\
 $x_t^{\text{ts}}$ & \textbf{ 0.590} & 0.119 & 1.062 & 0.239 & 2.466 & 0.014 & 0.033\\
 \rowcolor{gray!6}  $x_t^{\text{ys}}$ & 0.454 & -0.216 & 1.124 & 0.340 & 1.334 & 0.183 & 0.012\\
 $x_t^{\text{cs}}$ & \textbf{ 0.632} & 0.342 & 0.921 & 0.147 & 4.297 & 0.000 & 0.081\\
 \rowcolor{gray!6}  $x_t^{\text{ds}}$ & \textbf{ 1.885} & 0.586 & 3.184 & 0.660 & 2.858 & 0.005 & 0.047\\
-$x_t^{\text{fr}}$ & -0.139 & -0.280 & 0.003 & 0.072 & -1.934 & 0.054 & 0.017\\
+$x_t^{\text{fr}_{\text{d}}}$ & \textbf{-1.152} & -1.824 & -0.479 & 0.342 & -3.371 & 0.001 & 0.119\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -1970,7 +1982,7 @@ $x_t^{\text{fr}}$ & -0.139 & -0.280 & 0.003 & 0.072 & -1.934 & 0.054 & 0.017\\
 \end{threeparttable}
 \end{table}
 
-De statistiske resultater for de univariate regressioner på det fremtidige log merafkast på virksomhedsobligationer, \(rx_{t+1}^v\), er rapporteret i Tabel \ref{tab:UNI-v}. Igen ses, at alle rentespænd prædikterer merafkastet positivt, og alle er signifikante på \(5\%\)-niveauet, specielt \emph{Credit Spread} med en \(t\)-størrelse på 5.063. Den samme inferens for \(rx_{t+1}^s\) kan blive udtænkt for \(rx_{t+1}^v\). Alle de finansielle variable, med undtagelse af \emph{Small Minus Big}, har ikke styrke til at forklare variationen i det fremtidige log merafkast på virksomhedsobligationer. Den makroøkonomiske variabel \emph{Federal Funds Rate} prædikterer merafkastet negativt, som også var tilfældet for statsobligations merafkastet, men denne gang er koefficienten signifikant med en \(t\)-størrelse på -2.739.
+De statistiske resultater for de univariate regressioner på det fremtidige log merafkast på virksomhedsobligationer, \(rx_{t+1}^v\), er rapporteret i Tabel \ref{tab:UNI-v}. Igen ses, at alle rentespænd prædikterer merafkastet positivt, og alle er signifikante på \(5\%\)-niveauet, specielt \emph{Credit Spread} med en \(t\)-størrelse på 5.063. Den samme inferens for \(rx_{t+1}^s\) kan blive udtænkt for \(rx_{t+1}^v\). Alle de finansielle variable, med undtagelse af \emph{Small Minus Big}, har ikke styrke til at forklare variationen i det fremtidige log merafkast på virksomhedsobligationer. Den makroøkonomiske variabel \emph{Federal Funds Rate} prædikterer merafkastet negativt, som også var tilfældet for statsobligations merafkastet, men denne gang er koefficienten signifikant med en \(t\)-størrelse på -2.845.
 
 \begin{table}[!h]
 
@@ -1983,18 +1995,18 @@ De statistiske resultater for de univariate regressioner på det fremtidige log 
 \cmidrule(l{3pt}r{3pt}){1-1} \cmidrule(l{3pt}r{3pt}){3-4}
   & Koefficient & Nedre & Øvre & Standardfejl & $t$-værdi & $p$ & $R^2$\\
 \midrule
-\rowcolor{gray!6}  $x_t^{\text{dp}}$ & -0.007 & -0.024 & 0.010 & 0.009 & -0.797 & 0.426 & 0.003\\
-$x_t^{\text{pe}}$ & 0.009 & -0.007 & 0.025 & 0.008 & 1.084 & 0.279 & 0.006\\
-\rowcolor{gray!6}  $x_t^{\text{bm}}$ & -0.010 & -0.041 & 0.021 & 0.016 & -0.660 & 0.510 & 0.003\\
+\rowcolor{gray!6}  $x_t^{\text{dp}_{\text{d}}}$ & 0.042 & -0.027 & 0.110 & 0.035 & 1.197 & 0.232 & 0.005\\
+$x_t^{\text{pe}_{\text{d}}}$ & -0.040 & -0.082 & 0.002 & 0.021 & -1.893 & 0.060 & 0.015\\
+\rowcolor{gray!6}  $x_t^{\text{bm}_{\text{d}}}$ & 0.065 & -0.040 & 0.170 & 0.053 & 1.216 & 0.225 & 0.004\\
 $x_t^{\sigma_{\text{a}}^2}$ & 0.077 & -0.594 & 0.748 & 0.341 & 0.227 & 0.821 & 0.000\\
 \rowcolor{gray!6}  $x_t^{\text{hml}}$ & 0.002 & -0.001 & 0.006 & 0.002 & 1.236 & 0.218 & 0.008\\
 $x_t^{\text{smb}}$ & \textbf{-0.004} & -0.008 & -0.001 & 0.002 & -2.304 & 0.022 & 0.024\\
-\rowcolor{gray!6}  $x_t^{\text{b}}$ & -0.447 & -1.542 & 0.647 & 0.556 & -0.805 & 0.422 & 0.006\\
+\rowcolor{gray!6}  $x_t^{\text{b}_{\text{d}}}$ & -0.217 & -3.164 & 2.730 & 1.496 & -0.145 & 0.885 & 0.000\\
 $x_t^{\text{ts}}$ & \textbf{ 1.146} & 0.438 & 1.854 & 0.360 & 3.188 & 0.002 & 0.084\\
 \rowcolor{gray!6}  $x_t^{\text{ys}}$ & \textbf{ 1.142} & 0.161 & 2.123 & 0.498 & 2.292 & 0.023 & 0.051\\
 $x_t^{\text{cs}}$ & \textbf{ 0.958} & 0.585 & 1.330 & 0.189 & 5.063 & 0.000 & 0.125\\
 \rowcolor{gray!6}  $x_t^{\text{ds}}$ & \textbf{ 2.369} & 0.892 & 3.847 & 0.750 & 3.158 & 0.002 & 0.049\\
-$x_t^{\text{fr}}$ & \textbf{-0.282} & -0.484 & -0.079 & 0.103 & -2.739 & 0.007 & 0.047\\
+$x_t^{\text{fr}_{\text{d}}}$ & \textbf{-1.542} & -2.610 & -0.475 & 0.542 & -2.845 & 0.005 & 0.143\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -2021,19 +2033,19 @@ I denne sektion fortsættes analysen af variablene, som kan indgå i den endelig
 \cmidrule(l{3pt}r{3pt}){1-1} \cmidrule(l{3pt}r{3pt}){3-4}
   & Koefficient & Nedre & Øvre & Standardfejl & $t$-værdi & $p$\\
 \midrule
-\rowcolor{gray!6}  Afskæring & 0.078 & -0.275 & 0.431 & 0.179 & 0.436 & 0.663\\
-$x_t^{\text{dp}}$ & 0.005 & -0.063 & 0.074 & 0.035 & 0.156 & 0.876\\
-\rowcolor{gray!6}  $x_t^{\text{pe}}$ & -0.007 & -0.089 & 0.076 & 0.042 & -0.156 & 0.876\\
-$x_t^{\text{bm}}$ & 0.040 & -0.114 & 0.194 & 0.078 & 0.510 & 0.611\\
-\rowcolor{gray!6}  $x_t^{\sigma_{\text{a}}^2}$ & 0.620 & -0.721 & 1.961 & 0.681 & 0.911 & 0.363\\
-$x_t^{\text{hml}}$ & -0.005 & -0.011 & 0.000 & 0.003 & -1.860 & 0.064\\
-\rowcolor{gray!6}  $x_t^{\text{smb}}$ & \textbf{-0.005} & -0.010 & -0.001 & 0.002 & -2.274 & 0.024\\
-$x_t^{\text{b}}$ & \textbf{ 3.509} & 0.624 & 6.394 & 1.465 & 2.396 & 0.017\\
-\rowcolor{gray!6}  $x_t^{\text{ts}}$ & 9.147 & -0.253 & 18.546 & 4.772 & 1.917 & 0.056\\
-$x_t^{\text{ys}}$ & -6.204 & -12.411 & 0.004 & 3.152 & -1.968 & 0.050\\
-\rowcolor{gray!6}  $x_t^{\text{cs}}$ & -3.231 & -8.106 & 1.643 & 2.475 & -1.306 & 0.193\\
-$x_t^{\text{ds}}$ & 0.898 & -9.399 & 11.195 & 5.228 & 0.172 & 0.864\\
-\rowcolor{gray!6}  $x_t^{\text{fr}}$ & \textbf{-1.073} & -1.946 & -0.199 & 0.443 & -2.419 & 0.016\\
+\rowcolor{gray!6}  Afskæring & \textbf{ 0.046} & 0.011 & 0.081 & 0.018 & 2.582 & 0.010\\
+$x_t^{\text{dp}_{\text{d}}}$ & -0.043 & -0.336 & 0.250 & 0.149 & -0.292 & 0.771\\
+\rowcolor{gray!6}  $x_t^{\text{pe}_{\text{d}}}$ & -0.024 & -0.079 & 0.032 & 0.028 & -0.831 & 0.407\\
+$x_t^{\text{bm}_{\text{d}}}$ & -0.188 & -0.611 & 0.235 & 0.215 & -0.877 & 0.381\\
+\rowcolor{gray!6}  $x_t^{\sigma_{\text{a}}^2}$ & 1.081 & -0.367 & 2.529 & 0.735 & 1.471 & 0.143\\
+$x_t^{\text{hml}}$ & -0.004 & -0.010 & 0.002 & 0.003 & -1.227 & 0.221\\
+\rowcolor{gray!6}  $x_t^{\text{smb}}$ & \textbf{-0.007} & -0.012 & -0.001 & 0.003 & -2.479 & 0.014\\
+$x_t^{\text{b}_{\text{d}}}$ & -1.794 & -4.777 & 1.189 & 1.514 & -1.185 & 0.237\\
+\rowcolor{gray!6}  $x_t^{\text{ts}}$ & \textbf{11.733} & 4.874 & 18.591 & 3.482 & 3.370 & 0.001\\
+$x_t^{\text{ys}}$ & \textbf{-6.900} & -12.363 & -1.437 & 2.773 & -2.488 & 0.014\\
+\rowcolor{gray!6}  $x_t^{\text{cs}}$ & \textbf{-4.773} & -7.538 & -2.008 & 1.404 & -3.401 & 0.001\\
+$x_t^{\text{ds}}$ & 3.331 & -1.342 & 8.004 & 2.372 & 1.404 & 0.162\\
+\rowcolor{gray!6}  $x_t^{\text{fr}_{\text{d}}}$ & -0.603 & -1.734 & 0.529 & 0.574 & -1.049 & 0.295\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -2072,19 +2084,19 @@ $x_t^{\text{ds}}$ & 0.898 & -9.399 & 11.195 & 5.228 & 0.172 & 0.864\\
 \cmidrule(l{3pt}r{3pt}){1-1} \cmidrule(l{3pt}r{3pt}){3-4}
   & Koefficient & Nedre & Øvre & Standardfejl & $t$-værdi & $p$\\
 \midrule
-\rowcolor{gray!6}  Afskæring & 0.069 & -0.055 & 0.193 & 0.063 & 1.102 & 0.271\\
-$x_t^{\text{dp}}$ & 0.017 & -0.011 & 0.046 & 0.015 & 1.191 & 0.235\\
-\rowcolor{gray!6}  $x_t^{\text{pe}}$ & -0.008 & -0.023 & 0.007 & 0.007 & -1.062 & 0.289\\
-$x_t^{\text{bm}}$ & -0.017 & -0.057 & 0.023 & 0.021 & -0.826 & 0.409\\
-\rowcolor{gray!6}  $x_t^{\sigma_{\text{a}}^2}$ & \textbf{-0.851} & -1.568 & -0.134 & 0.364 & -2.337 & 0.020\\
-$x_t^{\text{hml}}$ & 0.000 & -0.002 & 0.003 & 0.001 & 0.353 & 0.724\\
-\rowcolor{gray!6}  $x_t^{\text{smb}}$ & \textbf{-0.003} & -0.006 & -0.001 & 0.001 & -2.594 & 0.010\\
-$x_t^{\text{b}}$ & \textbf{ 2.387} & 0.073 & 4.701 & 1.175 & 2.032 & 0.043\\
-\rowcolor{gray!6}  $x_t^{\text{ts}}$ & -1.056 & -3.619 & 1.507 & 1.301 & -0.812 & 0.418\\
-$x_t^{\text{ys}}$ & -1.705 & -4.000 & 0.591 & 1.165 & -1.463 & 0.145\\
-\rowcolor{gray!6}  $x_t^{\text{cs}}$ & \textbf{ 2.102} & 0.777 & 3.426 & 0.672 & 3.126 & 0.002\\
-$x_t^{\text{ds}}$ & -0.485 & -2.873 & 1.902 & 1.212 & -0.400 & 0.689\\
-\rowcolor{gray!6}  $x_t^{\text{fr}}$ & \textbf{-0.596} & -1.134 & -0.059 & 0.273 & -2.186 & 0.030\\
+\rowcolor{gray!6}  Afskæring & \textbf{-0.020} & -0.033 & -0.006 & 0.007 & -2.930 & 0.004\\
+$x_t^{\text{dp}_{\text{d}}}$ & -0.010 & -0.111 & 0.092 & 0.051 & -0.188 & 0.851\\
+\rowcolor{gray!6}  $x_t^{\text{pe}_{\text{d}}}$ & -0.016 & -0.058 & 0.025 & 0.021 & -0.784 & 0.434\\
+$x_t^{\text{bm}_{\text{d}}}$ & 0.041 & -0.098 & 0.179 & 0.070 & 0.578 & 0.564\\
+\rowcolor{gray!6}  $x_t^{\sigma_{\text{a}}^2}$ & \textbf{-0.802} & -1.578 & -0.025 & 0.394 & -2.034 & 0.043\\
+$x_t^{\text{hml}}$ & 0.000 & -0.002 & 0.002 & 0.001 & 0.097 & 0.923\\
+\rowcolor{gray!6}  $x_t^{\text{smb}}$ & -0.002 & -0.005 & 0.000 & 0.001 & -1.753 & 0.081\\
+$x_t^{\text{b}_{\text{d}}}$ & -0.277 & -3.151 & 2.596 & 1.459 & -0.190 & 0.849\\
+\rowcolor{gray!6}  $x_t^{\text{ts}}$ & 0.252 & -2.478 & 2.981 & 1.386 & 0.182 & 0.856\\
+$x_t^{\text{ys}}$ & -2.089 & -4.583 & 0.404 & 1.266 & -1.651 & 0.100\\
+\rowcolor{gray!6}  $x_t^{\text{cs}}$ & \textbf{ 1.256} & 0.292 & 2.220 & 0.490 & 2.566 & 0.011\\
+$x_t^{\text{ds}}$ & 0.539 & -1.226 & 2.304 & 0.896 & 0.601 & 0.548\\
+\rowcolor{gray!6}  $x_t^{\text{fr}_{\text{d}}}$ & \textbf{-0.919} & -1.441 & -0.396 & 0.265 & -3.464 & 0.001\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -2105,19 +2117,19 @@ $x_t^{\text{ds}}$ & -0.485 & -2.873 & 1.902 & 1.212 & -0.400 & 0.689\\
 \cmidrule(l{3pt}r{3pt}){1-1} \cmidrule(l{3pt}r{3pt}){3-4}
   & Koefficient & Nedre & Øvre & Standardfejl & $t$-værdi & $p$\\
 \midrule
-\rowcolor{gray!6}  Afskæring & 0.040 & -0.097 & 0.176 & 0.069 & 0.572 & 0.568\\
-$x_t^{\text{dp}}$ & 0.015 & -0.015 & 0.045 & 0.015 & 0.979 & 0.329\\
-\rowcolor{gray!6}  $x_t^{\text{pe}}$ & 0.000 & -0.026 & 0.026 & 0.013 & -0.021 & 0.983\\
-$x_t^{\text{bm}}$ & -0.011 & -0.057 & 0.035 & 0.023 & -0.476 & 0.635\\
-\rowcolor{gray!6}  $x_t^{\sigma_{\text{a}}^2}$ & -1.162 & -2.467 & 0.142 & 0.662 & -1.755 & 0.080\\
-$x_t^{\text{hml}}$ & 0.002 & -0.001 & 0.005 & 0.001 & 1.203 & 0.230\\
-\rowcolor{gray!6}  $x_t^{\text{smb}}$ & \textbf{-0.004} & -0.007 & -0.001 & 0.001 & -2.836 & 0.005\\
-$x_t^{\text{b}}$ & 2.140 & -0.382 & 4.662 & 1.280 & 1.671 & 0.096\\
-\rowcolor{gray!6}  $x_t^{\text{ts}}$ & -0.288 & -3.119 & 2.543 & 1.437 & -0.200 & 0.842\\
-$x_t^{\text{ys}}$ & -1.275 & -3.768 & 1.217 & 1.265 & -1.008 & 0.315\\
-\rowcolor{gray!6}  $x_t^{\text{cs}}$ & 1.329 & -0.186 & 2.845 & 0.769 & 1.728 & 0.085\\
-$x_t^{\text{ds}}$ & 1.754 & -1.147 & 4.656 & 1.473 & 1.191 & 0.235\\
-\rowcolor{gray!6}  $x_t^{\text{fr}}$ & \textbf{-0.751} & -1.291 & -0.211 & 0.274 & -2.739 & 0.007\\
+\rowcolor{gray!6}  Afskæring & \textbf{-0.024} & -0.039 & -0.009 & 0.008 & -3.216 & 0.001\\
+$x_t^{\text{dp}_{\text{d}}}$ & -0.030 & -0.141 & 0.080 & 0.056 & -0.539 & 0.590\\
+\rowcolor{gray!6}  $x_t^{\text{pe}_{\text{d}}}$ & -0.030 & -0.094 & 0.033 & 0.032 & -0.939 & 0.349\\
+$x_t^{\text{bm}_{\text{d}}}$ & 0.052 & -0.104 & 0.208 & 0.079 & 0.658 & 0.511\\
+\rowcolor{gray!6}  $x_t^{\sigma_{\text{a}}^2}$ & -0.876 & -1.819 & 0.067 & 0.479 & -1.829 & 0.069\\
+$x_t^{\text{hml}}$ & 0.001 & -0.002 & 0.004 & 0.001 & 0.623 & 0.534\\
+\rowcolor{gray!6}  $x_t^{\text{smb}}$ & -0.003 & -0.005 & 0.000 & 0.001 & -1.934 & 0.054\\
+$x_t^{\text{b}_{\text{d}}}$ & -0.692 & -4.200 & 2.817 & 1.781 & -0.388 & 0.698\\
+\rowcolor{gray!6}  $x_t^{\text{ts}}$ & 1.497 & -1.729 & 4.723 & 1.638 & 0.914 & 0.361\\
+$x_t^{\text{ys}}$ & -2.572 & -5.448 & 0.303 & 1.460 & -1.762 & 0.079\\
+\rowcolor{gray!6}  $x_t^{\text{cs}}$ & 0.888 & -0.231 & 2.007 & 0.568 & 1.563 & 0.119\\
+$x_t^{\text{ds}}$ & 1.216 & -1.070 & 3.503 & 1.161 & 1.048 & 0.296\\
+\rowcolor{gray!6}  $x_t^{\text{fr}_{\text{d}}}$ & \textbf{-1.151} & -1.878 & -0.425 & 0.369 & -3.122 & 0.002\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -2284,7 +2296,7 @@ Risikofri & 0.000 & 0.000 & -2.136 & 0.216 & 0.608 & -1.447 & 0.388 & 0.694\\
 \end{tabular}
 \begin{tablenotes}
 \item \textit{Note: } 
-\item \textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de sande momenter. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for et delmængde af risikoaversioner.}
+\item \textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de sande momenter. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -2293,6 +2305,7 @@ Risikofri & 0.000 & 0.000 & -2.136 & 0.216 & 0.608 & -1.447 & 0.388 & 0.694\\
 
 \caption{\label{tab:sum-1}Gengivelse af de beregnede porteføljer ved brug af de simulerede afkast, fra første simulering.}
 \centering
+\begin{threeparttable}
 \begin{tabular}[t]{lrrrrrrrr}
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{1}{c}{GMV} & \multicolumn{1}{c}{Tangens} & \multicolumn{3}{c}{CRRA} & \multicolumn{3}{c}{CARA} \\
@@ -2309,12 +2322,18 @@ Risikofri & 0.000 & 0.000 & -2.239 & 0.190 & 0.595 & -1.547 & 0.363 & 0.682\\
 \em{Estimeret volatilitet} & \em{8.020} & \em{15.559} & \em{45.933} & \em{11.483} & \em{5.742} & \em{39.626} & \em{9.907} & \em{4.953}\\
 \bottomrule
 \end{tabular}
+\begin{tablenotes}
+\item \textit{Note: } 
+\item \textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de simulerede momenter, fra første simulering. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne.  Samt de estimerede forventede afkast for hver af porteføljerne og den estimerede volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}
+\end{tablenotes}
+\end{threeparttable}
 \end{table}
 
 \begin{table}[!h]
 
 \caption{\label{tab:sum-2}Gengivelse af de beregnede porteføljer ved brug af de simulerede afkast, fra anden simulering.}
 \centering
+\begin{threeparttable}
 \begin{tabular}[t]{lrrrrrrrr}
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{1}{c}{GMV} & \multicolumn{1}{c}{Tangens} & \multicolumn{3}{c}{CRRA} & \multicolumn{3}{c}{CARA} \\
@@ -2331,12 +2350,18 @@ Risikofri & 0.000 & 0.000 & -1.009 & 0.498 & 0.749 & -0.264 & 0.684 & 0.842\\
 \em{Estimeret volatilitet} & \em{8.389} & \em{13.221} & \em{22.988} & \em{5.747} & \em{2.873} & \em{16.710} & \em{4.178} & \em{2.089}\\
 \bottomrule
 \end{tabular}
+\begin{tablenotes}
+\item \textit{Note: } 
+\item \textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de simulerede momenter, fra anden simulering. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne.  Samt de estimerede forventede afkast for hver af porteføljerne og den estimerede volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}
+\end{tablenotes}
+\end{threeparttable}
 \end{table}
 
 \begin{table}[!h]
 
 \caption{\label{tab:sum-3}Gengivelse af de beregnede porteføljer ved brug af de simulerede afkast, fra tredje simulering.}
 \centering
+\begin{threeparttable}
 \begin{tabular}[t]{lrrrrrrrr}
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{1}{c}{GMV} & \multicolumn{1}{c}{Tangens} & \multicolumn{3}{c}{CRRA} & \multicolumn{3}{c}{CARA} \\
@@ -2353,6 +2378,11 @@ Risikofri & 0.000 & 0.000 & -2.033 & 0.242 & 0.621 & -1.350 & 0.412 & 0.706\\
 \em{Estimeret volatilitet} & \em{8.283} & \em{15.386} & \em{42.658} & \em{10.665} & \em{5.332} & \em{36.159} & \em{9.040} & \em{4.520}\\
 \bottomrule
 \end{tabular}
+\begin{tablenotes}
+\item \textit{Note: } 
+\item \textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de simulerede momenter, fra tredje simulering. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne. Samt de estimerede forventede afkast for hver af porteføljerne og den estimerede volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}
+\end{tablenotes}
+\end{threeparttable}
 \end{table}
 
 Ved brug af de sande momenter, hælder minimum varians porteføljen mod Aktiv 3, med den relative laveste varians. Se Tabel \ref{tab:sum-true}. Omtrent en tredjedel af porteføljen er eksponeret i Aktiv 1 og Aktiv 2 har den laveste vægtning givet dens høje relative varians. Tangensporteføljen består af to lange positioner i Aktiv 1 og Aktiv 2, tilsammen finansieret af en kort position i Aktiv 3, hvilket reflekterer rangeringen af aktiverne ift. deres \emph{Sharpe Ratio}.
@@ -2534,7 +2564,7 @@ ved at vælge følgen af vægte \(\left\{\bm{\alpha}_{t+k-2}^2, \bm{\alpha}_{t+k
 \hypertarget{policy-funktionen}{%
 \subsection{\texorpdfstring{\emph{Policy}-funktionen}{Policy-funktionen}}\label{policy-funktionen}}
 
-Maksimeringsproblemet på tidspunkt \(t+k-1\) er uændret ift. problemet som blev beskrevet ovenfor.
+Maksimeringsproblemet på tidspunkt \((t+k-1)\) er uændret ift. problemet som blev beskrevet ovenfor.
 \[\max_{\bm{\alpha}_{t+k-1}^1} \mathbb{E}_{t+k-1}[\exp((1-\gamma)r_{p,t+k})] = \exp\left((1-\gamma) \mathbb{E}_{t+k-1}[r_{p,t+k}]+\frac{1}{2}(1-\gamma)^2 \mathbb{V}_{t+k-1}[r_{p,t+k}]\right).\]
 
 Ved brug af selektionsmatricerne \(\bm{H}_x\) og \(\bm{H}_1\), er de første to momenter af porteføljeafkastet givet ved
@@ -2560,12 +2590,12 @@ A_0^1&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1}\left(\bm{\Phi}_0^x + \frac{1}{2}\b
 A_1^1&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1}\bm{\Phi}_1^x.
 \end{align*}
 
-Dette afslutter udledningen for \emph{policy}-funktionen på tidspunkt \(t+k-1\).
+Dette afslutter udledningen for \emph{policy}-funktionen på tidspunkt \((t+k-1)\).
 
 \hypertarget{value-funktionen}{%
 \subsection{\texorpdfstring{\emph{Value}-funktionen}{Value-funktionen}}\label{value-funktionen}}
 
-Udledningen for \emph{value}-funktionen på tidspunkt \(t+k-1\) startes med substitution af Ligning \eqref{eq:pol1p} ind i portefølje afkast momenterne. Dette gør, at de kan omskrives til funktioner af \(A_i^1\) koefficienterne.
+Udledningen for \emph{value}-funktionen på tidspunkt \((t+k-1)\) startes med substitution af Ligning \eqref{eq:pol1p} ind i portefølje afkast momenterne. Dette gør, at de kan omskrives til funktioner af \(A_i^1\) koefficienterne.
 \begin{align*}
 \mathbb{E}_{t+k-1}[r_{p,t+k}] &= (A_0^1 + A_1^1\bm{z}_{t+k-1})' (\bm{\Phi}_0^x +\bm{\Phi}_1^x\bm{z}_{t+k-1}) + (\bm{\Phi}_0^0 +\bm{\Phi}_1^0 \bm{z}_{t+k-1})\\
 &\quad+\frac{1}{2} (A_0^1 + A_1^1\bm{z}_{t+k-1})' (\bm{\sigma}_x^2-\bm{\Sigma}_{xx}(A_0^1 + A_1^1\bm{z}_{t+k-1}))\\
@@ -2576,7 +2606,7 @@ Udledningen for \emph{value}-funktionen på tidspunkt \(t+k-1\) startes med subs
 &\quad+\bm{z}_{t+k-1}' A_1^{1\prime} (\bm{\Sigma}_{xx} A_0^1 + 2\bm{\sigma}_{0x}) + \bm{z}_{t+k-1}' A_1^{1\prime} \bm{\Sigma}_{xx} A_1^1 \bm{z}_{t+k-1}.
 \end{align*}
 
-Siden hvert led i ovenstående summer er en skalar, kan ethvert komponent, i hvert led, frit udskiftes med dets transponerede. Dette medfører at leddene kan skrives ift. \(\bm{z}_{t+k-1}\) og \(\bm{z}_{t+k-1}'\). Indsættes ovenstående momenter nu i \(t+k-1\) optimeringsfunktionen, opnåes en forventning af en eksponentiel polynomisk funktion af tilstandsvektoren, som kan beregnes i lukket form, for at opnå den maksimerede \emph{value}-funktion
+Siden hvert led i ovenstående summer er en skalar, kan ethvert komponent, i hvert led, frit udskiftes med dets transponerede. Dette medfører at leddene kan skrives ift. \(\bm{z}_{t+k-1}\) og \(\bm{z}_{t+k-1}'\). Indsættes ovenstående momenter nu i \((t+k-1)\) optimeringsfunktionen, opnåes en forventning af en eksponentiel polynomisk funktion af tilstandsvektoren, som kan beregnes i lukket form, for at opnå den maksimerede \emph{value}-funktion
 \[\mathbb{E}_{t+k-1}[\exp((1-\gamma)r_{p,t+k}^*)] = \exp\left((1-\gamma) (B_0^1 + B_1^1 \bm{z}_{t+k-1}+\bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1})\right),\]
 
 hvor
@@ -2592,7 +2622,7 @@ B_2^1&=A_1^{1\prime} (\bm{\Phi}_1^x - \frac{\gamma}{2} \bm{\Sigma}_{xx} A_1^1).
 \hypertarget{policy-funktionen-1}{%
 \subsection{\texorpdfstring{\emph{Policy}-funktionen}{Policy-funktionen}}\label{policy-funktionen-1}}
 
-Det næstsidste periode problem, \(t+k-2\), involverer at vælge porteføljevægtene \(\bm{\alpha}_{t+k-2}^2\), som maksimerer den følgene funktion
+Det næstsidste periode problem, \((t+k-2)\), involverer at vælge porteføljevægtene \(\bm{\alpha}_{t+k-2}^2\), som maksimerer den følgende funktion
 \[\frac{W_{t+k-2}^{1-\gamma}}{1-\gamma} \mathbb{E}_{t+k-2}[\exp((1-\gamma) r_{p,t+k-1}) \exp((1-\gamma) (B_0^1 + B_1^1 \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' B_2^1\bm{z}_{t+k-1}))]\]
 
 Eftersom hverken \(\tfrac{1}{1-\gamma}\) eller \(W_{t+k-2}^{1-\gamma}\) påvirker optimum kan det fjernes fra optimeringsfunktionen. Ved brug af Taylor approksimationen, \citep{CampVicCha2003}, kan \((t+k-1)\) log porteføljeafkastet beskrives som en funktion af \(\bm{z}_{t+k-1}\). Dette tillader, at leddene kan samles i eksponentialet og derefter beregne forventningen.
@@ -2604,12 +2634,118 @@ r_{p,t+k-1}&=\bm{\alpha}_{t+k-2}^{2\prime} + \bm{x}_{t+k-1} + r_{0,t+k-1} + \fra
 \end{align*}
 
 Ved substition af ovenstående ind i \((t+k-2)\) optimeringsfunktionen fås
-\[\mathbb{E}_{t+k-2}[\exp((1-\gamma)  (\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} (\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-2}^{2}) + B_0^1 + (B_1^1 + \begin{pmatrix} 1 & \bm{\alpha}_{t+k-2}^{2} & \bm{0}\end{pmatrix} ) \bm{z}_{t+k-1} + \bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1} ))].\]
+\begin{align*}
+\mathbb{E}_{t+k-2}[&\exp((1-\gamma)  (\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} (\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-2}^{2}) + B_0^1 + (B_1^1 + \begin{pmatrix} 1 & \bm{\alpha}_{t+k-2}^{2} & \bm{0}\end{pmatrix} ) \bm{z}_{t+k-1}\\
+                   &+ \bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1} ))].
+\end{align*}
 
 Fra ovenstående ses, at investoren på tidspunkt \((t+k-2)\) ved, at kun de sidste to summer i eksponentialet er stokastiske. Derfor fokusers, for nu, på at evaluere den følgende funktion, givet investorens valg af \(\bm{\alpha}_{t+k-2}^{2}\)
 \[\mathbb{E}_{t+k-2}[ \exp( (1-\gamma) ((B_1^1 + \begin{pmatrix} 1 & \bm{\alpha}_{t+k-2}^{2} & \bm{0}\end{pmatrix} ) \bm{z}_{t+k-1} + \bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1}  )) ].\]
 
-Resultatet af denne beregning vil herefter substitueres ind i den oprindelige optimeringsfunktion, for at opnå forvetningen af \emph{value}-funktionen betinget på investorens porteføljevalg, som herefter er maksimeret over \(\bm{\alpha}_{t+k-2}^{2}\).
+Resultatet af denne beregning vil herefter substitueres ind i den oprindelige optimeringsfunktion, for at opnå forvetningen af \emph{value}-funktionen betinget på investorens porteføljevalg, som herefter bliver maksimeret over \(\bm{\alpha}_{t+k-2}^{2}\).
+
+Fordelingen af \(\bm{z}_{t+k-1}\) betinget på tidspunkt \((t+k-2)\)-informationen er givet ved
+\[\bm{z}_{t+k-1\mid t+k-2}\sim\mathcal{N}(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2},\bm{\Sigma}_v).\]
+
+Dette betyder også at Ligning ?? beregner den forventede værdi af det eksponentielle kvadratiske polynomium i en normalfordelt stokastisk variabel.
+
+For at lette notationen indføres nu de følgende hjælpevariable
+\begin{align*}
+C_1^2 &= (1-\gamma) \begin{pmatrix} 1\\ \bm{\alpha}_{t+k-2}^{2} \\ \bm{0} \end{pmatrix} + (1-\gamma) B_1^{1\prime}\\
+C_2^2 &= (1-\gamma) B_2^1.
+\end{align*}
+
+Kombineres ovenstående hjælpevariable med Ligning ?? og den betingende fordeling af \(\bm{z}_{t+k-1}\) fås
+\begin{align*}
+\mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} ) ] = &\mathbb{E}_{t+k-2}[ \exp ( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} + \bm{v}_{t+k-2} )\\
+                                                                                                  &+ (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} + \bm{v}_{t+k-2})' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\\
+                                                                                                  &+ \bm{v}_{t+k-2}) ) ].
+\end{align*}
+
+Ovenstående Ligning ?? har led i eksponentialet, som enten er konstanter, lineære kombinationer af \(\bm{v}_{t+k-2}\) stødene eller kvadratiske i \(\bm{v}_{t+k-2}\). Derfor kan vi omarrangere leddene som følger
+\begin{align*}
+\mathbb{E}_{t+k-2}[\exp(\cdot)] &= \exp( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ))\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}[\exp( C_1^{2\prime} \bm{v}_{t+k-2}+ \bm{v}_{t+k-2}' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^{2} \bm{v}_{t+k-2}'\\
+                                &\,\,\quad+ \bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} )]\\
+                                &= \exp( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ))\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}[\exp( C_1^{2\prime} \bm{v}_{t+k-2}+ \bm{v}_{t+k-2}' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^{2} \bm{v}_{t+k-2}')\\
+                                &\,\,\quad\exp(\bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} )]\\
+                                &=\exp( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ))\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}[ \exp(\bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} ) \exp( C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2} )   \bm{v}_{t+k-2}],
+\end{align*}
+
+hvor \(\Tilde{C}_2^{2}\) er gennemsnittet af ikke-tilde-matricen og dens egen transponerede. Ved brug af dette sikres, at resultatet ikke er afhængig af symmetrien af de underliggende matricer. Hvis den underliggende matrix er symmetrisk vil tilde-notationen blive droppet, siden den underliggende matrix og tilde-matricen da vil være identiske.
+
+Herfra er der to måder at evaluere ovenstående forventning: den komplementære approksimation og den eksakte evaluering. Den eksakte evaluering er først introduceret af \citep{CampVicCha2003}. Begge måder vil blive præsenteret, selvom de medfører empiriske resultater, som ikke er til at skelne mellem, \citep{JurVic2011}.
+
+\hypertarget{komplementuxe6r-approksimation}{%
+\subsubsection{Komplementær approksimation}\label{komplementuxe6r-approksimation}}
+
+Først beskrives den komplementære approksimation. Her bygger resultatet på, at alle led med orden højere end \(\text{d}t\) har forsvindende sandsynlighed i grænsen, når tidsintervallet går mod nul. Altså vil kun de lineære led fra Ligning ?? være stokastiske. Altså er de lineære led af orden \(\text{d}Z\), mens de kvadratiske led er af orden \(\text{d}t\).
+\[\lim_{\Delta t \to 0}\frac{\exp( \bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} )}{\text{d}t}=\exp( \text{tr}(C_2^2 \bm{\Sigma}_v) ).\]
+
+Dette medfører at Ligning ?? simplificeres til
+\begin{align*}
+\lim_{\Delta t \to 0}\mathbb{E}_{t+k-2}[\exp(\cdot)] &=\exp( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}) +  \text{tr}(C_2^2 \bm{\Sigma}_v))\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2} )   \bm{v}_{t+k-2}],
+\end{align*}
+
+her observeres, at forventningen i Ligning ?? er forventningen af en lognormal stokastisk variabel, som er givet ved
+\begin{align*}
+\lim_{\Delta t \to 0}&\mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2} )   \bm{v}_{t+k-2}]\\
+&=\exp(\frac{1}{2} (C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2})' \bm{\Sigma}_v (C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2})) 
+\end{align*}
+
+Kombineres Ligning ?? og Ligning ?? ses, at Ligning ?? i grænsen for kontinuert tid er lig
+\begin{align*}
+\lim_{\Delta t \to 0} &\mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} )]\\
+                      &=\exp( \text{tr}(C_2^2\bm{\Sigma}_v) + D_0^{(t+k-2)} + \frac{1}{2} D_1^{(t+k-2)} \bm{\Sigma}_v^{-1} D_1^{(t+k-2)'} ),
+\end{align*}
+
+hvor
+\begin{align*}
+D_0^{(t+k-2)}&=C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \\
+D_1^{(t+k-2)}&=C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2}.
+\end{align*}
+
+\hypertarget{eksakt-evaluering}{%
+\subsubsection{Eksakt evaluering}\label{eksakt-evaluering}}
+
+Ved brug af den eksakte evaluering foreslået af \citep{CampVicCha2003} er en løsning på lukket form stadig tilgengælig. Ved brug af den etablerede notation kan Ligning (46) fra det Tekniske Appendiks til \citep{CampVicCha2003} anvendes, for at opnå følgende evaluering af forventningen
+\begin{align*}
+&\mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} ) ]\\
+&= \frac{\left| \bm{\Sigma}_v \right|^{-\tfrac{1}{2}}}{\left| (\bm{\Sigma}_v^{-1} - 2 D_2^{(t+k-2)}) \right|^{\tfrac{1}{2}}}\exp(D_0^{(t+k-2)} + \frac{1}{2} D_1^{(t+k-2)} (\bm{\Omega}^1)^{-1} D_1^{(t+k-2)\prime}),
+\end{align*}
+
+hvor følgende notation er introduceret
+\begin{align*}
+D_2^2&=C_2^2\\
+\bm{\Omega}^1&=(\bm{\Sigma}_v^{-1} - 2D_2^2)^{-1}=(\bm{\Sigma}_v^{-1}  - 2(1-\gamma) B_2^1)^{-1}.
+\end{align*}
+
+\hypertarget{optimalt-portefuxf8ljevalg}{%
+\subsubsection{Optimalt porteføljevalg}\label{optimalt-portefuxf8ljevalg}}
+
+For et udlede den optimale portefølje strategi, droppes konstanten fra Ligning ??, siden dette ikke påvirker optimum. Altså ser investorens problem på tidspunkt \((t+k-2)\) således ud
+\[\max_{\bm{\alpha}_{t+k-2}^2}\mathcal{L}= ( (1-\gamma) (\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} (\bm{\sigma}_x^2 - \bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2) + B_0^1 + D_0^{(t+k-2)} + \frac{1}{2} D_1^{(t+k-2)} \bm{\Omega}^1 D_1^{(t+k-2)\prime})).\]
+
+Førsteordensbetingelsen bliver da
+\begin{align*}
+\frac{\partial \mathcal{L}}{\partial\bm{\alpha}_{t+k-2}^2 }&=(1-\gamma) (\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2} + \frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 ) + \frac{1}{2} (\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2})' (\bm{\Omega}^1+\bm{\Omega}^{1\prime}) D_1^{(t+k-2)\prime} = 0\\
+&\Updownarrow\\
+\frac{\partial \mathcal{L}}{\partial\bm{\alpha}_{t+k-2}^2 }&=(1-\gamma) (\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2} + \frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 ) + (\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2})' \Tilde{\bm{\Omega}}^1 D_1^{(t+k-2)\prime} = 0.
+\end{align*}
+
+På baggrund af notationen for \(D_1^2\) kan dens afledte mht. porteføljevægtene, \(\bm{\alpha}_{t+k-2}^2\), relateres til de risikobærende merafkast aktivers selektions matrix
+\[\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2} = (1-\gamma) \begin{pmatrix} \bm{0} \\ \bm{I}_{n-1} \\ \bm{0}\end{pmatrix}=(\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2})' = (1-\gamma)\bm{H}_x.\]
+
+Dette giver den følgende form for førsteordensbetingelsen
+\begin{align*}
+\frac{\partial \mathcal{L}}{\partial\bm{\alpha}_{t+k-2}^2 }&= \bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 +\bm{H}_x\Tilde{\bm{\Omega}}^{1}(C_1^2+ 2\Tilde{C}_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}))\\
+&=\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 + (1-\gamma)\Tilde{\bm{\Omega}}^{1} (\begin{pmatrix} 1\\ \bm{\alpha}_{t+k-2}^2 \\ \bm{0} \end{pmatrix} + B_1^{1\prime} + 2\Tilde{B}_2^1 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}))\\
+&=\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 + (1-\gamma)(\Tilde{\bm{\Omega}}_{x0}^{1} + \Tilde{\bm{\Omega}}_{xx}^{1} \bm{\alpha}_{t+k-2}^2 + \Tilde{\bm{\Omega}}_{x} B_1^{1\prime}+ 2\Tilde{\bm{\Omega}}_{x}^1 \Tilde{B}_2^1 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}))\\
+&=((1-\gamma)\Tilde{\bm{\Omega}}_{xx}^{1} - \bm{\Sigma}_{xx} )  \bm{\alpha}_{t+k-2}^2 + \bm{\Phi}_0^x + (1-\gamma)(\Tilde{\bm{\Omega}}_{x0}^{1} + \Tilde{\bm{\Omega}}_{x}^{1}(B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0))+ \frac{1}{2} \bm{\sigma}_x^2 + (\bm{\Phi}_1^x + 2(1-\gamma)\Tilde{\bm{\Omega}}_{x}^{1} \Tilde{B}_2^1\bm{\Phi}_1 )\bm{z}_{t+k-2}=0.
+\end{align*}
 
 \hypertarget{value-funktionen-1}{%
 \subsection{\texorpdfstring{\emph{Value}-funktionen}{Value-funktionen}}\label{value-funktionen-1}}

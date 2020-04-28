@@ -258,6 +258,195 @@ hvilket er en geometrisk og kontinuert følge. Logafkastet af aktiver vil skabe 
 
 # Afkast
 
+# VAR
+
+I dette kapitel fastsættes den teoretiske ramme for den empiriske analyse. Dette gøres hovedsageligt ud fra teorien bag [@Userguide2004] med enkelte dele, som varierer.
+\section{Sættet af investeringsmuligheder}
+Først etableres en model, som kan modellere forventet afkast og risiko af aktier på tværs af investeringshorisonter.
+
+\subsection{Afkastdynamikken}
+
+Lad $\bm{z}_{t+1}$ være en $m\times 1$ vektor, hvis indgange er afkastet på alle aktiver som vi vil undersøge samt værdierne af tilstandsvariablene på tidspunkt $t+1$. Denne vektor opskrives som
+    \begin{equation}
+        \bm{z}_{t+1}\equiv
+        \begin{bmatrix}
+        r_{0,t+1}\\
+        \bm{r}_{t+1}-r_{0,t+1}\bm{\ell}\\
+        \bm{s}_{t+1}
+        \end{bmatrix}\equiv
+        \begin{bmatrix}
+        r_{0,t+1}\\
+        \bm{x}_{t+1}\\
+        \bm{s}_{t+1}
+        \end{bmatrix},
+    \end{equation}
+hvor $r_{0,t+1}$ er netto log-afkastet af det aktiv, som vores merafkast for de andre aktiver regnes ud fra, $\bm{x}_{t+1}$ er en vektor af log merafkast for alle andre aktiver, og $\bm{s}_{t+1}$ er en vektor indeholdende realisationerne af tilstandsvariablene. Vi antager samtidig, at der eksisterer $n+1$ klasser af aktiver og $m-n-1$ tilstandsvariable.
+
+\vspace{5mm}
+
+Nu vises, hvordan momenterne af afkastene fremkommer ved brug af en VAR process. Det antages, at aktivernes afkast samt tilstandsvariablene følger en $\text{VAR}(1)$ process
+    \begin{equation}
+        z_{i,t+1}=\varphi_0+\varphi_1 z_{1,t}+\dots+\varphi_i z_{i,t}+\dots+v_{i,t+1},
+    \end{equation}
+hvor hver variabel, $z_{i,t+1}$, afhænger lineært af en konstant, værdien af variablen på tidspunkt $t$, værdien af alle andre variable på tidspunkt $t$ samt et fejlled.
+
+\vspace{5mm}
+
+I matrixnotation fås da følgende kompakteopskrivning
+    \begin{equation}\label{eq:1}
+        \bm{z}_{t+1}=\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_t+\bm{v}_{t+1},
+    \end{equation}
+hvor $\bm{\Phi}$ er en vektor af afskæringer, $\bm{\Phi}_1$ er en kvadratisk matrix, som indeholder hældningskoefficienterne og $\bm{v}_{t+1}$ er en vektor fejlled til: realisationerne af afkast samt alle afkast variable i modellen, med middelværdi $0$.
+
+\vspace{5mm}
+
+For at få stationalitetsbetingelsen opfyldt modellen, antages, at
+    \begin{equation*}
+        |\bm{\Phi}_1|\in(-1,1).
+    \end{equation*}
+Dvs. at determinanten matricen -- bestående af hældningskoefficienter -- er begrænset mellem $-1$ og $1$.
+
+\vspace{5mm}
+
+Slutteligt antages, at fejlleddet er normalfordelt
+    \begin{equation}\label{eq:2}
+        \bm{v}_{t+1}\overset{\text{i.i.d.}}{\sim}\mathcal{N}(0,\bm{\Sigma}_v),
+    \end{equation}
+hvor middelværdien er $0$, som tidligere nævnt, og $\bm{\Sigma}_v$ er kovariansmatricen, som tillige er symmetrisk.
+
+For notationens skyld sættes
+    \begin{equation*}
+        \bm{\Sigma}_v\equiv \mathbb{V}_t(\bm{v}_{t+1})=
+        \begin{bmatrix}
+        \bm{\sigma}_0^2 & \bm{\sigma}_{0x}' & \bm{\sigma}_{0s}'\\
+        \bm{\sigma}_{0x} & \bm{\Sigma}_{xx} & \bm{\Sigma}_{xs}'\\
+        \bm{\sigma}_{0s} & \bm{\Sigma}_{xs} & \bm{\Sigma}_{s}\\
+        \end{bmatrix},
+    \end{equation*}
+hvor indgangene på diagonalen er: variansen af netto afkastet på vores benchmark aktiv, kovariansmatricen af uventede merafkast og kovariansmatricen af stød til tilstandsvariablene. Uden for diagonalen består indgangene af: kovariansen mellem netto afkastet af benchmark aktivet og hhv. merafkastet for alle andre aktiver samt stødene til tilstandsvariablene.
+
+\vspace{5mm}
+
+På trods af den simplificerende antagelse om tidsinvariant varians ikke virker empirisk sandsynlig, er antagelsen relativt uproblematisk givet, at fokus er på det langsigtede porteføljevalg hos investoren. [@Chacko2005] argumenterer -- ved brug af en realistisk kalibreret model af aktieafkast volatilitet -- at størrelsenordenen af volatiliteten af risiko ikke er stor nok til at have indvirkning på porteføljevalget for investorer med en lang investeringshorisont, relativt til porteføljevalg af investorer med en kort investeringshorisont. Herudover viser empiriske undersøgelser, at ændringer i risiko er kortvarige fænomener, [@Camp1987], men samtidig kan kovariansmatricen stadig ændre sig på tværs af investeringshorisonter.
+
+\vspace{5mm}
+
+Den ubetingede middelværdi og kovariansmatrix af $\bm{z}_{t+1}$ er givet ved
+    \begin{align*}
+        \mathbb{E}_t(\bm{z}_{t+1}) &= (\bm{I}_m-\bm{\Phi}_1)^{-1}\bm{\Phi}_0\\
+        \text{vec}(\bm{\Sigma}_{zz}) &= (\bm{I}_{m^2}-\bm{\Phi}_1\otimes\bm{\Phi}_1)^{-1}\text{vec}(\bm{\Sigma}_v).
+    \end{align*}
+Ovenstående ligninger ligger også til grund for determinantbetingelsen: hvis ikke determinanten af $\bm{\Phi}_1$ var begrænset af $-1$ og $1$, ville den ubetingede middelværdi og varians af $\bm{z}_{t+1}$ ikke være defineret.
+
+\subsection{Betingede momenter for $k$-perioder}
+Nu udledes den betingede middelværdi og kovariansmatrix af $(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})$ for enhver horisont $k$. Dette gøres eftersom det akkumulerede $k$-periode afkast fremkommer ved at addere én-periode log-afkast over $k$ perioder. Ved rekursion af \eqref{eq:1} fås
+    \begin{align*}
+        \bm{z}_{t+1}&=\bm{\Phi}_0+\bm{\Phi}_1 \bm{z}_t+\bm{v}_{t+1}\\
+        \bm{z}_{t+2}&=\bm{\Phi}_0+\bm{\Phi}_1 \bm{z}_{t+1}+\bm{v}_{t+2}=\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_1 \bm{z}_t +\bm{\Phi}_1 \bm{v}_{t+1}+\bm{v}_{t+2}\\
+        &\vdots\\
+        \bm{z}_{t+k}&=\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_0+\bm{\Phi}_1^2\bm{\Phi}_0+\dots+\bm{\Phi}_1^{k-1}\bm{\Phi}_0+\bm{\Phi}_1^k \bm{z}_t+\bm{\Phi}_1^{k-1}\bm{v}_{t+1}+\bm{\Phi}_1^{k-2}\bm{v}_{t+2}+\dots+\bm{\Phi}_1 \bm{v}_{t+k-1}+\bm{v}_{t+k}.
+    \end{align*}
+Herefter adderes udtrykkene for $\bm{z}_{t+1}$, $\bm{z}_{t+2},\dots,\bm{z}_{t+k}$ og det følger at
+    \begin{align*}
+        \bm{z}_{t+1}+\dots+\bm{z}_{t+k}=&\left(k+(k-1)\bm{\Phi}_1+(k-2)\bm{\Phi}_1^2+\dots+\bm{\Phi}_1^{k-1}\right)\Phi_0\\
+        &+\left(\bm{\Phi}_1^k+\bm{\Phi}_1^{k-1}+\dots+\bm{\Phi}_1\right)\bm{z}_t\\
+        &+\left(1+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\right)\bm{v}_{t+1}\\
+        &+\left(1+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\right)\bm{v}_{t+2}\\
+        &+\dots\\
+        &+(I+\bm{\Phi}_1)\bm{v}_{t+k-1}+\bm{v}_{t+k}.
+    \end{align*}
+Ved brug af sumoperatoren kan ovenstående skrives på kompakt form
+    \begin{equation}
+        \bm{z}_{t+1}+\dots+\bm{z}_{t+k}=\left(\sum_{i=0}^{k-1} (k-i)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_1^j\right)\bm{z}_t+\sum_{q=1}^k\left(\sum_{p=0}^{k-q} \bm{\Phi}_1^p \bm{v}_{t+q}\right).
+    \end{equation}
+Nu kan de betingede $k$-periode momenter af tilstandsvektoren beregnes. Den betingende middelværdi er
+    \begin{equation}
+        \mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})=\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t,
+    \end{equation}
+hvor antagelsen i \eqref{eq:2} benyttes.
+
+\vspace{5mm}
+
+Den betingede varians er
+    \begin{align}
+        \mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})
+        &=\mathbb{V}_t\left(\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t +\sum_{q=1}^k\left(\sum_{p=0}^{k-q}\bm{\Phi}_1^p \bm{v}_{t+q}\right)\right) \nonumber\\
+        &=\mathbb{V}_t\left(\sum_{q=1}^k\left(\sum_{p=0}^{k-q} \bm{\Phi}_1^p \bm{v}_{t+q}\right)\right) \label{eq:3},
+    \end{align}
+hvor de første to led i variansen forsvinder, da de er konstante eller kendte på tidspunkt $t$. Ved omskrivning af \eqref{eq:3} fås
+    \begin{align*}
+        \mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})&=\mathbb{V}_t\big(\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\bm{v}_{t+1}+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\big)\bm{v}_{t+2}\\
+        &\hphantom{=}+\dots+\big(I+\Phi_1\big)\bm{v}_{t+k-1}+\bm{v}_{t+k}\big)\\
+        &=\Sigma_v+\big(I+\bm{\Phi}_1\big)\Sigma_v(I+\bm{\Phi}_1)'+\big(I+\bm{\Phi}_1+\bm{\Phi}_1\bm{\Phi}_1\big)\Sigma_v\big(I+\bm{\Phi}_1+\bm{\Phi}_1\bm{\Phi}_1\big)'\\
+        &\hphantom{=}+\dots+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\Sigma_v\big(I+\bm{\Phi}_1'+\dots+\bm{\Phi}_1^{k-1}\big)',
+    \end{align*}
+som følger af omskrivning af leddene, og at den betingede kovariansmatrix af $v_{t+i}$ er den samme for alle $i$.
+\subsection{Betingede momenter for $k$-periode afkast}
+Eftersom interessen kun er i den del af VAR-processen, som indeholder afkast, benyttes de såkaldte selektionsmatricer.
+
+Vil vi have det forventede $k$-periode log-(mer)afkast pr. periode, kan følgende benyttes
+    \begin{equation*}
+        \bm{H}_r=\begin{pmatrix}\bm{I}_{n+1} & \bm{0}_{m-n}\end{pmatrix},
+    \end{equation*}
+ved at anvende denne matrix på den betingede middelværdi fås da
+    \begin{equation}
+        \frac{1}{k}\begin{pmatrix}
+        \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
+        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}} \right)
+        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k}).
+    \end{equation}
+Anvendes den på den betingede varians fås
+    \begin{equation}
+        \frac{1}{k}\mathbb{V}_t\begin{pmatrix}
+        r_{0,t+1}^{(k)}\\
+        \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}}
+        \end{pmatrix}=\frac{1}{k}\begin{pmatrix}
+        \sigma_0^2(k) & \bm{\sigma}_{0x}(k)'\\
+        \bm{\sigma}_{0x}(k) & \bm{\Sigma}_{xx}(k)
+        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})\bm{H}_r'.
+    \end{equation}
+Den anden selektionsmatrix som benyttes kan udtrække $k$-periode log-afkastet pr. periode
+    \begin{equation}
+        \bm{M}_r=\begin{pmatrix}
+        1 & \bm{0}_{1\times n} & \bm{0}_{1\times (m-n-1)}\\
+        \bm{\bm{\ell}}_n & \bm{I}_n & \bm{0}_{m-n-1}
+        \end{pmatrix}.\label{eq:sel}
+    \end{equation}
+Anvender vi den på den betingede middelværdi fås
+    \begin{equation}
+        \frac{1}{k}\begin{pmatrix}
+        \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
+        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)} \right)
+        \end{pmatrix}=\frac{1}{k}\bm{M}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k}).
+    \end{equation}
+Slutteligt anvendes den på den betingede varians
+    \begin{equation}
+        \frac{1}{k}\mathbb{V}_t\begin{pmatrix}
+        r_{0,t+1}^{(k)}\\
+        \bm{r}_{t+1}^{(k)}
+        \end{pmatrix}=\frac{1}{k}\bm{\Sigma}_{rr}(k)=\frac{1}{k}\bm{M}_r\mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})\bm{M}_r'.\label{eq:bv}
+    \end{equation}
+    
+\subsection{Bytteforholdet for en VAR-investor}
+En investor, som bruger VAR-processen til at forudsige afkast, vil opfatte afkast-risiko bytteforholdet anderledes end en investor, som benytter den traditionelle metode (estimerer forventede afkast ud fra deres historiske gennemsnit). Mere specifikt benytter VAR-investoren den betingede forventning af afkast fremfor den ubetingede, som den traditionelle investor bruger.
+
+Herudover vil en VAR-investor måle risikoen for hvert aktiv -- på kort sigt -- ud fra dens varians relativt til hvert specifikke aktivs betingede forventning af afkast til forskel for den ubetingede forventning af afkast. En vigtig ting at notere sig, er at den betingede varians er forskellig fra den ubetingede varians. Dette kan lade sig gøre, selv når der arbejdes under antagelsen, at den betingede varians er konstant over tid. Denne antagelse er også den, som arbejdes videre med i analysen. Begrundelsen for, at de er forskellige kommer sig af, at VAR-investoren ved, at noget af den ubetingede volatilitet for hvert aktiv er forudsigelig tidsvariation i afkastet, der derfor ikke tæller som risiko.  
+
+For det tredje vil VAR-investoren vide, at risikoen på lang sigt af hvert aktivs afkast vil være forskelligt fra hvert aktivs risiko på kort sigt. For den traditionelle investor med konstante forventede afkast (de historiske gennemsnit) vil variansen af hvert aktiv være proportional med den tid aktivet holdes i. Annualiserede varianser er uafhængige af tiden, som aktivet bliver holdt i, og derfor vil den traditionelle investor have et konstant tal, som sammenholder risikoen for alle perioder for aktivet. For VAR-investoren vil annualiserede varianser enten stige eller falde, når investeringsperioden øges. Et andet vigtig aspekt er, at annualiserede kovarianser også kan stige eller falde over investeringsperioden.
+    
+## Bias justeret VAR-model
+Ved brug af den analytiske middelværdirette estimator foreslået af [@Pope1990], viser [@Engsted2012] at justering for bias i estimatorerne af middelværdi, i det multivariate setup, kan producere forskellige parameter estimater i den givne VAR($1$)-model. Benyttelse af ordinær lineær regressionsestimater kan resultere i bias pga. den begrænsede stikprøvestørrelse og af den årsag mislede inferensen gjort på baggrund af VAR($1$) estimaterne. Herudover kan variablene besidde autokorrelation, hvis de er udviser vedvarende effekter pga. stød til tidsserien. Den analytiske bias af OLS estimatoren, $\bm{\Phi}_1$, er udledt på baggrund af en Taylor udvidelse af høj orden. Dermed lader vi den analytiske bias, $\bm{B}_T$, være givet ved
+\begin{equation}
+\bm{B}_T=-\frac{\bm{b}}{T}+ O\left(T^{-\frac{3}{2}}\right), \label{eq:bias}
+\end{equation}
+
+hvor $T$ er sample size og tælleren er lig
+$$\bm{b}=\bm{\Sigma}_v\left(\left(\bm{I}-\bm{\Phi}_1'\right)^{-1}+\bm{\Phi}_1'\left(\bm{I}-\left(\bm{\Phi}_1'\right)^2\right)+\sum_{i=1}^m \lambda \left(\bm{I}-\lambda\bm{\Phi}_1'\right)^{-1}\right)\bm{\Sigma}_z^{-1}.$$
+
+Her er $\bm{\Sigma}_v$ den betingede kovariansmatrix af $v_t$, $\lambda$ er vektoren af egenværdier af $\bm{\Phi}_1$, $\bm{I}$ er identitetsvektoren og $m$ er antallet af tilstandsvariable i $\bm{z}$. Bias'en i Ligning \@ref(eq:bias) falder med raten $T^{-\frac{3}{2}}$, som $T\rightarrow \infty$. Den analytiske formel af [@Pope1990] giver ikke bias justerede afskæringer, $\bm{\Phi}_0$, men som [@Engsted2012] pointerer vil dette problem automatisk blive løst af de bias justerede hældninger. Dette sker eftersom det ubetingede aritmetiske gennemsnit af en stationær variabel, er et ikke-biased estimat af den sande middelværdi, og samtidig estimerer OLS præcis middelværdien af variablene i VAR-modellen, ved at fjerne første observation. Altså vil en VAR-model med bias justerede hældninger medføre ikke-biased estimater af $\bm{\Phi}_0$, givet modelrestriktionen, at de ubetingede middelværdier af variablene -- udledt fra VAR koefficienterne -- er lig deres aritmetiske gennemsnit
+ 
+[@Engsted2012] finder både kvantitative og kvalitative effekter ved brug af bias justerede koefficienter ift. de regulere OLS estimater. De viser bl.a. hvordan *hedging* komponentet af porteføljeallokeringen ændrer sig for et kontinuum af risikoaversioner, hvor specielt mellemliggende risikoaversions værdier ($\gamma=2$) er særligt påvirket af biasjusteringen.^[Se evt. Figur 1 i [@Engsted2012].] Her bliver det optimale portefølgevalg påvirket, eftersom bias justeringen afstedkommer reducerede positioner for obligationer og aktier, gennem det intertemporale *hedging demand*, mens positionen for kontanter forøges.
+
 # Porteføljeteori
 I dette kapitel udvides teorien fra Kapitel \@ref(unteo). Mere specifikt sammenkobles porteføljeteorien fra Sektion \@ref(myoinv) og nytteteorien fra Sektion \@ref(typnyt). Dette gøres på baggrund af *CRRA*-nytte, i tilfældet, hvor investoren kan rebalancere sin portefølje periodisk, og i det restringerede tilfælde, hvor ingen rebalancering er tilladt. Herefter beskrives den analytiske løsning til det dynamiske porteføljeproblem foreslået af [@JurVic2011].
 
@@ -426,185 +615,3 @@ Den generelle rekursive løsning til det dynamiske porteføljeproblem er givet v
 hvor $\bm{\Sigma}_x=\begin{pmatrix}\bm{\sigma}_0x & \bm{\Sigma} & \bm{\Sigma}_{xs}'\end{pmatrix}$ og $B_1^{\tau-1}$, $B_2^{\tau-1}$ samt $B_3^{\tau-1}$ er funktioner afhængende af: den resterende investeringshorisont, $\tau$, *RRA*-parameteren, $\gamma$, samt koefficeinterne fra VAR-modellen, [@JurVic2011].
 
 Ovenstående Ligning \@ref(eq:jurvicalpha) giver den fulde analytiske løsning til det intertemporale porteføljeproblem fra Ligning ??. Den optimale portefølje er en sum af to komponenter. Den første del af summen er identisk til den én-periode myopiske portefølje fra Ligning ??. Den anden del af summen, består af det såkaldte intertemporale *hedging demand* for risikobærende aktiver, [@Merton1969; @Merton1971; @Merton1973]. Herudover viser løsning at den myopiske del af det totale porteføljevalg er uafhængigt af den resterende tid til investeringshorisonten, $\tau$. Den viser også at den myopiske del er den totale porteføljedel for investorer med log nytte, $\gamma=1$. Hvilket også er konsistent med intutionen givet i Sektion ??, at log nytte investorer ikke forholder sig til investeringshorisonten.
-
-# VAR
-
-I dette kapitel fastsættes den teoretiske ramme for den empiriske analyse. Dette gøres hovedsageligt ud fra teorien bag [@Userguide2004] s. 2-22 med enkelte dele, som varierer.
-\section{Sættet af investeringsmuligheder}
-Først etableres en model, som kan modellere forventet afkast og risiko af aktier på tværs af investeringshorisonter.
-
-\subsection{Afkastdynamikken}
-
-Lad $\bm{z}_{t+1}$ være en $m\times 1$ vektor, hvis indgange er afkastet på alle aktiver som vi vil undersøge samt værdierne af tilstandsvariablene på tidspunkt $t+1$. Denne vektor opskrives som
-    \begin{equation}
-        \bm{z}_{t+1}\equiv
-        \begin{bmatrix}
-        r_{0,t+1}\\
-        \bm{r}_{t+1}-r_{0,t+1}\\
-        \bm{s}_{t+1}
-        \end{bmatrix}\equiv
-        \begin{bmatrix}
-        r_{0,t+1}\\
-        \bm{x}_{t+1}\\
-        \bm{s}_{t+1}
-        \end{bmatrix},
-    \end{equation}
-hvor $r_{0,t+1}$ er netto log-afkastet af det aktiv, som vores merafkast for de andre aktiver regnes ud fra, $\bm{x}_{t+1}$ er en vektor af netto log-merafkast for alle andre aktiver, og $\bm{s}_{t+1}$ er en vektor indeholdende realisationerne af tilstandsvariablene. Vi antager samtidig, at der eksisterer $n+1$ klasser af aktiver og $m-n-1$ tilstandsvariable.
-
-\vspace{5mm}
-
-Nu viser vi, hvordan momenterne af netto afkastene fremkommer ved brug af en VAR process. Vi antager, at aktivernes afkast samt tilstandsvariablene følger en $\text{VAR}(1)$ process
-    \begin{equation}
-        z_{i,t+1}=\varphi_0+\varphi_1 z_{1,t}+\dots+\varphi_i z_{i,t}+\dots+v_{i,t+1},
-    \end{equation}
-hvor hver variabel, $z_{i,t+1}$, afhænger lineært af en konstant, værdien af variablen på tidspunkt $t$, værdien af alle andre variable på tidspunkt $t$ samt et fejlled.
-
-\vspace{5mm}
-
-I matrixnotation får vi da følgende kompakteopskrivning
-    \begin{equation}\label{eq:1}
-        \bm{z}_{t+1}=\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_t+\bm{v}_{t+1},
-    \end{equation}
-hvor $\bm{\Phi}$ er en vektor af afskæringer, $\bm{\Phi}_1$ er en kvadratisk matrix, som indeholder hældningskoefficienterne og $\bm{v}_{t+1}$ er en vektor fejlled til: realisationerne af afkast samt alle afkast variable i vores model, med middelværdi $0$.
-
-\vspace{5mm}
-
-For at få stationalitetsbetingelsen opfyldt i vores model, antager vi, at
-    \begin{equation*}
-        |\bm{\Phi}_1|\in(-1,1).
-    \end{equation*}
-Dvs. at determinanten af vores matrix -- bestående af hældningskoefficienter -- er begrænset mellem $-1$ og $1$.
-
-\vspace{5mm}
-
-Slutteligt antager vi, at fejlleddet er normalfordelt
-    \begin{equation}\label{eq:2}
-        \bm{v}_{t+1}\overset{\text{i.i.d.}}{\sim}\mathcal{N}(0,\bm{\Sigma}_v),
-    \end{equation}
-hvor middelværdien er $0$, som tidligere nævnt, og $\bm{\Sigma}_v$ er kovariansmatricen, som tillige er symmetrisk. For notationens skyld sætter vi
-    \begin{equation*}
-        \bm{\Sigma}_v\equiv \mathbb{V}_t(\bm{v}_{t+1})=
-        \begin{bmatrix}
-        \bm{\sigma}_0^2 & \bm{\sigma}_{0x} & \bm{\sigma}_{0s}\\
-        \bm{\sigma}_{0x} & \bm{\Sigma}_{xx} & \bm{\Sigma}_{xs}\\
-        \bm{\sigma}_{0s} & \bm{\Sigma}_{xs} & \bm{\Sigma}_{s}\\
-        \end{bmatrix},
-    \end{equation*}
-hvor indgangene på diagonalen er: variansen af netto afkastet på vores benchmark aktiv, kovariansmatricen af uventede merafkast og kovariansmatricen af tilstandsvariablene. Uden for diagonalen består indgangene af: kovariansen mellem netto afkastet af benchmark aktivet og hhv. merafkastet for alle andre aktiver samt fejlledene til tilstandsvariablene.
-
-\vspace{5mm}
-
-Vi antager, at kovariansmatricen ikke ændrer sig med tiden, eftersom empiriske undersøgelser viser, at ændringer i risiko er kortvarige fænomener [@Camp1987] s. 32-33, men kovariansmatricen kan stadig ændre sig på tværs af investeringshorisonter.
-
-\vspace{5mm}
-
-Den ubetingede middelværdi og kovariansmatrix af $\bm{z}_{t+1}$ er givet ved
-    \begin{align*}
-        \mathbb{E}_t(\bm{z}_{t+1}) &= (\bm{I}_m-\bm{\Phi}_1)^{-1}\bm{\Phi}_0\\
-        \text{vec}(\bm{\Sigma}_{zz}) &= (\bm{I}_{m^2}-\bm{\Phi}_1\otimes\bm{\Phi}_1)^{-1}\text{vec}(\bm{\Sigma}_v).
-    \end{align*}
-Ovenstående ligninger ligger også til grund for determinantbetingelsen: hvis ikke determinanten af $\bm{\Phi}_1$ var begrænset af $-1$ og $1$, ville den ubetingede middelværdi og varians af $\bm{z}_{t+1}$ ikke være defineret.
-
-\subsection{Betingede momenter for $k$-perioder}
-Nu udledes den betingede middelværdi og kovariansmatrix af $(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})$ for enhver horisont $k$. Dette gøres eftersom det akkumulerede $k$-periode afkast fremkommer ved at addere én-periode log-afkast over $k$ perioder. Ved rekursion af \eqref{eq:1} fås
-    \begin{align*}
-        \bm{z}_{t+1}&=\bm{\Phi}_0+\bm{\Phi}_1 \bm{z}_t+\bm{v}_{t+1}\\
-        \bm{z}_{t+2}&=\bm{\Phi}_0+\bm{\Phi}_1 \bm{z}_{t+1}+\bm{v}_{t+2}=\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_1 \bm{z}_t +\bm{\Phi}_1 \bm{v}_{t+1}+\bm{v}_{t+2}\\
-        &\vdots\\
-        \bm{z}_{t+k}&=\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_0+\bm{\Phi}_1^2\bm{\Phi}_0+\dots+\bm{\Phi}_1^{k-1}\bm{\Phi}_0+\bm{\Phi}_1^k \bm{z}_t+\bm{\Phi}_1^{k-1}\bm{v}_{t+1}+\bm{\Phi}_1^{k-2}\bm{v}_{t+2}+\dots+\bm{\Phi}_1 \bm{v}_{t+k-1}+\bm{v}_{t+k}.
-    \end{align*}
-Herefter adderer vi udtrykkene for $\bm{z}_{t+1}$, $\bm{z}_{t+2},\dots,\bm{z}_{t+k}$ og får
-    \begin{align*}
-        \bm{z}_{t+1}+\dots+\bm{z}_{t+k}=&\left(k+(k-1)\bm{\Phi}_1+(k-2)\bm{\Phi}_1^2+\dots+\bm{\Phi}_1^{k-1}\right)\Phi_0\\
-        &+\left(\bm{\Phi}_1^k+\bm{\Phi}_1^{k-1}+\dots+\bm{\Phi}_1\right)\bm{z}_t\\
-        &+\left(1+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\right)\bm{v}_{t+1}\\
-        &+\left(1+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\right)\bm{v}_{t+2}\\
-        &+\dots\\
-        &+(I+\bm{\Phi}_1)\bm{v}_{t+k-1}+\bm{v}_{t+k}.
-    \end{align*}
-Ved brug af sumoperatoren kan vi skrive ovenstående i kompaktform
-    \begin{equation}
-        \bm{z}_{t+1}+\dots+\bm{z}_{t+k}=\left(\sum_{i=0}^{k-1} (k-i)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_1^j\right)\bm{z}_t+\sum_{q=1}^k\left(\sum_{p=0}^{k-q} \bm{\Phi}_1^p \bm{v}_{t+q}\right).
-    \end{equation}
-Nu kan vi beregne de betingede $k$-periode momenter af tilstandsvektoren. Den betingende middelværdi er
-    \begin{equation}
-        \mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})=\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t,
-    \end{equation}
-hvor vi benytter antagelsen i \eqref{eq:2}.
-
-\vspace{5mm}
-
-Den betingede varians er
-    \begin{align}
-        \mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})
-        &=\mathbb{V}_t\left(\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t +\sum_{q=1}^k\left(\sum_{p=0}^{k-q}\bm{\Phi}_1^p \bm{v}_{t+q}\right)\right) \nonumber\\
-        &=\mathbb{V}_t\left(\sum_{q=1}^k\left(\sum_{p=0}^{k-q} \bm{\Phi}_1^p \bm{v}_{t+q}\right)\right) \label{eq:3},
-    \end{align}
-hvor de første to led i variansen forsvinder, da de er konstante eller kendte på tidspunkt $t$. Ved omskrivning af \eqref{eq:3} fås
-    \begin{align*}
-        \mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})&=\mathbb{V}_t\big(\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\bm{v}_{t+1}+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\big)\bm{v}_{t+2}\\
-        &\hphantom{=}+\dots+\big(I+\Phi_1\big)\bm{v}_{t+k-1}+\bm{v}_{t+k}\big)\\
-        &=\Sigma_v+\big(I+\bm{\Phi}_1\big)\Sigma_v(I+\bm{\Phi}_1)'+\big(I+\bm{\Phi}_1+\bm{\Phi}_1\bm{\Phi}_1\big)\Sigma_v\big(I+\bm{\Phi}_1+\bm{\Phi}_1\bm{\Phi}_1\big)'\\
-        &\hphantom{=}+\dots+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\Sigma_v\big(I+\bm{\Phi}_1'+\dots+\bm{\Phi}_1^{k-1}\big)',
-    \end{align*}
-som følger af omskrivning af leddene, og at den betingede kovariansmatrix af $v_{t+i}$ er den samme for alle $i$.
-\subsection{Betingede momenter for $k$-periode afkast}
-Eftersom vi kun er interesserede i den del af vores VAR process, som indeholder afkast, benytter vi de såkaldte selektionsmatricer.
-
-\vspace{5mm}
-
-Vil vi have det forventede $k$-periode log-afkast pr. periode, kan vi benytte
-    \begin{equation*}
-        \bm{H}_r=\begin{pmatrix}\bm{I}_{n+1} & \bm{0}_{m-n}\end{pmatrix},
-    \end{equation*}
-ved at anvende denne matrix på den betingede middelværdi fås da
-    \begin{equation}
-        \frac{1}{k}\begin{pmatrix}
-        \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
-        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}} \right)
-        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k}).
-    \end{equation}
-Anvender vi den på den betingede varians fås
-    \begin{equation}
-        \frac{1}{k}\mathbb{V}_t\begin{pmatrix}
-        r_{0,t+1}^{(k)}\\
-        \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}}
-        \end{pmatrix}=\frac{1}{k}\begin{pmatrix}
-        \sigma_0^2(k) & \bm{\sigma}_{0x}(k)'\\
-        \bm{\sigma}_{0x}(k) & \bm{\Sigma}_{xx}(k)
-        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})\bm{H}_r'.
-    \end{equation}
-Den anden selektionsmatrix vi vil benytte kan udtrække netto $k$-periode log-afkastet pr. periode
-    \begin{equation}
-        \bm{M}_r=\begin{pmatrix}
-        1 & \bm{0}_{1\times n} & \bm{0}_{1\times (m-n-1)}\\
-        \bm{\bm{\ell}}_n & \bm{I}_n & \bm{0}_{m-n-1}
-        \end{pmatrix}.\label{eq:sel}
-    \end{equation}
-Anvender vi den på den betingede middelværdi fås
-    \begin{equation}
-        \frac{1}{k}\begin{pmatrix}
-        \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
-        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)} \right)=\frac{1}{k}\bm{M}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})
-        \end{pmatrix}.
-    \end{equation}
-Slutteligt anvendes den på den betingede varians
-    \begin{equation}
-        \frac{1}{k}\mathbb{V}_t\begin{pmatrix}
-        r_{0,t+1}^{(k)}\\
-        \bm{r}_{t+1}^{(k)}
-        \end{pmatrix}=\frac{1}{k}\bm{\Sigma}_{rr}(k)=\frac{1}{k}\bm{M}_r\mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})\bm{M}_r'.\label{eq:bv}
-    \end{equation}
-    
-## Bias justeret VAR-model
-Ved brug af den analytiske middelværdirette estimator foreslået af [@Pope1990], viser [@Engsted2012] at justering for bias i estimatorerne af middelværdi, i det multivariate setup, kan producere forskellige parameter estimater i den givne VAR($1$)-model. Benyttelse af ordinær lineær regressionsestimater kan resultere i bias pga. den begrænsede stikprøvestørrelse og af den årsag mislede inferensen gjort på baggrund af VAR($1$) estimaterne. Herudover kan variablene besidde autokorrelation, hvis de er udviser vedvarende effekter pga. stød til tidsserien. Den analytiske bias af OLS estimatoren, $\bm{\Phi}_1$, er udledt på baggrund af en Taylor udvidelse af høj orden. Dermed lader vi den analytiske bias, $\bm{B}_T$, være givet ved
-\begin{equation}
-\bm{B}_T=-\frac{\bm{b}}{T}+ O\left(T^{-\frac{3}{2}}\right), \label{eq:bias}
-\end{equation}
-
-hvor $T$ er sample size og tælleren er lig
-$$\bm{b}=\bm{\Sigma}_v\left(\left(\bm{I}-\bm{\Phi}_1'\right)^{-1}+\bm{\Phi}_1'\left(\bm{I}-\left(\bm{\Phi}_1'\right)^2\right)+\sum_{i=1}^m \lambda \left(\bm{I}-\lambda\bm{\Phi}_1'\right)^{-1}\right)\bm{\Sigma}_z^{-1}.$$
-
-Her er $\bm{\Sigma}_v$ den betingede kovariansmatrix af $v_t$, $\lambda$ er vektoren af egenværdier af $\bm{\Phi}_1$, $\bm{I}$ er identitetsvektoren og $m$ er antallet af tilstandsvariable i $\bm{z}$. Bias'en i Ligning \@ref(eq:bias) falder med raten $T^{-\frac{3}{2}}$, som $T\rightarrow \infty$. Den analytiske formel af [@Pope1990] giver ikke bias justerede afskæringer, $\bm{\Phi}_0$, men som [@Engsted2012] pointerer vil dette problem automatisk blive løst af de bias justerede hældninger. Dette sker eftersom det ubetingede aritmetiske gennemsnit af en stationær variabel, er et ikke-biased estimat af den sande middelværdi, og samtidig estimerer OLS præcis middelværdien af variablene i VAR-modellen, ved at fjerne første observation. Altså vil en VAR-model med bias justerede hældninger medføre ikke-biased estimater af $\bm{\Phi}_0$, givet modelrestriktionen, at de ubetingede middelværdier af variablene -- udledt fra VAR koefficienterne -- er lig deres aritmetiske gennemsnit
- 
-[@Engsted2012] finder både kvantitative og kvalitative effekter ved brug af bias justerede koefficienter ift. de regulere OLS estimater. De viser bl.a. hvordan *hedging* komponentet af porteføljeallokeringen ændrer sig for et kontinuum af risikoaversioner, hvor specielt mellemliggende risikoaversions værdier ($\gamma=2$) er særligt påvirket af biasjusteringen.^[Se evt. Figur 1 i [@Engsted2012].] Her bliver det optimale portefølgevalg påvirket, eftersom bias justeringen afstedkommer reducerede positioner for obligationer og aktier, gennem det intertemporale *hedging demand*, mens positionen for kontanter forøges.

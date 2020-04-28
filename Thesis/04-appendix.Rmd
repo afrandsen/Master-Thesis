@@ -112,7 +112,7 @@ ved at vælge følgen af vægte $\left\{\bm{\alpha}_{t+k-2}^2, \bm{\alpha}_{t+k-
 ## Tidspunkt $t+k-1$ ($\tau=1$)
 
 ### *Policy*-funktionen
-Maksimeringsproblemet på tidspunkt $t+k-1$ er uændret ift. problemet som blev beskrevet ovenfor.
+Maksimeringsproblemet på tidspunkt $(t+k-1)$ er uændret ift. problemet som blev beskrevet ovenfor.
 $$\max_{\bm{\alpha}_{t+k-1}^1} \mathbb{E}_{t+k-1}[\exp((1-\gamma)r_{p,t+k})] = \exp\left((1-\gamma) \mathbb{E}_{t+k-1}[r_{p,t+k}]+\frac{1}{2}(1-\gamma)^2 \mathbb{V}_{t+k-1}[r_{p,t+k}]\right).$$
 
 Ved brug af selektionsmatricerne $\bm{H}_x$ og $\bm{H}_1$, er de første to momenter af porteføljeafkastet givet ved
@@ -138,10 +138,10 @@ A_0^1&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1}\left(\bm{\Phi}_0^x + \frac{1}{2}\b
 A_1^1&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1}\bm{\Phi}_1^x.
 \end{align*}
 
-Dette afslutter udledningen for *policy*-funktionen på tidspunkt $t+k-1$.
+Dette afslutter udledningen for *policy*-funktionen på tidspunkt $(t+k-1)$.
 
 ### *Value*-funktionen
-Udledningen for *value*-funktionen på tidspunkt $t+k-1$ startes med substitution af Ligning \@ref(eq:pol1p) ind i portefølje afkast momenterne. Dette gør, at de kan omskrives til funktioner af $A_i^1$ koefficienterne.
+Udledningen for *value*-funktionen på tidspunkt $(t+k-1)$ startes med substitution af Ligning \@ref(eq:pol1p) ind i portefølje afkast momenterne. Dette gør, at de kan omskrives til funktioner af $A_i^1$ koefficienterne.
 \begin{align*}
 \mathbb{E}_{t+k-1}[r_{p,t+k}] &= (A_0^1 + A_1^1\bm{z}_{t+k-1})' (\bm{\Phi}_0^x +\bm{\Phi}_1^x\bm{z}_{t+k-1}) + (\bm{\Phi}_0^0 +\bm{\Phi}_1^0 \bm{z}_{t+k-1})\\
 &\quad+\frac{1}{2} (A_0^1 + A_1^1\bm{z}_{t+k-1})' (\bm{\sigma}_x^2-\bm{\Sigma}_{xx}(A_0^1 + A_1^1\bm{z}_{t+k-1}))\\
@@ -152,7 +152,7 @@ Udledningen for *value*-funktionen på tidspunkt $t+k-1$ startes med substitutio
 &\quad+\bm{z}_{t+k-1}' A_1^{1\prime} (\bm{\Sigma}_{xx} A_0^1 + 2\bm{\sigma}_{0x}) + \bm{z}_{t+k-1}' A_1^{1\prime} \bm{\Sigma}_{xx} A_1^1 \bm{z}_{t+k-1}.
 \end{align*}
 
-Siden hvert led i ovenstående summer er en skalar, kan ethvert komponent, i hvert led, frit udskiftes med dets transponerede. Dette medfører at leddene kan skrives ift. $\bm{z}_{t+k-1}$ og $\bm{z}_{t+k-1}'$. Indsættes ovenstående momenter nu i $t+k-1$ optimeringsfunktionen, opnåes en forventning af en eksponentiel polynomisk funktion af tilstandsvektoren, som kan beregnes i lukket form, for at opnå den maksimerede *value*-funktion
+Siden hvert led i ovenstående summer er en skalar, kan ethvert komponent, i hvert led, frit udskiftes med dets transponerede. Dette medfører at leddene kan skrives ift. $\bm{z}_{t+k-1}$ og $\bm{z}_{t+k-1}'$. Indsættes ovenstående momenter nu i $(t+k-1)$ optimeringsfunktionen, opnåes en forventning af en eksponentiel polynomisk funktion af tilstandsvektoren, som kan beregnes i lukket form, for at opnå den maksimerede *value*-funktion
 $$\mathbb{E}_{t+k-1}[\exp((1-\gamma)r_{p,t+k}^*)] = \exp\left((1-\gamma) (B_0^1 + B_1^1 \bm{z}_{t+k-1}+\bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1})\right),$$
 
 hvor
@@ -165,7 +165,7 @@ B_2^1&=A_1^{1\prime} (\bm{\Phi}_1^x - \frac{\gamma}{2} \bm{\Sigma}_{xx} A_1^1).
 ## Tidspunkt $t+k-2$ ($\tau=2$)
 
 ### *Policy*-funktionen
-Det næstsidste periode problem, $t+k-2$, involverer at vælge porteføljevægtene $\bm{\alpha}_{t+k-2}^2$, som maksimerer den følgene funktion
+Det næstsidste periode problem, $(t+k-2)$, involverer at vælge porteføljevægtene $\bm{\alpha}_{t+k-2}^2$, som maksimerer den følgende funktion
 $$\frac{W_{t+k-2}^{1-\gamma}}{1-\gamma} \mathbb{E}_{t+k-2}[\exp((1-\gamma) r_{p,t+k-1}) \exp((1-\gamma) (B_0^1 + B_1^1 \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' B_2^1\bm{z}_{t+k-1}))]$$
 
 Eftersom hverken $\tfrac{1}{1-\gamma}$ eller $W_{t+k-2}^{1-\gamma}$ påvirker optimum kan det fjernes fra optimeringsfunktionen. Ved brug af Taylor approksimationen, [@CampVicCha2003], kan $(t+k-1)$ log porteføljeafkastet beskrives som en funktion af $\bm{z}_{t+k-1}$. Dette tillader, at leddene kan samles i eksponentialet og derefter beregne forventningen. 
@@ -177,12 +177,117 @@ r_{p,t+k-1}&=\bm{\alpha}_{t+k-2}^{2\prime} + \bm{x}_{t+k-1} + r_{0,t+k-1} + \fra
 \end{align*}
 
 Ved substition af ovenstående ind i $(t+k-2)$ optimeringsfunktionen fås
-$$\mathbb{E}_{t+k-2}[\exp((1-\gamma)  (\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} (\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-2}^{2}) + B_0^1 + (B_1^1 + \begin{pmatrix} 1 & \bm{\alpha}_{t+k-2}^{2} & \bm{0}\end{pmatrix} ) \bm{z}_{t+k-1} + \bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1} ))].$$
+\begin{align*}
+\mathbb{E}_{t+k-2}[&\exp((1-\gamma)  (\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} (\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-2}^{2}) + B_0^1 + (B_1^1 + \begin{pmatrix} 1 & \bm{\alpha}_{t+k-2}^{2} & \bm{0}\end{pmatrix} ) \bm{z}_{t+k-1}\\
+                   &+ \bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1} ))].
+\end{align*}
 
 Fra ovenstående ses, at investoren på tidspunkt $(t+k-2)$ ved, at kun de sidste to summer i eksponentialet er stokastiske. Derfor fokusers, for nu, på at evaluere den følgende funktion, givet investorens valg af $\bm{\alpha}_{t+k-2}^{2}$
 $$\mathbb{E}_{t+k-2}[ \exp( (1-\gamma) ((B_1^1 + \begin{pmatrix} 1 & \bm{\alpha}_{t+k-2}^{2} & \bm{0}\end{pmatrix} ) \bm{z}_{t+k-1} + \bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1}  )) ].$$
 
-Resultatet af denne beregning vil herefter substitueres ind i den oprindelige optimeringsfunktion, for at opnå forvetningen af *value*-funktionen betinget på investorens porteføljevalg, som herefter er maksimeret over $\bm{\alpha}_{t+k-2}^{2}$.
+Resultatet af denne beregning vil herefter substitueres ind i den oprindelige optimeringsfunktion, for at opnå forvetningen af *value*-funktionen betinget på investorens porteføljevalg, som herefter bliver maksimeret over $\bm{\alpha}_{t+k-2}^{2}$.
+
+Fordelingen af $\bm{z}_{t+k-1}$ betinget på tidspunkt $(t+k-2)$-informationen er givet ved
+$$\bm{z}_{t+k-1\mid t+k-2}\sim\mathcal{N}(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2},\bm{\Sigma}_v).$$
+
+Dette betyder også at Ligning ?? beregner den forventede værdi af det eksponentielle kvadratiske polynomium i en normalfordelt stokastisk variabel.
+
+For at lette notationen indføres nu de følgende hjælpevariable
+\begin{align*}
+C_1^2 &= (1-\gamma) \begin{pmatrix} 1\\ \bm{\alpha}_{t+k-2}^{2} \\ \bm{0} \end{pmatrix} + (1-\gamma) B_1^{1\prime}\\
+C_2^2 &= (1-\gamma) B_2^1.
+\end{align*}
+
+Kombineres ovenstående hjælpevariable med Ligning ?? og den betingende fordeling af $\bm{z}_{t+k-1}$ fås
+\begin{align*}
+\mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} ) ] = &\mathbb{E}_{t+k-2}[ \exp ( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} + \bm{v}_{t+k-2} )\\
+                                                                                                  &+ (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} + \bm{v}_{t+k-2})' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\\
+                                                                                                  &+ \bm{v}_{t+k-2}) ) ].
+\end{align*}
+
+Ovenstående Ligning ?? har led i eksponentialet, som enten er konstanter, lineære kombinationer af $\bm{v}_{t+k-2}$ stødene eller kvadratiske i $\bm{v}_{t+k-2}$. Derfor kan vi omarrangere leddene som følger
+\begin{align*}
+\mathbb{E}_{t+k-2}[\exp(\cdot)] &= \exp( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ))\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}[\exp( C_1^{2\prime} \bm{v}_{t+k-2}+ \bm{v}_{t+k-2}' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^{2} \bm{v}_{t+k-2}'\\
+                                &\,\,\quad+ \bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} )]\\
+                                &= \exp( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ))\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}[\exp( C_1^{2\prime} \bm{v}_{t+k-2}+ \bm{v}_{t+k-2}' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^{2} \bm{v}_{t+k-2}')\\
+                                &\,\,\quad\exp(\bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} )]\\
+                                &=\exp( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ))\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}[ \exp(\bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} ) \exp( C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2} )   \bm{v}_{t+k-2}],
+\end{align*}
+
+hvor $\Tilde{C}_2^{2}$ er gennemsnittet af ikke-tilde-matricen og dens egen transponerede. Ved brug af dette sikres, at resultatet ikke er afhængig af symmetrien af de underliggende matricer. Hvis den underliggende matrix er symmetrisk vil tilde-notationen blive droppet, siden den underliggende matrix og tilde-matricen da vil være identiske.
+
+Herfra er der to måder at evaluere ovenstående forventning: den komplementære approksimation og den eksakte evaluering. Den eksakte evaluering er først introduceret af [@CampVicCha2003]. Begge måder vil blive præsenteret, selvom de medfører empiriske resultater, som ikke er til at skelne mellem, [@JurVic2011]. 
+
+#### Komplementær approksimation
+Først beskrives den komplementære approksimation. Her bygger resultatet på, at alle led med orden højere end $\text{d}t$ har forsvindende sandsynlighed i grænsen, når tidsintervallet går mod nul. Altså vil kun de lineære led fra Ligning ?? være stokastiske. Altså er de lineære led af orden $\text{d}Z$, mens de kvadratiske led er af orden $\text{d}t$.
+$$\lim_{\Delta t \to 0}\frac{\exp( \bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} )}{\text{d}t}=\exp( \text{tr}(C_2^2 \bm{\Sigma}_v) ).$$
+
+Dette medfører at Ligning ?? simplificeres til
+\begin{align*}
+\lim_{\Delta t \to 0}\mathbb{E}_{t+k-2}[\exp(\cdot)] &=\exp( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}) +  \text{tr}(C_2^2 \bm{\Sigma}_v))\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2} )   \bm{v}_{t+k-2}],
+\end{align*}
+
+her observeres, at forventningen i Ligning ?? er forventningen af en lognormal stokastisk variabel, som er givet ved
+\begin{align*}
+\lim_{\Delta t \to 0}&\mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2} )   \bm{v}_{t+k-2}]\\
+&=\exp(\frac{1}{2} (C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2})' \bm{\Sigma}_v (C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2})) 
+\end{align*}
+
+Kombineres Ligning ?? og Ligning ?? ses, at Ligning ?? i grænsen for kontinuert tid er lig
+\begin{align*}
+\lim_{\Delta t \to 0} &\mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} )]\\
+                      &=\exp( \text{tr}(C_2^2\bm{\Sigma}_v) + D_0^{(t+k-2)} + \frac{1}{2} D_1^{(t+k-2)} \bm{\Sigma}_v^{-1} D_1^{(t+k-2)'} ),
+\end{align*}
+
+hvor
+\begin{align*}
+D_0^{(t+k-2)}&=C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \\
+D_1^{(t+k-2)}&=C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2}.
+\end{align*}
+
+#### Eksakt evaluering
+Ved brug af den eksakte evaluering foreslået af [@CampVicCha2003] er en løsning på lukket form stadig tilgengælig. Ved brug af den etablerede notation kan Ligning (46) fra det Tekniske Appendiks til [@CampVicCha2003] anvendes, for at opnå følgende evaluering af forventningen
+\begin{align*}
+&\mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} ) ]\\
+&= \frac{\left| \bm{\Sigma}_v \right|^{-\tfrac{1}{2}}}{\left| (\bm{\Sigma}_v^{-1} - 2 D_2^{(t+k-2)}) \right|^{\tfrac{1}{2}}}\exp(D_0^{(t+k-2)} + \frac{1}{2} D_1^{(t+k-2)} (\bm{\Omega}^1)^{-1} D_1^{(t+k-2)\prime}),
+\end{align*}
+
+hvor følgende notation er introduceret
+\begin{align*}
+D_2^2&=C_2^2\\
+\bm{\Omega}^1&=(\bm{\Sigma}_v^{-1} - 2D_2^2)^{-1}=(\bm{\Sigma}_v^{-1}  - 2(1-\gamma) B_2^1)^{-1}.
+\end{align*}
+
+#### Optimalt porteføljevalg
+For et udlede den optimale portefølje strategi, droppes konstanten fra Ligning ??, siden dette ikke påvirker optimum. Altså ser investorens problem på tidspunkt $(t+k-2)$ således ud
+$$\max_{\bm{\alpha}_{t+k-2}^2}\mathcal{L}= ( (1-\gamma) (\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} (\bm{\sigma}_x^2 - \bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2) + B_0^1 + D_0^{(t+k-2)} + \frac{1}{2} D_1^{(t+k-2)} \bm{\Omega}^1 D_1^{(t+k-2)\prime})).$$
+
+Førsteordensbetingelsen bliver da
+\begin{align*}
+\frac{\partial \mathcal{L}}{\partial\bm{\alpha}_{t+k-2}^2 }&=(1-\gamma) (\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2} + \frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 ) + \frac{1}{2} (\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2})' (\bm{\Omega}^1+\bm{\Omega}^{1\prime}) D_1^{(t+k-2)\prime} = 0\\
+&\Updownarrow\\
+\frac{\partial \mathcal{L}}{\partial\bm{\alpha}_{t+k-2}^2 }&=(1-\gamma) (\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2} + \frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 ) + (\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2})' \Tilde{\bm{\Omega}}^1 D_1^{(t+k-2)\prime} = 0.
+\end{align*}
+
+På baggrund af notationen for $D_1^2$ kan dens afledte mht. porteføljevægtene, $\bm{\alpha}_{t+k-2}^2$, relateres til de risikobærende merafkast aktivers selektions matrix
+$$\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2} = (1-\gamma) \begin{pmatrix} \bm{0} \\ \bm{I}_{n-1} \\ \bm{0}\end{pmatrix}=(\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2})' = (1-\gamma)\bm{H}_x.$$
+
+Dette giver den følgende form for førsteordensbetingelsen
+\begin{align*}
+\frac{\partial \mathcal{L}}{\partial\bm{\alpha}_{t+k-2}^2 }&= \bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 +\bm{H}_x\Tilde{\bm{\Omega}}^{1}(C_1^2+ 2\Tilde{C}_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}))\\
+&=\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 + (1-\gamma)\Tilde{\bm{\Omega}}^{1} (\begin{pmatrix} 1\\ \bm{\alpha}_{t+k-2}^2 \\ \bm{0} \end{pmatrix} + B_1^{1\prime} + 2\Tilde{B}_2^1 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}))\\
+&=\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 + (1-\gamma)(\Tilde{\bm{\Omega}}_{x0}^{1} + \Tilde{\bm{\Omega}}_{xx}^{1} \bm{\alpha}_{t+k-2}^2 + \Tilde{\bm{\Omega}}_{x} B_1^{1\prime}+ 2\Tilde{\bm{\Omega}}_{x}^1 \Tilde{B}_2^1 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}))\\
+&=((1-\gamma)\Tilde{\bm{\Omega}}_{xx}^{1} - \bm{\Sigma}_{xx} )  \bm{\alpha}_{t+k-2}^2 + \bm{\Phi}_0^x + (1-\gamma)(\Tilde{\bm{\Omega}}_{x0}^{1} + \Tilde{\bm{\Omega}}_{x}^{1}(B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0))+ \frac{1}{2} \bm{\sigma}_x^2 + (\bm{\Phi}_1^x + 2(1-\gamma)\Tilde{\bm{\Omega}}_{x}^{1} \Tilde{B}_2^1\bm{\Phi}_1 )\bm{z}_{t+k-2}=0.
+\end{align*}
+
+Løsningen til ovenstående førsteordensbetingelse medfører et udtryk for den optimale portefølje på tidspunkt $(t+k-2)$ som en affin funktion af $\bm{z}_{t+k-2}$
+$$\bm{\alpha}_{t+k-2}^2 = A_0^2 + A_1^2 \bm{z}_{t+k-2},$$
+
+hvor
 
 ### *Value*-funktionen
 

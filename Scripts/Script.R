@@ -123,6 +123,13 @@ STAT_TABLE_PP <- data.frame(teststat_a=unlist(lapply(1:ncol(data), function(x) p
                             p_at=unlist(lapply(1:ncol(data), function(x) pp.test(data[,x], type = "Z(t_alpha)")$p.value)))
 
 # UNIVARIATE
+data$DP <- diff(data$DP, na.pad = T)
+data$EP <- diff(data$EP, na.pad = T)
+data$BM <- diff(data$BM, na.pad = T)
+data$TB <- diff(data$TB, na.pad = T)
+data$FR <- diff(data$FR, na.pad = T)
+
+
 FIT_AKT <- lapply(5:ncol(data), function(x) lm(as.numeric(xts::lag.xts(data$AKT,-1, na.pad = FALSE)) ~ as.numeric(head(data[,x], -1)), data=data))
 FIT_AKT_SUMMARY <- lapply(FIT_AKT, summary)
 
@@ -155,15 +162,35 @@ FIT_V_TABLE <- data.frame(coef=sapply(FIT_V_OBL, coef)[2,],
 
 
 # MULTIPLE REGRESSION 
+data <- xts::xts(merge(NET_TB, AKT, S_OBL, V_OBL, DP, EP, BM, AKT_VAR, HML, SMB, TB, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR), index(NET_TB))
+
 
 data_mult_akt <- as.xts(merge(xts::lag.xts(data$AKT, -1, na.pad = FALSE), head(data, -1)))
 data_mult_akt <- subset(data_mult_akt, select = -AKT.1)
 
+data_mult_akt$DP <- diff(data_mult_akt$DP, na.pad = T)
+data_mult_akt$EP <- diff(data_mult_akt$EP, na.pad = T)
+data_mult_akt$BM <- diff(data_mult_akt$BM, na.pad = T)
+data_mult_akt$TB <- diff(data_mult_akt$TB, na.pad = T)
+data_mult_akt$FR <- diff(data_mult_akt$FR, na.pad = T)
+
 data_mult_s <- as.xts(merge(xts::lag.xts(data$S_OBL, -1, na.pad = FALSE), head(data, -1)))
 data_mult_s <- subset(data_mult_s, select = -S_OBL.1)
 
+data_mult_s$DP <- diff(data_mult_s$DP, na.pad = T)
+data_mult_s$EP <- diff(data_mult_s$EP, na.pad = T)
+data_mult_s$BM <- diff(data_mult_s$BM, na.pad = T)
+data_mult_s$TB <- diff(data_mult_s$TB, na.pad = T)
+data_mult_s$FR <- diff(data_mult_s$FR, na.pad = T)
+
 data_mult_v <- as.xts(merge(xts::lag.xts(data$V_OBL, -1, na.pad = FALSE), head(data, -1)))
 data_mult_v <- subset(data_mult_v, select = -V_OBL.1)
+
+data_mult_v$DP <- diff(data_mult_v$DP, na.pad = T)
+data_mult_v$EP <- diff(data_mult_v$EP, na.pad = T)
+data_mult_v$BM <- diff(data_mult_v$BM, na.pad = T)
+data_mult_v$TB <- diff(data_mult_v$TB, na.pad = T)
+data_mult_v$FR <- diff(data_mult_v$FR, na.pad = T)
 
 # KITCHEN SINK
 fit_AKT <- lm(AKT ~ DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_mult_akt)
@@ -211,6 +238,8 @@ FIT_M_V_TABLE <- data.frame(coef=coef(fit_V_OBL),
 # 
 
 # VAR
+data <- xts::xts(merge(NET_TB, AKT, S_OBL, V_OBL, DP, EP, BM, AKT_VAR, HML, SMB, TB, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR), index(NET_TB))
+
 data_v <- as.ts(data)
 # 
 data_sub <- subset(data_v, select = -c(DP, EP, AKT_VAR, HML, Y_SPREAD, C_SPREAD, D_SPREAD, FR))
@@ -221,7 +250,6 @@ coef <- Bcoef(var)
 coef1 <- coef(var)
 cov <- summary(var)$covres
 cor <- summary(var)$corres
-
 
 recessions.df = read.table(textConnection(
   "Peak, Trough

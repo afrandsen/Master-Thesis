@@ -1079,7 +1079,7 @@ FIT_TABLE <- format(round(FIT_TABLE, digits = 3), nsmall = 3)
 FIT_TABLE <- FIT_TABLE %>%
   mutate(coef = cell_spec(coef,"latex", bold = ifelse(p <= 0.05, T, F)))
   
-rownames(FIT_TABLE) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+rownames(FIT_TABLE) <- c('$x_t^{\\text{dp}_{\\text{d}}}$', '$x_t^{\\text{pe}_{\\text{d}}}$', '$x_t^{\\text{bm}_{\\text{d}}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}_{\\text{d}}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}_{\\text{d}}}$')
 
 colnames(FIT_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
 
@@ -1110,7 +1110,7 @@ FIT_S_TABLE <- FIT_S_TABLE %>%
 
 colnames(FIT_S_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
 
-rownames(FIT_S_TABLE) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+rownames(FIT_S_TABLE) <- c('$x_t^{\\text{dp}_{\\text{d}}}$', '$x_t^{\\text{pe}_{\\text{d}}}$', '$x_t^{\\text{bm}_{\\text{d}}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}_{\\text{d}}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}_{\\text{d}}}$')
 
 FIT_S_TABLE %>% 
   knitr::kable(caption = 'Univariat prædiktabilitet af merafkastet på statsobligationer.',
@@ -1138,7 +1138,7 @@ FIT_V_TABLE <- FIT_V_TABLE %>%
 
 colnames(FIT_V_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$', '$R^2$')
 
-rownames(FIT_V_TABLE) <- c('$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+rownames(FIT_V_TABLE) <- c('$x_t^{\\text{dp}_{\\text{d}}}$', '$x_t^{\\text{pe}_{\\text{d}}}$', '$x_t^{\\text{bm}_{\\text{d}}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}_{\\text{d}}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}_{\\text{d}}}$')
 
 FIT_V_TABLE %>% 
   knitr::kable(caption = 'Univariat prædiktabilitet af merafkastet på virksomhedsobligationer',
@@ -1170,7 +1170,7 @@ FIT_M_TABLE <- FIT_M_TABLE %>%
 
 colnames(FIT_M_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$')
 
-rownames(FIT_M_TABLE) <- c('Afskæring', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+rownames(FIT_M_TABLE) <- c('Afskæring', '$x_t^{\\text{dp}_{\\text{d}}}$', '$x_t^{\\text{pe}_{\\text{d}}}$', '$x_t^{\\text{bm}_{\\text{d}}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}_{\\text{d}}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}_{\\text{d}}}$')
 
 FIT_M_TABLE %>% 
   knitr::kable(caption = 'Multipel prædiktabilitet af merafkastet på aktier.',
@@ -1225,7 +1225,7 @@ FIT_M_S_TABLE <- FIT_M_S_TABLE %>%
 
 colnames(FIT_M_S_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$')
 
-rownames(FIT_M_S_TABLE) <- c('Afskæring', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+rownames(FIT_M_S_TABLE) <- c('Afskæring', '$x_t^{\\text{dp}_{\\text{d}}}$', '$x_t^{\\text{pe}_{\\text{d}}}$', '$x_t^{\\text{bm}_{\\text{d}}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}_{\\text{d}}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}_{\\text{d}}}$')
 
 FIT_M_S_TABLE %>% 
   knitr::kable(caption = 'Multipel prædiktabilitet af merafkastet på statsobligationer.',
@@ -1252,7 +1252,7 @@ FIT_M_V_TABLE <- FIT_M_V_TABLE %>%
 
 colnames(FIT_M_V_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$')
 
-rownames(FIT_M_V_TABLE) <- c('Afskæring', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+rownames(FIT_M_V_TABLE) <- c('Afskæring', '$x_t^{\\text{dp}_{\\text{d}}}$', '$x_t^{\\text{pe}_{\\text{d}}}$', '$x_t^{\\text{bm}_{\\text{d}}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}_{\\text{d}}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}_{\\text{d}}}$')
 
 FIT_M_V_TABLE %>% 
   knitr::kable(caption = 'Multipel prædiktabilitet af merafkastet på virksomhedsobligationer',
@@ -1448,7 +1448,7 @@ data %>%
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
   kableExtra::row_spec(c(6, 8), italic = T) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de sande momenter. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for et delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de sande momenter. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE)
 ```
 
 ```{r sum-1, echo=FALSE}
@@ -1511,7 +1511,8 @@ data %>%
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
-  kableExtra::row_spec(c(6, 8), italic = T)
+  kableExtra::row_spec(c(6, 8), italic = T) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de simulerede momenter, fra første simulering. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne.  Samt de estimerede forventede afkast for hver af porteføljerne og den estimerede volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE)
 ```
 
 ```{r sum-2, echo=FALSE}
@@ -1574,7 +1575,8 @@ data %>%
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
-  kableExtra::row_spec(c(6, 8), italic = T)
+  kableExtra::row_spec(c(6, 8), italic = T) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de simulerede momenter, fra anden simulering. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne.  Samt de estimerede forventede afkast for hver af porteføljerne og den estimerede volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE)
 ```
 
 ```{r sum-3, echo=FALSE}
@@ -1637,7 +1639,8 @@ data %>%
                              latex_options = c("striped", "hold_position"),
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
-  kableExtra::row_spec(c(6, 8), italic = T)
+  kableExtra::row_spec(c(6, 8), italic = T) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de simulerede momenter, fra tredje simulering. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne. Samt de estimerede forventede afkast for hver af porteføljerne og den estimerede volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE)
 ```
 
 Ved brug af de sande momenter, hælder minimum varians porteføljen mod Aktiv 3, med den relative laveste varians. Se Tabel \@ref(tab:sum-true). Omtrent en tredjedel af porteføljen er eksponeret i Aktiv 1 og Aktiv 2 har den laveste vægtning givet dens høje relative varians. Tangensporteføljen består af to lange positioner i Aktiv 1 og Aktiv 2, tilsammen finansieret af en kort position i Aktiv 3, hvilket reflekterer rangeringen af aktiverne ift. deres *Sharpe Ratio*.
