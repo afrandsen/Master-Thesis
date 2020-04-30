@@ -101,7 +101,38 @@ JB_T <- data.frame(teststat = unlist(lapply(1:ncol(DATA_T), function(x) jarque.b
 # STATIONARITET
 data <- xts::xts(merge(NET_TB, AKT, S_OBL, V_OBL, DP, EP, BM, AKT_VAR, HML, SMB, TB, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR), index(NET_TB))
 
-STAT_TABLE <- data.frame(teststat_1=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=1)$statistic)),
+STAT_TABLE <- data.frame(teststat_0=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=0)$statistic)),
+                         p_0=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=0)$p.value)),
+                         teststat_1=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=1)$statistic)),
+                         p_1=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=1)$p.value)),
+                         teststat_2=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=2)$statistic)),
+                         p_2=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=2)$p.value)),
+                         teststat_3=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=3)$statistic)),
+                         p_3=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=3)$p.value)),
+                         teststat_4=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=4)$statistic)),
+                         p_4=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=4)$p.value)),
+                         teststat_5=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=5)$statistic)),
+                         p_5=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=5)$p.value)))
+
+data_diff <- xts::xts(merge(diff(DP), diff(BM), diff(TB), diff(FR)), index(diff(DP)))
+
+
+STAT_TABLE_DIFF <- data.frame(teststat_0=unlist(lapply(1:ncol(data_diff), function(x) adf.test(data_diff[,x], k=0)$statistic)),
+                         p_0=unlist(lapply(1:ncol(data_diff), function(x) adf.test(data_diff[,x], k=0)$p.value)),
+                         teststat_1=unlist(lapply(1:ncol(data_diff), function(x) adf.test(data_diff[,x], k=1)$statistic)),
+                         p_1=unlist(lapply(1:ncol(data_diff), function(x) adf.test(data_diff[,x], k=1)$p.value)),
+                         teststat_2=unlist(lapply(1:ncol(data_diff), function(x) adf.test(data_diff[,x], k=2)$statistic)),
+                         p_2=unlist(lapply(1:ncol(data_diff), function(x) adf.test(data_diff[,x], k=2)$p.value)),
+                         teststat_3=unlist(lapply(1:ncol(data_diff), function(x) adf.test(data_diff[,x], k=3)$statistic)),
+                         p_3=unlist(lapply(1:ncol(data_diff), function(x) adf.test(data_diff[,x], k=3)$p.value)),
+                         teststat_4=unlist(lapply(1:ncol(data_diff), function(x) adf.test(data_diff[,x], k=4)$statistic)),
+                         p_4=unlist(lapply(1:ncol(data_diff), function(x) adf.test(data_diff[,x], k=4)$p.value)),
+                         teststat_5=unlist(lapply(1:ncol(data_diff), function(x) adf.test(data_diff[,x], k=5)$statistic)),
+                         p_5=unlist(lapply(1:ncol(data_diff), function(x) adf.test(data_diff[,x], k=5)$p.value)))
+
+STAT_TABLE <- data.frame(teststat_0=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=0)$statistic)),
+                         p_0=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=0)$p.value)),
+                         teststat_1=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=1)$statistic)),
                          p_1=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=1)$p.value)),
                          teststat_2=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=2)$statistic)),
                          p_2=unlist(lapply(1:ncol(data), function(x) adf.test(data[,x], k=2)$p.value)),
@@ -123,13 +154,6 @@ STAT_TABLE_PP <- data.frame(teststat_a=unlist(lapply(1:ncol(data), function(x) p
                             p_at=unlist(lapply(1:ncol(data), function(x) pp.test(data[,x], type = "Z(t_alpha)")$p.value)))
 
 # UNIVARIATE
-data$DP <- diff(data$DP, na.pad = T)
-data$EP <- diff(data$EP, na.pad = T)
-data$BM <- diff(data$BM, na.pad = T)
-data$TB <- diff(data$TB, na.pad = T)
-data$FR <- diff(data$FR, na.pad = T)
-
-
 FIT_AKT <- lapply(5:ncol(data), function(x) lm(as.numeric(xts::lag.xts(data$AKT,-1, na.pad = FALSE)) ~ as.numeric(head(data[,x], -1)), data=data))
 FIT_AKT_SUMMARY <- lapply(FIT_AKT, summary)
 
@@ -168,29 +192,11 @@ data <- xts::xts(merge(NET_TB, AKT, S_OBL, V_OBL, DP, EP, BM, AKT_VAR, HML, SMB,
 data_mult_akt <- as.xts(merge(xts::lag.xts(data$AKT, -1, na.pad = FALSE), head(data, -1)))
 data_mult_akt <- subset(data_mult_akt, select = -AKT.1)
 
-data_mult_akt$DP <- diff(data_mult_akt$DP, na.pad = T)
-data_mult_akt$EP <- diff(data_mult_akt$EP, na.pad = T)
-data_mult_akt$BM <- diff(data_mult_akt$BM, na.pad = T)
-data_mult_akt$TB <- diff(data_mult_akt$TB, na.pad = T)
-data_mult_akt$FR <- diff(data_mult_akt$FR, na.pad = T)
-
 data_mult_s <- as.xts(merge(xts::lag.xts(data$S_OBL, -1, na.pad = FALSE), head(data, -1)))
 data_mult_s <- subset(data_mult_s, select = -S_OBL.1)
 
-data_mult_s$DP <- diff(data_mult_s$DP, na.pad = T)
-data_mult_s$EP <- diff(data_mult_s$EP, na.pad = T)
-data_mult_s$BM <- diff(data_mult_s$BM, na.pad = T)
-data_mult_s$TB <- diff(data_mult_s$TB, na.pad = T)
-data_mult_s$FR <- diff(data_mult_s$FR, na.pad = T)
-
 data_mult_v <- as.xts(merge(xts::lag.xts(data$V_OBL, -1, na.pad = FALSE), head(data, -1)))
 data_mult_v <- subset(data_mult_v, select = -V_OBL.1)
-
-data_mult_v$DP <- diff(data_mult_v$DP, na.pad = T)
-data_mult_v$EP <- diff(data_mult_v$EP, na.pad = T)
-data_mult_v$BM <- diff(data_mult_v$BM, na.pad = T)
-data_mult_v$TB <- diff(data_mult_v$TB, na.pad = T)
-data_mult_v$FR <- diff(data_mult_v$FR, na.pad = T)
 
 # KITCHEN SINK
 fit_AKT <- lm(AKT ~ DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_mult_akt)
@@ -233,9 +239,6 @@ FIT_M_V_TABLE <- data.frame(coef=coef(fit_V_OBL),
                             sd=sqrt(diag(NeweyWest(fit_V_OBL))),
                             t=coeftest(fit_V_OBL, vcov. = NeweyWest(fit_V_OBL))[,3],
                             p=coeftest(fit_V_OBL, vcov. = NeweyWest(fit_V_OBL))[,4])
-
-# m_fit <- lm(cbind(AKT, S_OBL, V_OBL) ~ lag(DP, 1) + lag(BM, 1) + lag(AKT_VAR, 1) + lag(T_SPREAD, 1) + lag(Y_SPREAD, 1) + lag(C_SPREAD, 1) + lag(D_SPREAD, 1) + lag(FR, 1), data = data)
-# 
 
 # VAR
 data <- xts::xts(merge(NET_TB, AKT, S_OBL, V_OBL, DP, EP, BM, AKT_VAR, HML, SMB, TB, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR), index(NET_TB))

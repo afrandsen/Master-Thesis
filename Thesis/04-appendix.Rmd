@@ -115,9 +115,9 @@ ved at vælge følgen af vægte $\left\{\bm{\alpha}_{t+k-2}^2, \bm{\alpha}_{t+k-
 Maksimeringsproblemet på tidspunkt $(t+k-1)$ er uændret ift. problemet som blev beskrevet ovenfor.
 $$\max_{\bm{\alpha}_{t+k-1}^1} \mathbb{E}_{t+k-1}[\exp((1-\gamma)r_{p,t+k})] = \exp\left((1-\gamma) \mathbb{E}_{t+k-1}[r_{p,t+k}]+\frac{1}{2}(1-\gamma)^2 \mathbb{V}_{t+k-1}[r_{p,t+k}]\right).$$
 
-Ved brug af selektionsmatricerne $\bm{H}_x$ og $\bm{H}_1$, er de første to momenter af porteføljeafkastet givet ved
+Ved brug af selektionsmatricerne $\bm{H}_x$ og $\bm{H}_0$, er de første to momenter af porteføljeafkastet givet ved
 \begin{align*}
-\mathbb{E}_{t+k-1}[r_{p,t+k}]&= \bm{\alpha}_{t+k-1}^{1\prime} \bm{H}_x (\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1}) + \bm{H}_1(\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1})+\frac{1}{2} \bm{\alpha}_{t+k-1}^{1\prime} (\bm{\sigma}_x^2-\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1})\\
+\mathbb{E}_{t+k-1}[r_{p,t+k}]&= \bm{\alpha}_{t+k-1}^{1\prime} \bm{H}_x (\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1}) + \bm{H}_0(\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1})+\frac{1}{2} \bm{\alpha}_{t+k-1}^{1\prime} (\bm{\sigma}_x^2-\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1})\\
 \mathbb{V}_{t+k-1}[r_{p,t+k}]&=\bm{\alpha}_{t+k-1}^{1\prime}\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1}+ \sigma_0^2 + 2\bm{\alpha}_{t+k-1}^{1\prime}\bm{\sigma}_{0x}
 \end{align*}
 
@@ -268,9 +268,8 @@ $$\max_{\bm{\alpha}_{t+k-2}^2}\mathcal{L}= ( (1-\gamma) (\frac{1}{2}\bm{\alpha}_
 
 Førsteordensbetingelsen bliver da
 \begin{align*}
-\frac{\partial \mathcal{L}}{\partial\bm{\alpha}_{t+k-2}^2 }&=(1-\gamma) (\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2} + \frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 ) + \frac{1}{2} (\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2})' (\bm{\Omega}^1+\bm{\Omega}^{1\prime}) D_1^{(t+k-2)\prime} = 0\\
-&\Updownarrow\\
-\frac{\partial \mathcal{L}}{\partial\bm{\alpha}_{t+k-2}^2 }&=(1-\gamma) (\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2} + \frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 ) + (\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2})' \Tilde{\bm{\Omega}}^1 D_1^{(t+k-2)\prime} = 0.
+\frac{\partial \mathcal{L}}{\partial\bm{\alpha}_{t+k-2}^2 }&=(1-\gamma) (\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2} + \frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 ) + \frac{1}{2} (\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2})' (\bm{\Omega}^1+\bm{\Omega}^{1\prime}) D_1^{(t+k-2)\prime}\\
+                                                           &=(1-\gamma) (\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2} + \frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 ) + (\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2})' \Tilde{\bm{\Omega}}^1 D_1^{(t+k-2)\prime} = 0.
 \end{align*}
 
 På baggrund af notationen for $D_1^2$ kan dens afledte mht. porteføljevægtene, $\bm{\alpha}_{t+k-2}^2$, relateres til de risikobærende merafkast aktivers selektions matrix
@@ -279,16 +278,66 @@ $$\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2} = (1-\gamm
 Dette giver den følgende form for førsteordensbetingelsen
 \begin{align*}
 \frac{\partial \mathcal{L}}{\partial\bm{\alpha}_{t+k-2}^2 }&= \bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 +\bm{H}_x\Tilde{\bm{\Omega}}^{1}(C_1^2+ 2\Tilde{C}_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}))\\
-&=\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 + (1-\gamma)\Tilde{\bm{\Omega}}^{1} (\begin{pmatrix} 1\\ \bm{\alpha}_{t+k-2}^2 \\ \bm{0} \end{pmatrix} + B_1^{1\prime} + 2\Tilde{B}_2^1 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}))\\
-&=\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 + (1-\gamma)(\Tilde{\bm{\Omega}}_{x0}^{1} + \Tilde{\bm{\Omega}}_{xx}^{1} \bm{\alpha}_{t+k-2}^2 + \Tilde{\bm{\Omega}}_{x} B_1^{1\prime}+ 2\Tilde{\bm{\Omega}}_{x}^1 \Tilde{B}_2^1 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}))\\
-&=((1-\gamma)\Tilde{\bm{\Omega}}_{xx}^{1} - \bm{\Sigma}_{xx} )  \bm{\alpha}_{t+k-2}^2 + \bm{\Phi}_0^x + (1-\gamma)(\Tilde{\bm{\Omega}}_{x0}^{1} + \Tilde{\bm{\Omega}}_{x}^{1}(B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0))+ \frac{1}{2} \bm{\sigma}_x^2 + (\bm{\Phi}_1^x + 2(1-\gamma)\Tilde{\bm{\Omega}}_{x}^{1} \Tilde{B}_2^1\bm{\Phi}_1 )\bm{z}_{t+k-2}=0.
+&=\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 + (1-\gamma)\Tilde{\bm{\Omega}}^{1} (\begin{pmatrix} 1\\ \bm{\alpha}_{t+k-2}^2 \\ \bm{0} \end{pmatrix} + B_1^{1\prime}\\
+&\quad + 2\Tilde{B}_2^1 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}))\\
+&=\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 + (1-\gamma)(\Tilde{\bm{\Omega}}_{x0}^{1} + \Tilde{\bm{\Omega}}_{xx}^{1} \bm{\alpha}_{t+k-2}^2 + \Tilde{\bm{\Omega}}_{x} B_1^{1\prime}\\
+&\quad + 2\Tilde{\bm{\Omega}}_{x}^1 \Tilde{B}_2^1 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}))\\
+&=((1-\gamma)\Tilde{\bm{\Omega}}_{xx}^{1} - \bm{\Sigma}_{xx} )  \bm{\alpha}_{t+k-2}^2 + \bm{\Phi}_0^x + (1-\gamma)(\Tilde{\bm{\Omega}}_{x0}^{1} + \Tilde{\bm{\Omega}}_{x}^{1}(B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0))+ \frac{1}{2} \bm{\sigma}_x^2\\
+&\quad + (\bm{\Phi}_1^x + 2(1-\gamma)\Tilde{\bm{\Omega}}_{x}^{1} \Tilde{B}_2^1\bm{\Phi}_1 )\bm{z}_{t+k-2}=0.
 \end{align*}
 
 Løsningen til ovenstående førsteordensbetingelse medfører et udtryk for den optimale portefølje på tidspunkt $(t+k-2)$ som en affin funktion af $\bm{z}_{t+k-2}$
 $$\bm{\alpha}_{t+k-2}^2 = A_0^2 + A_1^2 \bm{z}_{t+k-2},$$
 
 hvor
+\begin{align*}
+A_0^2&=(\bm{\Sigma}_xx - (1-\gamma)\Tilde{\bm{\Omega}}_{xx}^1)^{-1} (\bm{\Phi}_0^x + \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma) (\Tilde{\bm{\Omega}}_{x0}^1 + \Tilde{\bm{\Omega}}_{x}^1 (B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0)))\\
+A_1^2&=(\bm{\Sigma}_xx - (1-\gamma)\Tilde{\bm{\Omega}}_{xx}^1)^{-1}(\bm{\Phi}_1^x+2(1-\gamma) \Tilde{\bm{\Omega}}_{x}^1 \Tilde{B} _2^{1}\bm{\Phi}_1).
+\end{align*}
+
+På samme vis kan beregniner baseret på Ligning ??, give følgende resultat
+\begin{align*}
+A_0^2&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} (\bm{\Phi}_0^x \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma ) (\bm{\Sigma}_{x0} + \bm{\Sigma}_x (B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0 )))\\
+A_1^2&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} (\bm{\Phi}_1^x + 2(1-\gamma) \bm{\Sigma}_x \Tilde{B}_2^{1}\bm{\Phi}_1).
+\end{align*}
+
+Ligning ?? og Ligning ?? er identiske med Ligning ?? og Ligning ??, bortset fra at $\Tilde{\bm{\Omega}}^1$ er udskiftet med $\bm{\Sigma}_v$.
 
 ### *Value*-funktionen
+Nu udledes de relevante udtryk for koefficienterne, $B_i^2$, i den maksimerede *value*-funktion. Dette gør, at der kan skabes et forhold mellem de foregående værdier af hhv. $A_i^1$ og $B_i^1$ koefficienterne. Ved indsættelse af den optimale porteføljeallokering for tidspunkt $(t+k-2)$ ind i *value*-funktionen, Ligning ??, og ved samtidig udeladelse af konstanter ganget på forventningen, opnåes det følgende udtryk
+\begin{align*}
+&\mathbb{E}_{t+k-2}[ \exp( (1-\gamma)  r_{p,t+k-1})\exp ( (1-\gamma) (B_0^1 + B_1^1\bm{z}_{t+k-1}  + \bm{z}_{t+k-1}' B_2^1 \bm{z}_{t+k-1}  ))]\\
+&=\exp((1-\gamma)(\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} (\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-2}^2) + B_0^1 ) + D_0^{(t+k-2)} + \frac{1}{2} D_1^{(t+k-2)} \bm{\Omega}^1 D_1^{(t+k-2)\prime})\\
+&=\exp((1-\gamma)(B_0^2 + B_1^2 \bm{z}_{t+k-2} \bm{z}_{t+k-2}' B_2^2 \bm{z}_{t+k-2} )),
+\end{align*}
+
+hvor
+\begin{align*}
+B_0^2&=\bm{\Phi}_0^0 + A_0^{1\prime} (\bm{\Phi}_0^x + \frac{1}{2}\bm{\sigma}_x^2) + \frac{1-\gamma}{2} (\bm{\Omega}_{00}^1 + 2A_0^{1\prime}\Tilde{\bm{\Omega}}_{x0}^1)- \frac{1}{2} A_0^{1\prime} (\bm{\Sigma}_{xx} - (1-\gamma) \bm{\Omega}_{xx}^1) A_0^1 + B_0^1 \\
+&\quad + (B_1^1 + \bm{\Phi}_0' B_2^1)\bm{\Phi}_0 + (1-\gamma) B_1^1 (\Tilde{\bm{\Omega}}_1^{1\prime} + \frac{1}{2} \bm{\Omega}^1 B_1^{1\prime} + \Tilde{\bm{\Omega}}_x^{1\prime} A_0^1)+ (1-\gamma) \bm{\Phi}_0' (2\bm{\Lambda}^1 \bm{\Phi}_0 + \bm{\Xi}_1^{1\prime}\\
+&\quad + \bm{\Xi}_x^{1\prime} A_0^1 + \bm{\Gamma}^1 B_1^{1\prime})\\
+B_1^2&=\bm{\Phi}_1^1 + A_0^{1\prime} (\bm{\Phi}_1^x - (\bm{\Sigma}_{xx} - (1-\gamma) \Tilde{\bm{\Omega}}_{xx}^{1}) A_1^1) + ( \bm{\Phi}_0^x + \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma) \Tilde{\bm{\Omega}}_{x0}^{1})' A_1^1+ (B_1^1 + 2\bm{\Phi}_0' \Tilde{B}_2^1) \bm{\Phi}_1\\
+&\quad + (1-\gamma) (B_1^1 \Tilde{\bm{\Omega}}_{x}^{1\prime} + \bm{\Phi}_0' \bm{\Xi}_x^{1\prime}) A_1^1 + (1-\gamma) (4 \bm{\Phi}_0' \Tilde{\bm{\Lambda}}^1 + \bm{\Xi}_1^1 + A_0^{1\prime} \bm{\Xi}_x^1 + B_1^1 \bm{\Xi}^1) \bm{\Phi}_1\\
+B_2^2&= A_1^{1\prime} (\bm{\Phi}_1^x - \frac{1}{2} (\bm{\Sigma}_{xx} - (1-\gamma)\bm{\Omega}_{xx}^1) A_1^1) + \bm{\Phi}_1' (B_2^1 + 2(1-\gamma) \bm{\Lambda}^1) \bm{\Phi}_1 + (1-\gamma)\bm{\Phi}_1' \bm{\Xi}_x^{1\prime} A_1^1,
+\end{align*}
+
+hvor de følgende hjælpematricer er anvendt $\bm{\Lambda}^1=\Tilde{B}_2^{1}\bm{\Omega}^1 \Tilde{B}_2^{1\prime}$, $\bm{\Gamma}^1=2\Tilde{B}_2^{1}\Tilde{\bm{\Omega}}^1$ samt $\bm{\Xi}^1=\bm{\Gamma}^{1\prime}$.
+
+I grænsen af kontinuert tid kan der ligeledes opnåes simplificerede udtryk, analoge til trykkene, som ledte til udledning af *policy*-funktionen. Ergo bliver udtrykkene nu
+\begin{align*}
+B_0^2&=\bm{\Phi}_0^0 + A_0^{1\prime} (\bm{\Phi}_0^x + \frac{1}{2}\bm{\sigma}_x^2) + \frac{1-\gamma}{2} (\bm{\Sigma}_{00}+ 2A_0^{1\prime} \bm{\Sigma}_x0) - \frac{\gamma}{2} A_0^{1\prime} \bm{\Sigma}_{xx} A_0^1 + B_0^1 + (B_1^1 + \bm{\Phi}_0' B_2^1) \bm{\Phi }_0\\
+&\quad + (1-\gamma)B_1^1 (\bm{\Sigma}_0' + \frac{1}{2} \bm{\Sigma} B_1^{1\prime} + \bm{\Sigma}_x' A_0^1) + (1-\gamma) \bm{\Phi}_0' (2\bm{\Lambda}^1 \bm{\Phi}_0 + \bm{\Xi}_0^{1\prime} + \bm{\Xi}_x^{1\prime} A_0^1 + \bm{\Gamma}^1 B_1^{1\prime})\\
+B_1^2&=\bm{\Phi}_1^1 + A_0^{1\prime} (\bm{\Phi}_1^x -\gamma\bm{\Sigma}_{xx}) A_1^1 + (\bm{\Phi}_0^x + \frac{1}{2}\bm{\sigma}_x^2 + (1-\gamma) \bm{\Sigma}_{x0})' A_1^1 + (B_1^1 + 2\bm{\Phi}_0' \Tilde{B}_2^1)\bm{\Phi}_1 + (1-\gamma) (B_1^1\bm{\Sigma}_x'\\
+&\quad + \bm{\Phi}_0' \bm{\Xi}_{x}^{1\prime}) A_1^1\\
+&\quad + (1-\gamma) (4 \bm{\Phi}_0' \Tilde{\bm{\Lambda}}^1 + \bm{\Xi}_1^1 + A_0^{1\prime} \bm{\Xi}_x^1 + B_1^1 \bm{\Xi}^1)\bm{\Phi}_1,\\
+B_2^2&= A_1^{1\prime} (\bm{\Phi}_1^x - \frac{\gamma}{2} \bm{\Sigma}_{xx} A_1^1) + \bm{\Phi}_1' (B_2^1 + 2(1-\gamma) \bm{\Lambda}^1) \bm{\Phi}_1 + (1-\gamma) \bm{\Phi}_1' \bm{\Xi}_x^{1\prime} A_1^1,
+\end{align*}
+
+hvor de følgende hjælpematricer er anvendt $\bm{\Lambda}^1=\Tilde{B}_2^{1}\bm{\Sigma}_v \Tilde{B}_2^{1\prime}$, $\bm{\Gamma}^1=2\Tilde{B}_2^{1}\bm{\Sigma}_v$ samt $\bm{\Xi}^1=\bm{\Gamma}^{1\prime}$.
+
+Sammenhængen mellem *policy*-funktionen og *value*-funktionen i to succesive perioder er nu skabet, den generelle løsning kan blive opnået ved følgende udskiftninger
+\begin{equation*}
+1\to \tau-1\quad\text{og}\quad 2\to \tau-2.
+\end{equation*}
 
 # Shiller

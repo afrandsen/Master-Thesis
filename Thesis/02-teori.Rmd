@@ -63,7 +63,7 @@ Den optimale porteføljestrategi, givet som løsningen til Maksimeringsproblemet
 
 Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det værd at bemærke, at løsningen er karakteriseret af \textit{The Mutual Fund Seperation Theorem}, [@Tobin1958], som var en af mange videnskabelige bidrag James Tobin fik sin Nobelpris for i 1981, [@Nobel2020]. Essencen af Sætningen er, at alle investorer vil holde den eksakt samme portefølje af risikobærende aktiver samt en del i det risikofrie aktiv. Det eneste som adskiller investorer fra hinanden, er deres relative fordeling af total formue i den optimale risikobærende portefølje, som er fastsat ud fra deres egne risikopræferencer. Figur \@ref(fig:AfkVol) viser de optimale porteføljestrategier i et afkast-volatilitets spektrum.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=1]
 \begin{axis}[
@@ -80,7 +80,7 @@ Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det 
   enlargelimits=true,
   scatter/classes={
     a={mark=o,draw=black, mark size = 3pt},
-    b={mark=*, mark size = 3pt,draw=magenta, fill = red},
+    b={mark=*, mark size = 3pt,draw=red, fill = red},
     c={mark=*, mark size = 3pt,draw=black, fill = black}
   }
 ]
@@ -142,7 +142,7 @@ Her måles marginal nytten og dermed investorens risikoaversion over en procentd
 
 De tilsvarende reciprokke af ovenstående mål kaldes hhv. *Coefficeint of Absolute Risk Tolerance* samt *Coefficeint of Relative Risk Tolerance*.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=1]
 \begin{axis}[
@@ -256,7 +256,24 @@ $$r_{t+1}\equiv\log(1+R_{t+1}),$$
 
 hvilket er en geometrisk og kontinuert følge. Logafkastet af aktiver vil skabe symmetriske fordelinger, som overholder dermed overholder markedsinvariansen.
 
-# Afkast
+# Afkastrelationer
+I Kapitel \@ref(#unteo), blev den grundliggende teori for porteføljevalg beskrevet. Som beskrevet kræver de underliggende modeller, at afkast er lognormalfordelte, og af den grund må afkastserierne transformeres. Mere specifikt blev investoren med potens nytte bl.a. beskrevet, her var det et krav, at de anvendte variable var logbaseret. Dette er specielt anvendeligt når investorens porteføljevalg skal modelleres på lang sigt. Afkastprædiktabilitet lægger som navnet, op til at afkast *er* prædiktable. En forkastelse af *i.i.d.* antagelsen vil implicit medføre afkastprædiktabilitet. Dette kapitel vil fungere som en teoretisk gennemgang af udledningen af de specifikke aktivklasser som investoren står overfor, når porteføljevalget skal tages. For at udlede approksimative analytiske løsninger på tværs aktivklasser, vil den såkaldte loglineære relation af afkast blive anvendt, [@Camp1988]. [@Camp1988] viste i tilfældet af aktieafkast, hvordan en approksimativ loglineær relation af aktieafkast kunne etableres. På baggrund af denne relation har nyere litteratur anvendt deres metode på andre klasser af aktiver. At kunne etablere approksimative analytiske løsninger for alle aktivklasser er et afgørende element for at kunne skabe en robust VAR(1)-model i Kapitel ??. Sektion ?? vil opsummere kapitlets fund.
+
+## Afkast og nutidsværdi-relationer
+
+### Definition af aktieafkast
+
+### Definintion af obligationsafkast
+
+## Potentielle prædiktabilitetsvariable
+
+### Finansielle variable
+
+### Rentestrukturs variable
+
+### Makroøkonomsike variable
+
+## Opsummering
 
 # VAR
 
@@ -450,7 +467,7 @@ Her er $\bm{\Sigma}_v$ den betingede kovariansmatrix af $v_t$, $\lambda$ er vekt
 # Porteføljeteori
 I dette kapitel udvides teorien fra Kapitel \@ref(unteo). Mere specifikt sammenkobles porteføljeteorien fra Sektion \@ref(myoinv) og nytteteorien fra Sektion \@ref(typnyt). Dette gøres på baggrund af *CRRA*-nytte, i tilfældet, hvor investoren kan rebalancere sin portefølje periodisk, og i det restringerede tilfælde, hvor ingen rebalancering er tilladt. Herefter beskrives den analytiske løsning til det dynamiske porteføljeproblem foreslået af [@JurVic2011].
 
-## CRRA Portefølje
+## CRRA Portefølje {#crraportef}
 I det følgende vil porteføljevalget under antagelsen, at investoren har potens nytte, dvs. *CRRA*-nytte samt at afkastene på alle aktivklasser er lognormale.
 
 Først antages, at afkastet på investorens portefølje er lognormal, dette betyder at $W_{t+1}$ ligeledes er lognormal. Under antagelsen om potens nytte, kan vi omskrive Maksimeringsproblemet \@ref(eq:Nyttemaks) til
@@ -459,7 +476,7 @@ Først antages, at afkastet på investorens portefølje er lognormal, dette bety
 &\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
 \end{align}
 
-Maksimering af ovenstående forventning er ækvivalent til at maksimere log af forventningen, eftersom log-funktionen er strent voksende, se evt. Figur \@ref(fig:Nyt), som er tegnet på baggrund af log-funktionen. Derudover kan: $\tfrac{1}{1-\gamma}$ og $-1$ fjernes fra Maksimeringsproblemet, eftersom de er konstante og derfor ikke vil påvirke optimum. Givet af $W_{t+1}$ er lognormal, kan resultatet fra Appendiks ?? anvendes, og dermed opnå
+Maksimering af ovenstående forventning er ækvivalent til at maksimere log af forventningen, eftersom log-funktionen er strengt voksende, se evt. Figur \@ref(fig:Nyt), som er tegnet på baggrund af log-funktionen. Derudover kan: $\tfrac{1}{1-\gamma}$ og $-1$ fjernes fra Maksimeringsproblemet, eftersom de er konstante og derfor ikke vil påvirke optimum. Givet af $W_{t+1}$ er lognormal, kan resultatet fra Appendiks ?? anvendes, og dermed opnå
 \begin{align}
 &\max \log\left(\mathbb{E}_t(W_{t+1}^{1-\gamma})\right)=(1-\gamma){E}_t(w_{t+1})+\frac{1}{2}(1-\gamma)^2\sigma_{wt}^2 (\#eq:CRRAmakslog)\\
 &\text{ubb.}\,\,w_{t+1}=r_{p,t+1} + w_t.\notag
@@ -470,7 +487,7 @@ hvor $\sigma_{wt}^2$ er den betingede varians af log formuen, $w_{t+1}$. Derudov
 \max\mathbb{E}_t(r_{p,t+1}) + \frac{1}{2}(1-\gamma)\sigma_{pt}^2, (\#eq:CRRAmakslog2)
 \end{equation}
 
-hvor $\sigma_{pt}^2$ er den betingede varians af det kontinuert tilskrevne porteføljeafkast. Dette benytter faktummet at $\mathbb{E}(w_t)=w_t$ er deterministisk og ikke påvirker optimum eller variansleddet. Her kan det bemærkes, at
+hvor $\sigma_{pt}^2$ er den betingede varians af det kontinuert tilskrevne porteføljeafkast. Dette benytter faktummet at $\mathbb{E}_t(w_t)=w_t$ er deterministisk og ikke påvirker optimum eller variansleddet. Her kan det bemærkes, at
 \begin{equation}
 \mathbb{E}(r_{p,t+1})+\frac{1}{2}\sigma_{pt}^2=\log(\mathbb{E}(1+R_{p,t+1})), (\#eq:portafkls)
 \end{equation}
@@ -493,7 +510,7 @@ Risikoaversion kan også analyseres på baggrund af \@ref(eq:CRRAmakslog2).
 For at kunne løse Maksimeringsproblemet \@ref(eq:CRRAmakslog3), må et nyttigt approksimationsresultat tages i brug. Som tidligere nævnt er porteføljeafkastet en lineær kombination af vægtede afkast på aktiver. Log afkastet på porteføljen er log af denne lineære kombination, men ikke lig den lineære kombination af aktivernes log afkast. For at repræsentere log porteføljeafkastet på baggrund af log aktivafkast, over korte tidsintervaller, kan den følgende Taylor approksimation af den ikke-lineære funktion benyttes
 $$r_{p,t+1}-r_{0,t+1}\approx \alpha_t (r_{t+1}-r_{0,t+1})+\frac{1}{2}\alpha_t(1-\alpha_t)\sigma_t^2.$$
 
-Her epræsenterer $r_{t+1}$ log afkastet på det ene risikobærende aktiv, og $r_{0,t+1}$ repræsenterer log afkastet på det risikofrie aktiv. Forskellen mellem log porteføljeafkastet og den lineære kombination af de individuelle logafkast er givet ved $\alpha_t(1-\alpha_t)\tfrac{1}{2}\sigma_t^2$. Forskellen vil forsvinde, hvis vægtningen i det risikobærende aktiv er nul, eller hvis vægtningen i det risikofrie aktiv er nul. Ovenstående approksimation er eksakt i grænsen, ved benyttelse af kontinuerte *diffusion processes* for priserne på aktiverne, og kan udledes ved brug af *Itô's Lemma*, [@CampVicCha2003]. Ovenstående approksimation kan nu benyttes, og dermed kan Maksimeringsproblemet \@ref(eq:CRRAmakslog2) skrives i form af merafkast på porteføljen.
+Her repræsenterer $r_{t+1}$ log afkastet på det ene risikobærende aktiv, og $r_{0,t+1}$ repræsenterer log afkastet på det risikofrie aktiv. Forskellen mellem log porteføljeafkastet og den lineære kombination af de individuelle logafkast er givet ved $\alpha_t(1-\alpha_t)\tfrac{1}{2}\sigma_t^2$. Forskellen vil forsvinde, hvis vægtningen i det risikobærende aktiv er nul, eller hvis vægtningen i det risikofrie aktiv er nul. Ovenstående approksimation er eksakt i grænsen, ved benyttelse af kontinuerte *diffusion processes* for priserne på aktiverne, og kan udledes ved brug af *Itô's Lemma*, [@CampVicCha2003]. Ovenstående approksimation kan nu benyttes, og dermed kan Maksimeringsproblemet \@ref(eq:CRRAmakslog2) skrives i form af merafkast på porteføljen.
 \begin{equation}
 \max\alpha_t(\mathbb{E}_t(r_{t+1}) - r_{0,t+1}) + \frac{1}{2}\alpha_t(1-\alpha_t)\sigma_t^2 + \frac{1}{2}(1-\gamma)\alpha_t^2\sigma_t^2, (\#eq:CRRAmakslog4) 
 \end{equation}
@@ -515,7 +532,7 @@ Den optimale løsning vil være givet ved
 
 Som igen er ækvivalent med den optimale løsning, Ligning \@ref(eq:Multalpha), for middelværdi-varians analysen i det multiple tilfælde. På samme måde som i middelværdi-varians analysen, har løsningen egenskaben, at koefficienten for relativ risikoaversion, $\gamma$, kun påvirker den overordnede skalering af positionen i det risikobærende aktiv, men ikke kompositionen. Dette er ensbetydende med, at \textit{The Mutual Fund Seperation Theorem}, [@Tobin1958], også holder i den lognormale model med potens nytte. Et mere generelt tilfælde end ovenstående, er når der ikke eksisterer et risikofrit aktiv, og man da i stedet må benytte et risikobærende *benchmark*-afkast, $r_{b,t+1}$, da bliver løsningen
 \begin{equation}
-\bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t(\bm{r}_{t+1})-r_{0,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right)+(1-\frac{1}{\gamma})(-\bm{\Sigma}_t^{-1}\bm{\sigma}_{0,t}).
+\bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t(\bm{r}_{t+1})-r_{b,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right)+(1-\frac{1}{\gamma})(-\bm{\Sigma}_t^{-1}\bm{\sigma}_{b,t}).
 \end{equation}
 
 ## Model for $k$-perioder
@@ -525,7 +542,7 @@ W_{t+k}&=R_{pk,t+k}W_t \notag\\
 &=R_{p,t+1}R_{p,t+2}\cdots R_{p,t+k}W_t.
 \end{align}
 
-hvor $k$ er investeringshorisonten og $R_{pK,t+k}$ noterer det kumulative afkast over perioderne fra $t$ til $t+k$. Ved brug af log, kan det kumulative $k$-periode afkast simplificeres til summen af $k$ én-periode log afkast
+hvor $k$ er investeringshorisonten og $R_{pk,t+k}$ noterer det kumulative afkast over perioderne fra $t$ til $t+k$. Ved brug af log, kan det kumulative $k$-periode afkast simplificeres til summen af $k$ én-periode log afkast
 \begin{equation}
 r_{pk,t+k}=r_{p,t+1}+\cdots+r_{p,t+k}. (\#eq:sumportk)
 \end{equation}
@@ -541,7 +558,7 @@ I tilfældet uden periodisk rebalancering skal investoren evaluere $k$-periode a
 Altså vil investoren vælge den samme portefølje over hele deres investeringshorisont givet, at der ikke er mulighed for periodisk rebalancering.
 
 ### Med periodisk rebalancering
-Antagelsen om, at ingen rebalancering finder sted over tid, synes at være i modstrid med virkelige observationer. Derfor arbejdes videre med en teoretisk ramme, som tillader periodisk rebalancering af investorporteføljen. Den første som beskrev maksimering af nytte ift terminal formue var [@Mossin1968], som beskriver problemet i diskrettid. [@Mossin1968] noterede sig, at enhver følge af porteføljer beslutninger skal være betingede af resultatet fra tidligere perioder, men på samme tid tage hensyn til information vedr. de fremtidige fordelinger af afkast. [@Samuelson1969] udvidede denne teori til at medtage forbrug, mens [@Merton1969; @Merton1971] beskrev en forbrugsbaseret model i kontinuert tid. I det følgende vil to eksempler med traktable løsninger blive præsenteret. Disse eksempler medfører, at investoren handler myopisk, selvom der er mulighed for rebalancering.
+Antagelsen om, at ingen rebalancering finder sted over tid, synes at være i modstrid med virkelige observationer. Derfor arbejdes videre med en teoretisk ramme, som tillader periodisk rebalancering af investorporteføljen. Den første som beskrev maksimering af nytte ift terminal formue var [@Mossin1968], som beskriver problemet i diskrettid. [@Mossin1968] noterede sig, at enhver følge af portefølje beslutninger skal være betingede af resultatet fra tidligere perioder, men på samme tid tage hensyn til information vedr. de fremtidige fordelinger af afkast. [@Samuelson1969] udvidede denne teori til at medtage forbrug, mens [@Merton1969; @Merton1971] beskrev en forbrugsbaseret model i kontinuert tid. I det følgende vil to eksempler med traktable løsninger blive præsenteret. Disse eksempler medfører, at investoren handler myopisk, selvom der er mulighed for rebalancering.
 
 Først præsenteres den generelle potens nytte investor med *i.i.d.* afkast. Givet at investoren har potens nytte og at afkastene på aktiverne er *i.i.d.*, er det muligt at vise, at investorens porteføljevalg vil blive myopiske. Dette er også kendt som den første *Samuelson-Merton* betingelse. En intuitiv forklaring er som følger: Givet *i.i.d.* afkast vil investoren ikke opnå ny information vedr. log afkastfordelingen over tid. Dernæst haves at *RRA* er konstant, hvilket medfører at porteføljevalget er uafhængig af formueniveauet. Når forskellige porteføljestrategier, $\bm{\alpha}_t$ for $t=1,\dots,k$, tillades kan $2$-periode portefølje merafkastet omskrives til
 \begin{align}
@@ -564,7 +581,7 @@ Benyttelse af ovenstående momenter giver følgende maksimeringsproblem for $2$-
 
 Ovenstående medfører, at investorer med $\gamma>0$ vil vælge porteføljer med en lavere varians for et givet varians justeret forventet afkast. Men den justerede middelværdi afhænger kun af summen af de to vægte $(\bm{\alpha}_t'+\bm{\alpha}_{t+1}')$. Investorerne kan dermed justere de individuelle vægte og for den faste sum minimere variansen. I optimum vil variansen være minimeret ved at sætte $\bm{\alpha}_t=\bm{\alpha}_{t+1}$. Dette betyder, at ingen rebalancering er optimal på trods af muligheden i hver periode. Dette medfører altså, at den langsigtede investor handler myopisk, ***når*** afkastene på aktiverne er *i.i.d.* over tid. 
 
-Den anden Samuelson-Merton betingelse som foranlediger til det myopiske porteføljevalg er baseret på faktummet, at en investor har log nytte, dvs. potens nytte, hvor $\gamma=1$. Her vil porteføljevalget være myopisk, uanset om aktiv afkastene er *i.i.d.*. Argumenteret for dette er, at en log nytte investor vælger en portefølje, som maksimerer det forventede logafkast. Ligning \@ref(eq:sumportk) viser at $k$-periode log afkastet er summen af én-periode logafkast. Summen bliver maksimeret ved at maksimere hvert element seperat, siden at porteføljen frit kan blive valgt hver periode, altså vil hver én-periodes maksimering lede til det myopiske valg.
+Den anden Samuelson-Merton betingelse som foranlediger til det myopiske porteføljevalg er baseret på faktummet, at en investor har log nytte, dvs. potens nytte, hvor $\gamma=1$. Her vil porteføljevalget være myopisk, uanset om aktiv afkastene er *i.i.d.* Argumenteret for dette er, at en log nytte investor vælger en portefølje, som maksimerer det forventede logafkast. Ligning \@ref(eq:sumportk) viser at $k$-periode log afkastet er summen af én-periode logafkast. Summen bliver maksimeret ved at maksimere hvert element seperat, siden at porteføljen frit kan blive valgt hver periode, altså vil hver én-periodes maksimering lede til det myopiske valg.
 
 ## Rekursiv løsning
 
@@ -579,7 +596,7 @@ Investoren vælger altså vægte sådan, at
 \end{cases}
 \end{align}
 
-Her er $\tau$ den resterende tid til investeringshorisonten, $t+k$. Altså indekseres vægtenes på det tidspunkt de bliver valgt med sunket skrift, og med hævet skrift for den resterende tid til investeringshorisonten. Risikopræferencen for investoren indebærer, at $(1+R_{p,t+i})>0$ for $i=1,\dots,k$. For de optimale vægte haves derfor
+Her er $\tau$ den resterende tid til investeringshorisonten. Altså indekseres vægtenes på det tidspunkt de bliver valgt med sunket skrift, og med hævet skrift for den resterende tid til investeringshorisonten. Risikopræferencen for investoren indebærer, at $(1+R_{p,t+i})>0$ for $i=1,\dots,k$. For de optimale vægte haves derfor
 \begin{equation}
 W_{t+k}=W_t\exp(r_{p,t\to t+k}),(\#eq:formuetk)
 \end{equation}
@@ -598,7 +615,7 @@ $$\bm{\alpha}_{t+k-1}^1=\frac{1}{\gamma}\bm{\Sigma}_{xx}^{-1}\left(\mathbb{E}_{t
 hvor, at
 $$\mathbb{E}_{t+k-1}(\bm{r}_{t+k}-r_{0,t+k}\bm{\ell})=\bm{H}_x(\bm{\Phi}_0 + \bm{\Phi}_1 \bm{z}_{t+k-1}),$$
 
-og $H_x$ er selektionsmatricen, som vælger rækkerne hørende til vektoren af merafkast $\bm{x}$ fra den relevante matrix. Den optimale portefølje kombinerer tangensporteføljen og global minimum varians porteføljen fra den efficiente rand, konstrueret af de én-periode forventede merafkast og kovariansmatricen af én-periode merafkastene. Tangensporteføljedelen er
+og $\bm{H}_x$ er selektionsmatricen, som vælger rækkerne hørende til vektoren af merafkast $\bm{x}$ fra den relevante matrix. Den optimale portefølje kombinerer tangensporteføljen og global minimum varians porteføljen fra den efficiente rand, konstrueret af de én-periode forventede merafkast og kovariansmatricen af én-periode merafkastene. Tangensporteføljedelen er
 $$\bm{\Sigma}_{xx}^{-1}\mathbb{E}_{t+k-1}(\bm{r}_{t+k}-r_{0,t+k}\bm{\ell})+\frac{1}{2}\bm{\sigma}_x^2.$$
 
 Denne portefølje er afhængig af de tidsvarierende merafkast og kovariansmatricen af merafkastene, dette er ensbetydende med at porteføljen vil ændre sig over tid. Global minimum varians porteføljen består af den anden del
@@ -615,3 +632,5 @@ Den generelle rekursive løsning til det dynamiske porteføljeproblem er givet v
 hvor $\bm{\Sigma}_x=\begin{pmatrix}\bm{\sigma}_0x & \bm{\Sigma} & \bm{\Sigma}_{xs}'\end{pmatrix}$ og $B_1^{\tau-1}$, $B_2^{\tau-1}$ samt $B_3^{\tau-1}$ er funktioner afhængende af: den resterende investeringshorisont, $\tau$, *RRA*-parameteren, $\gamma$, samt koefficeinterne fra VAR-modellen, [@JurVic2011].
 
 Ovenstående Ligning \@ref(eq:jurvicalpha) giver den fulde analytiske løsning til det intertemporale porteføljeproblem fra Ligning ??. Den optimale portefølje er en sum af to komponenter. Den første del af summen er identisk til den én-periode myopiske portefølje fra Ligning ??. Den anden del af summen, består af det såkaldte intertemporale *hedging demand* for risikobærende aktiver, [@Merton1969; @Merton1971; @Merton1973]. Herudover viser løsning at den myopiske del af det totale porteføljevalg er uafhængigt af den resterende tid til investeringshorisonten, $\tau$. Den viser også at den myopiske del er den totale porteføljedel for investorer med log nytte, $\gamma=1$. Hvilket også er konsistent med intutionen givet i Sektion ??, at log nytte investorer ikke forholder sig til investeringshorisonten.
+
+Komponentet som repræsenterer det intertemporale *hedging demand* består af to elementer. 
