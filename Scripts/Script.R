@@ -248,6 +248,7 @@ data_v <- as.ts(data)
 data_sub <- subset(data_v, select = -c(DP, EP, AKT_VAR, HML, Y_SPREAD, C_SPREAD, D_SPREAD, FR))
 # 
 var <- VAR(data_sub, p = 1)
+var.p <- VAR.Pope(data_sub, p = 1)
 
 coef <- Bcoef(var)
 coef1 <- coef(var)

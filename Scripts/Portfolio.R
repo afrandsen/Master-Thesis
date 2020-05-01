@@ -199,23 +199,23 @@ for (i in c(1, 5, 9, 13)) {
 HOR_ANA_VAL <- c(1, 3:100)
 
 HOR_ANA <- matrix(0, nrow = 4, ncol = length(HOR_ANA_VAL))
-
-for (i in (1:length(HOR_ANA_VAL))) {
-  HOR_ANA[, i] <- rowMeans(port_calc(gamma = 5, K = HOR_ANA_VAL[i])$alphafixedT)
-}
-
-HOR_ANA_VAL <- c(1, 3:100)
-
 HOR_ANA_R <- matrix(0, nrow = 4, ncol = length(HOR_ANA_VAL))
 
 for (i in (1:length(HOR_ANA_VAL))) {
-  HOR_ANA_R[, i] <- rowMeans(port_calc(gamma = 5, K = HOR_ANA_VAL[i])$res_alphafixedT)
+  a <- port_calc(gamma = 5, K = HOR_ANA_VAL[i])
+  
+  HOR_ANA[, i] <- rowMeans(a$alphafixedT)
+  HOR_ANA_R[, i] <- rowMeans(a$res_alphafixedT)
 }
 
-GAM_ANA_VAL <- seq(1, 50, 0.05)
+GAM_ANA_VAL <- seq(1, 50, 0.1)
 
 GAM_ANA <- matrix(0, nrow = 4, ncol = length(GAM_ANA_VAL))
+GAM_ANA_R <- matrix(0, nrow = 4, ncol = length(GAM_ANA_VAL))
 
 for (i in (1:length(GAM_ANA_VAL))) {
-  GAM_ANA[, i] <- rowMeans(port_calc(gamma = GAM_ANA_VAL[i], K = 100)$alphafixedT)
+  b <- port_calc(gamma = GAM_ANA_VAL[i], K = 100)
+  
+  GAM_ANA[, i] <- rowMeans(b$alphafixedT)
+  GAM_ANA_R[, i] <- rowMeans(b$res_alphafixedT)
 }
