@@ -72,10 +72,13 @@ ggplot(INF) +
 a  <- acf(as.numeric(NET_TB), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.1, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -122,10 +125,13 @@ ggplot(data) +
 a  <- acf(as.numeric(AKT), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.1, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -172,10 +178,13 @@ ggplot(data) +
 a  <- acf(as.numeric(S_OBL), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.1, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -226,10 +235,13 @@ ggplot(data) +
 a  <- acf(as.numeric(V_OBL), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.1, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -330,10 +342,13 @@ ggplot(data) +
 a  <- acf(as.numeric(DP), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.7, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -378,10 +393,13 @@ ggplot(data) +
 a  <- acf(as.numeric(EP), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.6, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -426,10 +444,13 @@ ggplot(data) +
 a  <- acf(as.numeric(BM), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.8, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -474,10 +495,13 @@ ggplot(data) +
 a  <- acf(as.numeric(AKT_VAR), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.1, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -522,10 +546,13 @@ ggplot(data) +
 a  <- acf(as.numeric(HML), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.1, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -570,10 +597,13 @@ ggplot(data) +
 a  <- acf(as.numeric(SMB), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.1, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -618,10 +648,13 @@ ggplot(data) +
 a  <- acf(as.numeric(TB), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.7, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -669,10 +702,13 @@ ggplot(data) +
 a  <- acf(as.numeric(T_SPREAD), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.1, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -720,10 +756,13 @@ ggplot(data) +
 a  <- acf(as.numeric(Y_SPREAD), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.1, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -771,10 +810,13 @@ ggplot(data) +
 a  <- acf(as.numeric(C_SPREAD), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.3, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -822,10 +864,13 @@ ggplot(data) +
 a  <- acf(as.numeric(D_SPREAD), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.4, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -870,10 +915,13 @@ ggplot(data) +
 a  <- acf(as.numeric(FR), plot=FALSE)
 ba <- with(a, data.frame(lag, acf))
 
+conf_limits <- c(-1, 1) * qnorm((1 + 0.95) / 2) / sqrt(a$n.used)
+
 ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   geom_hline(aes(yintercept = 0)) +
+  geom_hline(yintercept = conf_limits, col = "pink") +
   geom_segment(mapping = aes(xend = lag, yend = 0)) +
-  coord_cartesian(ylim = c(min(ba$acf), 1)) +
+  coord_cartesian(ylim = c(min(ba$acf)-0.7, 1)) +
   scale_y_continuous(expand=c(0,0))+
   scale_x_continuous(breaks = seq(0, 25, 1)) +
   theme_bw()+
@@ -1230,6 +1278,8 @@ FIT_M_TABLE %>%
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE)
 ```
 
+Som et modeltjek viser Figur \@ref(fig:MULT-ak-auto) seks af de mest sædvanlige modelinspektionsplots. Disse indebærer bl.a. residualer, standardiserede residualer, *Normal Q-Q* m.fl. Her observeres heteroskedasticitet observeres svagt for lave og høje værdier af responsvariablen. Dette indikeres bl.a. af den røde linje på *Scale-Location* plottet. Dette er højst sandsynligt grundet den meget lave stiksprøvestørrelse. På *Normal Q-Q* plottet ses igen -- som indikeret af *Jarque-Bera* testen fra Tabel \@ref(tab:JB-AKTIVKLASSE) -- at residualerne ikke følger en normalfordeling, hvor særligt problemerne er i halerne som forventet. Statistisk set er en såkaldt *outlier* ikke nødvendigvis betydningsfuld for modellen. For at være betydningsfuld for den estimerede model, skal en observation have både høj *leverage* og en høj standardiseret residual. Dette gør sig særligt gældende for to dage under *Finanskrisen*, samt dagen for et af historiens største aktiefald, *Black Monday*. Disse er også indikeret målet *Cook's Distance*, [@Cook1977], som giver høje værdier til betydningsfulde observationer.
+
 ```{r MULT-ak-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af Kitchen-Sink regressionen for merafkastet på aktier.', fig.width=18, fig.asp=0.9, fig.pos='H'}
 g <- autoplot(fit_AKT, which = 1:6, ncol = 2, label.size = 3, smooth.colour  = 'red', smooth.linetype = "dashed", ad.colour = "pink", label.vjust = -0.3, label.angle = -15) + theme_bw()
 
@@ -1258,7 +1308,7 @@ for (i in 1:6) {
 g
 ```
 
-Mht. log merafkastet på statsobligationer ses, at *Small Minus Big* samt aktievariansen prædikterer merafkastet negativt, og som de eneste af finansielle variable, er de signifikante. For rentestruktursvariablene er det den nominelle rente samt *Credit Spread*, som er signifikante, de prædikterer afkastet positivt. Her skal det nævnes, at der er stor sandsynlighed for multikollinaritet, da rentespændene indeholder meget af den samme information og er stærkt korrelerede. *Federal Funds Rate* er ligeledes signifikant og bevæger sig kontracyklisk med en negativ koefficient.
+Mht. log merafkastet på statsobligationer ses, at *Small Minus Big* samt aktievariansen prædikterer merafkastet negativt, og som de eneste af finansielle variable, er de signifikante. For rentestruktursvariablene er det den nominelle rente samt *Credit Spread*, som er signifikante, de prædikterer afkastet positivt. Her skal det nævnes, at der er stor sandsynlighed for multikollinaritet, da rentespændene indeholder meget af den samme information og er stærkt korrelerede. Derudover kan det nævnes at *Credit Spread* er den eneste renstespændsvariabel med det korrekte fortegn. *Federal Funds Rate* er ligeledes signifikant og bevæger sig kontracyklisk med en negativ koefficient.
 
 ```{r MULT-s, echo=FALSE}
 options(knitr.kable.NA = '')
@@ -1315,7 +1365,7 @@ for (i in 1:6) {
 g
 ```
 
-Sidst ses i Tabel \@ref(tab:MULT-v) at log merafkastet på virksomhedsobligationer er svært prædiktabelt i det multiple setup. Kun *Small Minus Big* samt *Federal Funds Rate* er signifikante med $t$-størrelser på hhv. `r round(FIT_M_V_TABLE$t[7], 3)` og `r round(FIT_M_V_TABLE$t[13], 3)`.
+Sidst ses i Tabel \@ref(tab:MULT-v) at log merafkastet på virksomhedsobligationer er svært prædiktabelt i det multiple setup. Kun *Small Minus Big* samt *Federal Funds Rate* er signifikante med $t$-størrelser på hhv. `r round(FIT_M_V_TABLE$t[7], 3)` og `r round(FIT_M_V_TABLE$t[13], 3)`. Igen ses at *Credit Spread* er rentespændsvariablen, der har højest signifikans, hvilket følger den multiple regression mht. statsobligationerne. 
 
 ```{r MULT-v, echo=FALSE}
 options(knitr.kable.NA = '')

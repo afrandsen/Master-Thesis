@@ -300,7 +300,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-05-01                  
+##  date     2020-05-02                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -685,6 +685,34 @@ I Kapitel \ref{unteo}, blev den grundliggende teori for porteføljevalg beskreve
 
 \hypertarget{definition-af-aktieafkast}{%
 \subsection{Definition af aktieafkast}\label{definition-af-aktieafkast}}
+
+I denne Sektion har til formål at definere aktieafkast, dets logrepræsentation samt dets relation til udbytte. Udledningen af én-periode brutto aktieafkastet baseres på \citep{Campbell1988}. Først betragtes brutto aktieafkastet fra tidspunkt \(t\) til \(t+1\), og dernæst udledes dets én-periode log afkast via en førstordens Taylor approksimation. Lad \(R_{t+1}\) noterer én-periode brutto aktieafkastet, og lad det være defineret som
+\begin{equation}
+1+R_{t+1}=\frac{P_{t+1}+D_{t+1}}{P_t}, \label{eq:csaa}
+\end{equation}
+
+her er \(P_t\) prisen af aktien på tidspunkt \(t\). \(D_t\) er udbytte på tidspunkt \(t\). Tages nu log på begge sider af Ligning \eqref{eq:csaa} fås
+\begin{equation}
+r_{t+1}\approx p_{t+1}+\log(1+\exp(d_{t+1}-p{t+1}))-p_t. \label{eq:csaa2}
+\end{equation}
+
+Det observeres, at det andet led på højre side af Ligning \eqref{eq:csaa2} er ikke-lineær. Dette løses ved at lave en førsteordens Taylor approksimation omkring middelværdien ??, dermed kan det andet led skrives som
+\begin{equation}
+f(\log(1+\exp(d_{t+1}-p_{t+1}))) = (1-\rho)(d_{t+1}-p_{t+1}) + c, \label{eq:csaa3}
+\end{equation}
+
+hvor \(\rho\) og \(c\) er såkaldte lineariseringsparametre, defineret som
+\begin{align*}
+\rho&=1+\exp(d_{t+1}-p_{t+1})\\
+c=\log(1+\exp(d_{t+1}-p_{t+1}))-(1-\rho)(d_{t+1}-p_{t+1}).
+\end{align*}
+
+Indsættes Ligning \eqref{eq:csaa3} nu i Ligning \eqref{eq:csaa2}, kan det approksimative én-periode brutto aktie log afkast udledes til
+\begin{equation}
+r_{t+1}\approx \rho p_{t+1} + (1-\rho)d_{t+1}-p_t+c. \label{eq:csaa4}
+\end{equation}
+
+Ligning \eqref{eq:csaa4} betegnes undertiden som \emph{Campbell-Shiller Loglinear Relation}, og antyder, at brutto aktie logafkastet approksimativt er et vægtet gennemsnit af fremtidige logpriser og logudbytte fratrukket fra den nuværende logpris med den tilhørende lineariseringsparameter \(c\). Altså haves en approksimativ løsning for Ligning \eqref{eq:csaa}.
 
 \hypertarget{definintion-af-obligationsafkast}{%
 \subsection{Definintion af obligationsafkast}\label{definintion-af-obligationsafkast}}
@@ -2137,6 +2165,8 @@ $x_t^{\text{ds}}$ & 0.898 & -9.399 & 11.195 & 5.228 & 0.172 & 0.864\\
 \end{threeparttable}
 \end{table}
 
+Som et modeltjek viser Figur \ref{fig:MULT-ak-auto} seks af de mest sædvanlige modelinspektionsplots. Disse indebærer bl.a. residualer, standardiserede residualer, \emph{Normal Q-Q} m.fl. Her observeres heteroskedasticitet observeres svagt for lave og høje værdier af responsvariablen. Dette indikeres bl.a. af den røde linje på \emph{Scale-Location} plottet. Dette er højst sandsynligt grundet den meget lave stiksprøvestørrelse. På \emph{Normal Q-Q} plottet ses igen -- som indikeret af \emph{Jarque-Bera} testen fra Tabel \ref{tab:JB-AKTIVKLASSE} -- at residualerne ikke følger en normalfordeling, hvor særligt problemerne er i halerne som forventet. Statistisk set er en såkaldt \emph{outlier} ikke nødvendigvis betydningsfuld for modellen. For at være betydningsfuld for den estimerede model, skal en observation have både høj \emph{leverage} og en høj standardiseret residual. Dette gør sig særligt gældende for to dage under \emph{Finanskrisen}, samt dagen for et af historiens største aktiefald, \emph{Black Monday}. Disse er også indikeret målet \emph{Cook's Distance}, \citep{Cook1977}, som giver høje værdier til betydningsfulde observationer.
+
 \begin{figure}[H]
 
 {\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/MULT-ak-auto-1} 
@@ -2155,7 +2185,7 @@ $x_t^{\text{ds}}$ & 0.898 & -9.399 & 11.195 & 5.228 & 0.172 & 0.864\\
 \caption{Visuel inspektion af den step optimerede regression for merafkastet på aktier.}\label{fig:MULT-ak-step-auto}
 \end{figure}
 
-Mht. log merafkastet på statsobligationer ses, at \emph{Small Minus Big} samt aktievariansen prædikterer merafkastet negativt, og som de eneste af finansielle variable, er de signifikante. For rentestruktursvariablene er det den nominelle rente samt \emph{Credit Spread}, som er signifikante, de prædikterer afkastet positivt. Her skal det nævnes, at der er stor sandsynlighed for multikollinaritet, da rentespændene indeholder meget af den samme information og er stærkt korrelerede. \emph{Federal Funds Rate} er ligeledes signifikant og bevæger sig kontracyklisk med en negativ koefficient.
+Mht. log merafkastet på statsobligationer ses, at \emph{Small Minus Big} samt aktievariansen prædikterer merafkastet negativt, og som de eneste af finansielle variable, er de signifikante. For rentestruktursvariablene er det den nominelle rente samt \emph{Credit Spread}, som er signifikante, de prædikterer afkastet positivt. Her skal det nævnes, at der er stor sandsynlighed for multikollinaritet, da rentespændene indeholder meget af den samme information og er stærkt korrelerede. Derudover kan det nævnes at \emph{Credit Spread} er den eneste renstespændsvariabel med det korrekte fortegn. \emph{Federal Funds Rate} er ligeledes signifikant og bevæger sig kontracyklisk med en negativ koefficient.
 
 \begin{table}[H]
 
@@ -2208,7 +2238,7 @@ $x_t^{\text{ds}}$ & -0.485 & -2.873 & 1.902 & 1.212 & -0.400 & 0.689\\
 \caption{Visuel inspektion af den step optimerede regression for merafkastet på aktier.}\label{fig:MULT-s-step-auto}
 \end{figure}
 
-Sidst ses i Tabel \ref{tab:MULT-v} at log merafkastet på virksomhedsobligationer er svært prædiktabelt i det multiple setup. Kun \emph{Small Minus Big} samt \emph{Federal Funds Rate} er signifikante med \(t\)-størrelser på hhv. -2.836 og -2.739.
+Sidst ses i Tabel \ref{tab:MULT-v} at log merafkastet på virksomhedsobligationer er svært prædiktabelt i det multiple setup. Kun \emph{Small Minus Big} samt \emph{Federal Funds Rate} er signifikante med \(t\)-størrelser på hhv. -2.836 og -2.739. Igen ses at \emph{Credit Spread} er rentespændsvariablen, der har højest signifikans, hvilket følger den multiple regression mht. statsobligationerne.
 
 \begin{table}[H]
 
@@ -3022,8 +3052,8 @@ Løsningen til ovenstående førsteordensbetingelse medfører et udtryk for den 
 
 hvor
 \begin{align*}
-A_0^2&=(\bm{\Sigma}_xx - (1-\gamma)\Tilde{\bm{\Omega}}_{xx}^1)^{-1} (\bm{\Phi}_0^x + \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma) (\Tilde{\bm{\Omega}}_{x0}^1 + \Tilde{\bm{\Omega}}_{x}^1 (B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0)))\\
-A_1^2&=(\bm{\Sigma}_xx - (1-\gamma)\Tilde{\bm{\Omega}}_{xx}^1)^{-1}(\bm{\Phi}_1^x+2(1-\gamma) \Tilde{\bm{\Omega}}_{x}^1 \Tilde{B} _2^{1}\bm{\Phi}_1).
+A_0^2&=(\bm{\Sigma}_{xx} - (1-\gamma)\Tilde{\bm{\Omega}}_{xx}^1)^{-1} (\bm{\Phi}_0^x + \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma) (\Tilde{\bm{\Omega}}_{x0}^1 + \Tilde{\bm{\Omega}}_{x}^1 (B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0)))\\
+A_1^2&=(\bm{\Sigma}_{xx} - (1-\gamma)\Tilde{\bm{\Omega}}_{xx}^1)^{-1}(\bm{\Phi}_1^x+2(1-\gamma) \Tilde{\bm{\Omega}}_{x}^1 \Tilde{B} _2^{1}\bm{\Phi}_1).
 \end{align*}
 
 På samme vis kan beregniner baseret på Ligning ??, give følgende resultat
@@ -3058,12 +3088,12 @@ hvor de følgende hjælpematricer er anvendt \(\bm{\Lambda}^1=\Tilde{B}_2^{1}\bm
 
 I grænsen af kontinuert tid kan der ligeledes opnåes simplificerede udtryk, analoge til trykkene, som ledte til udledning af \emph{policy}-funktionen. Ergo bliver udtrykkene nu
 \begin{align*}
-B_0^2&=\bm{\Phi}_0^0 + A_0^{1\prime} (\bm{\Phi}_0^x + \frac{1}{2}\bm{\sigma}_x^2) + \frac{1-\gamma}{2} (\bm{\Sigma}_{00}+ 2A_0^{1\prime} \bm{\Sigma}_x0) - \frac{\gamma}{2} A_0^{1\prime} \bm{\Sigma}_{xx} A_0^1 + B_0^1 + (B_1^1 + \bm{\Phi}_0' B_2^1) \bm{\Phi }_0\\
-&\quad + (1-\gamma)B_1^1 (\bm{\Sigma}_0' + \frac{1}{2} \bm{\Sigma} B_1^{1\prime} + \bm{\Sigma}_x' A_0^1) + (1-\gamma) \bm{\Phi}_0' (2\bm{\Lambda}^1 \bm{\Phi}_0 + \bm{\Xi}_0^{1\prime} + \bm{\Xi}_x^{1\prime} A_0^1 + \bm{\Gamma}^1 B_1^{1\prime})\\
-B_1^2&=\bm{\Phi}_1^1 + A_0^{1\prime} (\bm{\Phi}_1^x -\gamma\bm{\Sigma}_{xx}) A_1^1 + (\bm{\Phi}_0^x + \frac{1}{2}\bm{\sigma}_x^2 + (1-\gamma) \bm{\Sigma}_{x0})' A_1^1 + (B_1^1 + 2\bm{\Phi}_0' \Tilde{B}_2^1)\bm{\Phi}_1 + (1-\gamma) (B_1^1\bm{\Sigma}_x'\\
-&\quad + \bm{\Phi}_0' \bm{\Xi}_{x}^{1\prime}) A_1^1\\
-&\quad + (1-\gamma) (4 \bm{\Phi}_0' \Tilde{\bm{\Lambda}}^1 + \bm{\Xi}_1^1 + A_0^{1\prime} \bm{\Xi}_x^1 + B_1^1 \bm{\Xi}^1)\bm{\Phi}_1,\\
-B_2^2&= A_1^{1\prime} (\bm{\Phi}_1^x - \frac{\gamma}{2} \bm{\Sigma}_{xx} A_1^1) + \bm{\Phi}_1' (B_2^1 + 2(1-\gamma) \bm{\Lambda}^1) \bm{\Phi}_1 + (1-\gamma) \bm{\Phi}_1' \bm{\Xi}_x^{1\prime} A_1^1,
+B_0^2&=\bm{\Phi}_0^0 + A_0^{1\prime} \Big(\bm{\Phi}_0^x + \frac{1}{2}\bm{\sigma}_x^2\Big) + \frac{1-\gamma}{2} \Big(\bm{\Sigma}_{00}+ 2A_0^{1\prime} \bm{\Sigma}_{x0}\Big) - \frac{\gamma}{2} A_0^{1\prime} \bm{\Sigma}_{xx} A_0^1 + B_0^1 + \Big(B_1^1 + \bm{\Phi}_0' B_2^1\Big) \bm{\Phi }_0\\
+&\quad + \Big(1-\gamma\Big)B_1^1 \Big(\bm{\Sigma}_0' + \frac{1}{2} \bm{\Sigma} B_1^{1\prime} + \bm{\Sigma}_x' A_0^1\Big) + \Big(1-\gamma\Big) \bm{\Phi}_0' \Big(2\bm{\Lambda}^1 \bm{\Phi}_0 + \bm{\Xi}_0^{1\prime} + \bm{\Xi}_x^{1\prime} A_0^1 + \bm{\Gamma}^1 B_1^{1\prime}\Big)\\
+B_1^2&=\bm{\Phi}_1^1 + A_0^{1\prime} \Big(\bm{\Phi}_1^x -\gamma\bm{\Sigma}_{xx}\Big) A_1^1 + \Big(\bm{\Phi}_0^x + \frac{1}{2}\bm{\sigma}_x^2 + \Big(1-\gamma\Big) \bm{\Sigma}_{x0}\Big)' A_1^1 + \Big(B_1^1 + 2\bm{\Phi}_0' \Tilde{B}_2^1\Big)\bm{\Phi}_1 + \Big(1-\gamma\Big) \Big(B_1^1\bm{\Sigma}_x'\\
+&\quad + \bm{\Phi}_0' \bm{\Xi}_{x}^{1\prime}\Big) A_1^1\\
+&\quad + \Big(1-\gamma\Big) \Big(4 \bm{\Phi}_0' \Tilde{\bm{\Lambda}}^1 + \bm{\Xi}_1^1 + A_0^{1\prime} \bm{\Xi}_x^1 + B_1^1 \bm{\Xi}^1\Big)\bm{\Phi}_1,\\
+B_2^2&= A_1^{1\prime} \Big(\bm{\Phi}_1^x - \frac{\gamma}{2} \bm{\Sigma}_{xx} A_1^1\Big) + \bm{\Phi}_1' \Big(B_2^1 + 2\Big(1-\gamma\Big) \bm{\Lambda}^1\Big) \bm{\Phi}_1 + \Big(1-\gamma\Big) \bm{\Phi}_1' \bm{\Xi}_x^{1\prime} A_1^1,
 \end{align*}
 
 hvor de følgende hjælpematricer er anvendt \(\bm{\Lambda}^1=\Tilde{B}_2^{1}\bm{\Sigma}_v \Tilde{B}_2^{1\prime}\), \(\bm{\Gamma}^1=2\Tilde{B}_2^{1}\bm{\Sigma}_v\) samt \(\bm{\Xi}^1=\bm{\Gamma}^{1\prime}\).

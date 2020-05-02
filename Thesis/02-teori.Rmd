@@ -262,6 +262,33 @@ I Kapitel \@ref(unteo), blev den grundliggende teori for porteføljevalg beskrev
 ## Afkast og nutidsværdi-relationer
 
 ### Definition af aktieafkast
+I denne Sektion har til formål at definere aktieafkast, dets logrepræsentation samt dets relation til udbytte. Udledningen af én-periode brutto aktieafkastet baseres på [@Campbell1988]. Først betragtes brutto aktieafkastet fra tidspunkt $t$ til $t+1$, og dernæst udledes dets én-periode log afkast via en førstordens Taylor approksimation. Lad $R_{t+1}$ noterer én-periode brutto aktieafkastet, og lad det være defineret som
+\begin{equation}
+1+R_{t+1}=\frac{P_{t+1}+D_{t+1}}{P_t}, (\#eq:csaa)
+\end{equation}
+
+her er $P_t$ prisen af aktien på tidspunkt $t$. $D_t$ er udbytte på tidspunkt $t$. Tages nu log på begge sider af Ligning \@ref(eq:csaa) fås
+\begin{equation}
+r_{t+1}\approx p_{t+1}+\log(1+\exp(d_{t+1}-p{t+1}))-p_t. (\#eq:csaa2)
+\end{equation}
+
+Det observeres, at det andet led på højre side af Ligning \@ref(eq:csaa2) er ikke-lineær. Dette løses ved at lave en førsteordens Taylor approksimation omkring middelværdien ??, dermed kan det andet led skrives som
+\begin{equation}
+f(\log(1+\exp(d_{t+1}-p_{t+1}))) = (1-\rho)(d_{t+1}-p_{t+1}) + c, (\#eq:csaa3)
+\end{equation}
+
+hvor $\rho$ og $c$ er såkaldte lineariseringsparametre, defineret som
+\begin{align*}
+\rho&=1+\exp(d_{t+1}-p_{t+1})\\
+c=\log(1+\exp(d_{t+1}-p_{t+1}))-(1-\rho)(d_{t+1}-p_{t+1}).
+\end{align*}
+
+Indsættes Ligning \@ref(eq:csaa3) nu i Ligning \@ref(eq:csaa2), kan det approksimative én-periode brutto aktie log afkast udledes til
+\begin{equation}
+r_{t+1}\approx \rho p_{t+1} + (1-\rho)d_{t+1}-p_t+c. (\#eq:csaa4)
+\end{equation}
+
+Ligning \@ref(eq:csaa4) betegnes undertiden som *Campbell-Shiller Loglinear Relation*, og antyder, at brutto aktie logafkastet approksimativt er et vægtet gennemsnit af fremtidige logpriser og logudbytte fratrukket fra den nuværende logpris med den tilhørende lineariseringsparameter $c$. Altså haves en approksimativ løsning for Ligning \@ref(eq:csaa).
 
 ### Definintion af obligationsafkast
 
