@@ -300,7 +300,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-05-02                  
+##  date     2020-05-05                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -683,8 +683,8 @@ I Kapitel \ref{unteo}, blev den grundliggende teori for porteføljevalg beskreve
 \hypertarget{afkast-og-nutidsvuxe6rdi-relationer}{%
 \section{Afkast og nutidsværdi-relationer}\label{afkast-og-nutidsvuxe6rdi-relationer}}
 
-\hypertarget{definition-af-aktieafkast}{%
-\subsection{Definition af aktieafkast}\label{definition-af-aktieafkast}}
+\hypertarget{defaktafk}{%
+\subsection{Definition af aktieafkast}\label{defaktafk}}
 
 I denne Sektion har til formål at definere aktieafkast, dets logrepræsentation samt dets relation til udbytte. Udledningen af én-periode brutto aktieafkastet baseres på \citep{Campbell1988}. Først betragtes brutto aktieafkastet fra tidspunkt \(t\) til \(t+1\), og dernæst udledes dets én-periode log afkast via en førstordens Taylor approksimation. Lad \(R_{t+1}\) noterer én-periode brutto aktieafkastet, og lad det være defineret som
 \begin{equation}
@@ -696,7 +696,7 @@ her er \(P_t\) prisen af aktien på tidspunkt \(t\). \(D_t\) er udbytte på tids
 r_{t+1}\approx p_{t+1}+\log(1+\exp(d_{t+1}-p{t+1}))-p_t. \label{eq:csaa2}
 \end{equation}
 
-Det observeres, at det andet led på højre side af Ligning \eqref{eq:csaa2} er ikke-lineær. Dette løses ved at lave en førsteordens Taylor approksimation omkring middelværdien ??, dermed kan det andet led skrives som
+Det observeres, at det andet led på højre side af Ligning \eqref{eq:csaa2} er ikke-lineær. Dette løses ved at lave en førsteordens Taylor approksimation omkring middelværdien af \(d_{t+1}-p_{t+1}\)\footnote{Fordelene ved en sådan linearisering er, at det tillader en lineær statistisk analyse af aktieprisens bevægelser, som simplificerer det økonometriske arbejde. Derudover er der den generelle konsensus, at aktieafkast og udbytte følger en loglineær stokastisk process, og derfor er det nødvendigt at udarbejde en model, som er tilpasset denne antagelse.}, dermed kan det andet led skrives som
 \begin{equation}
 f(\log(1+\exp(d_{t+1}-p_{t+1}))) = (1-\rho)(d_{t+1}-p_{t+1}) + c, \label{eq:csaa3}
 \end{equation}
@@ -704,7 +704,7 @@ f(\log(1+\exp(d_{t+1}-p_{t+1}))) = (1-\rho)(d_{t+1}-p_{t+1}) + c, \label{eq:csaa
 hvor \(\rho\) og \(c\) er såkaldte lineariseringsparametre, defineret som
 \begin{align*}
 \rho&=1+\exp(d_{t+1}-p_{t+1})\\
-c=\log(1+\exp(d_{t+1}-p_{t+1}))-(1-\rho)(d_{t+1}-p_{t+1}).
+c&=\log(1+\exp(d_{t+1}-p_{t+1}))-(1-\rho)(d_{t+1}-p_{t+1}).
 \end{align*}
 
 Indsættes Ligning \eqref{eq:csaa3} nu i Ligning \eqref{eq:csaa2}, kan det approksimative én-periode brutto aktie log afkast udledes til
@@ -712,10 +712,76 @@ Indsættes Ligning \eqref{eq:csaa3} nu i Ligning \eqref{eq:csaa2}, kan det appro
 r_{t+1}\approx \rho p_{t+1} + (1-\rho)d_{t+1}-p_t+c. \label{eq:csaa4}
 \end{equation}
 
-Ligning \eqref{eq:csaa4} betegnes undertiden som \emph{Campbell-Shiller Loglinear Relation}, og antyder, at brutto aktie logafkastet approksimativt er et vægtet gennemsnit af fremtidige logpriser og logudbytte fratrukket fra den nuværende logpris med den tilhørende lineariseringsparameter \(c\). Altså haves en approksimativ løsning for Ligning \eqref{eq:csaa}.
+Ligning \eqref{eq:csaa4} betegnes undertiden som \emph{Campbell-Shiller Loglinear Relation}, og antyder, at brutto aktie logafkastet approksimativt er et vægtet gennemsnit af fremtidige logpriser og logudbytte fratrukket fra den nuværende logpris med den tilhørende lineariseringsparameter \(c\). Altså haves en approksimativ løsning for Ligning \eqref{eq:csaa}. Givet at det gennemsnitlige \emph{Dividend-Price Ratio} i U.S.A. mellem 1926 og 1994 var omkring \(4\%\), haves det, at \(\rho\approx 0.96\) i årlig data og \(\rho\approx 0.997\) i månedlige data, \citep{Campbell1997}. Dette medfører en signifikant indvirkning fra proportionelle ændringer i aktiepriser på afkast ift. indvirkningen fra udbytte.
+
+Ligning \eqref{eq:csaa4} kan omskrives ift. \emph{Dividend-Price Ratio}. Dette gøres ved at multiplicere med \(-1\) og addere \(d_t\) på begge sider af lighedstegnet
+\begin{equation}
+d_t-p_t=\rho(d_{t+1}-p_{t+1}) + r_{t+1} -\Delta d_{t+1}-c. \label{eq:csaa5}
+\end{equation}
+
+Tages nu forventningen af Ligning \eqref{eq:csaa5} på tidspunkt \(t\) og ved samtidig overholdelse af transversalitetsbetingelsen
+\[\lim_{n\to\infty } \rho^n\mathbb{E}_t[d_{t+n}-p_{t+n}]= 0,\]
+
+kan der ved brug af rekursion, opnåes den såkaldte \emph{Dynamic Gordon Growth Model}
+\begin{equation}
+d_t-p_t=\sum_{j=0}^\infty \rho^j \mathbb{E}_t[r_{t+j+1}-\Delta d_{t+j+1}]-\frac{c}{1-\rho}. \label{eq:csaa6}
+\end{equation}
+
+Transversalitetsbetingelsen udeholder \emph{bobler} i \emph{Dynamic Gordon Growth Model}. Det følger igennem Ligning \eqref{eq:csaa6}, at ændringer i log \emph{Dividend-Price Ratio} må være grundet ændringer i: fremtidige afkast eller en ændring i forventningen til fremtidige udbyttebetalingenr eller en kombination af begge. Et vigtigt aspekt af ovenstående relation er, at den er udledt på baggrund af definitionen af afkast og ikke en økonomisk model. Derudover viser Ligning \eqref{eq:csaa6} baggrunden for at medtage log \emph{Dividend-Price Ratio}, som en forklarende variabel til responsvariablen aktieafkast: der må være en mellemliggende relation mellem bevægelser i aktieafkast eller vækst i udbyttebetalinger og ændringer i \emph{Dividend-Price Ratio}. Ligning \eqref{eq:csaa6} hævder, at log \emph{Dividend-Price Ratio} må bære på alt markedsinformation vedr. fremtidige bevægelser i aktieafkast eller udbytter.
 
 \hypertarget{definintion-af-obligationsafkast}{%
 \subsection{Definintion af obligationsafkast}\label{definintion-af-obligationsafkast}}
+
+Som en analog til det udledte resultat mellem aktieafkast og \emph{Dividend-Price Ratio} fra Sektion \ref{defaktafk}, eksisterer der en relation mellem obligationsafkast og rentespændet. Dvs. at rentespændet spiller en sammenlignelig rolle for \emph{Fixed Income} markederne, som \emph{Dividend-Price Ratio} gjorde det for aktiemarkedet \citep{Campbell1997}. Først etableres egenskaberne for nulkupon obligationer, for herefter at udarbejde relationen for kupon obligationer.
+
+Rentespændet prædiktabilitet af obligationsafkast kan be udledt, ved at betragte et marked bestående kun af nulkupon obligationer. Den nominelle pris på tidspunkt \(t\), for en nulkupon obligation med løbetid \(n\), noteres som \(P_t^n\). Den tilhørende effektive rente betegnes \(Y_t^n\). Ved tilbagediskontering af det fremtidige cashflow kan prisen i dag findes til
+\begin{equation}
+P_t^n=\frac{1}{(1+Y_t^n)^n}. \label{eq:csba1}
+\end{equation}
+
+Tages nu log på Ligning \eqref{eq:csba1} og ved samtidig isolering af log af den effektive rente opnåes
+\begin{equation}
+y_t^n=-\frac{1}{n}p_t^n. \label{eq:csba2}
+\end{equation}
+
+Ved brug af Ligning \eqref{eq:csba1}, ses at én-periode brutto afkastet på obligationen fra tidspunkt \(t\) til \(t+1\) bliver
+\begin{equation}
+1+R_{t+1}^n=\frac{P_{t+1}^{n-1}}{P_t^n}=\frac{(1+Y_t^n)^n}{(1+Y_t^{n-1})^{n-1}}. \label{eq:csba3}
+\end{equation}
+
+Ligning \eqref{eq:csba3} viser at \(n\)-periode afkastet bliver \(n-1\)-periode afksatet på tidspunkt \(t+1\). Dette kan lad sige gøre idet, at \(n\)-periode obligationen er holdt til en horisont \(n\). Ved at gå fra \(t\) til \(t+1\) er én-perioden af \(n\)-periode obligationen nu afsluttet, dermed bliver \(n\)-periode obligationen nu \(n-1\)-periode obligationen på tidspunkt \(t+1\). Ved at tage log på Ligning \eqref{eq:csba3}, bliver én-periode brutto afkastet for beholdningsperioden \(n\) lig
+\begin{equation}
+r_{t+1}^n=n y_t^n - (n-1) y_{t+1}^{n-1}. \label{eq:csba4}
+\end{equation}
+
+Fra Ligning \eqref{eq:csba4} observeres det, at afkastet er et vægtet gennemsnit af den nuværende effektive rente og den fremtidige effektive rente på obligationen med løbetid \(n\). Ved isolation af den nuværende effektive rente opnåes
+\begin{equation}
+y_t^n = \frac{1}{n} (r_{t+1}^n + (n-1) y_{t+1}^{n-1}). \label{eq:csba5}
+\end{equation}
+
+Kombineres udtrykket for den effektive rente \(y_t^n\) samt implikationen for \(p_t^n\), kan Ligning \eqref{eq:csba4} løses ved rekursion, og dermed opnå
+\begin{equation}
+y_t^n = \frac{1}{n} \sim_{i=0}^{n-1} r_{t+1+i}^{n-1}. \label{eq:csba6}
+\end{equation}
+
+Ligning \eqref{eq:csba6} er det gennemsnitlige effektive rente afkast pr. periode, givet at obligationen er holdt til udløb, \(n\). Derudover kan Ligning \eqref{eq:csba6} omskrives i termer af rentespændet, eftersom
+\begin{equation}
+s_t^n\equiv y_t^n - y_t^1. \label{eq:csba7}
+\end{equation}
+
+Rentespændet findes nu ved at tage den betingede forventning til den fremtidige (korte) rente og ændringer i risikopræmien
+\begin{equation}
+s_t^n=\frac{1}{n} \sum_{i=1}^{n-1} \mathbb{E}_t[(n-1)\Delta y_{t+1}^1] + \frac{1}{n}\sum_{i=0}^{n-1}\mathbb{E}_t[(r_{t+1+i}^{n-i}-y_t^1)]. \label{eq:csba8}
+\end{equation}
+
+Ved denne opskrivning ses, at ændringer i rentespændet er grundet bevægelser i den fremtidige (korte) rente og/eller ændringer i den fremtidige risikopræmie. Resultatet er dermed en analog til relationen mellem aktieafkast og \emph{Dividend-Price Ratio} i \emph{Dynamic Gordon Growth Model}. \citep{Fama1987} viser, at rentespændet implicit har styrke til at prædiktere obligationsafkast, hvis obligationsafkastet er tidsvarierende.
+
+Nu fortsættes udledingen for relationen ift. kupon betalende obligationer. Generelt set kan en kupon obligation betragtes som en række nulkupon obligationer. Hvor hver nulkupon obligation har en pålydende værdi lig kuponbetalingen for hver pågældende kuponbetalingsdag, inkl. udløbsbetalingen, \citep{Campbell1997}. Udover løbetiden på obligationen, vil prisen også afhænge af kuponrenten. For at se dette betragtes en kupon obligation med kuponbetalinger lig \(C\), med en periodisk effektiv rente på \(Y_t^{c,n}\), som samtidig defineres som den periodiske diskonteringsfaktor. Dermed bliver prisen på obligationen
+\begin{equation}
+P_t^{c,n}=\frac{C}{(1+Y_t^{c,n})}+\frac{C}{(1+Y_t^{c,n})^2}+\cdots+\frac{C}{(1+Y_t^{c,n})^n}.  \label{eq:csba9}
+\end{equation}
+
+En analytisk løsning for Ligning \eqref{eq:csba9} ift. \(Y_t^{c,n}\) er ikke mulig, ergo må ligningen derfor løses numerisk.
 
 \hypertarget{potentielle-pruxe6diktabilitetsvariable}{%
 \section{Potentielle prædiktabilitetsvariable}\label{potentielle-pruxe6diktabilitetsvariable}}
@@ -1113,7 +1179,12 @@ hvor \(\bm{\Sigma}_x=\begin{pmatrix}\bm{\sigma}_0x & \bm{\Sigma} & \bm{\Sigma}_{
 
 Ovenstående Ligning \eqref{eq:jurvicalpha} giver den fulde analytiske løsning til det intertemporale porteføljeproblem fra Ligning ??. Den optimale portefølje er en sum af to komponenter. Den første del af summen er identisk til den én-periode myopiske portefølje fra Ligning ??. Den anden del af summen, består af det såkaldte intertemporale \emph{hedging demand} for risikobærende aktiver, \citep{Merton1969, Merton1971, Merton1973}. Herudover viser løsning at den myopiske del af det totale porteføljevalg er uafhængigt af den resterende tid til investeringshorisonten, \(\tau\). Den viser også at den myopiske del er den totale porteføljedel for investorer med log nytte, \(\gamma=1\). Hvilket også er konsistent med intutionen givet i Sektion ??, at log nytte investorer ikke forholder sig til investeringshorisonten.
 
-Komponentet som repræsenterer det intertemporale \emph{hedging demand} består af to elementer.
+Komponentet som repræsenterer det intertemporale \emph{hedging demand} består af to elementer. Det første element, \(\bm{\Sigma}_{xx}\bm{\Sigma}_x\), fanger -- gennem korrelationen med vektoren af tilstandsvariable -- muligheden for at aktiver kan \emph{hedge} imod ændringer i investeringsmuligheder. Det andet element, som består af \(1-\tfrac{1}{\gamma}\) og leddene ??, fanger effekten af ændringer i investeringsmuligheder på investorens marginal nytte. Derudover ses det fra Ligning \eqref{eq:jurvicalpha}, at dette sidste led er afhængig af den forventede værdi af alle tilstandsvariablene, \(\mathbb{E}_{t+k-\tau}[\bm{z}_{t+k-\tau+1}]\), samt afhængig af horisontlængden gennem \(B_1^{\tau-1}\), \(B_2^{\tau-2}\).
+
+En begrænsning af den analytiske løsning udledt ovenfor, er manglen på kortsalgs bibetingelser. Altså, hvordan porteføljevægtene vil være anderledes, givet at investoren står overfor en kortsalgsrestriktion. For at drage inferens om en kortsalgs restringeret investor laves en sammenlingning, hvor porteføljevægtene fra Ligning \eqref{eq:jurvicalpha} trunkeres, givet at de er negative. Herefter normaliseres så porteføljenvægtningen benytter hele formuen. Nedenstående viser beregningen
+\[\alpha_{i,t}=\frac{\max(0,\alpha_{i,t})}{\sum_{i=1}^n \max(0,\alpha_{i,t})}.\]
+
+På denne måde opnåes en repræsentativ portefølje, som kan benyttes til at besvare spørgsmålet, hvordan porteføljebeslutingen ændrer sig, ifm. en kortsalgsrestriktion.
 
 \part{Den empiriske analyse}
 
@@ -1276,11 +1347,11 @@ Tabel \ref{tab:DES-AKTIVKLASSE} opsummerer ovenstående beskrivende statistik fo
 
 
 
-\begin{landscape}
 \begin{table}[H]
 
 \caption{\label{tab:DES-AKTIVKLASSE}Beskrivende statistik for de fire aktivklasser.}
 \centering
+\resizebox{\linewidth}{!}{
 \begin{threeparttable}
 \begin{tabular}[t]{lrrrrrrrrrrr}
 \toprule
@@ -1296,7 +1367,7 @@ $rx_t^{\text{v}}$ & 0.005 & 0.047 & 0.114 & 0.216 & 5.588 & -0.169 & -0.021 & 0.
 \item \textit{Note: } 
 \item \textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for alle aktivklasser.}
 \end{tablenotes}
-\end{threeparttable}
+\end{threeparttable}}
 \end{table}
 
 \begin{table}[H]
@@ -1320,7 +1391,6 @@ $rx_t^{\text{v}}$ & 74.307 & 0.000\\
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
-\end{landscape}
 
 \hypertarget{pvariable}{%
 \section{Prædiktionsvariable}\label{pvariable}}
@@ -1723,11 +1793,11 @@ I U.S.A. er \emph{Federal Funds Rate}, renten som private finansinstitutioner ta
 \caption{Autokorrelation af Federal Funds Rate.}\label{fig:FR-HIST}
 \end{figure}
 
-\begin{landscape}
 \begin{table}[H]
 
 \caption{\label{tab:DES-TILSTANDSVARIABLE}Beskrivende statistik for prædiktionsvariablene.}
 \centering
+\resizebox{\linewidth}{!}{
 \begin{threeparttable}
 \begin{tabular}[t]{lrrrrrrrrrr}
 \toprule
@@ -1751,7 +1821,7 @@ $x_t^{\text{fr}}$ & 0.048 & 0.036 & 1.053 & 4.625 & 0.001 & 0.021 & 0.045 & 0.06
 \item \textit{Note: } 
 \item \textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for prædiktionsvariablene: log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for log Dividend-Price ratio, log Earnings-Price Ratio samt log afkastet af den nominelle rente.}
 \end{tablenotes}
-\end{threeparttable}
+\end{threeparttable}}
 \end{table}
 
 \begin{table}[H]
@@ -1783,7 +1853,6 @@ $x_t^{\text{fr}}$ & 76.362 & 0.000\\
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
-\end{landscape}
 
 \hypertarget{korr}{%
 \section{Korrelation}\label{korr}}

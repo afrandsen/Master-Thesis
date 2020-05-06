@@ -269,7 +269,6 @@ Tabel \@ref(tab:DES-AKTIVKLASSE) opsummerer ovenstående beskrivende statistik f
 
 (ref:jb1980) [@Jarque1980]
 
-\begin{landscape}
 ```{r DES-AKTIVKLASSE, echo=FALSE}
 options(knitr.kable.NA = '')
 DESCRIPTIVE <- format(round(DESCRIPTIVE, digits = 3), nsmall = 3)
@@ -288,7 +287,7 @@ DESCRIPTIVE %>%
                #col.names = NULL,
                linesep = "") %>% 
    kableExtra::kable_styling(bootstrap_options = "striped",
-                             latex_options = c("striped", "HOLD_position"),
+                             latex_options = c("striped", "HOLD_position", "scale_down"),
                              full_width = F) %>% 
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for alle aktivklasser.}", threeparttable = T, escape = FALSE)
 ```
@@ -314,7 +313,6 @@ JB %>%
                              full_width = F) %>% 
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Jarque-Beta teststørrelser og $p$-værdier for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer, (ref:jb1980). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE)
 ```
-\end{landscape}
 
 ## Prædiktionsvariable{#pvariable}
 Denne sektion har til formål at beskrive datagrundlaget for prædiktionsvariablene, som først blev beskrevet i Sektion ??. Disse variable består af en række finansielle indikatorer: *Dividend-Price Ratio*, *Price-Earnings Ratio*, *Book-to-market Ratio*, *High Minus Low*, *Small Minus Big*, og variansen af aktieafkast. Derudover haves rentestruktursprædiktionsvariable: den nominelle rente, *Term Spread*, *Yield Spread*, *Credit Spread* og *Default Spread*. Én makroøkonomisk variabel udgør den sidste prædiktionsvariabel: *Federal Funds Rate*. Udover beskrivelsen og begrundelsen beregningsmetoden for hver variabel, vil den tilhørende beskrivende statistik for hver variabel belyses.
@@ -944,7 +942,6 @@ ggplot(data, aes(x = FR)) +
   )
 ```
 
-\begin{landscape}
 ```{r DES-TILSTANDSVARIABLE, echo=FALSE}
 DESCRIPTIVE_T <- format(round(DESCRIPTIVE_T, digits = 3), nsmall = 3)
 
@@ -961,7 +958,7 @@ DESCRIPTIVE_T %>%
                #col.names = NULL,
                linesep = "") %>% 
    kableExtra::kable_styling(bootstrap_options = "striped",
-                             latex_options = c("striped", "HOLD_position"),
+                             latex_options = c("striped", "HOLD_position", "scale_down"),
                              full_width = F) %>% 
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for prædiktionsvariablene: log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for log Dividend-Price ratio, log Earnings-Price Ratio samt log afkastet af den nominelle rente.}", threeparttable = T, escape = FALSE)
 ```
@@ -987,7 +984,6 @@ JB_T %>%
                              full_width = F) %>% 
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Jarque-Beta teststørrelser og $p$-værdier for prædiktionsvariablene: log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:jb1980). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE)
 ```
-\end{landscape}
 
 ## Korrelation{#korr}
 Denne sektion rapporterer korrelationen mellem alle de ovennævnte variable, som inkluderer både aktivklasserne og prædtiktionsvariablene. Korrelation er opsummeret i Tabel \@ref(tab:DES-KOR). En analyse af korrelationen er en vigtig del af datainspektionen, specielt for multivariate processor -- som den introducerede VAR(1)-model fra Sektion ?? -- når den statistiske sammenhæng mellem flere variable skal uddybes. Ergo for bedre at kunne beskrive, hvordan en variabel påvirker en eller flere andre variabler, analyseres korrelationen på tværs af alle variable.
