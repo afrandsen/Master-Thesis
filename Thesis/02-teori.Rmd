@@ -355,7 +355,7 @@ Nu fortsættes udledingen for relationen ift. kupon betalende obligationer. Gene
 P_t^{c,n}=\frac{C}{(1+Y_t^{c,n})}+\frac{C}{(1+Y_t^{c,n})^2}+\cdots+\frac{C}{(1+Y_t^{c,n})^n}.  (\#eq:csba9)
 \end{equation}
 
-En analytisk løsning for Ligning \@ref(eq:csba9) ift. $Y_t^{c,n}$ er ikke mulig, ergo må ligningen derfor løses numerisk. 
+En analytisk løsning for Ligning \@ref(eq:csba9) ift. $Y_t^{c,n}$ er ikke mulig, ergo må ligningen derfor løses numerisk. Ved sammenligning med den effektive rente på en nulkupon obligation, vil den effektive rente på en kuponbetalende obligation ikke nødvendigvis være lig det periodiske afkast, hvis obligationen holdes til udløb. Lighed opstår kun når, at kuponbetalingerne er geninvesteret til en rente lig den effektive rente. Fra Ligning \@ref(eq:csba9) kan to specialtilfælde ligeledes udledes. Hvis $n$ er uendelig, er obligationen et uamortisabelt lån eller såkaldt perpetuitet. Dette er ensbetydende med, at den effektive rente er lig forholdet mellem prisen på obligationen og kuponrenten. Derudover kaldes tilfældet, hvor $P_t^{c,n}=1$ at obligationen sælges til kurs pari.
 
 ## Potentielle prædiktabilitetsvariable
 
