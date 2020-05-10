@@ -28,6 +28,26 @@ if (knitr::is_html_output()) {
 
 # Implementering
 
+## Prædiktabilitstest
+
+### Univariat
+
+### Multipel
+
+### Potentiel bias
+
+## Test af tidsserier
+
+### Test af normalitet
+
+### Augmented Dickey-Fuller test
+
+### Phillips-Perron test
+
+### Kwiatkowski-Phillips-Schmidt-Shin test
+
+## Modelselektion
+
 # Data beskrivelse
 Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 2. kvartal til 2018 4. kvartal grundet dataophør. Startkvartalet er valgt på baggrund af, at den amerikanske centralbank, *Federal Reserve System*, kort tid forinden, havde givet den amerikanske korte rente, lov til at variere frit i markedet. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion \@ref(aktivklasser) beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik. Sektion \@ref(pvariable) indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion \@ref(korr). Sektion \@ref(ops) giver en opsummering af kapitlets statistiske fund. Tidsserien for hver aktivklasse og prædiktionsvariabel visualiseres med tilhørende recessionsperioder som defineret af [@NBER2020].
 
@@ -89,7 +109,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r NET-TB-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log netto renten.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r NET-TB-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for log netto renten.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = NET_TB)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.005, alpha = 0.4) +
   geom_density() +
@@ -142,7 +162,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r AKT-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af aktier.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r AKT-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for log merafkastet af aktier.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = AKT)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.05, alpha = 0.4) +
   geom_density() +
@@ -195,7 +215,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r S-OBL-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet på statsobligationer.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r S-OBL-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for log merafkastet på statsobligationer.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = S_OBL)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.025, alpha = 0.4) +
   geom_density() +
@@ -252,7 +272,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r V-OBL-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet på virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r V-OBL-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for log merafkastet på virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = V_OBL)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.05, alpha = 0.4) +
   geom_density() +
@@ -291,7 +311,7 @@ DESCRIPTIVE %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position", "scale_down"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for alle aktivklasser.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for alle aktivklasser.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r JB-AKTIVKLASSE, echo=FALSE}
@@ -313,7 +333,7 @@ JB %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Jarque-Beta teststørrelser og $p$-værdier for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer, (ref:jb1980). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Jarque-Beta teststørrelser og $p$-værdier for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer, (ref:jb1980). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ## Prædiktionsvariable{#pvariable}
@@ -357,7 +377,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r DP-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log Dividend Price Ratio.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r DP-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for log Dividend Price Ratio.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = DP)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.25, alpha = 0.4) +
   geom_density() +
@@ -408,7 +428,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r PE-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log Price Earnings Ratio.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r PE-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for log Price Earnings Ratio.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = EP)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.25, alpha = 0.4) +
   geom_density() +
@@ -459,7 +479,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r BM-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Book-to-market Ratio.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r BM-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for Book-to-market Ratio.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = BM)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.1, alpha = 0.4) +
   geom_density() +
@@ -510,7 +530,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r AV-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af aktievariansen.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r AV-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for aktievariansen.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = AKT_VAR)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.01, alpha = 0.4) +
   geom_density() +
@@ -561,7 +581,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r HML-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af High Minus Low.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r HML-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for High Minus Low.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = HML)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 1, alpha = 0.4) +
   geom_density() +
@@ -612,7 +632,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r SMB-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Small Minus Big.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r SMB-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for Small Minus Big.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = SMB)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 1, alpha = 0.4) +
   geom_density() +
@@ -663,7 +683,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r B-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log brutto afkastet på det risikofrie aktiv.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r B-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for log brutto afkastet på det risikofrie aktiv.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = TB)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.005, alpha = 0.4) +
   geom_density() +
@@ -717,7 +737,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r TS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Term Spread.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r TS-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for Term Spread.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = T_SPREAD)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.01, alpha = 0.4) +
   geom_density() +
@@ -771,7 +791,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r YS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Yield Spread.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r YS-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for Yield Spread.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = Y_SPREAD)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.005, alpha = 0.4) +
   geom_density() +
@@ -825,7 +845,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r CS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Credit Spread.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r CS-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for Credit Spread.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = C_SPREAD)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.01, alpha = 0.4) +
   geom_density() +
@@ -879,7 +899,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r DS-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Default Spread.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r DS-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for Default Spread.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = D_SPREAD)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.0025, alpha = 0.4) +
   geom_density() +
@@ -930,7 +950,7 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   )
 ```
 
-```{r FR-HIST, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Federal Funds Rate.', fig.width=18, fig.height=5, fig.pos='H'}
+```{r FR-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for Federal Funds Rate.', fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data, aes(x = FR)) +
   geom_histogram(aes(y=..density..), color="pink", fill = "pink", binwidth = 0.025, alpha = 0.4) +
   geom_density() +
@@ -962,7 +982,7 @@ DESCRIPTIVE_T %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position", "scale_down"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for prædiktionsvariablene: log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for log Dividend-Price ratio, log Earnings-Price Ratio samt log afkastet af den nominelle rente.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for prædiktionsvariablene: log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for log Dividend-Price ratio, log Earnings-Price Ratio samt log afkastet af den nominelle rente.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r JB-TILSTANDSVARIABLE, echo=FALSE}
@@ -984,7 +1004,7 @@ JB_T %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Jarque-Beta teststørrelser og $p$-værdier for prædiktionsvariablene: log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:jb1980). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Jarque-Beta teststørrelser og $p$-værdier for prædiktionsvariablene: log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:jb1980). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ## Korrelation{#korr}
@@ -1017,7 +1037,7 @@ DES_COR %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position", "scale_down"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer korrelationsmatricen i øvre triangulær form mellem alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer korrelationsmatricen i øvre triangulær form mellem alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ## Stationaritet
@@ -1054,7 +1074,7 @@ STAT_TABLE %>%
                              latex_options = c("striped", "HOLD_position", "scale_down"),
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "$\\\\delta=0$" = 2, "$\\\\delta=1$" = 2, "$\\\\delta=2$" = 2, "$\\\\delta=3$" = 2, "$\\\\delta=4$" = 2, "$\\\\delta^*=5$"=2), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Augmented Dickey-Fuller teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:df1979). Testen er udført for forskellige lags, samt et lag, $\\\\delta^*$, fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Augmented Dickey-Fuller teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:df1979). Testen er udført for forskellige lags, samt et lag, $\\\\delta^*$, fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r STAT-DIFF, echo=FALSE}
@@ -1078,7 +1098,7 @@ STAT_TABLE_DIFF %>%
                              latex_options = c("striped", "HOLD_position", "scale_down"),
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "$\\\\delta=0$" = 2, "$\\\\delta=1$" = 2, "$\\\\delta=2$" = 2, "$\\\\delta=3$" = 2, "$\\\\delta=4$" = 2, "$\\\\delta^*=5$"=2), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Augmented Dickey-Fuller teststørrelser og $p$-værdier for 'first-difference'-variablene: log Dividend-Price Ratio, Book-to-Market Ratio, log afkastet af den nominelle rente samt Federal Funds Rate, (ref:df1979). Testen er udført for forskellige lags, samt et lag, $\\\\delta^*$, fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Augmented Dickey-Fuller teststørrelser og $p$-værdier for 'first-difference'-variablene: log Dividend-Price Ratio, Book-to-Market Ratio, log afkastet af den nominelle rente samt Federal Funds Rate, (ref:df1979). Testen er udført for forskellige lags, samt et lag, $\\\\delta^*$, fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ### Phillips-Perron test
@@ -1106,7 +1126,7 @@ STAT_TABLE_PP %>%
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "$Z(\\\\hat{\\\\alpha})$" = 2, "$Z(t_{\\\\hat{\\\\alpha}})$" = 2), escape = FALSE) %>% 
   kableExtra::add_header_above(c(" ", "$l=5$" = 4), escape = FALSE) %>% 
-  kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Phillips-Perron teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:pp1988). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Testen er udført for et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$.}", threeparttable = T, escape = FALSE)
+  kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Phillips-Perron teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:pp1988). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Testen er udført for et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ### Kwiatkowski-Phillips-Schmidt-Shin test
@@ -1134,7 +1154,7 @@ STAT_TABLE_KPSS %>%
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "Level" = 2, "Trend" = 2)) %>% 
   kableExtra::add_header_above(c(" ", "$l=5$" = 4), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Kwiatkowski-Phillips-Schmidt-Shin teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:kpss1992). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Testen er udført for et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Kwiatkowski-Phillips-Schmidt-Shin teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:kpss1992). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Testen er udført for et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ## Opsummering{#ops}
@@ -1182,7 +1202,7 @@ FIT_TABLE %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
   kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{a}}$", " " = 1, "Konfidensinterval" = 2, " " = 4), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af de univariate regressioner ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række svarer til én selvstændig regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af de univariate regressioner ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række svarer til én selvstændig regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 Ligedes rapporterer Tabel \@ref(tab:UNI-s) de univariate regressions resultater af log merafkastet på statsobligationer, $rx_{t+1}^s$, overfor den introducerede delmængde af mulige prædiktionsvariable. Mest overraskende er, at *Yield Spread* ikke er signifikant, som den eneste af de fire rentespænds variable. Til gengæld prædikterer *Yield Spread* merafkastet på statsobligationer positivt, hvilket også følger tidligere litteratur, [@Fama1987]. Dette er også tilfældet for de resterende rentespænd. Af alle rentestruktursvariablene er det kun *Term Spread*, *Credit Spread* og *Default Spread* som er signifikante for denne stikprøve, med $t$-størrelser på hhv. `r  round(FIT_S_TABLE$t[8], 3)`, `r  round(FIT_S_TABLE$t[10], 3)` og `r  round(FIT_S_TABLE$t[11], 3)`. En stigning i den nuværende *Term Spread* kommer eksempelvis enten fra en forøgelse af den lange effektive rente, $Y_t^{10}$, eller et fald i den korte effektive rente, $Y_t^90$, eller en kombination af begge vil lede til en stigning i det fremtidige log merafkast på statsobligationer. Ift. de finansielle variable er det *Small Minus Big*, som har statistisk styrke i den univariate opsætning, med $t$-størrelse på `r  round(FIT_S_TABLE$t[6], 3)`. *Small Minus Big* prædikterer merafkastet negativt. Den makroøkonomiske variabel *Federal Funds Rate* er ikke signifikant, og prædikterer merafkastet negativt.
@@ -1211,7 +1231,7 @@ FIT_S_TABLE %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
   kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{s}}$", " " = 1, "Konfidensinterval" = 2, " " = 4), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af de univariate regressioner ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\\\\text{s}}$. Hver række svarer til én selvstændig regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af de univariate regressioner ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\\\\text{s}}$. Hver række svarer til én selvstændig regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 De statistiske resultater for de univariate regressioner på det fremtidige log merafkast på virksomhedsobligationer, $rx_{t+1}^v$, er rapporteret i Tabel \@ref(tab:UNI-v). Igen ses, at alle rentespænd prædikterer merafkastet positivt, og alle er signifikante på $5\%$-niveauet, specielt *Credit Spread* med en $t$-størrelse på `r  round(FIT_V_TABLE$t[10], 3)`. Den samme inferens for $rx_{t+1}^s$ kan blive udtænkt for $rx_{t+1}^v$. Alle de finansielle variable, med undtagelse af *Small Minus Big*, har ikke styrke til at forklare variationen i det fremtidige log merafkast på virksomhedsobligationer. Den makroøkonomiske variabel *Federal Funds Rate* prædikterer merafkastet negativt, som også var tilfældet for statsobligations merafkastet, men denne gang er koefficienten signifikant med en $t$-størrelse på `r  round(FIT_V_TABLE$t[12], 3)`.
@@ -1273,7 +1293,7 @@ FIT_M_TABLE %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F)  %>% 
    kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{a}}$", " " = 1, "Konfidensinterval" = 2, " " = 3), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 Som et modeltjek viser Figur \@ref(fig:MULT-ak-auto) seks af de mest sædvanlige modelinspektionsplots. Disse indebærer bl.a. residualer, standardiserede residualer, *Normal Q-Q* m.fl. Her observeres heteroskedasticitet observeres svagt for lave og høje værdier af responsvariablen. Dette indikeres bl.a. af den røde linje på *Scale-Location* plottet. Dette er højst sandsynligt grundet den meget lave stiksprøvestørrelse. På *Normal Q-Q* plottet ses igen -- som indikeret af *Jarque-Bera* testen fra Tabel \@ref(tab:JB-AKTIVKLASSE) -- at residualerne ikke følger en normalfordeling, hvor særligt problemerne er i halerne som forventet. Statistisk set er en såkaldt *outlier* ikke nødvendigvis betydningsfuld for modellen. For at være betydningsfuld for den estimerede model, skal en observation have både høj *leverage* og en høj standardiseret residual. Dette gør sig særligt gældende for to dage under *Finanskrisen*, samt dagen for et af historiens største aktiefald, *Black Monday*. Disse er også indikeret målet *Cook's Distance*, [@Cook1977], som giver høje værdier til betydningsfulde observationer.
@@ -1290,6 +1310,35 @@ for (i in 1:6) {
 }
 
 g
+```
+
+Figur \@ref(fig:MULT-ak-step-auto) viser ligeledes seks af de mest sædvanlige modelinspektionsplots. Disse er dannet på baggrund af en *Step AIC*-procedure. Hvor variablene iterativt er blevet fjernet fra *Kitchen-Sink* regressionen, afhængig af om de gav anledning til en bedre model ved fjernelse. Overordnet set er det de samme tendenser der ses som i Figur \@ref(fig:MULT-ak-auto). Enkelte nye observations bliver fanget af *Cook's Distance*.
+
+```{r MULT-step-ak, echo=FALSE}
+options(knitr.kable.NA = '')
+
+FIT_M_STEP_TABLE <- format(round(FIT_M_STEP_TABLE, digits = 3), nsmall = 3)
+  
+FIT_M_STEP_TABLE <- FIT_M_STEP_TABLE %>%
+  mutate(coef = cell_spec(coef, "latex", bold = ifelse(p <= 0.05, T, F)))
+
+colnames(FIT_M_STEP_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$')
+
+rownames(FIT_M_STEP_TABLE) <- c('Afskæring', '$x_t^{\\text{bm}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{fr}}$')
+
+FIT_M_STEP_TABLE %>% 
+  knitr::kable(caption = 'Step optimeret multipel prædiktabilitet af merafkastet på aktier.',
+               booktabs=TRUE,
+               align = c(rep('r', 15)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "HOLD_position"),
+                             full_width = F)  %>% 
+   kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{a}}$", " " = 1, "Konfidensinterval" = 2, " " = 3), escape = FALSE) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r MULT-ak-step-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af den step optimerede regression for merafkastet på aktier.', fig.width=18, fig.asp=0.9, fig.pos='H'}
@@ -1332,7 +1381,7 @@ FIT_M_S_TABLE %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F)  %>% 
    kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{s}}$", " " = 1, "Konfidensinterval" = 2, " " = 3), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\\\\text{s}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\\\\text{s}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r MULT-s-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af Kitchen-Sink regressionen for merafkastet på aktier.', fig.width=18, fig.asp=0.9, fig.pos='H'}
@@ -1389,7 +1438,7 @@ FIT_M_V_TABLE %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F)  %>% 
    kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{v}}$", " " = 1, "Konfidensinterval" = 2, " " = 3), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\\\\text{v}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\\\\text{v}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r MULT-v-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af Kitchen-Sink regressionen for merafkastet på aktier.', fig.width=18, fig.asp=0.9, fig.pos='H'}
@@ -1494,7 +1543,7 @@ data %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Korrelationer" = 3)) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer det sande: forventede afkast og volatilitet for de tre fiktive aktiver samt de sande korrelationer mellem aktiverne. Momenterne er opgjort kvartalsvist.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer det sande: forventede afkast og volatilitet for de tre fiktive aktiver samt de sande korrelationer mellem aktiverne. Momenterne er opgjort kvartalsvist.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 (ref:as2007) [@Asmussen2007]
@@ -1516,7 +1565,7 @@ data_1 %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3)) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer det estimerede: forventede afkast og volatilitet for de tre fiktive aktiver samt de estimerede korrelationer mellem aktiverne, ved brug af tidsserien fra første simulation af afkast. De relative fejl for hver simulation er ligeledes rapporteret, (ref:as2007). Momenterne er opgjort kvartalsvist.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer det estimerede: forventede afkast og volatilitet for de tre fiktive aktiver samt de estimerede korrelationer mellem aktiverne, ved brug af tidsserien fra første simulation af afkast. De relative fejl for hver simulation er ligeledes rapporteret, (ref:as2007). Momenterne er opgjort kvartalsvist.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r sim2, echo=FALSE}
@@ -1535,7 +1584,7 @@ data_2 %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3)) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer det estimerede: forventede afkast og volatilitet for de tre fiktive aktiver samt de estimerede korrelationer mellem aktiverne, ved brug af tidsserien fra anden simulation af afkast. De relative fejl for hver simulation er ligeledes rapporteret, (ref:as2007). Momenterne er opgjort kvartalsvist.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer det estimerede: forventede afkast og volatilitet for de tre fiktive aktiver samt de estimerede korrelationer mellem aktiverne, ved brug af tidsserien fra anden simulation af afkast. De relative fejl for hver simulation er ligeledes rapporteret, (ref:as2007). Momenterne er opgjort kvartalsvist.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r sim3, echo=FALSE}
@@ -1554,7 +1603,7 @@ data_3 %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "Forventet afkast" = 1, "Volatilitet" = 1, "Relativ fejl" = 1, "Korrelationer" = 3)) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer det estimerede: forventede afkast og volatilitet for de tre fiktive aktiver samt de estimerede korrelationer mellem aktiverne, ved brug af tidsserien fra tredje simulation af afkast. De relative fejl for hver simulation er ligeledes rapporteret, (ref:as2007). Momenterne er opgjort kvartalsvist.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer det estimerede: forventede afkast og volatilitet for de tre fiktive aktiver samt de estimerede korrelationer mellem aktiverne, ved brug af tidsserien fra tredje simulation af afkast. De relative fejl for hver simulation er ligeledes rapporteret, (ref:as2007). Momenterne er opgjort kvartalsvist.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 Disse tre sæt af estimerede parametre, baseret på de tre tidsserier, er blevet udvalgt til det følgende illustrative formål. Se Tabel \@ref(tab:sim1), Tabel \@ref(tab:sim2) og Tabel \@ref(tab:sim3) for en sammenligning ift. de sande parametre. De relative fejl for hver simulering er ligedes rapporteret, [@Asmussen2007]. Disse beregnes som
@@ -1599,7 +1648,7 @@ data %>%
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
   kableExtra::row_spec(c(6, 8), italic = T) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de sande momenter. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de sande momenter. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r sum-1, echo=FALSE}
@@ -1663,7 +1712,7 @@ data %>%
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
   kableExtra::row_spec(c(6, 8), italic = T) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de simulerede momenter, fra første simulering. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne.  Samt de estimerede forventede afkast for hver af porteføljerne og den estimerede volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de simulerede momenter, fra første simulering. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne.  Samt de estimerede forventede afkast for hver af porteføljerne og den estimerede volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r sum-2, echo=FALSE}
@@ -1727,7 +1776,7 @@ data %>%
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
   kableExtra::row_spec(c(6, 8), italic = T) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de simulerede momenter, fra anden simulering. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne.  Samt de estimerede forventede afkast for hver af porteføljerne og den estimerede volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de simulerede momenter, fra anden simulering. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne.  Samt de estimerede forventede afkast for hver af porteføljerne og den estimerede volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r sum-3, echo=FALSE}
@@ -1791,7 +1840,7 @@ data %>%
                              full_width = F) %>% 
   kableExtra::add_header_above(c(" ", "GMV" = 1, "Tangens" = 1, "CRRA" = 3, "CARA" = 3), escape = F) %>% 
   kableExtra::row_spec(c(6, 8), italic = T) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de simulerede momenter, fra tredje simulering. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne. Samt de estimerede forventede afkast for hver af porteføljerne og den estimerede volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de simulerede momenter, fra tredje simulering. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne. Samt de estimerede forventede afkast for hver af porteføljerne og den estimerede volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 Ved brug af de sande momenter, hælder minimum varians porteføljen mod Aktiv 3, med den relative laveste varians. Se Tabel \@ref(tab:sum-true). Omtrent en tredjedel af porteføljen er eksponeret i Aktiv 1 og Aktiv 2 har den laveste vægtning givet dens høje relative varians. Tangensporteføljen består af to lange positioner i Aktiv 1 og Aktiv 2, tilsammen finansieret af en kort position i Aktiv 3, hvilket reflekterer rangeringen af aktiverne ift. deres *Sharpe Ratio*.
@@ -1947,7 +1996,7 @@ KOMP %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F)  %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r AL-BIG, echo=FALSE}
@@ -1972,7 +2021,7 @@ BIG_TABLE %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position", "scale_down"),
                              full_width = F)  %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r AL-RES-BIG, echo=FALSE}
@@ -1997,7 +2046,7 @@ BIG_R_TABLE %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position", "scale_down"),
                              full_width = F)  %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE)
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r HOR-ana, echo=FALSE, fig.align='center', fig.cap='Horisontanalyse.', fig.width=18, fig.asp=0.5, fig.pos='H'}

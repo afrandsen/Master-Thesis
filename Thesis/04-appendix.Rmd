@@ -96,6 +96,45 @@ $$\lim_{\gamma\to 1}\frac{W_{t+1}^{1-\gamma}-1}{1-\gamma}=\lim_{\gamma\to 1}\fra
 
 Dermed er tilfældet udledt.
 
+## Loglinearisering af porteføljeafkastet
+Investorens porteføljeafkast kan beskrives som
+\begin{equation}
+R_{p,t+1}-1 = \alpha_t(R_{t+1}- 1) + (1-\alpha_t)(R_{0,t+1}-1)=(R_{0,t+1} -1) + \alpha_t (R_{t+1} - R_{0,t+1}) (\#eq:logl1)
+\end{equation}
+
+Ligning \@ref(eq:logl1) kan omskrives til
+\begin{equation}
+\frac{R_{p,t+1}}{R_{0,t+1}} = 1 + \alpha_t (\frac{R_{t+1}}{R_{0,t+1}}-1), (\#eq:logl2)
+\end{equation}
+
+og ved samtidig transformation ved benyttelse af logfunktionen, opnåes en ikke-lineær relation mellem log merafkastet på det risikobærende aktiv og log merafkastet på porteføljen
+\begin{equation}
+r_{p,t+1} - r_{0,t+1} = \log (1+\alpha_t (\exp(r_{t+1}-r_{0,t+1})-1)). (\#eq:logl3)
+\end{equation}
+
+Denne relation skaber problemerne i udledningen af porteføljeteorien, grundet dens ikke-linearitet. Som en approksimativ løsning kan en andenordens Taylor udvidelse omkring punktet, $r_{t+1}-r_{0,t+1}=0$, benyttes. Ovenstående relation defineres da nu $f_t(\cdot)$. Approksimationen bliver da
+\begin{equation}
+f_t(r_{t+1}-r_{0,t+1})\approx f_t(0) + f_t'(0)(r_{t+1}-r_{0,t+1})+\frac{1}{2}f_t''(0)(r_{t+1}-r_{0,t+1})^2. (\#eq:logl4)
+\end{equation}
+
+De afledte evalueret i centerpunktet er lig
+\begin{align*}
+f_t'(0) &= \alpha_t\\
+f_t''(0) &= \alpha_t(1-\alpha_t).
+\end{align*}
+
+Derudover kan $(r_{t+1}-r_{0,t+1})^2$ erstattes med dens betingede forventning, der defineres som $\sigma_t^2$. Implementeres dette er Taylor approksimationen givet ved
+\begin{equation}
+r_{p,t+1} - r_{0,t+1} \approx \alpha_t(r_{t+1} - r_{0,t+1}) + \frac{1}{2} \alpha_t(1-\alpha_t)\sigma_t^2. (\#eq:logl5)
+\end{equation}
+
+Ligning \@ref(eq:logl5) kan let generaliseres til tilfældet med flere risikobærende aktiver, $n>1$. Denne generalisering vil føre til følgende approksimation
+\begin{equation}
+r_{p,t+1} - r_{0,t+1} \approx \bm{\alpha}_t'(\bm{r}_{t+1} - r_{0,t+1}\bm{\ell}) + \frac{1}{2} \bm{\alpha}_t'\bm{\sigma}_t^2 - \frac{1}{2}\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t. (\#eq:logl6)
+\end{equation}
+
+Her er de risikobærende aktiver lognormal fordelt med $\bm{\Sigma}_t$ som den betingede kovariansmatrix, og $\bm{\sigma}_t$ er diagonalelementerne af $\bm{\Sigma}_t$, som mere specifikt er vektoren af de betingede varianser for aktiverne.
+
 # Den optimale dynamiske strategi
 Dette appendiks vil udlede den optimale porteføljestrategi, som beskrevet i Sektion ??. Udledningen vil følge [@JurVic2011] Appendiks C, som beskriver metoden, med enkelte dele som varierer.
 

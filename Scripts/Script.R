@@ -214,6 +214,13 @@ FIT_M_TABLE <- data.frame(coef=coef(fit_AKT),
                           t=coeftest(fit_AKT, vcov. = NeweyWest(fit_AKT))[,3],
                           p=coeftest(fit_AKT, vcov. = NeweyWest(fit_AKT))[,4])
 
+FIT_M_STEP_TABLE <- data.frame(coef=coef(step_AKT_model),
+                          cf=data.frame(coefci(step_AKT_model, vcov. = NeweyWest(step_AKT_model))[,1],
+                                        coefci(step_AKT_model, vcov. = NeweyWest(step_AKT_model))[,2]),
+                          sd=sqrt(diag(NeweyWest(step_AKT_model))),
+                          t=coeftest(step_AKT_model, vcov. = NeweyWest(step_AKT_model))[,3],
+                          p=coeftest(step_AKT_model, vcov. = NeweyWest(step_AKT_model))[,4])
+
 fit_S_OBL <- lm(S_OBL ~ DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_mult_s)
 
 step_S_OBL_model <- step(fit_S_OBL, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=S_OBL ~ TB, upper=fit_S_OBL))
