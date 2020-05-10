@@ -427,23 +427,26 @@ Aktievariansen, som den bliver præsenteret her, er målt via metoden etableret 
 \sigma^2_t = \sum_{i=1}^{N_t} r_{i,t} + 2 \sum_{i=1}^{N_t-1} r_{i,t}r_{i+1,t} (\#eq:aktvar1)
 \end{equation}
 
-Fra Ligning \@ref(eq:aktvar1) ses, at den estimerede stikprøve middelværdi ikke fratrækkes de daglige afkast. Dette gøres ikke eftersom det har vist sig at have meget lille effekt, [@French1987]. Ideen med at medtage variansen er, at den gennemsnitlige varians holder informationen på variansen af hele markedet. 
+Fra Ligning \@ref(eq:aktvar1) ses, at den estimerede middelværdi af stikprøven ikke fratrækkes de daglige afkast. Dette gøres ikke eftersom det har vist sig at have meget lille effekt, [@French1987]. Ideen med at medtage variansen er, at den gennemsnitlige varians holder informationen på variansen af hele markedet. 
 
-Sml
-
-Hml
+*Small Minus Big* og *High Minus Low* er ydereligere to finansielle variable/faktorer. Disse stammer fra [@Fama1993; @Fama2015], og mere specifikt deres *Three Factor Model* samt *Five Factor Model*. Disse variable anses for at være hhv. størrelsfaktoren på markedet og værdifaktoren på markedet. Faktorerne er skabt via en dannelse af seks markedsporteføljer. [@Fama1993] finder at begge faktorer signifikante i at prædiktere merafkastet på markedsporteføljen. Ved tilføjelse af yderligere to faktorer -- profitabilitesfaktoren og investeringsfaktoren -- finder [@Fama2015], at *High Minus Low* bliver redundant i deres underliggende model. Eftersom tidsserien for *High Minus Low* er fuldstændig forklaret af de andre fire faktorer. De finder bl.a., at investeringsfaktoren har en meget negativ korrelation med *High Minus Low* på $-0.7$.
 
 ### Rentestrukturs variable
-I denne sektion undersøges fem rentestruktursvariable, som tidligere er foreslået i litteraturen. Disse er *Yield Spread*, *Term Spread*, *Credit Spread*, *Default Spread* og den nominelle rente. 
+I denne sektion undersøges fem rentestruktursvariable, som tidligere er foreslået i litteraturen. Disse er *Yield Spread*, *Term Spread*, *Credit Spread*, *Default Spread* og den nominelle rente.
+
+*Term Spread* defineres som forskellen mellem den effektive lange rente og *T-Bill* renten og er på den måde rentespændet mellem to obligationsinstrumenter med forskellige løbetider. Igennem dette rentespænd kan hældningen på rentekurven ligeldes findes. Basalt set vil rentekurven blive stejlere des højere værdien af rentespændet bliver. [@Fama1989] viser at en del af præmien i forventede afkast af hhv. aktier og obligationer er prædikteret gennem rentestrukturen. Disse afkast har vist sig at have forskellige konjukturmønstre. Altså vil det forventede afkast over aktier og obligationer bevæge sig kontracyklisk med de generelle konjukturer i økonomien. For at have en breddere del af rentekurven med, medtages ligeledes *Yield Spread*. Denne variabel viser rentespændet på kort sigt, eftersom det ern forskellen mellem den effektive korte rente og *T-Bill* renten.
 
 ### Makroøkonomsike variable
-Udover de finansielle variable og rentestruktursvariablene medtages én makroøkonomiske variabel. Denne variabel er *Federal Funds Rate*. En generel egenskab af makroøkonomiske variable er, at de ikke baserer sig på markedspriser. [@Cochrane2008] finder, at priserne som prædikterer afkast er korreleret med business?? cyklusser, med højere forventet afkast under økonomiske recessioner?? 
+Udover de finansielle variable og rentestruktursvariablene medtages én makroøkonomiske variabel. Denne variabel er *Federal Funds Rate*. En generel egenskab af makroøkonomiske variable er, at de ikke baserer sig på markedspriser. [@Cochrane2008] finder, at priserne som prædikterer afkast er korreleret med økonomiske konjukturcyklusser, med højere forventet afkast under lavkonjukturer.
+
+En relevant makroøkonomisk del til at forklare variationen i specielt obligationsafkast er finanspolitikken. [@Dai2005] undersøger specielt finanspolitikkens indflydelse ved at inkorpere *Federal Funds Rate* som en forklarende variabel. De finder, at denne -- inkl. flere andre variable -- har statistisk styrke til at prædiktere obligationsafkast. 
 
 ## Opsummering
 
 # VAR
 
 I dette kapitel fastsættes den teoretiske ramme for den empiriske analyse. Dette gøres hovedsageligt ud fra teorien bag [@Userguide2004] med enkelte dele, som varierer.
+
 \section{Sættet af investeringsmuligheder}
 Først etableres en model, som kan modellere forventet afkast og risiko af aktier på tværs af investeringshorisonter.
 
