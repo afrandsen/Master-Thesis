@@ -335,7 +335,7 @@ y_t^n = \frac{1}{n} (r_{t+1}^n + (n-1) y_{t+1}^{n-1}). (\#eq:csba5)
 
 Kombineres udtrykket for den effektive rente $y_t^n$ samt implikationen for $p_t^n$, kan Ligning \@ref(eq:csba4) løses ved rekursion, og dermed opnå
 \begin{equation}
-y_t^n = \frac{1}{n} \sim_{i=0}^{n-1} r_{t+1+i}^{n-1}. (\#eq:csba6)
+y_t^n = \frac{1}{n} \sum_{i=0}^{n-1} r_{t+1+i}^{n-1}. (\#eq:csba6)
 \end{equation}
 
 Ligning \@ref(eq:csba6) er det gennemsnitlige effektive rente afkast pr. periode, givet at obligationen er holdt til udløb, $n$. Derudover kan Ligning \@ref(eq:csba6) omskrives i termer af rentespændet, eftersom
@@ -357,13 +357,87 @@ P_t^{c,n}=\frac{C}{(1+Y_t^{c,n})}+\frac{C}{(1+Y_t^{c,n})^2}+\cdots+\frac{C}{(1+Y
 
 En analytisk løsning for Ligning \@ref(eq:csba9) ift. $Y_t^{c,n}$ er ikke mulig, ergo må ligningen derfor løses numerisk. Ved sammenligning med den effektive rente på en nulkupon obligation, vil den effektive rente på en kuponbetalende obligation ikke nødvendigvis være lig det periodiske afkast, hvis obligationen holdes til udløb. Lighed opstår kun når, at kuponbetalingerne er geninvesteret til en rente lig den effektive rente. Fra Ligning \@ref(eq:csba9) kan to specialtilfælde ligeledes udledes. Hvis $n$ er uendelig, er obligationen et uamortisabelt lån eller såkaldt perpetuitet. Dette er ensbetydende med, at den effektive rente er lig forholdet mellem prisen på obligationen og kuponrenten. Derudover kaldes tilfældet, hvor $P_t^{c,n}=1$ at obligationen sælges til kurs pari.
 
+Når kuponobligations afkastet defineres som
+\begin{equation}
+1+R_{t+1}^n = \frac{P_{t+1}^{n-1}+C}{P_t^n} (\#eq:csba10)
+\end{equation}
+
+kan kuponbetalingerne sammenlignes med udbyttebetalinger. Ligning \@ref(eq:csba10) er reelt set brutto afkastet for kuponobligationen, ved at holde den fra $t$ til $t+1$, med $n$ perioder til udløb. En tilsvarende loglineær approksimation eksisterer for afkastet af kuponobligationer, som det var tilfældet for aktieafkastet. Benyttes denne approksimation bliver én-periode afkastet, $r_{t+1}^{c,n}$, tilnærmelsesvis lig det følgende
+\begin{equation}
+r_{t+1}^{c,n}\approx k + \rho p_{t+1}^{c,n-1} + (1-\rho)c - p_t^{c,n} (\#eq:csba11)
+\end{equation}
+
+Fra Ligning \@ref(eq:csba11) og Ligning \@ref(eq:csaa4) ses, at udbytte og kuponbetalingenr spiller en sammenlignelig rolle, når afkast skal approksimeres for hhv. aktier og obligationer. Her er $k$ og $\rho$ lineariseringsparametre, som er givet ved 
+
+\begin{align*}
+k &= -\log(1-\rho)\log(\frac{1}{\rho-1})\\
+\rho&= \frac{1}{(1\exp(c-p??))}.
+\end{align*}
+
+Hvis kuponobligationen bliver solgt til kurs pari, vil $\rho$ reduceres til
+$$\rho=\frac{1}{1+C}.$$
+
+Ved rekursion indtil udløb af kuponobligationen kan der udledes en ligning, som kobler obligationsprisen til dens følge af kuponbetalinger og det fremtidige afkast på obligationen, altså vil prisen blive
+\begin{equation}
+p_t^{c,n}\approx\sum_{i=0}^{n-1} \rho^i (k+(1-\rho)c - r_{t+1+i}^{c,n-i}). (\#eq:csba12)
+\end{equation}
+
+En tilsvarende approksimation af den effektive log rente eksisterer ligeledes, rekursion for denne medfører
+\begin{equation}
+p_t^{c,n}\approx\sum_{i=0}^{n-1} \rho^i (k+(1-\rho)c - y_{t}^{c,n}). (\#eq:csba13)
+\end{equation}
+
+Kombineres Ligning \@ref(eq:csba12) med Ligning \@ref(eq:csba13), kan følgende relation opnåes
+\begin{equation}
+y_{t}^{c,n}\approx (\frac{(1-\rho)}{(1-\rho^n)})\sum_{i=0}^{n-1} \rho^i r_{t+1+i}^{c,n-i}. (\#eq:csba14)
+\end{equation}
+
+Til forskel for nulkuponobligationen, hvor der eksisterer en eksakt relation mellem den effektive log rente og nulkupon obligations log afkastet, Ligning \@ref(eq:csba5), eksisterer der kun en approksimativ relation for kuponobligationen. En forskel, som adskiller nulkuponobligationer fra kuponobligationer er varighedens betydning. For nulkuponobligationer vil løbetiden direkte måle længden af tid en investor har investeret sin formue i obligationen. For kuponobligationer vil løbetiden være et uperfekt mål til at måle denne længde af tid, som investoren holder obligationen, eller portefølje af obligationer, da meget af værdiforøgelsen sker før udløb, [@Campbell1997]. For kuponobligationer vil *Macaulay* varighed være et bedre mål, [@Macaulay1938]. *Macaulay* varighed ser kuponobligationer som en række af nulkuponobligationer, og er et vægtet gennemsnit af løbetiderne på de indirekte nulkuponobligationer. Ved benyttelse af kuponobligationens effektive rente, som diskonteringsfaktoren vil varigheden blive
+\begin{equation}
+D_t^{c,n}=\frac{C\sum_{i=1}^n \frac{i}{(1+Y_t^{c,n})} + \frac{n}{(1+Y_t^{c,n})^n}}{P_t^{c,n}}. (\#eq:csba15)
+\end{equation}
+
+Definitionen af *Macaulay* varighed
+$$D^{c,n}=-\frac{\text{d} P_t^{c,n}}{\text{d} (1+Y_t^{c,n})}\frac{(1+Y_t^{c,n})}{P_t^{c,n}},$$
+
+vil i stedet give anledning til følgende approksimation 
+\begin{equation}
+D^{c,n}\approx \frac{(1-\rho^n)}{(1-\rho)} = \frac{1-(1+Y_t^{c,n})^{-n}}{1-(1+Y_t^{c,n})^{-1}}, (\#eq:csba16)
+\end{equation}
+
+hvor ligheden følger, da obligationen antages at handle til kurs pari. Den endelige loglineære relation kan nu findes, ved at indsætte Ligning \@ref(eq:csba13) og Ligning \@ref(eq:csba16) ind i Ligning \@ref(eq:csba11).
+\begin{equation}
+r_{t+1}^{c,n}\approx D^{c,n} y_t^{c,n} - (D^{c,n} - 1) y_{t+1}^{c,n-1}=D^{c,n}(y_t^{c,n}- y_{t+1}^{n-1}) + y_{t+1}^{n-1}  (\#eq:csba17)
+\end{equation}
+
+Ligning \@ref(eq:csba17) kan ligeledes sammenlignes med Ligning \@ref(eq:csaa4), og blev først udledt af [@Campbell1983]. Men i dette tilfælde er ligningen et vægtet gennemsnit af varigheden på nuværende og fremtidige effektive renter. Ligning \@ref(eq:csba17) holder ligeledes for nulkuponobligationer, hvor varigheden erstatter løbetiden. Det andet lighedstegn viser ligeledes relationen til rentespændet, $y_t^{c,n}- y_{t+1}^{n-1}$. Som der givetvis må resultere i en forventning om positiv korrelation mellem afkastet og rentespændet i den empiriske sektion.
+
 ## Potentielle prædiktabilitetsvariable
+Denne Sektion er en forlængelse af Sektion ??, og fungerer som en undersøgelse og diskussion af variable med en potentiel prædiktionsevne. Med tiden er en lang række variable blevet foreslået til afkast prædiktabilitet. Generelt kan disse variable grupperes ind i en række kategorier. I det følgende vil tre grupper bliver præsenteret: finasielle variable, rentestruktursvariable og makroøkonomiske variable. Denne inddeling er også anvendt i eksisterende litteratur, se bl.a. [@Koijen2011]. Den følgende undersøgelse af potentielle prædiktions variable vil bestå af kvalitative samt kvantitative analyser, som på den måde kommer til at foregå analysen relateret til porteføljevalget. Dette tillader at studere den potentielle lineære relation mellem merafkastet på aktiverne og variablene, og på den måde give en dybere inferens af de valgte foreklarende variable, som da vil blive benyttet i at modellere det optimale porteføljevalg.
 
 ### Finansielle variable
+I Sektion ?? blev den fundamentale værdi af aktier benyttet til at argumentere for relation til *Dividend-Price Ratio*. I denne sektion vil benyttes til at diskutere andre potentielle finasielle variable, som før har vist statistisk styrke i at prædiktere aktie afkast. Samtidig er det muligt, at disse variable fanger variation, som allerede er forklaret igennem nogle af de eksistende variable. Derudover kan disse variable også muligvis forklare variation i afkastet på nogle af de andre aktiver ud over aktieafkastet. I det følgende vil *Price-Earnings Ratio*, *Book-to-Market Ratio*, aktievariansen, *Small Minus Big* og *High Minus Low* blive undersøgt.
+
+[@Fama1988] finder, at både *Dividend-Price Ratio* samt *Price-Earnings Ratio* har statistisk styrke i at prædiktere forventede aktieafkast, og argumenterer for, at *Dividend-Price Ratio* er mindre variabel end *Price-Earnings Ratio* som indeholder en del støj. Derudover finder [@Lamont1998] evidens for, at den aggregerede *Dividend Payout Ratio* prædikterer merafkast på både aktier og obligationer. [@Lamont1998] argumenterer modsat [@Fama1988], at variansen fra *Price-Earnings Ratio* ikke er støj, men derimod information om forventede afkast. Givet disse ovenstående fund, vil en medtagelse af *Price-Earnings Ratio* være relevant for den følgende analyse.
+
+*Book-to-Market Ratio* er ligeledes en finansiel variabel, som måler værdien af en aktie ved at sammenligne den bogførte værdi relativt til markedsværdien. *Book-to-Market Ratio* har i litteraturen vist at kunne forklare variationen i forventede aktieafkast, [@Kothari1997].
+
+Aktievariansen, som den bliver præsenteret her, er målt via metoden etableret af [@French1987], der tager højde for autokorrelation. En tidsserie af $N_t$ daglige afkast er nødvendig for at estimere den månedlige aktievarians på tidspunkt $t$. Den estimerede varians er da lig summen af de kvadrerede daglige afkast, for en given måned, sammenlagt med to gange summen af produktet af to tilstødende daglige afkast. På denne måde korrigeres der for autokorrelation. 
+\begin{equation}
+\sigma^2_t = \sum_{i=1}^{N_t} r_{i,t} + 2 \sum_{i=1}^{N_t-1} r_{i,t}r_{i+1,t} (\#eq:aktvar1)
+\end{equation}
+
+Fra Ligning \@ref(eq:aktvar1) ses, at den estimerede stikprøve middelværdi ikke fratrækkes de daglige afkast. Dette gøres ikke eftersom det har vist sig at have meget lille effekt, [@French1987]. Ideen med at medtage variansen er, at den gennemsnitlige varians holder informationen på variansen af hele markedet. 
+
+Sml
+
+Hml
 
 ### Rentestrukturs variable
+I denne sektion undersøges fem rentestruktursvariable, som tidligere er foreslået i litteraturen. Disse er *Yield Spread*, *Term Spread*, *Credit Spread*, *Default Spread* og den nominelle rente. 
 
 ### Makroøkonomsike variable
+Udover de finansielle variable og rentestruktursvariablene medtages én makroøkonomiske variabel. Denne variabel er *Federal Funds Rate*. En generel egenskab af makroøkonomiske variable er, at de ikke baserer sig på markedspriser. [@Cochrane2008] finder, at priserne som prædikterer afkast er korreleret med business?? cyklusser, med højere forventet afkast under økonomiske recessioner?? 
 
 ## Opsummering
 
