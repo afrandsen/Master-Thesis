@@ -300,7 +300,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-05-10                  
+##  date     2020-05-13                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -419,27 +419,27 @@ R_{p,t+1}=\alpha_t R_{t+1}+\left(1-\alpha_t\right)R_{0,t+1}.\label{eq:Portafk}
 
 Den betingede middelværdi af porteføljeafkastet bliver dermed
 \begin{align}
-\mathbb{E}_t(R_{p,t+1})&=\alpha_t\mathbb{E}_t(R_{t+1})+(1-\alpha_t)R_{0,t+1} \notag\\ 
+\mathbb{E}_t[R_{p,t+1}]&=\alpha_t\mathbb{E}_t[R_{t+1}]+(1-\alpha_t)R_{0,t+1} \notag\\ 
 &=R_{0,t+1}+ \alpha_t\left(R_{t+1} - R_{0,t+1}\right),\label{eq:Forvport}
 \end{align}
 
 og endeligt den betingede varians af porteføljeafkastet
 \begin{equation}
-\mathbb{V}_t(R_{p,t+1})=\alpha_t^2\sigma_t^2.\label{eq:Varport}
+\mathbb{V}_t[R_{p,t+1}]=\alpha_t^2\sigma_t^2.\label{eq:Varport}
 \end{equation}
 
 Den simplificerende antagelse i \citep{Markowitz1952} er at investorer kun forholder sig til de første to momenter, hvis vi modellerer denne afvejning lineært, opnår vi følgende maksimeringsproblem
 \begin{equation}
-\max_{\alpha_t} \mathbb{E}_t\left(R_{p,t+1}\right) -\frac{k}{2} \mathbb{V}_t\left(R_{p,t+1}\right),\label{eq:Statmaks}
+\max_{\alpha_t} \mathbb{E}_t\left[R_{p,t+1}\right] -\frac{k}{2} \mathbb{V}_t\left[R_{p,t+1}\right],\label{eq:Statmaks}
 \end{equation}
 
 hvor \(k\) er en skalering, som repræsenterer investorens risiko aversion. Ved at modellere ovenstående relation som lineær og kun afhængig af de første to momenter restringerer vi investoren til at foretrække et højt afkast, lav volatilitet og ignorerer alle højere momenter, såsom skævhed og kurtosis. Ved indsættelse af Ligning \eqref{eq:Portafk} i Maksimeringsproblemet \eqref{eq:Statmaks} og dernæst differentiation opnåes førsteordensbetingelsen, se Appendiks \ref{udlmyo}, løsningen til optimalitetsproblemet bliver dermed
 \begin{equation}
-\alpha_t = \frac{\mathbb{E}_t\left(R_{t+1}\right)-R_{0,t+1}}{k\sigma_t^2}.\label{eq:Løsning}
+\alpha_t = \frac{\mathbb{E}_t\left[R_{t+1}\right]-R_{0,t+1}}{k\sigma_t^2}.\label{eq:Løsning}
 \end{equation}
 
 Porteføljeanalyse benytter ofte nøgletallet \emph{Sharpe Ratio}, også kendt som \emph{Market Price of Risk} i stokastisk finansiering, \citep{Bjork2009}. I porteføljeteori er det kendt som et performance-mål, som fortæller investoren om merafkastet i sin portefølje relativt til den risiko han har påtaget sig, altså
-\[S_t=\frac{\mathbb{E}_t(R_{t+1})-R_{0,t+1}}{\sigma_t}.\]
+\[S_t=\frac{\mathbb{E}_t[R_{t+1}]-R_{0,t+1}}{\sigma_t}.\]
 
 Dette tillader, at vi kan omskrive Ligning \eqref{eq:Løsning} til
 \[\alpha_t=\frac{S_t}{k\sigma_t}.\]
@@ -450,22 +450,22 @@ Altså er vægtningen i det risikobærende aktiv et forhold mellem: det forvente
 
 Den betingede middelværdi af porteføljeafkastet bliver dermed nu
 \begin{equation}
-\mathbb{E}_t(R_{p,t+1})=R_{0,t+1}+\bm{\alpha}_t'(\mathbb{E}_t(\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}),
+\mathbb{E}_t[R_{p,t+1}]=R_{0,t+1}+\bm{\alpha}_t'(\mathbb{E}_t[\bm{R}_{t+1}]- R_{0,t+1}\bm{\ell}),
 \end{equation}
 
 den betingede varians af porteføljeafkastet bliver
 \begin{equation}
-\mathbb{V}_t(R_{p,t+1})=\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t.
+\mathbb{V}_t[R_{p,t+1}]=\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t.
 \end{equation}
 
 Vi kan nu opskrive maksimeringsproblemet
 \begin{equation}
-\max_{\alpha_t} \bm{\alpha}_t'(\mathbb{E}_t(\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}) - \frac{k}{2}\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t, \label{eq:MultStatmaks}
+\max_{\alpha_t} \bm{\alpha}_t'(\mathbb{E}_t[\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}] - \frac{k}{2}\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t, \label{eq:MultStatmaks}
 \end{equation}
 
 Den optimale porteføljestrategi, givet som løsningen til Maksimeringsproblemet \eqref{eq:MultStatmaks} findes til at være
 \begin{equation}
-\bm{\alpha}_t=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t(\bm{R}_{t+1})-R_{0,t+1}\bm{\ell}).\label{eq:Multalpha}
+\bm{\alpha}_t=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t[\bm{R}_{t+1}]-R_{0,t+1}\bm{\ell}).\label{eq:Multalpha}
 \end{equation}
 
 Løsningen er en generalisering af Ligning \eqref{eq:Løsning}. Derudover er det værd at bemærke, at løsningen er karakteriseret af \textit{The Mutual Fund Seperation Theorem}, \citep{Tobin1958}, som var en af mange videnskabelige bidrag James Tobin fik sin Nobelpris for i 1981, \citep{Nobel2020}. Essencen af Sætningen er, at alle investorer vil holde den eksakt samme portefølje af risikobærende aktiver samt en del i det risikofrie aktiv. Det eneste som adskiller investorer fra hinanden, er deres relative fordeling af total formue i den optimale risikobærende portefølje, som er fastsat ud fra deres egne risikopræferencer. Figur \ref{fig:AfkVol} viser de optimale porteføljestrategier i et afkast-volatilitets spektrum.
@@ -593,14 +593,14 @@ Antagelser omhandlende: formen af nyttefunktioner og fordelingen af afkast, er p
 
 Generelt vil en investors nytte -- defineret over formue -- afhænge af samtlige momenter relateret til formue. For at se dette laves en Taylor udvidelse af \(U(W_{t+1})\) omkring den forventede formue, \(\mathbb{E}(W_{t+1})\)
 \begin{align*}
-U\left(W_{t+1}\right)=&U\left(\mathbb{E}\left(W_{t+1}\right)\right)+U'\left(\mathbb{E}\left(W_{t+1}\right)\right)+\frac{1}{2}U''\left(\mathbb{E}\left(W_{t+1}\right)\right)\left(W_{t+1}-\mathbb{E}\left(W_{t+1}\right)\right)^2\\
-&+\sum_{n=3}^\infty \frac{1}{n!}U^{\left(n\right)}\left(\mathbb{E}\left(W_{t+1}\right)\right)\left(W_{t+1}-\mathbb{E}\left(W_{t+1}\right)\right),
+U\left(W_{t+1}\right)=&U\left(\mathbb{E}\left[W_{t+1}\right]\right)+U'\left(\mathbb{E}\left[W_{t+1}\right]\right)+\frac{1}{2}U''\left(\mathbb{E}\left[W_{t+1}\right]\right)\left(W_{t+1}-\mathbb{E}\left[W_{t+1}\right]\right)^2\\
+&+\sum_{n=3}^\infty \frac{1}{n!}U^{\left(n\right)}\left(\mathbb{E}\left[W_{t+1}\right]\right)\left(W_{t+1}-\mathbb{E}\left[W_{t+1}\right]\right),
 \end{align*}
 
 hvor \(U^{(n)}\) er den \(n\)'te afledte af \(U(\cdot)\). Tager vi nu den forventede værdi fås
 \begin{align*}
-\mathbb{E}\left(U\left(W_{t+1}\right)\right)=&U\left(\mathbb{E}\left(W_{t+1}\right)\right)+\frac{1}{2}U''\left(\mathbb{E}\left(W_{t+1}\right)\right)\mathbb{V}\left(W_{t+1}\right)\\
-&+\sum_{n=3}^\infty \frac{1}{n!} U^{\left(n\right)}\left(\mathbb{E}\left(W_{t+1}\right)\right)\mathbb{E}\left(\left(W_{t+1}-\mathbb{E}\left(W_{t+1}\right)\right)^n\right),
+\mathbb{E}\left[U\left(W_{t+1}\right]\right)=&U\left(\mathbb{E}\left[W_{t+1}\right]\right)+\frac{1}{2}U''\left(\mathbb{E}\left[W_{t+1}\right]\right)\mathbb{V}\left(W_{t+1}\right)\\
+&+\sum_{n=3}^\infty \frac{1}{n!} U^{\left(n\right)}\left(\mathbb{E}\left[W_{t+1}\right]\right)\mathbb{E}\left[\left(W_{t+1}-\mathbb{E}\left[W_{t+1}\right]\right)^n\right],
 \end{align*}
 
 hvor \(\mathbb{E}((W_{t+1}-\mathbb{E}(W_{t+1}))^n)\) er det centrale moment af orden \(n\). Fælles for disse momenter er, at de kvantificerer en investors villighed til at afgive eller optage diverse risici. Givetvis vil en grådig investor foretrække højere forventet formue end lavere, for faste centrale momenter af anden orden eller højere. En risikoavers investor, altså \(U''(W)<0\), vil foretrække lavere varians af formue fremfor højere, for fast forventet formue samt faste centrale momenter af tredje orden eller højere. Problemet opstår når de centrale momenter højere end eller lig tredje orden ikke er ens for alle alternativer. I så fald ville vi ikke kunne evaluere dem på baggrund af middelværdi og varians.
@@ -616,7 +616,7 @@ U(W_{t+1})=aW_{t+1}-bW_{t+1}^2. \label{eq:Kvadnytte}
 Til forskel for nedenstående nyttefunktioner kræver kvadratisk nytte ikke fordelingsmæssige antagelser vedr. afkast af aktiverne.
 
 Under kvadratisk nytte vil maksimering af forventet nytte, som i Maksimeringsproblemet \eqref{eq:Nyttemaks}, være ækvivalent til at maksimere en lineær kombination af middelværdi og varians, som i Maksimeringsproblemet \eqref{eq:Statmaks}. Middelværdien af Ligning \eqref{eq:Kvadnytte} giver den forventede nytte
-\[\mathbb{E}(U(W_{t+1}))=\mathbb{E}(W_{t+1})-b(\mathbb{V}(W_{t+1}+\mathbb{E}(W_{t+1}))),\]
+\[\mathbb{E}[U(W_{t+1})]=\mathbb{E}[W_{t+1}]-b(\mathbb{V}[W_{t+1}+\mathbb{E}[W_{t+1}]]),\]
 
 og er dermed en funktion afhængende af både forventet formue og variansen af formue \citep{Munk2017}. Herudover vil \emph{ARA} samt \emph{RRA} begge være stigende i formue under kvadratisk nytte. Som argumenteret ovenfor vil stigende \emph{ARA} være uhensigtmæssigt.
 
@@ -868,6 +868,10 @@ I denne sektion undersøges fem rentestruktursvariable, som tidligere er foresl�
 
 \emph{Term Spread} defineres som forskellen mellem den effektive lange rente og \emph{T-Bill} renten og er på den måde rentespændet mellem to obligationsinstrumenter med forskellige løbetider. Igennem dette rentespænd kan hældningen på rentekurven ligeldes findes. Basalt set vil rentekurven blive stejlere des højere værdien af rentespændet bliver. \citep{Fama1989} viser at en del af præmien i forventede afkast af hhv. aktier og obligationer er prædikteret gennem rentestrukturen. Disse afkast har vist sig at have forskellige konjukturmønstre. Altså vil det forventede afkast over aktier og obligationer bevæge sig kontracyklisk med de generelle konjukturer i økonomien. For at have en breddere del af rentekurven med, medtages ligeledes \emph{Yield Spread}. Denne variabel viser rentespændet på kort sigt, eftersom det ern forskellen mellem den effektive korte rente og \emph{T-Bill} renten.
 
+\emph{Credit Spread} defineres som forskellen mellem lavt ratede virksomhedsobligationernes effektive rente og den 90-dages \emph{T-Bill} rente. Dette følger metoden af \citep{Keim1986}. Kreditspændet er en ex ante variabel, som følger niveauet for lavt ratede obligationers priser. \citep{Keim1986} beviser, at variablen summerer ex ante information vedr forventede risikopræmier. På samme vis defineres \emph{Default Spread} som forskellen mellem lavt ratede virksomhedsobligationers effektive rente og højt ratede virksomhedsobligationerns effektive rente. \citep{Fama1989} finder bl.a. at \emph{Default Spread} fanger variation i forventede obligations- og aktieafkast. Derudover beskriver de, at de største bevægelser i denne variabel og i afkastene som variablen prædikterer er relateret til langstrækte økonomiske hændelser, som spænder over flere økonomiske konjukturer.
+
+Den nominelle (korte) rente har før vist at have statistisk styrke til at prædiktere afkast, \citep{Campbell2005}. Ved at inkludere både den nominelle rente (brutto) og realrenten (netto), fanges inflation i modellen, \citep{Campbell2005}.
+
 \hypertarget{makrouxf8konomsike-variable}{%
 \subsection{Makroøkonomsike variable}\label{makrouxf8konomsike-variable}}
 
@@ -878,8 +882,10 @@ En relevant makroøkonomisk del til at forklare variationen i specielt obligatio
 \hypertarget{opsummering}{%
 \section{Opsummering}\label{opsummering}}
 
-\hypertarget{var}{%
-\chapter{VAR}\label{var}}
+Dette kapitel fungerede som et overblik over de approksimative og eksakte analytiske resultater på tværs af en række af aktiver. Ved benyttelse af den loglineære afkast approksimation af {[}campbell1988{]}, blev aktivklassernes nutidsværdi relateret til forventede fremtidige betalinger. Dette tilladte at prædiktiverelationer på tværs af aktivklasserne blev dannet, som er essentielle, når den mulige prædiktabilitet skal begrundes. Disse relationer vil derfor også kunne inkorporeres i den følgende VAR(1)-model. Derudover er en lang række variable ligeledes blevet præsenteret og diskuteret. Disse potentielle prædiktionsvariable er medtaget grundet tidligere litterære fund, som viser at prædiktabiliteten af afkast kan fanges af flere variable end de fundamentalt bundne variable.
+
+\hypertarget{varkapitel}{%
+\chapter{VAR}\label{varkapitel}}
 
 I dette kapitel fastsættes den teoretiske ramme for den empiriske analyse. Dette gøres hovedsageligt ud fra teorien bag \citep{Userguide2004} med enkelte dele, som varierer.
 
@@ -1271,8 +1277,10 @@ På denne måde opnåes en repræsentativ portefølje, som kan benyttes til at b
 \hypertarget{implementering}{%
 \chapter{Implementering}\label{implementering}}
 
-\hypertarget{pruxe6diktabilitstest}{%
-\section{Prædiktabilitstest}\label{pruxe6diktabilitstest}}
+Kapitel \ref{varkapitel} markerede slutningen af den underliggende teoretiske gennemgang samt diskussion. Nu tages fat på de nødvendige statistiske værktøjer, som er et nødvendige, for at kunne implementere den præsenterede porteføljemodel. Derfor vil dette kapitel lægge fundamentet for den empiriske del, som på den måde kan færdiggøre den optimale porteføljestrategi baseret på historiske data, der bliver gennemgået og gransket i Kapitel \ref{kapiteldatab}. Sektion \ref{sekprædik} vil præsentere de oftest anvendte lineære modeller til at teste afkastprædiktabilitet. Sektion \ref{sektestaftids} vil fungere som beskrivelse af de tests, som kan teste de anvendte tidsserier for de underliggende antagelser, der specielt er krævet af VAR-processen. Derudover vil Sektion \ref{sekmodelselek} sætte spørgsmåltegn ved højtparameteriserede modeller. Sektionen vil derfor diskutere problemet og præsentere et modelselektionsgrundlag, etableret for at kunne skabe en restringeret kvantiativ stærk model, som der -- ikke mindst -- samtidig er valgt ud fra en kvalitativ skepsis af undertegnede.
+
+\hypertarget{pruxe6diktabilitstest-sekpruxe6dik}{%
+\section{Prædiktabilitstest \{sekprædik\}}\label{pruxe6diktabilitstest-sekpruxe6dik}}
 
 \hypertarget{univariat}{%
 \subsection{Univariat}\label{univariat}}
@@ -1283,8 +1291,8 @@ På denne måde opnåes en repræsentativ portefølje, som kan benyttes til at b
 \hypertarget{potentiel-bias}{%
 \subsection{Potentiel bias}\label{potentiel-bias}}
 
-\hypertarget{test-af-tidsserier}{%
-\section{Test af tidsserier}\label{test-af-tidsserier}}
+\hypertarget{test-af-tidsserier-sektestaftids}{%
+\section{Test af tidsserier \{sektestaftids\}}\label{test-af-tidsserier-sektestaftids}}
 
 \hypertarget{test-af-normalitet}{%
 \subsection{Test af normalitet}\label{test-af-normalitet}}
@@ -1298,11 +1306,11 @@ På denne måde opnåes en repræsentativ portefølje, som kan benyttes til at b
 \hypertarget{kwiatkowski-phillips-schmidt-shin-test}{%
 \subsection{Kwiatkowski-Phillips-Schmidt-Shin test}\label{kwiatkowski-phillips-schmidt-shin-test}}
 
-\hypertarget{modelselektion}{%
-\section{Modelselektion}\label{modelselektion}}
+\hypertarget{modelselektion-sekmodelselek}{%
+\section{Modelselektion \{sekmodelselek\}}\label{modelselektion-sekmodelselek}}
 
-\hypertarget{data-beskrivelse}{%
-\chapter{Data beskrivelse}\label{data-beskrivelse}}
+\hypertarget{data-beskrivelse-kapteildatab}{%
+\chapter{Data beskrivelse \{kapteildatab\}}\label{data-beskrivelse-kapteildatab}}
 
 Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 2. kvartal til 2018 4. kvartal grundet dataophør. Startkvartalet er valgt på baggrund af, at den amerikanske centralbank, \emph{Federal Reserve System}, kort tid forinden, havde givet den amerikanske korte rente, lov til at variere frit i markedet. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion \ref{aktivklasser} beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik. Sektion \ref{pvariable} indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion \ref{korr}. Sektion \ref{ops} giver en opsummering af kapitlets statistiske fund. Tidsserien for hver aktivklasse og prædiktionsvariabel visualiseres med tilhørende recessionsperioder som defineret af \citep{NBER2020}.
 

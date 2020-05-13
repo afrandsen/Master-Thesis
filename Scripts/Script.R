@@ -247,8 +247,49 @@ FIT_M_V_TABLE <- data.frame(coef=coef(fit_V_OBL),
                             t=coeftest(fit_V_OBL, vcov. = NeweyWest(fit_V_OBL))[,3],
                             p=coeftest(fit_V_OBL, vcov. = NeweyWest(fit_V_OBL))[,4])
 
+
+
+
+
+
+
+
+
 # VAR
-data <- xts::xts(merge(NET_TB, AKT, S_OBL, V_OBL, DP, EP, BM, AKT_VAR, HML, SMB, TB, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR), index(NET_TB))
+
+# data <- xts::xts(merge(NET_TB, AKT, S_OBL, V_OBL, DP, EP, BM, AKT_VAR, HML, SMB, TB, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR), index(NET_TB))
+# 
+# ## AKTIER
+# data_var_akt <- as.xts(merge(xts::lag.xts(data$AKT, -1, na.pad = FALSE), head(data, -1)))
+# 
+# fit_var_akt  <- lm(AKT ~ NET_TB + AKT.1 + S_OBL + V_OBL + DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_var_akt)
+# 
+# step_var_akt_model <- step(fit_var_akt, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=AKT ~ TB, upper=fit_var_akt))
+# 
+# summary(step_var_akt_model)
+# 
+# ## STATS
+# data_var_s <- as.xts(merge(xts::lag.xts(data$S_OBL, -1, na.pad = FALSE), head(data, -1)))
+# 
+# fit_var_s  <- lm(S_OBL ~ NET_TB + AKT + S_OBL.1 + V_OBL + DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_var_s)
+# 
+# step_var_s_model <- step(fit_var_s, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=S_OBL ~ TB, upper=fit_var_s))
+# 
+# summary(step_var_s_model)
+# 
+# ## VIRKSOMHEDER
+# data_var_v <- as.xts(merge(xts::lag.xts(data$V_OBL, -1, na.pad = FALSE), head(data, -1)))
+# 
+# fit_var_v  <- lm(V_OBL ~ NET_TB + AKT + S_OBL + V_OBL.1 + DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_var_v)
+# 
+# step_var_v_model <- step(fit_var_v, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=V_OBL ~ TB, upper=fit_var_v))
+# 
+# summary(step_var_v_model)
+
+
+
+
+
 
 data_v <- as.ts(data)
 # 
@@ -300,3 +341,13 @@ recessions.df = read.table(textConnection(
   colClasses=c('Date', 'Date'), header=TRUE)
 
 recessions.trim = subset(recessions.df, Peak >= min(index(data)) )
+
+# a: AKT.1 BM AKT_VAR SMB TB Y_SPREAD
+# s: S_OBL.1 AKT_VAR SMB TB Y_SPREAD
+# v: V_OBL.1 AKT_VAR SMB TB Y_SPREAD
+
+# data_test <- subset(data_v, select = c(BM, AKT_VAR, SMB, TB, Y_SPREAD))
+# 
+# test <- lm(AKT ~ AKT.1 + BM + AKT_VAR + SMB + TB + Y_SPREAD, data=data_var_akt)
+# extractAIC(step_var_akt_model)
+# extractAIC(test)

@@ -27,8 +27,9 @@ if (knitr::is_html_output()) {
 ```
 
 # Implementering
+Kapitel \@ref(varkapitel) markerede slutningen af den underliggende teoretiske gennemgang samt diskussion. Nu tages fat på de nødvendige statistiske værktøjer, som er et nødvendige, for at kunne implementere den præsenterede porteføljemodel. Derfor vil dette kapitel lægge fundamentet for den empiriske del, som på den måde kan færdiggøre den optimale porteføljestrategi baseret på historiske data, der bliver gennemgået og gransket i Kapitel \@ref(kapiteldatab). Sektion \@ref(sekprædik) vil præsentere de oftest anvendte lineære modeller til at teste afkastprædiktabilitet. Sektion \@ref(#sektestaftids) vil fungere som beskrivelse af de tests, som kan teste de anvendte tidsserier for de underliggende antagelser, der specielt er krævet af VAR-processen. Derudover vil Sektion \@ref(sekmodelselek) sætte spørgsmåltegn ved højtparameteriserede modeller. Sektionen vil derfor diskutere problemet og præsentere et modelselektionsgrundlag, etableret for at kunne skabe en restringeret kvantiativ stærk model, som der -- ikke mindst -- samtidig er valgt ud fra en kvalitativ skepsis af undertegnede.
 
-## Prædiktabilitstest
+## Prædiktabilitstest {#sekprædik}
 
 ### Univariat
 
@@ -36,7 +37,7 @@ if (knitr::is_html_output()) {
 
 ### Potentiel bias
 
-## Test af tidsserier
+## Test af tidsserier {#sektestaftids}
 
 ### Test af normalitet
 
@@ -46,9 +47,9 @@ if (knitr::is_html_output()) {
 
 ### Kwiatkowski-Phillips-Schmidt-Shin test
 
-## Modelselektion
+## Modelselektion {#sekmodelselek}
 
-# Data beskrivelse
+# Data beskrivelse {#kapteildatab}
 Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 2. kvartal til 2018 4. kvartal grundet dataophør. Startkvartalet er valgt på baggrund af, at den amerikanske centralbank, *Federal Reserve System*, kort tid forinden, havde givet den amerikanske korte rente, lov til at variere frit i markedet. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion \@ref(aktivklasser) beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik. Sektion \@ref(pvariable) indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion \@ref(korr). Sektion \@ref(ops) giver en opsummering af kapitlets statistiske fund. Tidsserien for hver aktivklasse og prædiktionsvariabel visualiseres med tilhørende recessionsperioder som defineret af [@NBER2020].
 
 ## Beskrivelse af aktivklasser{#aktivklasser}
