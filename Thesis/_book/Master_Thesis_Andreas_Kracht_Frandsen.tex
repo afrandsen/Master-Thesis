@@ -300,7 +300,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-05-13                  
+##  date     2020-05-14                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -1277,22 +1277,34 @@ På denne måde opnåes en repræsentativ portefølje, som kan benyttes til at b
 \hypertarget{implementering}{%
 \chapter{Implementering}\label{implementering}}
 
-Kapitel \ref{varkapitel} markerede slutningen af den underliggende teoretiske gennemgang samt diskussion. Nu tages fat på de nødvendige statistiske værktøjer, som er et nødvendige, for at kunne implementere den præsenterede porteføljemodel. Derfor vil dette kapitel lægge fundamentet for den empiriske del, som på den måde kan færdiggøre den optimale porteføljestrategi baseret på historiske data, der bliver gennemgået og gransket i Kapitel \ref{kapiteldatab}. Sektion \ref{sekprædik} vil præsentere de oftest anvendte lineære modeller til at teste afkastprædiktabilitet. Sektion \ref{sektestaftids} vil fungere som beskrivelse af de tests, som kan teste de anvendte tidsserier for de underliggende antagelser, der specielt er krævet af VAR-processen. Derudover vil Sektion \ref{sekmodelselek} sætte spørgsmåltegn ved højtparameteriserede modeller. Sektionen vil derfor diskutere problemet og præsentere et modelselektionsgrundlag, etableret for at kunne skabe en restringeret kvantiativ stærk model, som der -- ikke mindst -- samtidig er valgt ud fra en kvalitativ skepsis af undertegnede.
+Kapitel \ref{varkapitel} markerede slutningen af den underliggende teoretiske gennemgang samt diskussion. Nu tages fat på de nødvendige statistiske værktøjer, som er et nødvendige, for at kunne implementere den præsenterede porteføljemodel. Derfor vil dette kapitel lægge fundamentet for den empiriske del, som på den måde kan færdiggøre den optimale porteføljestrategi baseret på historiske data, der bliver gennemgået og gransket i Kapitel \ref{kapiteldatab}. Sektion \ref{sekpradik} vil præsentere de oftest anvendte lineære modeller til at teste afkastprædiktabilitet. Sektion @ref(\#sektestaftids) vil fungere som beskrivelse af de tests, som kan teste de anvendte tidsserier for de underliggende antagelser, der specielt er krævet af VAR-processen. Derudover vil Sektion \ref{sekmodelselek} sætte spørgsmåltegn ved højtparameteriserede modeller. Sektionen vil derfor diskutere problemet og præsentere et modelselektionsgrundlag, etableret for at kunne skabe en restringeret kvantiativ stærk model, som der -- ikke mindst -- samtidig er valgt ud fra en kvalitativ skepsis af undertegnede.
 
-\hypertarget{pruxe6diktabilitstest-sekpruxe6dik}{%
-\section{Prædiktabilitstest \{sekprædik\}}\label{pruxe6diktabilitstest-sekpruxe6dik}}
+\hypertarget{sekpradik}{%
+\section{Prædiktabilitstest}\label{sekpradik}}
 
-\hypertarget{univariat}{%
-\subsection{Univariat}\label{univariat}}
+Denne sektion vil dække en introduktion til testing af afkastprædiktabilitet. Da fokus er på porteføljeallokering, vil en dybdegående analyse ikke foretages i denne afhandling. Ved at følge den eksisterende litteratur, vil testene være baseret på lineære modeller. Først beskrives den univariate regressions model, som går forud for den multiple regression. Disse to lineære grundlag vil danne rammen for de empiriske undersøgelser i denne sektion. Derudover bliver generelle økonometriske problemer præsenteret for fuldstændighedens skyld.
 
-\hypertarget{multipel}{%
-\subsection{Multipel}\label{multipel}}
+\hypertarget{univariat-regression}{%
+\subsection{Univariat regression}\label{univariat-regression}}
+
+Den simpleste statistiske metode til at finde statistiske sammenhænge er gennem en univariat lineær regression. I et afkastprædiktablitets henseende vil man lave en regression af merafkast som responsvariabel på laggede forklarende variable. Dette vil give en indikation af relationens signifikans og størrelsesorden. Merafkast anvendes, eftersom analysen forsøger at påvise tidsvariation i risikopræmier og ikke i renter. Derudover er laggede foreklarende variable nødvendige, for at iscenesætte en realistisk følge informationer. Den simple univariat regression kan dermed præsenteres analytisk som
+\[y_t=\beta_0 + \beta_1 x_{t-1} + \varepsilon_t.\]
+
+hvor \(y_t\) er responsvariablen, som repræsenterer det realiserede merafkast på det undersøgte aktiv på tidspunkt \(t\). Den forklarende variabel, \(x_{t-1}\), er den foregående periodes realiserede værdi af variablen. Derudover haves fejlledet, \(\varepsilon_t\), som følger de generelle OLS betingelser. Den overordnede nulhypotese er, at ingen tidsvariation eksistrer i merafkast, dette vil betyde en \(\beta_1\) koefficient på nul. Altså vil en koefficient, signifikant forskellig fra nul, argumentere for prædiktabilitet. En diskusion af den ovenstående præsenterede ramme, kan findes i \citep{Stambaugh1999}.
+
+\hypertarget{multipel-regression}{%
+\subsection{Multipel regression}\label{multipel-regression}}
+
+Som pointeret af \citep{Stambaugh1999} er der flere problemer med estimationen af den univariate regression. For at øge inferensen af estimationsresultaterne følges metoden af \citep{Goyal2007}, som består af en multipel regression. Den medfører en regression af responsvariablen, merafkast, på samtilige laggede forklarende variable. Altså kan den analytisk beskrives som
+\[y_t=\beta_0+\bm{\beta}_1\bm{x}_{t-1}+\bm{\varepsilon}_t,\]
+
+her er \(\bm{x}_{t-1}\) vektoren af realisationer fra forklarende variable, på tidspunkt \(t-1\). Nu er \(\bm{\beta}_1\) vektoren af hældningskoefficienter for hver af de forklarende variable. Slutteligt er \(\bm{\varepsilon}_t\) vektoren af fejlled. Fordelen ved en multipel regression er, at den muliggør biasreduktion -- som der ellers kan opstå i den univariate regression -- ved at inkludere tidligere udeladte variable. Denne fordel kommer dog med en omkostning, da multikollinaritet kan skabe en mere ustabil model.
 
 \hypertarget{potentiel-bias}{%
 \subsection{Potentiel bias}\label{potentiel-bias}}
 
-\hypertarget{test-af-tidsserier-sektestaftids}{%
-\section{Test af tidsserier \{sektestaftids\}}\label{test-af-tidsserier-sektestaftids}}
+\hypertarget{sektestaftids}{%
+\section{Test af tidsserier}\label{sektestaftids}}
 
 \hypertarget{test-af-normalitet}{%
 \subsection{Test af normalitet}\label{test-af-normalitet}}
@@ -1306,11 +1318,11 @@ Kapitel \ref{varkapitel} markerede slutningen af den underliggende teoretiske ge
 \hypertarget{kwiatkowski-phillips-schmidt-shin-test}{%
 \subsection{Kwiatkowski-Phillips-Schmidt-Shin test}\label{kwiatkowski-phillips-schmidt-shin-test}}
 
-\hypertarget{modelselektion-sekmodelselek}{%
-\section{Modelselektion \{sekmodelselek\}}\label{modelselektion-sekmodelselek}}
+\hypertarget{sekmodelselek}{%
+\section{Modelselektion}\label{sekmodelselek}}
 
-\hypertarget{data-beskrivelse-kapteildatab}{%
-\chapter{Data beskrivelse \{kapteildatab\}}\label{data-beskrivelse-kapteildatab}}
+\hypertarget{kapiteldatab}{%
+\chapter{Data beskrivelse}\label{kapiteldatab}}
 
 Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 2. kvartal til 2018 4. kvartal grundet dataophør. Startkvartalet er valgt på baggrund af, at den amerikanske centralbank, \emph{Federal Reserve System}, kort tid forinden, havde givet den amerikanske korte rente, lov til at variere frit i markedet. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion \ref{aktivklasser} beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik. Sektion \ref{pvariable} indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion \ref{korr}. Sektion \ref{ops} giver en opsummering af kapitlets statistiske fund. Tidsserien for hver aktivklasse og prædiktionsvariabel visualiseres med tilhørende recessionsperioder som defineret af \citep{NBER2020}.
 
@@ -1365,7 +1377,7 @@ I forlængelse af beskrivelsen af det risikofrie aktiv, viser Figur \ref{fig:INF
 \hypertarget{dataak}{%
 \subsection{\texorpdfstring{Merafkastet på aktier -- \(rx_{t+1}^{\textnormal{a}}\)}{Merafkastet på aktier -- rx\_\{t+1\}\^{}\{\textbackslash textnormal\{a\}\}}}\label{dataak}}
 
-For aktivklassen, som skal repræsentere børshandlede aktier, benyttes et markedsværdi-vægtet afkast over et repræsentativt indeks for samtlige handlede aktier på \emph{New York Stock Exchange}, \emph{National Association of Securities Dealers Automated Quotations} og \emph{American Stock Exchange}. Det vægtede afkast er inklusiv udbytte, aktiesplits og nyemissioner for de foregående 12 måneder ledende op til kvartalet. Ved at benytte et sådant forholdsvist bredt indeks, vil delanalysen for aktier være repræsentativt for det globale aktiemarked. Derudover er det ikke kun børsnoterede amerikanskbaserede selskaber, som handles via \emph{NYSE}, \emph{NASDAQ} og \emph{AMEX}, men i stadig større grad også virksomheder uden for U.S.A. Data over afkast er fra \citep{CRSPakt} og hentet gennem \citep{WRDSakt}. Log merafkastet af aktier beregnes som det kvartalsvise log brutto aktieafkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages \emph{T-Bill}. Det ses at aktier har det klart højeste kvartalvise justerede merafkast på 1.7\(\%\) ift. de andre aktivklasser. Dette høje merafkast følges af en ligeledes høj relativ volatilitet på 8.3\(\%\). Historisk set har det største negative markedsudsving givet et merafkast/tab på \(-30.4\%\), mens det største positive markedsudsving har været på \(20\%\). Et histogram sammenholdt med en skævhed på -0.946 afslører moderat til høj venstreskævhed. Altså har der oftere været negative merafkast ift. positive. Kurtosis på 4.624 medører en moderat leptokurtisk fordeling med en anelse tykkere haler, og at ekstreme observationer sker oftere end normalt. Disse tal er konsistente med \citep{CampVic2003}. Figur \ref{fig:AKT-tids} viser et plot over tidsserien, Figur \ref{fig:AKT-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:AKT-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
+For aktivklassen, som skal repræsentere børshandlede aktier, benyttes et markedsværdi-vægtet afkast over et repræsentativt indeks for samtlige handlede aktier på \emph{New York Stock Exchange}, \emph{National Association of Securities Dealers Automated Quotations} og \emph{American Stock Exchange}. Det vægtede afkast er inklusiv udbytte, aktiesplits og nyemissioner for de foregående 12 måneder ledende op til kvartalet. Ved at benytte et sådant forholdsvist bredt indeks, vil delanalysen for aktier være repræsentativt for det globale aktiemarked. Derudover er det ikke kun børsnoterede amerikanskbaserede selskaber, som handles via \emph{NYSE}, \emph{NASDAQ} og \emph{AMEX}, men i stadig større grad også virksomheder uden for U.S.A. Data over afkast er fra \citep{CRSPakt} og hentet gennem \citep{WRDSakt}. Log merafkastet af aktier beregnes som det kvartalsvise log brutto aktieafkast fratrukket det kvartalsvise brutto afkast på den amerikanske 90-dages \emph{T-Bill}. Det ses at aktier har det klart højeste kvartalvise justerede merafkast på 1.7\(\%\) ift. de andre aktivklasser. Dette høje merafkast følges af en ligeledes høj relativ volatilitet på 8.3\(\%\). Historisk set har det største negative markedsudsving givet et merafkast/tab på \(-30.4\%\), mens det største positive markedsudsving har været på \(20\%\). Et histogram sammenholdt med en skævhed på -0.946 afslører moderat til høj venstreskævhed. Altså har der oftere været negative merafkast ift. positive. Kurtosis på 4.624 medfører en moderat leptokurtisk fordeling med en anelse tykkere haler, og at ekstreme observationer sker oftere end normalt. Disse tal er konsistente med \citep{CampVic2003}. Figur \ref{fig:AKT-tids} viser et plot over tidsserien, Figur \ref{fig:AKT-AK} viser et plot over autokorrelationen for tidsserien og Figur \ref{fig:AKT-HIST} viser et plot over histogrammet for tidsserien med tilhørende \emph{kernel} tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 \begin{figure}[H]
 
@@ -1982,7 +1994,7 @@ Den anden række repræsenterer korrelationen med log merafkastet på aktier. De
 
 Log merafkastet på statsobligationer er højt korreleret med log merafkastet på virksomhedsobligationer, hvilket indikerer at de har sammenlignelige egenskaber. Mht. de finansielle variable er der generelt en korrelation omkring nul. For rentestruktursvariablene ses en relativt stor positiv korrelation. Dette kunne betyde, at disse har mere statistisk styrke til at prædiktere merafkastet. For makrovariablen ses et højere kontracyklisk mønster end for log merafkastet på aktier.
 
-Den fjerde række svarer til log merafkastet på virksomhedsobligationer. Her ses en blandet korrelation mellem de finansielle variable, mens der generelt ses en positiv korrelation mellem rentestruktursvariablene. Mht. \emph{Federal Funds Rate} ses igen et kontracyklisk mønster, som for resten af serien af log merafkast. Fokuseres nu på prædiktionsvariablene i Tabel \ref{tab:DES-KOR}, er der generelt høj korrelation mellem de finansielle variable, med undtagelse af \emph{Small Minus Big}, \emph{High Minus Low} og aktievariansen. Dette kan være problematisk, da de essentielt kan indeholde samme information, til at prædiktere merafkast. Korrelationskoefficienten mellem de finansielle variable og rentestruktursvariablene er generelt lav. Den makroøkonomiske variabel har et generelt mønster af høj korrelation mellem af de andre klasser af prædiktionsvariable.
+Den fjerde række svarer til log merafkastet på virksomhedsobligationer. Her ses en blandet korrelation mellem de finansielle variable, mens der generelt ses en positiv korrelation mellem rentestruktursvariablene. Mht. \emph{Federal Funds Rate} ses igen et kontracyklisk mønster, som for resten af serien af log merafkast. Fokuseres nu på prædiktionsvariablene i Tabel \ref{tab:DES-KOR}, er der generelt høj korrelation mellem de finansielle variable, med undtagelse af \emph{Small Minus Big}, \emph{High Minus Low} og aktievariansen. Dette kan være problematisk, da de essentielt kan indeholde samme information, til at prædiktere merafkast. Korrelationskoefficienten mellem de finansielle variable og rentestruktursvariablene er generelt lav. Der ses meget høj korrelation mellem rentespændende. Den makroøkonomiske variabel har et generelt mønster af høj korrelation mellem de andre klasser af prædiktionsvariable.
 
 \begin{table}[H]
 
@@ -2783,10 +2795,10 @@ Tredje simulering overestimerer Aktiv 1 samt 2 og underestimerer Aktiv 3. Ranger
 \toprule
   & Tangensporteføljen & GMV & Myopic Demand & IHD\\
 \midrule
-\rowcolor{gray!6}  T-Bills & -292.560 & 106.250 & 4.852 & 34.093\\
-Aktier & 193.406 & 0.243 & 193.406 & 53.525\\
-\rowcolor{gray!6}  Statsobligationer & 97.698 & 1.612 & 97.698 & 13.962\\
-Virksomhedsobligationer & 101.455 & -8.105 & 101.455 & -1.579\\
+\rowcolor{gray!6}  T-Bills & -280.427 & 106.098 & 7.455 & 58.745\\
+Aktier & 191.956 & 0.218 & 191.956 & 34.719\\
+\rowcolor{gray!6}  Statsobligationer & 92.349 & 1.223 & 92.349 & 7.519\\
+Virksomhedsobligationer & 96.123 & -7.539 & 96.123 & -0.983\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -2805,22 +2817,22 @@ Virksomhedsobligationer & 101.455 & -8.105 & 101.455 & -1.579\\
 \toprule
 $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 \midrule
-\rowcolor{gray!6}  2 & T-Bills & -147.208 & -140.683 & -144.749 & -160.166 & -182.526 & -194.346 & -200.344 & -203.401\\
- & Aktier & 122.904 & 130.969 & 138.499 & 153.080 & 165.151 & 171.201 & 174.299 & 175.900\\
-\rowcolor{gray!6}   & Statsobligationer & 83.870 & 77.085 & 66.636 & 61.955 & 72.097 & 78.109 & 81.128 & 82.643\\
- & Virksomhedsobligationer & 40.434 & 32.629 & 39.614 & 45.130 & 45.279 & 45.037 & 44.917 & 44.857\\
-\rowcolor{gray!6}  5 & T-Bills & 4.852 & 7.414 & 1.727 & -12.691 & -33.982 & -47.761 & -56.137 & -61.054\\
- & Aktier & 49.307 & 54.240 & 59.426 & 72.325 & 86.196 & 94.765 & 99.880 & 102.831\\
-\rowcolor{gray!6}   & Statsobligationer & 34.511 & 35.247 & 30.001 & 28.443 & 36.798 & 42.644 & 46.284 & 48.473\\
- & Virksomhedsobligationer & 11.329 & 3.099 & 8.846 & 11.923 & 10.988 & 10.352 & 9.973 & 9.750\\
-\rowcolor{gray!6}  10 & T-Bills & 55.539 & 56.048 & 50.655 & 40.025 & 26.090 & 16.272 & 9.496 & 4.884\\
- & Aktier & 24.775 & 27.118 & 29.949 & 37.972 & 47.791 & 54.653 & 59.345 & 62.510\\
-\rowcolor{gray!6}   & Statsobligationer & 18.058 & 20.582 & 19.141 & 19.864 & 24.871 & 28.444 & 30.947 & 32.677\\
- & Virksomhedsobligationer & 1.628 & -3.748 & 0.255 & 2.140 & 1.248 & 0.631 & 0.212 & -0.071\\
-\rowcolor{gray!6}  20 & T-Bills & 80.883 & 80.261 & 75.228 & 66.973 & 58.196 & 52.005 & 47.480 & 44.149\\
- & Aktier & 12.508 & 13.246 & 14.571 & 19.137 & 25.362 & 30.004 & 33.416 & 35.944\\
-\rowcolor{gray!6}   & Statsobligationer & 9.832 & 12.667 & 13.601 & 15.861 & 18.983 & 20.992 & 22.442 & 23.495\\
- & Virksomhedsobligationer & -3.223 & -6.174 & -3.399 & -1.972 & -2.541 & -3.001 & -3.338 & -3.588\\
+\rowcolor{gray!6}  2 & T-Bills & -140.475 & -127.092 & -126.193 & -135.788 & -153.094 & -162.021 & -166.275 & -168.280\\
+ & Aktier & 121.967 & 128.205 & 134.044 & 144.344 & 152.061 & 155.704 & 157.448 & 158.277\\
+\rowcolor{gray!6}   & Statsobligationer & 79.784 & 68.001 & 57.359 & 53.375 & 62.409 & 67.583 & 70.046 & 71.200\\
+ & Virksomhedsobligationer & 38.723 & 30.886 & 34.790 & 38.070 & 38.625 & 38.734 & 38.782 & 38.803\\
+\rowcolor{gray!6}  5 & T-Bills & 7.455 & 14.660 & 12.413 & 1.984 & -14.729 & -25.019 & -30.783 & -33.800\\
+ & Aktier & 48.917 & 52.559 & 56.888 & 66.100 & 74.768 & 79.727 & 82.359 & 83.636\\
+\rowcolor{gray!6}   & Statsobligationer & 32.645 & 27.941 & 22.306 & 21.218 & 29.509 & 35.104 & 38.366 & 40.163\\
+ & Virksomhedsobligationer & 10.983 & 4.840 & 8.393 & 10.698 & 10.452 & 10.189 & 10.057 & 10.001\\
+\rowcolor{gray!6}  10 & T-Bills & 56.765 & 59.742 & 56.201 & 47.572 & 36.187 & 28.538 & 23.606 & 20.575\\
+ & Aktier & 24.567 & 26.136 & 28.604 & 34.590 & 41.112 & 45.416 & 48.086 & 49.647\\
+\rowcolor{gray!6}   & Statsobligationer & 16.931 & 15.770 & 13.992 & 14.892 & 20.187 & 23.938 & 26.447 & 28.058\\
+ & Virksomhedsobligationer & 1.737 & -1.649 & 1.203 & 2.946 & 2.515 & 2.108 & 1.860 & 1.720\\
+\rowcolor{gray!6}  20 & T-Bills & 81.420 & 81.887 & 77.661 & 70.107 & 62.329 & 57.022 & 53.304 & 50.760\\
+ & Aktier & 12.392 & 12.681 & 13.905 & 17.588 & 22.209 & 25.542 & 27.831 & 29.350\\
+\rowcolor{gray!6}   & Statsobligationer & 9.075 & 9.692 & 10.363 & 12.686 & 16.187 & 18.557 & 20.258 & 21.461\\
+ & Virksomhedsobligationer & -2.887 & -4.260 & -1.929 & -0.381 & -0.725 & -1.121 & -1.393 & -1.571\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -2839,22 +2851,22 @@ $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 \toprule
 $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 \midrule
-\rowcolor{gray!6}  2 & T-Bills & 14.234 & 14.246 & 13.931 & 13.253 & 12.350 & 11.897 & 11.681 & 11.577\\
- & Aktier & 19.873 & 20.389 & 21.083 & 22.225 & 23.006 & 23.385 & 23.579 & 23.679\\
-\rowcolor{gray!6}   & Statsobligationer & 33.266 & 33.394 & 32.966 & 32.562 & 32.787 & 32.931 & 32.996 & 33.026\\
- & Virksomhedsobligationer & 32.241 & 31.585 & 31.633 & 31.574 & 31.471 & 31.401 & 31.357 & 31.331\\
-\rowcolor{gray!6}  5 & T-Bills & 20.503 & 20.148 & 19.165 & 17.304 & 14.769 & 13.315 & 12.505 & 12.053\\
- & Aktier & 18.077 & 18.597 & 19.599 & 22.052 & 24.585 & 26.011 & 26.805 & 27.245\\
-\rowcolor{gray!6}   & Statsobligationer & 31.118 & 31.707 & 31.379 & 30.922 & 31.330 & 31.646 & 31.845 & 31.965\\
- & Virksomhedsobligationer & 29.916 & 29.162 & 29.471 & 29.336 & 28.930 & 28.642 & 28.459 & 28.351\\
-\rowcolor{gray!6}  10 & T-Bills & 30.842 & 29.836 & 28.104 & 25.267 & 21.767 & 19.490 & 17.972 & 16.956\\
- & Aktier & 15.333 & 15.797 & 16.753 & 19.448 & 22.705 & 24.921 & 26.431 & 27.446\\
-\rowcolor{gray!6}   & Statsobligationer & 27.551 & 28.552 & 28.642 & 28.645 & 29.214 & 29.552 & 29.762 & 29.908\\
- & Virksomhedsobligationer & 25.888 & 25.429 & 26.115 & 26.254 & 25.928 & 25.651 & 25.448 & 25.303\\
-\rowcolor{gray!6}  20 & T-Bills & 49.590 & 47.768 & 45.070 & 41.085 & 36.653 & 33.481 & 31.222 & 29.589\\
- & Aktier & 10.933 & 11.155 & 11.948 & 14.366 & 17.710 & 20.288 & 22.217 & 23.654\\
-\rowcolor{gray!6}   & Statsobligationer & 20.856 & 22.292 & 23.109 & 23.997 & 24.959 & 25.536 & 25.922 & 26.194\\
- & Virksomhedsobligationer & 18.236 & 18.399 & 19.488 & 20.166 & 20.293 & 20.309 & 20.253 & 20.177\\
+\rowcolor{gray!6}  2 & T-Bills & 11.689 & 11.904 & 11.829 & 11.406 & 10.747 & 10.439 & 10.294 & 10.225\\
+ & Aktier & 19.442 & 20.035 & 20.644 & 21.490 & 21.963 & 22.163 & 22.262 & 22.310\\
+\rowcolor{gray!6}   & Statsobligationer & 35.249 & 35.084 & 34.622 & 34.264 & 34.467 & 34.588 & 34.641 & 34.666\\
+ & Virksomhedsobligationer & 33.233 & 32.590 & 32.519 & 32.454 & 32.437 & 32.424 & 32.416 & 32.412\\
+\rowcolor{gray!6}  5 & T-Bills & 17.362 & 17.665 & 17.108 & 15.729 & 13.904 & 12.814 & 12.237 & 11.957\\
+ & Aktier & 18.184 & 18.676 & 19.576 & 21.359 & 22.735 & 23.487 & 23.874 & 24.049\\
+\rowcolor{gray!6}   & Statsobligationer & 33.518 & 33.485 & 33.043 & 32.647 & 33.075 & 33.414 & 33.608 & 33.718\\
+ & Virksomhedsobligationer & 30.549 & 29.788 & 29.887 & 29.879 & 29.900 & 29.899 & 29.895 & 29.889\\
+\rowcolor{gray!6}  10 & T-Bills & 29.228 & 28.916 & 27.570 & 25.060 & 21.879 & 19.849 & 18.596 & 17.855\\
+ & Aktier & 15.260 & 15.537 & 16.403 & 18.483 & 20.685 & 22.112 & 22.985 & 23.485\\
+\rowcolor{gray!6}   & Statsobligationer & 29.297 & 29.774 & 29.815 & 29.964 & 30.797 & 31.328 & 31.669 & 31.886\\
+ & Virksomhedsobligationer & 25.828 & 25.387 & 25.826 & 26.107 & 26.253 & 26.325 & 26.363 & 26.388\\
+\rowcolor{gray!6}  20 & T-Bills & 49.307 & 48.165 & 45.794 & 42.009 & 37.999 & 35.259 & 33.350 & 32.039\\
+ & Aktier & 10.677 & 10.650 & 11.364 & 13.350 & 15.821 & 17.645 & 18.931 & 19.799\\
+\rowcolor{gray!6}   & Statsobligationer & 21.784 & 22.743 & 23.547 & 24.590 & 25.771 & 26.524 & 27.037 & 27.400\\
+ & Virksomhedsobligationer & 17.846 & 18.056 & 18.909 & 19.665 & 20.023 & 20.186 & 20.297 & 20.376\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}

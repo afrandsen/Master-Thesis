@@ -293,15 +293,33 @@ FIT_M_V_TABLE <- data.frame(coef=coef(fit_V_OBL),
 
 data_v <- as.ts(data)
 # 
-data_sub <- subset(data_v, select = -c(DP, EP, AKT_VAR, HML, Y_SPREAD, C_SPREAD, D_SPREAD, FR))
+data_sub <- subset(data_v, select = -c(DP, EP, HML, T_SPREAD, C_SPREAD, D_SPREAD, FR))
 # 
 var <- VAR(data_sub, p = 1)
 var.p <- VAR.Pope(data_sub, p = 1)
 
 coef <- Bcoef(var)
+
 coef1 <- coef(var)
 cov <- summary(var)$covres
 cor <- summary(var)$corres
+
+
+VAR_TABLE <- data.frame(coef)
+
+var.p$coef[1,]
+
+VAR_TABLE <- rbind(VAR_TABLE[1:1,],
+      var.p$coef[1,],
+      VAR_TABLE[-(1:1),])
+
+test$varresult$NET_TB$coefficients[,3]
+
+VAR_TABLE <- rbind(VAR_TABLE[1:2,],
+      test$varresult$NET_TB$coefficients[,3],
+      VAR_TABLE[-(1:2),])
+
+rownames(VAR_TABLE) <- c('NET_TB', '', ' ', 'AKT', 'S_OBL', 'V_OBL', 'BM', 'AKT_VAR', 'SMB', 'TB', 'Y_SPREAD')
 
 recessions.df = read.table(textConnection(
   "Peak, Trough
