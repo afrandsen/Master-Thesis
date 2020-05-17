@@ -300,7 +300,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-05-14                  
+##  date     2020-05-17                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -2514,6 +2514,78 @@ $x_t^{\text{ds}}$ & 1.754 & -1.147 & 4.656 & 1.473 & 1.191 & 0.235\\
 
 \hypertarget{underliggende-model}{%
 \chapter{Underliggende model}\label{underliggende-model}}
+
+\begin{landscape}
+\begin{table}[H]
+
+\caption{\label{tab:VAR-TAB}Beskrivende statistik for de fire aktivklasser.}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{ccccccccccc}
+\toprule
+Name & $r_t^{\text{rf}}$ & $rx_t^{\text{a}}$ & $rx_t^{\text{s}}$ & $rx_t^{\text{v}}$ & $x_t^{\text{bm}}$ & $x_t^{\text{avar}}$ & $x_t^{\text{smb}}$ & $x_t^{\text{b}}$ & $x_t^{\text{ys}}$ & Afskæring\\
+\midrule
+\rowcolor{gray!6}  $r_t^{\text{rf}}$ & \textbf{  0.145} & 0.003 & 0.011 & -0.024 & \textbf{-0.007} & -0.081 & \textbf{-0.001} & \textbf{ 0.493} & \textbf{ 0.150} & -0.001\\
+ 
+ & (0.161) & (0.004) & (0.011) & (-0.025) & (-0.007) & (-0.075) & (-0.001) & (0.482) & (0.158) & (-0.001)\\
+ 
+\rowcolor{gray!6}   & [2.079] & [0.409] & [0.447] & [-1.164] & [-2.900] & [-1.348] & [-2.547] & [5.878] & [2.908] & [-0.465]\\
+ 
+$rx_t^{\text{a}}$ & -0.074 & 0.135 & -0.074 & 0.317 & \textbf{ 0.068} & 0.311 & \textbf{-0.009} & -1.788 & 0.816 & -0.013\\
+ 
+\rowcolor{gray!6}   & (-0.136) & (0.156) & (-0.077) & (0.308) & (0.058) & (0.442) & (-0.010) & (-1.594) & (0.920) & (-0.013)\\
+ 
+ & [-0.098] & [1.627] & [-0.284] & [1.397] & [2.543] & [0.474] & [-2.856] & [-1.958] & [1.459] & [-0.920]\\
+ 
+\rowcolor{gray!6}  $rx_t^{\text{s}}$ & -0.244 & -0.034 & -0.043 & 0.031 & -0.011 & -0.122 & \textbf{-0.004} & 0.255 & \textbf{ 0.572} & 0.001\\
+ 
+ & (-0.257) & (-0.030) & (-0.025) & (0.027) & (-0.011) & (-0.075) & (-0.004) & (0.168) & (0.598) & (0.001)\\
+ 
+\rowcolor{gray!6}   & [-0.683] & [-0.873] & [-0.347] & [0.293] & [-0.868] & [-0.394] & [-2.347] & [0.592] & [2.172] & [0.136]\\
+ 
+$rx_t^{\text{v}}$ & -0.347 & -0.008 & 0.239 & \textbf{-0.248} & -0.004 & -0.100 & \textbf{-0.005} & -0.328 & \textbf{ 1.351} & -0.003\\
+ 
+\rowcolor{gray!6}   & (-0.364) & (-0.003) & (0.248) & (-0.244) & (-0.004) & (-0.041) & (-0.005) & (-0.398) & (1.378) & (-0.003)\\
+ 
+ & [-0.821] & [-0.181] & [1.642] & [-1.965] & [-0.238] & [-0.274] & [-2.583] & [-0.645] & [4.334] & [-0.345]\\
+ 
+\rowcolor{gray!6}  $x_t^{\text{bm}}$ & 0.555 & -0.083 & -0.069 & -0.110 & \textbf{ 0.970} & -0.129 & 0.004 & 0.063 & \textbf{-0.692} & \textbf{ 0.021}\\
+ 
+ & (0.595) & (-0.097) & (-0.071) & (-0.102) & (0.978) & (-0.260) & (0.004) & (-0.053) & (-0.784) & (0.021)\\
+ 
+\rowcolor{gray!6}   & [1.249] & [-1.722] & [-0.450] & [-0.829] & [61.513] & [-0.335] & [1.946] & [0.118] & [-2.110] & [2.445]\\
+ 
+$x_t^{\text{avar}}$ & -0.043 & 0.004 & \textbf{ 0.076} & \textbf{-0.089} & \textbf{-0.007} & \textbf{ 0.463} & 0.000 & 0.102 & 0.051 & \textbf{ 0.005}\\
+ 
+\rowcolor{gray!6}   & (-0.043) & (0.004) & (0.076) & (-0.090) & (-0.006) & (0.480) & (0.000) & (0.086) & (0.047) & (0.005)\\
+ 
+ & [-0.544] & [0.412] & [2.783] & [-3.794] & [-2.373] & [6.790] & [0.770] & [1.078] & [0.872] & [3.338]\\
+ 
+\rowcolor{gray!6}  $x_t^{\text{smb}}$ & -12.865 & 1.378 & -2.721 & 6.331 & 1.004 & 24.840 & -0.027 & 0.260 & 19.594 & \textbf{-0.710}\\
+ 
+ & (-13.596) & (1.309) & (-2.894) & (6.395) & (0.980) & (25.011) & (-0.012) & (1.136) & (19.477) & (-0.710)\\
+ 
+\rowcolor{gray!6}   & [-0.809] & [0.795] & [-0.497] & [1.332] & [1.779] & [1.808] & [-0.392] & [0.014] & [1.669] & [-2.344]\\
+ 
+$x_t^{\text{b}}$ & -0.018 & 0.001 & \textbf{-0.030} & -0.013 & 0.002 & 0.011 & 0.000 & \textbf{ 0.902} & -0.035 & 0.001\\
+ 
+\rowcolor{gray!6}   & (-0.017) & (0.001) & (-0.030) & (-0.013) & (0.001) & (0.010) & (0.000) & (0.914) & (-0.034) & (0.001)\\
+ 
+ & [-0.740] & [0.400] & [-3.446] & [-1.729] & [1.884] & [0.535] & [-1.210] & [30.137] & [-1.917] & [1.792]\\
+ 
+\rowcolor{gray!6}  $x_t^{\text{ys}}$ & \textbf{  0.205} & -0.006 & 0.004 & -0.019 & 0.002 & 0.050 & 0.000 & -0.114 & \textbf{ 0.753} & \textbf{ 0.002}\\
+ 
+ & (0.204) & (-0.006) & (0.003) & (-0.018) & (0.002) & (0.049) & (0.000) & (-0.124) & (0.777) & (0.002)\\
+ 
+\rowcolor{gray!6}   & [3.711] & [-1.032] & [0.196] & [-1.146] & [1.032] & [1.042] & [0.116] & [-1.716] & [18.520] & [2.284]\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item \textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for alle aktivklasser.}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\end{landscape}
 
 \hypertarget{problemer-ved-estimation}{%
 \chapter{Problemer ved estimation}\label{problemer-ved-estimation}}

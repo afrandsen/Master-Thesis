@@ -1483,6 +1483,28 @@ g
 
 # Underliggende model
 
+\begin{landscape}
+```{r VAR-TAB, echo=FALSE}
+
+colnames(VAR_TABLE) <- c("Name", "$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$", '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ys}}$', "Afskæring")
+
+rownames(VAR_TABLE) <- c(1:27)
+
+VAR_TABLE %>% 
+  knitr::kable(caption = 'Beskrivende statistik for de fire aktivklasser.',
+               booktabs=TRUE,
+               align = c(rep('c', 11)),
+               row.names = FALSE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = " ") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "HOLD_position"),
+                             full_width = F) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for alle aktivklasser.}", threeparttable = T, escape = FALSE, general_title = "")
+```
+\end{landscape}
+
 # Problemer ved estimation
 
 ```{r script2, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Speciale.R"), include=FALSE, cache=TRUE}

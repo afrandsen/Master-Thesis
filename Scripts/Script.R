@@ -304,22 +304,47 @@ coef1 <- coef(var)
 cov <- summary(var)$covres
 cor <- summary(var)$corres
 
+test <- summary(var)
 
 VAR_TABLE <- data.frame(coef)
 
-var.p$coef[1,]
+VAR_TABLE <- format(round(VAR_TABLE, digits = 3), nsmall = 3)
 
-VAR_TABLE <- rbind(VAR_TABLE[1:1,],
-      var.p$coef[1,],
-      VAR_TABLE[-(1:1),])
+for (j in c(1:9)) {
+  for (i in c(1:10)){
+    if (abs(test$varresult[[j]]$coefficients[,3][i])>=qnorm(0.975)) {
+      VAR_TABLE[j,i] <- paste0("\\textbf{", VAR_TABLE[j,i],"}")
+    }
+    
+  }
+}
 
-test$varresult$NET_TB$coefficients[,3]
+j <- 0
 
-VAR_TABLE <- rbind(VAR_TABLE[1:2,],
-      test$varresult$NET_TB$coefficients[,3],
-      VAR_TABLE[-(1:2),])
+for (i in c(1:9)) {
 
-rownames(VAR_TABLE) <- c('NET_TB', '', ' ', 'AKT', 'S_OBL', 'V_OBL', 'BM', 'AKT_VAR', 'SMB', 'TB', 'Y_SPREAD')
+  VAR_TABLE <- rbind(VAR_TABLE[(1):(1+j),],
+                     format(round(var.p$coef[i,],3), nsmall = 3),
+                     VAR_TABLE[-(1:(1+j)),])
+
+  VAR_TABLE <- rbind(VAR_TABLE[1:(2+j),],
+                     format(round(test$varresult[[i]]$coefficients[,3],3), nsmall = 3),
+                     VAR_TABLE[-(1:(2+j)),])
+
+  j <- j + 3
+}
+
+for (i in seq(1,27,3)){
+
+VAR_TABLE[i+1,] <- gsub("\\s", "", paste0("(", VAR_TABLE[i+1,], ")"))
+
+VAR_TABLE[i+2,] <- gsub("\\s", "", paste0("[", VAR_TABLE[i+2,], "]"))
+
+}
+
+
+VAR_TABLE <- cbind(NAME=c("$r_t^{\\text{rf}}$","","", "$rx_t^{\\text{a}}$","","", "$rx_t^{\\text{s}}$","","", "$rx_t^{\\text{v}}$","","", '$x_t^{\\text{bm}}$',"","", '$x_t^{\\text{avar}}$',"","", '$x_t^{\\text{smb}}$',"","", '$x_t^{\\text{b}}$',"","", '$x_t^{\\text{ys}}$',"",""), VAR_TABLE)
+
 
 recessions.df = read.table(textConnection(
   "Peak, Trough
