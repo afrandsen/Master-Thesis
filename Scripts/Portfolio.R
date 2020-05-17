@@ -212,10 +212,13 @@ GAM_ANA_VAL <- seq(1, 50, 0.1)
 
 GAM_ANA <- matrix(0, nrow = 4, ncol = length(GAM_ANA_VAL))
 GAM_ANA_R <- matrix(0, nrow = 4, ncol = length(GAM_ANA_VAL))
+GAM_ANA_MYO <- matrix(0, nrow = 4, ncol = length(GAM_ANA_VAL))
 
 for (i in (1:length(GAM_ANA_VAL))) {
   b <- port_calc(gamma = GAM_ANA_VAL[i], K = 100)
   
   GAM_ANA[, i] <- rowMeans(b$alphafixedT)
   GAM_ANA_R[, i] <- rowMeans(b$res_alphafixedT)
+  
+  GAM_ANA_MYO[, i] <- rowMeans(rbind(1-colSums(b$MyopicD), b$MyopicD))
 }

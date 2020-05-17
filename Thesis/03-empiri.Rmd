@@ -27,7 +27,7 @@ if (knitr::is_html_output()) {
 ```
 
 # Implementering
-Kapitel \@ref(varkapitel) markerede slutningen af den underliggende teoretiske gennemgang samt diskussion. Nu tages fat på de nødvendige statistiske værktøjer, som er et nødvendige, for at kunne implementere den præsenterede porteføljemodel. Derfor vil dette kapitel lægge fundamentet for den empiriske del, som på den måde kan færdiggøre den optimale porteføljestrategi baseret på historiske data, der bliver gennemgået og gransket i Kapitel \@ref(kapiteldatab). Sektion \@ref(sekpradik) vil præsentere de oftest anvendte lineære modeller til at teste afkastprædiktabilitet. Sektion \@ref(#sektestaftids) vil fungere som beskrivelse af de tests, som kan teste de anvendte tidsserier for de underliggende antagelser, der specielt er krævet af VAR-processen. Derudover vil Sektion \@ref(sekmodelselek) sætte spørgsmåltegn ved højtparameteriserede modeller. Sektionen vil derfor diskutere problemet og præsentere et modelselektionsgrundlag, etableret for at kunne skabe en restringeret kvantiativ stærk model, som der -- ikke mindst -- samtidig er valgt ud fra en kvalitativ skepsis af undertegnede.
+Kapitel \@ref(varkapitel) markerede slutningen af den underliggende teoretiske gennemgang samt diskussion. Nu tages fat på de nødvendige statistiske værktøjer, som er et nødvendige, for at kunne implementere den præsenterede porteføljemodel. Derfor vil dette kapitel lægge fundamentet for den empiriske del, som på den måde kan færdiggøre den optimale porteføljestrategi baseret på historiske data, der bliver gennemgået og gransket i Kapitel \@ref(kapiteldatab). Sektion \@ref(sekpradik) vil præsentere de oftest anvendte lineære modeller til at teste afkastprædiktabilitet. Sektion \@ref(sektestaftids) vil fungere som beskrivelse af de tests, som kan teste de anvendte tidsserier for de underliggende antagelser, der specielt er krævet af VAR-processen. Derudover vil Sektion \@ref(sekmodelselek) sætte spørgsmåltegn ved højtparameteriserede modeller. Sektionen vil derfor diskutere problemet og præsentere et modelselektionsgrundlag, etableret for at kunne skabe en restringeret kvantiativ stærk model, som der -- ikke mindst -- samtidig er valgt ud fra en kvalitativ skepsis af undertegnede.
 
 ## Prædiktabilitstest {#sekpradik}
 Denne sektion vil dække en introduktion til testing af afkastprædiktabilitet. Da fokus er på porteføljeallokering, vil en dybdegående analyse ikke foretages i denne afhandling. Ved at følge den eksisterende litteratur, vil testene være baseret på lineære modeller. Først beskrives den univariate regressions model, som går forud for den multiple regression. Disse to lineære grundlag vil danne rammen for de empiriske undersøgelser i denne sektion. Derudover bliver generelle økonometriske problemer præsenteret for fuldstændighedens skyld. 
@@ -44,9 +44,13 @@ $$y_t=\beta_0+\bm{\beta}_1\bm{x}_{t-1}+\bm{\varepsilon}_t,$$
 
 her er $\bm{x}_{t-1}$ vektoren af realisationer fra forklarende variable, på tidspunkt $t-1$. Nu er $\bm{\beta}_1$ vektoren af hældningskoefficienter for hver af de forklarende variable. Slutteligt er $\bm{\varepsilon}_t$ vektoren af fejlled. Fordelen ved en multipel regression er, at den muliggør biasreduktion -- som der ellers kan opstå i den univariate regression -- ved at inkludere tidligere udeladte variable. Denne fordel kommer dog med en omkostning, da multikollinaritet kan skabe en mere ustabil model.
 
-### Potentiel bias
-
 ## Test af tidsserier {#sektestaftids}
+Validiteten af VAR-modellen afhænger kraftigt af spørgsmålet om stationaritet og normalitet. Altså skal tilstandsvariablen i VAR-modellen være stationære tidsserier samt være normalfordelt. For ikke-stationære tidsserier kan autokorrelerede fejl resultere i ikke-efficiente estimationskoefficienter, som dermed vil lede til ugyldig inferens, og i sidste ende give forkerte værdier på en eksogen stikprøve, [@Granger1974]. For at et system er svagt stationært kræves det, at dets middelværdi og varians er konstant over tid. Altså skal de følgende betingelser overholdes
+\begin{align*}
+\mathbb{E}\left[\bm{z}_t\right]&=\bm{\mu},\quad\forall t\\
+\mathbb{E}\left[(\bm{z}_t-\bm{\mu}) (\bm{z}_{t-h}-\bm{\mu})'\right]&=\bm{\Sigma}_z(h),\quad \forall t\quad h=0,1,\dots,
+\end{align*}
+hvor den anden betingelse sikrer at autokovarianserne kun afhænger af perioden mellem de to vektorer, $h$, og ikke et specifikt tidspunkt $t$, [@Lutkepohl2005]. Stationaritets antagelsen holder dermed hvis tidsserien ikke udviser trend eller skift i middelværdi eller autokovarianser. Når en tidsserie ikke er stationær opstår muligheden for en *unit root*, hvilket ofte ses for finansielle og økonomiske tidsserier. Når en tidsserie besider en *unit root* kan stationaritets problemet fjernes ved at tage den første forskel af serien. Hvis denne første forskel nu er stationær, siges tidsserien at være integreret af første orden, $I(1)$. Problemet ved denne procedure er, at hældningskoefficienterne hørende til tidsserien i en givet model ikke vil være repræsenteret i niveauer. Dette gør fortolkningen en del sværere. Disse potentielle problemer vil blive undersøgt i de anvendte tidsserier i denne afhandling. Et væld af test kan anvendes til en sådan undersøgelse. I det følgende vil tre tests blive præsenteret.
 
 ### Test af normalitet
 
@@ -1303,7 +1307,7 @@ FIT_M_TABLE %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F)  %>% 
    kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{a}}$", " " = 1, "Konfidensinterval" = 2, " " = 3), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 Som et modeltjek viser Figur \@ref(fig:MULT-ak-auto) seks af de mest sædvanlige modelinspektionsplots. Disse indebærer bl.a. residualer, standardiserede residualer, *Normal Q-Q* m.fl. Her observeres heteroskedasticitet observeres svagt for lave og høje værdier af responsvariablen. Dette indikeres bl.a. af den røde linje på *Scale-Location* plottet. Dette er højst sandsynligt grundet den meget lave stiksprøvestørrelse. På *Normal Q-Q* plottet ses igen -- som indikeret af *Jarque-Bera* testen fra Tabel \@ref(tab:JB-AKTIVKLASSE) -- at residualerne ikke følger en normalfordeling, hvor særligt problemerne er i halerne som forventet. Statistisk set er en såkaldt *outlier* ikke nødvendigvis betydningsfuld for modellen. For at være betydningsfuld for den estimerede model, skal en observation have både høj *leverage* og en høj standardiseret residual. Dette gør sig særligt gældende for to dage under *Finanskrisen*, samt dagen for et af historiens største aktiefald, *Black Monday*. Disse er også indikeret målet *Cook's Distance*, [@Cook1977], som giver høje værdier til betydningsfulde observationer.
@@ -2152,8 +2156,13 @@ GAM_ANA <- data.frame(t(GAM_ANA), index=1/seq(1, 50, 0.1))
 
 colnames(GAM_ANA) <- c('A', 'B', 'C', 'D', 'index')
 
+GAM_ANA_MYO <- data.frame(t(GAM_ANA_MYO), index=1/seq(1, 50, 0.1))
+
+colnames(GAM_ANA_MYO) <- c('A', 'B', 'C', 'D', 'index')
+
 ggplot(GAM_ANA) +
   geom_line(aes(x=index, y=A, color = 'T-Bills', linetype = "T-Bills")) +
+  geom_line(data=GAM_ANA_MYO, aes(x=index, y=A, color = 'T-Bills', linetype = "T-Bills")) +
   coord_cartesian(xlim = c(1, 0),
                   ylim = c(min(GAM_ANA[,1]-0.05),
                            max(GAM_ANA[,1]+0.05))) +
@@ -2181,6 +2190,7 @@ ggplot(GAM_ANA) +
 ```{r GAM-ana-a, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse, aktier.', fig.width=18, fig.asp=0.5, fig.pos='H'}
 ggplot(GAM_ANA) +
   geom_line(aes(x=index, y=B, color = 'Aktier', linetype = "Aktier")) +
+  geom_line(data=GAM_ANA_MYO, aes(x=index, y=B, color = 'Aktier', linetype = "Aktier")) +
   coord_cartesian(xlim = c(1, 0),
                   ylim = c(min(GAM_ANA[,2]-0.05),
                            max(GAM_ANA[,2]+0.05))) +
@@ -2208,6 +2218,7 @@ ggplot(GAM_ANA) +
 ```{r GAM-ana-s, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse, statsobligationer.', fig.width=18, fig.asp=0.5, fig.pos='H'}
 ggplot(GAM_ANA) +
   geom_line(aes(x=index, y=C, color = 'Statsobligationer', linetype = "Statsobligationer")) +
+  geom_line(data=GAM_ANA_MYO, aes(x=index, y=C, color = 'Statsobligationer', linetype = "Statsobligationer")) +
   coord_cartesian(xlim = c(1, 0),
                   ylim = c(min(GAM_ANA[,3]-0.05),
                            max(GAM_ANA[,3]+0.05))) +
@@ -2235,6 +2246,7 @@ ggplot(GAM_ANA) +
 ```{r GAM-ana-v, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse, virksomhedsobligationer.', fig.width=18, fig.asp=0.5, fig.pos='H'}
 ggplot(GAM_ANA) +
   geom_line(aes(x=index, y=D, color = 'Virksomhedsobligationer', linetype = "Virksomhedsobligationer")) +
+  geom_line(data=GAM_ANA_MYO, aes(x=index, y=D, color = 'Virksomhedsobligationer', linetype = "Virksomhedsobligationer")) +
   coord_cartesian(xlim = c(1, 0),
                   ylim = c(min(GAM_ANA[,4]-0.05),
                            max(GAM_ANA[,4]+0.05))) +

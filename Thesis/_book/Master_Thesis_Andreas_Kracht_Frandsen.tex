@@ -1277,7 +1277,7 @@ På denne måde opnåes en repræsentativ portefølje, som kan benyttes til at b
 \hypertarget{implementering}{%
 \chapter{Implementering}\label{implementering}}
 
-Kapitel \ref{varkapitel} markerede slutningen af den underliggende teoretiske gennemgang samt diskussion. Nu tages fat på de nødvendige statistiske værktøjer, som er et nødvendige, for at kunne implementere den præsenterede porteføljemodel. Derfor vil dette kapitel lægge fundamentet for den empiriske del, som på den måde kan færdiggøre den optimale porteføljestrategi baseret på historiske data, der bliver gennemgået og gransket i Kapitel \ref{kapiteldatab}. Sektion \ref{sekpradik} vil præsentere de oftest anvendte lineære modeller til at teste afkastprædiktabilitet. Sektion @ref(\#sektestaftids) vil fungere som beskrivelse af de tests, som kan teste de anvendte tidsserier for de underliggende antagelser, der specielt er krævet af VAR-processen. Derudover vil Sektion \ref{sekmodelselek} sætte spørgsmåltegn ved højtparameteriserede modeller. Sektionen vil derfor diskutere problemet og præsentere et modelselektionsgrundlag, etableret for at kunne skabe en restringeret kvantiativ stærk model, som der -- ikke mindst -- samtidig er valgt ud fra en kvalitativ skepsis af undertegnede.
+Kapitel \ref{varkapitel} markerede slutningen af den underliggende teoretiske gennemgang samt diskussion. Nu tages fat på de nødvendige statistiske værktøjer, som er et nødvendige, for at kunne implementere den præsenterede porteføljemodel. Derfor vil dette kapitel lægge fundamentet for den empiriske del, som på den måde kan færdiggøre den optimale porteføljestrategi baseret på historiske data, der bliver gennemgået og gransket i Kapitel \ref{kapiteldatab}. Sektion \ref{sekpradik} vil præsentere de oftest anvendte lineære modeller til at teste afkastprædiktabilitet. Sektion \ref{sektestaftids} vil fungere som beskrivelse af de tests, som kan teste de anvendte tidsserier for de underliggende antagelser, der specielt er krævet af VAR-processen. Derudover vil Sektion \ref{sekmodelselek} sætte spørgsmåltegn ved højtparameteriserede modeller. Sektionen vil derfor diskutere problemet og præsentere et modelselektionsgrundlag, etableret for at kunne skabe en restringeret kvantiativ stærk model, som der -- ikke mindst -- samtidig er valgt ud fra en kvalitativ skepsis af undertegnede.
 
 \hypertarget{sekpradik}{%
 \section{Prædiktabilitstest}\label{sekpradik}}
@@ -1300,11 +1300,15 @@ Som pointeret af \citep{Stambaugh1999} er der flere problemer med estimationen a
 
 her er \(\bm{x}_{t-1}\) vektoren af realisationer fra forklarende variable, på tidspunkt \(t-1\). Nu er \(\bm{\beta}_1\) vektoren af hældningskoefficienter for hver af de forklarende variable. Slutteligt er \(\bm{\varepsilon}_t\) vektoren af fejlled. Fordelen ved en multipel regression er, at den muliggør biasreduktion -- som der ellers kan opstå i den univariate regression -- ved at inkludere tidligere udeladte variable. Denne fordel kommer dog med en omkostning, da multikollinaritet kan skabe en mere ustabil model.
 
-\hypertarget{potentiel-bias}{%
-\subsection{Potentiel bias}\label{potentiel-bias}}
-
 \hypertarget{sektestaftids}{%
 \section{Test af tidsserier}\label{sektestaftids}}
+
+Validiteten af VAR-modellen afhænger kraftigt af spørgsmålet om stationaritet og normalitet. Altså skal tilstandsvariablen i VAR-modellen være stationære tidsserier samt være normalfordelt. For ikke-stationære tidsserier kan autokorrelerede fejl resultere i ikke-efficiente estimationskoefficienter, som dermed vil lede til ugyldig inferens, og i sidste ende give forkerte værdier på en eksogen stikprøve, \citep{Granger1974}. For at et system er svagt stationært kræves det, at dets middelværdi og varians er konstant over tid. Altså skal de følgende betingelser overholdes
+\begin{align*}
+\mathbb{E}\left[\bm{z}_t\right]&=\bm{\mu},\quad\forall t\\
+\mathbb{E}\left[(\bm{z}_t-\bm{\mu}) (\bm{z}_{t-h}-\bm{\mu})'\right]&=\bm{\Sigma}_z(h),\quad \forall t\quad h=0,1,\dots,
+\end{align*}
+hvor den anden betingelse sikrer at autokovarianserne kun afhænger af perioden mellem de to vektorer, \(h\), og ikke et specifikt tidspunkt \(t\), \citep{Lutkepohl2005}. Stationaritets antagelsen holder dermed hvis tidsserien ikke udviser trend eller skift i middelværdi eller autokovarianser. Når en tidsserie ikke er stationær opstår muligheden for en \emph{unit root}, hvilket ofte ses for finansielle og økonomiske tidsserier. Når en tidsserie besider en \emph{unit root} kan stationaritets problemet fjernes ved at tage den første forskel af serien. Hvis denne første forskel nu er stationær, siges tidsserien at være integreret af første orden, \(I(1)\). Problemet ved denne procedure er, at hældningskoefficienterne hørende til tidsserien i en givet model ikke vil være repræsenteret i niveauer. Dette gør fortolkningen en del sværere. Disse potentielle problemer vil blive undersøgt i de anvendte tidsserier i denne afhandling. Et væld af test kan anvendes til en sådan undersøgelse. I det følgende vil tre tests blive præsenteret.
 
 \hypertarget{test-af-normalitet}{%
 \subsection{Test af normalitet}\label{test-af-normalitet}}
@@ -2350,7 +2354,7 @@ $x_t^{\text{ds}}$ & 0.898 & -9.399 & 11.195 & 5.228 & 0.172 & 0.864\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}
+\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette er den justerede $R^2$.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
