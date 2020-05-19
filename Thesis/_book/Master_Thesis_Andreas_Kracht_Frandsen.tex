@@ -213,12 +213,6 @@ Alt indhold er licenseret under CC BY-NC-SA 4.0
 \chapter*{Forord}\label{forord}}
 \addcontentsline{toc}{chapter}{Forord}
 
-Dette dokument findes interaktivt og i statisk format.
-
-For at se en interaktiv HTML version af dokumentet, med mulighed for at redigere fejl eller skrive kommentarer, gå da til denne hjemmeside \href{https://afrandsen.rbind.io/bare/thesis/}{afrandsen.rbind.io/bare/thesis/}. Siden vil blive opdateret kontinuerligt, hvis jeg selv finder fejl gennem GitHub.
-
-\vfill
-
 Kreditering: \href{http://starlogs.net/\#afrandsen/master-thesis}{starlogs.net/\#afrandsen/master-thesis}.
 
 Dokumentet er i farver, men kan printes i sort/hvid uden at skabe visuelle mangler på plots, da linjer samt punkter har hhv. forskellige linjetyper og symboler.
@@ -226,7 +220,7 @@ Dokumentet er i farver, men kan printes i sort/hvid uden at skabe visuelle mangl
 Farver igennem hele dokumentet er sat via pakken \emph{RColorBrewer} og dens tilhørende farvepalete \emph{Dark2}. Denne farvepalette tillader, at personer med nedsat farvesyn uden problemer kan skelne linjer, punkter osv. fra samtlige plots. Derudover er paletten printervenlig samt LCD-venlig.
 
 Gennem hele dokumentet er der anvendt \emph{fictitious entry}, der fungerer som en \emph{copyright trap}.
-
+'`
 \newpage
 
 \pagenumbering{arabic}
@@ -238,7 +232,7 @@ Gennem hele dokumentet er der anvendt \emph{fictitious entry}, der fungerer som 
 \hypertarget{indledning}{%
 \chapter{Indledning}\label{indledning}}
 
-Denne afhandling har til formål at undersøge langsigtet investering i aktiver under antagelsen om periodisk rebalancering. Dette gøres ved anvendelse af den analytiske løsning, til det dynamiske porteføljeproblem, først beskrevet af \citep{JurVic2011}. Denne løsning anvendes for en institutionel/privat investor med endelig investeringshorisont, tidsvarienede investeringsmuligheder og under antagelsen om potens nytte, \emph{CRRA}, defineret over deres intertemporale budgetbegræsning gennem formue. Sættet af tidsvarierende investeringsmuligheder er konstante under hele investeringshorisonten, dette gør, at en sammenligning af investorer, med en kort og en lang investeringshorisont samt for forskellige risiko tolerancer, kan udarbejdes. Investeringssættet, som spænder fra 1952 2. kvartal til 2018 4. kvartal, består af en 90-dages amerikansk \emph{T-Bill} -- som samtidig repræsenterer benchmarkaktivet -- et aktieindeks, som repræsenterer samtlige aktier handlet på \emph{NYSE}, \emph{AMEX} og \emph{NASDAQ}, den 10-årige amerikanske statsobligation samt et virksomhedsbaseret obligationsindeks. Før modellering af merafkastene over benchmarkaktivet på ovenstående aktiver undersøges prædiktabiliteten af afkastene, ved benyttelse af relevante finansielle, rentestruktur og makroøkonomiske variable, som før har vist prædiktablitetsegenskaber i eksisterende litteratur. Selve modellering af tilstandsvariablene antages at følge en første-ordens \emph{Vector Autoregressive Process}. Analysen viser at ??, ?? og ??, generelt for alle aktivklasser udviser størst statistisk signifikans. Derudover findes der evidens for, at afkastene på de risikobærende aktiver specielt er tidsvarierende. Afkastet på aktieindekset viser sig, at være sværest prædiktabelt, mens stats- og virksomhedsobligationerne bevæger sig procyklisk med yield spread. Porteføljevalget for investoren afhænger kraftigt af disse afkastbevægelser, da han udnytter denne information til at lave periodiske reblancereringer ift. sin risikoaversion. Ved undersøgelse af både investeringshorisontlængdens effekt, risikotolerancer og effekten af korte posisitoner kan forskellen mellem en lang række af investorer effektivt måles.
+Denne afhandling har til formål at undersøge langsigtet investering i aktiver under antagelsen om periodisk rebalancering. Dette gøres ved anvendelse af den analytiske løsning, til det dynamiske porteføljeproblem, først beskrevet af \citep{JurVic2011}. Denne løsning anvendes for en institutionel/privat investor med endelig investeringshorisont, tidsvarienede investeringsmuligheder og under antagelsen om potens nytte, \emph{CRRA}, defineret over deres intertemporale budgetbegræsning gennem formue. Sættet af tidsvarierende investeringsmuligheder er konstante under hele investeringshorisonten, dette gør, at en sammenligning af investorer, med en kort og en lang investeringshorisont samt med forskellige risikotolerancer, kan udarbejdes. Investeringssættet, som spænder fra 1952 2. kvartal til 2018 4. kvartal, består af en 90-dages amerikansk \emph{T-Bill} -- som samtidig repræsenterer benchmarkaktivet -- et aktieindeks, som repræsenterer samtlige aktier handlet på \emph{NYSE}, \emph{AMEX} og \emph{NASDAQ}, den 10-årige amerikanske statsobligation samt et virksomhedsbaseret obligationsindeks. Før modellering af merafkastene på ovenstående aktiver over benchmarkaktivet, undersøges prædiktabiliteten af afkastene, ved benyttelse af relevante finansielle, rentestruktur og makroøkonomiske variable, som før har vist prædiktablitetsegenskaber i eksisterende litteratur. Selve modellen af tilstandsvariablene antages at følge en første-ordens \emph{Vector Autoregressive Process}. Analysen viser at variansen på aktier, faktoren \emph{Small Minus Big} samt det korte rentespænd \emph{Yield Spread}, generelt for alle aktivklasser udviser størst statistisk signifikans. Derudover findes der evidens for, at afkastene på de risikobærende aktiver specielt er tidsvarierende. Afkastet på aktieindekset viser sig, at være sværest prædiktabelt, mens stats- og virksomhedsobligationerne bevæger sig procyklisk med yield spread. Porteføljevalget for investoren afhænger kraftigt af disse afkastbevægelser, da han udnytter denne information til at lave periodiske reblancereringer ift. sin risikoaversion. Ved undersøgelse af både investeringshorisontlængdens effekt, risikotolerancer og effekten af korte posisitoner kan forskellen mellem en lang række af investorer effektivt måles.
 
 \hypertarget{problemformulering}{%
 \section{Problemformulering}\label{problemformulering}}
@@ -249,16 +243,16 @@ Ved analytisk behandling af det dynamiske porteføljeproblem, vil denne afhandli
 \textit{Hvordan adskiller porteføljeallokeringen sig over investeringshorisonter, for den institutionelle og/eller private investor, under antagelsen, at der er mulighed for periodisk rebalancering?}
 \end{center}
 
-De underliggende spørgsmål, som ligger i forlængelse af det ovenstående grundlæggende spørgsmål vil undervejs i afhandlingen ligeledes blive behandlet og undersøgt, heriblandt, hvordan risikotolerancer hos individuelle investorer påvirker allokeringen mellem risikobærende aktiver.
+De underliggende spørgsmål, som ligger i forlængelse af det ovenstående grundlæggende spørgsmål, vil undervejs i afhandlingen ligeledes blive behandlet og undersøgt, heriblandt, hvordan risikotolerancer hos individuelle investorer påvirker allokeringen af risikobærende aktiver.
 
 \hypertarget{afgruxe6nsning}{%
 \section{Afgrænsning}\label{afgruxe6nsning}}
 
 Denne afhandling forsøger at svare på ovenstående hovedspørgsmål ved benyttelse af empirisk data. I forlængelse af søgen efter et sådant svar, vil en teoretisk afgrænsning være nødvendig. Menneskelig kapital samt forbrug vil af den grund ikke være en del af den empiriske analyse. Dette er også ensbetydende med at budgetbegrænsningen for hver institutionelle og/eller private investor er fuldstændig fastsat ud fra deres finansielle formue.
 
-Investorerne antages til at have deres nytte defineret via \emph{CRRA}-nytte. For at anvende \emph{CRRA}-nytte i porteføljeproblemet benyttes modellen fra \citep{JurVic2011}, som er defineret i diskrettid, med approksimative analytiske løsninger. Dette medfører bl.a. at det dynamiske porteføljeproblem i kontinuert tid bliver tilsidesat, da hovedformålet med afhandlingen er at undersøge det langsigtede porteføljevalg på diskrete tidspunkter over investorens investeringshorisont. Derudover ville en kontinuert behandling af det dynamiske porteføljeproblem ligeledes kræve en diskretisering af observationsrummet for anvendelse i et analytisk empirisk øjemed. Ved anvendelse af den teoretiske ramme foreslået af \citep{JurVic2011} antages det samtidigt, at investorens nytte kun er defineret over hans intertemporale budgetbegrænsning og over en fastlagt investeringshorisont med tidsvarierende investeringsmuligheder, som er modelleret via en VAR\((1)\)-process.
+Investorerne antages til at have deres nytte defineret via \emph{CRRA}-nytte. For at anvende \emph{CRRA}-nytte i porteføljeproblemet benyttes modellen fra \citep{JurVic2011}, som er defineret i diskrettid, med approksimative analytiske løsninger. Dette medfører bl.a. at det dynamiske porteføljeproblem i kontinuert tid bliver tilsidesat, da hovedformålet med afhandlingen er at undersøge det langsigtede porteføljevalg på diskrete tidspunkter over investorens investeringshorisont. Derudover ville en kontinuert behandling af det dynamiske porteføljeproblem ligeledes kræve en diskretisering af observationsrummet for anvendelse i et empirisk øjemed. Ved anvendelse af den teoretiske ramme foreslået af \citep{JurVic2011} antages det samtidigt, at investorens nytte kun er defineret over hans intertemporale budgetbegrænsning og over en fastlagt investeringshorisont med tidsvarierende investeringsmuligheder, som er modelleret via en VAR\((1)\)-process.
 
-Robustheden af den empiriske analyse er begrænset, eftersom eksogen stikprøvekontrol ikke bliver udført. Undersøgelsen indebærer kvartalsvise finansielle, demografiske og makroøkonomiske data fra 1954 2. kvartal til 2018 4. kvartal, dette betyder også, at de endelige resultater kan være signifikant forskellige fra analytiske metoder, som indebærer månedlige eller årlige data. Analysen vil ikke indebære transaktionsomkostninger, hvilket før har vist at have væsentlige betydninger for de endelige porteføljevalg, specielt for den myopiske investor, \citep{BalLyn1999}. Afhandlingen vil ikke indeholde en performance-mæssig evaluering -- på baggrund af porteføljevalgene -- ift. investeringsomkostninger. Derudover begrænses analysen af, at den ignorerer problemerne ved at investere til pension og dermed undgår kompleksiteterne ved levetid, aldring og tidsafhængige ændringer i karakteristika af markedsdeltagere og demografiske forhold, som indgår i det såkaldte \emph{life-cycle} problem.
+Robustheden af den empiriske analyse er begrænset, eftersom eksogen stikprøvekontrol ikke bliver udført. Undersøgelsen indebærer kvartalsvise finansielle, rentestrukturelle og makroøkonomiske data fra 1954 2. kvartal til 2018 4. kvartal, dette betyder også, at de endelige resultater kan være signifikant forskellige fra analytiske metoder, som indebærer månedlige eller årlige data. Analysen vil ikke indebære transaktionsomkostninger, hvilket før har vist at have væsentlige betydninger for de endelige porteføljevalg, specielt for den myopiske investor, \citep{BalLyn1999}. Afhandlingen vil ikke indeholde en performance-mæssig evaluering -- på baggrund af porteføljevalgene -- ift. investeringsomkostninger. Derudover begrænses analysen af, at den ignorerer problemerne ved at investere til pension og dermed undgår kompleksiteterne ved levetid, aldring og tidsafhængige ændringer i karakteristika af markedsdeltagere og demografiske forhold, som indgår i det såkaldte \emph{life-cycle} problem.
 
 Til forskel for ovenstående begrænsninger vil denne afhandling fokusere på, hvordan porteføljeallokeringer adskiller sig: på tværs af investeringshorisonter og ved forskellige tolerancer for risiko. Givet at investoren står overfor endelige investeringshorisonter og tidsvarierende investeringsmuligheder.
 En analyse af kortsalgsrestriktion på porteføljeproblemet er ligeledes medtaget i afhandlingen, men omkostningerne ved lån/gearing af den optimale portefølje er udeladt.
@@ -270,7 +264,7 @@ Ved at begrænse analysen for porteføljevalget, kan vi evaluere porteføljeallo
 
 En langsigtet porteføljestrategi forsøger at optimere bytteforholdet mellem risiko og afkast. En sådan strategi er i sagens natur optimal på lang sigt og ikke nødvendigvis på kort sigt. Den moderne teori bag dette bytteforhold, for den langsigtede investor, blev først beskrevet af Nobelpris modtageren Harry Markowitz, \citep{Markowitz1952}. Hans arbejde tager udgangspunkt i en investor på tidspunkt \(t\), som kun bekymrer sig om fordelingen af sin formue på et givet fremtidigt tidspunkt \(t+K\), hvor \(K\) er investeringshorisonten. Dette problem bliver undertiden beskrevet som det statiske portefølje problem. \citep{Markowitz1952} understreger vigtigheden af diversifikation af risiko, men den bærende antagelse om en køb og hold investor, findes generelt særdeles urealistisk. Investorer vælger ofte porteføljestrategier, som kræver rebalancering før eller siden, og er på den måde dynamiske i deres optimeringsstrategi.
 
-Mere generelt vil investorer altså rebalancere deres portefølje mellem tidspunkt \(t\) og \(t+K\), på en måde, som forholder sig til skiftende finansielle, demografiske og makroøkonomiske forhold over tid. Investoren vil altså i dette tilfælde vælge en dynamisk porteføljestrategi, som specificerer, hvordan allokeringen af en eller flere aktiver skal ændres i respons til de tidsafhængige bagvedliggende variable.
+Mere generelt vil investorer altså rebalancere deres portefølje mellem tidspunkt \(t\) og \(t+K\), på en måde, som forholder sig til skiftende finansielle, rentestrukturelle og makroøkonomiske forhold over tid. Investoren vil altså i dette tilfælde vælge en dynamisk porteføljestrategi, som specificerer, hvordan allokeringen af en eller flere aktiver skal ændres i respons til de tidsafhængige bagvedliggende variable.
 
 Dynamisk programmering er før blevet brugt i litteraturen til at formulere en løsning, \citep{Mossin1968}, \citep{Samuelson1969} og \citep{Merton1969, Merton1971, Merton1973}. Udover de specialtilfælde, hvor den langsigtede porteføljestrategi består af en række optimale kortsigtede strategier, er ingen generel løsning på lukket form udledt, \citep{JurVic2011}. \citep{Samuelson1969} introducerer også en model, som medtager forbrugsfunktionen. \citep{Merton1969} beskriver den dynamiske allokering i kontinuert tid til forskel fra de tidligere diskrettidsmodeller af bl.a. \citep{Samuelson1969}. Derudover beskriver \citep{Merton1969}, hvordan en flerdimensional stokastisk model -- hvor de underliggende variable er modelleret via en Wiener process -- giver en rigere og mere alsidig model.
 
@@ -278,14 +272,14 @@ På baggrund af det svære løsningsproblem, var der over længere tid en falden
 
 Derudover er numeriske metoder blevet foreslået af bl.a. \citep{BalLyn1999}, \citep{Lyn2001}, \citep{Bar2000}, \citep{BrenSchLag1997, BrenSchLag1999}, hvor de anvendte modeller enten har diskretiseret observationsrummet eller fundet numeriske løsninger til den partielle differentialligning hørende til det dynamiske problem. Disse -- til tider avancerede -- numeriske metoder har dog vist sig at være svært anvendelige. I praksis har det været komplekst at implementere selv for få variable.
 
-Ovenstående modeller tillader ikke den risikofrie rente og merafkastet af aktiver at ændre sig over tid, på samme tid, og mangler dermed det tidsvarierende perspektiv af alle aktiver. En ny metode præsenteret af \citep{CampVic1999, CampVic2001, CampVic2003}, giver approksimative analytiske metoder i et ikke-tilfældigt nabolag af specialtilfælde, hvor løsninger på lukket form er mulige. Her tager de udgangspunkt i en investor, som opnår nytte af forbrug i stedet for formue. \citep{CampVicCha2003} benytter samme metode til et problem involverende flere risikofyldte aktivklasser, hvor de samtidig tillader tidsvarierende investeringsmuligheder.
+Ovenstående modeller tillader ikke den risikofrie rente og merafkastet af aktiver at ændre sig over tid på samme tid, og mangler dermed det tidsvarierende perspektiv af alle aktiver. En ny metode præsenteret af \citep{CampVic1999, CampVic2001, CampVic2003}, giver approksimative analytiske metoder i et ikke-tilfældigt nabolag af specialtilfælde, hvor løsninger på lukket form er mulige. Her tager de udgangspunkt i en investor, som opnår nytte af forbrug i stedet for formue. \citep{CampVicCha2003} benytter samme metode til et problem involverende flere risikofyldte aktivklasser, hvor de samtidig tillader tidsvarierende investeringsmuligheder.
 
 Mit arbejde vil være en validering af \citep{JurVic2011} ved anvendelse af deres teori samt analytiske løsninger til det dynamiske porteføljeproblem for en institutionel/privat investor med et opdateret datagrundlag. Jeg bidrager til det dynamiske porteføljeproblem ved en længere statistisk analyse af potentielle variable, som kan benyttes til det prædiktive afspekt af flere aktivers afkast.
 
 \hypertarget{opbygning-samt-tekniske-specifikationer}{%
 \section{Opbygning samt tekniske specifikationer}\label{opbygning-samt-tekniske-specifikationer}}
 
-Opbygningen af denne afhandling tager udgangspunkt i dele. Første del fungerede som en introduktion til litteraturen og afhandlingens formål. I Del 2 af afhandlingen fastlægges det teoretiske fundament. Kapitel 2 giver et overblik over den underliggende porteføljeteori for en institutionel investor. Kapitel 3 præsenterer aktivklasserne og deres indbyrdes relationer samt opbygningen af afkast. Derudover præsenterer kapitlet en lang række potentielle prædiktionsvariable. Kapitel 4 bygger videre fra teorien i Kapitel 3, og fastlægger den analytiske løsning til det dynamiske porteføljeproblem og medtager dermed rebalanceringsperspektivet. Kapitel 5 opbygger den dynamiske ramme i form af VAR-processen for vores investeringssæt. Del 3 består af den empiriske analyse, hvor teorien fra Del 2 benyttes på virkeligt data. Kapitel 6 beskriver data samt kilder. Kapitel 7 består af univariate- og multiple regressioner, som benyttes til udvælgelse af variable med bedste prædiktabilitetsegenskaber til den endelige VAR-model. Kapitel 8 har til formål at præsentere et overblik over den endelige VAR-model. Kapitel 9 undersøger problemerne ved estimation. Kapitel 10 foretager analysen af samtlige porteføljeallokeringer. Kapitel 11 indeholder en diskussion og reflektion over fundende i Kapitel 10. Til slut afslutter Kapitel 12 afhandlingen med en konklusion.
+Opbygningen af denne afhandling tager udgangspunkt i dele. Første del fungerede som en introduktion til litteraturen og afhandlingens formål. I Del 2 af afhandlingen fastlægges det teoretiske fundament. Kapitel 2 giver et overblik over den underliggende porteføljeteori for en institutionel investor. Kapitel 3 præsenterer aktivklasserne og deres relationer med potentielle prædiktive variable samt opbygningen af afkast gennem nutidsværdi. Derudover præsenterer kapitlet en lang række potentielle prædiktionsvariable. Kapitel 4 bygger videre fra teorien i Kapitel 3, og fastlægger den analytiske løsning til det dynamiske porteføljeproblem og medtager dermed rebalanceringsperspektivet. Kapitel 5 opbygger den dynamiske ramme i form af VAR-processen for vores investeringssæt. Del 3 består af den empiriske analyse, hvor teorien fra Del 2 benyttes på virkeligt data. Kapitel 6 beskriver data samt kilder. Kapitel 7 består af univariate- og multiple regressioner, som benyttes til undersøgelse af variablene med bedste prædiktabilitetsegenskaber til den endelige VAR-model. Kapitel 8 har til formål at præsentere et overblik over den endelige VAR-model. Kapitel 9 undersøger problemerne ved estimation. Kapitel 10 foretager analysen af samtlige porteføljeallokeringer. Kapitel 11 indeholder en diskussion og reflektion over fundende i Kapitel 10. Til slut afslutter Kapitel 12 afhandlingen med en konklusion.
 
 Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet \textbf{R} 3.6.0 \emph{``Planting of a Tree''}. \textbf{R}-pakker med teoretisk dokumentation er anvendt ved estimation af VAR-processen samt for de univariate- og multiple regressioner, for yderligere information henvises til dokumentationen i litteraturlisten. Denne version af afhandlingen blev bygget med:
 
@@ -300,7 +294,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-05-17                  
+##  date     2020-05-19                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -398,7 +392,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ## [2] C:/Program Files/R/R-3.6.0/library
 \end{verbatim}
 
-Litterær programmering er blevet anvendt til at skrive/programmere denne afhandling i tekstformattet \emph{.Rmd}, for herefter at blive processeret af \emph{knitr} til et \emph{.md} format, denne fil føres videre til \emph{pandoc}, som har til ansvar at danne den færdige fil. Denne to-trins operation tillader at danne afhandlingen i en lang række filformater. I den forbindelse er versionsstyring samtidig blevet anvendt gennem \emph{GitHub}, af den grund er den fulde kildekode tilgængelig via \href{https://github.com/afrandsen/master-thesis}{github.com/afrandsen/master-thesis}.
+Litterær programmering er blevet anvendt til at skrive/programmere denne afhandling i tekstformattet \emph{.Rmd}, for herefter at blive processeret af \emph{knitr} til et \emph{.md} format, denne fil føres videre til \emph{pandoc}, som har til ansvar at danne den færdige fil. Denne to-trins operation tillader at danne afhandlingen i en lang række filformater. I den forbindelse er versionsstyring samtidig blevet anvendt gennem \emph{GitHub}. Af den grund er den fulde kildekode tilgængelig via \href{https://github.com/afrandsen/master-thesis}{github.com/afrandsen/master-thesis}.
 
 \newpage
 
@@ -410,7 +404,7 @@ Litterær programmering er blevet anvendt til at skrive/programmere denne afhand
 \hypertarget{myoinv}{%
 \section{Den myopiske investor}\label{myoinv}}
 
-Den myopiske investor vælger -- som navnet ligger op til -- sin portefølje under et én-periodes perspektiv, og foretager dermed et statisk bindende valg. Investoren forsøger at maksimere sin terminal formue, ved samtidig at forholde sig til sin risikoaversion. Dette forsager, at alle efterfølgende perioder bliver ignoreret af investoren. Ergo skal han løse det statiske portefølje problem fra tidspunkt \(t\) til tidspunkt \(t+1\). I denne ene periode er investeringsmulighederne: et risikobærende aktiv samt et risikofrit aktiv. Afkastene over den førstkommende periode for disse aktivklasser vil blive noteret som hhv. \(R_{t+1}\) med betinget middelværdi \(\mathbb{E}_t(R_{t+1})\)\footnote{Her benyttes den gængse notation \(\mathbb{E}(R_{t+1}\mid \mathcal{F}_t)=\mathbb{E}_t(R_{t+1})\) for filteret \(\mathcal{F}_t\).} samt betinget varians \(\mathbb{V}_t(R_{t+1})=\sigma_t^2\) og \(R_{0,t+1}\).
+Den myopiske investor vælger -- som navnet ligger op til -- sin portefølje under et én-periodes perspektiv, og foretager dermed et statisk bindende valg. Investoren forsøger at maksimere sin terminal formue, ved samtidig at forholde sig til sin risikoaversion. Dette forårsager, at alle efterfølgende perioder bliver ignoreret af investoren. Ergo skal han løse det statiske portefølje problem fra tidspunkt \(t\) til tidspunkt \(t+1\). I denne ene periode antages investeringsmulighederne at være: et risikobærende aktiv samt et risikofrit aktiv. Afkastene over den førstkommende periode for disse aktivklasser vil blive noteret som hhv. \(R_{t+1}\) med betinget middelværdi \(\mathbb{E}_t(R_{t+1})\)\footnote{Her benyttes den gængse notation \(\mathbb{E}(R_{t+1}\mid \mathcal{F}_t)=\mathbb{E}_t(R_{t+1})\) for filteret \(\mathcal{F}_t\).} samt betinget varians \(\mathbb{V}_t(R_{t+1})=\sigma_t^2\) og \(R_{0,t+1}\).
 
 Det antages at investorens formue er fuldt allokeret når en del \(\alpha_t\) bliver placeret i det risikobærende aktiv og \((1-\alpha_t)\) i det risikofrie aktiv. Hermed bliver hans porteføljeafkast givet ved
 \begin{equation}
@@ -428,12 +422,12 @@ og endeligt den betingede varians af porteføljeafkastet
 \mathbb{V}_t[R_{p,t+1}]=\alpha_t^2\sigma_t^2.\label{eq:Varport}
 \end{equation}
 
-Den simplificerende antagelse i \citep{Markowitz1952} er at investorer kun forholder sig til de første to momenter, hvis vi modellerer denne afvejning lineært, opnår vi følgende maksimeringsproblem
+Den simplificerende antagelse i \citep{Markowitz1952} er, at investorer kun forholder sig til de første to momenter, hvis vi modellerer denne afvejning lineært, opnår vi følgende maksimeringsproblem
 \begin{equation}
 \max_{\alpha_t} \mathbb{E}_t\left[R_{p,t+1}\right] -\frac{k}{2} \mathbb{V}_t\left[R_{p,t+1}\right],\label{eq:Statmaks}
 \end{equation}
 
-hvor \(k\) er en skalering, som repræsenterer investorens risiko aversion. Ved at modellere ovenstående relation som lineær og kun afhængig af de første to momenter restringerer vi investoren til at foretrække et højt afkast, lav volatilitet og ignorerer alle højere momenter, såsom skævhed og kurtosis. Ved indsættelse af Ligning \eqref{eq:Portafk} i Maksimeringsproblemet \eqref{eq:Statmaks} og dernæst differentiation opnåes førsteordensbetingelsen, se Appendiks \ref{udlmyo}, løsningen til optimalitetsproblemet bliver dermed
+hvor \(k\) er en skalering, som repræsenterer investorens risikoaversion. Ved at modellere ovenstående relation som lineær og kun afhængig af de første to momenter restringeres investoren til at foretrække et højt afkast, lav volatilitet og ignorerer alle højere momenter, såsom skævhed og kurtosis. Ved indsættelse af Ligning \eqref{eq:Portafk} i Maksimeringsproblemet \eqref{eq:Statmaks} og dernæst differentiation opnåes førsteordensbetingelsen, se Appendiks \ref{udlmyo}, løsningen til optimalitetsproblemet bliver
 \begin{equation}
 \alpha_t = \frac{\mathbb{E}_t\left[R_{t+1}\right]-R_{0,t+1}}{k\sigma_t^2}.\label{eq:Løsning}
 \end{equation}
@@ -444,7 +438,7 @@ Porteføljeanalyse benytter ofte nøgletallet \emph{Sharpe Ratio}, også kendt s
 Dette tillader, at vi kan omskrive Ligning \eqref{eq:Løsning} til
 \[\alpha_t=\frac{S_t}{k\sigma_t}.\]
 
-Forholdet mellem middelværdien og variansen er \(\tfrac{1}{k}\), eftersom vi kan udlede, at merafkastet på porteføljen er \(\tfrac{S_t^2}{k}\) og variansen er \(\tfrac{S_t^2}{k^2}\). \emph{Sharpe Ratio}'en på porteføljen er \(S_t\), og alle tænkelige porteføljer (afhængig af \(k\)) vil have samme \emph{Sharpe Ratio}, fordi de er eksponeret til det risikobærende aktiv, men stadig i større eller mindre grad.
+Forholdet mellem middelværdien og variansen er \(\tfrac{1}{k}\), eftersom vi kan udlede, at merafkastet på porteføljen er \(\tfrac{S_t^2}{k}\) og variansen er \(\tfrac{S_t^2}{k^2}\). \emph{Sharpe Ratio}'en på porteføljen er \(S_t\), og alle tænkelige porteføljer (afhængig af \(k\)) vil have samme \emph{Sharpe Ratio}, fordi de er eksponeret til det risikobærende aktiv, men i stadig større eller mindre grad.
 
 Altså er vægtningen i det risikobærende aktiv et forhold mellem: det forventede risikobærende merafkast over det risikofrie aktiv samt en skalering af det risikobærende aktivs varians. Vi kan uden problemer opskrive ovenstående løsning til tilfældet, hvor investoren står overfor \(n>1\) risikobærende aktiver. \(\bm{R}_{t+1}\) repræsenterer en \(n\times 1\) vektor af afkast for risikobærende aktiver, fra \(t\) til \(t+1\). Den betingede middelværdi bliver \(\mathbb{E}_t(\bm{R}_{t+1})\) og den betingede kovariansmatrix noteres som \(\mathbb{V}_t(\bm{R}_{t+1})=\bm{\Sigma}_t\). Herudover er \(\bm{\alpha}_t\) nu en \(n\times 1\) vektor af vægte i de risikobærende aktiver.
 
@@ -458,7 +452,7 @@ den betingede varians af porteføljeafkastet bliver
 \mathbb{V}_t[R_{p,t+1}]=\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t.
 \end{equation}
 
-Vi kan nu opskrive maksimeringsproblemet
+Nu kan maksimeringsproblemet opskrives
 \begin{equation}
 \max_{\alpha_t} \bm{\alpha}_t'(\mathbb{E}_t[\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}] - \frac{k}{2}\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t, \label{eq:MultStatmaks}
 \end{equation}
@@ -519,7 +513,7 @@ Løsningen er en generalisering af Ligning \eqref{eq:Løsning}. Derudover er det
 
 Altså vil investorer vælge en portefølje på den efficiente rand, som opnår en efficient porteføljevægtning langs \emph{Capital Market Line}. Derudover skal det nævnes, at det kun er den øvre halvdel af den efficiente rand, som reelt set er efficient. Dette kommer sig af at porteføljer på den nederste del har en identisk påhæftet volatilitet, men med et lavere forventet afkast end den symmetrisk modsatte portefølje.
 
-Selvom Markowitz' model er en hjørnesten inden for moderne porteføljeteori, er der flere mangler i den opsatte teoretiske ramme. Først og fremmest medfører Markowitz' antagelse om en lineær afvejning mellem kovarianser og afkast, implicit antagelsen, at investorenes nyttefunktioner kan approksimeres af en anden ordens Taylor udvidelse over en bredt sprektrum af afkast. Derudover findes ingen beskrivelse for, hvordan parameteren \(k\) er koblet til investorens nyttefunktion. Disse mangler kan blive afhjulpet ved samtidig brug af specifikke nyttefunktioner og afkastfordelinger, som opfylder Taylor udvidelsen. Dette medfører at middelværdi-varians analysen kan benyttes for tre forskellige opsætninger, som bliver præsenteret i Sektion \ref{typnyt}, \citep{CampVic2003}.
+Selvom Markowitz' model er en hjørnesten inden for moderne porteføljeteori, er der flere mangler i den opsatte teoretiske ramme. Først og fremmest medfører Markowitz' antagelse om en lineær afvejning mellem kovarianser og afkast implicit antagelsen, at investorenes nyttefunktioner kan approksimeres af en anden ordens Taylor udvidelse over en bredt sprektrum af afkast. Derudover findes ingen beskrivelse for, hvordan parameteren \(k\) er koblet til investorens nyttefunktion. Disse mangler kan blive afhjulpet ved samtidig brug af specifikke nyttefunktioner og afkastfordelinger, som opfylder Taylor udvidelsen. Dette medfører at middelværdi-varians analysen kan benyttes for tre forskellige opsætninger, som bliver præsenteret i Sektion \ref{typnyt}, \citep{CampVic2003}.
 
 \hypertarget{pruxe6ferencer-for-risiko}{%
 \section{Præferencer for risiko}\label{pruxe6ferencer-for-risiko}}
@@ -1313,11 +1307,37 @@ hvor den anden betingelse sikrer at autokovarianserne kun afhænger af perioden 
 \hypertarget{test-af-normalitet}{%
 \subsection{Test af normalitet}\label{test-af-normalitet}}
 
+For at teste variablene for normalitetsantagelsen, benyttes den såkaldte \emph{Jarque-Bera} test, \citep{Jarque1980}. Denne metode tester om den givne stikprøve har skævhed og kurtosis lig normalfordelingen. Dette er ligeledes nulhypotesen. Teststørrelsen er altid ikke-negativ, og store værdier signalerer at stikprøven ikke er normaltfordelt. Teststørrelsen er defineret som
+\[JB=\frac{n}{6}\left(S^2+\frac{1}{4}(K-3)^2\right),\]
+
+hvor \(n\) er antallet af observationer (eller antallet af frihedsgrader), \(S\) er skævheden for stikprøven og \(K\) er kurtosis for stikprøven.
+\begin{align*}
+S&=\frac{\hat{\mu}_3}{\hat{\sigma}^3}\\
+K&=\frac{\hat{\mu}_4}{\hat{\sigma}^4}.
+\end{align*}
+
+Her er \(\hat{\mu}_3\) og \(\hat{\mu}_3\) er estimaterne af hhv. det tredje og fjerde centrale moment, \(\hat{\sigma}\) er estimatet af standardafvigelsen. Under nulhypotesen har teststørrelsen asympototisk en \(\chi^2(2)\)--fordeling.
+
 \hypertarget{augmented-dickey-fuller-test}{%
 \subsection{Augmented Dickey-Fuller test}\label{augmented-dickey-fuller-test}}
 
+Den følgende regression ligger bag \emph{Augmented Dickey-Fuller} testen, \citep{Dickey1979}
+\[\Delta y_{t} = \alpha + \beta t + \phi y_{t-1} + \delta_1 \Delta y_{t-1} + \cdots + \delta_{p-1}\Delta y_{t-p+1} + \varepsilon_t,\]
+
+hvor \(y_t\) er tidsserien på tidspunkt \(t\), \(\alpha\) er en kostant, \(\beta\) er koefficienten for en tids trend og \(p\) er lagordenen. Under nulhypotesen indeholder \(y_t\) en \emph{unit root}, dvs. \(\phi=0\). Dette er testet mod den alternative én-sidet hypotese at \(\phi<0\), altså at tidsserien er stationær. Den resulterende teststørrelse
+\[\frac{\hat{\phi}}{\hat{\sigma}_{\hat{\phi}}},\]
+
+evalueres herefter mod de kritiske værdier fra \emph{Dickey-Fuller} \(t\)-fordelingen. Testen vil udføres på alle variable, hvis enkelte variable ikke kan forkaste nulhypotesen tages den første forskel, og herefter vil de blive gentestet. Kan disse nye variable nu forkaste nulhypotesen, betegnes de som regel \emph{difference-stationary}. Dette er dog ikke sikkert og enkelte tidsserier kan sagtens være integreret af anden eller tredje orden. Stationaritetsantagelsen er imod forventning ikke et krav for VAR-processen. Fra generel økonomisk teori er det kendt, at de præsenterede variable fra Kapitel ?? vil være ikke-eksplosive. Derfor vil testresultatet ikke være alt afgørende for modelspecifikationen.
+
 \hypertarget{phillips-perron-test}{%
 \subsection{Phillips-Perron test}\label{phillips-perron-test}}
+
+Som \emph{Augmented Dickey-Fuller} er \emph{Phillips-Perron} testen en metode til at teste for en \emph{unit root} i en given tidsserie. Nulhypotesen er derfor \(\rho=1\) i nedenstående regression
+\[\Delta y_t = (\rho-1) y_{t-1} + \varepsilon_t\]
+
+Som i \emph{Augmented Dickey-Fuller} testen løser \emph{Phillips-Perron} testen problemet, at processen som danner \(y_t\) muligvis har en højere orden af autokorrelation end tilladt i ovenstående Ligning ?? -- dette gør \(y_{t-1}\) endogen og vil ugyldiggøre den almindelige \emph{Dickey-Fuller} \(t\)-test. Hvorimod \emph{Augmented Dickey-Fuller} løser problemet ved at indtroducere lags i testligningen, laver \emph{Phillips-Perron} en ikke-parametrisk korrektion til \(t\)-test størrelsen. Derudover er testen robust overfor uspecificeret autokorrelation og heteroskedasticitet.
+
+\citep{Davidson2004} finder, at \emph{Phillips-Perron} testen har værre performance for endelige stikprøver end \emph{Augmented Dickey-Fuller} testen.
 
 \hypertarget{kwiatkowski-phillips-schmidt-shin-test}{%
 \subsection{Kwiatkowski-Phillips-Schmidt-Shin test}\label{kwiatkowski-phillips-schmidt-shin-test}}

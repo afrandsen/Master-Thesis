@@ -3,7 +3,7 @@
 # Underliggende teori {#unteo}
 
 ## Den myopiske investor{#myoinv}
-Den myopiske investor vælger -- som navnet ligger op til -- sin portefølje under et én-periodes perspektiv, og foretager dermed et statisk bindende valg. Investoren forsøger at maksimere sin terminal formue, ved samtidig at forholde sig til sin risikoaversion. Dette forsager, at alle efterfølgende perioder bliver ignoreret af investoren. Ergo skal han løse det statiske portefølje problem fra tidspunkt $t$ til tidspunkt $t+1$. I denne ene periode er investeringsmulighederne: et risikobærende aktiv samt et risikofrit aktiv. Afkastene over den førstkommende periode for disse aktivklasser vil blive noteret som hhv. $R_{t+1}$ med betinget middelværdi $\mathbb{E}_t(R_{t+1})$^[Her benyttes den gængse notation $\mathbb{E}(R_{t+1}\mid \mathcal{F}_t)=\mathbb{E}_t(R_{t+1})$ for filteret $\mathcal{F}_t$.] samt betinget varians $\mathbb{V}_t(R_{t+1})=\sigma_t^2$ og $R_{0,t+1}$.
+Den myopiske investor vælger -- som navnet ligger op til -- sin portefølje under et én-periodes perspektiv, og foretager dermed et statisk bindende valg. Investoren forsøger at maksimere sin terminal formue, ved samtidig at forholde sig til sin risikoaversion. Dette forårsager, at alle efterfølgende perioder bliver ignoreret af investoren. Ergo skal han løse det statiske portefølje problem fra tidspunkt $t$ til tidspunkt $t+1$. I denne ene periode antages investeringsmulighederne at være: et risikobærende aktiv samt et risikofrit aktiv. Afkastene over den førstkommende periode for disse aktivklasser vil blive noteret som hhv. $R_{t+1}$ med betinget middelværdi $\mathbb{E}_t(R_{t+1})$^[Her benyttes den gængse notation $\mathbb{E}(R_{t+1}\mid \mathcal{F}_t)=\mathbb{E}_t(R_{t+1})$ for filteret $\mathcal{F}_t$.] samt betinget varians $\mathbb{V}_t(R_{t+1})=\sigma_t^2$ og $R_{0,t+1}$.
 
 Det antages at investorens formue er fuldt allokeret når en del $\alpha_t$ bliver placeret i det risikobærende aktiv og $(1-\alpha_t)$ i det risikofrie aktiv. Hermed bliver hans porteføljeafkast givet ved
 \begin{equation}
@@ -21,12 +21,12 @@ og endeligt den betingede varians af porteføljeafkastet
 \mathbb{V}_t[R_{p,t+1}]=\alpha_t^2\sigma_t^2.(\#eq:Varport)
 \end{equation}
 
-Den simplificerende antagelse i [@Markowitz1952] er at investorer kun forholder sig til de første to momenter, hvis vi modellerer denne afvejning lineært, opnår vi følgende maksimeringsproblem
+Den simplificerende antagelse i [@Markowitz1952] er, at investorer kun forholder sig til de første to momenter, hvis vi modellerer denne afvejning lineært, opnår vi følgende maksimeringsproblem
 \begin{equation}
 \max_{\alpha_t} \mathbb{E}_t\left[R_{p,t+1}\right] -\frac{k}{2} \mathbb{V}_t\left[R_{p,t+1}\right],(\#eq:Statmaks)
 \end{equation}
 
-hvor $k$ er en skalering, som repræsenterer investorens risiko aversion. Ved at modellere ovenstående relation som lineær og kun afhængig af de første to momenter restringerer vi investoren til at foretrække et højt afkast, lav volatilitet og ignorerer alle højere momenter, såsom skævhed og kurtosis. Ved indsættelse af Ligning \@ref(eq:Portafk) i Maksimeringsproblemet \@ref(eq:Statmaks) og dernæst differentiation opnåes førsteordensbetingelsen, se Appendiks \@ref(udlmyo), løsningen til optimalitetsproblemet bliver dermed
+hvor $k$ er en skalering, som repræsenterer investorens risikoaversion. Ved at modellere ovenstående relation som lineær og kun afhængig af de første to momenter restringeres investoren til at foretrække et højt afkast, lav volatilitet og ignorerer alle højere momenter, såsom skævhed og kurtosis. Ved indsættelse af Ligning \@ref(eq:Portafk) i Maksimeringsproblemet \@ref(eq:Statmaks) og dernæst differentiation opnåes førsteordensbetingelsen, se Appendiks \@ref(udlmyo), løsningen til optimalitetsproblemet bliver
 \begin{equation}
 \alpha_t = \frac{\mathbb{E}_t\left[R_{t+1}\right]-R_{0,t+1}}{k\sigma_t^2}.(\#eq:Løsning)
 \end{equation}
@@ -37,7 +37,7 @@ $$S_t=\frac{\mathbb{E}_t[R_{t+1}]-R_{0,t+1}}{\sigma_t}.$$
 Dette tillader, at vi kan omskrive Ligning \@ref(eq:Løsning) til
 $$\alpha_t=\frac{S_t}{k\sigma_t}.$$
 
-Forholdet mellem middelværdien og variansen er $\tfrac{1}{k}$, eftersom vi kan udlede, at merafkastet på porteføljen er $\tfrac{S_t^2}{k}$ og variansen er $\tfrac{S_t^2}{k^2}$. *Sharpe Ratio*'en på porteføljen er $S_t$, og alle tænkelige porteføljer (afhængig af $k$) vil have samme *Sharpe Ratio*, fordi de er eksponeret til det risikobærende aktiv, men stadig i større eller mindre grad.
+Forholdet mellem middelværdien og variansen er $\tfrac{1}{k}$, eftersom vi kan udlede, at merafkastet på porteføljen er $\tfrac{S_t^2}{k}$ og variansen er $\tfrac{S_t^2}{k^2}$. *Sharpe Ratio*'en på porteføljen er $S_t$, og alle tænkelige porteføljer (afhængig af $k$) vil have samme *Sharpe Ratio*, fordi de er eksponeret til det risikobærende aktiv, men i stadig større eller mindre grad.
 
 Altså er vægtningen i det risikobærende aktiv et forhold mellem: det forventede risikobærende merafkast over det risikofrie aktiv samt en skalering af det risikobærende aktivs varians. Vi kan uden problemer opskrive ovenstående løsning til tilfældet, hvor investoren står overfor $n>1$ risikobærende aktiver. $\bm{R}_{t+1}$ repræsenterer en $n\times 1$ vektor af afkast for risikobærende aktiver, fra $t$ til $t+1$. Den betingede middelværdi bliver $\mathbb{E}_t(\bm{R}_{t+1})$ og den betingede kovariansmatrix noteres som $\mathbb{V}_t(\bm{R}_{t+1})=\bm{\Sigma}_t$. Herudover er $\bm{\alpha}_t$ nu en $n\times 1$ vektor af vægte i de risikobærende aktiver.
 
@@ -51,7 +51,7 @@ den betingede varians af porteføljeafkastet bliver
 \mathbb{V}_t[R_{p,t+1}]=\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t.
 \end{equation}
 
-Vi kan nu opskrive maksimeringsproblemet
+Nu kan maksimeringsproblemet opskrives
 \begin{equation}
 \max_{\alpha_t} \bm{\alpha}_t'(\mathbb{E}_t[\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}] - \frac{k}{2}\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t, (\#eq:MultStatmaks)
 \end{equation}
@@ -112,7 +112,7 @@ Løsningen er en generalisering af Ligning \@ref(eq:Løsning). Derudover er det 
 
 Altså vil investorer vælge en portefølje på den efficiente rand, som opnår en efficient porteføljevægtning langs *Capital Market Line*. Derudover skal det nævnes, at det kun er den øvre halvdel af den efficiente rand, som reelt set er efficient. Dette kommer sig af at porteføljer på den nederste del har en identisk påhæftet volatilitet, men med et lavere forventet afkast end den symmetrisk modsatte portefølje.
 
-Selvom Markowitz' model er en hjørnesten inden for moderne porteføljeteori, er der flere mangler i den opsatte teoretiske ramme. Først og fremmest medfører Markowitz' antagelse om en lineær afvejning mellem kovarianser og afkast, implicit antagelsen, at investorenes nyttefunktioner kan approksimeres af en anden ordens Taylor udvidelse over en bredt sprektrum af afkast. Derudover findes ingen beskrivelse for, hvordan parameteren $k$ er koblet til investorens nyttefunktion. Disse mangler kan blive afhjulpet ved samtidig brug af specifikke nyttefunktioner og afkastfordelinger, som opfylder Taylor udvidelsen. Dette medfører at middelværdi-varians analysen kan benyttes for tre forskellige opsætninger, som bliver præsenteret i Sektion \@ref(typnyt), [@CampVic2003].
+Selvom Markowitz' model er en hjørnesten inden for moderne porteføljeteori, er der flere mangler i den opsatte teoretiske ramme. Først og fremmest medfører Markowitz' antagelse om en lineær afvejning mellem kovarianser og afkast implicit antagelsen, at investorenes nyttefunktioner kan approksimeres af en anden ordens Taylor udvidelse over en bredt sprektrum af afkast. Derudover findes ingen beskrivelse for, hvordan parameteren $k$ er koblet til investorens nyttefunktion. Disse mangler kan blive afhjulpet ved samtidig brug af specifikke nyttefunktioner og afkastfordelinger, som opfylder Taylor udvidelsen. Dette medfører at middelværdi-varians analysen kan benyttes for tre forskellige opsætninger, som bliver præsenteret i Sektion \@ref(typnyt), [@CampVic2003].
 
 ## Præferencer for risiko
 For et fast formueniveau $w\in \mathbb{R}_+$ betragter vi en stokastisk variabel $X$, hvor $\mathbb{E}(X)=0$. Derfor kan også $w+X$ betragtes som en stokastisk variabel, der repræsenterer en fremtidig formueplan med realiseret formue $w+\mathbb{E}(X)$, hvis $X$ bliver realiseret. Derfor kaldes $X$ undertiden også et fair spil, derudover haves at $\mathbb{E}(w+X)=w$.

@@ -40,13 +40,6 @@ description: "Master's Theis of Andreas Kracht Frandsen, Aarhus University."
 
 # Forord {-}
 
-Dette dokument findes interaktivt og i statisk format.
-
-`r if (knitr::is_latex_output()) '
-For at se en interaktiv HTML version af dokumentet, med mulighed for at redigere fejl eller skrive kommentarer, gå da til denne hjemmeside [afrandsen.rbind.io/bare/thesis/](https://afrandsen.rbind.io/bare/thesis/). Siden vil blive opdateret kontinuerligt, hvis jeg selv finder fejl gennem GitHub.
-
-\\vfill
-
 Kreditering: [starlogs.net/#afrandsen/master-thesis](http://starlogs.net/#afrandsen/master-thesis).
 
 Dokumentet er i farver, men kan printes i sort/hvid uden at skabe visuelle mangler på plots, da linjer samt punkter har hhv. forskellige linjetyper og symboler.
@@ -54,18 +47,5 @@ Dokumentet er i farver, men kan printes i sort/hvid uden at skabe visuelle mangl
 Farver igennem hele dokumentet er sat via pakken *RColorBrewer* og dens tilhørende farvepalete *Dark2*. Denne farvepalette tillader, at personer med nedsat farvesyn uden problemer kan skelne linjer, punkter osv. fra samtlige plots. Derudover er paletten printervenlig samt LCD-venlig.
 
 Gennem hele dokumentet er der anvendt *fictitious entry*, der fungerer som en *copyright trap*.
-'`
-
-`r if (knitr::is_html_output()) '
-Dette er den interaktive HTML version af dokumentet, du kan redigere fejl ved at trykke på &#x1F589; knappen i menubaren.
-
-Til venstre finder du indholdsfortegnelsen. God fornøjelse!
-<p align="center">
-<img src="latex/ausegl_sort.png" width="200">
-</p>
-
-Copyright &#x00A9; 2019 $\\TeX$nician and useR Andreas Kracht Frandsen
-
-Alt indhold er licenseret under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 '`
 \newpage
