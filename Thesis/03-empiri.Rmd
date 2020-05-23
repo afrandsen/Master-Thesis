@@ -54,7 +54,7 @@ hvor den anden betingelse sikrer at autokovarianserne kun afhænger af perioden 
 
 ### Test af normalitet
 For at teste variablene for normalitetsantagelsen, benyttes den såkaldte *Jarque-Bera* test, [@Jarque1980]. Denne metode tester om den givne stikprøve har skævhed og kurtosis lig normalfordelingen. Dette er ligeledes nulhypotesen. Teststørrelsen er altid ikke-negativ, og store værdier signalerer at stikprøven ikke er normaltfordelt. Teststørrelsen er defineret som
-$$JB=\frac{n}{6}\left(S^2+\frac{1}{4}(K-3)^2\right),$$
+$$\text{JB}=\frac{n}{6}\left(S^2+\frac{1}{4}(K-3)^2\right),$$
 
 hvor $n$ er antallet af observationer (eller antallet af frihedsgrader), $S$ er skævheden for stikprøven og $K$ er kurtosis for stikprøven.
 \begin{align*}
@@ -69,7 +69,7 @@ Den følgende regression ligger bag *Augmented Dickey-Fuller* testen, [@Dickey19
 $$\Delta y_{t} = \alpha + \beta t + \phi y_{t-1} + \delta_1 \Delta y_{t-1} + \cdots + \delta_{p-1}\Delta y_{t-p+1} + \varepsilon_t,$$
 
 hvor $y_t$ er tidsserien på tidspunkt $t$, $\alpha$ er en kostant, $\beta$ er koefficienten for en tids trend og $p$ er lagordenen. Under nulhypotesen indeholder $y_t$ en *unit root*, dvs. $\phi=0$. Dette er testet mod den alternative én-sidet hypotese at $\phi<0$, altså at tidsserien er stationær. Den resulterende teststørrelse
-$$\frac{\hat{\phi}}{\hat{\sigma}_{\hat{\phi}}},$$
+$$\text{ADF}=\frac{\hat{\phi}}{\hat{\sigma}_{\hat{\phi}}},$$
 
 evalueres herefter mod de kritiske værdier fra *Dickey-Fuller* $t$-fordelingen. Testen vil udføres på alle variable, hvis enkelte variable ikke kan forkaste nulhypotesen tages den første forskel, og herefter vil de blive gentestet. Kan disse nye variable nu forkaste nulhypotesen, betegnes de som regel *difference-stationary*. Dette er dog ikke sikkert og enkelte tidsserier kan sagtens være integreret af anden eller tredje orden. Stationaritetsantagelsen er imod forventning ikke et krav for VAR-processen. Fra generel økonomisk teori er det kendt, at de præsenterede variable fra Kapitel ?? vil være ikke-eksplosive. Derfor vil testresultatet ikke være alt afgørende for modelspecifikationen.
 
@@ -77,13 +77,47 @@ evalueres herefter mod de kritiske værdier fra *Dickey-Fuller* $t$-fordelingen.
 Som *Augmented Dickey-Fuller* er *Phillips-Perron* testen en metode til at teste for en *unit root* i en given tidsserie. Nulhypotesen er derfor $\rho=1$ i nedenstående regression
 $$\Delta y_t = (\rho-1) y_{t-1} + \varepsilon_t$$
 
-Som i *Augmented Dickey-Fuller* testen løser *Phillips-Perron* testen problemet, at processen som danner $y_t$ muligvis har en højere orden af autokorrelation end tilladt i ovenstående Ligning ?? -- dette gør $y_{t-1}$ endogen og vil ugyldiggøre den almindelige *Dickey-Fuller* $t$-test. Hvorimod *Augmented Dickey-Fuller* løser problemet ved at indtroducere lags i testligningen, laver *Phillips-Perron* en ikke-parametrisk korrektion til $t$-test størrelsen. Derudover er testen robust overfor uspecificeret autokorrelation og heteroskedasticitet.
+Som i *Augmented Dickey-Fuller* testen løser *Phillips-Perron* testen problemet, at processen som danner $y_t$ muligvis har en højere orden af autokorrelation end tilladt i ovenstående Ligning ?? -- dette gør $y_{t-1}$ endogen og vil ugyldiggøre den almindelige *Dickey-Fuller* $t$-test. Hvorimod *Augmented Dickey-Fuller* løser problemet ved at indtroducere lags i test-ligningen, laver *Phillips-Perron* en ikke-parametrisk korrektion til $t$-test størrelsen. Derudover er testen robust overfor uspecificeret autokorrelation og heteroskedasticitet. Den fulde opskrivning af de to teststørrelser, $Z(\hat{\alpha})$ og $Z(t_{\hat{\alpha}})$, kan findes i [@Phillips1988]. Hvor den første teststørrelse, $Z(\hat{\alpha})$, hører til Ligning ??, og den anden teststørrelse, $Z(t_{\hat{\alpha}})$, hører til nedenstående regression, med en konstant og et ikke stokastisk led
+$$\Delta y_t =\alpha + \beta t + (\rho-1) y_{t-1} + \varepsilon_t.$$
 
-[@Davidson2004] finder, at *Phillips-Perron* testen har værre performance for endelige stikprøver end *Augmented Dickey-Fuller* testen.
+Fordelen ved *Phillips-Perron* testen er at den er ikke-parametrisk, dvs. den kræver ikke at vælge lagstørrelsen som i *Augmented Dickey-Fuller*. Ulempen er derimod, at den baserer sig på asymptotisk teori. [@Davidson2004] finder, at *Phillips-Perron* testen har værre performance for endelige stikprøver end *Augmented Dickey-Fuller* testen.
 
 ### Kwiatkowski-Phillips-Schmidt-Shin test
+Til forskel for de to tidligere præsenterede økonometriske tests, er nulhypotesen i *Kwiatkowski-Phillips-Schmidt-Shin* testen, at den undersøgte tidsserie er stationær omkring en deterministisk trend, [@Kwiatkowski1992]. Altså er den alternative hypotese at tidsserien har en *unit root*. Testen tager udgangspunkt i nedenstående regression
+\begin{align}
+y_t&=\alpha+\beta t + \mu_t+\varepsilon_t\\
+&=\mu_t=\mu_{t-1}+\nu_t,
+\end{align}
+
+hvor specielt $\nu_t\sim\mathcal{N}(0,\sigma_\nu ^2)$. Nulhypotesen vil på denne form formuleres som $H_0:\sigma_\nu^2=0$, som medfører, at $\mu_t$ er konstant. Teststørrelsen er *Lagrange Multiplier* eller Score teststatistikken for $\sigma_nu ^2=0$ mod alternativet $\sigma_nu ^2>0$. Den er givet ved
+$$\text{KPSS}=\frac{(T^{-2} \sum_{t=1}^T \hat{S}_t^2)}{\hat{\lambda}^2},$$
+
+hvor $\hat{S}_t=\sum_{j=1}^t \hat{u}_j$, $\hat{u}_t$ er residualen hørende til regressionen af $y_t$ og $\hat{\lambda}^2$ er et konsistent estimat af $u_t$ ved brug af $\hat{u}_t$. 
 
 ## Modelselektion {#sekmodelselek}
+
+Indtil videre er de økonometriske metoder og statistiske tests blevet beskrevet, som der anvendes i den empriske del af denne afhandling. Uden nogle yderligere restriktioner vil den præsenterede metodik kunne medføre en ikke-restringeret VAR model, som herefter vil kunne implementeres for porteføljevalget. Det er til gengæld urealistisk at tro, at en medtagelse af samtlige variable vil medføre en generel statistisk stærk model. Derfor vil denne sektion præsentere den generelle kvantitative og kvalitatitive metode til at specificere en mere sparsommelig model, som højst sandsynlig også vil have en stærkere performance på en eksogen stikprøve. 
+
+En ikke-restringeret VAR model indeholdende samtlige variable vil givetvis have den højeste *goodness-of-fit* relativt til alle restringerede modeller. Derudover ville en sådan model resultere i en række komplikationer. En sådan komplikation er eksempelvis multikollinaritet mellem de prædiktable variable. Eksempelvis kan korte og lange rentespænd muligvis fange den samme variation i merafkast, og en medtagelse af begge rentespænd vil derfor ikke være nødvendigt. Derudover kan for mange variable gøre VAR modellen højt parameteriseret, og dermed påvirke præcisionen af de estimerede koefficienter. En optimal model vil optimere det såkaldte *bias-variance tradeoff*, og dermed fange regulariteterne i estimationsdatasættet og ligeledes generalisere til eksterne datasæt. Givet at denne afhandling kun er intereseret i variable som *har* statistisk styrke til at forudsige afkast vil en række restriktioner automatisk føre til en sparsommelig model. Dette kan gøres på en lang række måder, men én af de absolut simpleste er den såkaldte *Top-down* strategi, som også er kendt i statistik som *backward-elimination*. En sådan strategi specificere en model baseret på relativ *goodness-of-fit* gennem det valgte informations kriterie. Formelt modellerer informations kriteriet bytteforholdet mellem præcisionen for stikprøven og antallet af estimerede parametre. Generelt kan et sådant kriterie opskrives matematisk som
+$$\text{IC}=\log(\mid \hat{\Sigma}\mid)+k(\#\text{parametre}),$$
+
+hvor $\hat{\Sigma}$ repræsentere dne estimerede kovariansmatrix af residualerne og $k$ vil afhænge af det valgte informationskriterie. Informationskriteriet vil dermed foretrække modeller med lav varians, men samtidig straffe modeller med inkludering af for mange variable. I denne afhandling benyttes det såkaldte *Andreas Kracht Frandsen Information Criteria*, *AKFIC*. Til forskel for det kendte *Akaike Information Criteria* straffes modellen med en faktor på
+$$k=\frac{Q(0.05)}{T}=\frac{3.841}{T},$$
+
+hvor $Q(\cdot)$ er kvantilfunktionen for $\chi^2$-fordelingen. I stedet for en faktor på
+$$k=\frac{2}{T}.$$
+
+hvor $T$ repræsenterer stikprøvestørrelsen. I praksis implementeres *Top-down* strategien ved at undersøge én ligning fra VAR systemets ligninger af de fire aktiver. Først evalueres kriteriet for den ikke-restringerede regression, herefter fjernes én forklarende variabel af gangen og kriteriet bliver genberegnet. Dernæst vil den laveste *AKFIC* værdi indikerer, hvilken variabel, der giver mindst ekstra information om variationen i responsvariablen, og er på den måde den bedste kandidat til fjernelse fra modellen. Denne midlertidige modelkandidat med laveste *AKFIC* sammenlignes nu med den intielle model, givet at der ligeldes er forbedring ift. den intielle, vil denne midlertidige model nu være den nye basismodel. Denne process fortsætter rekursivt indtil ingen forklarende variable kan fjernes for at forbedre *AKFIC* værdien. 
+
+Processen køres kun for regressionerne for aktivafkastene på det fulde datasæt, for at have et kvantitativt bud på deres optimale prædiktionsvariable. Eftersom fokus er på porteføljeallokering, restringeres datasættet herefter til kun at indeholde variablene, der forbliver i modellen efter *Top-down* processen. Dernæst holdes variablene op i mod de univariate og multiple regressioner samt korrelationsanalysen, for at undgå mulige multikollinaritetsproblemer. Skulle der være problemer med multikollinarietet fjernes evt. problematiske variable. Hvis de forklarende variable herefter er forskellige på tværs af aktivklasserne foretages en kvalitativ vurdering, som har til formål at udvælge en delmængde af de tilbageværende variable, som fuldt kommer til at indgå i VAR(1)-modellen. 
+
+Slutteligt foretages en *Variance Inflation Factor* analyse, som et sidste tjek for multikollinaritet. Analysen foretages i tre skridt. For samtlige foreklarende variable laves følgende regression
+$$x_t^i=\alpha+\bm{\beta}^j + \bm{x}_t^{j}+\varepsilon_t.$$
+
+Dernæst beregnes *VIF*-værdien for hvert $\beta^j$ som
+$$\text{VIF}_i=\frac{1}{1-R_i^2},$$
+
+hvor $R_i^2$ stammer fra regressionen i Ligning ??. Det sidste skridt består i at undersøge størrelsesordenen af multikollinaritet, ved at tjekke størrelsen på $\text{VIF}_i$. En generel regel er, at multikollinariteten er høj når $\text{VIF}_i>10$. Kvadratroden af $\text{VIF}$ indikerer, hvor meget standardfejlen øges, sammenlignet med tilfældet, hvor variablen hypotetisk ingen korrelation har til de andre variable i modellen.
 
 # Data beskrivelse {#kapiteldatab}
 Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 2. kvartal til 2018 4. kvartal grundet dataophør. Startkvartalet er valgt på baggrund af, at den amerikanske centralbank, *Federal Reserve System*, kort tid forinden, havde givet den amerikanske korte rente, lov til at variere frit i markedet. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion \@ref(aktivklasser) beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik. Sektion \@ref(pvariable) indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion \@ref(korr). Sektion \@ref(ops) giver en opsummering af kapitlets statistiske fund. Tidsserien for hver aktivklasse og prædiktionsvariabel visualiseres med tilhørende recessionsperioder som defineret af [@NBER2020].
@@ -1959,6 +1993,10 @@ ggplot(data, aes(sd, r)) +
 ```
 
 # Allokering af aktiver
+I dette kapitel vil teorien fra Del 2 samt de empiriske fund sammenkobles. Dette gøres ved at benytte VAR(1)-koefficienterne til porteføljevalget for den institutionelle investor. Den initielle analyse vil tage udgangspunkt i en investor med en moderat risikoaversion, $\gamma=5$, en lang investeringshorisont på $25$ år, $k=200$. Derudover restringeres investoren ikke, og dermed tillades kortsalg. Dette vil ligeledes fungere som sammenligningsgrundlaget for de resterende analyser i dette kapitel. I Sektion ?? vil denne initielle portefølje blive undersøgt, når afkast er tidsvarierende. Her vil porteføljevalget for hele den tilgængelige periode bliver undersøgt, når der fokuseres på allokeringen i samtlige *første* perioder. Dette giver mulighed for at undersøge investorens valg over samtlige recessioner. 
+
+## Porteføljevalg med tidsvarierende afkast
+
 ```{r script11, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Script.R"), include=FALSE, cache=TRUE}
 ```
 

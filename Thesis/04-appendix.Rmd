@@ -4,6 +4,12 @@
 
 # Underliggende teoretiske resultater
 
+Dette appendiks består af udledninger for de anvendte resultater gennem afhandlingen. Notationen som anvendes følger den generelle præsenterede notation fra tidligere kapitler.
+
+## Momenter af den lognormale fordeling
+
+Det præsenterede porteføljevalg i den empiriske analyse tog udgangspunkt i en investor med potens nytte. Dette udmyntede sig i antagelsen om lognormale afkast. 
+
 ## Udledning af den optimale myopiske portefølje {#udlmyo}
 I denne Sektion udledes den optimale portefølje på tidspunkt $t$ givet ved: Ligning \@ref(eq:Løsning) og Ligning \@ref(eq:Multalpha) for hhv. tilfældet med et risikobærende aktiv, $n=1$, samt tilfældet med flere risikobærende aktiver, $n>1$. Ved indsættelse af den betingede middelværdi, Ligning \@ref(eq:Forvport), samt den betingede varians, Ligning \@ref(eq:Varport). Kan Maksimeringsproblemet \@ref(eq:Statmaks) omskrives til
 $$\max_{\alpha_t} \mathcal{L}=\alpha_t\left(R_{t+1} - R_{0,t+1}\right)-\frac{k}{2}\alpha_t^2\sigma_t^2.$$
@@ -134,6 +140,44 @@ r_{p,t+1} - r_{0,t+1} \approx \bm{\alpha}_t'(\bm{r}_{t+1} - r_{0,t+1}\bm{\ell}) 
 \end{equation}
 
 Her er de risikobærende aktiver lognormal fordelt med $\bm{\Sigma}_t$ som den betingede kovariansmatrix, og $\bm{\sigma}_t$ er diagonalelementerne af $\bm{\Sigma}_t$, som mere specifikt er vektoren af de betingede varianser for aktiverne.
+
+
+# Campbell-Shiller loglineære relationer
+De præsenterede loglineære af afkast følger en første ordens Taylor approksimation, og giver en analytisk løsning når diskrettidsmodeller benyttes. Fælles for alle aktivklasser er, at deres brutto afkast består af et ikke-lineært led som løses af følgende funktion
+$$f(x)=f(\bar{x})+f'(\bar{x})(x-\bar{x}).$$
+
+## Approksimationen af aktieafkast
+
+Den fundamentale relation mellem aktieafkast og udbytte udledes i denne sektion.
+
+Definitionen af brutto aktieafkastet fra tidspunkt $t$ til $t+1$ er
+\begin{equation}
+1+R_{t+1}=\frac{P_{t+1}+D_{t+1}}{P_t}.
+\end{equation}
+
+Ved at tage logfunktionen af Ligning ?? kan følgende udledning opnåes
+\begin{align}
+\log(1+R_{t+1})&=\log(\frac{P_{t+1}+D_{t+1}}{P_t})\\
+&=\log(P_{t+1}+D_{t+1})-\log(P_t)\\
+&=\log(P_{t+1}(1+\frac{D_{t+1}}{P_{t+1}}))-\log(P_t)\\
+&=\log(P_{t+1})+\log(1+\exp(\log(D_{t+1})-\log(P_{t+1})))-\log(P_t).
+\end{align}
+
+Dette tillader følgende form ved brug af lognotationen
+$$r_{t+1}=p_{t+1} +\log(1+\exp(d_{t+1}-p_{t+1}))-p_t$$
+
+Ovenstående Ligning ?? viser den ikke-lineære relatioen mellem log afkastet og log udbyttet, altså er det andet led på højreside ikke-lineært, $\log(1+\exp(d_{t+1}-p_{t+1}))$. Ved brug af en første ordens Taylor udvidelse omkring middelværdien, $\overline{d_t-p_t}$, kan denne relation approksimeres. 
+
+Her bliver den første afledte, $f'(\overline{d_t-p_t})$ fundet ved brug af kædereglen til
+$$f'(\overline{d_{t+1}-p_{t+1}})=\frac{1}{1+\exp(\overline{d_{t+1}-p_{t+1}})}\exp(\overline{d_{t+1}-p_{t+1}}).$$
+
+Dermed bliver første ordens Taylor udvidelsen
+$$f(x)=\log(1+\exp(\overline{d_t-p_t}))+\frac{1}{1+\exp(\overline{d_t-p_t})}\exp(\overline{d_t-p_t})((d_t-p_t)- \overline{d_t-p_t})$$
+
+
+## Approksimation af obligationsafkast
+
+
 
 # Den optimale dynamiske strategi
 Dette appendiks vil udlede den optimale porteføljestrategi, som beskrevet i Sektion ??. Udledningen vil følge [@JurVic2011] Appendiks C, som beskriver metoden, med enkelte dele som varierer.
@@ -378,5 +422,3 @@ Sammenhængen mellem *policy*-funktionen og *value*-funktionen i to succesive pe
 \begin{equation*}
 1\to \tau-1\quad\text{og}\quad 2\to \tau-2.
 \end{equation*}
-
-# Shiller
