@@ -75,7 +75,7 @@ evalueres herefter mod de kritiske værdier fra *Dickey-Fuller* $t$-fordelingen.
 
 ### Phillips-Perron test
 Som *Augmented Dickey-Fuller* er *Phillips-Perron* testen en metode til at teste for en *unit root* i en given tidsserie. Nulhypotesen er derfor $\rho=1$ i nedenstående regression
-$$\Delta y_t = (\rho-1) y_{t-1} + \varepsilon_t$$
+$$\Delta y_t = (\rho-1) y_{t-1} + \varepsilon_t.$$
 
 Som i *Augmented Dickey-Fuller* testen løser *Phillips-Perron* testen problemet, at processen som danner $y_t$ muligvis har en højere orden af autokorrelation end tilladt i ovenstående Ligning ?? -- dette gør $y_{t-1}$ endogen og vil ugyldiggøre den almindelige *Dickey-Fuller* $t$-test. Hvorimod *Augmented Dickey-Fuller* løser problemet ved at indtroducere lags i test-ligningen, laver *Phillips-Perron* en ikke-parametrisk korrektion til $t$-test størrelsen. Derudover er testen robust overfor uspecificeret autokorrelation og heteroskedasticitet. Den fulde opskrivning af de to teststørrelser, $Z(\hat{\alpha})$ og $Z(t_{\hat{\alpha}})$, kan findes i [@Phillips1988]. Hvor den første teststørrelse, $Z(\hat{\alpha})$, hører til Ligning ??, og den anden teststørrelse, $Z(t_{\hat{\alpha}})$, hører til nedenstående regression, med en konstant og et ikke stokastisk led
 $$\Delta y_t =\alpha + \beta t + (\rho-1) y_{t-1} + \varepsilon_t.$$
