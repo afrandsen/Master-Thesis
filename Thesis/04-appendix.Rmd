@@ -144,7 +144,7 @@ Her er de risikobærende aktiver lognormal fordelt med $\bm{\Sigma}_t$ som den b
 
 # Campbell-Shiller loglineære relationer
 De præsenterede loglineære af afkast følger en første ordens Taylor approksimation, og giver en analytisk løsning når diskrettidsmodeller benyttes. Fælles for alle aktivklasser er, at deres brutto afkast består af et ikke-lineært led som løses af følgende funktion
-$$f(x)=f(\bar{x})+f'(\bar{x})(x-\bar{x}).$$
+$$f(x)=f(x^*)+f'(x^*)(x-x^*).$$
 
 ## Approksimationen af aktieafkast
 
@@ -166,13 +166,35 @@ Ved at tage logfunktionen af Ligning ?? kan følgende udledning opnåes
 Dette tillader følgende form ved brug af lognotationen
 $$r_{t+1}=p_{t+1} +\log(1+\exp(d_{t+1}-p_{t+1}))-p_t$$
 
-Ovenstående Ligning ?? viser den ikke-lineære relatioen mellem log afkastet og log udbyttet, altså er det andet led på højreside ikke-lineært, $\log(1+\exp(d_{t+1}-p_{t+1}))$. Ved brug af en første ordens Taylor udvidelse omkring middelværdien, $\overline{d_t-p_t}$, kan denne relation approksimeres. 
+Ovenstående Ligning ?? viser den ikke-lineære relatioen mellem log afkastet og log udbyttet, altså er det andet led på højreside ikke-lineært, $\log(1+\exp(d_{t+1}-p_{t+1}))$. Ved brug af en første ordens Taylor udvidelse omkring middelværdien, $\overline{d_t-p_t}$, kan denne relation approksimeres. Herfra sættes $x=\log(1+\exp(d_{t+1}-p_{t+1}))$.
 
-Her bliver den første afledte, $f'(\overline{d_t-p_t})$ fundet ved brug af kædereglen til
-$$f'(\overline{d_{t+1}-p_{t+1}})=\frac{1}{1+\exp(\overline{d_{t+1}-p_{t+1}})}\exp(\overline{d_{t+1}-p_{t+1}}).$$
+Her bliver den første afledte, $f'(x^*)$ fundet ved brug af kædereglen til
+$$f'(x^*)=\frac{1}{1+\exp(\overline{d_{t+1}-p_{t+1}})}\exp(\overline{d_{t+1}-p_{t+1}}).$$
 
 Dermed bliver første ordens Taylor udvidelsen
-$$f(x)=\log(1+\exp(\overline{d_t-p_t}))+\frac{1}{1+\exp(\overline{d_t-p_t})}\exp(\overline{d_t-p_t})((d_t-p_t)- \overline{d_t-p_t})$$
+$$f(x)=\log(1+\exp(\overline{d_{t+1}-p_{t+1}}))+\frac{1}{1+\exp(\overline{d_{t+1}-p_{t+1}})}\exp(\overline{d_{t+1}-p_{t+1}})((d_{t+1}-p_{t+1})- \overline{d_{t+1}-p_{t+1}}).$$
+
+Ved at definere følgende lineariseringsparametre
+\begin{align}
+\rho &=\frac{1}{1+\exp(\overline{d_{t+1}-p_{t+1}})}\\
+c&= \log(1+\exp(\overline{d_{t+1}-p_{t+1}})) - (1-\rho)(\overline{d_{t+1}-p_{t+1}}),
+\end{align}
+
+Kan $f(\log(1+\exp(\overline{d_{t+1}-p_{t+1}})))$ omskrives til
+\begin{align}
+f(x)&=\log(1+\exp(\overline{d_{t+1}-p_{t+1}})) + \rho\exp(\overline{d_{t+1}-p_{t+1}}) (d_{t+1}-p_{t+1})-\rho \exp(\overline{d_{t+1}-p_{t+1}})(\overline{d_{t+1}-p_{t+1}})\\
+&=(1-\rho)(d_{t+1}-p_{t+1})+c.
+\end{align}
+
+Indsættes Ligning ?? nu ind i Ligning ?? opnåes den lineære relation for én-periode log aktieafkastet.
+
+\begin{align}
+r_{t+1}&\approx p_{t+1} + \log(1+\exp(\overline{d_{t+1}-p_{t+1}}))- p_t\\
+&\approx p_{t+1} + (1-\rho) (d_{t+1}-p_{t+1})- p_t + c\\
+&\approx \rho p_{t+1} + (1-\rho) d_{t+1} - p_t + c.
+\end{align}
+
+### Dynamic Gordon Growth Model
 
 
 ## Approksimation af obligationsafkast
