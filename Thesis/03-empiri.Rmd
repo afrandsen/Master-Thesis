@@ -1548,6 +1548,14 @@ g
 
 # Underliggende model
 
+Dette kapitel har til formål at præsentere resultatet fra modelselektionproceduren, som blev præsenteret i Sektion \@ref(sekmodelselek). Derudover præsenterer kapitlet VAR(1)-modellens estimationsresultater i Sektion \@ref(var1est). Estimationen af VAR(1)-modellen er gennemført på den fulde stikprøve periode fra 1954 2. kvartal til 2018 4.kvartal, som tæller $252$ kvartalsvise observationer. Den restringerede VAR(1)-model estimeres ved brug af Ligning \@ref(eq:1), derudover estimeres de bias-justerede koefficienter ved brug af den analytiske bias formel af [@Pope1990], dvs. Ligning \@ref(eq:bias).
+
+## Resultatet fra modelselektionsproceduren
+
+## VAR(1) estimation {#var1est}
+
+(ref:po1990) [@Pope1990]
+
 \begin{landscape}
 ```{r VAR-TAB, echo=FALSE}
 
@@ -1556,7 +1564,7 @@ colnames(VAR_TABLE) <- c("Name", "$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$r
 rownames(VAR_TABLE) <- c(1:27)
 
 VAR_TABLE %>% 
-  knitr::kable(caption = 'Beskrivende statistik for de fire aktivklasser.',
+  knitr::kable(caption = 'Restringeret Vector Autoregressive Model.',
                booktabs=TRUE,
                align = c(rep('c', 11)),
                row.names = FALSE,
@@ -1566,7 +1574,7 @@ VAR_TABLE %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kvartalsvis beskrivende statistik for aktivklasserne: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Middelværdien er justeret for alle aktivklasser.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra po1990 er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 \end{landscape}
 
