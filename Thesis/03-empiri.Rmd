@@ -1473,6 +1473,34 @@ for (i in 1:6) {
 g
 ```
 
+```{r MULT-step-s, echo=FALSE}
+options(knitr.kable.NA = '')
+
+FIT_M_S_STEP_TABLE <- format(round(FIT_M_S_STEP_TABLE, digits = 3), nsmall = 3)
+  
+FIT_M_S_STEP_TABLE <- FIT_M_S_STEP_TABLE %>%
+  mutate(coef = cell_spec(coef, "latex", bold = ifelse(p <= 0.05, T, F)))
+
+colnames(FIT_M_S_STEP_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$')
+
+rownames(FIT_M_S_STEP_TABLE) <- c('Afskæring', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{tb}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{fr}}$')
+
+FIT_M_S_STEP_TABLE %>% 
+  knitr::kable(caption = 'Step optimeret multipel prædiktabilitet af merafkastet på statsobligationer.',
+               booktabs=TRUE,
+               align = c(rep('r', 15)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "HOLD_position"),
+                             full_width = F)  %>% 
+   kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{a}}$", " " = 1, "Konfidensinterval" = 2, " " = 3), escape = FALSE) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
+```
+
+
 ```{r MULT-s-step-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af den step optimerede regression for merafkastet på aktier.', fig.width=18, fig.asp=0.9, fig.pos='H'}
 g <- autoplot(step_S_OBL_model, which = 1:6, ncol = 2, label.size = 3, smooth.colour  = 'red', smooth.linetype = "dashed", ad.colour = "pink", label.vjust = -0.3, label.angle = -15) + theme_bw()
 
@@ -1530,6 +1558,33 @@ for (i in 1:6) {
 g
 ```
 
+```{r MULT-step-v, echo=FALSE}
+options(knitr.kable.NA = '')
+
+FIT_M_V_STEP_TABLE <- format(round(FIT_M_V_STEP_TABLE, digits = 3), nsmall = 3)
+  
+FIT_M_V_STEP_TABLE <- FIT_M_V_STEP_TABLE %>%
+  mutate(coef = cell_spec(coef, "latex", bold = ifelse(p <= 0.05, T, F)))
+
+colnames(FIT_M_V_STEP_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$')
+
+rownames(FIT_M_V_STEP_TABLE) <- c('Afskæring', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{tb}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+FIT_M_V_STEP_TABLE %>% 
+  knitr::kable(caption = 'Step optimeret multipel prædiktabilitet af merafkastet på virksomhedsobligationer',
+               booktabs=TRUE,
+               align = c(rep('r', 15)),
+               row.names = TRUE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "HOLD_position"),
+                             full_width = F)  %>% 
+   kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{a}}$", " " = 1, "Konfidensinterval" = 2, " " = 3), escape = FALSE) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
+```
+
 ```{r MULT-v-step-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af den step optimerede regression for merafkastet på aktier.', fig.width=18, fig.asp=0.9, fig.pos='H'}
 g <- autoplot(step_V_OBL_model, which = 1:6, ncol = 2, label.size = 3, smooth.colour  = 'red', smooth.linetype = "dashed", ad.colour = "pink", label.vjust = -0.3, label.angle = -15) + theme_bw()
 
@@ -1550,7 +1605,26 @@ g
 
 Dette kapitel har til formål at præsentere resultatet fra modelselektionproceduren, som blev præsenteret i Sektion \@ref(sekmodelselek). Derudover præsenterer kapitlet VAR(1)-modellens estimationsresultater i Sektion \@ref(var1est). Estimationen af VAR(1)-modellen er gennemført på den fulde stikprøve periode fra 1954 2. kvartal til 2018 4.kvartal, som tæller $252$ kvartalsvise observationer. Den restringerede VAR(1)-model estimeres ved brug af Ligning \@ref(eq:1), derudover estimeres de bias-justerede koefficienter ved brug af den analytiske bias formel af [@Pope1990], dvs. Ligning \@ref(eq:bias).
 
-## Resultatet fra modelselektionsproceduren
+## Resultater fra modelselektionsproceduren
+
+For at formindske modelkompleksiteten i VAR-modellen udføres den beskrevne *Top-down*/*backward-elimination* analyse, fra Sektion ??. Eftersom afkastprædiktabilitetsanalysen var kendetegnet ved lave signifikans niveauer, forventes det, at *AKFIC* analysen vil reducere antallet af relevante tilstandsvariable kraftigt. På denne måde vil en fuldt defineret VAR-process forhåbentligt stemme overens med de a priori teoretiske forventninger, og samtidig have et konservativt antal parametre, der givetvis vil følge det abduktive heuristiske parsimoni-princip kendt som *Occam's Razor*^[Den fordanskede udgave er næsten at foretrække: Ockhams ragekniv.] Derudover vil et reduceret system sandsynligvis signifikant formindske støjen af de estimerede koefficienter, som dermed vil lede til bedre eksterne stikprøve resultater^[Givet at denne stikprøve er repræsentativ for modelleringsstikprøven.]
+
+For at opnå den nødvendige dynamik til implementering af porteføljeallokeringen, præsenteres først resultatet fra *AKFIC* analysen og herefter estimeres sættet af restringerede VAR koefficienter fra det resulterende system. Slutteligt laves en kvalitativ analyse af *goodness-of-fit* for den resulterende VAR model, for at opnå bedre forståelse af modellen.
+
+## *AKFIC*-analysen
+Ved at følge modelselektionsproceduren fra Sektion ??, startes med at restringere ligninger for aktier og obligationertyperne. Resultatet af de tre analyser er vist i Tabel ??, Tabel ?? og Tabel ??. Den ikke-restringerede ligning for merafkastet af aktier har en *AKFIC* værdi på `r extractAIC(fit_var_akt, k=qchisq(0.05,df = 1, lower.tail = F))[2]`, som er den initielle basisværdi. Som hver af de laggede forklarende variable fjernes vil den resulterende *AKFIC* værdi reporteres i den første række. Den laveste *AKFIC* værdi resulterende fra fjernelse af én variabel markeres med fed, hvis den ligeledes forbedrer den initielle basis. Givet forbedring er denne værdi, nu også den nye basisværdi. Eksempelvis ses i første iteration at fjernelse af *Dividend-Price Ratio* er har den laveste *AKFIC* værdi på $-1264.27$. Denne er ligeledes optimal eftersom den er lavere end basisværdien. Basisværdien opdateres nu og processen gentages. I den sidste række er den laveste *AKFIC* værdi $-1283$ og er resultatet af at fjerne *Yield Spread*, dette er til gengæld ikke optimalt da værdien ikke er lavere end basis. Processen stoppes derfor. Dermed opnåes en temporal ligning for aktiemerafkastet. 
+
+Ved at udføre samme procedure for det risikofrie aktiv, statsobligationer og virksomhedsobligationer endes ud den følgende temporale modelspecifikation.
+\begin{align*}
+r_{t+1}^{\text{rf}}&=\phi_0^{\text{rf}} + \phi_1^{\text{rf}} x_{t}^{\text{dp}} +  \phi_2^{\text{rf}} x_{t}^{\text{bm}} + \phi_3^{\text{rf}} x_{t}^{\text{avar}} + \phi_4^{\text{rf}} x_{t}^{\text{smb}} + \phi_5^{\text{rf}} x_{t}^{\text{tb}} + \phi_6^{\text{rf}} x_{t}^{\text{ys}} + \phi_7^{\text{rf}} x_{t}^{\text{cs}} + \phi_8^{\text{rf}} x_{t}^{\text{ds}} + \phi_9^{\text{rf}} x_{t}^{\text{fr}}\\
+rx_{t+1}^{\text{a}}&=\phi_0^{\text{a}} + \phi_1^{\text{a}} rx_{t}^{\text{a}} +  \phi_2^{\text{a}} x_{t}^{\text{bm}} + \phi_3^{\text{a}} x_{t}^{\text{avar}} + \phi_4^{\text{a}} x_{t}^{\text{smb}} + \phi_5^{\text{a}} x_{t}^{\text{tb}} + \phi_6^{\text{a}} x_{t}^{\text{ts}} + \phi_7^{\text{a}} x_{t}^{\text{ys}} + \phi_8^{\text{a}} x_{t}^{\text{cs}} + \phi_9^{\text{a}} x_{t}^{\text{fr}}\\
+rx_{t+1}^{\text{s}}&=\phi_0^{\text{s}} + \phi_1^{\text{s}} rx_{t}^{\text{s}} +  \phi_2^{\text{s}} x_{t}^{\text{avar}} + \phi_3^{\text{s}} x_{t}^{\text{smb}} + \phi_4^{\text{s}} x_{t}^{\text{tb}} + \phi_5^{\text{s}} x_{t}^{\text{ys}} + \phi_6^{\text{s}} x_{t}^{\text{cs}} + \phi_7^{\text{s}} x_{t}^{\text{fr}}\\
+rx_{t+1}^{\text{v}}&=\phi_0^{\text{v}}+ \phi_1^{\text{v}} rx_{t}^{\text{v}} +  \phi_2^{\text{v}} x_{t}^{\text{avar}} + \phi_3^{\text{v}} x_{t}^{\text{smb}} + \phi_4^{\text{v}} x_{t}^{\text{tb}} + \phi_5^{\text{v}} x_{t}^{\text{ys}} + \phi_6^{\text{v}} x_{t}^{\text{cs}} + \phi_7^{\text{v}} x_{t}^{\text{fr}}.
+\end{align*}
+
+Dermed haves et temporalt system, som herfra vil udtyndes kvalitativt. 
+
+Givet den høje korrelation mellem rentespændende samt *Federal Funds Rate*, foretages en suboptimal beslutning ved at fjerne samtlige rentespænd på nær *Yield Spread*. Det korte rentespænd beholdes eftersom denne variabel generelt har udvist størst signifikans på tværs af alle aktivklasser i både den univariate samt multiple regressionsanalyse.
 
 ## VAR(1) estimation {#var1est}
 
@@ -1577,6 +1651,8 @@ VAR_TABLE %>%
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra po1990 er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 \end{landscape}
+
+## Backtest af VAR(1)-model
 
 # Problemer ved estimation
 

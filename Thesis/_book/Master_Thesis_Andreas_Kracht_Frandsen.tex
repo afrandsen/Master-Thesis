@@ -150,7 +150,9 @@
 
 \vspace{2mm}
 
-\Large Andreas Kracht Frandsen\footnote{Institut for Matematik, Aarhus Universitet, andreas.kracht.frandsen@jyskebank.dk.}
+\Large Andreas Kracht Frandsen\footnote{Institut for Matematik, Aarhus Universitet, andreas.kracht.frandsen@jyskebank.dk
+\vspace{1mm}
+Kreditmodeller, Jyske Bank.}
 
 \Large 201506176
 
@@ -183,6 +185,10 @@ Juni 2020
 \newpage
 
 \vspace*{\fill}
+
+\begin{wrapfigure}{L}{0.6\textwidth}
+    \includegraphics[width=6em]{latex/bync}
+\end{wrapfigure}
 
 Copyright \textcopyright\, 2020 \TeX nician og useR Andreas Kracht Frandsen
 
@@ -221,7 +227,6 @@ Dokumentet er i farver, men kan printes i sort/hvid uden at skabe visuelle mangl
 Farver igennem hele dokumentet er sat via pakken \emph{RColorBrewer} og dens tilhørende farvepalete \emph{Dark2}. Denne farvepalette tillader, at personer med nedsat farvesyn uden problemer kan skelne linjer, punkter osv. fra samtlige plots. Derudover er paletten printervenlig samt LCD-venlig.
 
 Gennem hele dokumentet er der anvendt \emph{fictitious entry}, der fungerer som en \emph{copyright trap}.
-'`
 \newpage
 
 \pagenumbering{arabic}
@@ -295,7 +300,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-05-24                  
+##  date     2020-05-25                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -2511,6 +2516,32 @@ $x_t^{\text{ds}}$ & -0.485 & -2.873 & 1.902 & 1.212 & -0.400 & 0.689\\
 \caption{Visuel inspektion af Kitchen-Sink regressionen for merafkastet på aktier.}\label{fig:MULT-s-auto}
 \end{figure}
 
+\begin{table}[H]
+
+\caption{\label{tab:MULT-step-s}Step optimeret multipel prædiktabilitet af merafkastet på statsobligationer.}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{lrrrrrr}
+\toprule
+\multicolumn{1}{c}{$rx_{t+1}^{\text{a}}$} & \multicolumn{1}{c}{ } & \multicolumn{2}{c}{Konfidensinterval} & \multicolumn{3}{c}{ } \\
+\cmidrule(l{3pt}r{3pt}){1-1} \cmidrule(l{3pt}r{3pt}){3-4}
+  & Koefficient & Nedre & Øvre & Standardfejl & $t$-værdi & $p$\\
+\midrule
+\rowcolor{gray!6}  Afskæring & \textbf{-0.020} & -0.032 & -0.009 & 0.006 & -3.491 & 0.001\\
+$x_t^{\sigma_{\text{a}}^2}$ & \textbf{-0.836} & -1.455 & -0.217 & 0.314 & -2.660 & 0.008\\
+\rowcolor{gray!6}  $x_t^{\text{smb}}$ & \textbf{-0.004} & -0.006 & -0.001 & 0.001 & -2.827 & 0.005\\
+$x_t^{\text{tb}}$ & \textbf{ 2.664} & 0.425 & 4.903 & 1.137 & 2.343 & 0.020\\
+\rowcolor{gray!6}  $x_t^{\text{ys}}$ & \textbf{-2.199} & -3.132 & -1.265 & 0.474 & -4.639 & 0.000\\
+$x_t^{\text{cs}}$ & \textbf{ 1.517} & 1.005 & 2.030 & 0.260 & 5.830 & 0.000\\
+\rowcolor{gray!6}  $x_t^{\text{fr}}$ & \textbf{-0.595} & -1.079 & -0.110 & 0.246 & -2.416 & 0.016\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
 \begin{figure}[H]
 
 {\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/MULT-s-step-auto-1} 
@@ -2563,6 +2594,31 @@ $x_t^{\text{ds}}$ & 1.754 & -1.147 & 4.656 & 1.473 & 1.191 & 0.235\\
 \caption{Visuel inspektion af Kitchen-Sink regressionen for merafkastet på aktier.}\label{fig:MULT-v-auto}
 \end{figure}
 
+\begin{table}[H]
+
+\caption{\label{tab:MULT-step-v}Step optimeret multipel prædiktabilitet af merafkastet på virksomhedsobligationer}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{lrrrrrr}
+\toprule
+\multicolumn{1}{c}{$rx_{t+1}^{\text{a}}$} & \multicolumn{1}{c}{ } & \multicolumn{2}{c}{Konfidensinterval} & \multicolumn{3}{c}{ } \\
+\cmidrule(l{3pt}r{3pt}){1-1} \cmidrule(l{3pt}r{3pt}){3-4}
+  & Koefficient & Nedre & Øvre & Standardfejl & $t$-værdi & $p$\\
+\midrule
+\rowcolor{gray!6}  Afskæring & -0.010 & -0.021 & 0.001 & 0.006 & -1.716 & 0.087\\
+$x_t^{\sigma_{\text{a}}^2}$ & -1.054 & -2.402 & 0.294 & 0.684 & -1.541 & 0.125\\
+\rowcolor{gray!6}  $x_t^{\text{smb}}$ & \textbf{-0.005} & -0.007 & -0.002 & 0.001 & -3.635 & 0.000\\
+$x_t^{\text{tb}}$ & 1.967 & -0.324 & 4.258 & 1.163 & 1.691 & 0.092\\
+\rowcolor{gray!6}  $x_t^{\text{ds}}$ & \textbf{ 4.075} & 2.224 & 5.926 & 0.940 & 4.337 & 0.000\\
+$x_t^{\text{fr}}$ & \textbf{-0.876} & -1.368 & -0.383 & 0.250 & -3.499 & 0.001\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
 \begin{figure}[H]
 
 {\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/MULT-v-step-auto-1} 
@@ -2580,8 +2636,29 @@ $x_t^{\text{ds}}$ & 1.754 & -1.147 & 4.656 & 1.473 & 1.191 & 0.235\\
 
 Dette kapitel har til formål at præsentere resultatet fra modelselektionproceduren, som blev præsenteret i Sektion \ref{sekmodelselek}. Derudover præsenterer kapitlet VAR(1)-modellens estimationsresultater i Sektion \ref{var1est}. Estimationen af VAR(1)-modellen er gennemført på den fulde stikprøve periode fra 1954 2. kvartal til 2018 4.kvartal, som tæller \(252\) kvartalsvise observationer. Den restringerede VAR(1)-model estimeres ved brug af Ligning \eqref{eq:1}, derudover estimeres de bias-justerede koefficienter ved brug af den analytiske bias formel af \citep{Pope1990}, dvs. Ligning \eqref{eq:bias}.
 
-\hypertarget{resultatet-fra-modelselektionsproceduren}{%
-\section{Resultatet fra modelselektionsproceduren}\label{resultatet-fra-modelselektionsproceduren}}
+\hypertarget{resultater-fra-modelselektionsproceduren}{%
+\section{Resultater fra modelselektionsproceduren}\label{resultater-fra-modelselektionsproceduren}}
+
+For at formindske modelkompleksiteten i VAR-modellen udføres den beskrevne \emph{Top-down}/\emph{backward-elimination} analyse, fra Sektion ??. Eftersom afkastprædiktabilitetsanalysen var kendetegnet ved lave signifikans niveauer, forventes det, at \emph{AKFIC} analysen vil reducere antallet af relevante tilstandsvariable kraftigt. På denne måde vil en fuldt defineret VAR-process forhåbentligt stemme overens med de a priori teoretiske forventninger, og samtidig have et konservativt antal parametre, der givetvis vil følge det abduktive heuristiske parsimoni-princip kendt som \emph{Occam's Razor}\footnote{Den fordanskede udgave er næsten at foretrække: Ockhams ragekniv.} Derudover vil et reduceret system sandsynligvis signifikant formindske støjen af de estimerede koefficienter, som dermed vil lede til bedre eksterne stikprøve resultater\footnote{Givet at denne stikprøve er repræsentativ for modelleringsstikprøven.}
+
+For at opnå den nødvendige dynamik til implementering af porteføljeallokeringen, præsenteres først resultatet fra \emph{AKFIC} analysen og herefter estimeres sættet af restringerede VAR koefficienter fra det resulterende system. Slutteligt laves en kvalitativ analyse af \emph{goodness-of-fit} for den resulterende VAR model, for at opnå bedre forståelse af modellen.
+
+\hypertarget{akfic-analysen}{%
+\section{\texorpdfstring{\emph{AKFIC}-analysen}{AKFIC-analysen}}\label{akfic-analysen}}
+
+Ved at følge modelselektionsproceduren fra Sektion ??, startes med at restringere ligninger for aktier og obligationertyperne. Resultatet af de tre analyser er vist i Tabel ??, Tabel ?? og Tabel ??. Den ikke-restringerede ligning for merafkastet af aktier har en \emph{AKFIC} værdi på -1260.5040333, som er den initielle basisværdi. Som hver af de laggede forklarende variable fjernes vil den resulterende \emph{AKFIC} værdi reporteres i den første række. Den laveste \emph{AKFIC} værdi resulterende fra fjernelse af én variabel markeres med fed, hvis den ligeledes forbedrer den initielle basis. Givet forbedring er denne værdi, nu også den nye basisværdi. Eksempelvis ses i første iteration at fjernelse af \emph{Dividend-Price Ratio} er har den laveste \emph{AKFIC} værdi på \(-1264.27\). Denne er ligeledes optimal eftersom den er lavere end basisværdien. Basisværdien opdateres nu og processen gentages. I den sidste række er den laveste \emph{AKFIC} værdi \(-1283\) og er resultatet af at fjerne \emph{Yield Spread}, dette er til gengæld ikke optimalt da værdien ikke er lavere end basis. Processen stoppes derfor. Dermed opnåes en temporal ligning for aktiemerafkastet.
+
+Ved at udføre samme procedure for det risikofrie aktiv, statsobligationer og virksomhedsobligationer endes ud den følgende temporale modelspecifikation.
+\begin{align*}
+r_{t+1}^{\text{rf}}&=\phi_0^{\text{rf}} + \phi_1^{\text{rf}} x_{t}^{\text{dp}} +  \phi_2^{\text{rf}} x_{t}^{\text{bm}} + \phi_3^{\text{rf}} x_{t}^{\text{avar}} + \phi_4^{\text{rf}} x_{t}^{\text{smb}} + \phi_5^{\text{rf}} x_{t}^{\text{tb}} + \phi_6^{\text{rf}} x_{t}^{\text{ys}} + \phi_7^{\text{rf}} x_{t}^{\text{cs}} + \phi_8^{\text{rf}} x_{t}^{\text{ds}} + \phi_9^{\text{rf}} x_{t}^{\text{fr}}\\
+rx_{t+1}^{\text{a}}&=\phi_0^{\text{a}} + \phi_1^{\text{a}} rx_{t}^{\text{a}} +  \phi_2^{\text{a}} x_{t}^{\text{bm}} + \phi_3^{\text{a}} x_{t}^{\text{avar}} + \phi_4^{\text{a}} x_{t}^{\text{smb}} + \phi_5^{\text{a}} x_{t}^{\text{tb}} + \phi_6^{\text{a}} x_{t}^{\text{ts}} + \phi_7^{\text{a}} x_{t}^{\text{ys}} + \phi_8^{\text{a}} x_{t}^{\text{cs}} + \phi_9^{\text{a}} x_{t}^{\text{fr}}\\
+rx_{t+1}^{\text{s}}&=\phi_0^{\text{s}} + \phi_1^{\text{s}} rx_{t}^{\text{s}} +  \phi_2^{\text{s}} x_{t}^{\text{avar}} + \phi_3^{\text{s}} x_{t}^{\text{smb}} + \phi_4^{\text{s}} x_{t}^{\text{tb}} + \phi_5^{\text{s}} x_{t}^{\text{ys}} + \phi_6^{\text{s}} x_{t}^{\text{cs}} + \phi_7^{\text{s}} x_{t}^{\text{fr}}\\
+rx_{t+1}^{\text{v}}&=\phi_0^{\text{v}}+ \phi_1^{\text{v}} rx_{t}^{\text{v}} +  \phi_2^{\text{v}} x_{t}^{\text{avar}} + \phi_3^{\text{v}} x_{t}^{\text{smb}} + \phi_4^{\text{v}} x_{t}^{\text{tb}} + \phi_5^{\text{v}} x_{t}^{\text{ys}} + \phi_6^{\text{v}} x_{t}^{\text{cs}} + \phi_7^{\text{v}} x_{t}^{\text{fr}}.
+\end{align*}
+
+Dermed haves et temporalt system, som herfra vil udtyndes kvalitativt.
+
+Givet den høje korrelation mellem rentespændende samt \emph{Federal Funds Rate}, foretages en suboptimal beslutning ved at fjerne samtlige rentespænd på nær \emph{Yield Spread}. Det korte rentespænd beholdes eftersom denne variabel generelt har udvist størst signifikans på tværs af alle aktivklasser i både den univariate samt multiple regressionsanalyse.
 
 \hypertarget{var1est}{%
 \section{VAR(1) estimation}\label{var1est}}
@@ -2659,6 +2736,9 @@ $x_t^{\text{b}}$ & -0.018 & 0.001 & \textbf{-0.030} & -0.013 & 0.002 & 0.011 & 0
 \end{threeparttable}
 \end{table}
 \end{landscape}
+
+\hypertarget{backtest-af-var1-model}{%
+\section{Backtest af VAR(1)-model}\label{backtest-af-var1-model}}
 
 \hypertarget{problemer-ved-estimation}{%
 \chapter{Problemer ved estimation}\label{problemer-ved-estimation}}

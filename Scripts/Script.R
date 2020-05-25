@@ -201,8 +201,6 @@ data_mult_v <- subset(data_mult_v, select = -V_OBL.1)
 # KITCHEN SINK
 fit_AKT <- lm(AKT ~ DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_mult_akt)
 
-test <- lm(AKT~NET_TB + S_OBL + V_OBL + TB + BM + T_SPREAD + FR, data = data_mult_akt)
-
 step_AKT_model <- step(fit_AKT, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=AKT ~ TB, upper=fit_AKT))
 
 summary(step_AKT_model)
@@ -234,6 +232,14 @@ FIT_M_S_TABLE <- data.frame(coef=coef(fit_S_OBL),
                           t=coeftest(fit_S_OBL, vcov. = NeweyWest(fit_S_OBL))[,3],
                           p=coeftest(fit_S_OBL, vcov. = NeweyWest(fit_S_OBL))[,4])
 
+FIT_M_S_STEP_TABLE <- data.frame(coef=coef(step_S_OBL_model),
+                               cf=data.frame(coefci(step_S_OBL_model, vcov. = NeweyWest(step_S_OBL_model))[,1],
+                                             coefci(step_S_OBL_model, vcov. = NeweyWest(step_S_OBL_model))[,2]),
+                               sd=sqrt(diag(NeweyWest(step_S_OBL_model))),
+                               t=coeftest(step_S_OBL_model, vcov. = NeweyWest(step_S_OBL_model))[,3],
+                               p=coeftest(step_S_OBL_model, vcov. = NeweyWest(step_S_OBL_model))[,4])
+
+
 fit_V_OBL <- lm(V_OBL ~ DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_mult_v)
 
 step_V_OBL_model <- step(fit_V_OBL, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=V_OBL ~ TB, upper=fit_V_OBL))
@@ -249,6 +255,13 @@ FIT_M_V_TABLE <- data.frame(coef=coef(fit_V_OBL),
 
 
 
+FIT_M_V_STEP_TABLE <- data.frame(coef=coef(step_V_OBL_model),
+                                 cf=data.frame(coefci(step_V_OBL_model, vcov. = NeweyWest(step_V_OBL_model))[,1],
+                                               coefci(step_V_OBL_model, vcov. = NeweyWest(step_V_OBL_model))[,2]),
+                                 sd=sqrt(diag(NeweyWest(step_V_OBL_model))),
+                                 t=coeftest(step_V_OBL_model, vcov. = NeweyWest(step_V_OBL_model))[,3],
+                                 p=coeftest(step_V_OBL_model, vcov. = NeweyWest(step_V_OBL_model))[,4])
+
 
 
 
@@ -257,34 +270,47 @@ FIT_M_V_TABLE <- data.frame(coef=coef(fit_V_OBL),
 
 # VAR
 
-# data <- xts::xts(merge(NET_TB, AKT, S_OBL, V_OBL, DP, EP, BM, AKT_VAR, HML, SMB, TB, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR), index(NET_TB))
-# 
-# ## AKTIER
-# data_var_akt <- as.xts(merge(xts::lag.xts(data$AKT, -1, na.pad = FALSE), head(data, -1)))
-# 
-# fit_var_akt  <- lm(AKT ~ NET_TB + AKT.1 + S_OBL + V_OBL + DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_var_akt)
-# 
-# step_var_akt_model <- step(fit_var_akt, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=AKT ~ TB, upper=fit_var_akt))
-# 
-# summary(step_var_akt_model)
-# 
-# ## STATS
-# data_var_s <- as.xts(merge(xts::lag.xts(data$S_OBL, -1, na.pad = FALSE), head(data, -1)))
-# 
-# fit_var_s  <- lm(S_OBL ~ NET_TB + AKT + S_OBL.1 + V_OBL + DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_var_s)
-# 
-# step_var_s_model <- step(fit_var_s, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=S_OBL ~ TB, upper=fit_var_s))
-# 
-# summary(step_var_s_model)
-# 
-# ## VIRKSOMHEDER
-# data_var_v <- as.xts(merge(xts::lag.xts(data$V_OBL, -1, na.pad = FALSE), head(data, -1)))
-# 
-# fit_var_v  <- lm(V_OBL ~ NET_TB + AKT + S_OBL + V_OBL.1 + DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_var_v)
-# 
-# step_var_v_model <- step(fit_var_v, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=V_OBL ~ TB, upper=fit_var_v))
-# 
-# summary(step_var_v_model)
+data <- xts::xts(merge(NET_TB, AKT, S_OBL, V_OBL, DP, EP, BM, AKT_VAR, HML, SMB, TB, T_SPREAD, Y_SPREAD, C_SPREAD, D_SPREAD, FR), index(NET_TB))
+
+## RISIKOFRI
+data_var_rf <- as.xts(merge(xts::lag.xts(data$NET_TB, -1, na.pad = FALSE), head(data, -1)))
+
+fit_var_rf  <- lm(NET_TB ~ NET_TB.1 + AKT + S_OBL + V_OBL + DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_var_rf)
+
+step_var_rf_model <- step(fit_var_rf, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=NET_TB ~ TB, upper=fit_var_rf))
+
+summary(step_var_rf_model)
+
+## AKTIER
+data_var_akt <- as.xts(merge(xts::lag.xts(data$AKT, -1, na.pad = FALSE), head(data, -1)))
+
+fit_var_akt  <- lm(AKT ~ NET_TB + AKT.1 + S_OBL + V_OBL + DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_var_akt)
+
+step_var_akt_model <- step(fit_var_akt, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=AKT ~ TB, upper=fit_var_akt))
+
+summary(step_var_akt_model)
+
+prod_var_akt <- lm(AKT ~ NET_TB + AKT.1 + S_OBL + V_OBL + BM + AKT_VAR + SMB + TB + Y_SPREAD, data=data_var_akt)
+
+car::vif(prod_var_akt)
+
+## STATS
+data_var_s <- as.xts(merge(xts::lag.xts(data$S_OBL, -1, na.pad = FALSE), head(data, -1)))
+
+fit_var_s  <- lm(S_OBL ~ NET_TB + AKT + S_OBL.1 + V_OBL + DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_var_s)
+
+step_var_s_model <- step(fit_var_s, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=S_OBL ~ TB, upper=fit_var_s))
+
+summary(step_var_s_model)
+
+## VIRKSOMHEDER
+data_var_v <- as.xts(merge(xts::lag.xts(data$V_OBL, -1, na.pad = FALSE), head(data, -1)))
+
+fit_var_v  <- lm(V_OBL ~ NET_TB + AKT + S_OBL + V_OBL.1 + DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_var_v)
+
+step_var_v_model <- step(fit_var_v, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=V_OBL ~ TB, upper=fit_var_v))
+
+summary(step_var_v_model)
 
 
 
