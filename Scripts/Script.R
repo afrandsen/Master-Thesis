@@ -277,20 +277,24 @@ data_var_rf <- as.xts(merge(xts::lag.xts(data$NET_TB, -1, na.pad = FALSE), head(
 
 fit_var_rf  <- lm(NET_TB ~ NET_TB.1 + AKT + S_OBL + V_OBL + DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_var_rf)
 
-step_var_rf_model <- step(fit_var_rf, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=NET_TB ~ TB, upper=fit_var_rf))
+step_var_rf_model <- step(fit_var_rf, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=NET_TB ~ NET_TB.1 + AKT + S_OBL + V_OBL + TB, upper=fit_var_rf))
 
 summary(step_var_rf_model)
+
+prod_var_rf <- lm(NET_TB ~ NET_TB.1 + AKT + S_OBL + V_OBL + BM + SMB + TB + Y_SPREAD, data=data_var_rf)
+
+car::vif(prod_var_rf)
 
 ## AKTIER
 data_var_akt <- as.xts(merge(xts::lag.xts(data$AKT, -1, na.pad = FALSE), head(data, -1)))
 
 fit_var_akt  <- lm(AKT ~ NET_TB + AKT.1 + S_OBL + V_OBL + DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_var_akt)
 
-step_var_akt_model <- step(fit_var_akt, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=AKT ~ TB, upper=fit_var_akt))
+step_var_akt_model <- step(fit_var_akt, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=AKT ~ NET_TB + AKT.1 + S_OBL + V_OBL + TB, upper=fit_var_akt))
 
 summary(step_var_akt_model)
 
-prod_var_akt <- lm(AKT ~ NET_TB + AKT.1 + S_OBL + V_OBL + BM + AKT_VAR + SMB + TB + Y_SPREAD, data=data_var_akt)
+prod_var_akt <- lm(AKT ~ NET_TB + AKT.1 + S_OBL + V_OBL + BM + SMB + TB + Y_SPREAD, data=data_var_akt)
 
 car::vif(prod_var_akt)
 
@@ -299,18 +303,26 @@ data_var_s <- as.xts(merge(xts::lag.xts(data$S_OBL, -1, na.pad = FALSE), head(da
 
 fit_var_s  <- lm(S_OBL ~ NET_TB + AKT + S_OBL.1 + V_OBL + DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_var_s)
 
-step_var_s_model <- step(fit_var_s, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=S_OBL ~ TB, upper=fit_var_s))
+step_var_s_model <- step(fit_var_s, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=S_OBL ~ NET_TB + AKT + S_OBL.1 + V_OBL + TB, upper=fit_var_s))
 
 summary(step_var_s_model)
+
+prod_var_s <- lm(S_OBL ~ NET_TB + AKT + S_OBL.1 + V_OBL + BM + SMB + TB + Y_SPREAD, data=data_var_s)
+
+car::vif(prod_var_s)
 
 ## VIRKSOMHEDER
 data_var_v <- as.xts(merge(xts::lag.xts(data$V_OBL, -1, na.pad = FALSE), head(data, -1)))
 
 fit_var_v  <- lm(V_OBL ~ NET_TB + AKT + S_OBL + V_OBL.1 + DP + EP + BM + AKT_VAR + HML + SMB + TB + T_SPREAD + Y_SPREAD + C_SPREAD + D_SPREAD + FR, data=data_var_v)
 
-step_var_v_model <- step(fit_var_v, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=V_OBL ~ TB, upper=fit_var_v))
+step_var_v_model <- step(fit_var_v, k = qchisq(0.05,df = 1, lower.tail = F), scope = list(lower=V_OBL ~ NET_TB + AKT + S_OBL + V_OBL.1 + TB, upper=fit_var_v))
 
 summary(step_var_v_model)
+
+prod_var_v <- lm(V_OBL ~ NET_TB + AKT + S_OBL + V_OBL.1 + BM + SMB + TB + Y_SPREAD, data=data_var_v)
+
+car::vif(prod_var_v)
 
 
 
@@ -319,7 +331,7 @@ summary(step_var_v_model)
 
 data_v <- as.ts(data)
 # 
-data_sub <- subset(data_v, select = -c(DP, EP, HML, T_SPREAD, C_SPREAD, D_SPREAD, FR))
+data_sub <- subset(data_v, select = -c(DP, EP, AKT_VAR, HML, T_SPREAD, C_SPREAD, D_SPREAD, FR))
 # 
 var <- VAR(data_sub, p = 1)
 var.p <- VAR.Pope(data_sub, p = 1)
@@ -332,12 +344,13 @@ cor <- summary(var)$corres
 
 test <- summary(var)
 
-VAR_TABLE <- data.frame(coef)
+VAR_TABLE <- data.frame(coef,
+                        rsq=unlist(lapply(1:8, function(x) test$varresult[[x]]$adj.r.squared)))
 
 VAR_TABLE <- format(round(VAR_TABLE, digits = 3), nsmall = 3)
 
-for (j in c(1:9)) {
-  for (i in c(1:10)){
+for (j in c(1:8)) {
+  for (i in c(1:9)){
     if (abs(test$varresult[[j]]$coefficients[,3][i])>=qnorm(0.975)) {
       VAR_TABLE[j,i] <- paste0("\\textbf{", VAR_TABLE[j,i],"}")
     }
@@ -347,7 +360,7 @@ for (j in c(1:9)) {
 
 j <- 0
 
-for (i in c(1:9)) {
+for (i in c(1:8)) {
 
   VAR_TABLE <- rbind(VAR_TABLE[(1):(1+j),],
                      format(round(var.p$coef[i,],3), nsmall = 3),
@@ -360,7 +373,7 @@ for (i in c(1:9)) {
   j <- j + 3
 }
 
-for (i in seq(1,27,3)){
+for (i in seq(1,24,3)){
 
 VAR_TABLE[i+1,] <- gsub("\\s", "", paste0("(", VAR_TABLE[i+1,], ")"))
 
@@ -368,9 +381,15 @@ VAR_TABLE[i+2,] <- gsub("\\s", "", paste0("[", VAR_TABLE[i+2,], "]"))
 
 }
 
+VAR_TABLE <- cbind(NAME=c("$r_t^{\\text{rf}}$","","", "$rx_t^{\\text{a}}$","","", "$rx_t^{\\text{s}}$","","", "$rx_t^{\\text{v}}$","","", '$x_t^{\\text{bm}}$',"","", '$x_t^{\\text{smb}}$',"","", '$x_t^{\\text{b}}$',"","", '$x_t^{\\text{ys}}$',"",""), VAR_TABLE)
 
-VAR_TABLE <- cbind(NAME=c("$r_t^{\\text{rf}}$","","", "$rx_t^{\\text{a}}$","","", "$rx_t^{\\text{s}}$","","", "$rx_t^{\\text{v}}$","","", '$x_t^{\\text{bm}}$',"","", '$x_t^{\\text{avar}}$',"","", '$x_t^{\\text{smb}}$',"","", '$x_t^{\\text{b}}$',"","", '$x_t^{\\text{ys}}$',"",""), VAR_TABLE)
+VAR_TABLE <- VAR_TABLE[,c(1,10,2,3,4,5,6,7,8,9,11)]
 
+for (i in seq(1,24,3)){
+  VAR_TABLE[i+1, 11] <- NA
+  
+  VAR_TABLE[i+2,11] <- NA
+}
 
 recessions.df = read.table(textConnection(
   "Peak, Trough

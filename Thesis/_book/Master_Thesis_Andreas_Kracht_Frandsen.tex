@@ -151,6 +151,7 @@
 \vspace{2mm}
 
 \Large Andreas Kracht Frandsen\footnote{Institut for Matematik, Aarhus Universitet, andreas.kracht.frandsen@jyskebank.dk
+
 \vspace{1mm}
 Kreditmodeller, Jyske Bank.}
 
@@ -300,7 +301,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-05-25                  
+##  date     2020-05-26                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -882,7 +883,7 @@ En relevant makroøkonomisk del til at forklare variationen i specielt obligatio
 \hypertarget{opsummering}{%
 \section{Opsummering}\label{opsummering}}
 
-Dette kapitel fungerede som et overblik over de approksimative og eksakte analytiske resultater på tværs af en række af aktiver. Ved benyttelse af den loglineære afkast approksimation af {[}campbell1988{]}, blev aktivklassernes nutidsværdi relateret til forventede fremtidige betalinger. Dette tilladte at prædiktiverelationer på tværs af aktivklasserne blev dannet, som er essentielle, når den mulige prædiktabilitet skal begrundes. Disse relationer vil derfor også kunne inkorporeres i den følgende VAR(1)-model. Derudover er en lang række variable ligeledes blevet præsenteret og diskuteret. Disse potentielle prædiktionsvariable er medtaget grundet tidligere litterære fund, som viser at prædiktabiliteten af afkast kan fanges af flere variable end de fundamentalt bundne variable.
+Dette kapitel fungerede som et overblik over de approksimative og eksakte analytiske resultater på tværs af en række af aktiver. Ved benyttelse af den loglineære afkast approksimation af \citep{Campbell1988}, blev aktivklassernes nutidsværdi relateret til forventede fremtidige betalinger. Dette tilladte at prædiktiverelationer på tværs af aktivklasserne blev dannet, som er essentielle, når den mulige prædiktabilitet skal begrundes. Disse relationer vil derfor også kunne inkorporeres i den følgende VAR(1)-model. Derudover er en lang række variable ligeledes blevet præsenteret og diskuteret. Disse potentielle prædiktionsvariable er medtaget grundet tidligere litterære fund, som viser at prædiktabiliteten af afkast kan fanges af flere variable end de fundamentalt bundne variable.
 
 \hypertarget{varkapitel}{%
 \chapter{VAR}\label{varkapitel}}
@@ -1371,23 +1372,21 @@ En ikke-restringeret VAR model indeholdende samtlige variable vil givetvis have 
 hvor \(\hat{\Sigma}\) repræsentere dne estimerede kovariansmatrix af residualerne og \(k\) vil afhænge af det valgte informationskriterie. Informationskriteriet vil dermed foretrække modeller med lav varians, men samtidig straffe modeller med inkludering af for mange variable. I denne afhandling benyttes det såkaldte \emph{Andreas Kracht Frandsen Information Criteria}, \emph{AKFIC}. Til forskel for det kendte \emph{Akaike Information Criteria} straffes modellen med en faktor på
 \[k=\frac{Q(0.05)}{T}=\frac{3.841}{T},\]
 
-hvor \(Q(\cdot)\) er kvantilfunktionen for \(\chi^2\)-fordelingen. I stedet for en faktor på
+hvor \(F^{-1}_{\chi_{+}^2}(\cdot)\) er kvantilfunktionen for den ensidet \(\chi^2\)-fordeling. I stedet for en faktor på
 \[k=\frac{2}{T}.\]
 
 hvor \(T\) repræsenterer stikprøvestørrelsen. I praksis implementeres \emph{Top-down} strategien ved at undersøge én ligning fra VAR systemets ligninger af de fire aktiver. Først evalueres kriteriet for den ikke-restringerede regression, herefter fjernes én forklarende variabel af gangen og kriteriet bliver genberegnet. Dernæst vil den laveste \emph{AKFIC} værdi indikerer, hvilken variabel, der giver mindst ekstra information om variationen i responsvariablen, og er på den måde den bedste kandidat til fjernelse fra modellen. Denne midlertidige modelkandidat med laveste \emph{AKFIC} sammenlignes nu med den intielle model, givet at der ligeldes er forbedring ift. den intielle, vil denne midlertidige model nu være den nye basismodel. Denne process fortsætter rekursivt indtil ingen forklarende variable kan fjernes for at forbedre \emph{AKFIC} værdien.
 
-Processen køres kun for regressionerne for aktivafkastene på det fulde datasæt, for at have et kvantitativt bud på deres optimale prædiktionsvariable. Eftersom fokus er på porteføljeallokering, restringeres datasættet herefter til kun at indeholde variablene, der forbliver i modellen efter \emph{Top-down} processen. Dernæst holdes variablene op i mod de univariate og multiple regressioner samt korrelationsanalysen, for at undgå mulige multikollinaritetsproblemer. Skulle der være problemer med multikollinarietet fjernes evt. problematiske variable. Hvis de forklarende variable herefter er forskellige på tværs af aktivklasserne foretages en kvalitativ vurdering, som har til formål at udvælge en delmængde af de tilbageværende variable, som fuldt kommer til at indgå i VAR(1)-modellen.
-
-Slutteligt foretages en \emph{Variance Inflation Factor} analyse, som et sidste tjek for multikollinaritet. Analysen foretages i tre skridt. For samtlige foreklarende variable laves følgende regression
+Processen køres kun for regressionerne for aktivafkastene på det fulde datasæt, for at have et kvantitativt bud på deres optimale prædiktionsvariable. Eftersom fokus er på porteføljeallokering, restringeres datasættet herefter til kun at indeholde variablene, der forbliver i modellen efter \emph{Top-down} processen. Dernæst holdes variablene op i mod de univariate og multiple regressioner samt korrelationsanalysen, for at undgå mulige multikollinaritetsproblemer. Derudover foretages en \emph{Variance Inflation Factor} analyse, som endnu et tjek for multikollinaritet. Analysen foretages i tre skridt. For samtlige forklarende variable fra \emph{Top-down} processen laves følgende regression
 \[x_t^i=\alpha+\bm{\beta}^j + \bm{x}_t^{j}+\varepsilon_t.\]
 
 Dernæst beregnes \emph{VIF}-værdien for hvert \(\beta^j\) som
 \[\text{VIF}_i=\frac{1}{1-R_i^2},\]
 
-hvor \(R_i^2\) stammer fra regressionen i ovenstående Ligning ??. Det sidste skridt består i at undersøge størrelsesordenen af multikollinaritet, ved at tjekke størrelsen på \(\text{VIF}_i\). En generel regel er, at multikollinariteten er høj når \(\text{VIF}_i>10\). Kvadratroden af \(\text{VIF}\) indikerer, hvor meget standardfejlen øges, sammenlignet med tilfældet, hvor variablen hypotetisk ingen korrelation har til de andre variable i modellen.
+hvor \(R_i^2\) stammer fra regressionen i ovenstående Ligning ??. Det sidste skridt består i at undersøge størrelsesordenen af multikollinaritet, ved at tjekke størrelsen på \(\text{VIF}_i\). En generel regel er, at multikollinariteten er meget høj når \(\text{VIF}_i>10\). Kvadratroden af \(\text{VIF}\) indikerer, hvor meget standardfejlen øges, sammenlignet med tilfældet, hvor variablen hypotetisk ingen korrelation har til de andre variable i modellen. Skulle der være problemer med multikollinarietet fjernes evt. problematiske variable. Hvis de forklarende variable herefter er forskellige på tværs af aktivklasserne foretages en kvalitativ vurdering, som har til formål at udvælge en delmængde af de tilbageværende variable, som fuldt kommer til at indgå i VAR(1)-modellen.
 
-\hypertarget{opsummering-1}{%
-\section{Opsummering}\label{opsummering-1}}
+Slutteligt foretages en sidste \emph{Variance Inflation Factor} analyse, som et sidste tjek for multikollinaritet.
+\#\# Opsummering
 
 \hypertarget{kapiteldatab}{%
 \chapter{Data beskrivelse}\label{kapiteldatab}}
@@ -2646,22 +2645,68 @@ For at opnå den nødvendige dynamik til implementering af porteføljeallokering
 \hypertarget{akfic-analysen}{%
 \section{\texorpdfstring{\emph{AKFIC}-analysen}{AKFIC-analysen}}\label{akfic-analysen}}
 
-Ved at følge modelselektionsproceduren fra Sektion ??, startes med at restringere ligninger for aktier og obligationertyperne. Resultatet af de tre analyser er vist i Tabel ??, Tabel ?? og Tabel ??. Den ikke-restringerede ligning for merafkastet af aktier har en \emph{AKFIC} værdi på -1260.5040333, som er den initielle basisværdi. Som hver af de laggede forklarende variable fjernes vil den resulterende \emph{AKFIC} værdi reporteres i den første række. Den laveste \emph{AKFIC} værdi resulterende fra fjernelse af én variabel markeres med fed, hvis den ligeledes forbedrer den initielle basis. Givet forbedring er denne værdi, nu også den nye basisværdi. Eksempelvis ses i første iteration at fjernelse af \emph{Dividend-Price Ratio} er har den laveste \emph{AKFIC} værdi på \(-1264.27\). Denne er ligeledes optimal eftersom den er lavere end basisværdien. Basisværdien opdateres nu og processen gentages. I den sidste række er den laveste \emph{AKFIC} værdi \(-1283\) og er resultatet af at fjerne \emph{Yield Spread}, dette er til gengæld ikke optimalt da værdien ikke er lavere end basis. Processen stoppes derfor. Dermed opnåes en temporal ligning for aktiemerafkastet.
+Ved at følge modelselektionsproceduren fra Sektion ??, startes med at restringere ligninger for aktier og obligationertyperne. Resultatet af de fire analyser er vist i Tabel ??, Tabel ??, Tabel ?? og Tabel ??. Den ikke-restringerede ligning for merafkastet af aktier har en \emph{AKFIC} værdi på -1260.5040333, som er den initielle basisværdi. Som hver af de laggede forklarende variable fjernes vil den resulterende \emph{AKFIC} værdi reporteres i den første række. Den laveste \emph{AKFIC} værdi resulterende fra fjernelse af én variabel markeres med fed, hvis den ligeledes forbedrer den initielle basis. Givet forbedring er denne værdi, nu også den nye basisværdi. Eksempelvis ses i første iteration at fjernelse af \emph{Dividend-Price Ratio} er har den laveste \emph{AKFIC} værdi på \(-1264.27\). Denne er ligeledes optimal eftersom den er lavere end basisværdien. Basisværdien opdateres nu og processen gentages. I den sidste række er den laveste \emph{AKFIC} værdi \(-1276.40\) og er resultatet af at fjerne \emph{Small Minus Big}, dette er til gengæld ikke optimalt da værdien ikke er lavere end basis. Processen stoppes derfor. Dermed opnåes en temporal ligning for aktiemerafkastet.
 
 Ved at udføre samme procedure for det risikofrie aktiv, statsobligationer og virksomhedsobligationer endes ud den følgende temporale modelspecifikation.
 \begin{align*}
-r_{t+1}^{\text{rf}}&=\phi_0^{\text{rf}} + \phi_1^{\text{rf}} x_{t}^{\text{dp}} +  \phi_2^{\text{rf}} x_{t}^{\text{bm}} + \phi_3^{\text{rf}} x_{t}^{\text{avar}} + \phi_4^{\text{rf}} x_{t}^{\text{smb}} + \phi_5^{\text{rf}} x_{t}^{\text{tb}} + \phi_6^{\text{rf}} x_{t}^{\text{ys}} + \phi_7^{\text{rf}} x_{t}^{\text{cs}} + \phi_8^{\text{rf}} x_{t}^{\text{ds}} + \phi_9^{\text{rf}} x_{t}^{\text{fr}}\\
-rx_{t+1}^{\text{a}}&=\phi_0^{\text{a}} + \phi_1^{\text{a}} rx_{t}^{\text{a}} +  \phi_2^{\text{a}} x_{t}^{\text{bm}} + \phi_3^{\text{a}} x_{t}^{\text{avar}} + \phi_4^{\text{a}} x_{t}^{\text{smb}} + \phi_5^{\text{a}} x_{t}^{\text{tb}} + \phi_6^{\text{a}} x_{t}^{\text{ts}} + \phi_7^{\text{a}} x_{t}^{\text{ys}} + \phi_8^{\text{a}} x_{t}^{\text{cs}} + \phi_9^{\text{a}} x_{t}^{\text{fr}}\\
-rx_{t+1}^{\text{s}}&=\phi_0^{\text{s}} + \phi_1^{\text{s}} rx_{t}^{\text{s}} +  \phi_2^{\text{s}} x_{t}^{\text{avar}} + \phi_3^{\text{s}} x_{t}^{\text{smb}} + \phi_4^{\text{s}} x_{t}^{\text{tb}} + \phi_5^{\text{s}} x_{t}^{\text{ys}} + \phi_6^{\text{s}} x_{t}^{\text{cs}} + \phi_7^{\text{s}} x_{t}^{\text{fr}}\\
-rx_{t+1}^{\text{v}}&=\phi_0^{\text{v}}+ \phi_1^{\text{v}} rx_{t}^{\text{v}} +  \phi_2^{\text{v}} x_{t}^{\text{avar}} + \phi_3^{\text{v}} x_{t}^{\text{smb}} + \phi_4^{\text{v}} x_{t}^{\text{tb}} + \phi_5^{\text{v}} x_{t}^{\text{ys}} + \phi_6^{\text{v}} x_{t}^{\text{cs}} + \phi_7^{\text{v}} x_{t}^{\text{fr}}.
+r_{t+1}^{\text{rf}}&=\phi_0^{\text{rf}} + \phi_1^{\text{rf}} r_{t}^{\text{rf}} +  \phi_2^{\text{rf}} rx_{t}^{\text{a}} + \phi_3^{\text{rf}} rx_{t}^{\text{s}} + \phi_4^{\text{rf}} rx_{t}^{\text{v}} + \phi_5^{\text{rf}} x_{t}^{\text{bm}} + \phi_6^{\text{rf}} x_{t}^{\text{avar}} + \phi_7^{\text{rf}} x_{t}^{\text{smb}} + \phi_8^{\text{rf}} x_{t}^{\text{b}} + \phi_9^{\text{rf}} x_{t}^{\text{ys}}\\
+&\quad+ \phi_{10}^{\text{rf}} x_{t}^{\text{cs}}+ \phi_{11}^{\text{rf}} x_{t}^{\text{ds}} + \phi_{12}^{\text{rf}} x_{t}^{\text{fr}}\\
+rx_{t+1}^{\text{a}}&=\phi_0^{\text{a}} + \phi_1^{\text{a}} r_{t}^{\text{rf}} +  \phi_2^{\text{a}} rx_{t}^{\text{a}} + \phi_3^{\text{a}} rx_{t}^{\text{s}} + \phi_4^{\text{a}} rx_{t}^{\text{v}} + \phi_5^{\text{a}} x_{t}^{\text{bm}} + \phi_6^{\text{a}} x_{t}^{\text{smb}} + \phi_7^{\text{a}} x_{t}^{\text{b}} + \phi_8^{\text{a}} x_{t}^{\text{fr}}\\
+rx_{t+1}^{\text{s}}&=\phi_0^{\text{s}} + \phi_1^{\text{s}} r_{t}^{\text{rf}} +  \phi_2^{\text{s}} rx_{t}^{\text{a}} + \phi_3^{\text{s}} rx_{t}^{\text{s}} + \phi_4^{\text{s}} rx_{t}^{\text{v}} + \phi_5^{\text{s}} x_{t}^{\text{avar}} + \phi_6^{\text{s}} x_{t}^{\text{smb}} + \phi_7^{\text{s}} x_{t}^{\text{b}} + \phi_8^{\text{s}} x_{t}^{\text{ys}}+ \phi_{10}^{\text{s}} x_{t}^{\text{cs}}+ \phi_{11}^{\text{s}} x_{t}^{\text{fr}}\\
+rx_{t+1}^{\text{v}}&=\phi_0^{\text{v}}+ \phi_1^{\text{v}} r_{t}^{\text{rf}} +  \phi_2^{\text{v}} rx_{t}^{\text{a}} + \phi_3^{\text{v}} rx_{t}^{\text{s}} + \phi_4^{\text{v}} rx_{t}^{\text{v}} + \phi_5^{\text{v}} x_{t}^{\text{avar}} + \phi_6^{\text{v}} x_{t}^{\text{smb}} + \phi_7^{\text{v}} x_{t}^{\text{b}} + \phi_8^{\text{v}} x_{t}^{\text{ys}}+ \phi_9^{\text{v}} x_{t}^{\text{cs}} + \phi_{10}^{\text{v}} x_{t}^{\text{fr}}.
 \end{align*}
 
-Dermed haves et temporalt system, som herfra vil udtyndes kvalitativt.
+Dermed haves et temporalt system, som herfra vil udtyndes kvalitativt. Disse kvalitative valg støttes først og fremmest af en \emph{VIF} analyse. Tabel \ref{tab:VIF-TAB} viser \emph{VIF} analysen for hver af de forklarende variable fra de fire regressionsligninger.
 
-Givet den høje korrelation mellem rentespændende samt \emph{Federal Funds Rate}, foretages en suboptimal beslutning ved at fjerne samtlige rentespænd på nær \emph{Yield Spread}. Det korte rentespænd beholdes eftersom denne variabel generelt har udvist størst signifikans på tværs af alle aktivklasser i både den univariate samt multiple regressionsanalyse.
+\begin{table}[H]
+
+\caption{\label{tab:VIF-TAB}VIF Analyse.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{threeparttable}
+\begin{tabular}[t]{cccccccccccc}
+\toprule
+$r_t^{\text{rf}}$ & $rx_t^{\text{a}}$ & $rx_t^{\text{s}}$ & $rx_t^{\text{v}}$ & $x_t^{\text{bm}}$ & $x_t^{\text{avar}}$ & $x_t^{\text{smb}}$ & $x_t^{\text{b}}$ & $x_t^{\text{ys}}$ & $x_t^{\text{cs}}$ & $x_t^{\text{ds}}$ & $x_t^{\text{fr}}$\\
+\midrule
+\rowcolor{gray!6}  1.919 & 1.877 & 4.284 & 4.595 & 2.730 & 2.046 & 1.273 & 9.909 & 6.339 & 11.997 & 5.370 & 9.663\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra po1990 er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\end{tablenotes}
+\end{threeparttable}}
+\end{table}
+
+Som forventet på baggrund af den høje korrelation mellem rentespændende samt \emph{Federal Funds Rate}, ses en høj \emph{VIF} værdi for disse variable. Derfor foretages en suboptimal beslutning ved at fjerne samtlige rentespænd på nær \emph{Yield Spread}. Det korte rentespænd beholdes eftersom denne variabel generelt har udvist størst signifikans på tværs af alle aktivklasser i både den univariate samt multiple regressionsanalyse. På baggrund af den forholdsvis begrænsede stikprøvestørrelse vælges ligeledes at udeholde aktievariansen fra modellen. Dette gøres for at opretholde en lige fordeling af finansielle variable ift. rentestruktursvariable.
+
+Tabel \ref{tab:VIF-TAB-PROD} viser \emph{VIF} analysen for de tilbageværende variable i modellen.
+
+\begin{table}[H]
+
+\caption{\label{tab:VIF-TAB-PROD}VIF Analyse.}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{cccccccc}
+\toprule
+$r_t^{\text{rf}}$ & $rx_t^{\text{a}}$ & $rx_t^{\text{s}}$ & $rx_t^{\text{v}}$ & $x_t^{\text{bm}}$ & $x_t^{\text{smb}}$ & $x_t^{\text{b}}$ & $x_t^{\text{ys}}$\\
+\midrule
+\rowcolor{gray!6}  1.607 & 1.354 & 3.956 & 4.332 & 1.751 & 1.242 & 2.266 & 1.054\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra po1990 er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+Ingen variable udviser nu multikollinaritetsproblemer derfor afsluttes modelselektionsproceduren.
 
 \hypertarget{var1est}{%
 \section{VAR(1) estimation}\label{var1est}}
+
+Tabel \ref{tab:VAR-TAB} rapporterer parameter estimaterne af Ligning \eqref{eq:1}. Tabellen består af af OLS samt bias-justerede koefficientestimater, og dertilhørende \(t\)-test størrelser for hver ligning i VAR(1)-modellen. Responsvariablene er vist til venstre i først kolonne.
+
+Den første række i Tabel \ref{tab:VAR-TAB} viser, at det risikofrie aktiv afhænger positivt af dets egen lag samt merafkastene på aktier og statsobligationer. Mens merafkastet på virksomhedsobligationer prædikterer det risikofrie afkast negativt. Kun den laggede værdi af det risikofrie afkast er signifikant ift. signifikansniveauet. Derudover haves en justeret \(R^2\) på \(0.2553\).
 
 
 
@@ -2673,65 +2718,59 @@ Givet den høje korrelation mellem rentespændende samt \emph{Federal Funds Rate
 \begin{threeparttable}
 \begin{tabular}[t]{ccccccccccc}
 \toprule
-Name & $r_t^{\text{rf}}$ & $rx_t^{\text{a}}$ & $rx_t^{\text{s}}$ & $rx_t^{\text{v}}$ & $x_t^{\text{bm}}$ & $x_t^{\text{avar}}$ & $x_t^{\text{smb}}$ & $x_t^{\text{b}}$ & $x_t^{\text{ys}}$ & Afskæring\\
+  & Afskæring & $r_t^{\text{rf}}$ & $rx_t^{\text{a}}$ & $rx_t^{\text{s}}$ & $rx_t^{\text{v}}$ & $x_t^{\text{bm}}$ & $x_t^{\text{smb}}$ & $x_t^{\text{b}}$ & $x_t^{\text{ys}}$ & $R^2$\\
 \midrule
-\rowcolor{gray!6}  $r_t^{\text{rf}}$ & \textbf{  0.145} & 0.003 & 0.011 & -0.024 & \textbf{-0.007} & -0.081 & \textbf{-0.001} & \textbf{ 0.493} & \textbf{ 0.150} & -0.001\\
+\rowcolor{gray!6}  $r_t^{\text{rf}}$ & -0.001 & 0.126 & 0.008 & 0.012 & -0.029 & \textbf{-0.007} & \textbf{-0.001} & \textbf{ 0.508} & \textbf{ 0.146} & 0.253\\
  
- & (0.161) & (0.004) & (0.011) & (-0.025) & (-0.007) & (-0.075) & (-0.001) & (0.482) & (0.158) & (-0.001)\\
+ & (-0.001) & (0.143) & (0.009) & (0.012) & (-0.030) & (-0.007) & (-0.001) & (0.496) & (0.155) & \\
  
-\rowcolor{gray!6}   & [2.079] & [0.409] & [0.447] & [-1.164] & [-2.900] & [-1.348] & [-2.547] & [5.878] & [2.908] & [-0.465]\\
+\rowcolor{gray!6}   & [-1.029] & [1.847] & [1.296] & [0.486] & [-1.408] & [-2.850] & [-2.753] & [6.102] & [2.830] & \\
  
-$rx_t^{\text{a}}$ & -0.074 & 0.135 & -0.074 & 0.317 & \textbf{ 0.068} & 0.311 & \textbf{-0.009} & -1.788 & 0.816 & -0.013\\
+$rx_t^{\text{a}}$ & -0.011 & -0.003 & 0.114 & -0.078 & 0.335 & \textbf{ 0.068} & \textbf{-0.009} & \textbf{-1.846} & 0.832 & 0.069\\
  
-\rowcolor{gray!6}   & (-0.136) & (0.156) & (-0.077) & (0.308) & (0.058) & (0.442) & (-0.010) & (-1.594) & (0.920) & (-0.013)\\
+\rowcolor{gray!6}   & (-0.011) & (-0.039) & (0.126) & (-0.083) & (0.334) & (0.058) & (-0.009) & (-1.672) & (0.965) & \\
  
- & [-0.098] & [1.627] & [-0.284] & [1.397] & [2.543] & [0.474] & [-2.856] & [-1.958] & [1.459] & [-0.920]\\
+ & [-0.803] & [-0.005] & [1.619] & [-0.298] & [1.500] & [2.532] & [-2.822] & [-2.043] & [1.491] & \\
  
-\rowcolor{gray!6}  $rx_t^{\text{s}}$ & -0.244 & -0.034 & -0.043 & 0.031 & -0.011 & -0.122 & \textbf{-0.004} & 0.255 & \textbf{ 0.572} & 0.001\\
+\rowcolor{gray!6}  $rx_t^{\text{s}}$ & 0.000 & -0.272 & -0.026 & -0.041 & 0.024 & -0.011 & \textbf{-0.004} & 0.277 & \textbf{ 0.566} & 0.024\\
  
- & (-0.257) & (-0.030) & (-0.025) & (0.027) & (-0.011) & (-0.075) & (-0.004) & (0.168) & (0.598) & (0.001)\\
+ & (0.000) & (-0.273) & (-0.025) & (-0.026) & (0.023) & (-0.010) & (-0.004) & (0.184) & (0.601) & \\
  
-\rowcolor{gray!6}   & [-0.683] & [-0.873] & [-0.347] & [0.293] & [-0.868] & [-0.394] & [-2.347] & [0.592] & [2.172] & [0.136]\\
+\rowcolor{gray!6}   & [-0.010] & [-0.777] & [-0.784] & [-0.336] & [0.230] & [-0.856] & [-2.428] & [0.652] & [2.157] & \\
  
-$rx_t^{\text{v}}$ & -0.347 & -0.008 & 0.239 & \textbf{-0.248} & -0.004 & -0.100 & \textbf{-0.005} & -0.328 & \textbf{ 1.351} & -0.003\\
+$rx_t^{\text{v}}$ & -0.004 & -0.370 & -0.002 & 0.240 & \textbf{-0.254} & -0.003 & \textbf{-0.005} & -0.310 & \textbf{ 1.346} & 0.085\\
  
-\rowcolor{gray!6}   & (-0.364) & (-0.003) & (0.248) & (-0.244) & (-0.004) & (-0.041) & (-0.005) & (-0.398) & (1.378) & (-0.003)\\
+\rowcolor{gray!6}   & (-0.004) & (-0.374) & (0.000) & (0.248) & (-0.247) & (-0.004) & (-0.005) & (-0.386) & (1.387) & \\
  
- & [-0.821] & [-0.181] & [1.642] & [-1.965] & [-0.238] & [-0.274] & [-2.583] & [-0.645] & [4.334] & [-0.345]\\
+ & [-0.479] & [-0.894] & [-0.045] & [1.654] & [-2.044] & [-0.229] & [-2.650] & [-0.615] & [4.333] & \\
  
-\rowcolor{gray!6}  $x_t^{\text{bm}}$ & 0.555 & -0.083 & -0.069 & -0.110 & \textbf{ 0.970} & -0.129 & 0.004 & 0.063 & \textbf{-0.692} & \textbf{ 0.021}\\
+\rowcolor{gray!6}  $x_t^{\text{bm}}$ & \textbf{ 0.020} & 0.526 & -0.075 & -0.067 & -0.118 & \textbf{ 0.971} & 0.004 & 0.087 & \textbf{-0.698} & 0.964\\
  
- & (0.595) & (-0.097) & (-0.071) & (-0.102) & (0.978) & (-0.260) & (0.004) & (-0.053) & (-0.784) & (0.021)\\
+ & (0.020) & (0.537) & (-0.080) & (-0.068) & (-0.117) & (0.977) & (0.004) & (-0.006) & (-0.817) & \\
  
-\rowcolor{gray!6}   & [1.249] & [-1.722] & [-0.450] & [-0.829] & [61.513] & [-0.335] & [1.946] & [0.118] & [-2.110] & [2.445]\\
+\rowcolor{gray!6}   & [2.500] & [1.209] & [-1.815] & [-0.441] & [-0.900] & [61.672] & [1.921] & [0.165] & [-2.137] & \\
  
-$x_t^{\text{avar}}$ & -0.043 & 0.004 & \textbf{ 0.076} & \textbf{-0.089} & \textbf{-0.007} & \textbf{ 0.463} & 0.000 & 0.102 & 0.051 & \textbf{ 0.005}\\
+$x_t^{\text{smb}}$ & -0.509 & -7.203 & -0.249 & -3.011 & 7.769 & 0.969 & -0.010 & -4.350 & 20.829 & 0.021\\
  
-\rowcolor{gray!6}   & (-0.043) & (0.004) & (0.076) & (-0.090) & (-0.006) & (0.480) & (0.000) & (0.086) & (0.047) & (0.005)\\
+\rowcolor{gray!6}   & (-0.509) & (-7.936) & (-0.328) & (-3.182) & (7.847) & (0.944) & (0.004) & (-3.431) & (20.815) & \\
  
- & [-0.544] & [0.412] & [2.783] & [-3.794] & [-2.373] & [6.790] & [0.770] & [1.078] & [0.872] & [3.338]\\
+ & [-1.799] & [-0.460] & [-0.167] & [-0.547] & [1.651] & [1.709] & [-0.146] & [-0.228] & [1.770] & \\
  
-\rowcolor{gray!6}  $x_t^{\text{smb}}$ & -12.865 & 1.378 & -2.721 & 6.331 & 1.004 & 24.840 & -0.027 & 0.260 & 19.594 & \textbf{-0.710}\\
+\rowcolor{gray!6}  $x_t^{\text{b}}$ & \textbf{ 0.001} & -0.016 & 0.000 & \textbf{-0.030} & -0.012 & 0.002 & 0.000 & \textbf{ 0.900} & -0.035 & 0.900\\
  
- & (-13.596) & (1.309) & (-2.894) & (6.395) & (0.980) & (25.011) & (-0.012) & (1.136) & (19.477) & (-0.710)\\
+ & (0.001) & (-0.015) & (0.000) & (-0.030) & (-0.012) & (0.001) & (0.000) & (0.912) & (-0.034) & \\
  
-\rowcolor{gray!6}   & [-0.809] & [0.795] & [-0.497] & [1.332] & [1.779] & [1.808] & [-0.392] & [0.014] & [1.669] & [-2.344]\\
+\rowcolor{gray!6}   & [2.140] & [-0.649] & [0.144] & [-3.468] & [-1.665] & [1.869] & [-1.150] & [30.380] & [-1.892] & \\
  
-$x_t^{\text{b}}$ & -0.018 & 0.001 & \textbf{-0.030} & -0.013 & 0.002 & 0.011 & 0.000 & \textbf{ 0.902} & -0.035 & 0.001\\
+$x_t^{\text{ys}}$ & \textbf{ 0.003} & \textbf{ 0.216} & -0.009 & 0.003 & -0.016 & 0.002 & 0.000 & -0.123 & \textbf{ 0.756} & 0.600\\
  
-\rowcolor{gray!6}   & (-0.017) & (0.001) & (-0.030) & (-0.013) & (0.001) & (0.010) & (0.000) & (0.914) & (-0.034) & (0.001)\\
+\rowcolor{gray!6}   & (0.003) & (0.215) & (-0.010) & (0.003) & (-0.015) & (0.002) & (0.000) & (-0.133) & (0.779) & \\
  
- & [-0.740] & [0.400] & [-3.446] & [-1.729] & [1.884] & [0.535] & [-1.210] & [30.137] & [-1.917] & [1.792]\\
- 
-\rowcolor{gray!6}  $x_t^{\text{ys}}$ & \textbf{  0.205} & -0.006 & 0.004 & -0.019 & 0.002 & 0.050 & 0.000 & -0.114 & \textbf{ 0.753} & \textbf{ 0.002}\\
- 
- & (0.204) & (-0.006) & (0.003) & (-0.018) & (0.002) & (0.049) & (0.000) & (-0.124) & (0.777) & (0.002)\\
- 
-\rowcolor{gray!6}   & [3.711] & [-1.032] & [0.196] & [-1.146] & [1.032] & [1.042] & [0.116] & [-1.716] & [18.520] & [2.284]\\
+ & [2.865] & [3.994] & [-1.841] & [0.166] & [-0.985] & [0.996] & [0.261] & [-1.871] & [18.609] & \\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra po1990 er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra \citep{Pope1990} er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -3025,10 +3064,10 @@ I dette kapitel vil teorien fra Del 2 samt de empiriske fund sammenkobles. Dette
 \toprule
   & Tangensporteføljen & GMV & Myopic Demand & IHD\\
 \midrule
-\rowcolor{gray!6}  T-Bills & -280.427 & 106.098 & 7.455 & 58.745\\
-Aktier & 191.956 & 0.218 & 191.956 & 34.719\\
-\rowcolor{gray!6}  Statsobligationer & 92.349 & 1.223 & 92.349 & 7.519\\
-Virksomhedsobligationer & 96.123 & -7.539 & 96.123 & -0.983\\
+\rowcolor{gray!6}  T-Bills & -282.034 & 106.113 & 7.122 & 55.402\\
+Aktier & 192.615 & 0.240 & 192.615 & 38.151\\
+\rowcolor{gray!6}  Statsobligationer & 92.877 & 1.193 & 92.877 & 5.212\\
+Virksomhedsobligationer & 96.542 & -7.545 & 96.542 & 1.236\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -3047,22 +3086,22 @@ Virksomhedsobligationer & 96.123 & -7.539 & 96.123 & -0.983\\
 \toprule
 $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 \midrule
-\rowcolor{gray!6}  2 & T-Bills & -140.475 & -127.092 & -126.193 & -135.788 & -153.094 & -162.021 & -166.275 & -168.280\\
- & Aktier & 121.967 & 128.205 & 134.044 & 144.344 & 152.061 & 155.704 & 157.448 & 158.277\\
-\rowcolor{gray!6}   & Statsobligationer & 79.784 & 68.001 & 57.359 & 53.375 & 62.409 & 67.583 & 70.046 & 71.200\\
- & Virksomhedsobligationer & 38.723 & 30.886 & 34.790 & 38.070 & 38.625 & 38.734 & 38.782 & 38.803\\
-\rowcolor{gray!6}  5 & T-Bills & 7.455 & 14.660 & 12.413 & 1.984 & -14.729 & -25.019 & -30.783 & -33.800\\
- & Aktier & 48.917 & 52.559 & 56.888 & 66.100 & 74.768 & 79.727 & 82.359 & 83.636\\
-\rowcolor{gray!6}   & Statsobligationer & 32.645 & 27.941 & 22.306 & 21.218 & 29.509 & 35.104 & 38.366 & 40.163\\
- & Virksomhedsobligationer & 10.983 & 4.840 & 8.393 & 10.698 & 10.452 & 10.189 & 10.057 & 10.001\\
-\rowcolor{gray!6}  10 & T-Bills & 56.765 & 59.742 & 56.201 & 47.572 & 36.187 & 28.538 & 23.606 & 20.575\\
- & Aktier & 24.567 & 26.136 & 28.604 & 34.590 & 41.112 & 45.416 & 48.086 & 49.647\\
-\rowcolor{gray!6}   & Statsobligationer & 16.931 & 15.770 & 13.992 & 14.892 & 20.187 & 23.938 & 26.447 & 28.058\\
- & Virksomhedsobligationer & 1.737 & -1.649 & 1.203 & 2.946 & 2.515 & 2.108 & 1.860 & 1.720\\
-\rowcolor{gray!6}  20 & T-Bills & 81.420 & 81.887 & 77.661 & 70.107 & 62.329 & 57.022 & 53.304 & 50.760\\
- & Aktier & 12.392 & 12.681 & 13.905 & 17.588 & 22.209 & 25.542 & 27.831 & 29.350\\
-\rowcolor{gray!6}   & Statsobligationer & 9.075 & 9.692 & 10.363 & 12.686 & 16.187 & 18.557 & 20.258 & 21.461\\
- & Virksomhedsobligationer & -2.887 & -4.260 & -1.929 & -0.381 & -0.725 & -1.121 & -1.393 & -1.571\\
+\rowcolor{gray!6}  2 & T-Bills & -141.328 & -127.919 & -127.082 & -137.121 & -155.580 & -165.388 & -170.250 & -172.662\\
+ & Aktier & 122.322 & 128.705 & 135.007 & 146.070 & 154.568 & 158.750 & 160.863 & 161.939\\
+\rowcolor{gray!6}   & Statsobligationer & 80.119 & 66.281 & 55.038 & 50.461 & 59.785 & 65.262 & 67.945 & 69.250\\
+ & Virksomhedsobligationer & 38.886 & 32.933 & 37.038 & 40.589 & 41.226 & 41.376 & 41.443 & 41.473\\
+\rowcolor{gray!6}  5 & T-Bills & 7.122 & 14.334 & 12.044 & 1.273 & -16.474 & -27.625 & -34.017 & -37.476\\
+ & Aktier & 49.072 & 52.898 & 57.582 & 67.480 & 76.996 & 82.572 & 85.643 & 87.223\\
+\rowcolor{gray!6}   & Statsobligationer & 32.761 & 25.771 & 19.842 & 18.336 & 26.779 & 32.587 & 36.033 & 37.972\\
+ & Virksomhedsobligationer & 11.045 & 6.998 & 10.532 & 12.910 & 12.698 & 12.466 & 12.342 & 12.281\\
+\rowcolor{gray!6}  10 & T-Bills & 56.606 & 59.611 & 56.050 & 47.249 & 35.313 & 27.185 & 21.881 & 18.572\\
+ & Aktier & 24.656 & 26.406 & 29.085 & 35.440 & 42.473 & 47.160 & 50.112 & 51.875\\
+\rowcolor{gray!6}   & Statsobligationer & 16.974 & 14.097 & 12.168 & 12.897 & 18.203 & 22.013 & 24.593 & 26.272\\
+ & Virksomhedsobligationer & 1.764 & -0.114 & 2.698 & 4.414 & 4.011 & 3.643 & 3.415 & 3.281\\
+\rowcolor{gray!6}  20 & T-Bills & 81.347 & 81.861 & 77.629 & 69.995 & 61.972 & 56.453 & 52.564 & 49.884\\
+ & Aktier & 12.447 & 12.914 & 14.256 & 18.091 & 22.968 & 26.496 & 28.931 & 30.561\\
+\rowcolor{gray!6}   & Statsobligationer & 9.081 & 8.447 & 9.024 & 11.338 & 14.799 & 17.143 & 18.840 & 20.053\\
+ & Virksomhedsobligationer & -2.876 & -3.222 & -0.908 & 0.575 & 0.261 & -0.092 & -0.336 & -0.498\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -3081,22 +3120,22 @@ $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 \toprule
 $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 \midrule
-\rowcolor{gray!6}  2 & T-Bills & 11.689 & 11.904 & 11.829 & 11.406 & 10.747 & 10.439 & 10.294 & 10.225\\
- & Aktier & 19.442 & 20.035 & 20.644 & 21.490 & 21.963 & 22.163 & 22.262 & 22.310\\
-\rowcolor{gray!6}   & Statsobligationer & 35.249 & 35.084 & 34.622 & 34.264 & 34.467 & 34.588 & 34.641 & 34.666\\
- & Virksomhedsobligationer & 33.233 & 32.590 & 32.519 & 32.454 & 32.437 & 32.424 & 32.416 & 32.412\\
-\rowcolor{gray!6}  5 & T-Bills & 17.362 & 17.665 & 17.108 & 15.729 & 13.904 & 12.814 & 12.237 & 11.957\\
- & Aktier & 18.184 & 18.676 & 19.576 & 21.359 & 22.735 & 23.487 & 23.874 & 24.049\\
-\rowcolor{gray!6}   & Statsobligationer & 33.518 & 33.485 & 33.043 & 32.647 & 33.075 & 33.414 & 33.608 & 33.718\\
- & Virksomhedsobligationer & 30.549 & 29.788 & 29.887 & 29.879 & 29.900 & 29.899 & 29.895 & 29.889\\
-\rowcolor{gray!6}  10 & T-Bills & 29.228 & 28.916 & 27.570 & 25.060 & 21.879 & 19.849 & 18.596 & 17.855\\
- & Aktier & 15.260 & 15.537 & 16.403 & 18.483 & 20.685 & 22.112 & 22.985 & 23.485\\
-\rowcolor{gray!6}   & Statsobligationer & 29.297 & 29.774 & 29.815 & 29.964 & 30.797 & 31.328 & 31.669 & 31.886\\
- & Virksomhedsobligationer & 25.828 & 25.387 & 25.826 & 26.107 & 26.253 & 26.325 & 26.363 & 26.388\\
-\rowcolor{gray!6}  20 & T-Bills & 49.307 & 48.165 & 45.794 & 42.009 & 37.999 & 35.259 & 33.350 & 32.039\\
- & Aktier & 10.677 & 10.650 & 11.364 & 13.350 & 15.821 & 17.645 & 18.931 & 19.799\\
-\rowcolor{gray!6}   & Statsobligationer & 21.784 & 22.743 & 23.547 & 24.590 & 25.771 & 26.524 & 27.037 & 27.400\\
- & Virksomhedsobligationer & 17.846 & 18.056 & 18.909 & 19.665 & 20.023 & 20.186 & 20.297 & 20.376\\
+\rowcolor{gray!6}  2 & T-Bills & 11.728 & 11.956 & 11.874 & 11.437 & 10.736 & 10.384 & 10.218 & 10.137\\
+ & Aktier & 19.622 & 20.224 & 20.851 & 21.758 & 22.288 & 22.529 & 22.648 & 22.709\\
+\rowcolor{gray!6}   & Statsobligationer & 35.105 & 34.854 & 34.381 & 33.989 & 34.192 & 34.325 & 34.385 & 34.412\\
+ & Virksomhedsobligationer & 33.158 & 32.581 & 32.508 & 32.430 & 32.398 & 32.376 & 32.363 & 32.356\\
+\rowcolor{gray!6}  5 & T-Bills & 17.397 & 17.656 & 17.094 & 15.680 & 13.751 & 12.583 & 11.967 & 11.659\\
+ & Aktier & 18.338 & 18.876 & 19.849 & 21.749 & 23.260 & 24.104 & 24.551 & 24.767\\
+\rowcolor{gray!6}   & Statsobligationer & 33.393 & 33.200 & 32.722 & 32.276 & 32.684 & 33.019 & 33.202 & 33.309\\
+ & Virksomhedsobligationer & 30.486 & 29.882 & 29.948 & 29.908 & 29.919 & 29.908 & 29.894 & 29.879\\
+\rowcolor{gray!6}  10 & T-Bills & 29.172 & 28.866 & 27.511 & 24.951 & 21.648 & 19.510 & 18.201 & 17.405\\
+ & Aktier & 15.410 & 15.753 & 16.686 & 18.887 & 21.248 & 22.800 & 23.749 & 24.309\\
+\rowcolor{gray!6}   & Statsobligationer & 29.214 & 29.454 & 29.462 & 29.557 & 30.362 & 30.880 & 31.205 & 31.418\\
+ & Virksomhedsobligationer & 25.818 & 25.541 & 25.954 & 26.220 & 26.355 & 26.424 & 26.459 & 26.482\\
+\rowcolor{gray!6}  20 & T-Bills & 49.220 & 48.089 & 45.715 & 41.897 & 37.784 & 34.952 & 32.951 & 31.575\\
+ & Aktier & 10.775 & 10.831 & 11.604 & 13.672 & 16.281 & 18.217 & 19.597 & 20.534\\
+\rowcolor{gray!6}   & Statsobligationer & 21.762 & 22.452 & 23.211 & 24.221 & 25.364 & 26.084 & 26.585 & 26.942\\
+ & Virksomhedsobligationer & 17.857 & 18.242 & 19.085 & 19.824 & 20.184 & 20.361 & 20.481 & 20.563\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -3384,8 +3423,84 @@ r_{t+1}&\approx p_{t+1} + \log(1+\exp(\overline{d_{t+1}-p_{t+1}}))- p_t\\
 \hypertarget{dynamic-gordon-growth-model}{%
 \subsection{Dynamic Gordon Growth Model}\label{dynamic-gordon-growth-model}}
 
+Identiteten fra \emph{Dynamic Gordon Growth Model} findes fra Ligning ??, og ved indsættelse af \(d_t-d_t\)
+\begin{align}
+r_{t+1}&\approx \rho p_{t+1} + (1-\rho) d_{t+1} - p_t + c\\
+&\approx \rho(p_{t+1}-d_{t+1})-d_{t+1}-p_t+c\\
+&\approx \rho(p_{t+1}-d_{t+1})-d_{t+1}-p_t+d_t-d_t+c
+\end{align}
+
+Samles forskellen \(\Delta d_{t+1}=d_{t+1}-d_t\), og løses dernæst for \(d_t-p_t\), opnåes
+\begin{equation}
+d_t-p_t=\rho (d_{t+1}-p_{t+1})+r_{t+1}-\Delta d_{t+1}-c.
+\end{equation}
+
+Tages nu den betingede forventning af Ligning ?? på tidspunkt \(t\), og ved samtidig rekursion fås
+\begin{align}
+\mathbb{E}_t[d_t-p_t]&=\mathbb{E}_t[\rho(d_{t+1}-p_{t+1}) + r_{t+1} -\Delta d_{t+1}-c]\\
+&=\mathbb{E}_t[\rho(\rho(d_{t+2}-p_{t+2}) + r_{t+2} -\Delta d_{t+2}-c) + r_{t+1} -\Delta d_{t+1} - c]\\
+&\,\,\vdots\\
+d_t-p_t&=\sum_{j=0}^\infty \rho^j \mathbb{E}_t[r_{t+j+1}-\Delta d_{t+j+1}] - \frac{c}{1-\rho}.
+\end{align}
+
+Hvor resultatet for en uendelig geometrisk række er anvendt samt transversalitetsbetingelsen, som udeholder økonomiske aktiebobler
+\[\lim_{n\to\infty} \rho^n \mathbb{E}_t[d_{t+n} - p_{t+n}]=0.\]
+
+Summationen starter ligeledes i nul for at fange det første led uden \(\rho\).
+
 \hypertarget{approksimation-af-obligationsafkast}{%
 \section{Approksimation af obligationsafkast}\label{approksimation-af-obligationsafkast}}
+
+Rentespændet mellem en obligation med lang løbetid og en obligation med kort løbetid spiller en vigtig rolle på \emph{Fixed Income} markedet. For at forstå rentespændet rolle, betragtes først et marked bestående af nulkupon obligationer. På tidspunkt \(t\) er prisen for en \(n\)-periode obligation med effektiv rente \(Y_t^n\) lig
+\begin{equation}
+P_t^n=\frac{1}{(1+Y_t^n)^n}.
+\end{equation}
+
+Tages logfunktionen på begge sider opnåes
+\begin{align}
+\log(P_t^n)&=\log(\frac{1}{(1+Y_t^n)^n})\\
+&=-n\log(1+Y_t^n)\\
+&=-n y_t^n\\
+&\Updownarrow\\
+y_t^n&=-\frac{1}{n}p_t^n.
+\end{align}
+
+Benyttes Ligning ?? følger det nu, at én-periode bruto afkastet på obligationen fra \(t\) fra \(t+1\) bliver
+\begin{align}
+1+R_{t+1}^n=\frac{P_{t+1}^{n-1}}{P_t^n}\\
+&=\frac{\frac{1}{(1+Y_t^n)^n}}{\frac{1}{(1+Y_t^{n-1})^{n-1}}}.
+\end{align}
+
+Fra logresultatet opnåes
+\begin{align}
+r_{t+1}^n&=p_{t+1}^{n-1}-p_t^n\\
+&=n y_t^n - (n-1) y_{t+1}^{n-1}.
+\end{align}
+
+Dermed bliver den effektive rente på tidspunkt \(t\) for en obligationen med \(n\)-perioder til udløb lig
+\begin{align}
+r_{t+1}^n&=n y_t^n - ny_{t+1}^{n-1}+y_{t+1}^{n-1}\\
+&\Updownarrow\\
+y_t^n &=\frac{1}{n}\left( r_{t+1}^n + (n-1) y_{t+1}^{n-1} \right).
+\end{align}
+
+Som \(n\)-periode obligationen bliver en \(n-1\)-periode obligation på tidspunkt \(t+1\), ændres relationen til
+\begin{align}
+r_{t+2}^{n-1}&=(n-1) y_{t+1}^{n-1} - (n-2) y_{t+2}^{n-2}\\
+&\Updownarrow\\
+(n-1) y_{t+1}^{n-1}&=r_{t+2}^{n-1} + (n-2) y_{t+2}^{n-2}.
+\end{align}
+
+Fortsættes dette rul til én-periode før udløb, \(t+n-1\), opnåes
+\begin{equation}
+y_{t+n-1}^{1}=(n-(n-1))y_{t+n-1}^{n-(n-1)}=r_{t+n}^{n-(n-1)}=r_{t+n}^1.
+\end{equation}
+
+Kombineres Ligning ?? og implikationen for den effektive rente, for herefter at tage den betingede forventning, giver det gennemsnitlige afkast per periode, hvis obligationen holdes til udløb
+\begin{align}
+y_t^n&=\frac{1}{n} (r_{t+1}^n + r_{t+2}^{n-1}+\cdots+r_{t+n}^1)\\
+&=\frac{1}{n}\sum_{i=0}^{n-1} r_{t+i+1}^{n-i}.
+\end{align}
 
 \hypertarget{den-optimale-dynamiske-strategi}{%
 \chapter{Den optimale dynamiske strategi}\label{den-optimale-dynamiske-strategi}}

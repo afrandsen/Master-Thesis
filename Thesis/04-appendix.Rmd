@@ -196,10 +196,83 @@ r_{t+1}&\approx p_{t+1} + \log(1+\exp(\overline{d_{t+1}-p_{t+1}}))- p_t\\
 
 ### Dynamic Gordon Growth Model
 
+Identiteten fra *Dynamic Gordon Growth Model* findes fra Ligning ??, og ved indsættelse af $d_t-d_t$
+\begin{align}
+r_{t+1}&\approx \rho p_{t+1} + (1-\rho) d_{t+1} - p_t + c\\
+&\approx \rho(p_{t+1}-d_{t+1})-d_{t+1}-p_t+c\\
+&\approx \rho(p_{t+1}-d_{t+1})-d_{t+1}-p_t+d_t-d_t+c
+\end{align}
+
+Samles forskellen $\Delta d_{t+1}=d_{t+1}-d_t$, og løses dernæst for $d_t-p_t$, opnåes
+\begin{equation}
+d_t-p_t=\rho (d_{t+1}-p_{t+1})+r_{t+1}-\Delta d_{t+1}-c.
+\end{equation}
+
+Tages nu den betingede forventning af Ligning ?? på tidspunkt $t$, og ved samtidig rekursion fås
+\begin{align}
+\mathbb{E}_t[d_t-p_t]&=\mathbb{E}_t[\rho(d_{t+1}-p_{t+1}) + r_{t+1} -\Delta d_{t+1}-c]\\
+&=\mathbb{E}_t[\rho(\rho(d_{t+2}-p_{t+2}) + r_{t+2} -\Delta d_{t+2}-c) + r_{t+1} -\Delta d_{t+1} - c]\\
+&\,\,\vdots\\
+d_t-p_t&=\sum_{j=0}^\infty \rho^j \mathbb{E}_t[r_{t+j+1}-\Delta d_{t+j+1}] - \frac{c}{1-\rho}.
+\end{align}
+
+Hvor resultatet for en uendelig geometrisk række er anvendt samt transversalitetsbetingelsen, som udeholder økonomiske aktiebobler
+$$\lim_{n\to\infty} \rho^n \mathbb{E}_t[d_{t+n} - p_{t+n}]=0.$$
+
+Summationen starter ligeledes i nul for at fange det første led uden $\rho$.
 
 ## Approksimation af obligationsafkast
 
+Rentespændet mellem en obligation med lang løbetid og en obligation med kort løbetid spiller en vigtig rolle på *Fixed Income* markedet. For at forstå rentespændet rolle, betragtes først et marked bestående af nulkupon obligationer. På tidspunkt $t$ er prisen for en $n$-periode obligation med effektiv rente $Y_t^n$ lig
+\begin{equation}
+P_t^n=\frac{1}{(1+Y_t^n)^n}.
+\end{equation}
 
+Tages logfunktionen på begge sider opnåes
+\begin{align}
+\log(P_t^n)&=\log(\frac{1}{(1+Y_t^n)^n})\\
+&=-n\log(1+Y_t^n)\\
+&=-n y_t^n\\
+&\Updownarrow\\
+y_t^n&=-\frac{1}{n}p_t^n.
+\end{align}
+
+Benyttes Ligning ?? følger det nu, at én-periode bruto afkastet på obligationen fra $t$ fra $t+1$ bliver
+\begin{align}
+1+R_{t+1}^n=\frac{P_{t+1}^{n-1}}{P_t^n}\\
+&=\frac{\frac{1}{(1+Y_t^n)^n}}{\frac{1}{(1+Y_t^{n-1})^{n-1}}}.
+\end{align}
+
+Fra logresultatet opnåes
+\begin{align}
+r_{t+1}^n&=p_{t+1}^{n-1}-p_t^n\\
+&=n y_t^n - (n-1) y_{t+1}^{n-1}.
+\end{align}
+
+Dermed bliver den effektive rente på tidspunkt $t$ for en obligationen med $n$-perioder til udløb lig
+\begin{align}
+r_{t+1}^n&=n y_t^n - ny_{t+1}^{n-1}+y_{t+1}^{n-1}\\
+&\Updownarrow\\
+y_t^n &=\frac{1}{n}\left( r_{t+1}^n + (n-1) y_{t+1}^{n-1} \right).
+\end{align}
+
+Som $n$-periode obligationen bliver en $n-1$-periode obligation på tidspunkt $t+1$, ændres relationen til
+\begin{align}
+r_{t+2}^{n-1}&=(n-1) y_{t+1}^{n-1} - (n-2) y_{t+2}^{n-2}\\
+&\Updownarrow\\
+(n-1) y_{t+1}^{n-1}&=r_{t+2}^{n-1} + (n-2) y_{t+2}^{n-2}.
+\end{align}
+
+Fortsættes dette rul til én-periode før udløb, $t+n-1$, opnåes 
+\begin{equation}
+y_{t+n-1}^{1}=(n-(n-1))y_{t+n-1}^{n-(n-1)}=r_{t+n}^{n-(n-1)}=r_{t+n}^1.
+\end{equation}
+
+Kombineres Ligning ?? og implikationen for den effektive rente, for herefter at tage den betingede forventning, giver det gennemsnitlige afkast per periode, hvis obligationen holdes til udløb
+\begin{align}
+y_t^n&=\frac{1}{n} (r_{t+1}^n + r_{t+2}^{n-1}+\cdots+r_{t+n}^1)\\
+&=\frac{1}{n}\sum_{i=0}^{n-1} r_{t+i+1}^{n-i}.
+\end{align}
 
 # Den optimale dynamiske strategi
 Dette appendiks vil udlede den optimale porteføljestrategi, som beskrevet i Sektion ??. Udledningen vil følge [@JurVic2011] Appendiks C, som beskriver metoden, med enkelte dele som varierer.
