@@ -274,6 +274,87 @@ y_t^n&=\frac{1}{n} (r_{t+1}^n + r_{t+2}^{n-1}+\cdots+r_{t+n}^1)\\
 &=\frac{1}{n}\sum_{i=0}^{n-1} r_{t+i+1}^{n-i}.
 \end{align}
 
+## Rentespændet
+
+For at udlede rentespændet fratrækkes $y_t^1$ på begge sider af Ligning ??, så
+\begin{align}
+y_t^n-y_t^1&=\frac{1}{n} \sum_{i=0}^{n-1} (r_{t+i+1}^{n-i}-y_t^1)\\
+&=\frac{1}{n} \sum_{i=0}^{n-1} ((y_{t+i}^1-y_t^1) + (r_{t+i+1}^{n-i}-y_t^1)).
+\end{align}
+
+Dermed kan det første led på højre side af summationen skrives som
+\begin{align}
+\sum_{i=0}^{n-1}(y_{t+i}^1-y_t^1)&=(y_{t+1}^1 y_t^1) + (y_{t+2}-y_t^1)+\dots +(y_{t+n-1} y_t^1)\\
+&=(n-1)\Delta y_{t+1}^1+(n-2)\Delta y_{t+2}^1 + \dots+ \Delta y_{t+n-1}^1\\
+&=\sum_{i=1}^{n-1}  (n-1)\Delta y_{t+i}^1.
+\end{align}
+
+Dette kan skrives i termer af rentespændet, $s_t^n=y_t^n-y_t^1$, ved at tage den betingede forventning på tidspunkt $t$, sådan at
+\begin{equation}
+s_t^n=\frac{1}{n} \sum_{i=1}^{n-1} \mathbb{E}_t[(n-1)\Delta y_{t+i}^1] + \frac{1}{n} \sum_{i=0}^{n-1} \mathbb{E}_t[(r_{t+i+1}^{n-i} - y_t^1)].
+\end{equation}
+
+## Varighed og renteimmunisering
+[@Macaulay1938] viser at den negative elasticitet af en kuponobligations pris mht. brutto renten giver varigheden
+\begin{equation}
+D_t^{c,n} = -\frac{\text{d} P_t^{c,n}}{\text{d}(1+Y_t^{c,n})}\frac{(1+Y_t^{c,n})}{P_t^{c,n}},
+\end{equation}
+
+og er udledt gennem en andenordens Taylor approksimation
+\begin{equation}
+\frac{\text{d} P^{c,n}}{P^{c,n}}\approx \frac{\text{d} P^{c,n}}{\text{d} Y^{c,n}}\frac{\text{d} Y^{c,n}}{P^{c,n}}+\frac{1}{2}\frac{\text{d}^2 P^{c,n}}{\text{d} Y^{c,n,2}}\frac{(\text{d}Y^{c,n})^2}{P^{c,n}},
+\end{equation}
+
+hvor den første afledte er den modificerede varighed og den anden afledte er konveksiteten af kuponobligationen, [@Campbell1997].
+
+## Loglineær approksimation af kuponobligations afkast
+På tidspunkt $t$ er afkastet på kuponobligationen med kuponbetaling $C$ lig
+\begin{equation}
+1+R_{t+1}^{c,n}=\frac{P_{t+1}^{c,n} + C}{P_t^{c,n}}.
+\end{equation}
+
+Tages logfunktionen på begge sider opnåes
+\begin{align}
+\log(1+R_{t+1}^{c,n})&=\\
+&=\log(\frac{P_{t+1}^{c,n} + C}{P_t^{c,n}})\\
+&=\log(P_{t+1}^{c,n} + C) - \log(P_t^{c,n})\\
+r_{t+1}^{c,n}&=\log(1+\exp(c- p_{t+1}^{c,n})) + p_{t+1}^{c,n} - p_t^{c,n}.
+\end{align}
+
+I ovenstående Ligning ??, er $\log(1+\exp(c- p_{t+1}^{c,n}))$ ikke-lineær. For at løse dette anvendes en førsteordens Taylor approksimation omkring middelværdie, $\overline{c- p_{t+1}^{c,n}}$. Herfra sættes $x=\log(1+\exp(c- p_{t+1}^{c,n}))$. 
+
+Den første afledte, $f'(x^*)$, bliver fundet ved brug af kædereglen til
+$$f'(x^*)=\frac{1}{1+\exp(\overline{c- p_{t+1}^{c,n}})}\exp(\overline{c- p_{t+1}^{c,n}}).$$
+
+Dermed bliver førsteordens Taylor approksimationen
+\begin{align}
+f(x)&=\log(1+\exp(\overline{c- p_{t+1}^{c,n}}))+ \frac{1}{1+\exp(\overline{c- p_{t+1}^{c,n}})}\exp(\overline{c- p_{t+1}^{c,n}}) ((c-p_{t+1}^{c,n}) -(\overline{c- p_{t+1}^{c,n}}))\\
+&=\log(1+\exp(\overline{c- p_{t+1}^{c,n}})) + \frac{1}{1+\exp(\overline{c- p_{t+1}^{c,n}})}\exp(\overline{c- p_{t+1}^{c,n}}) (c-p_{t+1}^{c,n}) - \frac{1}{1+\exp(\overline{c- p_{t+1}^{c,n}})}\exp(\overline{c- p_{t+1}^{c,n}})(\overline{c- p_{t+1}^{c,n}}).
+\end{align}
+
+Defineres lineariseringsparametrene $k$ og $\rho$ til
+\begin{align}
+\rho&=\frac{1}{(1+\exp(\overline{c- p_{t+1}^{c,n}})}\\
+k&=-\log(\rho)-(1-\rho)\log(\frac{1}{\rho-1}).
+\end{align}
+
+Kan der ved brug af rekursion opnåes følgende resultat
+\begin{equation}
+p_t^{c,n}=\sum_{i=0}^{n-1} \rho^i(k+(1-\rho)c - r_{t+i+1}^{c,n-i}).
+\end{equation}
+
+Kombineres dette nu med approksimationen for log af den effektive rente, som opfylder
+\begin{equation}
+p_t^{c,n}\approx\sum_{i=0}^{n-1} \rho^i(k+(1-\rho)c - y_t^{c,n}).
+\end{equation}
+
+Kan den effektive rente af $n$-periode kuponobligationen udledes til
+\begin{equation}
+y_t^{c,n}\approx (\frac{1-\rho}{1-\rho^n})\sum_{i=0}^{n-1}\rho^i r_{t+i+1}^{c,n-i}.
+\end{equation}
+
+Og ved substitution kan det approksimative loglinære afkast fra Kapitel ?? udledes.
+
 # Den optimale dynamiske strategi
 Dette appendiks vil udlede den optimale porteføljestrategi, som beskrevet i Sektion ??. Udledningen vil følge [@JurVic2011] Appendiks C, som beskriver metoden, med enkelte dele som varierer.
 

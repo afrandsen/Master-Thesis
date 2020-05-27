@@ -301,7 +301,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-05-26                  
+##  date     2020-05-27                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -1386,7 +1386,9 @@ Dernæst beregnes \emph{VIF}-værdien for hvert \(\beta^j\) som
 hvor \(R_i^2\) stammer fra regressionen i ovenstående Ligning ??. Det sidste skridt består i at undersøge størrelsesordenen af multikollinaritet, ved at tjekke størrelsen på \(\text{VIF}_i\). En generel regel er, at multikollinariteten er meget høj når \(\text{VIF}_i>10\). Kvadratroden af \(\text{VIF}\) indikerer, hvor meget standardfejlen øges, sammenlignet med tilfældet, hvor variablen hypotetisk ingen korrelation har til de andre variable i modellen. Skulle der være problemer med multikollinarietet fjernes evt. problematiske variable. Hvis de forklarende variable herefter er forskellige på tværs af aktivklasserne foretages en kvalitativ vurdering, som har til formål at udvælge en delmængde af de tilbageværende variable, som fuldt kommer til at indgå i VAR(1)-modellen.
 
 Slutteligt foretages en sidste \emph{Variance Inflation Factor} analyse, som et sidste tjek for multikollinaritet.
-\#\# Opsummering
+
+\hypertarget{opsummering-1}{%
+\section{Opsummering}\label{opsummering-1}}
 
 \hypertarget{kapiteldatab}{%
 \chapter{Data beskrivelse}\label{kapiteldatab}}
@@ -2645,7 +2647,7 @@ For at opnå den nødvendige dynamik til implementering af porteføljeallokering
 \hypertarget{akfic-analysen}{%
 \section{\texorpdfstring{\emph{AKFIC}-analysen}{AKFIC-analysen}}\label{akfic-analysen}}
 
-Ved at følge modelselektionsproceduren fra Sektion ??, startes med at restringere ligninger for aktier og obligationertyperne. Resultatet af de fire analyser er vist i Tabel ??, Tabel ??, Tabel ?? og Tabel ??. Den ikke-restringerede ligning for merafkastet af aktier har en \emph{AKFIC} værdi på -1260.5040333, som er den initielle basisværdi. Som hver af de laggede forklarende variable fjernes vil den resulterende \emph{AKFIC} værdi reporteres i den første række. Den laveste \emph{AKFIC} værdi resulterende fra fjernelse af én variabel markeres med fed, hvis den ligeledes forbedrer den initielle basis. Givet forbedring er denne værdi, nu også den nye basisværdi. Eksempelvis ses i første iteration at fjernelse af \emph{Dividend-Price Ratio} er har den laveste \emph{AKFIC} værdi på \(-1264.27\). Denne er ligeledes optimal eftersom den er lavere end basisværdien. Basisværdien opdateres nu og processen gentages. I den sidste række er den laveste \emph{AKFIC} værdi \(-1276.40\) og er resultatet af at fjerne \emph{Small Minus Big}, dette er til gengæld ikke optimalt da værdien ikke er lavere end basis. Processen stoppes derfor. Dermed opnåes en temporal ligning for aktiemerafkastet.
+Ved at følge modelselektionsproceduren fra Sektion ??, startes med at restringere ligninger for aktier og obligationertyperne. Resultatet af de fire analyser er vist i Tabel \ref{tab:STEP-RF-TABLE}, Tabel \ref{tab:STEP-AKT-TABLE}, Tabel \ref{tab:STEP-S-TABLE} og Tabel \ref{tab:STEP-V-TABLE}. Den ikke-restringerede ligning for merafkastet af aktier har en \emph{AKFIC} værdi på -1260.5040333, som er den initielle basisværdi. Som hver af de laggede forklarende variable fjernes vil den resulterende \emph{AKFIC} værdi reporteres i den første række. Den laveste \emph{AKFIC} værdi resulterende fra fjernelse af én variabel markeres med fed, hvis den ligeledes forbedrer den initielle basis. Givet forbedring er denne værdi, nu også den nye basisværdi. Eksempelvis ses i første iteration at fjernelse af \emph{Dividend-Price Ratio} er har den laveste \emph{AKFIC} værdi på \(-1264.27\). Denne er ligeledes optimal eftersom den er lavere end basisværdien. Basisværdien opdateres nu og processen gentages. I den sidste række er den laveste \emph{AKFIC} værdi \(-1276.40\) og er resultatet af at fjerne \emph{Small Minus Big}, dette er til gengæld ikke optimalt da værdien ikke er lavere end basis. Processen stoppes derfor. Dermed opnåes en temporal ligning for aktiemerafkastet.
 
 Ved at udføre samme procedure for det risikofrie aktiv, statsobligationer og virksomhedsobligationer endes ud den følgende temporale modelspecifikation.
 \begin{align*}
@@ -2701,12 +2703,138 @@ $r_t^{\text{rf}}$ & $rx_t^{\text{a}}$ & $rx_t^{\text{s}}$ & $rx_t^{\text{v}}$ & 
 
 Ingen variable udviser nu multikollinaritetsproblemer derfor afsluttes modelselektionsproceduren.
 
+\begin{landscape}
+\begin{table}[H]
+
+\caption{\label{tab:STEP-RF-TABLE}Top-down modelselektion på det risikofrie aktiv.}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{cccccccccccc}
+\toprule
+AKFIC & $x_t^{\text{dp}}$ & $x_t^{\text{pe}}$ & $x_t^{\text{bm}}$ & $x_t^{\text{avar}}$ & $x_t^{\text{hml}}$ & $x_t^{\text{smb}}$ & $x_t^{\text{ts}}$ & $x_t^{\text{ys}}$ & $x_t^{\text{cs}}$ & $x_t^{\text{ds}}$ & $x_t^{\text{fr}}$\\
+\midrule
+\rowcolor{gray!6}  -2520.2 & -2516.1 & -2520.2 & -2497.1 & -2515.0 & -2517.7 & -2513.6 & -2519.7 & -2514.8 & -2517.9 & -2503.7 & -2516.4\\
+ 
+-2523.5 & -2519.7 &  & -2499.3 & -2518.0 & -2521.5 & -2517.3 & -2523.5 & -2518.7 & -2521.7 & -2507.5 & -2520.2\\
+ 
+\rowcolor{gray!6}  -2525.0 & -2523.5 &  & -2502.5 & -2521.5 & -2525.0 & -2521.0 &  & -2514.5 & -2511.8 & -2495.9 & -2523.7\\
+ 
+-2525.3 & -2525.3 &  & -2505.2 & -2520.9 &  & -2522.7 &  & -2516.3 & -2514.2 & -2498.9 & -2525.1\\
+ 
+\rowcolor{gray!6}  -2524.7 &  &  & -2499.1 & -2522.5 &  & -2521.7 &  & -2510.2 & -2507.9 & -2497.0 & -2524.7\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra \citep{Pope1990} er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+
+\caption{\label{tab:STEP-AKT-TABLE}Top-down modelselektion på merafkastet af aktier.}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{cccccccccccc}
+\toprule
+AKFIC & $x_t^{\text{dp}}$ & $x_t^{\text{pe}}$ & $x_t^{\text{bm}}$ & $x_t^{\text{avar}}$ & $x_t^{\text{hml}}$ & $x_t^{\text{smb}}$ & $x_t^{\text{ts}}$ & $x_t^{\text{ys}}$ & $x_t^{\text{cs}}$ & $x_t^{\text{ds}}$ & $x_t^{\text{fr}}$\\
+\midrule
+\rowcolor{gray!6}  -1264.3 & -1264.3 & -1264.0 & -1264.1 & -1262.8 & -1262.3 & -1259.4 & -1260.2 & -1261.3 & -1261.8 & -1264.2 & -1258.8\\
+ 
+-1267.9 &  & -1267.7 & -1267.3 & -1266.5 & -1266.0 & -1263.0 & -1263.1 & -1264.9 & -1264.5 & -1267.9 & -1262.4\\
+ 
+\rowcolor{gray!6}  -1271.3 &  & -1271.3 & -1269.8 & -1269.8 & -1269.6 & -1266.5 & -1266.0 & -1268.7 & -1264.2 &  & -1266.1\\
+ 
+-1273.5 &  &  & -1269.4 & -1273.5 & -1272.9 & -1269.7 & -1268.7 & -1271.6 & -1266.7 &  & -1269.5\\
+ 
+\rowcolor{gray!6}  -1274.0 &  &  & -1271.3 &  & -1274.0 & -1272.5 & -1271.7 & -1273.9 & -1270.5 &  & -1272.2\\
+ 
+-1274.9 &  &  & -1271.7 &  &  & -1272.8 & -1273.2 & -1274.9 & -1272.3 &  & -1272.8\\
+ 
+\rowcolor{gray!6}  -1276.3 &  &  & -1272.7 &  &  & -1272.2 & -1276.3 &  & -1275.9 &  & -1274.0\\
+ 
+-1279.8 &  &  & -1271.8 &  &  & -1273.5 &  &  & -1279.8 &  & -1272.1\\
+ 
+\rowcolor{gray!6}  -1276.4 &  &  & -1275.1 &  &  & -1276.4 &  &  &  &  & -1275.5\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra \citep{Pope1990} er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+
+\caption{\label{tab:STEP-S-TABLE}Top-down modelselektion på merafkastet af statsobligationer.}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{cccccccccccc}
+\toprule
+AKFIC & $x_t^{\text{dp}}$ & $x_t^{\text{pe}}$ & $x_t^{\text{bm}}$ & $x_t^{\text{avar}}$ & $x_t^{\text{hml}}$ & $x_t^{\text{smb}}$ & $x_t^{\text{ts}}$ & $x_t^{\text{ys}}$ & $x_t^{\text{cs}}$ & $x_t^{\text{ds}}$ & $x_t^{\text{fr}}$\\
+\midrule
+\rowcolor{gray!6}  -1712.1 & -1710.4 & -1711.0 & -1711.9 & -1705.2 & -1712.1 & -1708.0 & -1711.9 & -1707.8 & -1702.1 & -1711.0 & -1687.6\\
+ 
+-1715.7 & -1714.2 & -1714.8 & -1715.7 & -1708.9 &  & -1711.7 & -1715.7 & -1711.6 & -1705.9 & -1714.8 & -1691.4\\
+ 
+\rowcolor{gray!6}  -1719.2 & -1717.8 & -1718.6 &  & -1712.6 &  & -1714.9 & -1719.2 & -1715.1 & -1709.3 & -1718.1 & -1694.2\\
+ 
+-1722.2 & -1721.7 & -1722.2 &  & -1716.3 &  & -1718.7 &  & -1694.6 & -1696.9 & -1721.9 & -1697.9\\
+ 
+\rowcolor{gray!6}  -1724.8 & -1721.9 &  &  & -1717.0 &  & -1721.7 &  & -1695.9 & -1699.6 & -1724.8 & -1701.3\\
+ 
+-1725.8 & -1725.8 &  &  & -1717.9 &  & -1723.9 &  & -1691.6 & -1681.0 &  & -1702.7\\
+ 
+\rowcolor{gray!6}  -1725.1 &  &  &  & -1720.2 &  & -1725.1 &  & -1695.2 & -1684.1 &  & -1704.9\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra \citep{Pope1990} er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+
+\caption{\label{tab:STEP-V-TABLE}Top-down modelselektion på merafkastet af virksomhedsobligationer.}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{cccccccccccc}
+\toprule
+AKFIC & $x_t^{\text{dp}}$ & $x_t^{\text{pe}}$ & $x_t^{\text{bm}}$ & $x_t^{\text{avar}}$ & $x_t^{\text{hml}}$ & $x_t^{\text{smb}}$ & $x_t^{\text{ts}}$ & $x_t^{\text{ys}}$ & $x_t^{\text{cs}}$ & $x_t^{\text{ds}}$ & $x_t^{\text{fr}}$\\
+\midrule
+\rowcolor{gray!6}  -1608.6 & -1607.8 & -1608.6 & -1608.6 & -1603.4 & -1607.6 & -1603.0 & -1608.6 & -1606.7 & -1605.8 & -1608.4 & -1584.4\\
+ 
+-1612.4 & -1611.5 & -1612.4 & -1612.4 & -1607.3 & -1611.5 & -1606.7 &  & -1604.2 & -1602.3 & -1612.2 & -1588.2\\
+ 
+\rowcolor{gray!6}  -1616.2 & -1615.4 &  & -1616.2 & -1610.8 & -1615.3 & -1610.6 &  & -1607.8 & -1606.1 & -1616.0 & -1592.0\\
+ 
+-1619.8 & -1618.2 &  &  & -1614.5 & -1619.1 & -1614.2 &  & -1611.6 & -1609.8 & -1619.8 & -1595.4\\
+ 
+\rowcolor{gray!6}  -1622.8 & -1620.0 &  &  & -1618.4 & -1622.8 & -1618.0 &  & -1607.3 & -1590.1 &  & -1599.2\\
+ 
+-1623.1 & -1623.1 &  &  & -1619.8 &  & -1621.1 &  & -1610.6 & -1593.0 &  & -1602.2\\
+ 
+\rowcolor{gray!6}  -1621.4 &  &  &  & -1621.2 &  & -1621.4 &  & -1614.2 & -1596.7 &  & -1603.8\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra \citep{Pope1990} er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\end{landscape}
+
 \hypertarget{var1est}{%
 \section{VAR(1) estimation}\label{var1est}}
 
 Tabel \ref{tab:VAR-TAB} rapporterer parameter estimaterne af Ligning \eqref{eq:1}. Tabellen består af af OLS samt bias-justerede koefficientestimater, og dertilhørende \(t\)-test størrelser for hver ligning i VAR(1)-modellen. Responsvariablene er vist til venstre i først kolonne.
 
-Den første række i Tabel \ref{tab:VAR-TAB} viser, at det risikofrie aktiv afhænger positivt af dets egen lag samt merafkastene på aktier og statsobligationer. Mens merafkastet på virksomhedsobligationer prædikterer det risikofrie afkast negativt. Kun den laggede værdi af det risikofrie afkast er signifikant ift. signifikansniveauet. Derudover haves en justeret \(R^2\) på \(0.2553\).
+Den første række i Tabel \ref{tab:VAR-TAB} viser, at det risikofrie aktiv afhænger positivt af dets egen lag samt merafkastene på aktier og statsobligationer. Mens merafkastet på virksomhedsobligationer prædikterer det risikofrie afkast negativt. Ingen af laggede værdier af aktiverne er signifikante ift. signifikansniveauet. På trods af dette er samtlige af prædiktionsvariablene signifikante. Der ses en kontracyklisk effekt overfor de finansielle variable og en positiv effekt af rentestruktursvariablene. Derudover haves en justeret \(R^2\) på \(25.3\%\). Den anden række repræsenterer ligningen for fremtidige merafkast på aktier, her ses en negativ prædiktabilitet af det risikofrie afkast samt merafkastet på statsobligationer. \emph{Book-to-market} prædikterer det fremtidige aktieafkast positivt og signifikant, dette kan være et resultat af forventninger til den fremtidige markedspris, givet øgede bogværdier. Der ses en forholdsvis lav justeret \(R^2\) værdi på \(6.9\%\). Det pointeres til gengæld af \citep{CampVicCha2003} at forudsigelse af merafkast på aktier er statistisk svært. Ligningen for det fremtidige merafkast på statsobligationer ses i tredje række. \emph{Small Minus Big} samt \emph{Yield Spread} er signifikante, ift. signifikansniveauet, og prædikterer det fremtidige merafkast på statsobligationer med modsatte fortegn. Det korte rentespænd prædikterer merafkastet positivt, hvilket er konsistent med den univariate analyse. Dvs. merafkastet er påvirket af enten en stigning i den lange rente eller et fald i den korte rente, hvis komplementet holdes konstant. Den laveste justerede \(R^2\), blandt aktiverne, rapporteres til \(2.4\%\). Fjerde række repræsenterer det fremtidige merafkast på virksomhedsobligationer, sammenlignelige mønstre ses, som for statsobligationer. Her ses til gengæld, at den laggede værdi af merafkastet på virksomhedsobligationer ligeledes bidrager til at foreklare varationen i variablen. Den justerede \(R^2\) er \(8.5\%\), og mere end fordoblet ift. merafkastet på statsobligationer.
+
+De sidste fire rækker af Tabel \ref{tab:VAR-TAB} rapporterer ligningerne for prædiktionsvariablene, dvs. \emph{Book-to-Market Ratio}, \emph{Small Minus Big}, den nominelle rente og \emph{Yield Spread}. Alle variablene, på nær \emph{Small Minus Big}, er veldefinerede af en AR(1)-process, og er over \(60\%\) i justeret \(R^2\). Dette er konsistent med førstordens autokorrelation størrelsen rapporteret i Tabel \ref{tab:DES-TILSTANDSVARIABLE}, som indikerer høj autokorrelation. De høje koefficient estimater af de laggede værdier af prædiktionsvariablene kan sætte spørgsmål om, hvorvidt processerne er \emph{unit root} processer end stationære processer, \citep{JurVic2011}. Samtidigt bidrager enkelte andre laggede variable til at forklare variationen på tværs af prædiktionsvariablene.
+
+For det meste er de bias-justerede koefficienter ikke er signifikant forskellige fra de regulære OLS estimater. Eksempelvis ses, at forskellen for det laggede merafkast på virksomhedsobligationer, på det fremtidige afkast af det risikofrie aktiv er \(0.001\), og er biased opadtil. De bias-justerede værdier på tværs af hele VAR-systemet viser, at koefficienterne ikke er meget påvirket af bias hørende til små stikprøver.
 
 
 
@@ -2767,6 +2895,38 @@ $x_t^{\text{ys}}$ & \textbf{ 0.003} & \textbf{ 0.216} & -0.009 & 0.003 & -0.016 
 \rowcolor{gray!6}   & (0.003) & (0.215) & (-0.010) & (0.003) & (-0.015) & (0.002) & (0.000) & (-0.133) & (0.779) & \\
  
  & [2.865] & [3.994] & [-1.841] & [0.166] & [-0.985] & [0.996] & [0.261] & [-1.871] & [18.609] & \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra \citep{Pope1990} er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+
+\caption{\label{tab:COV-RES-TAB}Vector Autoregressive fejlleds korrelationer samt standard afvigelser.}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{ccccccccc}
+\toprule
+  & $r_t^{\text{rf}}$ & $rx_t^{\text{a}}$ & $rx_t^{\text{s}}$ & $rx_t^{\text{v}}$ & $x_t^{\text{bm}}$ & $x_t^{\text{smb}}$ & $x_t^{\text{b}}$ & $x_t^{\text{ys}}$\\
+\midrule
+\rowcolor{gray!6}  $r_t^{\text{rf}}$ & 0.007 & 0.040 & 0.331 & 0.400 & -0.221 & -0.093 & 0.203 & -0.027\\
+ 
+$rx_t^{\text{a}}$ &  & 0.081 & -0.046 & 0.139 & -0.770 & 0.393 & -0.075 & -0.016\\
+ 
+\rowcolor{gray!6}  $rx_t^{\text{s}}$ &  &  & 0.038 & 0.857 & -0.132 & -0.120 & 0.114 & 0.080\\
+ 
+$rx_t^{\text{v}}$ &  &  &  & 0.045 & -0.265 & -0.065 & 0.089 & 0.012\\
+ 
+\rowcolor{gray!6}  $x_t^{\text{bm}}$ &  &  &  &  & 0.047 & -0.190 & 0.022 & 0.032\\
+ 
+$x_t^{\text{smb}}$ &  &  &  &  &  & 1.701 & -0.123 & 0.008\\
+ 
+\rowcolor{gray!6}  $x_t^{\text{b}}$ &  &  &  &  &  &  & 0.003 & 0.135\\
+ 
+$x_t^{\text{ys}}$ &  &  &  &  &  &  &  & 0.006\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -3501,6 +3661,92 @@ Kombineres Ligning ?? og implikationen for den effektive rente, for herefter at 
 y_t^n&=\frac{1}{n} (r_{t+1}^n + r_{t+2}^{n-1}+\cdots+r_{t+n}^1)\\
 &=\frac{1}{n}\sum_{i=0}^{n-1} r_{t+i+1}^{n-i}.
 \end{align}
+
+\hypertarget{rentespuxe6ndet}{%
+\section{Rentespændet}\label{rentespuxe6ndet}}
+
+For at udlede rentespændet fratrækkes \(y_t^1\) på begge sider af Ligning ??, så
+\begin{align}
+y_t^n-y_t^1&=\frac{1}{n} \sum_{i=0}^{n-1} (r_{t+i+1}^{n-i}-y_t^1)\\
+&=\frac{1}{n} \sum_{i=0}^{n-1} ((y_{t+i}^1-y_t^1) + (r_{t+i+1}^{n-i}-y_t^1)).
+\end{align}
+
+Dermed kan det første led på højre side af summationen skrives som
+\begin{align}
+\sum_{i=0}^{n-1}(y_{t+i}^1-y_t^1)&=(y_{t+1}^1 y_t^1) + (y_{t+2}-y_t^1)+\dots +(y_{t+n-1} y_t^1)\\
+&=(n-1)\Delta y_{t+1}^1+(n-2)\Delta y_{t+2}^1 + \dots+ \Delta y_{t+n-1}^1\\
+&=\sum_{i=1}^{n-1}  (n-1)\Delta y_{t+i}^1.
+\end{align}
+
+Dette kan skrives i termer af rentespændet, \(s_t^n=y_t^n-y_t^1\), ved at tage den betingede forventning på tidspunkt \(t\), sådan at
+\begin{equation}
+s_t^n=\frac{1}{n} \sum_{i=1}^{n-1} \mathbb{E}_t[(n-1)\Delta y_{t+i}^1] + \frac{1}{n} \sum_{i=0}^{n-1} \mathbb{E}_t[(r_{t+i+1}^{n-i} - y_t^1)].
+\end{equation}
+
+\hypertarget{varighed-og-renteimmunisering}{%
+\section{Varighed og renteimmunisering}\label{varighed-og-renteimmunisering}}
+
+\citep{Macaulay1938} viser at den negative elasticitet af en kuponobligations pris mht. brutto renten giver varigheden
+\begin{equation}
+D_t^{c,n} = -\frac{\text{d} P_t^{c,n}}{\text{d}(1+Y_t^{c,n})}\frac{(1+Y_t^{c,n})}{P_t^{c,n}},
+\end{equation}
+
+og er udledt gennem en andenordens Taylor approksimation
+\begin{equation}
+\frac{\text{d} P^{c,n}}{P^{c,n}}\approx \frac{\text{d} P^{c,n}}{\text{d} Y^{c,n}}\frac{\text{d} Y^{c,n}}{P^{c,n}}+\frac{1}{2}\frac{\text{d}^2 P^{c,n}}{\text{d} Y^{c,n,2}}\frac{(\text{d}Y^{c,n})^2}{P^{c,n}},
+\end{equation}
+
+hvor den første afledte er den modificerede varighed og den anden afledte er konveksiteten af kuponobligationen, \citep{Campbell1997}.
+
+\hypertarget{loglineuxe6r-approksimation-af-kuponobligations-afkast}{%
+\section{Loglineær approksimation af kuponobligations afkast}\label{loglineuxe6r-approksimation-af-kuponobligations-afkast}}
+
+På tidspunkt \(t\) er afkastet på kuponobligationen med kuponbetaling \(C\) lig
+\begin{equation}
+1+R_{t+1}^{c,n}=\frac{P_{t+1}^{c,n} + C}{P_t^{c,n}}.
+\end{equation}
+
+Tages logfunktionen på begge sider opnåes
+\begin{align}
+\log(1+R_{t+1}^{c,n})&=\\
+&=\log(\frac{P_{t+1}^{c,n} + C}{P_t^{c,n}})\\
+&=\log(P_{t+1}^{c,n} + C) - \log(P_t^{c,n})\\
+r_{t+1}^{c,n}&=\log(1+\exp(c- p_{t+1}^{c,n})) + p_{t+1}^{c,n} - p_t^{c,n}.
+\end{align}
+
+I ovenstående Ligning ??, er \(\log(1+\exp(c- p_{t+1}^{c,n}))\) ikke-lineær. For at løse dette anvendes en førsteordens Taylor approksimation omkring middelværdie, \(\overline{c- p_{t+1}^{c,n}}\). Herfra sættes \(x=\log(1+\exp(c- p_{t+1}^{c,n}))\).
+
+Den første afledte, \(f'(x^*)\), bliver fundet ved brug af kædereglen til
+\[f'(x^*)=\frac{1}{1+\exp(\overline{c- p_{t+1}^{c,n}})}\exp(\overline{c- p_{t+1}^{c,n}}).\]
+
+Dermed bliver førsteordens Taylor approksimationen
+\begin{align}
+f(x)&=\log(1+\exp(\overline{c- p_{t+1}^{c,n}}))+ \frac{1}{1+\exp(\overline{c- p_{t+1}^{c,n}})}\exp(\overline{c- p_{t+1}^{c,n}}) ((c-p_{t+1}^{c,n}) -(\overline{c- p_{t+1}^{c,n}}))\\
+&=\log(1+\exp(\overline{c- p_{t+1}^{c,n}})) + \frac{1}{1+\exp(\overline{c- p_{t+1}^{c,n}})}\exp(\overline{c- p_{t+1}^{c,n}}) (c-p_{t+1}^{c,n}) - \frac{1}{1+\exp(\overline{c- p_{t+1}^{c,n}})}\exp(\overline{c- p_{t+1}^{c,n}})(\overline{c- p_{t+1}^{c,n}}).
+\end{align}
+
+Defineres lineariseringsparametrene \(k\) og \(\rho\) til
+\begin{align}
+\rho&=\frac{1}{(1+\exp(\overline{c- p_{t+1}^{c,n}})}\\
+k&=-\log(\rho)-(1-\rho)\log(\frac{1}{\rho-1}).
+\end{align}
+
+Kan der ved brug af rekursion opnåes følgende resultat
+\begin{equation}
+p_t^{c,n}=\sum_{i=0}^{n-1} \rho^i(k+(1-\rho)c - r_{t+i+1}^{c,n-i}).
+\end{equation}
+
+Kombineres dette nu med approksimationen for log af den effektive rente, som opfylder
+\begin{equation}
+p_t^{c,n}\approx\sum_{i=0}^{n-1} \rho^i(k+(1-\rho)c - y_t^{c,n}).
+\end{equation}
+
+Kan den effektive rente af \(n\)-periode kuponobligationen udledes til
+\begin{equation}
+y_t^{c,n}\approx (\frac{1-\rho}{1-\rho^n})\sum_{i=0}^{n-1}\rho^i r_{t+i+1}^{c,n-i}.
+\end{equation}
+
+Og ved substitution kan det approksimative loglinære afkast fra Kapitel ?? udledes.
 
 \hypertarget{den-optimale-dynamiske-strategi}{%
 \chapter{Den optimale dynamiske strategi}\label{den-optimale-dynamiske-strategi}}

@@ -285,6 +285,20 @@ prod_var_rf <- lm(NET_TB ~ NET_TB.1 + AKT + S_OBL + V_OBL + BM + SMB + TB + Y_SP
 
 car::vif(prod_var_rf)
 
+step_table_rf <- data.frame(dp=c(-2516.1, -2519.7, -2523.5, -2525.3, NA),
+                            pe=c(-2520.2, NA, NA, NA, NA),
+                            bm=c(-2497.1, -2499.3, -2502.5, -2505.2, -2499.1),
+                            avar=c(-2515.0, -2518.0, -2521.5, -2520.9,  -2522.5),
+                            hml=c(-2517.7, -2521.5, -2525.0, NA, NA),
+                            smb=c(-2513.6, -2517.3, -2521.0, -2522.7, -2521.7),
+                            ts=c(-2519.7, -2523.5, NA, NA, NA),
+                            ys=c(-2514.8, -2518.7, -2514.5, -2516.3, -2510.2),
+                            cs=c(-2517.9, -2521.7, -2511.8, -2514.2, -2507.9),
+                            ds=c(-2503.7, -2507.5, -2495.9, -2498.9, -2497.0),
+                            fr=c(-2516.4, -2520.2, -2523.7, -2525.1, -2524.7))
+step_table_rf <- cbind(min=apply(step_table_rf, 1, FUN=min, na.rm=TRUE), step_table_rf)
+
+
 ## AKTIER
 data_var_akt <- as.xts(merge(xts::lag.xts(data$AKT, -1, na.pad = FALSE), head(data, -1)))
 
@@ -297,6 +311,19 @@ summary(step_var_akt_model)
 prod_var_akt <- lm(AKT ~ NET_TB + AKT.1 + S_OBL + V_OBL + BM + SMB + TB + Y_SPREAD, data=data_var_akt)
 
 car::vif(prod_var_akt)
+
+step_table_akt <- data.frame(dp=c(-1264.3, NA, NA, NA, NA, NA, NA, NA, NA),
+                            pe=c(-1264.0, -1267.7, -1271.3, NA, NA, NA, NA, NA, NA),
+                            bm=c(-1264.1, -1267.3, -1269.8, -1269.4, -1271.3, -1271.7, -1272.7,-1271.8,  -1275.1 ),
+                            avar=c(-1262.8, -1266.5, -1269.8,-1273.5, NA, NA, NA, NA, NA ),
+                            hml=c(-1262.3, -1266.0, -1269.6,-1272.9, -1274.0, NA, NA, NA, NA ),
+                            smb=c(-1259.4,-1263.0, -1266.5, -1269.7,  -1272.5, -1272.8,-1272.2, -1273.5, -1276.4 ),
+                            ts=c(-1260.2,-1263.1, -1266.0, -1268.7, -1271.7, -1273.2, -1276.3, NA, NA ),
+                            ys=c(-1261.3, -1264.9, -1268.7, -1271.6, -1273.9, -1274.9, NA, NA, NA),
+                            cs=c(-1261.8, -1264.5, -1264.2, -1266.7, -1270.5, -1272.3,-1275.9, -1279.8, NA ),
+                            ds=c( -1264.2,  -1267.9, NA, NA, NA, NA, NA, NA, NA),
+                            fr=c(-1258.8, -1262.4, -1266.1,-1269.5, -1272.2, -1272.8, -1274.0, -1272.1, -1275.5))
+step_table_akt <- cbind(min=apply(step_table_akt, 1, FUN=min, na.rm=TRUE), step_table_akt)
 
 ## STATS
 data_var_s <- as.xts(merge(xts::lag.xts(data$S_OBL, -1, na.pad = FALSE), head(data, -1)))
@@ -311,6 +338,19 @@ prod_var_s <- lm(S_OBL ~ NET_TB + AKT + S_OBL.1 + V_OBL + BM + SMB + TB + Y_SPRE
 
 car::vif(prod_var_s)
 
+step_table_s <- data.frame(dp=c(-1710.4,-1714.2,  -1717.8, -1721.7, -1721.9, -1725.8, NA ),
+                             pe=c(-1711.0, -1714.8, -1718.6,-1722.2, NA, NA, NA  ),
+                             bm=c(-1711.9,-1715.7, NA, NA, NA, NA, NA ),
+                             avar=c(-1705.2,-1708.9, -1712.6, -1716.3, -1717.0, -1717.9, -1720.2 ),
+                             hml=c( -1712.1, NA, NA, NA, NA, NA, NA),
+                             smb=c(-1708.0, -1711.7, -1714.9,-1718.7, -1721.7, -1723.9,  -1725.1 ),
+                             ts=c(-1711.9, -1715.7, -1719.2,  NA, NA, NA, NA),
+                             ys=c(-1707.8,-1711.6,  -1715.1,-1694.6,-1695.9,  -1691.6,-1695.2  ),
+                             cs=c(-1702.1, -1705.9, -1709.3,-1696.9, -1699.6, -1681.0, -1684.1 ),
+                             ds=c(-1711.0,-1714.8, -1718.1, -1721.9, -1724.8, NA, NA ),
+                             fr=c(-1687.6,-1691.4,  -1694.2, -1697.9, -1701.3,-1702.7, -1704.9  ))
+step_table_s <- cbind(min=apply(step_table_s, 1, FUN=min, na.rm=TRUE), step_table_s)
+
 ## VIRKSOMHEDER
 data_var_v <- as.xts(merge(xts::lag.xts(data$V_OBL, -1, na.pad = FALSE), head(data, -1)))
 
@@ -324,6 +364,18 @@ prod_var_v <- lm(V_OBL ~ NET_TB + AKT + S_OBL + V_OBL.1 + BM + SMB + TB + Y_SPRE
 
 car::vif(prod_var_v)
 
+step_table_v <- data.frame(dp=c(-1607.8, -1611.5, -1615.4, -1618.2,-1620.0, -1623.1,NA ),
+                             pe=c(-1608.6, -1612.4, NA, NA, NA, NA, NA),
+                             bm=c(-1608.6, -1612.4,  -1616.2, NA, NA ,NA , NA),
+                             avar=c(-1603.4, -1607.3, -1610.8,  -1614.5, -1618.4, -1619.8, -1621.2),
+                             hml=c( -1607.6, -1611.5, -1615.3, -1619.1,-1622.8, NA, NA ),
+                             smb=c(-1603.0, -1606.7,-1610.6,  -1614.2, -1618.0, -1621.1, -1621.4),
+                             ts=c(-1608.6, NA, NA, NA, NA, NA, NA),
+                             ys=c(-1606.7,-1604.2, -1607.8, -1611.6, -1607.3, -1610.6, -1614.2 ),
+                             cs=c(-1605.8, -1602.3, -1606.1,-1609.8,  -1590.1, -1593.0,  -1596.7 ),
+                             ds=c(-1608.4,-1612.2, -1616.0, -1619.8, NA, NA, NA ),
+                             fr=c(-1584.4,-1588.2,  -1592.0, -1595.4,-1599.2,   -1602.2,-1603.8  ))
+step_table_v <- cbind(min=apply(step_table_v, 1, FUN=min, na.rm=TRUE), step_table_v)
 
 
 

@@ -118,6 +118,7 @@ $$\text{VIF}_i=\frac{1}{1-R_i^2},$$
 hvor $R_i^2$ stammer fra regressionen i ovenstående Ligning ??. Det sidste skridt består i at undersøge størrelsesordenen af multikollinaritet, ved at tjekke størrelsen på $\text{VIF}_i$. En generel regel er, at multikollinariteten er meget høj når $\text{VIF}_i>10$. Kvadratroden af $\text{VIF}$ indikerer, hvor meget standardfejlen øges, sammenlignet med tilfældet, hvor variablen hypotetisk ingen korrelation har til de andre variable i modellen. Skulle der være problemer med multikollinarietet fjernes evt. problematiske variable. Hvis de forklarende variable herefter er forskellige på tværs af aktivklasserne foretages en kvalitativ vurdering, som har til formål at udvælge en delmængde af de tilbageværende variable, som fuldt kommer til at indgå i VAR(1)-modellen.
 
 Slutteligt foretages en sidste *Variance Inflation Factor* analyse, som et sidste tjek for multikollinaritet.
+
 ## Opsummering
 
 # Data beskrivelse {#kapiteldatab}
@@ -1609,7 +1610,7 @@ For at formindske modelkompleksiteten i VAR-modellen udføres den beskrevne *Top
 For at opnå den nødvendige dynamik til implementering af porteføljeallokeringen, præsenteres først resultatet fra *AKFIC* analysen og herefter estimeres sættet af restringerede VAR koefficienter fra det resulterende system. Slutteligt laves en kvalitativ analyse af *goodness-of-fit* for den resulterende VAR model, for at opnå bedre forståelse af modellen.
 
 ## *AKFIC*-analysen
-Ved at følge modelselektionsproceduren fra Sektion ??, startes med at restringere ligninger for aktier og obligationertyperne. Resultatet af de fire analyser er vist i Tabel ??, Tabel ??, Tabel ?? og Tabel ??. Den ikke-restringerede ligning for merafkastet af aktier har en *AKFIC* værdi på `r extractAIC(fit_var_akt, k=qchisq(0.05,df = 1, lower.tail = F))[2]`, som er den initielle basisværdi. Som hver af de laggede forklarende variable fjernes vil den resulterende *AKFIC* værdi reporteres i den første række. Den laveste *AKFIC* værdi resulterende fra fjernelse af én variabel markeres med fed, hvis den ligeledes forbedrer den initielle basis. Givet forbedring er denne værdi, nu også den nye basisværdi. Eksempelvis ses i første iteration at fjernelse af *Dividend-Price Ratio* er har den laveste *AKFIC* værdi på $-1264.27$. Denne er ligeledes optimal eftersom den er lavere end basisværdien. Basisværdien opdateres nu og processen gentages. I den sidste række er den laveste *AKFIC* værdi $-1276.40$ og er resultatet af at fjerne *Small Minus Big*, dette er til gengæld ikke optimalt da værdien ikke er lavere end basis. Processen stoppes derfor. Dermed opnåes en temporal ligning for aktiemerafkastet. 
+Ved at følge modelselektionsproceduren fra Sektion ??, startes med at restringere ligninger for aktier og obligationertyperne. Resultatet af de fire analyser er vist i Tabel \@ref(tab:STEP-RF-TABLE), Tabel \@ref(tab:STEP-AKT-TABLE), Tabel \@ref(tab:STEP-S-TABLE) og Tabel \@ref(tab:STEP-V-TABLE). Den ikke-restringerede ligning for merafkastet af aktier har en *AKFIC* værdi på `r extractAIC(fit_var_akt, k=qchisq(0.05,df = 1, lower.tail = F))[2]`, som er den initielle basisværdi. Som hver af de laggede forklarende variable fjernes vil den resulterende *AKFIC* værdi reporteres i den første række. Den laveste *AKFIC* værdi resulterende fra fjernelse af én variabel markeres med fed, hvis den ligeledes forbedrer den initielle basis. Givet forbedring er denne værdi, nu også den nye basisværdi. Eksempelvis ses i første iteration at fjernelse af *Dividend-Price Ratio* er har den laveste *AKFIC* værdi på $-1264.27$. Denne er ligeledes optimal eftersom den er lavere end basisværdien. Basisværdien opdateres nu og processen gentages. I den sidste række er den laveste *AKFIC* værdi $-1276.40$ og er resultatet af at fjerne *Small Minus Big*, dette er til gengæld ikke optimalt da værdien ikke er lavere end basis. Processen stoppes derfor. Dermed opnåes en temporal ligning for aktiemerafkastet. 
 
 Ved at udføre samme procedure for det risikofrie aktiv, statsobligationer og virksomhedsobligationer endes ud den følgende temporale modelspecifikation.
 \begin{align*}
@@ -1670,11 +1671,95 @@ a2 %>%
 
 Ingen variable udviser nu multikollinaritetsproblemer derfor afsluttes modelselektionsproceduren.
 
+\begin{landscape}
+```{r STEP-RF-TABLE, echo=FALSE}
+
+colnames(step_table_rf) <- c('AKFIC', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+
+step_table_rf %>% 
+  knitr::kable(caption = 'Top-down modelselektion på det risikofrie aktiv.',
+               booktabs=TRUE,
+               align = c(rep('c', 10)),
+               row.names = FALSE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = " ") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "HOLD_position"),
+                             full_width = F) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra (ref:po1990) er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
+```
+
+```{r STEP-AKT-TABLE, echo=FALSE}
+
+colnames(step_table_akt) <- c('AKFIC', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+
+step_table_akt %>% 
+  knitr::kable(caption = 'Top-down modelselektion på merafkastet af aktier.',
+               booktabs=TRUE,
+               align = c(rep('c', 10)),
+               row.names = FALSE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = " ") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "HOLD_position"),
+                             full_width = F) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra (ref:po1990) er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
+```
+
+```{r STEP-S-TABLE, echo=FALSE}
+
+colnames(step_table_s) <- c('AKFIC', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+
+step_table_s %>% 
+  knitr::kable(caption = 'Top-down modelselektion på merafkastet af statsobligationer.',
+               booktabs=TRUE,
+               align = c(rep('c', 10)),
+               row.names = FALSE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = " ") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "HOLD_position"),
+                             full_width = F) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra (ref:po1990) er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
+```
+
+```{r STEP-V-TABLE, echo=FALSE}
+
+colnames(step_table_v) <- c('AKFIC', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+
+
+step_table_v %>% 
+  knitr::kable(caption = 'Top-down modelselektion på merafkastet af virksomhedsobligationer.',
+               booktabs=TRUE,
+               align = c(rep('c', 10)),
+               row.names = FALSE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = " ") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "HOLD_position"),
+                             full_width = F) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra (ref:po1990) er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
+```
+\end{landscape}
+
 ## VAR(1) estimation {#var1est}
 
 Tabel \@ref(tab:VAR-TAB) rapporterer parameter estimaterne af Ligning \@ref(eq:1). Tabellen består af af OLS samt bias-justerede koefficientestimater, og dertilhørende $t$-test størrelser for hver ligning i VAR(1)-modellen. Responsvariablene er vist til venstre i først kolonne.
 
-Den første række i Tabel \@ref(tab:VAR-TAB) viser, at det risikofrie aktiv afhænger positivt af dets egen lag samt merafkastene på aktier og statsobligationer. Mens merafkastet på virksomhedsobligationer prædikterer det risikofrie afkast negativt. Kun den laggede værdi af det risikofrie afkast er signifikant ift. signifikansniveauet. Derudover haves en justeret $R^2$ på $0.2553$.
+Den første række i Tabel \@ref(tab:VAR-TAB) viser, at det risikofrie aktiv afhænger positivt af dets egen lag samt merafkastene på aktier og statsobligationer. Mens merafkastet på virksomhedsobligationer prædikterer det risikofrie afkast negativt. Ingen af laggede værdier af aktiverne er signifikante ift. signifikansniveauet. På trods af dette er samtlige af prædiktionsvariablene signifikante. Der ses en kontracyklisk effekt overfor de finansielle variable og en positiv effekt af rentestruktursvariablene. Derudover haves en justeret $R^2$ på $25.3\%$. Den anden række repræsenterer ligningen for fremtidige merafkast på aktier, her ses en negativ prædiktabilitet af det risikofrie afkast samt merafkastet på statsobligationer. *Book-to-market* prædikterer det fremtidige aktieafkast positivt og signifikant, dette kan være et resultat af forventninger til den fremtidige markedspris, givet øgede bogværdier. Der ses en forholdsvis lav justeret $R^2$ værdi på $6.9\%$. Det pointeres til gengæld af [@CampVicCha2003] at forudsigelse af merafkast på aktier er statistisk svært. Ligningen for det fremtidige merafkast på statsobligationer ses i tredje række. *Small Minus Big* samt *Yield Spread* er signifikante, ift. signifikansniveauet, og prædikterer det fremtidige merafkast på statsobligationer med modsatte fortegn. Det korte rentespænd prædikterer merafkastet positivt, hvilket er konsistent med den univariate analyse. Dvs. merafkastet er påvirket af enten en stigning i den lange rente eller et fald i den korte rente, hvis komplementet holdes konstant. Den laveste justerede $R^2$, blandt aktiverne, rapporteres til $2.4\%$. Fjerde række repræsenterer det fremtidige merafkast på virksomhedsobligationer, sammenlignelige mønstre ses, som for statsobligationer. Her ses til gengæld, at den laggede værdi af merafkastet på virksomhedsobligationer ligeledes bidrager til at foreklare varationen i variablen. Den justerede $R^2$ er $8.5\%$, og mere end fordoblet ift. merafkastet på statsobligationer.
+
+De sidste fire rækker af Tabel \@ref(tab:VAR-TAB) rapporterer ligningerne for prædiktionsvariablene, dvs. *Book-to-Market Ratio*, *Small Minus Big*, den nominelle rente og *Yield Spread*. Alle variablene, på nær *Small Minus Big*, er veldefinerede af en AR(1)-process, og er over $60\%$ i justeret $R^2$. Dette er konsistent med førstordens autokorrelation størrelsen rapporteret i Tabel \@ref(tab:DES-TILSTANDSVARIABLE), som indikerer høj autokorrelation. De høje koefficient estimater af de laggede værdier af prædiktionsvariablene kan sætte spørgsmål om, hvorvidt processerne er *unit root* processer end stationære processer, [@JurVic2011]. Samtidigt bidrager enkelte andre laggede variable til at forklare variationen på tværs af prædiktionsvariablene. 
+
+For det meste er de bias-justerede koefficienter ikke er signifikant forskellige fra de regulære OLS estimater. Eksempelvis ses, at forskellen for det laggede merafkast på virksomhedsobligationer, på det fremtidige afkast af det risikofrie aktiv er $0.001$, og er biased opadtil. De bias-justerede værdier på tværs af hele VAR-systemet viser dermed, at koefficienterne ikke er signifikant påvirket af bias hørende til små stikprøver.
+
+Tabel \@ref(tab:COV-RES-TAB) viser kovariansstrukturen af stødene til VAR-systemet. For det risikofrie aktiv ses, at den laggede værdi af merafkastet på aktier og merafkastet på statsobligationer sikrer *mean aversion*, siden både koefficient estimerne og stød til det fremtidige risikofrie afkast er positive. Merafkastet på virksomhedsobligationer fremprovokerer *mean reversion* i det risikofrie aktiv. Ses dernæst på merafkastet på aktier, fremgår det på trods af den ringe prædiktabilitet blandt tilstandsvariablene, at *Small Minus Big* skaber *mean reversion*, siden koefficienten er negativ, mens fejlkorrelationen er positiv. 
 
 
 (ref:po1990) [@Pope1990]
@@ -1688,6 +1773,32 @@ rownames(VAR_TABLE) <- c(1:24)
 
 VAR_TABLE %>% 
   knitr::kable(caption = 'Restringeret Vector Autoregressive Model.',
+               booktabs=TRUE,
+               align = c(rep('c', 10)),
+               row.names = FALSE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = " ") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "HOLD_position"),
+                             full_width = F) %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra (ref:po1990) er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
+```
+
+```{r COV-RES-TAB, echo=FALSE}
+COV_RES_TABLE <- `diag<-`(cor, sqrt(diag(cov)))
+
+COV_RES_TABLE <- format(round(COV_RES_TABLE, digits = 3), nsmall = 3)
+
+COV_RES_TABLE[lower.tri(COV_RES_TABLE )] <- NA
+
+COV_RES_TABLE <- cbind(NAME=c("$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$", '$x_t^{\\text{bm}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ys}}$'), COV_RES_TABLE)
+
+
+colnames(COV_RES_TABLE) <- c(" ", "$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$", '$x_t^{\\text{bm}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ys}}$')
+
+COV_RES_TABLE %>% 
+  knitr::kable(caption = 'Vector Autoregressive fejlleds korrelationer samt standard afvigelser.',
                booktabs=TRUE,
                align = c(rep('c', 10)),
                row.names = FALSE,
