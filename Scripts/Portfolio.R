@@ -176,7 +176,7 @@ KOMP <- data.frame(Tan=c(1-sum(rowMeans(dynport$TangencyP)),
                    GMV=c(1-sum(dynport$GMV),
                          dynport$GMV),
                    Myopic=c(1-sum(rowMeans(dynport$MyopicD)),
-                            rowMeans(dynport$TangencyP)),
+                            rowMeans(dynport$MyopicD)),
                    IHD=c(1-sum(rowMeans(dynport$HedgingD)), rowMeans(dynport$HedgingD))
                    )
 

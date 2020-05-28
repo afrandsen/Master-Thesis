@@ -2,6 +2,8 @@
 
 # Underliggende teori {#unteo}
 
+INTRO HER...
+
 ## Den myopiske investor{#myoinv}
 Den myopiske investor vælger -- som navnet ligger op til -- sin portefølje under et én-periodes perspektiv, og foretager dermed et statisk bindende valg. Investoren forsøger at maksimere sin terminal formue, ved samtidig at forholde sig til sin risikoaversion. Dette forårsager, at alle efterfølgende perioder bliver ignoreret af investoren. Ergo skal han løse det statiske portefølje problem fra tidspunkt $t$ til tidspunkt $t+1$. I denne ene periode antages investeringsmulighederne at være: et risikobærende aktiv samt et risikofrit aktiv. Afkastene over den førstkommende periode for disse aktivklasser vil blive noteret som hhv. $R_{t+1}$ med betinget middelværdi $\mathbb{E}_t(R_{t+1})$^[Her benyttes den gængse notation $\mathbb{E}(R_{t+1}\mid \mathcal{F}_t)=\mathbb{E}_t(R_{t+1})$ for filteret $\mathcal{F}_t$.] samt betinget varians $\mathbb{V}_t(R_{t+1})=\sigma_t^2$ og $R_{0,t+1}$.
 
@@ -256,6 +258,8 @@ $$r_{t+1}\equiv\log(1+R_{t+1}),$$
 
 hvilket er en geometrisk og kontinuert følge. Logafkastet af aktiver vil skabe symmetriske fordelinger, som overholder dermed overholder markedsinvariansen.
 
+## Opsummering
+
 # Afkastrelationer
 I Kapitel \@ref(unteo), blev den grundliggende teori for porteføljevalg beskrevet. Som beskrevet kræver de underliggende modeller, at afkast er lognormalfordelte, og af den grund må afkastserierne transformeres. Mere specifikt blev investoren med potens nytte bl.a. beskrevet, her var det et krav, at de anvendte variable var logbaseret. Dette er specielt anvendeligt når investorens porteføljevalg skal modelleres på lang sigt. Afkastprædiktabilitet lægger som navnet, op til at afkast *er* prædiktable. En forkastelse af *i.i.d.* antagelsen vil implicit medføre afkastprædiktabilitet. Dette kapitel vil fungere som en teoretisk gennemgang af udledningen af de specifikke aktivklasser som investoren står overfor, når porteføljevalget skal tages. For at udlede approksimative analytiske løsninger på tværs aktivklasser, vil den såkaldte loglineære relation af afkast blive anvendt, [@Campbell1988]. [@Campbell1988] viste i tilfældet af aktieafkast, hvordan en approksimativ loglineær relation af aktieafkast kunne etableres. På baggrund af denne relation har nyere litteratur anvendt deres metode på andre klasser af aktiver. At kunne etablere approksimative analytiske løsninger for alle aktivklasser er et afgørende element for at kunne skabe en robust VAR(1)-model i Kapitel ??. Sektion ?? vil opsummere kapitlets fund.
 
@@ -450,6 +454,8 @@ Dette kapitel fungerede som et overblik over de approksimative og eksakte analyt
 
 # VAR {#varkapitel}
 
+LÆNGERE INTRO HER....
+
 I dette kapitel fastsættes den teoretiske ramme for den empiriske analyse. Dette gøres hovedsageligt ud fra teorien bag [@Userguide2004] med enkelte dele, som varierer.
 
 \section{Sættet af investeringsmuligheder}
@@ -638,6 +644,8 @@ Her er $\bm{\Sigma}_v$ den betingede kovariansmatrix af $v_t$, $\lambda$ er vekt
  
 [@Engsted2012] finder både kvantitative og kvalitative effekter ved brug af bias justerede koefficienter ift. de regulere OLS estimater. De viser bl.a. hvordan *hedging* komponentet af porteføljeallokeringen ændrer sig for et kontinuum af risikoaversioner, hvor specielt mellemliggende risikoaversions værdier ($\gamma=2$) er særligt påvirket af biasjusteringen.^[Se evt. Figur 1 i [@Engsted2012].] Her bliver det optimale portefølgevalg påvirket, eftersom bias justeringen afstedkommer reducerede positioner for obligationer og aktier, gennem det intertemporale *hedging demand*, mens positionen for kontanter forøges.
 
+## Opsummering
+
 # Porteføljeteori
 I dette kapitel udvides teorien fra Kapitel \@ref(unteo). Mere specifikt sammenkobles porteføljeteorien fra Sektion \@ref(myoinv) og nytteteorien fra Sektion \@ref(typnyt). Dette gøres på baggrund af *CRRA*-nytte, i tilfældet, hvor investoren kan rebalancere sin portefølje periodisk, og i det restringerede tilfælde, hvor ingen rebalancering er tilladt. Herefter beskrives den analytiske løsning til det dynamiske porteføljeproblem foreslået af [@JurVic2011].
 
@@ -813,3 +821,5 @@ En begrænsning af den analytiske løsning udledt ovenfor, er manglen på kortsa
 $$\alpha_{i,t}=\frac{\max(0,\alpha_{i,t})}{\sum_{i=1}^n \max(0,\alpha_{i,t})}.$$
 
 På denne måde opnåes en repræsentativ portefølje, som kan benyttes til at besvare spørgsmålet, hvordan porteføljebeslutingen ændrer sig, ifm. en kortsalgsrestriktion.
+
+## Opsummering

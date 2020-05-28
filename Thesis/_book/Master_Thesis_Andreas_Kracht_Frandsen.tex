@@ -301,7 +301,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-05-27                  
+##  date     2020-05-28                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -407,6 +407,8 @@ Litterær programmering er blevet anvendt til at skrive/programmere denne afhand
 
 \hypertarget{unteo}{%
 \chapter{Underliggende teori}\label{unteo}}
+
+INTRO HER\ldots{}
 
 \hypertarget{myoinv}{%
 \section{Den myopiske investor}\label{myoinv}}
@@ -676,6 +678,9 @@ For at overkomme disse faldgruber af simple afkast, benyttes log afkastet. Log a
 
 hvilket er en geometrisk og kontinuert følge. Logafkastet af aktiver vil skabe symmetriske fordelinger, som overholder dermed overholder markedsinvariansen.
 
+\hypertarget{opsummering}{%
+\section{Opsummering}\label{opsummering}}
+
 \hypertarget{afkastrelationer}{%
 \chapter{Afkastrelationer}\label{afkastrelationer}}
 
@@ -880,13 +885,15 @@ Udover de finansielle variable og rentestruktursvariablene medtages én makroøk
 
 En relevant makroøkonomisk del til at forklare variationen i specielt obligationsafkast er finanspolitikken. \citep{Dai2005} undersøger specielt finanspolitikkens indflydelse ved at inkorpere \emph{Federal Funds Rate} som en forklarende variabel. De finder, at denne -- inkl. flere andre variable -- har statistisk styrke til at prædiktere obligationsafkast.
 
-\hypertarget{opsummering}{%
-\section{Opsummering}\label{opsummering}}
+\hypertarget{opsummering-1}{%
+\section{Opsummering}\label{opsummering-1}}
 
 Dette kapitel fungerede som et overblik over de approksimative og eksakte analytiske resultater på tværs af en række af aktiver. Ved benyttelse af den loglineære afkast approksimation af \citep{Campbell1988}, blev aktivklassernes nutidsværdi relateret til forventede fremtidige betalinger. Dette tilladte at prædiktiverelationer på tværs af aktivklasserne blev dannet, som er essentielle, når den mulige prædiktabilitet skal begrundes. Disse relationer vil derfor også kunne inkorporeres i den følgende VAR(1)-model. Derudover er en lang række variable ligeledes blevet præsenteret og diskuteret. Disse potentielle prædiktionsvariable er medtaget grundet tidligere litterære fund, som viser at prædiktabiliteten af afkast kan fanges af flere variable end de fundamentalt bundne variable.
 
 \hypertarget{varkapitel}{%
 \chapter{VAR}\label{varkapitel}}
+
+LÆNGERE INTRO HER\ldots.
 
 I dette kapitel fastsættes den teoretiske ramme for den empiriske analyse. Dette gøres hovedsageligt ud fra teorien bag \citep{Userguide2004} med enkelte dele, som varierer.
 
@@ -1083,6 +1090,9 @@ Her er \(\bm{\Sigma}_v\) den betingede kovariansmatrix af \(v_t\), \(\lambda\) e
 
 \citep{Engsted2012} finder både kvantitative og kvalitative effekter ved brug af bias justerede koefficienter ift. de regulere OLS estimater. De viser bl.a. hvordan \emph{hedging} komponentet af porteføljeallokeringen ændrer sig for et kontinuum af risikoaversioner, hvor specielt mellemliggende risikoaversions værdier (\(\gamma=2\)) er særligt påvirket af biasjusteringen.\footnote{Se evt. Figur 1 i \citep{Engsted2012}.} Her bliver det optimale portefølgevalg påvirket, eftersom bias justeringen afstedkommer reducerede positioner for obligationer og aktier, gennem det intertemporale \emph{hedging demand}, mens positionen for kontanter forøges.
 
+\hypertarget{opsummering-2}{%
+\section{Opsummering}\label{opsummering-2}}
+
 \hypertarget{portefuxf8ljeteori}{%
 \chapter{Porteføljeteori}\label{portefuxf8ljeteori}}
 
@@ -1273,6 +1283,9 @@ En begrænsning af den analytiske løsning udledt ovenfor, er manglen på kortsa
 
 På denne måde opnåes en repræsentativ portefølje, som kan benyttes til at besvare spørgsmålet, hvordan porteføljebeslutingen ændrer sig, ifm. en kortsalgsrestriktion.
 
+\hypertarget{opsummering-3}{%
+\section{Opsummering}\label{opsummering-3}}
+
 \part{Den empiriske analyse}
 
 \hypertarget{implementering}{%
@@ -1387,8 +1400,8 @@ hvor \(R_i^2\) stammer fra regressionen i ovenstående Ligning ??. Det sidste sk
 
 Slutteligt foretages en sidste \emph{Variance Inflation Factor} analyse, som et sidste tjek for multikollinaritet.
 
-\hypertarget{opsummering-1}{%
-\section{Opsummering}\label{opsummering-1}}
+\hypertarget{opsummering-4}{%
+\section{Opsummering}\label{opsummering-4}}
 
 \hypertarget{kapiteldatab}{%
 \chapter{Data beskrivelse}\label{kapiteldatab}}
@@ -2834,15 +2847,15 @@ Den første række i Tabel \ref{tab:VAR-TAB} viser, at det risikofrie aktiv afh�
 
 De sidste fire rækker af Tabel \ref{tab:VAR-TAB} rapporterer ligningerne for prædiktionsvariablene, dvs. \emph{Book-to-Market Ratio}, \emph{Small Minus Big}, den nominelle rente og \emph{Yield Spread}. Alle variablene, på nær \emph{Small Minus Big}, er veldefinerede af en AR(1)-process, og er over \(60\%\) i justeret \(R^2\). Dette er konsistent med førstordens autokorrelation størrelsen rapporteret i Tabel \ref{tab:DES-TILSTANDSVARIABLE}, som indikerer høj autokorrelation. De høje koefficient estimater af de laggede værdier af prædiktionsvariablene kan sætte spørgsmål om, hvorvidt processerne er \emph{unit root} processer end stationære processer, \citep{JurVic2011}. Samtidigt bidrager enkelte andre laggede variable til at forklare variationen på tværs af prædiktionsvariablene.
 
-For det meste er de bias-justerede koefficienter ikke er signifikant forskellige fra de regulære OLS estimater. Eksempelvis ses, at forskellen for det laggede merafkast på virksomhedsobligationer, på det fremtidige afkast af det risikofrie aktiv er \(0.001\), og er biased opadtil. De bias-justerede værdier på tværs af hele VAR-systemet viser, at koefficienterne ikke er meget påvirket af bias hørende til små stikprøver.
+For det meste er de bias-justerede koefficienter ikke signifikant forskellige fra de regulære OLS estimater. Eksempelvis ses, at forskellen for det laggede merafkast på virksomhedsobligationer, på det fremtidige afkast af det risikofrie aktiv er \(0.001\), og er biased opadtil. De bias-justerede værdier på tværs af hele VAR-systemet viser dermed, at koefficienterne ikke er signifikant påvirket af bias hørende til små stikprøver.
 
 
 
-\begin{landscape}
 \begin{table}[H]
 
 \caption{\label{tab:VAR-TAB}Restringeret Vector Autoregressive Model.}
 \centering
+\resizebox{\linewidth}{!}{
 \begin{threeparttable}
 \begin{tabular}[t]{ccccccccccc}
 \toprule
@@ -2850,49 +2863,49 @@ For det meste er de bias-justerede koefficienter ikke er signifikant forskellige
 \midrule
 \rowcolor{gray!6}  $r_t^{\text{rf}}$ & -0.001 & 0.126 & 0.008 & 0.012 & -0.029 & \textbf{-0.007} & \textbf{-0.001} & \textbf{ 0.508} & \textbf{ 0.146} & 0.253\\
  
- & (-0.001) & (0.143) & (0.009) & (0.012) & (-0.030) & (-0.007) & (-0.001) & (0.496) & (0.155) & \\
+ & (-0.001) & (0.143) & (0.009) & (0.012) & (-0.030) & (-0.007) & (-0.001) & (0.496) & (0.155) & $\langle11.872\rangle$\\
  
 \rowcolor{gray!6}   & [-1.029] & [1.847] & [1.296] & [0.486] & [-1.408] & [-2.850] & [-2.753] & [6.102] & [2.830] & \\
  
 $rx_t^{\text{a}}$ & -0.011 & -0.003 & 0.114 & -0.078 & 0.335 & \textbf{ 0.068} & \textbf{-0.009} & \textbf{-1.846} & 0.832 & 0.069\\
  
-\rowcolor{gray!6}   & (-0.011) & (-0.039) & (0.126) & (-0.083) & (0.334) & (0.058) & (-0.009) & (-1.672) & (0.965) & \\
+\rowcolor{gray!6}   & (-0.011) & (-0.039) & (0.126) & (-0.083) & (0.334) & (0.058) & (-0.009) & (-1.672) & (0.965) & $\langle3.380\rangle$\\
  
  & [-0.803] & [-0.005] & [1.619] & [-0.298] & [1.500] & [2.532] & [-2.822] & [-2.043] & [1.491] & \\
  
 \rowcolor{gray!6}  $rx_t^{\text{s}}$ & 0.000 & -0.272 & -0.026 & -0.041 & 0.024 & -0.011 & \textbf{-0.004} & 0.277 & \textbf{ 0.566} & 0.024\\
  
- & (0.000) & (-0.273) & (-0.025) & (-0.026) & (0.023) & (-0.010) & (-0.004) & (0.184) & (0.601) & \\
+ & (0.000) & (-0.273) & (-0.025) & (-0.026) & (0.023) & (-0.010) & (-0.004) & (0.184) & (0.601) & $\langle1.774\rangle$\\
  
 \rowcolor{gray!6}   & [-0.010] & [-0.777] & [-0.784] & [-0.336] & [0.230] & [-0.856] & [-2.428] & [0.652] & [2.157] & \\
  
 $rx_t^{\text{v}}$ & -0.004 & -0.370 & -0.002 & 0.240 & \textbf{-0.254} & -0.003 & \textbf{-0.005} & -0.310 & \textbf{ 1.346} & 0.085\\
  
-\rowcolor{gray!6}   & (-0.004) & (-0.374) & (0.000) & (0.248) & (-0.247) & (-0.004) & (-0.005) & (-0.386) & (1.387) & \\
+\rowcolor{gray!6}   & (-0.004) & (-0.374) & (0.000) & (0.248) & (-0.247) & (-0.004) & (-0.005) & (-0.386) & (1.387) & $\langle3.980\rangle$\\
  
  & [-0.479] & [-0.894] & [-0.045] & [1.654] & [-2.044] & [-0.229] & [-2.650] & [-0.615] & [4.333] & \\
  
 \rowcolor{gray!6}  $x_t^{\text{bm}}$ & \textbf{ 0.020} & 0.526 & -0.075 & -0.067 & -0.118 & \textbf{ 0.971} & 0.004 & 0.087 & \textbf{-0.698} & 0.964\\
  
- & (0.020) & (0.537) & (-0.080) & (-0.068) & (-0.117) & (0.977) & (0.004) & (-0.006) & (-0.817) & \\
+ & (0.020) & (0.537) & (-0.080) & (-0.068) & (-0.117) & (0.977) & (0.004) & (-0.006) & (-0.817) & $\langle853.115\rangle$\\
  
 \rowcolor{gray!6}   & [2.500] & [1.209] & [-1.815] & [-0.441] & [-0.900] & [61.672] & [1.921] & [0.165] & [-2.137] & \\
  
 $x_t^{\text{smb}}$ & -0.509 & -7.203 & -0.249 & -3.011 & 7.769 & 0.969 & -0.010 & -4.350 & 20.829 & 0.021\\
  
-\rowcolor{gray!6}   & (-0.509) & (-7.936) & (-0.328) & (-3.182) & (7.847) & (0.944) & (0.004) & (-3.431) & (20.815) & \\
+\rowcolor{gray!6}   & (-0.509) & (-7.936) & (-0.328) & (-3.182) & (7.847) & (0.944) & (0.004) & (-3.431) & (20.815) & $\langle1.691\rangle$\\
  
  & [-1.799] & [-0.460] & [-0.167] & [-0.547] & [1.651] & [1.709] & [-0.146] & [-0.228] & [1.770] & \\
  
 \rowcolor{gray!6}  $x_t^{\text{b}}$ & \textbf{ 0.001} & -0.016 & 0.000 & \textbf{-0.030} & -0.012 & 0.002 & 0.000 & \textbf{ 0.900} & -0.035 & 0.900\\
  
- & (0.001) & (-0.015) & (0.000) & (-0.030) & (-0.012) & (0.001) & (0.000) & (0.912) & (-0.034) & \\
+ & (0.001) & (-0.015) & (0.000) & (-0.030) & (-0.012) & (0.001) & (0.000) & (0.912) & (-0.034) & $\langle290.786\rangle$\\
  
 \rowcolor{gray!6}   & [2.140] & [-0.649] & [0.144] & [-3.468] & [-1.665] & [1.869] & [-1.150] & [30.380] & [-1.892] & \\
  
 $x_t^{\text{ys}}$ & \textbf{ 0.003} & \textbf{ 0.216} & -0.009 & 0.003 & -0.016 & 0.002 & 0.000 & -0.123 & \textbf{ 0.756} & 0.600\\
  
-\rowcolor{gray!6}   & (0.003) & (0.215) & (-0.010) & (0.003) & (-0.015) & (0.002) & (0.000) & (-0.133) & (0.779) & \\
+\rowcolor{gray!6}   & (0.003) & (0.215) & (-0.010) & (0.003) & (-0.015) & (0.002) & (0.000) & (-0.133) & (0.779) & $\langle49.229\rangle$\\
  
  & [2.865] & [3.994] & [-1.841] & [0.166] & [-0.985] & [0.996] & [0.261] & [-1.871] & [18.609] & \\
 \bottomrule
@@ -2900,7 +2913,7 @@ $x_t^{\text{ys}}$ & \textbf{ 0.003} & \textbf{ 0.216} & -0.009 & 0.003 & -0.016 
 \begin{tablenotes}
 \item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra \citep{Pope1990} er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
 \end{tablenotes}
-\end{threeparttable}
+\end{threeparttable}}
 \end{table}
 
 \begin{table}[H]
@@ -2934,13 +2947,95 @@ $x_t^{\text{ys}}$ &  &  &  &  &  &  &  & 0.006\\
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
-\end{landscape}
+
+Tabel \ref{tab:COV-RES-TAB} viser kovariansstrukturen af stødene til VAR-systemet. For det risikofrie aktiv ses, at den laggede værdi af den nominelle rente sikrer \emph{mean aversion}, siden både koefficient estimaterne og stød til det fremtidige risikofrie afkast er positive. Ligeledes vil \emph{Book-to-Market Ratio} og \emph{Small Minus Big} give anledning til \emph{mean aversion}. Det korte rentespænd fremprovokerer \emph{mean reversion} i det risikofrie aktiv. For merafkastet på aktier, ses det omvendte. Det fremgår på trods af den ringe prædiktabilitet blandt tilstandsvariablene, at \emph{Book-to-market} samt \emph{Small Minus Big} skaber \emph{mean reversion}, siden deres koefficient og fejlkorrelationen er modsatrettede. Den nominelle rente skaber derimod \emph{mean aversion}. For det fremtidige merafkast på statsobligationer ses, at stød til \emph{Small Minus Big} er negativt korreleret med det fremtidige merafkast på statsobligationer, og medfører derfor \emph{mean reversion}. Dette er på linje med, hvad resultaterne fra \citep{Fama1989}. De finder bl.a. en kontracyklisk variation mellem aktier og obligationer. Stød til \emph{Yield Spread} udviser derimod positiv korrelation. \emph{Mean aversion}-effekten fra \emph{Yield Spread} må enten være pga.: en stigning i den lange rente, et fald i den korte rente eller en blanding af begge effekter. Fokuseres nu på det fremtidige merafkast af virksomhedsobligationer, ses at den laggede værdi af variablen \emph{Small Minus Big} medfører \emph{mean aversion}, mens det samme er tilfældet for \emph{Yield Spread}. Generelt ses at prædiktionsvariablene bliver \emph{mean reverting} givet deres indbyrdes relationer samt deres relationer til aktiverne. Dette understreger at antagelsen om stationaritet i systemet er overholdt, og dermed haves et stabilt system.
 
 \hypertarget{backtest-af-var1-model}{%
 \section{Backtest af VAR(1)-model}\label{backtest-af-var1-model}}
 
+For at få et overblik over den restringerede VAR models præcision. Præsenteres nedenfor en Figur hørende til hver variabel, hvor den estimerede regressions linje er holdt op imod den sande værdi fra tidsserierne. Den visuelle analyse er vist i Figur ?? til Figur ??. Som forventet ud fra \(R^2\) værdierne er specielt merafkastet på aktier og statsobligationer svær estimerbare. Det samme gør sig gældende for \emph{Small Minus Big}, mens de resterende prædiktionsvariable er modelleret meget præcist.
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/BACKTEST-NET-TB-1} 
+
+}
+
+\caption[short]{A.}\label{fig:BACKTEST-NET-TB}
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/BACKTEST-AKT-1} 
+
+}
+
+\caption[short]{A.}\label{fig:BACKTEST-AKT}
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/BACKTEST-S-1} 
+
+}
+
+\caption[short]{A.}\label{fig:BACKTEST-S}
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/BACKTEST-V-1} 
+
+}
+
+\caption[short]{A.}\label{fig:BACKTEST-V}
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/BACKTEST-BM-1} 
+
+}
+
+\caption[short]{A.}\label{fig:BACKTEST-BM}
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/BACKTEST-SMB-1} 
+
+}
+
+\caption[short]{A.}\label{fig:BACKTEST-SMB}
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/BACKTEST-B-1} 
+
+}
+
+\caption[short]{A.}\label{fig:BACKTEST-B}
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/BACKTEST-Y-1} 
+
+}
+
+\caption[short]{A.}\label{fig:BACKTEST-Y}
+\end{figure}
+
+\hypertarget{opsummering-5}{%
+\section{Opsummering}\label{opsummering-5}}
+
+I dette kapitel blev modelselektionen fremlagt. Derudover blev VAR(1)-estimaterne præsenteret og analyseret. I VAR-processen viste merafkastet på statsobligationer sig svær at forudsige. Mens det risikofrie afkast havde den højeste \(R^2\) blandt aktiverne. Strukturen i VAR-systemet er essentielle for porteføljeallokeringerne, siden at parametrene afhænger af VAR(1) estimationsresultaterne. Derudover blev stikprøve-bias undersøgt, ved at bias-justere koefficienterne. Ganske små forskelle blev fundet mellem de regulære OLS estimater og de bias-justerede estimater. For fuldstændighedens skyld fortsættes dog med de bias-justerede estimater.
+
 \hypertarget{problemer-ved-estimation}{%
 \chapter{Problemer ved estimation}\label{problemer-ved-estimation}}
+
+INTRO HER + SEKTIONSINDDELING
 
 Middelværdi-varians optimering har vist sig meget sensitiv overfor den kvantitative størrelse af parametrene som indgår i vægtelsesberegningen for den relevante portefølje, dvs. forventede afkast, varianser og kovarianser. Som også er tilfældet i denne afhandling, er disse parametre estimeret via en tidsserie af afkast, men forventningen til disse estimater skal anskues skeptisk, idet de indeholder en væsentlig mængde usikkerhed.
 
@@ -3189,6 +3284,9 @@ Tredje simulering overestimerer Aktiv 1 samt 2 og underestimerer Aktiv 3. Ranger
 \caption{Global minimum varians portføljen, tangensporteføljen samt for CRRA- og CARA-porteføljen for hhv. $\gamma=1$, $\gamma=4$ og $\gamma=8$ samt $\theta=1$, $\theta=4$ og $\theta=8$, beregnet ud for hhv. de sande og simulerede afkast. Bemærk at akserne er blevet $\log_{10}$ transformeret.}\label{fig:weight-exp}
 \end{figure}
 
+\hypertarget{opsummering-6}{%
+\section{Opsummering}\label{opsummering-6}}
+
 \hypertarget{allokering-af-aktiver}{%
 \chapter{Allokering af aktiver}\label{allokering-af-aktiver}}
 
@@ -3196,6 +3294,8 @@ I dette kapitel vil teorien fra Del 2 samt de empiriske fund sammenkobles. Dette
 
 \hypertarget{portefuxf8ljevalg-med-tidsvarierende-afkast}{%
 \section{Porteføljevalg med tidsvarierende afkast}\label{portefuxf8ljevalg-med-tidsvarierende-afkast}}
+
+Ved benyttelse af VAR(1)-koefficientestimaterne fra Sektion ??, kan investorens valg porteføljeallokeringer undersøges, under antagelsen om tidsvarierende afkast. Det antages at investoren har moderat risikoaversion, \(\gamma=5\), en lang investeringshorisont, \(k=200\), og uden en kortsalgsrestriktion. Kombineres VAR(1)-estimaterne med de nævnte antagelser, kan dynamikken for investeringsmulighederne skabes. På denne måde kan allokeringsreglen, for det multivariate investeringsrum bestående af det risikofrie aktiv, aktier, statsobligationer og virksomhedsobligationer, etableres. Figur \ref{fig:AL-tids} viser den optimale første-periode allokering over tid for investoren med de ovennævnte antagelser. Figuren viser, hvordan investoren fordeler sin formue over de risikobærende afkast samt det risikofrie afkast over hele stikprøveperioden, 1954 2. kvartal til 2018 4. kvartal. De tilhørende recessionsperioder er -- som defineret af \citep{NBER2020} -- er ligeledes visualiseret. Ud fra en visuel inspektion ses det, at investoren under recessioner forsøger at øge sine eksponeringer i aktivklasser, som har relativt lave volatiliteter. De procentvise andele i hver aktiv viser sig at være ekstreme -- særligt i recessioner -- med et allokeringsinterval på \(\pm 2000\%\). Dette foranlediger én til at tænke på, hvordan transaktionsomkostninger ville have påvirket allokeringerne. Tilsyneladende sker det yderst sjældent, at investoren går kort i aktier. Ydermere ses det, at positionen i aktier øges halvvejs igennem en recession. Generelt udviser den optimale portføljeallokering betydelig intertemporal variation. Dette ses særligt for allokeringen mod obligationstyperne, som udviser de højeste variationer. Allokeringen over hele stikprøven er konsistent med \citep{JurVic2011}.
 
 \begin{figure}[H]
 
@@ -3206,14 +3306,11 @@ I dette kapitel vil teorien fra Del 2 samt de empiriske fund sammenkobles. Dette
 \caption{Tidsserie af allokeringer.}\label{fig:AL-tids}
 \end{figure}
 
-\begin{figure}[H]
+For at lave en gennemgående analyse af investorens porteføljeallokeringer, separeres effekterne i Tabel \ref{tab:AL-KOMP}. Tabellen rapporter investorens komposition af tangens-, GMV-, \emph{myopic demand}- og \emph{intertemporal hedging demand}-porteføljen, ift. de tilgengælige investeringsmuligheder. Tabellen er skabt ud fra de nævnte antagelser om investoren. Tangensporteføljen for investoren er kraftigt skubbet mod aktier, statsobligationer og virksomhedsobligationer. Gennemsnitligt investeres hhv. \(173 \%\), \(74\%\) og \(92\%\) af formuen i disse aktiver. Disse lange positioner er finansieret af en stor kort position i det risikofrie aktiv, på hhv. \(-238\%\). For at understøtte disse fund, kan den beskrivende statistik fra Kapitel ?? samt VAR(1)-estimaterne fra Kapitel ?? medtages. Tabel \ref{tab:DES-AKTIVKLASSE} viser, at det gennemsnitlige merafkast på aktier er højere end det gennemsnitlige afkast på både stats- og virksomhedsobligationer. Tabel \ref{tab:DES-KOR} viser, at korrelationen mellem aktier og statsobligationer er negativ, \(-0.02\), og meget lav mellem aktier og virksomhedsobligationer, \(0.16\). Derimod er korrelationen mellem stats- og virksomhedsobligationer meget høj, \(0.85\). Dette betyder, at stats- og virksomhedsobligationer næsten er substitutter. Global minimum varians porteføljen har givetvis -- som forventet -- den højeste allokering mod aktivet med laveste volatilitet. Dette understøttes ligeledes af Tabel \ref{tab:DES-AKTIVKLASSE}. Gennemsnitligt viser det sig, at det er optimalt for investoren at holde en allokering i aktier på \(81\%\). Allokeringen mod aktier stammer fra det \emph{intertemporale hedging demand}. Eftersom investoren kan \emph{hedge} variationer i fremtidige merafkast på aktier, ved at holde aktier. Dette understøttes ligeledes af fundende i Kapitel ?, hvor flere variable udviste \emph{mean reversion} overfor aktieafkastet.
 
-{\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AL-RES-tids-1} 
-
-}
-
-\caption{Tidsserie af allokeringer, med restringeret kortsalg.}\label{fig:AL-RES-tids}
-\end{figure}
+The allocation in stocks appears to
+mainly be driven by the IHD suggesting that an investor can hedge variations in future stock
+returns by holding stocks. It is aligned with findings in Chapter 9, of output having a meanreverting effect on excess stock return. Thus, moderate AM investors have an IHD for stocks
 
 \begin{table}[H]
 
@@ -3224,10 +3321,10 @@ I dette kapitel vil teorien fra Del 2 samt de empiriske fund sammenkobles. Dette
 \toprule
   & Tangensporteføljen & GMV & Myopic Demand & IHD\\
 \midrule
-\rowcolor{gray!6}  T-Bills & -282.034 & 106.113 & 7.122 & 55.402\\
-Aktier & 192.615 & 0.240 & 192.615 & 38.151\\
-\rowcolor{gray!6}  Statsobligationer & 92.877 & 1.193 & 92.877 & 5.212\\
-Virksomhedsobligationer & 96.542 & -7.545 & 96.542 & 1.236\\
+\rowcolor{gray!6}  T-Bills & -238.475 & 106.118 & 15.843 & 66.621\\
+Aktier & 172.661 & 0.237 & 45.079 & 36.016\\
+\rowcolor{gray!6}  Statsobligationer & 74.185 & 1.189 & 29.022 & -3.894\\
+Virksomhedsobligationer & 91.629 & -7.544 & 10.057 & 1.256\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -3246,56 +3343,22 @@ Virksomhedsobligationer & 96.542 & -7.545 & 96.542 & 1.236\\
 \toprule
 $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 \midrule
-\rowcolor{gray!6}  2 & T-Bills & -141.328 & -127.919 & -127.082 & -137.121 & -155.580 & -165.388 & -170.250 & -172.662\\
- & Aktier & 122.322 & 128.705 & 135.007 & 146.070 & 154.568 & 158.750 & 160.863 & 161.939\\
-\rowcolor{gray!6}   & Statsobligationer & 80.119 & 66.281 & 55.038 & 50.461 & 59.785 & 65.262 & 67.945 & 69.250\\
- & Virksomhedsobligationer & 38.886 & 32.933 & 37.038 & 40.589 & 41.226 & 41.376 & 41.443 & 41.473\\
-\rowcolor{gray!6}  5 & T-Bills & 7.122 & 14.334 & 12.044 & 1.273 & -16.474 & -27.625 & -34.017 & -37.476\\
- & Aktier & 49.072 & 52.898 & 57.582 & 67.480 & 76.996 & 82.572 & 85.643 & 87.223\\
-\rowcolor{gray!6}   & Statsobligationer & 32.761 & 25.771 & 19.842 & 18.336 & 26.779 & 32.587 & 36.033 & 37.972\\
- & Virksomhedsobligationer & 11.045 & 6.998 & 10.532 & 12.910 & 12.698 & 12.466 & 12.342 & 12.281\\
-\rowcolor{gray!6}  10 & T-Bills & 56.606 & 59.611 & 56.050 & 47.249 & 35.313 & 27.185 & 21.881 & 18.572\\
- & Aktier & 24.656 & 26.406 & 29.085 & 35.440 & 42.473 & 47.160 & 50.112 & 51.875\\
-\rowcolor{gray!6}   & Statsobligationer & 16.974 & 14.097 & 12.168 & 12.897 & 18.203 & 22.013 & 24.593 & 26.272\\
- & Virksomhedsobligationer & 1.764 & -0.114 & 2.698 & 4.414 & 4.011 & 3.643 & 3.415 & 3.281\\
-\rowcolor{gray!6}  20 & T-Bills & 81.347 & 81.861 & 77.629 & 69.995 & 61.972 & 56.453 & 52.564 & 49.884\\
- & Aktier & 12.447 & 12.914 & 14.256 & 18.091 & 22.968 & 26.496 & 28.931 & 30.561\\
-\rowcolor{gray!6}   & Statsobligationer & 9.081 & 8.447 & 9.024 & 11.338 & 14.799 & 17.143 & 18.840 & 20.053\\
- & Virksomhedsobligationer & -2.876 & -3.222 & -0.908 & 0.575 & 0.261 & -0.092 & -0.336 & -0.498\\
-\bottomrule
-\end{tabular}
-\begin{tablenotes}
-\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}
-\end{tablenotes}
-\end{threeparttable}}
-\end{table}
-
-\begin{table}[H]
-
-\caption{\label{tab:AL-RES-BIG}Komposition restringeret.}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{threeparttable}
-\begin{tabular}[t]{llrrrrrrrr}
-\toprule
-$\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
-\midrule
-\rowcolor{gray!6}  2 & T-Bills & 11.728 & 11.956 & 11.874 & 11.437 & 10.736 & 10.384 & 10.218 & 10.137\\
- & Aktier & 19.622 & 20.224 & 20.851 & 21.758 & 22.288 & 22.529 & 22.648 & 22.709\\
-\rowcolor{gray!6}   & Statsobligationer & 35.105 & 34.854 & 34.381 & 33.989 & 34.192 & 34.325 & 34.385 & 34.412\\
- & Virksomhedsobligationer & 33.158 & 32.581 & 32.508 & 32.430 & 32.398 & 32.376 & 32.363 & 32.356\\
-\rowcolor{gray!6}  5 & T-Bills & 17.397 & 17.656 & 17.094 & 15.680 & 13.751 & 12.583 & 11.967 & 11.659\\
- & Aktier & 18.338 & 18.876 & 19.849 & 21.749 & 23.260 & 24.104 & 24.551 & 24.767\\
-\rowcolor{gray!6}   & Statsobligationer & 33.393 & 33.200 & 32.722 & 32.276 & 32.684 & 33.019 & 33.202 & 33.309\\
- & Virksomhedsobligationer & 30.486 & 29.882 & 29.948 & 29.908 & 29.919 & 29.908 & 29.894 & 29.879\\
-\rowcolor{gray!6}  10 & T-Bills & 29.172 & 28.866 & 27.511 & 24.951 & 21.648 & 19.510 & 18.201 & 17.405\\
- & Aktier & 15.410 & 15.753 & 16.686 & 18.887 & 21.248 & 22.800 & 23.749 & 24.309\\
-\rowcolor{gray!6}   & Statsobligationer & 29.214 & 29.454 & 29.462 & 29.557 & 30.362 & 30.880 & 31.205 & 31.418\\
- & Virksomhedsobligationer & 25.818 & 25.541 & 25.954 & 26.220 & 26.355 & 26.424 & 26.459 & 26.482\\
-\rowcolor{gray!6}  20 & T-Bills & 49.220 & 48.089 & 45.715 & 41.897 & 37.784 & 34.952 & 32.951 & 31.575\\
- & Aktier & 10.775 & 10.831 & 11.604 & 13.672 & 16.281 & 18.217 & 19.597 & 20.534\\
-\rowcolor{gray!6}   & Statsobligationer & 21.762 & 22.452 & 23.211 & 24.221 & 25.364 & 26.084 & 26.585 & 26.942\\
- & Virksomhedsobligationer & 17.857 & 18.242 & 19.085 & 19.824 & 20.184 & 20.361 & 20.481 & 20.563\\
+\rowcolor{gray!6}  2 & T-Bills & -119.533 & -104.429 & -101.207 & -104.766 & -120.001 & -129.676 & -134.601 & -136.780\\
+ & Aktier & 112.343 & 116.870 & 122.112 & 131.919 & 138.927 & 142.000 & 143.196 & 143.435\\
+\rowcolor{gray!6}   & Statsobligationer & 70.777 & 56.183 & 43.494 & 33.563 & 41.304 & 47.949 & 51.703 & 53.645\\
+ & Virksomhedsobligationer & 36.414 & 31.376 & 35.601 & 39.283 & 39.769 & 39.727 & 39.703 & 39.699\\
+\rowcolor{gray!6}  5 & T-Bills & 15.843 & 24.265 & 23.579 & 18.297 & 5.626 & -4.583 & -12.141 & -17.536\\
+ & Aktier & 45.079 & 47.677 & 51.611 & 60.654 & 69.217 & 74.954 & 78.770 & 81.095\\
+\rowcolor{gray!6}   & Statsobligationer & 29.022 & 21.758 & 14.775 & 8.327 & 12.822 & 17.807 & 21.873 & 25.128\\
+ & Virksomhedsobligationer & 10.057 & 6.300 & 10.035 & 12.722 & 12.335 & 11.822 & 11.498 & 11.313\\
+\rowcolor{gray!6}  10 & T-Bills & 60.969 & 64.690 & 62.001 & 56.769 & 50.097 & 45.601 & 43.012 & 42.491\\
+ & Aktier & 22.657 & 23.697 & 25.878 & 31.432 & 37.277 & 41.709 & 45.204 & 47.984\\
+\rowcolor{gray!6}   & Statsobligationer & 15.103 & 12.097 & 9.584 & 7.135 & 8.419 & 9.117 & 8.769 & 7.069\\
+ & Virksomhedsobligationer & 1.271 & -0.483 & 2.538 & 4.663 & 4.208 & 3.573 & 3.014 & 2.456\\
+\rowcolor{gray!6}  20 & T-Bills & 83.531 & 84.446 & 80.623 & 75.096 & 71.482 & 70.739 & 73.629 & 86.304\\
+ & Aktier & 11.447 & 11.518 & 12.513 & 15.549 & 18.990 & 21.421 & 22.669 & 20.911\\
+\rowcolor{gray!6}   & Statsobligationer & 8.144 & 7.434 & 7.744 & 8.290 & 8.677 & 7.471 & 3.867 & -6.100\\
+ & Virksomhedsobligationer & -3.122 & -3.398 & -0.879 & 1.064 & 0.851 & 0.368 & -0.165 & -1.114\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -3357,6 +3420,52 @@ $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 
 \caption{Risikotolerance analyse, virksomhedsobligationer.}\label{fig:GAM-ana-v}
 \end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/AL-RES-tids-1} 
+
+}
+
+\caption{Tidsserie af allokeringer, med restringeret kortsalg.}\label{fig:AL-RES-tids}
+\end{figure}
+
+\begin{table}[H]
+
+\caption{\label{tab:AL-RES-BIG}Komposition restringeret.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{threeparttable}
+\begin{tabular}[t]{llrrrrrrrr}
+\toprule
+$\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
+\midrule
+\rowcolor{gray!6}  2 & T-Bills & 13.491 & 13.709 & 13.654 & 13.393 & 12.713 & 12.291 & 12.088 & 12.000\\
+ & Aktier & 18.890 & 19.376 & 19.981 & 20.891 & 21.315 & 21.462 & 21.504 & 21.497\\
+\rowcolor{gray!6}   & Statsobligationer & 34.367 & 34.123 & 33.645 & 33.088 & 33.312 & 33.544 & 33.682 & 33.762\\
+ & Virksomhedsobligationer & 32.866 & 32.405 & 32.334 & 32.242 & 32.274 & 32.316 & 32.339 & 32.355\\
+\rowcolor{gray!6}  5 & T-Bills & 19.180 & 19.537 & 19.134 & 18.308 & 16.756 & 15.573 & 14.747 & 14.180\\
+ & Aktier & 17.597 & 17.931 & 18.789 & 20.588 & 22.148 & 23.152 & 23.755 & 24.086\\
+\rowcolor{gray!6}   & Statsobligationer & 32.569 & 32.401 & 31.886 & 31.057 & 31.133 & 31.367 & 31.607 & 31.832\\
+ & Virksomhedsobligationer & 30.267 & 29.745 & 29.804 & 29.661 & 29.577 & 29.522 & 29.504 & 29.517\\
+\rowcolor{gray!6}  10 & T-Bills & 30.792 & 30.709 & 29.564 & 27.925 & 25.959 & 24.634 & 23.853 & 23.611\\
+ & Aktier & 14.798 & 14.936 & 15.703 & 17.587 & 19.571 & 21.076 & 22.255 & 23.183\\
+\rowcolor{gray!6}   & Statsobligationer & 28.368 & 28.619 & 28.579 & 28.168 & 28.196 & 28.141 & 27.914 & 27.463\\
+ & Virksomhedsobligationer & 25.656 & 25.350 & 25.767 & 25.934 & 25.888 & 25.762 & 25.591 & 25.357\\
+\rowcolor{gray!6}  20 & T-Bills & 50.499 & 49.598 & 47.416 & 44.625 & 42.654 & 42.060 & 43.137 & 48.415\\
+ & Aktier & 10.342 & 10.224 & 10.812 & 12.415 & 14.181 & 15.400 & 15.917 & 14.610\\
+\rowcolor{gray!6}   & Statsobligationer & 21.061 & 21.725 & 22.470 & 22.981 & 23.123 & 22.707 & 21.568 & 18.667\\
+ & Virksomhedsobligationer & 17.712 & 18.066 & 18.916 & 19.593 & 19.655 & 19.447 & 18.992 & 17.923\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}
+\end{tablenotes}
+\end{threeparttable}}
+\end{table}
+
+\hypertarget{opsummering-7}{%
+\section{Opsummering}\label{opsummering-7}}
 
 \hypertarget{diskussion}{%
 \chapter{Diskussion}\label{diskussion}}

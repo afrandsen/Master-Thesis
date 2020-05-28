@@ -425,11 +425,22 @@ for (i in c(1:8)) {
   j <- j + 3
 }
 
+j <- 1
+
+for (i in seq(2,23,3)) {
+  
+  VAR_TABLE[i, 10] <- format(round(test$varresult[[j]]$fstatistic[1], 3), nsmall = 3)
+  
+  j <- j + 1
+}
+
 for (i in seq(1,24,3)){
 
-VAR_TABLE[i+1,] <- gsub("\\s", "", paste0("(", VAR_TABLE[i+1,], ")"))
+VAR_TABLE[i+1,1:9] <- gsub("\\s", "", paste0("(", VAR_TABLE[i+1,], ")"))
 
-VAR_TABLE[i+2,] <- gsub("\\s", "", paste0("[", VAR_TABLE[i+2,], "]"))
+VAR_TABLE[i+2,1:9] <- gsub("\\s", "", paste0("[", VAR_TABLE[i+2,], "]"))
+
+VAR_TABLE[i+1,10] <- gsub("\\s", "", paste0("$\\langle", VAR_TABLE[i+1,10], "\\rangle$"))
 
 }
 
@@ -438,10 +449,12 @@ VAR_TABLE <- cbind(NAME=c("$r_t^{\\text{rf}}$","","", "$rx_t^{\\text{a}}$","",""
 VAR_TABLE <- VAR_TABLE[,c(1,10,2,3,4,5,6,7,8,9,11)]
 
 for (i in seq(1,24,3)){
-  VAR_TABLE[i+1, 11] <- NA
   
   VAR_TABLE[i+2,11] <- NA
 }
+
+coef <- var.p$coef
+cov <- var.p$sigu
 
 recessions.df = read.table(textConnection(
   "Peak, Trough

@@ -1757,14 +1757,10 @@ Den første række i Tabel \@ref(tab:VAR-TAB) viser, at det risikofrie aktiv afh
 
 De sidste fire rækker af Tabel \@ref(tab:VAR-TAB) rapporterer ligningerne for prædiktionsvariablene, dvs. *Book-to-Market Ratio*, *Small Minus Big*, den nominelle rente og *Yield Spread*. Alle variablene, på nær *Small Minus Big*, er veldefinerede af en AR(1)-process, og er over $60\%$ i justeret $R^2$. Dette er konsistent med førstordens autokorrelation størrelsen rapporteret i Tabel \@ref(tab:DES-TILSTANDSVARIABLE), som indikerer høj autokorrelation. De høje koefficient estimater af de laggede værdier af prædiktionsvariablene kan sætte spørgsmål om, hvorvidt processerne er *unit root* processer end stationære processer, [@JurVic2011]. Samtidigt bidrager enkelte andre laggede variable til at forklare variationen på tværs af prædiktionsvariablene. 
 
-For det meste er de bias-justerede koefficienter ikke er signifikant forskellige fra de regulære OLS estimater. Eksempelvis ses, at forskellen for det laggede merafkast på virksomhedsobligationer, på det fremtidige afkast af det risikofrie aktiv er $0.001$, og er biased opadtil. De bias-justerede værdier på tværs af hele VAR-systemet viser dermed, at koefficienterne ikke er signifikant påvirket af bias hørende til små stikprøver.
-
-Tabel \@ref(tab:COV-RES-TAB) viser kovariansstrukturen af stødene til VAR-systemet. For det risikofrie aktiv ses, at den laggede værdi af merafkastet på aktier og merafkastet på statsobligationer sikrer *mean aversion*, siden både koefficient estimerne og stød til det fremtidige risikofrie afkast er positive. Merafkastet på virksomhedsobligationer fremprovokerer *mean reversion* i det risikofrie aktiv. Ses dernæst på merafkastet på aktier, fremgår det på trods af den ringe prædiktabilitet blandt tilstandsvariablene, at *Small Minus Big* skaber *mean reversion*, siden koefficienten er negativ, mens fejlkorrelationen er positiv. 
-
+For det meste er de bias-justerede koefficienter ikke signifikant forskellige fra de regulære OLS estimater. Eksempelvis ses, at forskellen for det laggede merafkast på virksomhedsobligationer, på det fremtidige afkast af det risikofrie aktiv er $0.001$, og er biased opadtil. De bias-justerede værdier på tværs af hele VAR-systemet viser dermed, at koefficienterne ikke er signifikant påvirket af bias hørende til små stikprøver.
 
 (ref:po1990) [@Pope1990]
 
-\begin{landscape}
 ```{r VAR-TAB, echo=FALSE}
 
 colnames(VAR_TABLE) <- c(" ", "Afskæring", "$r_t^{\\text{rf}}$", "$rx_t^{\\text{a}}$", "$rx_t^{\\text{s}}$", "$rx_t^{\\text{v}}$", '$x_t^{\\text{bm}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ys}}$', "$R^2$")
@@ -1780,7 +1776,7 @@ VAR_TABLE %>%
                #col.names = NULL,
                linesep = " ") %>% 
    kableExtra::kable_styling(bootstrap_options = "striped",
-                             latex_options = c("striped", "HOLD_position"),
+                             latex_options = c("striped", "HOLD_position", "scale_down"),
                              full_width = F) %>% 
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra (ref:po1990) er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
@@ -1810,14 +1806,181 @@ COV_RES_TABLE %>%
                              full_width = F) %>% 
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra (ref:po1990) er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
-\end{landscape}
+
+Tabel \@ref(tab:COV-RES-TAB) viser kovariansstrukturen af stødene til VAR-systemet. For det risikofrie aktiv ses, at den laggede værdi af den nominelle rente sikrer *mean aversion*, siden både koefficient estimaterne og stød til det fremtidige risikofrie afkast er positive. Ligeledes vil *Book-to-Market Ratio* og *Small Minus Big* give anledning til *mean aversion*. Det korte rentespænd fremprovokerer *mean reversion* i det risikofrie aktiv. For merafkastet på aktier, ses det omvendte. Det fremgår på trods af den ringe prædiktabilitet blandt tilstandsvariablene, at *Book-to-market* samt *Small Minus Big* skaber *mean reversion*, siden deres koefficient og fejlkorrelationen er modsatrettede. Den nominelle rente skaber derimod *mean aversion*. For det fremtidige merafkast på statsobligationer ses, at stød til *Small Minus Big* er negativt korreleret med det fremtidige merafkast på statsobligationer, og medfører derfor *mean reversion*. Dette er på linje med, hvad resultaterne fra [@Fama1989]. De finder bl.a. en kontracyklisk variation mellem aktier og obligationer. Stød til *Yield Spread* udviser derimod positiv korrelation. *Mean aversion*-effekten fra *Yield Spread* må enten være pga.: en stigning i den lange rente, et fald i den korte rente eller en blanding af begge effekter. Fokuseres nu på det fremtidige merafkast af virksomhedsobligationer, ses at den laggede værdi af variablen *Small Minus Big* medfører *mean aversion*, mens det samme er tilfældet for *Yield Spread*. Generelt ses at prædiktionsvariablene bliver *mean reverting* givet deres indbyrdes relationer samt deres relationer til aktiverne. Dette understreger at antagelsen om stationaritet i systemet er overholdt, og dermed haves et stabilt system.
 
 ## Backtest af VAR(1)-model
+For at få et overblik over den restringerede VAR models præcision. Præsenteres nedenfor en Figur hørende til hver variabel, hvor den estimerede regressions linje er holdt op imod den sande værdi fra tidsserierne. Den visuelle analyse er vist i Figur ?? til Figur ??. Som forventet ud fra $R^2$ værdierne er specielt merafkastet på aktier og statsobligationer svær estimerbare. Det samme gør sig gældende for *Small Minus Big*, mens de resterende prædiktionsvariable er modelleret meget præcist.
+
+```{r BACKTEST-NET-TB, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+data <- cbind(NET_TB, c(NA,fitted(var)[,1]))
+
+colnames(data) <- c("NET_TB", "FITTED")
+
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$NET_TB))+
+  geom_line(aes(x=index(data), y=NET_TB, color = "Sand")) +
+  geom_line(aes(x=index(data), y=FITTED, color = "Estimeret")) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$NET_TB), max(data$NET_TB))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$r_{t}^{rf}$"))
+```
+
+```{r BACKTEST-AKT, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+data <- cbind(AKT, c(NA,fitted(var)[,2]))
+
+colnames(data) <- c("AKT", "FITTED")
+
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$AKT))+
+  geom_line(aes(x=index(data), y=AKT)) +
+  geom_line(aes(x=index(data), y=FITTED)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$AKT), max(data$AKT))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$r_{t}^{rf}$"))
+```
+
+```{r BACKTEST-S, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+data <- cbind(S_OBL, c(NA,fitted(var)[,3]))
+
+colnames(data) <- c("S_OBL", "FITTED")
+
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$S_OBL))+
+  geom_line(aes(x=index(data), y=S_OBL)) +
+  geom_line(aes(x=index(data), y=FITTED)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$S_OBL), max(data$S_OBL))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$r_{t}^{rf}$"))
+```
+
+```{r BACKTEST-V, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+data <- cbind(V_OBL, c(NA,fitted(var)[,4]))
+
+colnames(data) <- c("V_OBL", "FITTED")
+
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$V_OBL))+
+  geom_line(aes(x=index(data), y=V_OBL)) +
+  geom_line(aes(x=index(data), y=FITTED)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$V_OBL), max(data$V_OBL))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$r_{t}^{rf}$"))
+```
+
+```{r BACKTEST-BM, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+data <- cbind(BM, c(NA,fitted(var)[,5]))
+
+colnames(data) <- c("BM", "FITTED")
+
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$BM))+
+  geom_line(aes(x=index(data), y=BM)) +
+  geom_line(aes(x=index(data), y=FITTED)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$BM), max(data$BM))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$r_{t}^{rf}$"))
+```
+
+```{r BACKTEST-SMB, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+data <- cbind(SMB, c(NA,fitted(var)[,6]))
+
+colnames(data) <- c("SMB", "FITTED")
+
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$SMB))+
+  geom_line(aes(x=index(data), y=SMB)) +
+  geom_line(aes(x=index(data), y=FITTED)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$SMB), max(data$SMB))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$r_{t}^{rf}$"))
+```
+
+```{r BACKTEST-B, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+data <- cbind(TB, c(NA,fitted(var)[,7]))
+
+colnames(data) <- c("TB", "FITTED")
+
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$TB))+
+  geom_line(aes(x=index(data), y=TB)) +
+  geom_line(aes(x=index(data), y=FITTED)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$TB), max(data$TB))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$r_{t}^{rf}$"))
+```
+
+```{r BACKTEST-Y, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+data <- cbind(Y_SPREAD, c(NA,fitted(var)[,8]))
+
+colnames(data) <- c("Y_SPREAD", "FITTED")
+
+ggplot(data) +
+  expand_limits(x = min(index(data)), y = min(data$Y_SPREAD))+
+  geom_line(aes(x=index(data), y=Y_SPREAD)) +
+  geom_line(aes(x=index(data), y=FITTED)) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(data$Y_SPREAD), max(data$Y_SPREAD))) +
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
+  scale_y_continuous(expand=c(0,0))+
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank()
+  ) + 
+  ylab(TeX("$r_{t}^{rf}$"))
+```
+
+## Opsummering
+I dette kapitel blev modelselektionen fremlagt. Derudover blev VAR(1)-estimaterne præsenteret og analyseret. I VAR-processen viste merafkastet på statsobligationer sig svær at forudsige. Mens det risikofrie afkast havde den højeste $R^2$ blandt aktiverne. Strukturen i VAR-systemet er essentielle for porteføljeallokeringerne, siden at parametrene afhænger af VAR(1) estimationsresultaterne. Derudover blev stikprøve-bias undersøgt, ved at bias-justere koefficienterne. Ganske små forskelle blev fundet mellem de regulære OLS estimater og de bias-justerede estimater. For fuldstændighedens skyld fortsættes dog med de bias-justerede estimater.
 
 # Problemer ved estimation
 
 ```{r script2, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Speciale.R"), include=FALSE, cache=TRUE}
 ```
+
+INTRO HER + SEKTIONSINDDELING
 
 Middelværdi-varians optimering har vist sig meget sensitiv overfor den kvantitative størrelse af parametrene som indgår i vægtelsesberegningen for den relevante portefølje, dvs. forventede afkast, varianser og kovarianser. Som også er tilfældet i denne afhandling, er disse parametre estimeret via en tidsserie af afkast, men forventningen til disse estimater skal anskues skeptisk, idet de indeholder en væsentlig mængde usikkerhed.
 
@@ -2240,16 +2403,19 @@ ggplot(data, aes(sd, r)) +
        size = "Grundlag")
 ```
 
+## Opsummering
+
 # Allokering af aktiver
-I dette kapitel vil teorien fra Del 2 samt de empiriske fund sammenkobles. Dette gøres ved at benytte VAR(1)-koefficienterne til porteføljevalget for den institutionelle investor. Den initielle analyse vil tage udgangspunkt i en investor med en moderat risikoaversion, $\gamma=5$, en lang investeringshorisont på $25$ år, $k=200$. Derudover restringeres investoren ikke, og dermed tillades kortsalg. Dette vil ligeledes fungere som sammenligningsgrundlaget for de resterende analyser i dette kapitel. I Sektion ?? vil denne initielle portefølje blive undersøgt, når afkast er tidsvarierende. Her vil porteføljevalget for hele den tilgængelige periode bliver undersøgt, når der fokuseres på allokeringen i samtlige *første* perioder. Dette giver mulighed for at undersøge investorens valg over samtlige recessioner. 
+I dette kapitel vil teorien fra Del 2 samt de empiriske fund sammenkobles. Dette gøres ved at benytte VAR(1)-koefficienterne til porteføljevalget for den institutionelle investor. Den initielle analyse vil tage udgangspunkt i en investor med en moderat risikoaversion, $\gamma=5$, en lang investeringshorisont på $25$ år, $k=200$. Derudover restringeres investoren ikke, og dermed tillades kortsalg. Dette vil ligeledes fungere som sammenligningsgrundlaget for de resterende analyser i dette kapitel. I Sektion ?? vil denne initielle portefølje blive undersøgt, når afkast er tidsvarierende. Her vil porteføljevalget for hele den tilgængelige periode bliver undersøgt, når der fokuseres på allokeringen i samtlige *første* perioder. Dette giver mulighed for at undersøge investorens valg over samtlige recessioner.
 
 ## Porteføljevalg med tidsvarierende afkast
-
 ```{r script11, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Script.R"), include=FALSE, cache=TRUE}
 ```
 
 ```{r script2, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Portfolio.R"), include=FALSE, cache=TRUE}
 ```
+
+Ved benyttelse af VAR(1)-koefficientestimaterne fra Sektion ??, kan investorens valg porteføljeallokeringer undersøges, under antagelsen om tidsvarierende afkast. Det antages at investoren har moderat risikoaversion, $\gamma=5$, en lang investeringshorisont, $k=200$, og uden en kortsalgsrestriktion. Kombineres VAR(1)-estimaterne med de nævnte antagelser, kan dynamikken for investeringsmulighederne skabes. På denne måde kan allokeringsreglen, for det multivariate investeringsrum bestående af det risikofrie aktiv, aktier, statsobligationer og virksomhedsobligationer, etableres. Figur \@ref(fig:AL-tids) viser den optimale første-periode allokering over tid for investoren med de ovennævnte antagelser. Figuren viser, hvordan investoren fordeler sin formue over de risikobærende afkast samt det risikofrie afkast over hele stikprøveperioden, 1954 2. kvartal til 2018 4. kvartal. De tilhørende recessionsperioder er -- som defineret af [@NBER2020] -- er ligeledes visualiseret. Ud fra en visuel inspektion ses det, at investoren under recessioner forsøger at øge sine eksponeringer i aktivklasser, som har relativt lave volatiliteter. De procentvise andele i hver aktiv viser sig at være ekstreme -- særligt i recessioner -- med et allokeringsinterval på $\pm 2000\%$. Dette foranlediger én til at tænke på, hvordan transaktionsomkostninger ville have påvirket allokeringerne. Tilsyneladende sker det yderst sjældent, at investoren går kort i aktier. Ydermere ses det, at positionen i aktier øges halvvejs igennem en recession. Generelt udviser den optimale portføljeallokering betydelig intertemporal variation. Dette ses særligt for allokeringen mod obligationstyperne, som udviser de højeste variationer. Allokeringen over hele stikprøven er konsistent med [@JurVic2011].
 
 ```{r AL-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af allokeringer.', fig.width=18, fig.asp=0.5, fig.pos='H'}
 alpha <- xts::xts(t(dynport$alphafixedT), index(NET_TB))
@@ -2286,41 +2452,13 @@ ggplot(alpha) +
        size = "Aktiv")
 ```
 
-```{r AL-RES-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af allokeringer, med restringeret kortsalg.', fig.width=18, fig.asp=0.5, fig.pos='H'}
-alpha_res <- xts::xts(t(dynport$res_alphafixedT), index(NET_TB))
+For at lave en gennemgående analyse af investorens porteføljeallokeringer, separeres effekterne i Tabel \@ref(tab:AL-KOMP). Tabellen rapporter investorens komposition af tangens-, GMV-, *myopic demand*- og *intertemporal hedging demand*-porteføljen, ift. de tilgengælige investeringsmuligheder. Tabellen er skabt ud fra de nævnte antagelser om investoren. Tangensporteføljen for investoren er kraftigt skubbet mod aktier, statsobligationer og virksomhedsobligationer. Gennemsnitligt investeres hhv. $173 \%$, $74\%$ og $92\%$ af formuen i disse aktiver. Disse lange positioner er finansieret af en stor kort position i det risikofrie aktiv, på hhv. $-238\%$. For at understøtte disse fund, kan den beskrivende statistik fra Kapitel ?? samt VAR(1)-estimaterne fra Kapitel ?? medtages. Tabel \@ref(tab:DES-AKTIVKLASSE) viser, at det gennemsnitlige merafkast på aktier er højere end det gennemsnitlige afkast på både stats- og virksomhedsobligationer. Tabel \@ref(tab:DES-KOR) viser, at korrelationen mellem aktier og statsobligationer er negativ, $-0.02$, og meget lav mellem aktier og virksomhedsobligationer, $0.16$. Derimod er korrelationen mellem stats- og virksomhedsobligationer meget høj, $0.85$. Dette betyder, at stats- og virksomhedsobligationer næsten er substitutter. Global minimum varians porteføljen har givetvis -- som forventet -- den højeste allokering mod aktivet med laveste volatilitet. Dette understøttes ligeledes af Tabel \@ref(tab:DES-AKTIVKLASSE). Gennemsnitligt viser det sig, at det er optimalt for investoren at holde en allokering i aktier på $81\%$. Allokeringen mod aktier stammer fra det *intertemporale hedging demand*. Eftersom investoren kan *hedge* variationer i fremtidige merafkast på aktier, ved at holde aktier. Dette understøttes ligeledes af fundende i Kapitel ?, hvor flere variable udviste *mean reversion* overfor aktieafkastet. 
 
-colnames(alpha_res) <- c('A', 'B', 'C', 'D')
 
-ggplot(alpha_res) +
-  expand_limits(x = min(index(alpha_res)), y = min(alpha_res)-0.25)+
-  geom_line(aes(x=index(alpha_res), y=A, color = 'T-Bills', linetype = "T-Bills")) +
-  geom_line(aes(x=index(alpha_res), y=B, color = 'Aktier', linetype = "Aktier")) +
-  geom_line(aes(x=index(alpha_res), y=C, color = 'Statsobligationer', linetype = "Statsobligationer")) +
-  geom_line(aes(x=index(alpha_res), y=D, color = 'Virksomhedsobligationer', linetype = "Virksomhedsobligationer")) +
-  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
-  coord_cartesian(ylim = c(min(alpha_res)-0.25, max(alpha_res)+0.25)) +
-  scale_linetype_manual(values=c("solid", "dashed", "dotted", "dotdash"))+
-  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(alpha_res)), max(index(alpha_res))))+
-  scale_y_continuous(expand=c(0,0))+
-  scale_colour_brewer(palette = "Dark2") +
-  theme_bw()+
-  theme(
-    panel.grid.minor = element_blank(),
-    legend.background = element_rect(fill = "white",
-                                     linetype="solid",
-                                     size = 0.1,
-                                     colour = "black"),
-    legend.position="bottom",
-    legend.key.size = unit(4, "line"),
-    legend.title = element_blank(),
-    legend.text=element_text(size = 20)
-  ) +
-  labs(color = "Aktiv",
-       linetype = "Aktiv",
-       shape = "Aktiv",
-       size = "Aktiv")
-```
 
+The allocation in stocks appears to
+mainly be driven by the IHD suggesting that an investor can hedge variations in future stock
+returns by holding stocks. It is aligned with findings in Chapter 9, of output having a meanreverting effect on excess stock return. Thus, moderate AM investors have an IHD for stocks
 ```{r AL-KOMP, echo=FALSE}
 options(knitr.kable.NA = '')
 
@@ -2357,31 +2495,6 @@ colnames(BIG_TABLE) <- c('$\\gamma$', 'Aktiv', '1', '4', '8', '20', '40', '60', 
 
 BIG_TABLE %>% 
   knitr::kable(caption = 'Komposition.',
-               booktabs=TRUE,
-               align = c('l', 'l', rep('r', 8)),
-               row.names = FALSE,
-               escape = FALSE,
-               #col.names = NULL,
-               linesep = "") %>% 
-   kableExtra::kable_styling(bootstrap_options = "striped",
-                             latex_options = c("striped", "HOLD_position", "scale_down"),
-                             full_width = F)  %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
-```
-
-```{r AL-RES-BIG, echo=FALSE}
-options(knitr.kable.NA = '')
-
-BIG_R_TABLE <- data.frame(BIG_R_TABLE)
-
-BIG_R_TABLE <- format(round(BIG_R_TABLE*100, digits = 3), nsmall = 3)
-
-BIG_R_TABLE <- cbind(c(2, rep(NA, 3), 5, rep(NA, 3), 10, rep(NA, 3), 20, rep(NA, 3)), rep(c('T-Bills', 'Aktier', 'Statsobligationer', 'Virksomhedsobligationer'), 4), BIG_R_TABLE)
-
-colnames(BIG_R_TABLE) <- c('$\\gamma$', 'Aktiv', '1', '4', '8', '20', '40', '60', '80', '100')
-
-BIG_R_TABLE %>% 
-  knitr::kable(caption = 'Komposition restringeret.',
                booktabs=TRUE,
                align = c('l', 'l', rep('r', 8)),
                row.names = FALSE,
@@ -2579,6 +2692,68 @@ ggplot(GAM_ANA) +
        shape = "Aktiv",
        size = "Aktiv")
 ```
+
+```{r AL-RES-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af allokeringer, med restringeret kortsalg.', fig.width=18, fig.asp=0.5, fig.pos='H'}
+alpha_res <- xts::xts(t(dynport$res_alphafixedT), index(NET_TB))
+
+colnames(alpha_res) <- c('A', 'B', 'C', 'D')
+
+ggplot(alpha_res) +
+  expand_limits(x = min(index(alpha_res)), y = min(alpha_res)-0.25)+
+  geom_line(aes(x=index(alpha_res), y=A, color = 'T-Bills', linetype = "T-Bills")) +
+  geom_line(aes(x=index(alpha_res), y=B, color = 'Aktier', linetype = "Aktier")) +
+  geom_line(aes(x=index(alpha_res), y=C, color = 'Statsobligationer', linetype = "Statsobligationer")) +
+  geom_line(aes(x=index(alpha_res), y=D, color = 'Virksomhedsobligationer', linetype = "Virksomhedsobligationer")) +
+  geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
+  coord_cartesian(ylim = c(min(alpha_res)-0.25, max(alpha_res)+0.25)) +
+  scale_linetype_manual(values=c("solid", "dashed", "dotted", "dotdash"))+
+  scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(alpha_res)), max(index(alpha_res))))+
+  scale_y_continuous(expand=c(0,0))+
+  scale_colour_brewer(palette = "Dark2") +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill = "white",
+                                     linetype="solid",
+                                     size = 0.1,
+                                     colour = "black"),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size = 20)
+  ) +
+  labs(color = "Aktiv",
+       linetype = "Aktiv",
+       shape = "Aktiv",
+       size = "Aktiv")
+```
+
+```{r AL-RES-BIG, echo=FALSE}
+options(knitr.kable.NA = '')
+
+BIG_R_TABLE <- data.frame(BIG_R_TABLE)
+
+BIG_R_TABLE <- format(round(BIG_R_TABLE*100, digits = 3), nsmall = 3)
+
+BIG_R_TABLE <- cbind(c(2, rep(NA, 3), 5, rep(NA, 3), 10, rep(NA, 3), 20, rep(NA, 3)), rep(c('T-Bills', 'Aktier', 'Statsobligationer', 'Virksomhedsobligationer'), 4), BIG_R_TABLE)
+
+colnames(BIG_R_TABLE) <- c('$\\gamma$', 'Aktiv', '1', '4', '8', '20', '40', '60', '80', '100')
+
+BIG_R_TABLE %>% 
+  knitr::kable(caption = 'Komposition restringeret.',
+               booktabs=TRUE,
+               align = c('l', 'l', rep('r', 8)),
+               row.names = FALSE,
+               escape = FALSE,
+               #col.names = NULL,
+               linesep = "") %>% 
+   kableExtra::kable_styling(bootstrap_options = "striped",
+                             latex_options = c("striped", "HOLD_position", "scale_down"),
+                             full_width = F)  %>% 
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
+```
+
+## Opsummering
 
 # Diskussion
 
