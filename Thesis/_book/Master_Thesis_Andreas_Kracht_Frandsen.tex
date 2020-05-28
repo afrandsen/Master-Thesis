@@ -3306,11 +3306,9 @@ Ved benyttelse af VAR(1)-koefficientestimaterne fra Sektion ??, kan investorens 
 \caption{Tidsserie af allokeringer.}\label{fig:AL-tids}
 \end{figure}
 
-For at lave en gennemgående analyse af investorens porteføljeallokeringer, separeres effekterne i Tabel \ref{tab:AL-KOMP}. Tabellen rapporter investorens komposition af tangens-, GMV-, \emph{myopic demand}- og \emph{intertemporal hedging demand}-porteføljen, ift. de tilgengælige investeringsmuligheder. Tabellen er skabt ud fra de nævnte antagelser om investoren. Tangensporteføljen for investoren er kraftigt skubbet mod aktier, statsobligationer og virksomhedsobligationer. Gennemsnitligt investeres hhv. \(173 \%\), \(74\%\) og \(92\%\) af formuen i disse aktiver. Disse lange positioner er finansieret af en stor kort position i det risikofrie aktiv, på hhv. \(-238\%\). For at understøtte disse fund, kan den beskrivende statistik fra Kapitel ?? samt VAR(1)-estimaterne fra Kapitel ?? medtages. Tabel \ref{tab:DES-AKTIVKLASSE} viser, at det gennemsnitlige merafkast på aktier er højere end det gennemsnitlige afkast på både stats- og virksomhedsobligationer. Tabel \ref{tab:DES-KOR} viser, at korrelationen mellem aktier og statsobligationer er negativ, \(-0.02\), og meget lav mellem aktier og virksomhedsobligationer, \(0.16\). Derimod er korrelationen mellem stats- og virksomhedsobligationer meget høj, \(0.85\). Dette betyder, at stats- og virksomhedsobligationer næsten er substitutter. Global minimum varians porteføljen har givetvis -- som forventet -- den højeste allokering mod aktivet med laveste volatilitet. Dette understøttes ligeledes af Tabel \ref{tab:DES-AKTIVKLASSE}. Gennemsnitligt viser det sig, at det er optimalt for investoren at holde en allokering i aktier på \(81\%\). Allokeringen mod aktier stammer fra det \emph{intertemporale hedging demand}. Eftersom investoren kan \emph{hedge} variationer i fremtidige merafkast på aktier, ved at holde aktier. Dette understøttes ligeledes af fundende i Kapitel ?, hvor flere variable udviste \emph{mean reversion} overfor aktieafkastet.
+For at lave en gennemgående analyse af investorens porteføljeallokeringer, separeres effekterne i Tabel \ref{tab:AL-KOMP}. Tabellen rapporter investorens komposition af tangens-, GMV-, \emph{myopic demand}- og \emph{intertemporal hedging demand}-porteføljen, ift. de tilgengælige investeringsmuligheder. Tabellen er skabt ud fra de nævnte antagelser om investoren. Tangensporteføljen for investoren er kraftigt skubbet mod aktier, statsobligationer og virksomhedsobligationer. Gennemsnitligt investeres hhv. \(173 \%\), \(74\%\) og \(92\%\) af formuen i disse aktiver. Disse lange positioner er finansieret af en stor kort position i det risikofrie aktiv, på hhv. \(-238\%\). For at understøtte disse fund, kan den beskrivende statistik fra Kapitel ?? samt VAR(1)-estimaterne fra Kapitel ?? medtages. Tabel \ref{tab:DES-AKTIVKLASSE} viser, at det gennemsnitlige merafkast på aktier er højere end det gennemsnitlige afkast på både stats- og virksomhedsobligationer. Tabel \ref{tab:DES-KOR} viser, at korrelationen mellem aktier og statsobligationer er negativ, \(-0.02\), og meget lav mellem aktier og virksomhedsobligationer, \(0.16\). Derimod er korrelationen mellem stats- og virksomhedsobligationer meget høj, \(0.85\). Dette betyder, at stats- og virksomhedsobligationer næsten er substitutter. Global minimum varians porteføljen har givetvis -- som forventet -- den højeste allokering mod aktivet med laveste volatilitet. Dette understøttes ligeledes af Tabel \ref{tab:DES-AKTIVKLASSE}. Gennemsnitligt viser det sig, at det er optimalt for investoren at holde en allokering i aktier på \(81\%\). En større del af allokeringen mod aktier og \emph{T-Bills} lader til at stamme fra det \emph{intertemporale hedging demand}. Hvilket betyder, at investoren kan \emph{hedge} variationer i fremtidige merafkast på aktier og afkast på \emph{T-Bills}, ved netop at holde disse aktiver. Dette understøttes ligeledes af fundende i Kapitel ?, hvor flere variable udviste \emph{mean reversion} overfor særligt merafkastet på aktier. Fokuseres på allokeringen mod obligationer, ses at investoren generelt foretrækker en lang position i statsobligationer.
 
-The allocation in stocks appears to
-mainly be driven by the IHD suggesting that an investor can hedge variations in future stock
-returns by holding stocks. It is aligned with findings in Chapter 9, of output having a meanreverting effect on excess stock return. Thus, moderate AM investors have an IHD for stocks
+Holdes den visuelle inspektion af Figur \ref{fig:AL-tids} op i mod opdelingen fra Tabel \ref{tab:AL-KOMP}, kan der argumenteres for, at investoren øger sin lange position i virksomhedsobligationer under igangværende recessioner. Som dermed må betyde, at investoren finansierer disse høje positioner gennem korte positioner i \emph{T-Bills} og statsobligationer.
 
 \begin{table}[H]
 
@@ -3319,7 +3317,7 @@ returns by holding stocks. It is aligned with findings in Chapter 9, of output h
 \begin{threeparttable}
 \begin{tabular}[t]{lrrrr}
 \toprule
-  & Tangensporteføljen & GMV & Myopic Demand & IHD\\
+  & Tangens & GMV & Myopic Demand & IHD\\
 \midrule
 \rowcolor{gray!6}  T-Bills & -238.475 & 106.118 & 15.843 & 66.621\\
 Aktier & 172.661 & 0.237 & 45.079 & 36.016\\
@@ -3332,6 +3330,11 @@ Virksomhedsobligationer & 91.629 & -7.544 & 10.057 & 1.256\\
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+
+\hypertarget{effekten-af-horisontluxe6ngde-og-risikotolerance}{%
+\section{Effekten af horisontlængde og risikotolerance}\label{effekten-af-horisontluxe6ngde-og-risikotolerance}}
+
+Den initielle investor antoges at have en konstant investeringshorisont og en konstant risikoaversion. I denne sektion undersøges porteføljeallokeringen af den optimale portefølje for forskellige niveauer af risikoaversion og horisont længder. Tabel \ref{tab:AL-BIG} rapporterer porteføljevægte for investoren, for en serie af investeringshorisonter -- \(1\) kvartal til \(100\) kvartaler -- og en serie af risikoaversioner -- \(\gamma=2,5,10,20\).
 
 \begin{table}[H]
 
