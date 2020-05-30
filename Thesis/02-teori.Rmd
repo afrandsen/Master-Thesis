@@ -2,7 +2,7 @@
 
 # Underliggende teori {#unteo}
 
-INTRO HER...
+I dette kapitel introduceres den underliggende teori til det dynamiske porteføljeproblem: det statiske porteføljeproblem. Derudover defineres en række nyttefunktioner, som alle er defineret over terminalformue. Sektion \@ref(myoinv) starter med en gennemgang af porteføljeproblemet for den myopiske investor, som først blev introduceret af [@Markowitz1952]. Dernæst fungerer Sektion \@ref(preforris) som en introduktion til risikoaversion. Sektion \@ref(nytdefover) belyser en række nyttefunktioner, som alle kan fungere i porteføljemodellering. Fordelingsmæssige resultater vedr. afkast tages hånd om i Sektion \@ref(fordafafk). Slutteligt opsummerer Sektion \@ref(opsunteo) kapitlets fund. 
 
 ## Den myopiske investor{#myoinv}
 Den myopiske investor vælger -- som navnet ligger op til -- sin portefølje under et én-periodes perspektiv, og foretager dermed et statisk bindende valg. Investoren forsøger at maksimere sin terminal formue, ved samtidig at forholde sig til sin risikoaversion. Dette forårsager, at alle efterfølgende perioder bliver ignoreret af investoren. Ergo skal han løse det statiske portefølje problem fra tidspunkt $t$ til tidspunkt $t+1$. I denne ene periode antages investeringsmulighederne at være: et risikobærende aktiv samt et risikofrit aktiv. Afkastene over den førstkommende periode for disse aktivklasser vil blive noteret som hhv. $R_{t+1}$ med betinget middelværdi $\mathbb{E}_t(R_{t+1})$^[Her benyttes den gængse notation $\mathbb{E}(R_{t+1}\mid \mathcal{F}_t)=\mathbb{E}_t(R_{t+1})$ for filteret $\mathcal{F}_t$.] samt betinget varians $\mathbb{V}_t(R_{t+1})=\sigma_t^2$ og $R_{0,t+1}$.
@@ -116,28 +116,28 @@ Altså vil investorer vælge en portefølje på den efficiente rand, som opnår 
 
 Selvom Markowitz' model er en hjørnesten inden for moderne porteføljeteori, er der flere mangler i den opsatte teoretiske ramme. Først og fremmest medfører Markowitz' antagelse om en lineær afvejning mellem kovarianser og afkast implicit antagelsen, at investorenes nyttefunktioner kan approksimeres af en anden ordens Taylor udvidelse over en bredt sprektrum af afkast. Derudover findes ingen beskrivelse for, hvordan parameteren $k$ er koblet til investorens nyttefunktion. Disse mangler kan blive afhjulpet ved samtidig brug af specifikke nyttefunktioner og afkastfordelinger, som opfylder Taylor udvidelsen. Dette medfører at middelværdi-varians analysen kan benyttes for tre forskellige opsætninger, som bliver præsenteret i Sektion \@ref(typnyt), [@CampVic2003].
 
-## Præferencer for risiko
+## Præferencer for risiko {#preforris}
 For et fast formueniveau $w\in \mathbb{R}_+$ betragter vi en stokastisk variabel $X$, hvor $\mathbb{E}(X)=0$. Derfor kan også $w+X$ betragtes som en stokastisk variabel, der repræsenterer en fremtidig formueplan med realiseret formue $w+\mathbb{E}(X)$, hvis $X$ bliver realiseret. Derfor kaldes $X$ undertiden også et fair spil, derudover haves at $\mathbb{E}(w+X)=w$.
 
 En (strengt) risikoavers investor vil for alle $w\in \mathbb{R}_+$ og alle $X$ (strengt) foretrække den sikre formue $w$ fremfor $w+X$. Ergo vil investoren altid afslå ethvert fair spil. Omvendt vil en (strengt) risikoelskende investor foretrække spillet og dermed $w+X$ fremfor $w$. Endeligt findes risikoneutrale investorer, som er indifferent mellem den sikre formue $w$ og formuen $w+X$. I realiteten er investorer ingen af delene, f.eks. vil nogle afslå fair spil i et ikke-tilfældigt nabolag rundt om værdien af $w$. Dette betegnes undertiden som at være lokalt risikoavers, lokalt risikoelskende og lokalt risikoneutral.
 
 Generelt anses investorer (og andre individer for den sags skyld) at være risikoaverse, derfor vil fokus være på denne risikopræference.
 
-## Nytte defineret over formue
+## Nytte defineret over formue {#nytdefover}
 
-I Sektion \@ref(myoinv), introducerede vi en af de bærende antagelser i [@Markowitz1952]: at investorer kun forholder sig til middelværdien og variansen af porteføljeafkast, og ikke højere momenter. Vi kan tilsvarende antage, at investorer definerer deres nytte via formue på terminaltidspunktet. Dette tillader os at redefinere Maksimeringsproblemet \@ref(eq:Statmaks) til nedenstående
+I Sektion \@ref(myoinv), blev en af de bærende antagelser i [@Markowitz1952] introduceret: at investorer kun forholder sig til middelværdien og variansen af porteføljeafkast, og ikke højere momenter. Det kan tilsvarende antages, at investorer definerer deres nytte via formue på terminaltidspunktet. Dette tillader at redefinere Maksimeringsproblemet \@ref(eq:Statmaks) til nedenstående
 \begin{align}
 &\max\mathbb {E}_t(U(W_{t+1})) (\#eq:Nyttemaks)\\
 &\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
 \end{align}
 
-Hvor $U(W_{t+1})\in\mathbb{R}_+$ er en konkav nyttefunktion. Investoren vil givet nyttefunktionens konkave krumning være risikoavers. Netop dette aspekt gør, at vi kan inkorporere risikoaversion, når investorens porteføljevalg skal foretages. For at fastlægge denne investorspecifikke risikoaversion benyttes derfor skalerede krumningsmål. Disse fundamentale risikoaversionsmål er kendt som *Arrow-Pratt Målene for Risikoaversion*, [@Arrow1965] og [@Pratt1964]. Når nytte skal belyses, kan risikoaversion mht. den fremtidige formue $W_{t+1}$ benyttes. Graden af krumningen på nyttefunktion giver os information om investorens risikopræferencer introduceret ovenfor. Vi antager at investorens nyttefunktion er strengt voksende i terminal formue -- altså er investoren grådig og foretrækker høj formue frem for en lav formue -- men i en faldende rate. Nyttefunktion vil altså have følgende karakteristika
+Hvor $U(W_{t+1})\in\mathbb{R}_+$ er en konkav nyttefunktion. Investoren vil givet nyttefunktionens konkave krumning være risikoavers. Netop dette aspekt gør, at vi kan inkorporere risikoaversion, når investorens porteføljevalg skal foretages. For at fastlægge denne investorspecifikke risikoaversion benyttes derfor skalerede krumningsmål. Disse fundamentale risikoaversionsmål er kendt som *Arrow-Pratt Målene for Risikoaversion*, [@Arrow1965] og [@Pratt1964]. Når nytte skal belyses, kan risikoaversion mht. den fremtidige formue $W_{t+1}$ benyttes. Graden af krumningen på nyttefunktion giver information om investorens risikopræferencer introduceret ovenfor. Det antages at investorens nyttefunktion er strengt voksende i terminal formue -- altså er investoren grådig og foretrækker høj formue frem for en lav formue -- men i en faldende rate. Nyttefunktion vil altså have følgende karakteristika
 $$U'(W)>0\quad\text{og}\quad U''(W)<0.$$
 
-Hvor $U'(W)$ og $U''(W)$ er den hhv. første- og anden afledte mht. formuen $W$. Når vi skal kvantificere denne risikoaversion, skal vi sikre, at målet er invariant overfor strengt positive affine transformationer. Dette er bl.a. opfyldt ved brug af *Coefficient of Absolut Risk Aversion*, [@Arrow1965] og [@Pratt1964]. *ARA* er defineret som den negative anden afledte af nyttefunktionen mht. formue, skaleret med den første afledte
+Hvor $U'(W)$ og $U''(W)$ er den hhv. første- og anden afledte mht. formuen $W$. Når denne risikoaversion skal kvantificeres, skal det sikres, at målet er invariant overfor strengt positive affine transformationer. Dette er bl.a. opfyldt ved brug af *Coefficient of Absolut Risk Aversion*, [@Arrow1965] og [@Pratt1964]. *ARA* er defineret som den negative anden afledte af nyttefunktionen mht. formue, skaleret med den første afledte
 $$\text{ARA}(W)=-\frac{U''(W)}{U'(W)}.$$
 
-Selvom den anden afledte af nyttefunktionen er et mål for krumningen af nyttefunktionen, bliver vi nødt til at skalere for at eliminere afhængigheden af abitrære størrelser, som relaterer sig til målbarheden af nytte. *ARA* måler investorens absolutte dollar værdi, som han er villig til at købe, for at undgå et tab på samme absolutte størrelse. Hvis *ARA* er faldende medfører det at desto mere formue en investor har, desto mere risikosøgende bliver han, altså haves at $\text{ARA}(W)<0$, og så fremdeles. Almindeligt menes det, at *ARA* burde falde, eller i det mindste ikke stige, med formue. Et relateret mål er *Coefficient of Relative Risk Aversion*, *RRA*, som er samtidig tager højde for investorens formue
+Selvom den anden afledte af nyttefunktionen er et mål for krumningen af nyttefunktionen, er det nødvendigt at skalere for at eliminere afhængigheden af abitrære størrelser, som relaterer sig til målbarheden af nytte. *ARA* måler investorens absolutte dollar værdi, som han er villig til at købe, for at undgå et tab på samme absolutte størrelse. Hvis *ARA* er faldende medfører det at desto mere formue en investor har, desto mere risikosøgende bliver han, altså haves at $\text{ARA}(W)<0$, og så fremdeles. Almindeligt menes det, at *ARA* burde falde, eller i det mindste ikke stige, med formue. Et relateret mål er *Coefficient of Relative Risk Aversion*, *RRA*, som er samtidig tager højde for investorens formue
 $$\text{RRA}(W)=-\frac{WU''(W)}{U'(W)}.$$
 
 Her måles marginal nytten og dermed investorens risikoaversion over en procentdel af formuen. Samme inferens som for *ARA* kan blive udtænkt for *RRA*. *RRA* måler den del af formuen, som investoren vil betale for at undgå et spil på en given størrelse relativt til formuen.
@@ -172,15 +172,15 @@ De tilsvarende reciprokke af ovenstående mål kaldes hhv. *Coefficeint of Absol
   \draw [dashed] (-6, 20.5) -- (30, 20.5);
 \end{axis}
 \end{tikzpicture}
-\caption{Konkav nytte af formue.}
+\caption{Konkav nytte af formue. Her kunne $G$ opfattes som et tab eller en gevinst af et givet aktiv.}
 \label{fig:Nyt}
 \end{figure}
 
-Som redegjort ovenfor, er både *ARA* samt *RRA* essientielle mål til kvantificering af risikopræferencer og dermed til at opnå forståelse for nyttefunktionen hos den enkelte investor. Konstateringer udledt fra den langsigtede økonomiske adfærd fastslår, at *RRA* ikke kan afhænge alene af formue. Dette kommer sig af, at formue og per capita forbrug er steget henover de seneste to århundreder. Det absolutte forhold mellem finansielle risici er ligeledes forøget -- siden disse risici er multiplikative -- mens den relative risici har været konstant. Samtidigt er der ikke fundet evidens baseret på afkast og renter, der har påvist en langsigtet tendens, som respons til denne vækst. Altså vil investorer betale de samme relative omkostninger for at undgå en given finansiel risiko uanset om de er velhavende eller ej, [@CampVic2003]. Dette foranlediger en til at tænke tanken, at *RRA* er uafhængig af formue og bør være konstant, [@Chiappori2008].
+Som redegjort ovenfor, er både *ARA* samt *RRA* essientielle mål til kvantificering af risikopræferencer og dermed til at opnå forståelse for nyttefunktionen hos den enkelte investor. Konstateringer udledt fra den langsigtede økonomiske adfærd fastslår, at *RRA* ikke kan afhænge alene af formue. Dette kommer sig af, at formue og per capita forbrug er steget henover de seneste to århundreder. Det absolutte forhold mellem finansielle risici er ligeledes forøget -- siden disse risici er multiplikative -- mens de relative risici har været konstante. Samtidigt er der ikke fundet evidens baseret på afkast og renter, der har påvist en langsigtet tendens, som respons til denne vækst. Altså vil investorer betale de samme relative omkostninger for at undgå en given finansiel risiko uanset om de er velhavende eller ej, [@CampVic2003]. Dette foranlediger en til at tænke tanken, at *RRA* er uafhængig af formue og bør være konstant, [@Chiappori2008].
 
 ## Typer af nyttefunktioner{#typnyt}
 
-Antagelser omhandlende: formen af nyttefunktioner og fordelingen af afkast, er påkrævet, for at kunne skabe en traktabel model. Flere nyttefunktioner har vist sig relevante inden for middelværdi-varians analyse, [@CampVic2003]. Nogle af disse er eksponentiel nytte, potens nytte samt kvadratisk nytte. Fælles for disse er, at de definerer nytte over formue, udover disse findes andre mere eksotiske nyttefunktioner såsom Epstein-Zin nytte. I denne Sektion vil vi undersøge ovenstående nærmere, og ud fra et kvantitativt aspekt vælge nyttefunktionen, som denne afhandling vil arbejde videre med.
+Antagelser omhandlende: formen af nyttefunktioner og fordelingen af afkast, er påkrævet, for at kunne skabe en traktabel model. Flere nyttefunktioner har vist sig relevante inden for middelværdi-varians analyse, [@CampVic2003]. Nogle af disse er eksponentiel nytte, potens nytte samt kvadratisk nytte. Fælles for disse er, at de definerer nytte over formue, udover disse findes andre mere eksotiske nyttefunktioner såsom Epstein-Zin nytte. I denne sektion undersøges ovenstående nærmere, og ud fra et kvantitativt aspekt vælges nyttefunktionen, som denne afhandling vil arbejde videre med.
 
 Generelt vil en investors nytte -- defineret over formue -- afhænge af samtlige momenter relateret til formue. For at se dette laves en Taylor udvidelse af $U(W_{t+1})$ omkring den forventede formue, $\mathbb{E}(W_{t+1})$
 \begin{align*}
@@ -188,13 +188,13 @@ U\left(W_{t+1}\right)=&U\left(\mathbb{E}\left[W_{t+1}\right]\right)+U'\left(\mat
 &+\sum_{n=3}^\infty \frac{1}{n!}U^{\left(n\right)}\left(\mathbb{E}\left[W_{t+1}\right]\right)\left(W_{t+1}-\mathbb{E}\left[W_{t+1}\right]\right),
 \end{align*}
 
-hvor $U^{(n)}$ er den $n$'te afledte af $U(\cdot)$. Tager vi nu den forventede værdi fås
+hvor $U^{(n)}$ er den $n$'te afledte af $U(\cdot)$. Tages nu den forventede værdi fås
 \begin{align*}
 \mathbb{E}\left[U\left(W_{t+1}\right]\right)=&U\left(\mathbb{E}\left[W_{t+1}\right]\right)+\frac{1}{2}U''\left(\mathbb{E}\left[W_{t+1}\right]\right)\mathbb{V}\left(W_{t+1}\right)\\
 &+\sum_{n=3}^\infty \frac{1}{n!} U^{\left(n\right)}\left(\mathbb{E}\left[W_{t+1}\right]\right)\mathbb{E}\left[\left(W_{t+1}-\mathbb{E}\left[W_{t+1}\right]\right)^n\right],
 \end{align*}
 
-hvor $\mathbb{E}((W_{t+1}-\mathbb{E}(W_{t+1}))^n)$ er det centrale moment af orden $n$. Fælles for disse momenter er, at de kvantificerer en investors villighed til at afgive eller optage diverse risici. Givetvis vil en grådig investor foretrække højere forventet formue end lavere, for faste centrale momenter af anden orden eller højere. En risikoavers investor, altså $U''(W)<0$, vil foretrække lavere varians af formue fremfor højere, for fast forventet formue samt faste centrale momenter af tredje orden eller højere. Problemet opstår når de centrale momenter højere end eller lig tredje orden ikke er ens for alle alternativer. I så fald ville vi ikke kunne evaluere dem på baggrund af middelværdi og varians.
+hvor $\mathbb{E}((W_{t+1}-\mathbb{E}(W_{t+1}))^n)$ er det centrale moment af orden $n$. Fælles for disse momenter er, at de kvantificerer en investors villighed til at afgive eller optage diverse risici. Givetvis vil en grådig investor foretrække højere forventet formue end lavere, for faste centrale momenter af anden orden eller højere. En risikoavers investor, altså $U''(W)<0$, vil foretrække lavere varians af formue fremfor højere, for fast forventet formue samt faste centrale momenter af tredje orden eller højere. Problemet opstår når de centrale momenter højere end eller lig tredje orden ikke er ens for alle alternativer. I så fald ville man ikke kunne evaluere dem på baggrund af middelværdi og varians.
 
 ### Kvadratisk nytte
 
@@ -208,7 +208,7 @@ Til forskel for nedenstående nyttefunktioner kræver kvadratisk nytte ikke ford
 Under kvadratisk nytte vil maksimering af forventet nytte, som i Maksimeringsproblemet \@ref(eq:Nyttemaks), være ækvivalent til at maksimere en lineær kombination af middelværdi og varians, som i Maksimeringsproblemet \@ref(eq:Statmaks). Middelværdien af Ligning \@ref(eq:Kvadnytte) giver den forventede nytte
 $$\mathbb{E}[U(W_{t+1})]=\mathbb{E}[W_{t+1}]-b(\mathbb{V}[W_{t+1}+\mathbb{E}[W_{t+1}]]),$$
 
-og er dermed en funktion afhængende af både forventet formue og variansen af formue [@Munk2017]. Herudover vil *ARA* samt *RRA* begge være stigende i formue under kvadratisk nytte. Som argumenteret ovenfor vil stigende *ARA* være uhensigtmæssigt. 
+og er dermed en funktion afhængende af både forventet formue og variansen af formue [@Munk2017]. Herudover vil *ARA* samt *RRA* begge være stigende i formue under kvadratisk nytte. Som argumenteret ovenfor vil stigende *ARA* være uhensigtmæssig. 
 
 ### Eksponentiel nytte
 Eksponentiel nytte antager at variablene i modellen er normalfordelt. Lad $\theta\in\mathbb{R}$ være parametren i modellen, da vil eksponentiel nytte være defineret ved
@@ -216,10 +216,10 @@ Eksponentiel nytte antager at variablene i modellen er normalfordelt. Lad $\thet
 U(W_{t+1})=-\exp\left(-\theta W_{t+1}\right). (\#eq:Ekspnytte)
 \end{equation}
 
-Eksponentiel nytte antager, at *ARA* er konstant lig $\theta$, mens *RRA* kan stige med formue. Dette aspekt gør også eksponentiel nytte foretrukket ift. kvadratisk nytte. Eksponentiel nytte er også kendt under navnet *Constant Absolute Risk Aversion*. For en eksplicit opskrivning af forventningen af Ligning \@ref(eq:Ekspnytte) bemærker vi følgende
-$$W_{t+1}\sim \mathcal{N}\mu_p,\sigma_p^2)$$
+Eksponentiel nytte antager, at *ARA* er konstant lig $\theta$, mens *RRA* kan stige med formue. Dette aspekt gør også eksponentiel nytte foretrukket ift. kvadratisk nytte. Eksponentiel nytte er også kendt under navnet *Constant Absolute Risk Aversion*. For en eksplicit opskrivning af forventningen af Ligning \@ref(eq:Ekspnytte) bemærkes følgende
+$$W_{t+1}\sim \mathcal{N}\left(\mu_p,\sigma_p^2\right)$$
 
-altså er terminalnytten normalfordelt for enhver mulig portefølje, $p$, givet at afkastene er normalfordelt. Regner vi derfor på forventningen, får vi
+altså er terminalnytten normalfordelt for enhver mulig portefølje, $p$, givet at afkastene er normalfordelt. Regnes derfor på forventningen, fås
 $$\mathbb{E}(U(W_{t+1}))=-\exp\left(-\theta\mu_p+\frac{\theta^2}{2}\sigma_p^2\right).$$
 
 ### Potens nytte
@@ -232,7 +232,7 @@ U(W_{t+1})=\begin{cases} \frac{W_{t+1}^{1-\gamma}-1}{1-\gamma},\quad &\gamma\neq
 For $\gamma\neq 1$ fås den forventede nytte til
 $$\log(\mathbb{E}(W_{t+1}))=\mathbb{E}(\log(W_{t+1}))+\frac{1}{2}\mathbb{V}(\log(W_{t+1})),$$
 
-hvor vi har anvendt det bærende resultat vedr. middelværdien af en lognormalfordelt stokastisk variabel, se evt. Appendiks ??. Logaritmefunktionen er en konkav funktion, dette betyder at middelværdien af log af en stokastisk variabel er mindre end log af middelværdien, og forskellen er stigende i variabiliteten af den stokastiske variabel. For $\gamma \rightarrow 1$ haves
+hvor det bærende resultat vedr. middelværdien af en lognormalfordelt stokastisk variabel, se evt. Appendiks \@ref(underligteo), er anvendt. Logaritmefunktionen er en konkav funktion, dette betyder, at middelværdien af log af en stokastisk variabel er mindre end log af middelværdien, og forskellen er stigende i variabiliteten af den stokastiske variabel. For $\gamma \rightarrow 1$ haves
 $$\mathbb{E}(U(W_{t+1}))=\mathbb{E}(\log(W_{t+1})).$$
 
 ### Sammenligning af nyttefunktioner
@@ -242,28 +242,30 @@ Derudover vil valget mellem potens nytte og eksponentiel nytte også skabe de ov
 
 Antagelsen om normalfordelte afkast er tiltalende, men begrænser sig til et kortsigtet perspektiv, i det, at antagelsen ikke kan holde mere end én periode. F.eks. kan vi antage, at kvartalvise afkast er normalfordelte, men så vil afkastet over to kvartaler ikke være normalfordelt. Dette kommer sig af at de er produktet af to succesive normalfordelte afkast, og kun summen af normalfordelte variable er selv normalfordelt, ikke produktet. En antagelse om lognormalfordelte afkast vil modsat holde i en hver tidshorisont, siden produktet af to lognormale stokastiske variable selv er lognormal. Derudover vil en lognormal stokastisk variabel aldrig blive negativ, og dette er konsistent med de fleste finansielle aktivers begrænsede gældsforpligtelser.
 
-Lognormale afkast vil til gengæld ikke nemt kunne flyttes fra aktivniveau til porteføljeniveau. Dette kommer sig af, at en portefølje givetvis er en lineær kombination af individuelle aktiver. Hvis disse individuelle aktiver antages at have lognormale afkast, vil porteføljeafkastet være et vægtet gennemsnit af lognormale afkast, men et sådant gennemsnit er ikke selv lognormalt. Vi overkommer imidlertidigt dette problem ved at arbejde med korte intervaller. Ikke-lognormaliteten af porteføljeafkastet formindskes ved at benytte kortere og kortere intervaller. I kontinuert tid vil problemet forsvinde i grænsen, [@CampVic2003].
+Lognormale afkast vil til gengæld ikke nemt kunne flyttes fra aktivniveau til porteføljeniveau. Dette kommer sig af, at en portefølje givetvis er en lineær kombination af individuelle aktiver. Hvis disse individuelle aktiver antages at have lognormale afkast, vil porteføljeafkastet være et vægtet gennemsnit af lognormale afkast, men et sådant gennemsnit er ikke selv lognormalt. Dette problem overkommes imidlertidigt ved at arbejde med korte intervaller. Ikke-lognormaliteten af porteføljeafkastet formindskes ved at benytte kortere og kortere intervaller. I kontinuert tid vil problemet forsvinde i grænsen, [@CampVic2003].
 
-## Fordeling af afkast
+## Fordeling af afkast {#fordafafk}
 
-Brugen af afkast fremfor priser på aktiver, kommer sig af markedsinvariansen af afkast. Priser siges derimod at være kontrære, eller modsat rettede, [@Jondeau2007]. I bund og grund er priser *unit root* processer, dvs. stød til tidsserien af priser har permant effekt, dette kaldes undertiden også for ikke-stationære processer. *Unit root* processer siges også at have integration af orden $1$, $I(1)$. Afkast er derimod stationære processer, de har integration af orden $0$, $I(0)$, [@Verbeek2017]. For en ikke-stationær tidsserie vil momenterne ændre sig over tid, f.eks. vil middelværdien og variansen af en prisprocess på tidspunkt $t$, afhænge af den foregående periodes pris, altså på tidspunkt $t-1$. Den manglende markedsinvarians af prisprocesser holder dem ude af ligningen, da de grundet ovenstående ikke vil kunne producere *i.i.d.* stokatiske variable.
+Brugen af afkast fremfor priser på aktiver, kommer sig af markedsinvariansen af afkast. Priser siges derimod at være kontrære, eller modsat rettede, [@Jondeau2007]. I bund og grund er priser *unit root* processer, dvs. stød til tidsserien af priser har permant effekt, dette kaldes undertiden også for ikke-stationære processer. *Unit root* processer siges også at have integration af første orden, $I(1)$. Afkast er derimod stationære processer, de har integration af nulte orden, $I(0)$, [@Verbeek2017]. For en ikke-stationær tidsserie vil momenterne ændre sig over tid, f.eks. vil middelværdien og variansen af en prisprocess på tidspunkt $t$, afhænge af den foregående periodes pris, altså på tidspunkt $t-1$. Den manglende markedsinvarians af prisprocesser holder dem ude af ligningen, da de grundet ovenstående ikke vil kunne producere *i.i.d.* stokatiske variable.
 
-I det følgende vil vi adskille simple afkast og log^[Gennem resten af denne afhandling vil log referer til den naturlige logaritme.] afkast gennem notation. Vi lader os notere det simple afkast som $R_{t+1}$, som følger den gængse notation i litteraturen. Vi lader det simple brutto afkast være defineret som
+I det følgende vil vi adskille simple afkast og log^[Gennem resten af denne afhandling vil log referer til den naturlige logaritme.] afkast gennem notation. Det simple afkast noteres som $R_{t+1}$, som følger den gængse notation i litteraturen. Vi lader det simple brutto afkast være defineret som
 $$R_{t+1}\equiv\frac{P_{t+1}}{P_t},$$
 
 hvor $P_t\in\mathbb{R}_+$ er prisen på et aktiv, på tidspunkt $t$, og dermed $R_t\in\mathbb{R}$. Det simple afkast $R_t-1$ er den procentvise ændring over den respektive tidsperiode. Empiriske resultater har påvist, at simple afkast af aktiver udviser assymmetri og resulterer i højreskæve fordelinger bl.a. pga. de bagvedliggende virksomheder og/eller institutioneres begrænsede gældsforpligtelser. Derudover kan højreskævheden af simple afkast fremkomme på lang sigt grundet, at de er produktet af afkast over én-periode, som argumenteret for ovenfor.
 
-For at overkomme disse faldgruber af simple afkast, benyttes log afkastet. Log afkastet noteres som $r_{t+1}$, og defineres som
+I et forsøg på at overkomme disse faldgruber af simple afkast, benyttes log afkastet. Log afkastet noteres som $r_{t+1}$, og defineres som
 $$r_{t+1}\equiv\log(1+R_{t+1}),$$
 
-hvilket er en geometrisk og kontinuert følge. Logafkastet af aktiver vil skabe symmetriske fordelinger, som overholder dermed overholder markedsinvariansen.
+hvilket er en geometrisk og kontinuert følge, som dermed overholder markedsinvariansen.
 
-## Opsummering
+## Opsummering {#opsunteo}
 
-# Afkastrelationer
-I Kapitel \@ref(unteo), blev den grundliggende teori for porteføljevalg beskrevet. Som beskrevet kræver de underliggende modeller, at afkast er lognormalfordelte, og af den grund må afkastserierne transformeres. Mere specifikt blev investoren med potens nytte bl.a. beskrevet, her var det et krav, at de anvendte variable var logbaseret. Dette er specielt anvendeligt når investorens porteføljevalg skal modelleres på lang sigt. Afkastprædiktabilitet lægger som navnet, op til at afkast *er* prædiktable. En forkastelse af *i.i.d.* antagelsen vil implicit medføre afkastprædiktabilitet. Dette kapitel vil fungere som en teoretisk gennemgang af udledningen af de specifikke aktivklasser som investoren står overfor, når porteføljevalget skal tages. For at udlede approksimative analytiske løsninger på tværs aktivklasser, vil den såkaldte loglineære relation af afkast blive anvendt, [@Campbell1988]. [@Campbell1988] viste i tilfældet af aktieafkast, hvordan en approksimativ loglineær relation af aktieafkast kunne etableres. På baggrund af denne relation har nyere litteratur anvendt deres metode på andre klasser af aktiver. At kunne etablere approksimative analytiske løsninger for alle aktivklasser er et afgørende element for at kunne skabe en robust VAR(1)-model i Kapitel ??. Sektion ?? vil opsummere kapitlets fund.
+Dette kapitel præsenterede den grundliggende teori til porteføljeproblemet. 
 
-## Afkast og nutidsværdi-relationer
+# Afkastrelationer {#afkrel}
+I Kapitel \@ref(unteo), blev den grundliggende teori bag porteføljevalget beskrevet. Som beskrevet kræver de underliggende modeller, at afkast er lognormalfordelte, og af den grund må afkastserierne transformeres. Mere specifikt blev investoren med potens nytte bl.a. beskrevet, her var det et krav, at de anvendte variable var logbaseret. Dette er specielt anvendeligt når investorens porteføljevalg skal modelleres på lang sigt. Afkastprædiktabilitet lægger som navnet, op til at afkast *er* prædiktable. En forkastelse af *i.i.d.* antagelsen vil implicit medføre afkastprædiktabilitet. Dette kapitel vil fungere som en teoretisk gennemgang af udledningen af de specifikke aktivklasser som investoren står overfor, når porteføljevalget skal tages. For at udlede approksimative analytiske løsninger på tværs aktivklasser, vil den såkaldte loglineære relation af afkast blive anvendt, [@Campbell1988]. [@Campbell1988] viste i tilfældet af aktieafkast, hvordan en approksimativ loglineær relation af aktieafkast kunne etableres. På baggrund af denne relation har nyere litteratur anvendt deres metode på andre klasser af aktiver. At kunne etablere approksimative analytiske løsninger for alle aktivklasser er et afgørende element for at kunne skabe en robust VAR(1)-model i Kapitel \@ref(underligmodel). Sektion \@ref(opsafkrel) vil opsummere kapitlets fund.
+
+## Afkast og nutidsværdi-relationer {#afkognut}
 
 ### Definition af aktieafkast {#defaktafk}
 I denne Sektion har til formål at definere aktieafkast, dets logrepræsentation samt dets relation til udbytte. Udledningen af én-periode brutto aktieafkastet baseres på [@Campbell1988]. Først betragtes brutto aktieafkastet fra tidspunkt $t$ til $t+1$, og dernæst udledes dets én-periode log afkast via en førstordens Taylor approksimation. Lad $R_{t+1}$ noterer én-periode brutto aktieafkastet, og lad det være defineret som
@@ -276,15 +278,15 @@ her er $P_t$ prisen af aktien på tidspunkt $t$. $D_t$ er udbytte på tidspunkt 
 r_{t+1}\approx p_{t+1}+\log(1+\exp(d_{t+1}-p{t+1}))-p_t. (\#eq:csaa2)
 \end{equation}
 
-Det observeres, at det andet led på højre side af Ligning \@ref(eq:csaa2) er ikke-lineær. Dette løses ved at lave en førsteordens Taylor approksimation omkring middelværdien af $d_{t+1}-p_{t+1}$^[Fordelene ved en sådan linearisering er, at det tillader en lineær statistisk analyse af aktieprisens bevægelser, som simplificerer det økonometriske arbejde. Derudover er der den generelle konsensus, at aktieafkast og udbytte følger en loglineær stokastisk process, og derfor er det nødvendigt at udarbejde en model, som er tilpasset denne antagelse.], dermed kan det andet led skrives som
+Det observeres, at det andet led på højre side af Ligning \@ref(eq:csaa2) ikke er lineært. Dette løses ved at lave en førsteordens Taylor approksimation omkring middelværdien, $\overline{d_{t+1}-p_{t+1}}$^[Fordelene ved en sådan linearisering er, at det tillader en lineær statistisk analyse af aktieprisens bevægelser, som simplificerer det økonometriske arbejde. Derudover er der den generelle konsensus, at aktieafkast og udbytte følger en loglineær stokastisk process, og derfor er det nødvendigt at udarbejde en model, som er tilpasset denne antagelse.], dermed kan det andet led skrives som
 \begin{equation}
-f(\log(1+\exp(d_{t+1}-p_{t+1}))) = (1-\rho)(d_{t+1}-p_{t+1}) + c, (\#eq:csaa3)
+f(\log(1+\exp(\overline{d_{t+1}-p_{t+1}}))) = (1-\rho)(d_{t+1}-p_{t+1}) + c, (\#eq:csaa3)
 \end{equation}
 
 hvor $\rho$ og $c$ er såkaldte lineariseringsparametre, defineret som
 \begin{align*}
-\rho&=1+\exp(d_{t+1}-p_{t+1})\\
-c&=\log(1+\exp(d_{t+1}-p_{t+1}))-(1-\rho)(d_{t+1}-p_{t+1}).
+\rho&=1+\exp(\overline{d_{t+1}-p_{t+1}})\\
+c&=\log(1+\exp(\overline{d_{t+1}-p_{t+1}}))-(1-\rho)(\overline{d_{t+1}-p_{t+1}}).
 \end{align*}
 
 Indsættes Ligning \@ref(eq:csaa3) nu i Ligning \@ref(eq:csaa2), kan det approksimative én-periode brutto aktie log afkast udledes til
@@ -309,7 +311,7 @@ d_t-p_t=\sum_{j=0}^\infty \rho^j \mathbb{E}_t[r_{t+j+1}-\Delta d_{t+j+1}]-\frac{
 
 Transversalitetsbetingelsen udeholder *bobler* i *Dynamic Gordon Growth Model*. Det følger igennem Ligning \@ref(eq:csaa6), at ændringer i log *Dividend-Price Ratio* må være grundet ændringer i: fremtidige afkast eller en ændring i forventningen til fremtidige udbyttebetalingenr eller en kombination af begge. Et vigtigt aspekt af ovenstående relation er, at den er udledt på baggrund af definitionen af afkast og ikke en økonomisk model. Derudover viser Ligning \@ref(eq:csaa6) baggrunden for at medtage log *Dividend-Price Ratio*, som en forklarende variabel til responsvariablen aktieafkast: der må være en mellemliggende relation mellem bevægelser i aktieafkast eller vækst i udbyttebetalinger og ændringer i *Dividend-Price Ratio*. Ligning \@ref(eq:csaa6) hævder, at log *Dividend-Price Ratio* må bære på alt markedsinformation vedr. fremtidige bevægelser i aktieafkast eller udbytter.
 
-### Definintion af obligationsafkast
+### Definition af obligationsafkast {#defafobl}
 Som en analog til det udledte resultat mellem aktieafkast og *Dividend-Price Ratio* fra Sektion \@ref(defaktafk), eksisterer der en relation mellem obligationsafkast og rentespændet. Dvs. at rentespændet spiller en sammenlignelig rolle for *Fixed Income* markederne, som *Dividend-Price Ratio* gjorde det for aktiemarkedet [@Campbell1997]. Først etableres egenskaberne for nulkupon obligationer, for herefter at udarbejde relationen for kupon obligationer. 
 
 Rentespændet prædiktabilitet af obligationsafkast kan be udledt, ved at betragte et marked bestående kun af nulkupon obligationer. Den nominelle pris på tidspunkt $t$, for en nulkupon obligation med løbetid $n$, noteres som $P_t^n$. Den tilhørende effektive rente betegnes $Y_t^n$. Ved tilbagediskontering af det fremtidige cashflow kan prisen i dag findes til
@@ -375,7 +377,7 @@ Fra Ligning \@ref(eq:csba11) og Ligning \@ref(eq:csaa4) ses, at udbytte og kupon
 
 \begin{align*}
 k &= -\log(1-\rho)\log(\frac{1}{\rho-1})\\
-\rho&= \frac{1}{(1\exp(c-p??))}.
+\rho&= \frac{1}{(1\exp(\overline{c-p}))}.
 \end{align*}
 
 Hvis kuponobligationen bliver solgt til kurs pari, vil $\rho$ reduceres til
@@ -416,11 +418,11 @@ r_{t+1}^{c,n}\approx D^{c,n} y_t^{c,n} - (D^{c,n} - 1) y_{t+1}^{c,n-1}=D^{c,n}(y
 
 Ligning \@ref(eq:csba17) kan ligeledes sammenlignes med Ligning \@ref(eq:csaa4), og blev først udledt af [@Campbell1983]. Men i dette tilfælde er ligningen et vægtet gennemsnit af varigheden på nuværende og fremtidige effektive renter. Ligning \@ref(eq:csba17) holder ligeledes for nulkuponobligationer, hvor varigheden erstatter løbetiden. Det andet lighedstegn viser ligeledes relationen til rentespændet, $y_t^{c,n}- y_{t+1}^{n-1}$. Som der givetvis må resultere i en forventning om positiv korrelation mellem afkastet og rentespændet i den empiriske sektion.
 
-## Potentielle prædiktabilitetsvariable
-Denne Sektion er en forlængelse af Sektion ??, og fungerer som en undersøgelse og diskussion af variable med en potentiel prædiktionsevne. Med tiden er en lang række variable blevet foreslået til afkast prædiktabilitet. Generelt kan disse variable grupperes ind i en række kategorier. I det følgende vil tre grupper bliver præsenteret: finasielle variable, rentestruktursvariable og makroøkonomiske variable. Denne inddeling er også anvendt i eksisterende litteratur, se bl.a. [@Koijen2011]. Den følgende undersøgelse af potentielle prædiktions variable vil bestå af kvalitative samt kvantitative analyser, som på den måde kommer til at foregå analysen relateret til porteføljevalget. Dette tillader at studere den potentielle lineære relation mellem merafkastet på aktiverne og variablene, og på den måde give en dybere inferens af de valgte foreklarende variable, som da vil blive benyttet i at modellere det optimale porteføljevalg.
+## Potentielle prædiktabilitetsvariable {#potpradik}
+Denne sektion er en forlængelse af Sektion \@ref(afkognut), og fungerer som en undersøgelse og diskussion af variable med en potentiel prædiktionsevne. Med tiden er en lang række variable blevet foreslået til afkast prædiktabilitet. Generelt kan disse variable grupperes ind i en række kategorier. I det følgende vil tre grupper bliver præsenteret: finasielle variable, rentestruktursvariable og makroøkonomiske variable. Denne inddeling er også anvendt i eksisterende litteratur, se bl.a. [@Koijen2011]. Den følgende undersøgelse af potentielle prædiktions variable vil bestå af kvalitative samt kvantitative analyser, som på den måde kommer til at foregå analysen relateret til porteføljevalget. Dette tillader at studere den potentielle lineære relation mellem merafkastet på aktiverne og variablene, og på den måde give en dybere inferens af de valgte foreklarende variable, som da vil blive benyttet i at modellere det optimale porteføljevalg.
 
 ### Finansielle variable
-I Sektion ?? blev den fundamentale værdi af aktier benyttet til at argumentere for relation til *Dividend-Price Ratio*. I denne sektion vil benyttes til at diskutere andre potentielle finasielle variable, som før har vist statistisk styrke i at prædiktere aktie afkast. Samtidig er det muligt, at disse variable fanger variation, som allerede er forklaret igennem nogle af de eksistende variable. Derudover kan disse variable også muligvis forklare variation i afkastet på nogle af de andre aktiver ud over aktieafkastet. I det følgende vil *Price-Earnings Ratio*, *Book-to-Market Ratio*, aktievariansen, *Small Minus Big* og *High Minus Low* blive undersøgt.
+I Sektion \@ref(defaktafk) blev den fundamentale værdi af aktier benyttet til at argumentere for relation til *Dividend-Price Ratio*. I denne sektion vil benyttes til at diskutere andre potentielle finasielle variable, som før har vist statistisk styrke i at prædiktere aktie afkast. Samtidig er det muligt, at disse variable fanger variation, som allerede er forklaret igennem nogle af de eksistende variable. Derudover kan disse variable også muligvis forklare variation i afkastet på nogle af de andre aktiver ud over aktieafkastet. I det følgende vil *Price-Earnings Ratio*, *Book-to-Market Ratio*, aktievariansen, *Small Minus Big* og *High Minus Low* blive undersøgt.
 
 [@Fama1988] finder, at både *Dividend-Price Ratio* samt *Price-Earnings Ratio* har statistisk styrke i at prædiktere forventede aktieafkast, og argumenterer for, at *Dividend-Price Ratio* er mindre variabel end *Price-Earnings Ratio* som indeholder en del støj. Derudover finder [@Lamont1998] evidens for, at den aggregerede *Dividend Payout Ratio* prædikterer merafkast på både aktier og obligationer. [@Lamont1998] argumenterer modsat [@Fama1988], at variansen fra *Price-Earnings Ratio* ikke er støj, men derimod information om forventede afkast. Givet disse ovenstående fund, vil en medtagelse af *Price-Earnings Ratio* være relevant for den følgende analyse.
 
@@ -449,7 +451,7 @@ Udover de finansielle variable og rentestruktursvariablene medtages én makroøk
 
 En relevant makroøkonomisk del til at forklare variationen i specielt obligationsafkast er finanspolitikken. [@Dai2005] undersøger specielt finanspolitikkens indflydelse ved at inkorpere *Federal Funds Rate* som en forklarende variabel. De finder, at denne -- inkl. flere andre variable -- har statistisk styrke til at prædiktere obligationsafkast. 
 
-## Opsummering
+## Opsummering {#opsafkrel}
 Dette kapitel fungerede som et overblik over de approksimative og eksakte analytiske resultater på tværs af en række af aktiver. Ved benyttelse af den loglineære afkast approksimation af [@Campbell1988], blev aktivklassernes nutidsværdi relateret til forventede fremtidige betalinger. Dette tilladte at prædiktiverelationer på tværs af aktivklasserne blev dannet, som er essentielle, når den mulige prædiktabilitet skal begrundes. Disse relationer vil derfor også kunne inkorporeres i den følgende VAR(1)-model. Derudover er en lang række variable ligeledes blevet præsenteret og diskuteret. Disse potentielle prædiktionsvariable er medtaget grundet tidligere litterære fund, som viser at prædiktabiliteten af afkast kan fanges af flere variable end de fundamentalt bundne variable.
 
 # VAR {#varkapitel}
@@ -646,7 +648,7 @@ Her er $\bm{\Sigma}_v$ den betingede kovariansmatrix af $v_t$, $\lambda$ er vekt
 
 ## Opsummering
 
-# Porteføljeteori
+# Porteføljeteori {#porteteori}
 I dette kapitel udvides teorien fra Kapitel \@ref(unteo). Mere specifikt sammenkobles porteføljeteorien fra Sektion \@ref(myoinv) og nytteteorien fra Sektion \@ref(typnyt). Dette gøres på baggrund af *CRRA*-nytte, i tilfældet, hvor investoren kan rebalancere sin portefølje periodisk, og i det restringerede tilfælde, hvor ingen rebalancering er tilladt. Herefter beskrives den analytiske løsning til det dynamiske porteføljeproblem foreslået af [@JurVic2011].
 
 ## CRRA Portefølje {#crraportef}
@@ -658,7 +660,7 @@ Først antages, at afkastet på investorens portefølje er lognormal, dette bety
 &\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
 \end{align}
 
-Maksimering af ovenstående forventning er ækvivalent til at maksimere log af forventningen, eftersom log-funktionen er strengt voksende, se evt. Figur \@ref(fig:Nyt), som er tegnet på baggrund af log-funktionen. Derudover kan: $\tfrac{1}{1-\gamma}$ og $-1$ fjernes fra Maksimeringsproblemet, eftersom de er konstante og derfor ikke vil påvirke optimum. Givet af $W_{t+1}$ er lognormal, kan resultatet fra Appendiks ?? anvendes, og dermed opnå
+Maksimering af ovenstående forventning er ækvivalent til at maksimere log af forventningen, eftersom log-funktionen er strengt voksende, se evt. Figur \@ref(fig:Nyt), som er tegnet på baggrund af log-funktionen. Derudover kan: $\tfrac{1}{1-\gamma}$ og $-1$ fjernes fra Maksimeringsproblemet, eftersom de er konstante og derfor ikke vil påvirke optimum. Givet af $W_{t+1}$ er lognormal, kan resultatet fra Appendiks \@ref(underligteo) anvendes, og dermed opnå
 \begin{align}
 &\max \log\left(\mathbb{E}_t(W_{t+1}^{1-\gamma})\right)=(1-\gamma){E}_t(w_{t+1})+\frac{1}{2}(1-\gamma)^2\sigma_{wt}^2 (\#eq:CRRAmakslog)\\
 &\text{ubb.}\,\,w_{t+1}=r_{p,t+1} + w_t.\notag
@@ -717,7 +719,7 @@ Som igen er ækvivalent med den optimale løsning, Ligning \@ref(eq:Multalpha), 
 \bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t(\bm{r}_{t+1})-r_{b,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right)+(1-\frac{1}{\gamma})(-\bm{\Sigma}_t^{-1}\bm{\sigma}_{b,t}).
 \end{equation}
 
-## Model for $k$-perioder
+## Model for $k$-perioder {#modkper}
 Analysen har indtil videre benyttet den restriktive antagelse, at investoren kun har en én-periodes investeringshorisont. Et mere realistisk tilfælde, er at antage, at investorens forventede nytte er udledt på baggrund af formuefordeling flere perioder fra nu. I den multiple-periode model, antages det at afkast på investeringer bliver geninvesteret, dette implicerer den nye budgetbegrænsning
 \begin{align}
 W_{t+k}&=R_{pk,t+k}W_t \notag\\
@@ -739,7 +741,7 @@ I tilfældet uden periodisk rebalancering skal investoren evaluere $k$-periode a
 
 Altså vil investoren vælge den samme portefølje over hele deres investeringshorisont givet, at der ikke er mulighed for periodisk rebalancering.
 
-### Med periodisk rebalancering
+### Med periodisk rebalancering {#medperireb}
 Antagelsen om, at ingen rebalancering finder sted over tid, synes at være i modstrid med virkelige observationer. Derfor arbejdes videre med en teoretisk ramme, som tillader periodisk rebalancering af investorporteføljen. Den første som beskrev maksimering af nytte ift terminal formue var [@Mossin1968], som beskriver problemet i diskrettid. [@Mossin1968] noterede sig, at enhver følge af portefølje beslutninger skal være betingede af resultatet fra tidligere perioder, men på samme tid tage hensyn til information vedr. de fremtidige fordelinger af afkast. [@Samuelson1969] udvidede denne teori til at medtage forbrug, mens [@Merton1969; @Merton1971] beskrev en forbrugsbaseret model i kontinuert tid. I det følgende vil to eksempler med traktable løsninger blive præsenteret. Disse eksempler medfører, at investoren handler myopisk, selvom der er mulighed for rebalancering.
 
 Først præsenteres den generelle potens nytte investor med *i.i.d.* afkast. Givet at investoren har potens nytte og at afkastene på aktiverne er *i.i.d.*, er det muligt at vise, at investorens porteføljevalg vil blive myopiske. Dette er også kendt som den første *Samuelson-Merton* betingelse. En intuitiv forklaring er som følger: Givet *i.i.d.* afkast vil investoren ikke opnå ny information vedr. log afkastfordelingen over tid. Dernæst haves at *RRA* er konstant, hvilket medfører at porteføljevalget er uafhængig af formueniveauet. Når forskellige porteføljestrategier, $\bm{\alpha}_t$ for $t=1,\dots,k$, tillades kan $2$-periode portefølje merafkastet omskrives til
@@ -765,7 +767,7 @@ Ovenstående medfører, at investorer med $\gamma>0$ vil vælge porteføljer med
 
 Den anden Samuelson-Merton betingelse som foranlediger til det myopiske porteføljevalg er baseret på faktummet, at en investor har log nytte, dvs. potens nytte, hvor $\gamma=1$. Her vil porteføljevalget være myopisk, uanset om aktiv afkastene er *i.i.d.* Argumenteret for dette er, at en log nytte investor vælger en portefølje, som maksimerer det forventede logafkast. Ligning \@ref(eq:sumportk) viser at $k$-periode log afkastet er summen af én-periode logafkast. Summen bliver maksimeret ved at maksimere hvert element seperat, siden at porteføljen frit kan blive valgt hver periode, altså vil hver én-periodes maksimering lede til det myopiske valg.
 
-## Rekursiv løsning
+## Rekursiv løsning {#rekloes}
 
 I forlængelse af ovenstående modeller følges nu den analytiske løsning til det dynamiske porteføljeproblem foreslået af [@JurVic2011]. Her betragtes en investor med initial formue $W_t$ på tidspunkt $t$, som vælger en porteføljestrategi, der maksimerer den forventede nytte af formue $k$ perioder frem i tiden, altså på tidspunkt $t+k$. Investoren antages at have potens nytte med konstant risikoaversions parameter, $\gamma$, og forbruger den akkumulerede nytte på terminaltidspunktet, $t+k$. 
 
@@ -775,7 +777,7 @@ Investoren vælger altså vægte sådan, at
 \begin{cases}
 \arg\max\mathbb{E}_t(\frac{1}{1-\gamma}W_{t+k}^{1-\gamma}),\quad &\gamma\neq 1\\
 \arg\max\mathbb{E}_t(\log(W_{t+k})),\quad &\gamma=1.
-\end{cases}
+\end{cases}(\#eq:jurvaegt)
 \end{align}
 
 Her er $\tau$ den resterende tid til investeringshorisonten. Altså indekseres vægtenes på det tidspunkt de bliver valgt med sunket skrift, og med hævet skrift for den resterende tid til investeringshorisonten. Risikopræferencen for investoren indebærer, at $(1+R_{p,t+i})>0$ for $i=1,\dots,k$. For de optimale vægte haves derfor
@@ -783,12 +785,12 @@ Her er $\tau$ den resterende tid til investeringshorisonten. Altså indekseres v
 W_{t+k}=W_t\exp(r_{p,t\to t+k}),(\#eq:formuetk)
 \end{equation}
 
-hvor $r_{p,t\to t+k}=\sum_{i=1}^k r_{p,t+i}$ er $k$-periode log porteføljeafkastet mellem tidspunkt $t$ og $t+k$. Dette tillader at vægtene ??, kan omskrives til
+hvor $r_{p,t\to t+k}=\sum_{i=1}^k r_{p,t+i}$ er $k$-periode log porteføljeafkastet mellem tidspunkt $t$ og $t+k$. Dette tillader, at vægtene \@ref(eq:jurvaegt), kan omskrives til
 \begin{align}
 \left\{\bm{\alpha}_{t+k-\tau}^\tau\right\}_{\tau=k}^{\tau=1}=\begin{cases}
 \arg\max\mathbb{E}_t(\exp ((1-\gamma) r_{p,t\to t+k})),\quad &\gamma\neq 1\\
 \arg\max\mathbb{E}_t(r_{p,t\to t+k}),\quad &\gamma=1.
-\end{cases}
+\end{cases}(\#eq:jurvaegt2)
 \end{align}
 
 Som tidligere argumenteret vil en antagelse om rebalancering følge markedsobservationer, og det er ud fra denne antagelse at [@JurVic2011] løser det generelle $k$-periode porteføljeproblem ved benyttelse af baglæns optrævling. Løsningen er en diskretiseret version af [@Liu2007], men mere fleksibel idet, at den kan håndtere et bredt spektrum af risikobærende aktiver og tilstandsvariable på samme tid. Derudover vil løsningen være eksakt i kontinuert tid, grundet den loglineære approksimation. Først udledes porteføljestrategien for den sidste periode, $\tau=1$, da denne vægtning vil danne grundlaget for resten af rekursionen. Den optimale portefølje for sidste periode er den sædvanlige myopiske eller én-periode middelværdi-varians optimale portefølje, som tidligere præsenteret
@@ -813,12 +815,14 @@ Den generelle rekursive løsning til det dynamiske porteføljeproblem er givet v
 
 hvor $\bm{\Sigma}_x=\begin{pmatrix}\bm{\sigma}_0x & \bm{\Sigma} & \bm{\Sigma}_{xs}'\end{pmatrix}$ og $B_1^{\tau-1}$, $B_2^{\tau-1}$ samt $B_3^{\tau-1}$ er funktioner afhængende af: den resterende investeringshorisont, $\tau$, *RRA*-parameteren, $\gamma$, samt koefficeinterne fra VAR-modellen, [@JurVic2011].
 
-Ovenstående Ligning \@ref(eq:jurvicalpha) giver den fulde analytiske løsning til det intertemporale porteføljeproblem fra Ligning ??. Den optimale portefølje er en sum af to komponenter. Den første del af summen er identisk til den én-periode myopiske portefølje fra Ligning ??. Den anden del af summen, består af det såkaldte intertemporale *hedging demand* for risikobærende aktiver, [@Merton1969; @Merton1971; @Merton1973]. Herudover viser løsning at den myopiske del af det totale porteføljevalg er uafhængigt af den resterende tid til investeringshorisonten, $\tau$. Den viser også at den myopiske del er den totale porteføljedel for investorer med log nytte, $\gamma=1$. Hvilket også er konsistent med intutionen givet i Sektion ??, at log nytte investorer ikke forholder sig til investeringshorisonten.
+Ovenstående Ligning \@ref(eq:jurvicalpha) giver den fulde analytiske løsning til det intertemporale porteføljeproblem fra Ligning \@ref(eq:jurvaegt2). Den optimale portefølje er en sum af to komponenter. Den første del af summen er identisk til den én-periode myopiske portefølje fra Ligning \@ref(eq:Potmultalpha). Den anden del af summen, består af det såkaldte intertemporale *hedging demand* for risikobærende aktiver, [@Merton1969; @Merton1971; @Merton1973]. Herudover viser løsning at den myopiske del af det totale porteføljevalg er uafhængigt af den resterende tid til investeringshorisonten, $\tau$. Den viser også at den myopiske del er den totale porteføljedel for investorer med log nytte, $\gamma=1$. Hvilket også er konsistent med intutionen givet i Sektion \@ref(medperireb), at log nytte investorer ikke forholder sig til investeringshorisonten.
 
-Komponentet som repræsenterer det intertemporale *hedging demand* består af to elementer. Det første element, $\bm{\Sigma}_{xx}\bm{\Sigma}_x$, fanger -- gennem korrelationen med vektoren af tilstandsvariable -- muligheden for at aktiver kan *hedge* imod ændringer i investeringsmuligheder. Det andet element, som består af $1-\tfrac{1}{\gamma}$ og leddene ??, fanger effekten af ændringer i investeringsmuligheder på investorens marginal nytte. Derudover ses det fra Ligning \@ref(eq:jurvicalpha), at dette sidste led er afhængig af den forventede værdi af alle tilstandsvariablene, $\mathbb{E}_{t+k-\tau}[\bm{z}_{t+k-\tau+1}]$, samt afhængig af horisontlængden gennem $B_1^{\tau-1}$, $B_2^{\tau-2}$.
+Komponentet som repræsenterer det *intertemporale hedging demand* er en funktion af *RRA*-koefficienten, koefficienterne fra VAR-systemet og koefficienterne af *value*-funktionen fra Appendiks \@ref(optdynstrategi), som selv er funktionern af koefficienterne fra VAR-systemet, og den tilbageværende investeringshorisont, $\tau$. Altså er det gennem det *intertemporale hedging demand*, at investeringshorisonten påvirker porteføljeallokeringen af den dynamiske rebalancerende investor.
 
 En begrænsning af den analytiske løsning udledt ovenfor, er manglen på kortsalgs bibetingelser. Altså, hvordan porteføljevægtene vil være anderledes, givet at investoren står overfor en kortsalgsrestriktion. For at drage inferens om en kortsalgs restringeret investor laves en sammenlingning, hvor porteføljevægtene fra Ligning \@ref(eq:jurvicalpha) trunkeres, givet at de er negative. Herefter normaliseres så porteføljenvægtningen benytter hele formuen. Nedenstående viser beregningen
-$$\alpha_{i,t}=\frac{\max(0,\alpha_{i,t})}{\sum_{i=1}^n \max(0,\alpha_{i,t})}.$$
+\begin{equation}
+\alpha_{i,t}=\frac{\max(0,\alpha_{i,t})}{\sum_{i=1}^n \max(0,\alpha_{i,t})}.(\#eq:kortsalgsrestr)
+\end{equation}
 
 På denne måde opnåes en repræsentativ portefølje, som kan benyttes til at besvare spørgsmålet, hvordan porteføljebeslutingen ændrer sig, ifm. en kortsalgsrestriktion.
 

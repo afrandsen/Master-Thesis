@@ -2,7 +2,7 @@
 
 \part{Appendiks}
 
-# Underliggende teoretiske resultater
+# Underliggende teoretiske resultater {#underligteo}
 
 Dette appendiks består af udledninger for de anvendte resultater gennem afhandlingen. Notationen som anvendes følger den generelle præsenterede notation fra tidligere kapitler.
 
@@ -355,7 +355,7 @@ y_t^{c,n}\approx (\frac{1-\rho}{1-\rho^n})\sum_{i=0}^{n-1}\rho^i r_{t+i+1}^{c,n-
 
 Og ved substitution kan det approksimative loglinære afkast fra Kapitel ?? udledes.
 
-# Den optimale dynamiske strategi
+# Den optimale dynamiske strategi {#optdynstrategi}
 Dette appendiks vil udlede den optimale porteføljestrategi, som beskrevet i Sektion ??. Udledningen vil følge [@JurVic2011] Appendiks C, som beskriver metoden, med enkelte dele som varierer.
 
 Uden tab af generalitet, kan det $k$-periode dynamiske porteføljeproblem løses, ved benyttelse af en rekursiv forlængelse af løsningen for optimalitetsproblemet hørende til de sidste to perioder. Først udledes porteføljestrategien i den sidste periode -- denne vil fungere som basis for den såkaldte *policy*-funktion i rekursionen -- samt den tilhørende *value* funktion. Herefter vil problemet i den foregående periode løses, dette problem er en funktion af koefficienterne fra *policy*- og *value*-funktionerne fra den sidste periode. Dette skaber det rekursive forhold mellem de to sidste tilstødende perioder, som herefter generalises til to generelle tilstødende perioder.

@@ -26,19 +26,19 @@ if (knitr::is_html_output()) {
 ```{r script1, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Script.R"), include=FALSE, cache=TRUE}
 ```
 
-# Implementering
+# Implementering {#imple}
 Kapitel \@ref(varkapitel) markerede slutningen af den underliggende teoretiske gennemgang samt diskussion. Nu tages fat på de nødvendige statistiske værktøjer, som er et nødvendige, for at kunne implementere den præsenterede porteføljemodel. Derfor vil dette kapitel lægge fundamentet for den empiriske del, som på den måde kan færdiggøre den optimale porteføljestrategi baseret på historiske data, der bliver gennemgået og gransket i Kapitel \@ref(kapiteldatab). Sektion \@ref(sekpradik) vil præsentere de oftest anvendte lineære modeller til at teste afkastprædiktabilitet. Sektion \@ref(sektestaftids) vil fungere som beskrivelse af de tests, som kan teste de anvendte tidsserier for de underliggende antagelser, der specielt er krævet af VAR-processen. Derudover vil Sektion \@ref(sekmodelselek) sætte spørgsmåltegn ved højtparameteriserede modeller. Sektionen vil derfor diskutere problemet og præsentere et modelselektionsgrundlag, etableret for at kunne skabe en restringeret kvantiativ stærk model, som der -- ikke mindst -- samtidig er valgt ud fra en kvalitativ skepsis af undertegnede.
 
 ## Prædiktabilitstest {#sekpradik}
 Denne sektion vil dække en introduktion til testing af afkastprædiktabilitet. Da fokus er på porteføljeallokering, vil en dybdegående analyse ikke foretages i denne afhandling. Ved at følge den eksisterende litteratur, vil testene være baseret på lineære modeller. Først beskrives den univariate regressions model, som går forud for den multiple regression. Disse to lineære grundlag vil danne rammen for de empiriske undersøgelser i denne sektion. Derudover bliver generelle økonometriske problemer præsenteret for fuldstændighedens skyld. 
 
-### Univariat regression
+### Univariat regression {#univarregr}
 Den simpleste statistiske metode til at finde statistiske sammenhænge er gennem en univariat lineær regression. I et afkastprædiktablitets henseende vil man lave en regression af merafkast som responsvariabel på laggede forklarende variable. Dette vil give en indikation af relationens signifikans og størrelsesorden. Merafkast anvendes, eftersom analysen forsøger at påvise tidsvariation i risikopræmier og ikke i renter. Derudover er laggede foreklarende variable nødvendige, for at iscenesætte en realistisk følge informationer. Den simple univariat regression kan dermed præsenteres analytisk som
 $$y_t=\beta_0 + \beta_1 x_{t-1} + \varepsilon_t.$$
 
 hvor $y_t$ er responsvariablen, som repræsenterer det realiserede merafkast på det undersøgte aktiv på tidspunkt $t$. Den forklarende variabel, $x_{t-1}$, er den foregående periodes realiserede værdi af variablen. Derudover haves fejlledet, $\varepsilon_t$, som følger de generelle OLS betingelser. Den overordnede nulhypotese er, at ingen tidsvariation eksistrer i merafkast, dette vil betyde en $\beta_1$ koefficient på nul. Altså vil en koefficient, signifikant forskellig fra nul, argumentere for prædiktabilitet. En diskusion af den ovenstående præsenterede ramme, kan findes i [@Stambaugh1999].
 
-### Multipel regression
+### Multipel regression {#multregr}
 Som pointeret af [@Stambaugh1999] er der flere problemer med estimationen af den univariate regression. For at øge inferensen af estimationsresultaterne følges metoden af [@Goyal2007], som består af en multipel regression. Den medfører en regression af responsvariablen, merafkast, på samtilige laggede forklarende variable. Altså kan den analytisk beskrives som
 $$y_t=\beta_0+\bm{\beta}_1\bm{x}_{t-1}+\bm{\varepsilon}_t,$$
 
@@ -71,13 +71,15 @@ $$\Delta y_{t} = \alpha + \beta t + \phi y_{t-1} + \delta_1 \Delta y_{t-1} + \cd
 hvor $y_t$ er tidsserien på tidspunkt $t$, $\alpha$ er en kostant, $\beta$ er koefficienten for en tids trend og $p$ er lagordenen. Under nulhypotesen indeholder $y_t$ en *unit root*, dvs. $\phi=0$. Dette er testet mod den alternative én-sidet hypotese at $\phi<0$, altså at tidsserien er stationær. Den resulterende teststørrelse
 $$\text{ADF}=\frac{\hat{\phi}}{\hat{\sigma}_{\hat{\phi}}},$$
 
-evalueres herefter mod de kritiske værdier fra *Dickey-Fuller* $t$-fordelingen. Testen vil udføres på alle variable, hvis enkelte variable ikke kan forkaste nulhypotesen tages den første forskel, og herefter vil de blive gentestet. Kan disse nye variable nu forkaste nulhypotesen, betegnes de som regel *difference-stationary*. Dette er dog ikke sikkert og enkelte tidsserier kan sagtens være integreret af anden eller tredje orden. Stationaritetsantagelsen er imod forventning ikke et krav for VAR-processen. Fra generel økonomisk teori er det kendt, at de præsenterede variable fra Kapitel ?? vil være ikke-eksplosive. Derfor vil testresultatet ikke være alt afgørende for modelspecifikationen.
+evalueres herefter mod de kritiske værdier fra *Dickey-Fuller* $t$-fordelingen. Testen vil udføres på alle variable, hvis enkelte variable ikke kan forkaste nulhypotesen tages den første forskel, og herefter vil de blive gentestet. Kan disse nye variable nu forkaste nulhypotesen, betegnes de som regel *difference-stationary*. Dette er dog ikke sikkert og enkelte tidsserier kan sagtens være integreret af anden eller tredje orden. Stationaritetsantagelsen er imod forventning ikke et krav for VAR-processen. Fra generel økonomisk teori er det kendt, at de præsenterede variable fra Kapitel \@ref(afkrel) vil være ikke-eksplosive. Derfor vil testresultatet ikke være alt afgørende for modelspecifikationen.
 
 ### Phillips-Perron test
 Som *Augmented Dickey-Fuller* er *Phillips-Perron* testen en metode til at teste for en *unit root* i en given tidsserie. Nulhypotesen er derfor $\rho=1$ i nedenstående regression
-$$\Delta y_t = (\rho-1) y_{t-1} + \varepsilon_t.$$
+\begin{equation}
+\Delta y_t = (\rho-1) y_{t-1} + \varepsilon_t.(\#eq:philper)
+\end{equation}
 
-Som i *Augmented Dickey-Fuller* testen løser *Phillips-Perron* testen problemet, at processen som danner $y_t$ muligvis har en højere orden af autokorrelation end tilladt i ovenstående Ligning ?? -- dette gør $y_{t-1}$ endogen og vil ugyldiggøre den almindelige *Dickey-Fuller* $t$-test. Hvorimod *Augmented Dickey-Fuller* løser problemet ved at indtroducere lags i test-ligningen, laver *Phillips-Perron* en ikke-parametrisk korrektion til $t$-test størrelsen. Derudover er testen robust overfor uspecificeret autokorrelation og heteroskedasticitet. Den fulde opskrivning af de to teststørrelser, $Z(\hat{\alpha})$ og $Z(t_{\hat{\alpha}})$, kan findes i [@Phillips1988]. Hvor den første teststørrelse, $Z(\hat{\alpha})$, hører til Ligning ??, og den anden teststørrelse, $Z(t_{\hat{\alpha}})$, hører til nedenstående regression, med en konstant og et ikke stokastisk led
+Som i *Augmented Dickey-Fuller* testen løser *Phillips-Perron* testen problemet, at processen som danner $y_t$ muligvis har en højere orden af autokorrelation end tilladt i ovenstående Ligning \@ref(eq:philper) -- dette gør $y_{t-1}$ endogen og vil ugyldiggøre den almindelige *Dickey-Fuller* $t$-test. Hvorimod *Augmented Dickey-Fuller* løser problemet ved at indtroducere lags i test-ligningen, laver *Phillips-Perron* en ikke-parametrisk korrektion til $t$-test størrelsen. Derudover er testen robust overfor uspecificeret autokorrelation og heteroskedasticitet. Den fulde opskrivning af de to teststørrelser, $Z(\hat{\alpha})$ og $Z(t_{\hat{\alpha}})$, kan findes i [@Phillips1988]. Hvor den første teststørrelse, $Z(\hat{\alpha})$, hører til Ligning \@ref(philper), og den anden teststørrelse, $Z(t_{\hat{\alpha}})$, hører til nedenstående regression, med en konstant og et ikke stokastisk led
 $$\Delta y_t =\alpha + \beta t + (\rho-1) y_{t-1} + \varepsilon_t.$$
 
 Fordelen ved *Phillips-Perron* testen er at den er ikke-parametrisk, dvs. den kræver ikke at vælge lagstørrelsen som i *Augmented Dickey-Fuller*. Ulempen er derimod, at den baserer sig på asymptotisk teori. [@Davidson2004] finder, at *Phillips-Perron* testen har værre performance for endelige stikprøver end *Augmented Dickey-Fuller* testen.
@@ -110,12 +112,14 @@ $$k=\frac{2}{T}.$$
 hvor $T$ repræsenterer stikprøvestørrelsen. I praksis implementeres *Top-down* strategien ved at undersøge én ligning fra VAR systemets ligninger af de fire aktiver. Først evalueres kriteriet for den ikke-restringerede regression, herefter fjernes én forklarende variabel af gangen og kriteriet bliver genberegnet. Dernæst vil den laveste *AKFIC* værdi indikerer, hvilken variabel, der giver mindst ekstra information om variationen i responsvariablen, og er på den måde den bedste kandidat til fjernelse fra modellen. Denne midlertidige modelkandidat med laveste *AKFIC* sammenlignes nu med den intielle model, givet at der ligeldes er forbedring ift. den intielle, vil denne midlertidige model nu være den nye basismodel. Denne process fortsætter rekursivt indtil ingen forklarende variable kan fjernes for at forbedre *AKFIC* værdien. 
 
 Processen køres kun for regressionerne for aktivafkastene på det fulde datasæt, for at have et kvantitativt bud på deres optimale prædiktionsvariable. Eftersom fokus er på porteføljeallokering, restringeres datasættet herefter til kun at indeholde variablene, der forbliver i modellen efter *Top-down* processen. Dernæst holdes variablene op i mod de univariate og multiple regressioner samt korrelationsanalysen, for at undgå mulige multikollinaritetsproblemer. Derudover foretages en *Variance Inflation Factor* analyse, som endnu et tjek for multikollinaritet. Analysen foretages i tre skridt. For samtlige forklarende variable fra *Top-down* processen laves følgende regression
-$$x_t^i=\alpha+\bm{\beta}^j + \bm{x}_t^{j}+\varepsilon_t.$$
+\begin{equation}
+x_t^i=\alpha+\bm{\beta}^j + \bm{x}_t^{j}+\varepsilon_t. (\#eq:vifanareg)
+\end{equation}
 
 Dernæst beregnes *VIF*-værdien for hvert $\beta^j$ som
 $$\text{VIF}_i=\frac{1}{1-R_i^2},$$
 
-hvor $R_i^2$ stammer fra regressionen i ovenstående Ligning ??. Det sidste skridt består i at undersøge størrelsesordenen af multikollinaritet, ved at tjekke størrelsen på $\text{VIF}_i$. En generel regel er, at multikollinariteten er meget høj når $\text{VIF}_i>10$. Kvadratroden af $\text{VIF}$ indikerer, hvor meget standardfejlen øges, sammenlignet med tilfældet, hvor variablen hypotetisk ingen korrelation har til de andre variable i modellen. Skulle der være problemer med multikollinarietet fjernes evt. problematiske variable. Hvis de forklarende variable herefter er forskellige på tværs af aktivklasserne foretages en kvalitativ vurdering, som har til formål at udvælge en delmængde af de tilbageværende variable, som fuldt kommer til at indgå i VAR(1)-modellen.
+hvor $R_i^2$ stammer fra regressionen i ovenstående Ligning \@ref(eq:vifanareg). Det sidste skridt består i at undersøge størrelsesordenen af multikollinaritet, ved at tjekke størrelsen på $\text{VIF}_i$. En generel regel er, at multikollinariteten er meget høj når $\text{VIF}_i>10$. Kvadratroden af $\text{VIF}$ indikerer, hvor meget standardfejlen øges, sammenlignet med tilfældet, hvor variablen hypotetisk ingen korrelation har til de andre variable i modellen. Skulle der være problemer med multikollinarietet fjernes evt. problematiske variable. Hvis de forklarende variable herefter er forskellige på tværs af aktivklasserne foretages en kvalitativ vurdering, som har til formål at udvælge en delmængde af de tilbageværende variable, som fuldt kommer til at indgå i VAR(1)-modellen.
 
 Slutteligt foretages en sidste *Variance Inflation Factor* analyse, som et sidste tjek for multikollinaritet.
 
@@ -130,7 +134,7 @@ Mængden af aktivklasser, som pt. er tilgængelige på finansmarkedet har aldrig
 ### Det risikofrie afkast -- $r_{t+1}^{\textnormal{rf}}$
 Essencen af et risikofrit aktiv er at repræsentere et afkast med varians lig $0$. Dette betegnes undertiden også som et sikkert afkast. Udover at give investoren muligheder for indlån, kan investoren også udvide sine investeringsmuligheder ved at låne til den risikofrie rente, dvs. have en kort position i det risikofrie aktiv. Et ofte valgt aktiv i litteraturen, som en proxy for det risikofrie aktiv, er de kortefristede statsværdipapirer, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. Disse betegnes i U.S.A. som *T-Bills*. Valget af netop dette aktiv sker på baggrund af den historiske og nuværende meget lave risiko for statskonkurser, [@Beers2017]. Eksempelvis gik den danske stat tilnærmelsesvis senest bankerot under *Statsbankerotten* i 1813 efter *Napoleonskrigene*. Derfor benyttes det amerikanske statspapir med kort løbetid, mere præcist anvendes den 90-dages amerikanske *T-Bill*, som en proxy for det risikofrie aktiv. Data over afkast er fra [@CRSPt90] hentet gennem [@WRDSt90]. Log netto afkastet af det risikofrie aktiv beregnes som log forskellen mellem det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill* og den kvartalsvise inflationsrate, målt via *Consumer Price Index*. Nettoafkastet har et kvartalsvist justeret afkast på `r round(DESCRIPTIVE$adj_mean[1]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[1]*100, 1)`$\%$. Som det kan ses på kvantilerne har det risikofrie afkast givet negativt afkast sommetider. Et histogram indikerer en højreskæv fordeling af afkast, hvilket også underbygges af en skævhed på `r round(DESCRIPTIVE$skew[1], 3)`. Med en kurtosis på `r round(DESCRIPTIVE$kurt[1], 3)` haves en leptokurtisk fordeling, med tykkere/længere haler og et smallere samt højere cetrum. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:NET-TB-tids) viser et plot over tidsserien, Figur \@ref(fig:NET-TB-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:NET-TB-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
-```{r NET-TB-tids, echo=FALSE, fig.align='center', fig.cap="Tidsserie af log netto renten \\\\\\raggedright Tidsserien spænder fra 2. kvartal 1954 til 4. kvartal 2018.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H'}
+```{r NET-TB-tids, echo=FALSE, fig.align='center', fig.cap="Tidsserie af log netto renten.", fig.scap="Tidsserie af log netto renten.", fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data) +
   expand_limits(x = min(index(data)), y = min(data$NET_TB))+
   geom_line(aes(x=index(data), y=NET_TB)) +
@@ -142,7 +146,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$r_{t}^{rf}$"))
+  ylab(TeX("$r_{t}^{rf}$")) + 
+  xlab("År")
 ```
 
 I forlængelse af beskrivelsen af det risikofrie aktiv, viser Figur \@ref(fig:INF-tids) et plot over tidsserien hørende til inflationsraten.
@@ -179,7 +184,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r NET-TB-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for log netto renten.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -194,7 +201,9 @@ ggplot(data, aes(x = NET_TB)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )  +
+   ylab(TeX("$r_{t}^{rf}$")) +
+  xlab("Densitet")
 ```
 
 ### Merafkastet på aktier -- $rx_{t+1}^{\textnormal{a}}${#dataak}
@@ -213,7 +222,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$rx_{t}^{a}$"))
+  ylab(TeX("$rx_{t}^{a}$")) + 
+  xlab("År")
 ```
 
 ```{r AKT-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af aktier.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -232,7 +242,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r AKT-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for log merafkastet af aktier.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -247,7 +259,9 @@ ggplot(data, aes(x = AKT)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$xr_{t}^{a}$")) +
+  xlab("Densitet")
 ```
 
 ### Merafkastet på statsobligationer -- $rx_{t+1}^{\textnormal{s}}$
@@ -266,7 +280,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$rx_{t}^{s}$"))
+  ylab(TeX("$rx_{t}^{s}$")) + 
+  xlab("År")
 ```
 
 ```{r S-OBL-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af statsobligationer.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -285,7 +300,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r S-OBL-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for log merafkastet på statsobligationer.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -300,7 +317,9 @@ ggplot(data, aes(x = S_OBL)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$xr_{t}^{s}$")) +
+  xlab("Densitet")
 ```
 
 ### Merafkastet på virksomhedsobligationer -- $rx_{t+1}^{\textnormal{v}}$
@@ -323,7 +342,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$rx_{t}^{v}$"))
+  ylab(TeX("$rx_{t}^{v}$")) + 
+  xlab("År")
 ```
 
 ```{r V-OBL-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log merafkastet af virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -342,7 +362,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r V-OBL-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for log merafkastet på virksomhedsobligationer.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -357,7 +379,9 @@ ggplot(data, aes(x = V_OBL)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$xr_{t}^{v}$")) +
+  xlab("Densitet")
 ```
 
 Tabel \@ref(tab:DES-AKTIVKLASSE) opsummerer ovenstående beskrivende statistik for de fire aktivkasser.
@@ -410,7 +434,7 @@ JB %>%
 ```
 
 ## Prædiktionsvariable{#pvariable}
-Denne sektion har til formål at beskrive datagrundlaget for prædiktionsvariablene, som først blev beskrevet i Sektion ??. Disse variable består af en række finansielle indikatorer: *Dividend-Price Ratio*, *Price-Earnings Ratio*, *Book-to-market Ratio*, *High Minus Low*, *Small Minus Big*, og variansen af aktieafkast. Derudover haves rentestruktursprædiktionsvariable: den nominelle rente, *Term Spread*, *Yield Spread*, *Credit Spread* og *Default Spread*. Én makroøkonomisk variabel udgør den sidste prædiktionsvariabel: *Federal Funds Rate*. Udover beskrivelsen og begrundelsen beregningsmetoden for hver variabel, vil den tilhørende beskrivende statistik for hver variabel belyses.
+Denne sektion har til formål at beskrive datagrundlaget for prædiktionsvariablene, som først blev beskrevet i Sektion \@ref(potpradik). Disse variable består af en række finansielle indikatorer: *Dividend-Price Ratio*, *Price-Earnings Ratio*, *Book-to-market Ratio*, *High Minus Low*, *Small Minus Big*, og variansen af aktieafkast. Derudover haves rentestruktursprædiktionsvariable: den nominelle rente, *Term Spread*, *Yield Spread*, *Credit Spread* og *Default Spread*. Én makroøkonomisk variabel udgør den sidste prædiktionsvariabel: *Federal Funds Rate*. Udover beskrivelsen og begrundelsen beregningsmetoden for hver variabel, vil den tilhørende beskrivende statistik for hver variabel belyses.
 
 ### Dividend-Price Ratio -- $x_t^{\text{dp}}$
 Repræsentativet for priserne til forholdet mellem udbytte og priser er indeksniveauet, eksklusiv udbytte, over det brede indeks som blev beskrevet i Sektion \@ref(dataak). Udbyttet stammer ligeledes fra aktieindekset, og er beregnet som en rullende sum over de seneste fire kvartaler. Log udbyttet er logaritmen til tidsserien over de rullende summer af udbytte. Log *Dividend-Price Ratio* bliver da beregnet som forskellen mellem det rullende kvartalsvise log udbytte og de kvartalsvise log priser. Data er fra [@CRSPakt] og hentet gennem [@WRDSakt]. Den justerede middelværdi er `r round(DESCRIPTIVE_T$mean[1], 3)`$\%$, og betyder altså at det sande forhold mellem udbytte og priser historisk har været omtrent $1$:$34$. Det andet moment er `r round(DESCRIPTIVE_T$sd[1], 3)`$\%$. Forholdet er en næsten symmetrisk med et tredje moment på `r round(DESCRIPTIVE_T$skew[1], 3)`. En kurtosis på `r round(DESCRIPTIVE_T$kurt[1], 3)` indebærer at log *Dividend Price Ratio* har en platykurtisk fordeling med sjældne ekstreme observationer. Den `r format(index(DP[which.max(DP)]), '%d %B, %Y')` var det sande forhold på sidst højeste, da det nåede `r round(exp(max(DP)), 3)*100`$\%$. Over de følgende $18$ år, dalede forholdet til `r round(exp(min(DP)), 3)*100`$\%$ den `r format(index(DP[which.min(DP)]), '%d %B, %Y')`, fordi aktieprisernes værdi steg hurtigere end udbyttebetalingerne fra indtjeningen i virksomhederne. Derudover steg offentlige virksomheders indtjening langsommere end aktiepriserne. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:DP-tids) viser et plot over tidsserien, Figur \@ref(fig:DP-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:DP-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
@@ -428,7 +452,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$x_{t}^{inf}$"))
+  ylab(TeX("$x_{t}^{dp}$")) + 
+  xlab("År")
 ```
 
 ```{r DP-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log Dividend Price Ratio.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -447,7 +472,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r DP-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for log Dividend Price Ratio.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -461,7 +488,9 @@ ggplot(data, aes(x = DP)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$x_{t}^{dp}$")) +
+  xlab("Densitet")
 ```
 
 ### Price-Earnings Ratio -- $x_t^{\text{pe}}$
@@ -479,7 +508,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$x_{t}^{pe}$"))
+  ylab(TeX("$x_{t}^{pe}$")) + 
+  xlab("År")
 ```
 
 ```{r PE-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log Price Earnings Ratio.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -498,7 +528,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r PE-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for log Price Earnings Ratio.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -512,7 +544,9 @@ ggplot(data, aes(x = EP)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$x_{t}^{pe}$")) +
+  xlab("Densitet")
 ```
 
 ### Book-to-Market Ratio -- $x_t^{\text{bm}}$
@@ -530,7 +564,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$x_{t}^{bm}$"))
+  ylab(TeX("$x_{t}^{bm}$")) + 
+  xlab("År")
 ```
 
 ```{r BM-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Book-to-market Ratio.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -549,7 +584,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r BM-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for Book-to-market Ratio.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -563,7 +600,9 @@ ggplot(data, aes(x = BM)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$x_{t}^{bm}$")) +
+  xlab("Densitet")
 ```
 
 ### Aktievarians -- $x_t^{\text{avar}}$
@@ -581,7 +620,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$x_{t}^{avar}$"))
+  ylab(TeX("$x_{t}^{avar}$")) + 
+  xlab("År")
 ```
 
 ```{r AV-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af aktievariansen.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -600,7 +640,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r AV-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for aktievariansen.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -614,7 +656,9 @@ ggplot(data, aes(x = AKT_VAR)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$x_{t}^{avar}$")) +
+  xlab("Densitet")
 ```
 
 ### High Minus Low -- $x_t^{\text{hml}}${#datahml}
@@ -632,7 +676,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$x_{t}^{hml}$"))
+  ylab(TeX("$x_{t}^{hml}$")) + 
+  xlab("År")
 ```
 
 ```{r HML-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af High Minus Low.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -651,7 +696,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r HML-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for High Minus Low.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -665,7 +712,9 @@ ggplot(data, aes(x = HML)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$x_{t}^{hml}$")) +
+  xlab("Densitet")
 ```
 
 ### Small Minus Big -- $x_t^{\text{smb}}${#datasmb}
@@ -683,7 +732,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$x_{t}^{smb}$"))
+  ylab(TeX("$x_{t}^{smb}$")) + 
+  xlab("År")
 ```
 
 ```{r SMB-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Small Minus Big.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -702,7 +752,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r SMB-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for Small Minus Big.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -716,7 +768,9 @@ ggplot(data, aes(x = SMB)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$x_{t}^{smb}$")) +
+  xlab("Densitet")
 ```
 
 ### Nominel rente -- $x_t^{\text{b}}$
@@ -734,7 +788,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$x_{t}^{b}$"))
+  ylab(TeX("$x_{t}^{b}$")) + 
+  xlab("År")
 ```
 
 ```{r B-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af log brutto afkastet på det risikofrie aktiv.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -753,7 +808,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r B-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for log brutto afkastet på det risikofrie aktiv.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -767,7 +824,9 @@ ggplot(data, aes(x = TB)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$x_{t}^{b}$")) +
+  xlab("Densitet")
 ```
 
 ### Term Spread -- $x_t^{\text{ts}}$
@@ -788,7 +847,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$x_{t}^{ts}$"))
+  ylab(TeX("$x_{t}^{ts}$")) + 
+  xlab("År")
 ```
 
 ```{r TS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Term Spread.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -807,7 +867,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r TS-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for Term Spread.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -821,7 +883,9 @@ ggplot(data, aes(x = T_SPREAD)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$x_{t}^{ts}$")) +
+  xlab("Densitet")
 ```
 
 ### Yield Spread -- $x_t^{\text{ys}}$
@@ -842,7 +906,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$x_{t}^{ys}$"))
+  ylab(TeX("$x_{t}^{ys}$")) + 
+  xlab("År")
 ```
 
 ```{r YS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Yield Spread.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -861,7 +926,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r YS-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for Yield Spread.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -875,7 +942,9 @@ ggplot(data, aes(x = Y_SPREAD)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$x_{t}^{ys}$")) +
+  xlab("Densitet")
 ```
 
 ### Credit Spread -- $x_t^{\text{cs}}$
@@ -896,7 +965,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$x_{t}^{cs}$"))
+  ylab(TeX("$x_{t}^{cs}$")) + 
+  xlab("År")
 ```
 
 ```{r CS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Credit Spread.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -915,7 +985,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r CS-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for Credit Spread.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -929,7 +1001,9 @@ ggplot(data, aes(x = C_SPREAD)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$x_{t}^{cs}$")) +
+  xlab("Densitet")
 ```
 
 ### Default Spread -- $x_t^{\text{ds}}$
@@ -950,7 +1024,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$x_{t}^{ds}$"))
+  ylab(TeX("$x_{t}^{ds}$")) + 
+  xlab("År")
 ```
 
 ```{r DS-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Default Spread.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -969,7 +1044,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r DS-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for Default Spread.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -983,7 +1060,9 @@ ggplot(data, aes(x = D_SPREAD)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$x_{t}^{ds}$")) +
+  xlab("Densitet")
 ```
 
 ### Federal Funds Rate -- $x_t^{\text{fr}}$
@@ -1001,7 +1080,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$x_{t}^{fr}$"))
+  ylab(TeX("$x_{t}^{fr}$")) + 
+  xlab("År")
 ```
 
 ```{r FR-AK, echo=FALSE, fig.align='center', fig.cap='Autokorrelation af Federal Funds Rate.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -1020,7 +1100,9 @@ ggplot(data = ba, mapping = aes(x = lag, y = acf)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  ) + 
+  ylab("AK") +
+  xlab("Lag")
 ```
 
 ```{r FR-HIST, echo=FALSE, fig.align='center', fig.cap='Histogram for Federal Funds Rate.', fig.width=18, fig.height=5, fig.pos='H'}
@@ -1034,7 +1116,9 @@ ggplot(data, aes(x = FR)) +
   theme_bw()+
   theme(
     panel.grid.minor = element_blank()
-  )
+  )+
+   ylab(TeX("$x_{t}^{fr}$")) +
+  xlab("Densitet")
 ```
 
 ```{r DES-TILSTANDSVARIABLE, echo=FALSE}
@@ -1081,7 +1165,7 @@ JB_T %>%
 ```
 
 ## Korrelation{#korr}
-Denne sektion rapporterer korrelationen mellem alle de ovennævnte variable, som inkluderer både aktivklasserne og prædtiktionsvariablene. Korrelation er opsummeret i Tabel \@ref(tab:DES-KOR). En analyse af korrelationen er en vigtig del af datainspektionen, specielt for multivariate processor -- som den introducerede VAR(1)-model fra Sektion ?? -- når den statistiske sammenhæng mellem flere variable skal uddybes. Ergo for bedre at kunne beskrive, hvordan en variabel påvirker en eller flere andre variabler, analyseres korrelationen på tværs af alle variable.
+Denne sektion rapporterer korrelationen mellem alle de ovennævnte variable, som inkluderer både aktivklasserne og prædtiktionsvariablene. Korrelation er opsummeret i Tabel \@ref(tab:DES-KOR). En analyse af korrelationen er en vigtig del af datainspektionen, specielt for multivariate processor -- som den introducerede VAR(1)-model fra Sektion \@ref(varkapitel) -- når den statistiske sammenhæng mellem flere variable skal uddybes. Ergo for bedre at kunne beskrive, hvordan en variabel påvirker en eller flere andre variabler, analyseres korrelationen på tværs af alle variable.
 
 Fra Tabel \@ref(tab:DES-KOR), ses at alle log merafkast er ikke-negativt korreleret med den risikofrie netto rente. Samtidig bemærkes at korrelationen mellem obligationsmerafkastene er forholdsvis høj. Som forventet er korrelationen med den risikofrie brutto rente højest af alle variable. De finasielle variable har generelt lav korrelation med den risikofrie netto rente, det samme gør sig gældende for rentestruktursvariablene, mens den makroøkonomiske variabel *Federal Funds Rate* har højere korrelation.
 
@@ -1113,10 +1197,10 @@ DES_COR %>%
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer korrelationsmatricen i øvre triangulær form mellem alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
-## Stationaritet
+## Stationaritet {#stationar}
 Som nævnt tidligere er stationaritet af de anvendte tidsserier et bærende element for validiteten af den endelige VAR(1)-model. I denne sektion vil en række testprocedure blive udført, for at kontrollere for stationaritet, på en mere formel måde end visuel inspektion. Tre forskellige test vil tilsammen skabe et grundlag for at afgøre om en eller flere af alle tilstandsvariablene skal ekskluderes fra den endelige VAR(1)-model. Disse er hhv. *Augmented Dickey-Fuller* test, *Phillips-Perron* test samt *Kwiatkowski-Phillips-Schmidt-Shin*.
 
-### Augmented Dickey-Fuller Test
+### Augmented Dickey-Fuller Test {#augdickful}
 *Augmented Dickey-Fuller* test outputtet ses i Tabel \@ref(tab:STAT). Først og fremmest ses, at vi afvise hypotesen om ikke-stationaritet hos alle aktivklasserne -- på et signifikansniveau på $\alpha=0.05$ -- når fokus er på de første par lags. Dette var også forventet givet en inspektion af de relevante tidsserie plots. Fokuseres dernæst på prædiktionsvariablene er det kun *Dividend-Price Ratio*, *Book-to-Market Ratio*, den nominelle rente samt *Federal Funds Rate*, som ikke kan forkaste hypotesen om ikke-stationaritet. *Price-Earnings* kan kun forkaste hypotesen for et signifikansniveau på $\alpha=0.1$, uden lags. Hvorimod resten af prædiktionsvariablene forkaster hypotesen for alle lags. For at verificere, at de tre nævnte ovennævnte variable potentielt er eksplosive eller har en *unit root*, tages den første forskel på tidsserierne. Herefter foretages testen igen. Outputtet fra denne re-testning ses i Tabel \@ref(tab:STAT-DIFF). Som det kan aflæses i tabellen er alle variablene integreret af første orden, $I(1)$, eller stationære med hensyn til deres første forskel.
 
 Håndteringen af potentielle ikke-stationære tidsserier er mere problematisk. Essentielt kan de problematiske variable udelades fra resten af analysen. På den anden side vil afvisning af de såkaldte *difference stationary* serier være ufornuftigt, da disse ikke kan skabe problemer for den færdige model. Den generelle statistiske metode, ville være at fortsætte analysen med brug af disse nye serier: $x_t^{\text{dp}_{\Delta}}$, $x_t^{\text{bm}_{\Delta}}$, $x_t^{\text{b}_{\Delta}}$ og $x_t^{\text{fr}_{\Delta}}$. Men flere argumenter taler til gengæld imod denne procedure. Først og fremmest er det generelt accepteret i litteraturen at anvende disse variable i niveauer. For det andet vil mange variable miste deres intuitive prædiktionskvaliteter, da deres niveau er en del af argumentationen for at medtage dem. For det tredje vides det fra økonomisk intuition, at disse variable ikke kan blive eksplosive af konstruktion.
@@ -1174,7 +1258,7 @@ STAT_TABLE_DIFF %>%
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Augmented Dickey-Fuller teststørrelser og $p$-værdier for 'first-difference'-variablene: log Dividend-Price Ratio, Book-to-Market Ratio, log afkastet af den nominelle rente samt Federal Funds Rate, (ref:df1979). Testen er udført for forskellige lags, samt et lag, $\\\\delta^*$, fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
-### Phillips-Perron test
+### Phillips-Perron test {#philper}
 Som en validering af resultaterne fra *Augmented Dickey Fuller* test, foretages *Phillips-Perron* testen. Outputtet fra denne ses i Tabel \@ref(tab:STAT-PP). Igen er det *Dividend-Price Ratio*, *Book-to-Market Ratio*, den nominelle rente samt *Federal Funds Rate*, som er problematiske.
 
 ```{r STAT-PP, echo=FALSE}
@@ -1202,7 +1286,7 @@ STAT_TABLE_PP %>%
   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer Phillips-Perron teststørrelser og $p$-værdier for alle beskrevne variable: det risikofrie aktiv, merafkastet på aktier, merafkastet på statsobligationer, merafkastet på virksomhedsobligationer, log Dividend-Price Ratio, log Price-Earnings Ratio, Book-to-Market Ratio, aktievariansen, High Minus Low, Small Minus Big, log afkastet af den nominelle rente, Term Spread, Yield Spread, Credit Spread, Default Spread samt Federal Funds Rate, (ref:pp1988). Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Testen er udført for et lag fastsat til heltalsdelen af $4(T/100)^{1/4}$ -- som foreslået af (ref:sc1989) -- hvor $T=259$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
-### Kwiatkowski-Phillips-Schmidt-Shin test
+### Kwiatkowski-Phillips-Schmidt-Shin test {#kwiatkow}
 Som en ekstra validering foretages *Kwiatkowski-Phillips-Schmidt-Shin* testen. Nulhypotesen er i dette tilfælde omvendt. Outputtet fra testen ses i Tabel \@ref(tab:STAT-KPSS). Det ses, at *KPSS* testen modsiger resultaterne fra både *Augmented Dickey-Fuller* testen og *Phillips-Perron* testen, for visse variable. Dette er imidlertid et kendt problem, som generelt opstår grundet en begrænset stikprøvestørrelse.
 
 ```{r STAT-KPSS, echo=FALSE}
@@ -1233,7 +1317,7 @@ STAT_TABLE_KPSS %>%
 ## Opsummering{#ops}
 Dette kapitel fungerede som en detaljeret data beskrivelse af alle undersøgte variable inkluderet til den videre analyse. Kapitlet indeholdte både beskrivende statistik samt plots og derudover beregninger og estimationsprocedure. Inspektion af autokorrelation i hver variabel viste, at log merafkastene ikke er udsat for autokorrelation, mens det risikofrie afkast udviser en smule autokorrelation. Derimod viste stort set alle prædiktionsvariable høj autokorrelation som generelt næsten var lig $1$. Dette betyder at de generelt er meget vedvarende over tid. Dette kunne blive et problem for den videre analyse, idet, at de potentielt kan medfører bias pga. den endelige stikprøvestørrelse. En kvantitativ og kvalitativ vurdering af normaliteten af alle variable indebar, at næsten alle variable ikke udviser normalitet, dette kan tilgengæld være påvirket af stikprøvestørrelsen. Korrelationer blandt alle variable, følger generelt andre fund i eksisterende litteratur. Sidst foretog kapitlet en analyse af den mulige stationaritet blandt alle variable.
 
-# Prædiktabilitet
+# Prædiktabilitet {#predikta}
 Dette kapitel har til formål at teste for prædiktabilitet af afkastene i de introducerede aktivklasser fra Sektion \@ref(aktivklasser), ved benyttelse af de introducerede mulige prædiktionsvariable fra Sektion \@ref(pvariable). Prædiktabiliteten bliver testet i både et univariat og et multipelt øjemed. Dette tillader at teste for robusthed på tværs af prædiktionsvariablene og drage inferens af den mulige linearitet imellem merafkastene på aktivklasserne og de forklarende variable. Derudover vil testene giver et fingerpeg om graden af variationsforklaring, som de individuelle prædiktionsvariable måtte have, ift. responsvariablene. Disse regressioner vil have til formål at bidrage til delmængden af variable, som senere skal indgå i variabeludvælgelsen for VAR(1)-modellen. Det primære fokus vil være på de fundamentale variable, som før har vist særlig prædiktabilitets evner. Sekundært vil koefficienter, fortegn samt signifikans for hver individuel variabel blive beskrevet.
 
 Kapitlets opbygning er som følger: Sektion \@ref(unireg) beskriver og diskuterer de univariate regressioner, Sektion \@ref(multreg) beskriver og diskuterer de multiple regressioner sidst vil Sektion \@ref(opsreg) en opsummering af kapitlets fund.
@@ -1247,7 +1331,7 @@ $$rx_{t+1}^j=\beta_{0}^i+\beta_{1}^ix_{t}^i+\varepsilon_{t+1}^i,$$
 
 hvor $j$ er notationen for de $3$ aktivklasser bestående af merafkast og $i$ er notationen for de $12$ prædiktionsvariable. Den statistiske signifikans for hver individuel koefficient vil kort blive vurderet, da dette vil give et fingerpeg om den mulige styrke, for hver forklarende variabel ift. prædiktion af fremtidige afkast. Mest opmærksomhed vil dog stadig være på aktivklassernes fundamentale relation til visse variable.
 
-Tabel \@ref(tab:UNI-ak) rapporterer de univariate regressions resultater af log merafkastet på aktier, $rx_{t+1}^a$, overfor den introducerede delmængde af mulige prædiktionsvariable. Det kendte nøgletal *Dividend-Price Ratio* er ikke signifikant for hverken et $5\%$ eller $10\%$ signifikansniveau, med en tilhørende $t$-størrelse på `r  round(FIT_TABLE$t[1], 3)`. Af de resterende finansielle variable er det *Price-Earnings Ratio*, *Book-to-Market Ratio*, *High Minus Low* og *Small Minus Big* som prædiktrer merafkastet på aktier negativt. Af disse er det kun *Small Minus Big* som påviser signifikans, med en $t$-størrelse på `r  round(FIT_TABLE$t[6], 3)`. Fortegnene for de finansielle variable er ækvivalente med tidligere i fund i litteraturen, eksempelvis [@Camp1987] og [@CampVicCha2003]. Den sidste signifikante variabel er *Term-Spread* med $t$-størrelse på `r  round(FIT_TABLE$t[8], 3)`. På et $10\%$ signifikansniveau vil også *Yield Spread* være statistisk signifikant, og kunne derfor også være en mulig variabel til prædiktion af merafkastet på aktier. Størstedelen af rentestrukturs variablene prædikterer merafkastet positivt, med undtagelse af den nominelle rente og *Default Spread*. Hvilket for rentespændende er ensbetydende med, at når spændet mellem langsigtede instrumenter og kortsigtede instrumenter stiger, vil en øgning i merafkastet på aktier, $rx_{t+1}^s$, ligeledes ske i den næstkommende periode.
+Tabel \@ref(tab:UNI-ak) rapporterer de univariate regressions resultater af merafkastet på aktier, $rx_{t+1}^a$, overfor den introducerede delmængde af mulige prædiktionsvariable. Det kendte nøgletal *Dividend-Price Ratio* er ikke signifikant for hverken et $5\%$ eller $10\%$ signifikansniveau, med en tilhørende $t$-størrelse på `r  round(FIT_TABLE$t[1], 3)`. Af de resterende finansielle variable er det *Price-Earnings Ratio*, *Book-to-Market Ratio*, *High Minus Low* og *Small Minus Big* som prædiktrer merafkastet på aktier negativt. Af disse er det kun *Small Minus Big* som påviser signifikans, med en $t$-størrelse på `r  round(FIT_TABLE$t[6], 3)`. Fortegnene for de finansielle variable er ækvivalente med tidligere i fund i litteraturen, eksempelvis [@Camp1987] og [@CampVicCha2003]. Den sidste signifikante variabel er *Term-Spread* med $t$-størrelse på `r  round(FIT_TABLE$t[8], 3)`. På et $10\%$ signifikansniveau vil også *Yield Spread* være statistisk signifikant, og kunne derfor også være en mulig variabel til prædiktion af merafkastet på aktier. Størstedelen af rentestrukturs variablene prædikterer merafkastet positivt, med undtagelse af den nominelle rente og *Default Spread*. Hvilket for rentespændende er ensbetydende med, at når spændet mellem langsigtede instrumenter og kortsigtede instrumenter stiger, vil en øgning i merafkastet på aktier, $rx_{t+1}^s$, ligeledes ske i den næstkommende periode.
 
 (ref:nw1987) [@Newey1987]
 
@@ -1278,7 +1362,7 @@ FIT_TABLE %>%
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af de univariate regressioner ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række svarer til én selvstændig regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
-Ligedes rapporterer Tabel \@ref(tab:UNI-s) de univariate regressions resultater af log merafkastet på statsobligationer, $rx_{t+1}^s$, overfor den introducerede delmængde af mulige prædiktionsvariable. Mest overraskende er, at *Yield Spread* ikke er signifikant, som den eneste af de fire rentespænds variable. Til gengæld prædikterer *Yield Spread* merafkastet på statsobligationer positivt, hvilket også følger tidligere litteratur, [@Fama1987]. Dette er også tilfældet for de resterende rentespænd. Af alle rentestruktursvariablene er det kun *Term Spread*, *Credit Spread* og *Default Spread* som er signifikante for denne stikprøve, med $t$-størrelser på hhv. `r  round(FIT_S_TABLE$t[8], 3)`, `r  round(FIT_S_TABLE$t[10], 3)` og `r  round(FIT_S_TABLE$t[11], 3)`. En stigning i den nuværende *Term Spread* kommer eksempelvis enten fra en forøgelse af den lange effektive rente, $Y_t^{10}$, eller et fald i den korte effektive rente, $Y_t^90$, eller en kombination af begge vil lede til en stigning i det fremtidige log merafkast på statsobligationer. Ift. de finansielle variable er det *Small Minus Big*, som har statistisk styrke i den univariate opsætning, med $t$-størrelse på `r  round(FIT_S_TABLE$t[6], 3)`. *Small Minus Big* prædikterer merafkastet negativt. Den makroøkonomiske variabel *Federal Funds Rate* er ikke signifikant, og prædikterer merafkastet negativt.
+Ligedes rapporterer Tabel \@ref(tab:UNI-s) de univariate regressions resultater af merafkastet på statsobligationer, $rx_{t+1}^s$, overfor den introducerede delmængde af mulige prædiktionsvariable. Mest overraskende er, at *Yield Spread* ikke er signifikant, som den eneste af de fire rentespænds variable. Til gengæld prædikterer *Yield Spread* merafkastet på statsobligationer positivt, hvilket også følger tidligere litteratur, [@Fama1987]. Dette er også tilfældet for de resterende rentespænd. Af alle rentestruktursvariablene er det kun *Term Spread*, *Credit Spread* og *Default Spread* som er signifikante for denne stikprøve, med $t$-størrelser på hhv. `r  round(FIT_S_TABLE$t[8], 3)`, `r  round(FIT_S_TABLE$t[10], 3)` og `r  round(FIT_S_TABLE$t[11], 3)`. En stigning i den nuværende *Term Spread* kommer eksempelvis enten fra en forøgelse af den lange effektive rente, $Y_t^{10}$, eller et fald i den korte effektive rente, $Y_t^90$, eller en kombination af begge vil lede til en stigning i det fremtidige log merafkast på statsobligationer. Ift. de finansielle variable er det *Small Minus Big*, som har statistisk styrke i den univariate opsætning, med $t$-størrelse på `r  round(FIT_S_TABLE$t[6], 3)`. *Small Minus Big* prædikterer merafkastet negativt. Den makroøkonomiske variabel *Federal Funds Rate* er ikke signifikant, og prædikterer merafkastet negativt.
 
 ```{r UNI-s, echo=FALSE}
 options(knitr.kable.NA = '')
@@ -1307,7 +1391,7 @@ FIT_S_TABLE %>%
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af de univariate regressioner ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\\\\text{s}}$. Hver række svarer til én selvstændig regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
-De statistiske resultater for de univariate regressioner på det fremtidige log merafkast på virksomhedsobligationer, $rx_{t+1}^v$, er rapporteret i Tabel \@ref(tab:UNI-v). Igen ses, at alle rentespænd prædikterer merafkastet positivt, og alle er signifikante på $5\%$-niveauet, specielt *Credit Spread* med en $t$-størrelse på `r  round(FIT_V_TABLE$t[10], 3)`. Den samme inferens for $rx_{t+1}^s$ kan blive udtænkt for $rx_{t+1}^v$. Alle de finansielle variable, med undtagelse af *Small Minus Big*, har ikke styrke til at forklare variationen i det fremtidige log merafkast på virksomhedsobligationer. Den makroøkonomiske variabel *Federal Funds Rate* prædikterer merafkastet negativt, som også var tilfældet for statsobligations merafkastet, men denne gang er koefficienten signifikant med en $t$-størrelse på `r  round(FIT_V_TABLE$t[12], 3)`.
+De statistiske resultater for de univariate regressioner på det fremtidige merafkast på virksomhedsobligationer, $rx_{t+1}^v$, er rapporteret i Tabel \@ref(tab:UNI-v). Igen ses, at alle rentespænd prædikterer merafkastet positivt, og alle er signifikante på $5\%$-niveauet, specielt *Credit Spread* med en $t$-størrelse på `r  round(FIT_V_TABLE$t[10], 3)`. Den samme inferens for $rx_{t+1}^s$ kan blive udtænkt for $rx_{t+1}^v$. Alle de finansielle variable, med undtagelse af *Small Minus Big*, har ikke styrke til at forklare variationen i det fremtidige log merafkast på virksomhedsobligationer. Den makroøkonomiske variabel *Federal Funds Rate* prædikterer merafkastet negativt, som også var tilfældet for statsobligations merafkastet, men denne gang er koefficienten signifikant med en $t$-størrelse på `r  round(FIT_V_TABLE$t[12], 3)`.
 
 ```{r UNI-v, echo=FALSE}
 options(knitr.kable.NA = '')
@@ -1338,9 +1422,9 @@ FIT_V_TABLE %>%
 De ovenstående præsenterede univariate regressioner kaster tvivl på validiteten af resultater i artikler, som taler for et bredt sæt af prædiktionsvariable. Derudover indikerer de univariate regressioner, at risikoen for stikprøveafhængighed også skal medtages i konstruktionen af den endelige VAR(1)-model, hvilket også bliver understreget af [@Goyal2007]. Samtidig kan disse simple regressioner ikke stå alene om en endelig konklusion, og derfor foretages en mere kompleks multipel regressions analyse i næste sektion, som foreslået af [@Goyal2007].
 
 ## Multiple regressioner {#multreg}
-I denne sektion fortsættes analysen af variablene, som kan indgå i den endelige VAR(1)-model, ved brug af multiple regressioner. Altså antages det, at en eller flere variable forklarer variationen i log merafkastet på aktivklasserne. I det følgende vil tre robuste OLS estimationer blive undersøgt nærmere, idet, at standardfejl er justeret for heteroskedasticitet og autokorrelation, [@Newey1987]. $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. Signifikansniveauet fastholdes på niveauet $\alpha=0.05$. At inkludere alle variable i én multipel regression betegnes undertiden i litteraturen med det velvalgte navn *Kitchen-Sink Regression*, [@Goyal2007].
+I denne sektion fortsættes analysen af variablene, som kan indgå i den endelige VAR(1)-model, ved brug af multiple regressioner. Altså antages det, at en eller flere variable forklarer variationen i log merafkastet på aktivklasserne. I det følgende vil tre robuste OLS estimationer blive undersøgt nærmere, idet, at standardfejl er justeret for heteroskedasticitet og autokorrelation, [@Newey1987]. $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. Signifikansniveauet fastholdes på niveauet $\alpha=0.05$. At inkludere alle variable i én multipel regression betegnes undertiden i litteraturen med det velvalgte navn *Kitchen-Sink Regression*, [@Goyal2007]. Derudover foretages en *Step-AIC*-procedure, der giver anledning til en regression, af en delmængde af de foreklarende variable i de multiple regressioner. Dette anvendes kun som et supplement til modeltjekkene.
 
-Fokuseres først på log merafkastet på aktier, bemærkes det, at næsten alle de finansielle variable er yderst insignifikante. Kun *Small Minus Big* kan prædiktere merafkastet signifikant, hvilket stemmer overens med den univariate analyse. Dette gør den med en negativ koefficient, som også er gældende for *Price-Earnings Ratio* og *High Minus Low*. Hvorimod resten af de finansielle variable har en positiv koefficient. Ift. rentestruktursvariablene ses at den nominelle rente er signifikant med en $t$-størrelse på `r round(FIT_M_TABLE$t[8], 3)`. Den nominelle rente var til gengæld ikke signifikant i den univariate analyse. Den makroøkonomiske variabel er ligeledes signifikant -- med en $t$-størrelse på `r round(FIT_M_TABLE$t[13], 3)` -- hvilket den også var i det univariate setup. 
+Fokuseres først på merafkastet på aktier, bemærkes det, at næsten alle de finansielle variable er yderst insignifikante. Kun *Small Minus Big* kan prædiktere merafkastet signifikant, hvilket stemmer overens med den univariate analyse. Dette gør den med en negativ koefficient, som også er gældende for *Price-Earnings Ratio* og *High Minus Low*. Hvorimod resten af de finansielle variable har en positiv koefficient. Ift. rentestruktursvariablene ses at den nominelle rente er signifikant med en $t$-størrelse på `r round(FIT_M_TABLE$t[8], 3)`. Den nominelle rente var til gengæld ikke signifikant i den univariate analyse. Den makroøkonomiske variabel er ligeledes signifikant -- med en $t$-størrelse på `r round(FIT_M_TABLE$t[13], 3)` -- hvilket den også var i det univariate setup. 
 
 ```{r MULT-ak, echo=FALSE}
 options(knitr.kable.NA = '')
@@ -1366,7 +1450,7 @@ FIT_M_TABLE %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F)  %>% 
    kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{a}}$", " " = 1, "Konfidensinterval" = 2, " " = 3), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er på ??, bemærk dette er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 Som et modeltjek viser Figur \@ref(fig:MULT-ak-auto) seks af de mest sædvanlige modelinspektionsplots. Disse indebærer bl.a. residualer, standardiserede residualer, *Normal Q-Q* m.fl. Her observeres heteroskedasticitet observeres svagt for lave og høje værdier af responsvariablen. Dette indikeres bl.a. af den røde linje på *Scale-Location* plottet. Dette er højst sandsynligt grundet den meget lave stiksprøvestørrelse. På *Normal Q-Q* plottet ses igen -- som indikeret af *Jarque-Bera* testen fra Tabel \@ref(tab:JB-AKTIVKLASSE) -- at residualerne ikke følger en normalfordeling, hvor særligt problemerne er i halerne som forventet. Statistisk set er en såkaldt *outlier* ikke nødvendigvis betydningsfuld for modellen. For at være betydningsfuld for den estimerede model, skal en observation have både høj *leverage* og en høj standardiseret residual. Dette gør sig særligt gældende for to dage under *Finanskrisen*, samt dagen for et af historiens største aktiefald, *Black Monday*. Disse er også indikeret målet *Cook's Distance*, [@Cook1977], som giver høje værdier til betydningsfulde observationer.
@@ -1385,7 +1469,7 @@ for (i in 1:6) {
 g
 ```
 
-Figur \@ref(fig:MULT-ak-step-auto) viser ligeledes seks af de mest sædvanlige modelinspektionsplots. Disse er dannet på baggrund af en *Step AIC*-procedure. Hvor variablene iterativt er blevet fjernet fra *Kitchen-Sink* regressionen, afhængig af om de gav anledning til en bedre model ved fjernelse. Overordnet set er det de samme tendenser der ses som i Figur \@ref(fig:MULT-ak-auto). Enkelte nye observations bliver fanget af *Cook's Distance*.
+Som et mellemliggende tjek er der dannet en step optimeret multipel regression. Denne model er dannet på baggrund af en *Step AIC*-procedure. Her er variablene iterativt blevet fjernet fra *Kitchen-Sink* regressionen, afhængig af om de gav anledning til en bedre model ved fjernelse. Tabel \@ref(tab:MULT-step-ak) viser den resulterende multiple regression.
 
 ```{r MULT-step-ak, echo=FALSE}
 options(knitr.kable.NA = '')
@@ -1411,8 +1495,10 @@ FIT_M_STEP_TABLE %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F)  %>% 
    kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{a}}$", " " = 1, "Konfidensinterval" = 2, " " = 3), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af en AIC step optimeret multipel regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er på ??, bemærk dette er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
+
+Figur \@ref(fig:MULT-ak-step-auto) viser ligeledes seks af de mest sædvanlige modelinspektionsplots, denne gang for den step optimeret mutiple regression. Overordnet set er det de samme tendenser der ses som i Figur \@ref(fig:MULT-ak-auto). Enkelte nye observations bliver fanget af *Cook's Distance*.
 
 ```{r MULT-ak-step-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af den step optimerede regression for merafkastet på aktier.', fig.width=18, fig.asp=0.9, fig.pos='H'}
 g <- autoplot(step_AKT_model, which = 1:6, ncol = 2, label.size = 3, smooth.colour  = 'red', smooth.linetype = "dashed", ad.colour = "pink", label.vjust = -0.3, label.angle = -15) + theme_bw()
@@ -1428,7 +1514,7 @@ for (i in 1:6) {
 g
 ```
 
-Mht. log merafkastet på statsobligationer ses, at *Small Minus Big* samt aktievariansen prædikterer merafkastet negativt, og som de eneste af finansielle variable, er de signifikante. For rentestruktursvariablene er det den nominelle rente samt *Credit Spread*, som er signifikante, de prædikterer afkastet positivt. Her skal det nævnes, at der er stor sandsynlighed for multikollinaritet, da rentespændene indeholder meget af den samme information og er stærkt korrelerede. Derudover kan det nævnes at *Credit Spread* er den eneste renstespændsvariabel med det korrekte fortegn. *Federal Funds Rate* er ligeledes signifikant og bevæger sig kontracyklisk med en negativ koefficient.
+Mht. merafkastet på statsobligationer ses, at *Small Minus Big* samt aktievariansen prædikterer merafkastet negativt, og som de eneste af finansielle variable, er de signifikante. For rentestruktursvariablene er det den nominelle rente samt *Credit Spread*, som er signifikante, de prædikterer afkastet positivt. Her skal det nævnes, at der er stor sandsynlighed for multikollinaritet, da rentespændene indeholder meget af den samme information og er stærkt korrelerede. Derudover kan det nævnes at *Credit Spread* er den eneste renstespændsvariabel med det korrekte fortegn. *Federal Funds Rate* er ligeledes signifikant og bevæger sig kontracyklisk med en negativ koefficient.
 
 ```{r MULT-s, echo=FALSE}
 options(knitr.kable.NA = '')
@@ -1440,7 +1526,7 @@ FIT_M_S_TABLE <- FIT_M_S_TABLE %>%
 
 colnames(FIT_M_S_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$')
 
-rownames(FIT_M_S_TABLE) <- c('Afskæring', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+rownames(FIT_M_S_TABLE) <- c('Afskæring', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
 
 FIT_M_S_TABLE %>% 
   knitr::kable(caption = 'Multipel prædiktabilitet af merafkastet på statsobligationer.',
@@ -1454,10 +1540,12 @@ FIT_M_S_TABLE %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F)  %>% 
    kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{s}}$", " " = 1, "Konfidensinterval" = 2, " " = 3), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\\\\text{s}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\\\\text{s}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er på ??, bemærk dette er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
-```{r MULT-s-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af Kitchen-Sink regressionen for merafkastet på aktier.', fig.width=18, fig.asp=0.9, fig.pos='H'}
+Figur \@ref(fig:MULT-s-auto) viser modelinspektionsplottene for den multiple regression på merafkastet af statsobligationer. Residualerne har en acceptabel spredning, men for meget høje og meget lave værdier af responsvariablen observeres heteroskedasticitet. Igen skal stikprøvestørrelsen tages som et forbehold, når sådanne inspektionsplots skal undersøges. Enkelte observationer udviser høj *leverage* og tilsvarende en høj *Cook's Distance*. 
+
+```{r MULT-s-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af Kitchen-Sink regressionen for merafkastet på statsobligationer.', fig.width=18, fig.asp=0.9, fig.pos='H'}
 g <- autoplot(fit_S_OBL, which = 1:6, ncol = 2, label.size = 3, smooth.colour  = 'red', smooth.linetype = "dashed", ad.colour = "pink", label.vjust = -0.3, label.angle = -15) + theme_bw()
 
 xLabs <- c("Fittede værdier", "Standardiserede residualer", "Fittede værdier", "Observations nummer", "Leverage", "Leverage")
@@ -1471,6 +1559,8 @@ for (i in 1:6) {
 g
 ```
 
+Også for responsvariablen: merafkastet på statsobligationer er de forklarende variable iterativt blevet fjernet fra *Kitchen-Sink* regressionen, gennem *Step-AIC*-proceduren. Tabel \@ref(tab:MULT-step-s) viser den resulterende multiple regression.
+
 ```{r MULT-step-s, echo=FALSE}
 options(knitr.kable.NA = '')
 
@@ -1481,7 +1571,7 @@ FIT_M_S_STEP_TABLE <- FIT_M_S_STEP_TABLE %>%
 
 colnames(FIT_M_S_STEP_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$')
 
-rownames(FIT_M_S_STEP_TABLE) <- c('Afskæring', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{tb}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{fr}}$')
+rownames(FIT_M_S_STEP_TABLE) <- c('Afskæring', '$x_t^{\\text{avar}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{fr}}$')
 
 FIT_M_S_STEP_TABLE %>% 
   knitr::kable(caption = 'Step optimeret multipel prædiktabilitet af merafkastet på statsobligationer.',
@@ -1495,11 +1585,11 @@ FIT_M_S_STEP_TABLE %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F)  %>% 
    kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{a}}$", " " = 1, "Konfidensinterval" = 2, " " = 3), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af en AIC step optimeret multipel regression ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er på ??, bemærk dette er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 
-```{r MULT-s-step-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af den step optimerede regression for merafkastet på aktier.', fig.width=18, fig.asp=0.9, fig.pos='H'}
+```{r MULT-s-step-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af den step optimerede regression for merafkastet på statsobligationer.', fig.width=18, fig.asp=0.9, fig.pos='H'}
 g <- autoplot(step_S_OBL_model, which = 1:6, ncol = 2, label.size = 3, smooth.colour  = 'red', smooth.linetype = "dashed", ad.colour = "pink", label.vjust = -0.3, label.angle = -15) + theme_bw()
 
 xLabs <- c("Fittede værdier", "Standardiserede residualer", "Fittede værdier", "Observations nummer", "Leverage", "Leverage")
@@ -1513,7 +1603,7 @@ for (i in 1:6) {
 g
 ```
 
-Sidst ses i Tabel \@ref(tab:MULT-v) at log merafkastet på virksomhedsobligationer er svært prædiktabelt i det multiple setup. Kun *Small Minus Big* samt *Federal Funds Rate* er signifikante med $t$-størrelser på hhv. `r round(FIT_M_V_TABLE$t[7], 3)` og `r round(FIT_M_V_TABLE$t[13], 3)`. Igen ses at *Credit Spread* er rentespændsvariablen, der har højest signifikans, hvilket følger den multiple regression mht. statsobligationerne. 
+Sidst ses i Tabel \@ref(tab:MULT-v), at merafkastet på virksomhedsobligationer er svært prædiktabelt i det multiple setup. Kun *Small Minus Big* samt *Federal Funds Rate* er signifikante med $t$-størrelser på hhv. `r round(FIT_M_V_TABLE$t[7], 3)` og `r round(FIT_M_V_TABLE$t[13], 3)`. Igen ses at *Credit Spread* er rentespændsvariablen, der har højest signifikans, hvilket følger den multiple regression mht. statsobligationerne. 
 
 ```{r MULT-v, echo=FALSE}
 options(knitr.kable.NA = '')
@@ -1525,7 +1615,7 @@ FIT_M_V_TABLE <- FIT_M_V_TABLE %>%
 
 colnames(FIT_M_V_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$')
 
-rownames(FIT_M_V_TABLE) <- c('Afskæring', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+rownames(FIT_M_V_TABLE) <- c('Afskæring', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$', '$x_t^{\\text{bm}}$', '$x_t^{\\text{avar}}}$', '$x_t^{\\text{hml}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ts}}$', '$x_t^{\\text{ys}}$', '$x_t^{\\text{cs}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
 
 FIT_M_V_TABLE %>% 
   knitr::kable(caption = 'Multipel prædiktabilitet af merafkastet på virksomhedsobligationer',
@@ -1539,10 +1629,12 @@ FIT_M_V_TABLE %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F)  %>% 
    kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{v}}$", " " = 1, "Konfidensinterval" = 2, " " = 3), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\\\\text{v}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\\\\text{v}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er på ??, bemærk dette er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
-```{r MULT-v-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af Kitchen-Sink regressionen for merafkastet på aktier.', fig.width=18, fig.asp=0.9, fig.pos='H'}
+Modeltjekket i Figur \@ref(fig:MULT-v-auto) viser tilsvarende problemer for merafkasatet på virksomhedsobligationer som for de to andre risikobærende aktiver. For høje værdier af responsvariablen ses dog mindre grad af heteoriskedasticitet.
+
+```{r MULT-v-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af Kitchen-Sink regressionen for merafkastet på virksomhedsobligationer.', fig.width=18, fig.asp=0.9, fig.pos='H'}
 g <- autoplot(fit_V_OBL, which = 1:6, ncol = 2, label.size = 3, smooth.colour  = 'red', smooth.linetype = "dashed", ad.colour = "pink", label.vjust = -0.3, label.angle = -15) + theme_bw()
 
 xLabs <- c("Fittede værdier", "Standardiserede residualer", "Fittede værdier", "Observations nummer", "Leverage", "Leverage")
@@ -1556,6 +1648,8 @@ for (i in 1:6) {
 g
 ```
 
+Tabel \@ref(tab:MULT-step-v) viser den resulterende multiple regression efter *Step-AIC*-proceduren for merafkastet på virksomhedsobligationer.
+
 ```{r MULT-step-v, echo=FALSE}
 options(knitr.kable.NA = '')
 
@@ -1566,7 +1660,7 @@ FIT_M_V_STEP_TABLE <- FIT_M_V_STEP_TABLE %>%
 
 colnames(FIT_M_V_STEP_TABLE) <- c('Koefficient', 'Nedre', 'Øvre', 'Standardfejl', '$t$-værdi', '$p$')
 
-rownames(FIT_M_V_STEP_TABLE) <- c('Afskæring', '$x_t^{\\sigma_{\\text{a}}^2}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{tb}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
+rownames(FIT_M_V_STEP_TABLE) <- c('Afskæring', '$x_t^{\\text{a}}$', '$x_t^{\\text{smb}}$', '$x_t^{\\text{b}}$', '$x_t^{\\text{ds}}$', '$x_t^{\\text{fr}}$')
 
 FIT_M_V_STEP_TABLE %>% 
   knitr::kable(caption = 'Step optimeret multipel prædiktabilitet af merafkastet på virksomhedsobligationer',
@@ -1580,10 +1674,10 @@ FIT_M_V_STEP_TABLE %>%
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F)  %>% 
    kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{a}}$", " " = 1, "Konfidensinterval" = 2, " " = 3), escape = FALSE) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af en AIC step optimeret multipel regression ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er på ??, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
-```{r MULT-v-step-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af den step optimerede regression for merafkastet på aktier.', fig.width=18, fig.asp=0.9, fig.pos='H'}
+```{r MULT-v-step-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af den step optimerede regression for merafkastet på virksomhedsobligationer.', fig.width=18, fig.asp=0.9, fig.pos='H'}
 g <- autoplot(step_V_OBL_model, which = 1:6, ncol = 2, label.size = 3, smooth.colour  = 'red', smooth.linetype = "dashed", ad.colour = "pink", label.vjust = -0.3, label.angle = -15) + theme_bw()
 
 xLabs <- c("Fittede værdier", "Standardiserede residualer", "Fittede værdier", "Observations nummer", "Leverage", "Leverage")
@@ -1599,18 +1693,20 @@ g
 
 ## Opsummering {#opsreg}
 
-# Underliggende model
+I dette kapitel blev prædiktabiliteten af merafkastet på de risikobærende aktiver testet. For at have et initielt bud på potentielle tilstandsvariable i VAR(1)-modellen. Derudover blev en *Step-AIC*-procedure foretaget, som skulle ses som et supplement til modeltjekkene.
+
+# Underliggende model {#underligmodel}
 
 Dette kapitel har til formål at præsentere resultatet fra modelselektionproceduren, som blev præsenteret i Sektion \@ref(sekmodelselek). Derudover præsenterer kapitlet VAR(1)-modellens estimationsresultater i Sektion \@ref(var1est). Estimationen af VAR(1)-modellen er gennemført på den fulde stikprøve periode fra 1954 2. kvartal til 2018 4.kvartal, som tæller $252$ kvartalsvise observationer. Den restringerede VAR(1)-model estimeres ved brug af Ligning \@ref(eq:1), derudover estimeres de bias-justerede koefficienter ved brug af den analytiske bias formel af [@Pope1990], dvs. Ligning \@ref(eq:bias).
 
-## Resultater fra modelselektionsproceduren
+## Resultater fra modelselektionsproceduren {#resframodelsel}
 
-For at formindske modelkompleksiteten i VAR-modellen udføres den beskrevne *Top-down*/*backward-elimination* analyse, fra Sektion ??. Eftersom afkastprædiktabilitetsanalysen var kendetegnet ved lave signifikans niveauer, forventes det, at *AKFIC* analysen vil reducere antallet af relevante tilstandsvariable kraftigt. På denne måde vil en fuldt defineret VAR-process forhåbentligt stemme overens med de a priori teoretiske forventninger, og samtidig have et konservativt antal parametre, der givetvis vil følge det abduktive heuristiske parsimoni-princip kendt som *Occam's Razor*^[Den fordanskede udgave er næsten at foretrække: Ockhams ragekniv.] Derudover vil et reduceret system sandsynligvis signifikant formindske støjen af de estimerede koefficienter, som dermed vil lede til bedre eksterne stikprøve resultater^[Givet at denne stikprøve er repræsentativ for modelleringsstikprøven.]
+For at formindske modelkompleksiteten i VAR-modellen udføres den beskrevne *Top-down*/*backward-elimination* analyse, fra Sektion \@ref(sekmodelselek). Eftersom afkastprædiktabilitetsanalysen var kendetegnet ved lave signifikans niveauer, forventes det, at *AKFIC* analysen vil reducere antallet af relevante tilstandsvariable kraftigt. På denne måde vil en fuldt defineret VAR-process forhåbentligt stemme overens med de a priori teoretiske forventninger, og samtidig have et konservativt antal parametre, der givetvis vil følge det abduktive heuristiske parsimoni-princip kendt som *Occam's Razor*^[Den fordanskede udgave er næsten at foretrække: Ockhams ragekniv.] Derudover vil et reduceret system sandsynligvis signifikant formindske støjen af de estimerede koefficienter, som dermed vil lede til bedre eksterne stikprøve resultater^[Givet at denne stikprøve er repræsentativ for modelleringsstikprøven.]
 
 For at opnå den nødvendige dynamik til implementering af porteføljeallokeringen, præsenteres først resultatet fra *AKFIC* analysen og herefter estimeres sættet af restringerede VAR koefficienter fra det resulterende system. Slutteligt laves en kvalitativ analyse af *goodness-of-fit* for den resulterende VAR model, for at opnå bedre forståelse af modellen.
 
-## *AKFIC*-analysen
-Ved at følge modelselektionsproceduren fra Sektion ??, startes med at restringere ligninger for aktier og obligationertyperne. Resultatet af de fire analyser er vist i Tabel \@ref(tab:STEP-RF-TABLE), Tabel \@ref(tab:STEP-AKT-TABLE), Tabel \@ref(tab:STEP-S-TABLE) og Tabel \@ref(tab:STEP-V-TABLE). Den ikke-restringerede ligning for merafkastet af aktier har en *AKFIC* værdi på `r extractAIC(fit_var_akt, k=qchisq(0.05,df = 1, lower.tail = F))[2]`, som er den initielle basisværdi. Som hver af de laggede forklarende variable fjernes vil den resulterende *AKFIC* værdi reporteres i den første række. Den laveste *AKFIC* værdi resulterende fra fjernelse af én variabel markeres med fed, hvis den ligeledes forbedrer den initielle basis. Givet forbedring er denne værdi, nu også den nye basisværdi. Eksempelvis ses i første iteration at fjernelse af *Dividend-Price Ratio* er har den laveste *AKFIC* værdi på $-1264.27$. Denne er ligeledes optimal eftersom den er lavere end basisværdien. Basisværdien opdateres nu og processen gentages. I den sidste række er den laveste *AKFIC* værdi $-1276.40$ og er resultatet af at fjerne *Small Minus Big*, dette er til gengæld ikke optimalt da værdien ikke er lavere end basis. Processen stoppes derfor. Dermed opnåes en temporal ligning for aktiemerafkastet. 
+## *AKFIC*-analysen {#akficana}
+Ved at følge modelselektionsproceduren fra Sektion \@ref(sekmodelselek), startes med at restringere ligninger for aktier og obligationertyperne. Resultatet af de fire analyser er vist i Tabel \@ref(tab:STEP-RF-TABLE), Tabel \@ref(tab:STEP-AKT-TABLE), Tabel \@ref(tab:STEP-S-TABLE) og Tabel \@ref(tab:STEP-V-TABLE). Den ikke-restringerede ligning for merafkastet af aktier har en *AKFIC* værdi på `r extractAIC(fit_var_akt, k=qchisq(0.05,df = 1, lower.tail = F))[2]`, som er den initielle basisværdi. Som hver af de laggede forklarende variable fjernes vil den resulterende *AKFIC* værdi reporteres i den første række. Den laveste *AKFIC* værdi resulterende fra fjernelse af én variabel markeres med fed, hvis den ligeledes forbedrer den initielle basis. Givet forbedring er denne værdi, nu også den nye basisværdi. Eksempelvis ses i første iteration at fjernelse af *Dividend-Price Ratio* er har den laveste *AKFIC* værdi på $-1264.27$. Denne er ligeledes optimal eftersom den er lavere end basisværdien. Basisværdien opdateres nu og processen gentages. I den sidste række er den laveste *AKFIC* værdi $-1276.40$ og er resultatet af at fjerne *Small Minus Big*, dette er til gengæld ikke optimalt da værdien ikke er lavere end basis. Processen stoppes derfor. Dermed opnåes en temporal ligning for aktiemerafkastet. 
 
 Ved at udføre samme procedure for det risikofrie aktiv, statsobligationer og virksomhedsobligationer endes ud den følgende temporale modelspecifikation.
 \begin{align*}
@@ -1641,7 +1737,7 @@ a %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position", "scale_down"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra po1990 er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer \\\\textit{Variance Inflation Factor} analysen for variablene udledt fra \\\\textit{Top-down} analysen.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 Som forventet på baggrund af den høje korrelation mellem rentespændende samt *Federal Funds Rate*, ses en høj *VIF* værdi for disse variable. Derfor foretages en suboptimal beslutning ved at fjerne samtlige rentespænd på nær *Yield Spread*. Det korte rentespænd beholdes eftersom denne variabel generelt har udvist størst signifikans på tværs af alle aktivklasser i både den univariate samt multiple regressionsanalyse. På baggrund af den forholdsvis begrænsede stikprøvestørrelse vælges ligeledes at udeholde aktievariansen fra modellen. Dette gøres for at opretholde en lige fordeling af finansielle variable ift. rentestruktursvariable.
@@ -1666,7 +1762,7 @@ a2 %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra po1990 er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer \\\\textit{Variance Inflation Factor} analysen for de tilbageværende variablene udledt fra \\\\textit{Top-down} analysen og den første \\\\textit{Variance Inflation Factor} analyse.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 Ingen variable udviser nu multikollinaritetsproblemer derfor afsluttes modelselektionsproceduren.
@@ -1688,7 +1784,7 @@ step_table_rf %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra (ref:po1990) er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer resultaterne fra \\\\texti{Top-down} modelselektionsanalysen for det risikofrie aktiv.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r STEP-AKT-TABLE, echo=FALSE}
@@ -1707,7 +1803,7 @@ step_table_akt %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra (ref:po1990) er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer resultaterne fra \\\\texti{Top-down} modelselektionsanalysen for merafkastet på aktier.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r STEP-S-TABLE, echo=FALSE}
@@ -1726,7 +1822,7 @@ step_table_s %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra (ref:po1990) er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer resultaterne fra \\\\texti{Top-down} modelselektionsanalysen for merafkastet på statsobligationer.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r STEP-V-TABLE, echo=FALSE}
@@ -1745,7 +1841,7 @@ step_table_v %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra (ref:po1990) er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer resultaterne fra \\\\texti{Top-down} modelselektionsanalysen for merafkastet på virksomhedsobligationer.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 \end{landscape}
 
@@ -1804,15 +1900,15 @@ COV_RES_TABLE %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra (ref:po1990) er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1)-systemets fejlleds korrelationsmatrix og fejlleds standardafvigelser. Matricen er på øvre triangulær form, grundet symmetri. Elementerne udenfor diagonalen er fejlledskorrelationerne og diagonal indgangene er fejlleds standardafvigelserne.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 Tabel \@ref(tab:COV-RES-TAB) viser kovariansstrukturen af stødene til VAR-systemet. For det risikofrie aktiv ses, at den laggede værdi af den nominelle rente sikrer *mean aversion*, siden både koefficient estimaterne og stød til det fremtidige risikofrie afkast er positive. Ligeledes vil *Book-to-Market Ratio* og *Small Minus Big* give anledning til *mean aversion*. Det korte rentespænd fremprovokerer *mean reversion* i det risikofrie aktiv. For merafkastet på aktier, ses det omvendte. Det fremgår på trods af den ringe prædiktabilitet blandt tilstandsvariablene, at *Book-to-market* samt *Small Minus Big* skaber *mean reversion*, siden deres koefficient og fejlkorrelationen er modsatrettede. Den nominelle rente skaber derimod *mean aversion*. For det fremtidige merafkast på statsobligationer ses, at stød til *Small Minus Big* er negativt korreleret med det fremtidige merafkast på statsobligationer, og medfører derfor *mean reversion*. Dette er på linje med, hvad resultaterne fra [@Fama1989]. De finder bl.a. en kontracyklisk variation mellem aktier og obligationer. Stød til *Yield Spread* udviser derimod positiv korrelation. *Mean aversion*-effekten fra *Yield Spread* må enten være pga.: en stigning i den lange rente, et fald i den korte rente eller en blanding af begge effekter. Fokuseres nu på det fremtidige merafkast af virksomhedsobligationer, ses at den laggede værdi af variablen *Small Minus Big* medfører *mean aversion*, mens det samme er tilfældet for *Yield Spread*. Generelt ses at prædiktionsvariablene bliver *mean reverting* givet deres indbyrdes relationer samt deres relationer til aktiverne. Dette understreger at antagelsen om stationaritet i systemet er overholdt, og dermed haves et stabilt system.
 
-## Backtest af VAR(1)-model
-For at få et overblik over den restringerede VAR models præcision. Præsenteres nedenfor en Figur hørende til hver variabel, hvor den estimerede regressions linje er holdt op imod den sande værdi fra tidsserierne. Den visuelle analyse er vist i Figur ?? til Figur ??. Som forventet ud fra $R^2$ værdierne er specielt merafkastet på aktier og statsobligationer svær estimerbare. Det samme gør sig gældende for *Small Minus Big*, mens de resterende prædiktionsvariable er modelleret meget præcist.
+## Backtest af VAR(1)-model {#backtestvar}
+For at få et overblik over den restringerede VAR models præcision. Præsenteres nedenfor en Figur hørende til hver variabel, hvor den estimerede regressions linje er holdt op imod den sande værdi fra tidsserierne. Den visuelle analyse er vist i Figur \@ref(fig:BACKTEST-NET-TB) til Figur \@ref(fig:BACKTEST-Y). Som forventet ud fra $R^2$ værdierne er specielt merafkastet på aktier og statsobligationer svær estimerbare. Det samme gør sig gældende for *Small Minus Big*, mens de resterende prædiktionsvariable er modelleret meget præcist.
 
-```{r BACKTEST-NET-TB, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+```{r BACKTEST-NET-TB, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for det risikofrie aktiv.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
 data <- cbind(NET_TB, c(NA,fitted(var)[,1]))
 
 colnames(data) <- c("NET_TB", "FITTED")
@@ -1832,7 +1928,7 @@ ggplot(data) +
   ylab(TeX("$r_{t}^{rf}$"))
 ```
 
-```{r BACKTEST-AKT, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+```{r BACKTEST-AKT, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for merafkastet på aktier.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
 data <- cbind(AKT, c(NA,fitted(var)[,2]))
 
 colnames(data) <- c("AKT", "FITTED")
@@ -1852,7 +1948,7 @@ ggplot(data) +
   ylab(TeX("$r_{t}^{rf}$"))
 ```
 
-```{r BACKTEST-S, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+```{r BACKTEST-S, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for merafkastet på statsobligationer.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
 data <- cbind(S_OBL, c(NA,fitted(var)[,3]))
 
 colnames(data) <- c("S_OBL", "FITTED")
@@ -1872,7 +1968,7 @@ ggplot(data) +
   ylab(TeX("$r_{t}^{rf}$"))
 ```
 
-```{r BACKTEST-V, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+```{r BACKTEST-V, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for merafkastet på virksomhedsobligationer.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
 data <- cbind(V_OBL, c(NA,fitted(var)[,4]))
 
 colnames(data) <- c("V_OBL", "FITTED")
@@ -1892,7 +1988,7 @@ ggplot(data) +
   ylab(TeX("$r_{t}^{rf}$"))
 ```
 
-```{r BACKTEST-BM, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+```{r BACKTEST-BM, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for prædiktionsvariablen Book-to-Market Ratio.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
 data <- cbind(BM, c(NA,fitted(var)[,5]))
 
 colnames(data) <- c("BM", "FITTED")
@@ -1912,7 +2008,7 @@ ggplot(data) +
   ylab(TeX("$r_{t}^{rf}$"))
 ```
 
-```{r BACKTEST-SMB, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+```{r BACKTEST-SMB, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for prædiktionsvariablen Small Minus Big.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
 data <- cbind(SMB, c(NA,fitted(var)[,6]))
 
 colnames(data) <- c("SMB", "FITTED")
@@ -1932,7 +2028,7 @@ ggplot(data) +
   ylab(TeX("$r_{t}^{rf}$"))
 ```
 
-```{r BACKTEST-B, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+```{r BACKTEST-B, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for prædiktionsvariablen den nominelle rente.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
 data <- cbind(TB, c(NA,fitted(var)[,7]))
 
 colnames(data) <- c("TB", "FITTED")
@@ -1952,15 +2048,15 @@ ggplot(data) +
   ylab(TeX("$r_{t}^{rf}$"))
 ```
 
-```{r BACKTEST-Y, echo=FALSE, fig.align='center', fig.cap="A.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
+```{r BACKTEST-Y, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for prædiktionsvariablen Yield Spread.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
 data <- cbind(Y_SPREAD, c(NA,fitted(var)[,8]))
 
 colnames(data) <- c("Y_SPREAD", "FITTED")
 
 ggplot(data) +
   expand_limits(x = min(index(data)), y = min(data$Y_SPREAD))+
-  geom_line(aes(x=index(data), y=Y_SPREAD)) +
-  geom_line(aes(x=index(data), y=FITTED)) +
+  geom_line(aes(x=index(data), y=Y_SPREAD, col="A", linetype="A")) +
+  geom_line(aes(x=index(data), y=FITTED, col="B", linetype="B")) +
   geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
   coord_cartesian(ylim = c(min(data$Y_SPREAD), max(data$Y_SPREAD))) +
   scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
@@ -1969,20 +2065,22 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$r_{t}^{rf}$"))
+  ylab(TeX("$r_{t}^{rf}$"))+
+  scale_colour_brewer(palette = "Dark2") +
+  scale_linetype_manual(values=c("longdash", "dotted"))
 ```
 
-## Opsummering
+## Opsummering {#opsundermodel}
 I dette kapitel blev modelselektionen fremlagt. Derudover blev VAR(1)-estimaterne præsenteret og analyseret. I VAR-processen viste merafkastet på statsobligationer sig svær at forudsige. Mens det risikofrie afkast havde den højeste $R^2$ blandt aktiverne. Strukturen i VAR-systemet er essentielle for porteføljeallokeringerne, siden at parametrene afhænger af VAR(1) estimationsresultaterne. Derudover blev stikprøve-bias undersøgt, ved at bias-justere koefficienterne. Ganske små forskelle blev fundet mellem de regulære OLS estimater og de bias-justerede estimater. For fuldstændighedens skyld fortsættes dog med de bias-justerede estimater.
 
-# Problemer ved estimation
+# Problemer ved estimation {#problemervedest}
 
 ```{r script2, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Speciale.R"), include=FALSE, cache=TRUE}
 ```
 
-INTRO HER + SEKTIONSINDDELING
+Middelværdi-varians optimering har vist sig meget sensitiv overfor den kvantitative størrelse af parametrene som indgår i vægtelsesberegningen for den relevante portefølje, dvs. forventede afkast, varianser og kovarianser. Som også er tilfældet i denne afhandling, er disse parametre estimeret via en tidsserie af afkast, men forventningen til disse estimater skal anskues skeptisk, idet de indeholder en væsentlig mængde usikkerhed. Derfor undersøger dette kapitel problemerne ved estimation af afkast. Først introduceres et Monte Carlo forsøg i Sektion \@ref(simeks), og resultaterne fra dette forsøg belyses i Sektion \@ref(ressimeks). Slutteligt gives en opsummering af kapitlets fund.
 
-Middelværdi-varians optimering har vist sig meget sensitiv overfor den kvantitative størrelse af parametrene som indgår i vægtelsesberegningen for den relevante portefølje, dvs. forventede afkast, varianser og kovarianser. Som også er tilfældet i denne afhandling, er disse parametre estimeret via en tidsserie af afkast, men forventningen til disse estimater skal anskues skeptisk, idet de indeholder en væsentlig mængde usikkerhed.
+## Simuleringseksempel {#simeks}
 
 Simuleringsforsøg har vist at porteføljer udvalgt på baggrund af Markowitz teorien med estimerede input har værre performance og er mindre efficiente end en $\tfrac{1}{n}$ (ligevægtet) portefølje, [@Frankfurter1971]. Ligeledes viser [@Chopra1993], at det er afgørende i en porteføljeanalyse at estimere forventede afkast præcist, men forventede afkast er alt andet lige svært prædiktable, [@Merton1980]. Videnskabelige artikler har foreslået ændringer til de statistiske metoder som ligger bag estimaterne, heriblandt foreslår [@Jorion1986] at benytte en Bayes-estimator i stedet for det aritmetiske gennemsnit, se evt. også [@MacKinlay2000], [@Garlappi2007], [@Kan2007], [@Tu2011].
 
@@ -2114,6 +2212,8 @@ Disse tre sæt af estimerede parametre, baseret på de tre tidsserier, er blevet
 $$\varepsilon_{i,j} = \frac{z_{0.975}\hat{\sigma}_{i,j}}{\sqrt{R}\hat{\mu}_{i,j}},$$
 
 hvor $i=1,2,3$ repræsenterer aktiverne og $j=1,2,3$ repræsenterer simuleringen. $z_{0.975}$ er fraktilfunktionen fra standard normal fordelingen, for et signifikansniveau på $\alpha=0.05$. $R$ er antallet af observationer fra hver simulering, i dette forsøg er $R=200$.
+
+## Resultater fra simuleringseksemplet {#ressimeks}
 
 Ud fra de sande parametre samt de estimerede parametre fra de tre tidsserier er global minimum varians porteføljen, tangensporteføljen, den optimale portefølje for en *CRRA* investor med risikoaversions parameter lig hhv. $1$, $5$ og $10$, samt den optimale portefølje for en *CARA* investor med risikoaversions parameter lig hhv. $1$, $5$ og $10$.
 
@@ -2405,17 +2505,19 @@ ggplot(data, aes(sd, r)) +
 
 ## Opsummering
 
-# Allokering af aktiver
-I dette kapitel vil teorien fra Del 2 samt de empiriske fund sammenkobles. Dette gøres ved at benytte VAR(1)-koefficienterne til porteføljevalget for den institutionelle investor. Den initielle analyse vil tage udgangspunkt i en investor med en moderat risikoaversion, $\gamma=5$, en lang investeringshorisont på $25$ år, $k=200$. Derudover restringeres investoren ikke, og dermed tillades kortsalg. Dette vil ligeledes fungere som sammenligningsgrundlaget for de resterende analyser i dette kapitel. I Sektion ?? vil denne initielle portefølje blive undersøgt, når afkast er tidsvarierende. Her vil porteføljevalget for hele den tilgængelige periode bliver undersøgt, når der fokuseres på allokeringen i samtlige *første* perioder. Dette giver mulighed for at undersøge investorens valg over samtlige recessioner.
+I dette kapitel blev problemerne ved estimation undersøgt gennem et Monte Carlo forsøg. I dette forsøg var den bagvedliggende fordeling af afkastene kendt på forhånd, men selv med denne information viste det sig, at selv små over- eller underestimationer påvirker én-periode porteføljeallokeringen i en signifikant grad. På tværs af alle porteføljetyper, heriblandt *CARA*- og *CRRA*-porteføljer, og på tværs af alle risikoaversioner.
 
-## Porteføljevalg med tidsvarierende afkast
+# Allokering af aktiver
+I dette kapitel vil teorien fra Del 2 samt de empiriske fund sammenkobles. Dette gøres ved at benytte VAR(1)-koefficienterne til porteføljevalget for den institutionelle investor. Den initielle analyse vil tage udgangspunkt i en investor med en moderat risikoaversion, $\gamma=5$, en lang investeringshorisont på $25$ år, $k=200$. Derudover restringeres investoren ikke, og dermed tillades kortsalg. Dette vil ligeledes fungere som sammenligningsgrundlaget for de resterende analyser i dette kapitel. I Sektion \@ref(portvalgmedtids) vil denne initielle portefølje blive undersøgt, når afkast er tidsvarierende. Her vil porteføljevalget for hele den tilgængelige periode bliver undersøgt, når der fokuseres på allokeringen i samtlige *første* perioder. Dette giver mulighed for at undersøge investorens valg over samtlige recessioner.
+
+## Porteføljevalg med tidsvarierende afkast {#portvalgmedtids}
 ```{r script11, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Script.R"), include=FALSE, cache=TRUE}
 ```
 
 ```{r script2, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Portfolio.R"), include=FALSE, cache=TRUE}
 ```
 
-Ved benyttelse af VAR(1)-koefficientestimaterne fra Sektion ??, kan investorens valg porteføljeallokeringer undersøges, under antagelsen om tidsvarierende afkast. Det antages at investoren har moderat risikoaversion, $\gamma=5$, en lang investeringshorisont, $k=200$, og uden en kortsalgsrestriktion. Kombineres VAR(1)-estimaterne med de nævnte antagelser, kan dynamikken for investeringsmulighederne skabes. På denne måde kan allokeringsreglen, for det multivariate investeringsrum bestående af det risikofrie aktiv, aktier, statsobligationer og virksomhedsobligationer, etableres. Figur \@ref(fig:AL-tids) viser den optimale første-periode allokering over tid for investoren med de ovennævnte antagelser. Figuren viser, hvordan investoren fordeler sin formue over de risikobærende afkast samt det risikofrie afkast over hele stikprøveperioden, 1954 2. kvartal til 2018 4. kvartal. De tilhørende recessionsperioder er -- som defineret af [@NBER2020] -- er ligeledes visualiseret. Ud fra en visuel inspektion ses det, at investoren under recessioner forsøger at øge sine eksponeringer i aktivklasser, som har relativt lave volatiliteter. De procentvise andele i hver aktiv viser sig at være ekstreme -- særligt i recessioner -- med et allokeringsinterval på $\pm 2000\%$. Dette foranlediger én til at tænke på, hvordan transaktionsomkostninger ville have påvirket allokeringerne. Tilsyneladende sker det yderst sjældent, at investoren går kort i aktier. Ydermere ses det, at positionen i aktier øges halvvejs igennem en recession. Generelt udviser den optimale portføljeallokering betydelig intertemporal variation. Dette ses særligt for allokeringen mod obligationstyperne, som udviser de højeste variationer. Allokeringen over hele stikprøven er konsistent med [@JurVic2011].
+Ved benyttelse af VAR(1)-koefficientestimaterne fra Sektion \@ref(var1est), kan investorens valg porteføljeallokeringer undersøges, under antagelsen om tidsvarierende afkast. Det antages at investoren har moderat risikoaversion, $\gamma=5$, en lang investeringshorisont, $k=200$, og uden en kortsalgsrestriktion. Kombineres VAR(1)-estimaterne med de nævnte antagelser, kan dynamikken for investeringsmulighederne skabes. På denne måde kan allokeringsreglen, for det multivariate investeringsrum bestående af det risikofrie aktiv, aktier, statsobligationer og virksomhedsobligationer, etableres. Figur \@ref(fig:AL-tids) viser den optimale første-periode allokering over tid for investoren med de ovennævnte antagelser. Figuren viser, hvordan investoren fordeler sin formue over de risikobærende afkast samt det risikofrie afkast over hele stikprøveperioden, 1954 2. kvartal til 2018 4. kvartal. De tilhørende recessionsperioder er -- som defineret af [@NBER2020] -- er ligeledes visualiseret. Ud fra en visuel inspektion ses det, at investoren under recessioner forsøger at øge sine eksponeringer i aktivklasser, som har relativt lave volatiliteter. De procentvise andele i hver aktiv viser sig at være ekstreme -- særligt i recessioner -- med et allokeringsinterval på $\pm 2000\%$. Dette foranlediger én til at tænke på, hvordan transaktionsomkostninger ville have påvirket allokeringerne. Tilsyneladende sker det yderst sjældent, at investoren går kort i aktier. Ydermere ses det, at positionen i aktier øges halvvejs igennem en recession. Generelt udviser den optimale portføljeallokering betydelig intertemporal variation. Dette ses særligt for allokeringen mod obligationstyperne, som udviser de højeste variationer. Allokeringen over hele stikprøven er konsistent med [@JurVic2011].
 
 ```{r AL-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af allokeringer.', fig.width=18, fig.asp=0.5, fig.pos='H'}
 alpha <- xts::xts(t(dynport$alphafixedT), index(NET_TB))
@@ -2452,7 +2554,7 @@ ggplot(alpha) +
        size = "Aktiv")
 ```
 
-For at lave en gennemgående analyse af investorens porteføljeallokeringer, separeres effekterne i Tabel \@ref(tab:AL-KOMP). Tabellen rapporter investorens komposition af tangens-, GMV-, *myopic demand*- og *intertemporal hedging demand*-porteføljen, ift. de tilgengælige investeringsmuligheder. Tabellen er skabt ud fra de nævnte antagelser om investoren. Tangensporteføljen for investoren er kraftigt skubbet mod aktier, statsobligationer og virksomhedsobligationer. Gennemsnitligt investeres hhv. $173 \%$, $74\%$ og $92\%$ af formuen i disse aktiver. Disse lange positioner er finansieret af en stor kort position i det risikofrie aktiv, på hhv. $-238\%$. For at understøtte disse fund, kan den beskrivende statistik fra Kapitel ?? samt VAR(1)-estimaterne fra Kapitel ?? medtages. Tabel \@ref(tab:DES-AKTIVKLASSE) viser, at det gennemsnitlige merafkast på aktier er højere end det gennemsnitlige afkast på både stats- og virksomhedsobligationer. Tabel \@ref(tab:DES-KOR) viser, at korrelationen mellem aktier og statsobligationer er negativ, $-0.02$, og meget lav mellem aktier og virksomhedsobligationer, $0.16$. Derimod er korrelationen mellem stats- og virksomhedsobligationer meget høj, $0.85$. Dette betyder, at stats- og virksomhedsobligationer næsten er substitutter. Global minimum varians porteføljen har givetvis -- som forventet -- den højeste allokering mod aktivet med laveste volatilitet. Dette understøttes ligeledes af Tabel \@ref(tab:DES-AKTIVKLASSE). Gennemsnitligt viser det sig, at det er optimalt for investoren at holde en allokering i aktier på $81\%$. En større del af allokeringen mod aktier og *T-Bills* lader til at stamme fra det *intertemporale hedging demand*. Hvilket betyder, at investoren kan *hedge* variationer i fremtidige merafkast på aktier og afkast på *T-Bills*, ved netop at holde disse aktiver. Dette understøttes ligeledes af fundende i Kapitel ?, hvor flere variable udviste *mean reversion* overfor særligt merafkastet på aktier. Fokuseres på allokeringen mod obligationer, ses at investoren generelt foretrækker en lang position i statsobligationer. 
+For at lave en gennemgående analyse af investorens porteføljeallokeringer, separeres effekterne i Tabel \@ref(tab:AL-KOMP). Tabellen rapporter investorens komposition af tangens-, GMV-, *myopic demand*- og *intertemporal hedging demand*-porteføljen, ift. de tilgengælige investeringsmuligheder. Tabellen er skabt ud fra de nævnte antagelser om investoren. Tangensporteføljen for investoren er kraftigt skubbet mod aktier, statsobligationer og virksomhedsobligationer. Gennemsnitligt investeres hhv. $173 \%$, $74\%$ og $92\%$ af formuen i disse aktiver. Disse lange positioner er finansieret af en stor kort position i det risikofrie aktiv, på hhv. $-238\%$. For at understøtte disse fund, kan den beskrivende statistik fra Kapitel \@ref(kapiteldatab) samt VAR(1)-estimaterne fra Kapitel \@ref(underligmodel) medtages. Tabel \@ref(tab:DES-AKTIVKLASSE) viser, at det gennemsnitlige merafkast på aktier er højere end det gennemsnitlige afkast på både stats- og virksomhedsobligationer. Tabel \@ref(tab:DES-KOR) viser, at korrelationen mellem aktier og statsobligationer er negativ, $-0.02$, og meget lav mellem aktier og virksomhedsobligationer, $0.16$. Derimod er korrelationen mellem stats- og virksomhedsobligationer meget høj, $0.85$. Dette betyder, at stats- og virksomhedsobligationer næsten er substitutter. Global minimum varians porteføljen har givetvis -- som forventet -- den højeste allokering mod aktivet med laveste volatilitet. Dette understøttes ligeledes af Tabel \@ref(tab:DES-AKTIVKLASSE). Gennemsnitligt viser det sig, at det er optimalt for investoren at holde en allokering i aktier på $81\%$. En større del af allokeringen mod aktier og *T-Bills* lader til at stamme fra det *intertemporale hedging demand*. Hvilket betyder, at investoren kan *hedge* variationer i fremtidige merafkast på aktier og afkast på *T-Bills*, ved netop at holde disse aktiver. Dette understøttes ligeledes af fundende i Kapitel ?, hvor flere variable udviste *mean reversion* overfor særligt merafkastet på aktier. Fokuseres på allokeringen mod obligationer, ses at investoren generelt foretrækker en lang position i statsobligationer. 
 
 Holdes den visuelle inspektion af Figur \@ref(fig:AL-tids) op i mod opdelingen fra Tabel \@ref(tab:AL-KOMP), kan der argumenteres for, at investoren øger sin lange position i virksomhedsobligationer under igangværende recessioner. Som dermed må betyde, at investoren finansierer disse høje positioner gennem korte positioner i *T-Bills* og statsobligationer. 
 
@@ -2513,6 +2615,8 @@ BIG_TABLE %>%
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
+Som et supplement til Tabel \@ref(tab:AL-BIG) viser Figur \@ref(fig:HOR-ana) porteføljeallokeringen for et kontinum af investeringshorisonter. 
+
 ```{r HOR-ana, echo=FALSE, fig.align='center', fig.cap='Horisontanalyse.', fig.width=18, fig.asp=0.5, fig.pos='H'}
 HOR_ANA <- data.frame(t(HOR_ANA), index=c(1, 3:100))
 
@@ -2546,40 +2650,9 @@ ggplot(HOR_ANA) +
        size = "Aktiv")
 ```
 
-```{r HOR-RES-ana, echo=FALSE, fig.align='center', fig.cap='Horisontanalyse restringeret.', fig.width=18, fig.asp=0.5, fig.pos='H'}
-HOR_ANA_R <- data.frame(t(HOR_ANA_R), index=c(1, 3:100))
+Derudover suppleres analysen af risikoaversionen med Figurerne \@ref(fig:GAM-ana-t), \@ref(fig:GAM-ana-a), \@ref(fig:GAM-ana-s) og \@ref(fig:GAM-ana-v). Disse Figurer viser den totalte allokering for hhv. *T-Bills*, aktier, statsobligationer og virksomhedsobligationer holdt op imod et kontinum af risikotolerancer, defineret som $\tfrac{1}{\gamma}$, for $\gamma>0$. Derudover vises *myopic demand* ligeledes, der ses som rette linjer. 
 
-colnames(HOR_ANA_R) <- c('A', 'B', 'C', 'D', 'index')
-
-ggplot(HOR_ANA_R) +
-  expand_limits(x = min(HOR_ANA_R$index), y = min(HOR_ANA_R[,1:3]))+
-  geom_line(aes(x=index, y=A, color = 'T-Bills', linetype = "T-Bills")) +
-  geom_line(aes(x=index, y=B, color = 'Aktier', linetype = "Aktier")) +
-  geom_line(aes(x=index, y=C, color = 'Statsobligationer', linetype = "Statsobligationer")) +
-  geom_line(aes(x=index, y=D, color = 'Virksomhedsobligationer', linetype = "Virksomhedsobligationer")) +
-  coord_cartesian(ylim = c(min(HOR_ANA_R[,1:3]) - 0.05, max(HOR_ANA_R[,1:3]) + 0.05)) +
-  scale_linetype_manual(values=c("solid", "dashed", "dotted", "dotdash"))+
-  scale_y_continuous(expand=c(0,0))+
-  scale_colour_brewer(palette = "Dark2") +
-  theme_bw()+
-  theme(
-    panel.grid.minor = element_blank(),
-    legend.background = element_rect(fill = "white",
-                                     linetype="solid",
-                                     size = 0.1,
-                                     colour = "black"),
-    legend.position="bottom",
-    legend.key.size = unit(4, "line"),
-    legend.title = element_blank(),
-    legend.text=element_text(size = 20)
-  ) +
-  labs(color = "Aktiv",
-       linetype = "Aktiv",
-       shape = "Aktiv",
-       size = "Aktiv")
-```
-
-```{r GAM-ana-t, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse, T-Bills.', fig.width=18, fig.asp=0.5, fig.pos='H'}
+```{r GAM-ana-t, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse for aktivet T-Bills.', fig.width=18, fig.asp=0.2, fig.pos='H'}
 GAM_ANA <- data.frame(t(GAM_ANA), index=1/seq(1, 50, 0.1))
 
 colnames(GAM_ANA) <- c('A', 'B', 'C', 'D', 'index')
@@ -2615,7 +2688,7 @@ ggplot(GAM_ANA) +
        size = "Aktiv")
 ```
 
-```{r GAM-ana-a, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse, aktier.', fig.width=18, fig.asp=0.5, fig.pos='H'}
+```{r GAM-ana-a, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse for aktivet aktier.', fig.width=18, fig.asp=0.2, fig.pos='H'}
 ggplot(GAM_ANA) +
   geom_line(aes(x=index, y=B, color = 'Aktier', linetype = "Aktier")) +
   geom_line(data=GAM_ANA_MYO, aes(x=index, y=B, color = 'Aktier', linetype = "Aktier2")) +
@@ -2643,7 +2716,7 @@ ggplot(GAM_ANA) +
        size = "Aktiv")
 ```
 
-```{r GAM-ana-s, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse, statsobligationer.', fig.width=18, fig.asp=0.5, fig.pos='H'}
+```{r GAM-ana-s, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse for aktivet statsobligationer.', fig.width=18, fig.asp=0.2, fig.pos='H'}
 ggplot(GAM_ANA) +
   geom_line(aes(x=index, y=C, color = 'Statsobligationer', linetype = "Statsobligationer")) +
   geom_line(data=GAM_ANA_MYO, aes(x=index, y=C, color = 'Statsobligationer2', linetype = "Statsobligationer2")) +
@@ -2671,7 +2744,7 @@ ggplot(GAM_ANA) +
        size = "Aktiv")
 ```
 
-```{r GAM-ana-v, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse, virksomhedsobligationer.', fig.width=18, fig.asp=0.5, fig.pos='H'}
+```{r GAM-ana-v, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse for virksomhedsobligationer.', fig.width=18, fig.asp=0.2, fig.pos='H'}
 ggplot(GAM_ANA) +
   geom_line(aes(x=index, y=D, color = 'Virksomhedsobligationer', linetype = "Virksomhedsobligationer")) +
   geom_line(data=GAM_ANA_MYO, aes(x=index, y=D, color = 'Virksomhedsobligationer2', linetype = "Virksomhedsobligationer2")) +
@@ -2698,6 +2771,12 @@ ggplot(GAM_ANA) +
        shape = "Aktiv",
        size = "Aktiv")
 ```
+
+## Effekten af en kortsalgsrestriktion
+
+For visse institutionelle investorer er kortsalg ikke tilladt. Derfor fjernes antagelsen om kortsalg ved at benytte Ligning \@ref(eq:kortsalgsrestr). Dette tillader, at undersøge allokeringerne på tværs af investeringshorisonter og for en række risikoaversioner. Det dynamiske porteføljeproblem er stadig interessen for denne analyse. I det, at der stadig arbejdes under antagelsen, at investorens porteføljevægte er afhængige af tidsvarierende forventninger af afkast og volatiliteter.
+
+Figur \@ref(fig:AL-RES-tids) viser den optimale første-periode allokering over tid for den intielle investor med den nye ovennævnte restriktion. Som det kan ses er allokeringen på visse aktiver nul i lange perioder. 
 
 ```{r AL-RES-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af allokeringer, med restringeret kortsalg.', fig.width=18, fig.asp=0.5, fig.pos='H'}
 alpha_res <- xts::xts(t(dynport$res_alphafixedT), index(NET_TB))
@@ -2734,6 +2813,8 @@ ggplot(alpha_res) +
        size = "Aktiv")
 ```
 
+Tabel \@ref(tab:AL-RES-BIG) rapporterer porteføljevægtene for den kortsalgsrestringerede investor, på tværs af investeringshorisonter og for forskellige tolerancer for risiko.
+
 ```{r AL-RES-BIG, echo=FALSE}
 options(knitr.kable.NA = '')
 
@@ -2759,9 +2840,48 @@ BIG_R_TABLE %>%
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
+Myopiske investorer med lav risikoaversion allokerer en større del mod virksomhedsobligationer. Des mere konservativ investoren bliver ses det, at allokeringen mod *T-Bills* mere end fordobles, mens der generelt hensættes en mindre allokering mod risikobærende aktiver. Altså ses en dalende allokering mod aktier og begge obligationstyper, mens mere eksponering rettes mod aktivet med lav volatilitet. Generelt ses, at diversifikationsmulighederne udnyttes i langt mindre grad, des mere konservativ investoren bliver, til forskel fra den myopiske investor uden en kortsalgsrestriktion. 
+
+Kontrolleres effekten af investeringshorisonten, vil risikoaverse og risikotolerante investorer dele en række egenskaber. Begge reducerer allokeringen mod *T-Bills* som horisonten øges. For investoren med lav risikoaversion reduceres eksponeringen mindre end for den konvservative investor. Den moderate investor deler ligeledes denne egenskab, dog i mindre grad. For næsten alle risikoaversioner ses, at investoren har samme vægt i obligationstyperne som horisonten øges, mens at eksponeringen mod aktier øges gradvist. Den stigende eksponering mod aktier, kan være grundet den faldende aktie volatilitet, som kommer sig af *mean reverison* i aktiepriser. Dette understøttes bl.a. af den lave første ordens autokorrelation på $0.075$.  
+```{r HOR-RES-ana, echo=FALSE, fig.align='center', fig.cap='Horisontanalyse restringeret.', fig.width=18, fig.asp=0.5, fig.pos='H'}
+HOR_ANA_R <- data.frame(t(HOR_ANA_R), index=c(1, 3:100))
+
+colnames(HOR_ANA_R) <- c('A', 'B', 'C', 'D', 'index')
+
+ggplot(HOR_ANA_R) +
+  expand_limits(x = min(HOR_ANA_R$index), y = min(HOR_ANA_R[,1:3]))+
+  geom_line(aes(x=index, y=A, color = 'T-Bills', linetype = "T-Bills")) +
+  geom_line(aes(x=index, y=B, color = 'Aktier', linetype = "Aktier")) +
+  geom_line(aes(x=index, y=C, color = 'Statsobligationer', linetype = "Statsobligationer")) +
+  geom_line(aes(x=index, y=D, color = 'Virksomhedsobligationer', linetype = "Virksomhedsobligationer")) +
+  coord_cartesian(ylim = c(min(HOR_ANA_R[,1:3]) - 0.05, max(HOR_ANA_R[,1:3]) + 0.05)) +
+  scale_linetype_manual(values=c("solid", "dashed", "dotted", "dotdash"))+
+  scale_y_continuous(expand=c(0,0))+
+  scale_colour_brewer(palette = "Dark2") +
+  theme_bw()+
+  theme(
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill = "white",
+                                     linetype="solid",
+                                     size = 0.1,
+                                     colour = "black"),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size = 20)
+  ) +
+  labs(color = "Aktiv",
+       linetype = "Aktiv",
+       shape = "Aktiv",
+       size = "Aktiv")
+```
+
 ## Opsummering
+
+I dette kapitel blev den optimale porteføljeallokering undersøgt. Forskellene mellem investorer med lange og korte investeringshorisonter blev skitseret. Derudover blev risikoaversionen ligeledes analyseret. 
 
 # Diskussion
 
 # Konklusion
 
+Denne afhandling undersøgte det finansielle emne: dynamisk porteføljeallokering, ved at se porteføljeallokeringen fra en investors perspektiv. Dette blev undersøgt ved brug af en analytisk løsning til det dynamiske porteføljeproblem. Som antog, at investoren havde CRRA-nytte over terminalformue og stod overfor tidsvarierende afkast for en endelig investeringshorisont. Afhandlingen komplementerer eksisterende litteratur på en række punkter. Begrænsningen af den rene middelværdi-varians analyse er indlysende grundet dens fordelingsmæssige og statiske antagelser. Hvorimod en antagelse om CRRA-nytte og lognormale afkast kan udnytte approksimative løsninger. Afhandlingen benytter derudover ikke kun nutidsværdirelationer mellem aktivklasserne, men også variable fra akademisk litteratur, som før har vist prædiktabilitsegenskaber overfor afkast. Fordi afhandlingen var interesseret i allokeringen mod en række aktivklasser, antoges det, at dynamikken i de relevante tilstandsvariable fulgte en VAR(1)-process. Dette tillod at fange lineære afhængigheder mellem alle aktivklasser og prædiktionsvariable på samme tid. En kvalitativ og kvantitativ modelselektionsproceudre blev anvendt til at finde en delmængde af variable til den endelige VAR(1)-model, hvor variablene bl.a. skulle være signifikante på signifikansniveauet $\alpha=0.05$, som udvalgt gennem *AKFIC*. Ved dannelse af univariate samt multiple regressioner blev det konkluderet at afkastene på aktivklasserne var prædiktable til en vis grad. Specielt viste *Book-to-Market Ratio*, *Small Minus Big* og *Yield Spread* at være de mest passende tilstandsvariable i den introducerede specifikation. Efter tilstandsvariablene var fastsat kunne VAR(1)-modellen estimeres. Her var kun en delmængde af koefficienterne stadig signifiankte. Derudover blev koefficienterne bias-justeret, men ingen signifkant forskel blev fundet, som dermed betød, at ingen stikprøve bias var tilstede. Strukturen fra VAR(1)-modellen er grundlæggende for porteføljeallokeringen, eftersom parameterene som investoren benytter til udvælgelsen afhænger af netop koefficientestimaterne. Dette tillod at undersøge forskellen mellem investorer med høj og lav risikoaversion, og derudover investorer med lang eller kort investeringshorisont. For fast risikoaversion, findes afhandlingen at aktier er drevet af det *intertemporale hedging demand*, som investeringshorisonten udvides. Til forskel finder analysen at allokeringen mod obligationstyperne er drevet af *myopic demand*, siden de er relativt stabile over tid. Investoren udnytter muligheden for at geare sin portefølje. For en lange række kombinationer af horisonter og risikoaversioner, finansierer investoren sine lange positioner ved at tage en kort position i *T-Bills*. Ved at indføre en kortsalgsrestriktion bliver specielt eksponeringen mod *T-Bills* påvirket, da investorens gearingsmuligheder fuldstændig fjernes. 
