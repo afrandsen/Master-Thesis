@@ -8,7 +8,7 @@ Dette appendiks består af udledninger for de anvendte resultater gennem afhandl
 
 ## Momenter af den lognormale fordeling
 
-Det præsenterede porteføljevalg i den empiriske analyse tog udgangspunkt i en investor med potens nytte. Dette udmyntede sig i antagelsen om lognormale afkast. 
+Det præsenterede porteføljevalg i den empiriske analyse tog udgangspunkt i en investor med potens nytte. Dette udmyntede sig i antagelsen om lognormale afkast. Lad en stokastisk variabel $Y=\exp(X)\sim \mathcal{LN}(\mu,\sigma^2)$ have den egenskab, at $X=\log(Y)\sim\mathcal{N}(\mu,\sigma^2)$.
 
 ## Udledning af den optimale myopiske portefølje {#udlmyo}
 I denne Sektion udledes den optimale portefølje på tidspunkt $t$ givet ved: Ligning \@ref(eq:Løsning) og Ligning \@ref(eq:Multalpha) for hhv. tilfældet med et risikobærende aktiv, $n=1$, samt tilfældet med flere risikobærende aktiver, $n>1$. Ved indsættelse af den betingede middelværdi, Ligning \@ref(eq:Forvport), samt den betingede varians, Ligning \@ref(eq:Varport). Kan Maksimeringsproblemet \@ref(eq:Statmaks) omskrives til
