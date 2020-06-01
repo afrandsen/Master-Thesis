@@ -101,10 +101,10 @@ hvor $\hat{S}_t=\sum_{j=1}^t \hat{u}_j$, $\hat{u}_t$ er residualen hørende til 
 Indtil videre er de økonometriske metoder og statistiske tests blevet beskrevet, som der anvendes i den empriske del af denne afhandling. Uden nogle yderligere restriktioner vil den præsenterede metodik kunne medføre en ikke-restringeret VAR model, som herefter vil kunne implementeres for porteføljevalget. Det er til gengæld urealistisk at tro, at en medtagelse af samtlige variable vil medføre en generel statistisk stærk model. Derfor vil denne sektion præsentere den generelle kvantitative og kvalitatitive metode til at specificere en mere sparsommelig model, som højst sandsynlig også vil have en stærkere performance på en eksogen stikprøve. 
 
 En ikke-restringeret VAR model indeholdende samtlige variable vil givetvis have den højeste *goodness-of-fit* relativt til alle restringerede modeller. Derudover ville en sådan model resultere i en række komplikationer. En sådan komplikation er eksempelvis multikollinaritet mellem de prædiktable variable. Eksempelvis kan korte og lange rentespænd muligvis fange den samme variation i merafkast, og en medtagelse af begge rentespænd vil derfor ikke være nødvendigt. Derudover kan for mange variable gøre VAR modellen højt parameteriseret, og dermed påvirke præcisionen af de estimerede koefficienter. En optimal model vil optimere det såkaldte *bias-variance tradeoff*, og dermed fange regulariteterne i estimationsdatasættet og ligeledes generalisere til eksterne datasæt. Givet at denne afhandling kun er intereseret i variable som *har* statistisk styrke til at forudsige afkast vil en række restriktioner automatisk føre til en sparsommelig model. Dette kan gøres på en lang række måder, men én af de absolut simpleste er den såkaldte *Top-down* strategi, som også er kendt i statistik som *backward-elimination*. En sådan strategi specificere en model baseret på relativ *goodness-of-fit* gennem det valgte informations kriterie. Formelt modellerer informations kriteriet bytteforholdet mellem præcisionen for stikprøven og antallet af estimerede parametre. Generelt kan et sådant kriterie opskrives matematisk som
-$$\text{IC}=\log(\mid \hat{\Sigma}\mid)+k(\#\text{parametre}),$$
+$$\text{IC}=\log(\det(\hat{\Sigma}))+k(\#\text{parametre}),$$
 
 hvor $\hat{\Sigma}$ repræsentere dne estimerede kovariansmatrix af residualerne og $k$ vil afhænge af det valgte informationskriterie. Informationskriteriet vil dermed foretrække modeller med lav varians, men samtidig straffe modeller med inkludering af for mange variable. I denne afhandling benyttes det såkaldte *Andreas Kracht Frandsen Information Criteria*, *AKFIC*. Til forskel for det kendte *Akaike Information Criteria* straffes modellen med en faktor på
-$$k=\frac{Q(0.05)}{T}=\frac{3.841}{T},$$
+$$k=\frac{F^{-1}_{\chi_{+}^2}(0.05)}{T}=\frac{3.841}{T},$$
 
 hvor $F^{-1}_{\chi_{+}^2}(\cdot)$ er kvantilfunktionen for den ensidet $\chi^2$-fordeling. I stedet for en faktor på
 $$k=\frac{2}{T}.$$
@@ -113,7 +113,7 @@ hvor $T$ repræsenterer stikprøvestørrelsen. I praksis implementeres *Top-down
 
 Processen køres kun for regressionerne for aktivafkastene på det fulde datasæt, for at have et kvantitativt bud på deres optimale prædiktionsvariable. Eftersom fokus er på porteføljeallokering, restringeres datasættet herefter til kun at indeholde variablene, der forbliver i modellen efter *Top-down* processen. Dernæst holdes variablene op i mod de univariate og multiple regressioner samt korrelationsanalysen, for at undgå mulige multikollinaritetsproblemer. Derudover foretages en *Variance Inflation Factor* analyse, som endnu et tjek for multikollinaritet. Analysen foretages i tre skridt. For samtlige forklarende variable fra *Top-down* processen laves følgende regression
 \begin{equation}
-x_t^i=\alpha+\bm{\beta}^j + \bm{x}_t^{j}+\varepsilon_t. (\#eq:vifanareg)
+x_t^i=\alpha+\bm{\beta}^j\bm{x}_t^{j}+\varepsilon_t. (\#eq:vifanareg)
 \end{equation}
 
 Dernæst beregnes *VIF*-værdien for hvert $\beta^j$ som
@@ -1714,10 +1714,10 @@ Ved at følge modelselektionsproceduren fra Sektion \@ref(sekmodelselek), starte
 Ved at udføre samme procedure for det risikofrie aktiv, statsobligationer og virksomhedsobligationer endes ud den følgende temporale modelspecifikation.
 \begin{align*}
 r_{t+1}^{\text{rf}}&=\phi_0^{\text{rf}} + \phi_1^{\text{rf}} r_{t}^{\text{rf}} +  \phi_2^{\text{rf}} rx_{t}^{\text{a}} + \phi_3^{\text{rf}} rx_{t}^{\text{s}} + \phi_4^{\text{rf}} rx_{t}^{\text{v}} + \phi_5^{\text{rf}} x_{t}^{\text{bm}} + \phi_6^{\text{rf}} x_{t}^{\text{avar}} + \phi_7^{\text{rf}} x_{t}^{\text{smb}} + \phi_8^{\text{rf}} x_{t}^{\text{b}} + \phi_9^{\text{rf}} x_{t}^{\text{ys}}\\
-&\quad+ \phi_{10}^{\text{rf}} x_{t}^{\text{cs}}+ \phi_{11}^{\text{rf}} x_{t}^{\text{ds}} + \phi_{12}^{\text{rf}} x_{t}^{\text{fr}}\\
-rx_{t+1}^{\text{a}}&=\phi_0^{\text{a}} + \phi_1^{\text{a}} r_{t}^{\text{rf}} +  \phi_2^{\text{a}} rx_{t}^{\text{a}} + \phi_3^{\text{a}} rx_{t}^{\text{s}} + \phi_4^{\text{a}} rx_{t}^{\text{v}} + \phi_5^{\text{a}} x_{t}^{\text{bm}} + \phi_6^{\text{a}} x_{t}^{\text{smb}} + \phi_7^{\text{a}} x_{t}^{\text{b}} + \phi_8^{\text{a}} x_{t}^{\text{fr}}\\
-rx_{t+1}^{\text{s}}&=\phi_0^{\text{s}} + \phi_1^{\text{s}} r_{t}^{\text{rf}} +  \phi_2^{\text{s}} rx_{t}^{\text{a}} + \phi_3^{\text{s}} rx_{t}^{\text{s}} + \phi_4^{\text{s}} rx_{t}^{\text{v}} + \phi_5^{\text{s}} x_{t}^{\text{avar}} + \phi_6^{\text{s}} x_{t}^{\text{smb}} + \phi_7^{\text{s}} x_{t}^{\text{b}} + \phi_8^{\text{s}} x_{t}^{\text{ys}}+ \phi_{10}^{\text{s}} x_{t}^{\text{cs}}+ \phi_{11}^{\text{s}} x_{t}^{\text{fr}}\\
-rx_{t+1}^{\text{v}}&=\phi_0^{\text{v}}+ \phi_1^{\text{v}} r_{t}^{\text{rf}} +  \phi_2^{\text{v}} rx_{t}^{\text{a}} + \phi_3^{\text{v}} rx_{t}^{\text{s}} + \phi_4^{\text{v}} rx_{t}^{\text{v}} + \phi_5^{\text{v}} x_{t}^{\text{avar}} + \phi_6^{\text{v}} x_{t}^{\text{smb}} + \phi_7^{\text{v}} x_{t}^{\text{b}} + \phi_8^{\text{v}} x_{t}^{\text{ys}}+ \phi_9^{\text{v}} x_{t}^{\text{cs}} + \phi_{10}^{\text{v}} x_{t}^{\text{fr}}.
+&\quad+ \phi_{10}^{\text{rf}} x_{t}^{\text{cs}}+ \phi_{11}^{\text{rf}} x_{t}^{\text{ds}} + \phi_{12}^{\text{rf}} x_{t}^{\text{fr}}+v^{\text{rf}}\\
+rx_{t+1}^{\text{a}}&=\phi_0^{\text{a}} + \phi_1^{\text{a}} r_{t}^{\text{rf}} +  \phi_2^{\text{a}} rx_{t}^{\text{a}} + \phi_3^{\text{a}} rx_{t}^{\text{s}} + \phi_4^{\text{a}} rx_{t}^{\text{v}} + \phi_5^{\text{a}} x_{t}^{\text{bm}} + \phi_6^{\text{a}} x_{t}^{\text{smb}} + \phi_7^{\text{a}} x_{t}^{\text{b}} + \phi_8^{\text{a}} x_{t}^{\text{fr}}+v^{\text{a}}\\
+rx_{t+1}^{\text{s}}&=\phi_0^{\text{s}} + \phi_1^{\text{s}} r_{t}^{\text{rf}} +  \phi_2^{\text{s}} rx_{t}^{\text{a}} + \phi_3^{\text{s}} rx_{t}^{\text{s}} + \phi_4^{\text{s}} rx_{t}^{\text{v}} + \phi_5^{\text{s}} x_{t}^{\text{avar}} + \phi_6^{\text{s}} x_{t}^{\text{smb}} + \phi_7^{\text{s}} x_{t}^{\text{b}} + \phi_8^{\text{s}} x_{t}^{\text{ys}}+ \phi_{10}^{\text{s}} x_{t}^{\text{cs}}+ \phi_{11}^{\text{s}} x_{t}^{\text{fr}}+v^{\text{s}}\\
+rx_{t+1}^{\text{v}}&=\phi_0^{\text{v}}+ \phi_1^{\text{v}} r_{t}^{\text{rf}} +  \phi_2^{\text{v}} rx_{t}^{\text{a}} + \phi_3^{\text{v}} rx_{t}^{\text{s}} + \phi_4^{\text{v}} rx_{t}^{\text{v}} + \phi_5^{\text{v}} x_{t}^{\text{avar}} + \phi_6^{\text{v}} x_{t}^{\text{smb}} + \phi_7^{\text{v}} x_{t}^{\text{b}} + \phi_8^{\text{v}} x_{t}^{\text{ys}}+ \phi_9^{\text{v}} x_{t}^{\text{cs}} + \phi_{10}^{\text{v}} x_{t}^{\text{fr}}+v^{\text{v}}.
 \end{align*}
 
 Dermed haves et temporalt system, som herfra vil udtyndes kvalitativt. Disse kvalitative valg støttes først og fremmest af en *VIF* analyse. Tabel \@ref(tab:VIF-TAB) viser *VIF* analysen for hver af de forklarende variable fra de fire regressionsligninger.
@@ -1918,8 +1918,8 @@ colnames(data) <- c("NET_TB", "FITTED")
 
 ggplot(data) +
   expand_limits(x = min(index(data)), y = min(data$NET_TB))+
-  geom_line(aes(x=index(data), y=NET_TB, color = "Sand")) +
-  geom_line(aes(x=index(data), y=FITTED, color = "Estimeret")) +
+  geom_line(aes(x=index(data), y=NET_TB, color = "Sand", linetype = "Sand"), linetype="solid", color ="black") +
+  geom_line(aes(x=index(data), y=FITTED, color = "Estimeret", linetype = "Estimeret"), linetype="dashed", color ="red") +
   geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
   coord_cartesian(ylim = c(min(data$NET_TB), max(data$NET_TB))) +
   scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
@@ -1939,8 +1939,8 @@ colnames(data) <- c("AKT", "FITTED")
 
 ggplot(data) +
   expand_limits(x = min(index(data)), y = min(data$AKT))+
-  geom_line(aes(x=index(data), y=AKT)) +
-  geom_line(aes(x=index(data), y=FITTED)) +
+  geom_line(aes(x=index(data), y=AKT, color = "Sand", linetype = "Sand"), linetype="solid", color ="black") +
+  geom_line(aes(x=index(data), y=FITTED, color = "Estimeret", linetype = "Estimeret"), linetype="dashed", color ="red") +
   geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
   coord_cartesian(ylim = c(min(data$AKT), max(data$AKT))) +
   scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
@@ -1960,8 +1960,8 @@ colnames(data) <- c("S_OBL", "FITTED")
 
 ggplot(data) +
   expand_limits(x = min(index(data)), y = min(data$S_OBL))+
-  geom_line(aes(x=index(data), y=S_OBL)) +
-  geom_line(aes(x=index(data), y=FITTED)) +
+  geom_line(aes(x=index(data), y=S_OBL, color = "Sand", linetype = "Sand"), linetype="solid", color ="black") +
+  geom_line(aes(x=index(data), y=FITTED, color = "Estimeret", linetype = "Estimeret"), linetype="dashed", color ="red") +
   geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
   coord_cartesian(ylim = c(min(data$S_OBL), max(data$S_OBL))) +
   scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
@@ -1981,8 +1981,8 @@ colnames(data) <- c("V_OBL", "FITTED")
 
 ggplot(data) +
   expand_limits(x = min(index(data)), y = min(data$V_OBL))+
-  geom_line(aes(x=index(data), y=V_OBL)) +
-  geom_line(aes(x=index(data), y=FITTED)) +
+  geom_line(aes(x=index(data), y=V_OBL, color = "Sand", linetype = "Sand"), linetype="solid", color ="black") +
+  geom_line(aes(x=index(data), y=FITTED, color = "Estimeret", linetype = "Estimeret"), linetype="dashed", color ="red") +
   geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
   coord_cartesian(ylim = c(min(data$V_OBL), max(data$V_OBL))) +
   scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
@@ -2002,8 +2002,8 @@ colnames(data) <- c("BM", "FITTED")
 
 ggplot(data) +
   expand_limits(x = min(index(data)), y = min(data$BM))+
-  geom_line(aes(x=index(data), y=BM)) +
-  geom_line(aes(x=index(data), y=FITTED)) +
+  geom_line(aes(x=index(data), y=BM, color = "Sand", linetype = "Sand"), linetype="solid", color ="black") +
+  geom_line(aes(x=index(data), y=FITTED, color = "Estimeret", linetype = "Estimeret"), linetype="dashed", color ="red") +
   geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
   coord_cartesian(ylim = c(min(data$BM), max(data$BM))) +
   scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
@@ -2023,8 +2023,8 @@ colnames(data) <- c("SMB", "FITTED")
 
 ggplot(data) +
   expand_limits(x = min(index(data)), y = min(data$SMB))+
-  geom_line(aes(x=index(data), y=SMB)) +
-  geom_line(aes(x=index(data), y=FITTED)) +
+  geom_line(aes(x=index(data), y=SMB, color = "Sand", linetype = "Sand"), linetype="solid", color ="black") +
+  geom_line(aes(x=index(data), y=FITTED, color = "Estimeret", linetype = "Estimeret"), linetype="dashed", color ="red") +
   geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
   coord_cartesian(ylim = c(min(data$SMB), max(data$SMB))) +
   scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
@@ -2044,8 +2044,8 @@ colnames(data) <- c("TB", "FITTED")
 
 ggplot(data) +
   expand_limits(x = min(index(data)), y = min(data$TB))+
-  geom_line(aes(x=index(data), y=TB)) +
-  geom_line(aes(x=index(data), y=FITTED)) +
+  geom_line(aes(x=index(data), y=TB, color = "Sand", linetype = "Sand"), linetype="solid", color ="black") +
+  geom_line(aes(x=index(data), y=FITTED, color = "Estimeret", linetype = "Estimeret"), linetype="dashed", color ="red") +
   geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
   coord_cartesian(ylim = c(min(data$TB), max(data$TB))) +
   scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
@@ -2065,20 +2065,28 @@ colnames(data) <- c("Y_SPREAD", "FITTED")
 
 ggplot(data) +
   expand_limits(x = min(index(data)), y = min(data$Y_SPREAD))+
-  geom_line(aes(x=index(data), y=Y_SPREAD, col="A", linetype="A")) +
-  geom_line(aes(x=index(data), y=FITTED, col="B", linetype="B")) +
+  geom_line(aes(x=index(data), y=Y_SPREAD, color = "Sand", linetype = "Sand"), linetype="solid", color ="black") +
+  geom_line(aes(x=index(data), y=FITTED, color = "Estimeret", linetype = "Estimeret"), linetype="dashed", color ="red") +
   geom_rect(data=recessions.trim, aes(xmin=Peak, xmax=Trough, ymin=-Inf, ymax=+Inf), fill='pink', alpha=0.2)+
   coord_cartesian(ylim = c(min(data$Y_SPREAD), max(data$Y_SPREAD))) +
   scale_x_date(expand = c(0, 0), date_labels = "%Y", date_breaks = "2 year", limits = c(min(index(data)), max(index(data))))+
   scale_y_continuous(expand=c(0,0))+
   theme_bw()+
   theme(
-    panel.grid.minor = element_blank()
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill = "white",
+                                     linetype="solid",
+                                     size = 0.1,
+                                     colour = "black"),
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size=20)
   ) + 
   ylab(TeX("$r_{t}^{rf}$")) +
-  xlab("År")+
-  scale_colour_brewer(palette = "Dark2") +
-  scale_linetype_manual(values=c("longdash", "dotted"))
+  xlab("År")
 ```
 
 Som et stationaritetstjek af den færdige VAR-model, undersøges stabiliteten af modellen. Eftersom en stabil VAR-model vil medføre en stationær VAR-model, [@Lutkepohl2005]. En VAR(1)-model er stabil, hvis det omvendte karateristiske polynomie
@@ -2122,8 +2130,8 @@ ggplot(data, aes(index, sim)) +
   geom_hline(data=data2, aes(yintercept = simval, color = "Estimeret middelværdi", linetype = "Estimeret middelværdi")) +
   geom_line() +
   facet_wrap(~type, scales = "free_y", ncol = 1) +
-  xlab(expression(italic("Indeks")))+
-  ylab(expression(italic("Afkast")))+
+  xlab("Indeks")+
+  ylab("Afkast")+
   scale_x_continuous(expand = c(0,0))+
   scale_y_continuous(expand = c(0,0))+
   theme_bw()+

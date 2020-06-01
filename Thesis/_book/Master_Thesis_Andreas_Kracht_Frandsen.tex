@@ -301,7 +301,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-06-01                  
+##  date     2020-06-02                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -463,7 +463,7 @@ den betingede varians af porteføljeafkastet bliver
 
 Nu kan maksimeringsproblemet opskrives
 \begin{equation}
-\max_{\alpha_t} \bm{\alpha}_t'(\mathbb{E}_t\left[\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}\right] - \frac{k}{2}\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t, \label{eq:MultStatmaks}
+\max_{\alpha_t} \bm{\alpha}_t'(\mathbb{E}_t\left[\bm{R}_{t+1}\right]- R_{0,t+1}\bm{\ell}) - \frac{k}{2}\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t, \label{eq:MultStatmaks}
 \end{equation}
 
 Den optimale porteføljestrategi, givet som løsningen til Maksimeringsproblemet \eqref{eq:MultStatmaks} findes til at være
@@ -538,7 +538,7 @@ Generelt anses investorer (og andre individer for den sags skyld) at være risik
 
 I Sektion \ref{myoinv}, blev en af de bærende antagelser i \citep{Markowitz1952} introduceret: at investorer kun forholder sig til middelværdien og variansen af porteføljeafkast, og ikke højere momenter. Det kan tilsvarende antages, at investorer definerer deres nytte via formue på terminaltidspunktet. Dette tillader at redefinere Maksimeringsproblemet \eqref{eq:Statmaks} til nedenstående
 \begin{align}
-&\max\mathbb {E}_t(U(W_{t+1})) \label{eq:Nyttemaks}\\
+&\max\mathbb {E}_t\left[U(W_{t+1})\right] \label{eq:Nyttemaks}\\
 &\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
 \end{align}
 
@@ -635,7 +635,7 @@ Eksponentiel nytte antager, at \emph{ARA} er konstant lig \(\theta\), mens \emph
 \[W_{t+1}\sim \mathcal{N}\left(\mu_p,\sigma_p^2\right)\]
 
 altså er terminalnytten normalfordelt for enhver mulig portefølje, \(p\), givet at afkastene er normalfordelt. Regnes derfor på forventningen, fås
-\[\mathbb{E}(U(W_{t+1}))=-\exp\left(-\theta\mu_p+\frac{\theta^2}{2}\sigma_p^2\right).\]
+\[\mathbb{E}[U(W_{t+1})]=-\exp\left(-\theta\mu_p+\frac{\theta^2}{2}\sigma_p^2\right).\]
 
 \hypertarget{potens-nytte}{%
 \subsection{Potens nytte}\label{potens-nytte}}
@@ -647,10 +647,10 @@ U(W_{t+1})=\begin{cases} \frac{W_{t+1}^{1-\gamma}-1}{1-\gamma},\quad &\gamma\neq
 \end{align}
 
 For \(\gamma\neq 1\) fås den forventede nytte til
-\[\log(\mathbb{E}(W_{t+1}))=\mathbb{E}(\log(W_{t+1}))+\frac{1}{2}\mathbb{V}(\log(W_{t+1})),\]
+\[\log(\mathbb{E}[W_{t+1})]=\mathbb{E}\left[\log(W_{t+1})\right]+\frac{1}{2}\mathbb{V}\left[\log(W_{t+1})\right],\]
 
 hvor det bærende resultat vedr. middelværdien af en lognormalfordelt stokastisk variabel, se evt. Appendiks \ref{underligteo}, er anvendt. Logaritmefunktionen er en konkav funktion, dette betyder, at middelværdien af log af en stokastisk variabel er mindre end log af middelværdien, og forskellen er stigende i variabiliteten af den stokastiske variabel. For \(\gamma \rightarrow 1\) haves
-\[\mathbb{E}(U(W_{t+1}))=\mathbb{E}(\log(W_{t+1})).\]
+\[\mathbb{E}\left[U(W_{t+1})\right]=\mathbb{E}\left[\log(W_{t+1})\right].\]
 
 \hypertarget{sammenligning-af-nyttefunktioner}{%
 \subsection{Sammenligning af nyttefunktioner}\label{sammenligning-af-nyttefunktioner}}
@@ -701,18 +701,18 @@ Denne Sektion har til formål at definere aktieafkast, dets logrepræsentation s
 
 her er \(P_t\) prisen af aktien på tidspunkt \(t\). \(D_t\) er udbytte på tidspunkt \(t\). Tages nu log på begge sider af Ligning \eqref{eq:csaa} fås
 \begin{equation}
-r_{t+1}\approx p_{t+1}+\log(1+\exp(d_{t+1}-p{t+1}))-p_t. \label{eq:csaa2}
+r_{t+1}\approx p_{t+1}+\log\left(1+\exp\left(d_{t+1}-p_{t+1}\right)\right)-p_t. \label{eq:csaa2}
 \end{equation}
 
 Det observeres, at det andet led på højre side af Ligning \eqref{eq:csaa2} ikke er lineært. Dette løses ved at lave en førsteordens Taylor approksimation omkring middelværdien, \(\overline{d_{t+1}-p_{t+1}}\)\footnote{Fordelene ved en sådan linearisering er, at det tillader en lineær statistisk analyse af aktieprisens bevægelser, som simplificerer det økonometriske arbejde. Derudover er der den generelle konsensus, at aktieafkast og udbytte følger en loglineær stokastisk process, og derfor er det nødvendigt at udarbejde en model, som er tilpasset denne antagelse.}, dermed kan det andet led skrives som
 \begin{equation}
-f(\log(1+\exp(\overline{d_{t+1}-p_{t+1}}))) = (1-\rho)(d_{t+1}-p_{t+1}) + c, \label{eq:csaa3}
+f\left(\log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right)\right) = (1-\rho)(d_{t+1}-p_{t+1}) + c, \label{eq:csaa3}
 \end{equation}
 
 hvor \(\rho\) og \(c\) er såkaldte lineariseringsparametre, defineret som
 \begin{align*}
-\rho&=1+\exp(\overline{d_{t+1}-p_{t+1}})\\
-c&=\log(1+\exp(\overline{d_{t+1}-p_{t+1}}))-(1-\rho)(\overline{d_{t+1}-p_{t+1}}).
+\rho&=1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\\
+c&=\log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right)-(1-\rho)(\overline{d_{t+1}-p_{t+1}}).
 \end{align*}
 
 Indsættes Ligning \eqref{eq:csaa3} nu i Ligning \eqref{eq:csaa2}, kan det approksimative én-periode brutto aktie log afkast udledes til
@@ -728,11 +728,11 @@ d_t-p_t=\rho(d_{t+1}-p_{t+1}) + r_{t+1} -\Delta d_{t+1}-c. \label{eq:csaa5}
 \end{equation}
 
 Tages nu forventningen af Ligning \eqref{eq:csaa5} på tidspunkt \(t\) og ved samtidig overholdelse af transversalitetsbetingelsen
-\[\lim_{n\to\infty } \rho^n\mathbb{E}_t[d_{t+n}-p_{t+n}]= 0,\]
+\[\lim_{n\to\infty } \rho^n\mathbb{E}_t\left[d_{t+n}-p_{t+n}\right]= 0,\]
 
 kan der ved brug af rekursion, opnåes den såkaldte \emph{Dynamic Gordon Growth Model}
 \begin{equation}
-d_t-p_t=\sum_{j=0}^\infty \rho^j \mathbb{E}_t[r_{t+j+1}-\Delta d_{t+j+1}]-\frac{c}{1-\rho}. \label{eq:csaa6}
+d_t-p_t=\sum_{j=0}^\infty \rho^j \mathbb{E}_t\left[r_{t+j+1}-\Delta d_{t+j+1}\right]-\frac{c}{1-\rho}. \label{eq:csaa6}
 \end{equation}
 
 Transversalitetsbetingelsen udeholder \emph{bobler} i \emph{Dynamic Gordon Growth Model}. Det følger igennem Ligning \eqref{eq:csaa6}, at ændringer i log \emph{Dividend-Price Ratio} må være grundet ændringer i: fremtidige afkast eller en ændring i forventningen til fremtidige udbyttebetalinger eller en kombination af begge. Et vigtigt aspekt af ovenstående relation er, at den er udledt på baggrund af definitionen af afkast og ikke en økonomisk model. Derudover viser Ligning \eqref{eq:csaa6} baggrunden for at medtage log \emph{Dividend-Price Ratio}, som en forklarende variabel til responsvariablen aktieafkast: der må være en mellemliggende relation mellem bevægelser i aktieafkast eller vækst i udbyttebetalinger og ændringer i \emph{Dividend-Price Ratio}. Ligning \eqref{eq:csaa6} hævder, at log \emph{Dividend-Price Ratio} må bære på alt markedsinformation vedr. fremtidige bevægelser i aktieafkast eller udbytter.
@@ -764,7 +764,7 @@ r_{t+1}^n=n y_t^n - (n-1) y_{t+1}^{n-1}. \label{eq:csba4}
 
 Fra Ligning \eqref{eq:csba4} observeres det, at afkastet er et vægtet gennemsnit af den nuværende effektive rente og den fremtidige effektive rente på obligationen med løbetid \(n\). Ved isolation af den nuværende effektive rente opnåes
 \begin{equation}
-y_t^n = \frac{1}{n} (r_{t+1}^n + (n-1) y_{t+1}^{n-1}). \label{eq:csba5}
+y_t^n = \frac{1}{n} \left(r_{t+1}^n + (n-1) y_{t+1}^{n-1}\right). \label{eq:csba5}
 \end{equation}
 
 Kombineres udtrykket for den effektive rente \(y_t^n\) samt implikationen for \(p_t^n\), kan Ligning \eqref{eq:csba4} løses ved rekursion, og dermed opnå
@@ -779,7 +779,7 @@ s_t^n\equiv y_t^n - y_t^1. \label{eq:csba7}
 
 Rentespændet findes nu ved at tage den betingede forventning til den fremtidige (korte) rente og ændringer i risikopræmien
 \begin{equation}
-s_t^n=\frac{1}{n} \sum_{i=1}^{n-1} \mathbb{E}_t[(n-1)\Delta y_{t+1}^1] + \frac{1}{n}\sum_{i=0}^{n-1}\mathbb{E}_t[(r_{t+1+i}^{n-i}-y_t^1)]. \label{eq:csba8}
+s_t^n=\frac{1}{n} \sum_{i=1}^{n-1} \mathbb{E}_t\left[(n-1)\Delta y_{t+1}^1\right] + \frac{1}{n}\sum_{i=0}^{n-1}\mathbb{E}_t\left[(r_{t+1+i}^{n-i}-y_t^1)\right]. \label{eq:csba8}
 \end{equation}
 
 Ved denne opskrivning ses, at ændringer i rentespændet er grundet bevægelser i den fremtidige (korte) rente og/eller ændringer i den fremtidige risikopræmie. Resultatet er dermed en analog til relationen mellem aktieafkast og \emph{Dividend-Price Ratio} i \emph{Dynamic Gordon Growth Model}. \citep{Fama1987} viser, at rentespændet implicit har styrke til at prædiktere obligationsafkast, hvis obligationsafkastet er tidsvarierende.
@@ -804,8 +804,8 @@ r_{t+1}^{c,n}\approx k + \rho p_{t+1}^{c,n-1} + (1-\rho)c - p_t^{c,n} \label{eq:
 Fra Ligning \eqref{eq:csba11} og Ligning \eqref{eq:csaa4} ses, at udbytte og kuponbetalingenr spiller en sammenlignelig rolle, når afkast skal approksimeres for hhv. aktier og obligationer. Her er \(k\) og \(\rho\) lineariseringsparametre, som er givet ved
 
 \begin{align*}
-k &= -\log(1-\rho)\log(\frac{1}{\rho-1})\\
-\rho&= \frac{1}{(1\exp(\overline{c-p}))}.
+k &= -\log(1-\rho)\log\left(\frac{1}{\rho-1}\right)\\
+\rho&= \frac{1}{\exp\left(\overline{c-p}\right)}.
 \end{align*}
 
 Hvis kuponobligationen bliver solgt til kurs pari, vil \(\rho\) reduceres til
@@ -813,17 +813,17 @@ Hvis kuponobligationen bliver solgt til kurs pari, vil \(\rho\) reduceres til
 
 Ved rekursion indtil udløb af kuponobligationen kan der udledes en ligning, som kobler obligationsprisen til dens følge af kuponbetalinger og det fremtidige afkast på obligationen, altså vil prisen blive
 \begin{equation}
-p_t^{c,n}\approx\sum_{i=0}^{n-1} \rho^i (k+(1-\rho)c - r_{t+1+i}^{c,n-i}). \label{eq:csba12}
+p_t^{c,n}\approx\sum_{i=0}^{n-1} \rho^i \left(k+(1-\rho)c - r_{t+1+i}^{c,n-i}\right). \label{eq:csba12}
 \end{equation}
 
 En tilsvarende approksimation af den effektive log rente eksisterer ligeledes, rekursion for denne medfører
 \begin{equation}
-p_t^{c,n}\approx\sum_{i=0}^{n-1} \rho^i (k+(1-\rho)c - y_{t}^{c,n}). \label{eq:csba13}
+p_t^{c,n}\approx\sum_{i=0}^{n-1} \rho^i \left(k+(1-\rho)c - y_{t}^{c,n}\right). \label{eq:csba13}
 \end{equation}
 
 Kombineres Ligning \eqref{eq:csba12} med Ligning \eqref{eq:csba13}, kan følgende relation opnåes
 \begin{equation}
-y_{t}^{c,n}\approx (\frac{(1-\rho)}{(1-\rho^n)})\sum_{i=0}^{n-1} \rho^i r_{t+1+i}^{c,n-i}. \label{eq:csba14}
+y_{t}^{c,n}\approx \frac{(1-\rho)}{(1-\rho^n)}\sum_{i=0}^{n-1} \rho^i r_{t+1+i}^{c,n-i}. \label{eq:csba14}
 \end{equation}
 
 Til forskel for nulkuponobligationen, hvor der eksisterer en eksakt relation mellem den effektive log rente og nulkupon obligations log afkastet, Ligning \eqref{eq:csba5}, eksisterer der kun en approksimativ relation for kuponobligationen. En forskel, som adskiller nulkuponobligationer fra kuponobligationer er varighedens betydning. For nulkuponobligationer vil løbetiden direkte måle længden af tid en investor har investeret sin formue i obligationen. For kuponobligationer vil løbetiden være et uperfekt mål til at måle denne længde af tid, som investoren holder obligationen, eller portefølje af obligationer, da meget af værdiforøgelsen sker før udløb, \citep{Campbell1997}. For kuponobligationer vil \emph{Macaulay} varighed være et bedre mål, \citep{Macaulay1938}. \emph{Macaulay} varighed ser kuponobligationer som en række af nulkuponobligationer, og er et vægtet gennemsnit af løbetiderne på de indirekte nulkuponobligationer. Ved benyttelse af kuponobligationens effektive rente som diskonteringsfaktoren vil varigheden blive
@@ -841,7 +841,7 @@ D^{c,n}\approx \frac{(1-\rho^n)}{(1-\rho)} = \frac{1-(1+Y_t^{c,n})^{-n}}{1-(1+Y_
 
 hvor ligheden følger, da obligationen antages at handle til kurs pari. Den endelige loglineære relation kan nu findes, ved at indsætte Ligning \eqref{eq:csba13} og Ligning \eqref{eq:csba16} ind i Ligning \eqref{eq:csba11}.
 \begin{equation}
-r_{t+1}^{c,n}\approx D^{c,n} y_t^{c,n} - (D^{c,n} - 1) y_{t+1}^{c,n-1}=D^{c,n}(y_t^{c,n}- y_{t+1}^{n-1}) + y_{t+1}^{n-1}  \label{eq:csba17}
+r_{t+1}^{c,n}\approx D^{c,n} y_t^{c,n} - \left(D^{c,n} - 1\right) y_{t+1}^{c,n-1}=D^{c,n}(y_t^{c,n}- y_{t+1}^{n-1}) + y_{t+1}^{n-1}  \label{eq:csba17}
 \end{equation}
 
 Ligning \eqref{eq:csba17} kan ligeledes sammenlignes med Ligning \eqref{eq:csaa4}, og blev først udledt af \citep{Campbell1983}. Men i dette tilfælde er ligningen et vægtet gennemsnit af varigheden på nuværende og fremtidige effektive renter. Ligning \eqref{eq:csba17} holder ligeledes for nulkuponobligationer, hvor varigheden erstatter løbetiden. Det andet lighedstegn viser ligeledes relationen til rentespændet, \(y_t^{c,n}- y_{t+1}^{n-1}\). Som der givetvis må resultere i en forventning om positiv korrelation mellem afkastet og rentespændet i den empiriske sektion.
@@ -939,7 +939,7 @@ hvor \(\bm{\Phi}\) er en vektor af afskæringer, \(\bm{\Phi}_1\) er en kvadratis
 
 For at få stationalitetsbetingelsen opfyldt modellen, antages, at
 \begin{equation*}
-        |\bm{\Phi}_1|\in(-1,1).
+        \det(\bm{\Phi}_1)\in(-1,1).
     \end{equation*}
 Dvs. at determinanten matricen -- bestående af hældningskoefficienter -- er begrænset mellem \(-1\) og \(1\).
 
@@ -999,7 +999,7 @@ Ved brug af sumoperatoren kan ovenstående skrives på kompakt form
     \end{equation}
 Nu kan de betingede \(k\)-periode momenter af tilstandsvektoren beregnes. Den betingende middelværdi er
 \begin{equation}
-        \mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})=\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t,
+        \mathbb{E}_t[\bm{z}_{t+1}+\dots+\bm{z}_{t+k}]=\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t,
     \end{equation}
 hvor antagelsen i \eqref{eq:2} benyttes.
 
@@ -1007,14 +1007,14 @@ hvor antagelsen i \eqref{eq:2} benyttes.
 
 Den betingede varians er
 \begin{align}
-        \mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})
-        &=\mathbb{V}_t\left(\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t +\sum_{q=1}^k\left(\sum_{p=0}^{k-q}\bm{\Phi}_1^p \bm{v}_{t+q}\right)\right) \nonumber\\
-        &=\mathbb{V}_t\left(\sum_{q=1}^k\left(\sum_{p=0}^{k-q} \bm{\Phi}_1^p \bm{v}_{t+q}\right)\right) \label{eq:3},
+        \mathbb{V}_t[\bm{z}_{t+1}+\dots+\bm{z}_{t+k}]
+        &=\mathbb{V}_t\left[\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t +\sum_{q=1}^k\left(\sum_{p=0}^{k-q}\bm{\Phi}_1^p \bm{v}_{t+q}\right)\right] \nonumber\\
+        &=\mathbb{V}_t\left[\sum_{q=1}^k\left(\sum_{p=0}^{k-q} \bm{\Phi}_1^p \bm{v}_{t+q}\right)\right] \label{eq:3},
     \end{align}
 hvor de første to led i variansen forsvinder, da de er konstante eller kendte på tidspunkt \(t\). Ved omskrivning af \eqref{eq:3} fås
 \begin{align*}
-        \mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})&=\mathbb{V}_t\big(\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\bm{v}_{t+1}+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\big)\bm{v}_{t+2}\\
-        &\hphantom{=}+\dots+\big(I+\Phi_1\big)\bm{v}_{t+k-1}+\bm{v}_{t+k}\big)\\
+        \mathbb{V}_t[\bm{z}_{t+1}+\dots+\bm{z}_{t+k}]&=\mathbb{V}_t\big[\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\bm{v}_{t+1}+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\big)\bm{v}_{t+2}\\
+        &\hphantom{=}+\dots+\big(I+\Phi_1\big)\bm{v}_{t+k-1}+\bm{v}_{t+k}\big]\\
         &=\Sigma_v+\big(I+\bm{\Phi}_1\big)\Sigma_v(I+\bm{\Phi}_1)'+\big(I+\bm{\Phi}_1+\bm{\Phi}_1\bm{\Phi}_1\big)\Sigma_v\big(I+\bm{\Phi}_1+\bm{\Phi}_1\bm{\Phi}_1\big)'\\
         &\hphantom{=}+\dots+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\Sigma_v\big(I+\bm{\Phi}_1'+\dots+\bm{\Phi}_1^{k-1}\big)',
     \end{align*}
@@ -1031,19 +1031,19 @@ Vil vi have det forventede \(k\)-periode log-(mer)afkast pr. periode, kan følge
 ved at anvende denne matrix på den betingede middelværdi fås da
 \begin{equation}
         \frac{1}{k}\begin{pmatrix}
-        \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
-        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}} \right)
-        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k}).
+        \mathbb{E}_t\left[ r_{0,t+1}^{(k)} \right]\\
+        \mathbb{E}_t\left[ \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}} \right]
+        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{E}_t[\bm{z}_{t+1}+\dots+\bm{z}_{t+k}].
     \end{equation}
 Anvendes den på den betingede varians fås
 \begin{equation}
-        \frac{1}{k}\mathbb{V}_t\begin{pmatrix}
+        \frac{1}{k}\mathbb{V}_t\begin{bmatrix}
         r_{0,t+1}^{(k)}\\
         \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}}
-        \end{pmatrix}=\frac{1}{k}\begin{pmatrix}
+        \end{bmatrix}=\frac{1}{k}\begin{pmatrix}
         \sigma_0^2(k) & \bm{\sigma}_{0x}(k)'\\
         \bm{\sigma}_{0x}(k) & \bm{\Sigma}_{xx}(k)
-        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})\bm{H}_r'.
+        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{V}_t[\bm{z}_{t+1}+\dots+\bm{z}_{t+k}]\bm{H}_r'.
     \end{equation}
 Den anden selektionsmatrix som benyttes kan udtrække \(k\)-periode log-afkastet pr. periode
 \begin{equation}
@@ -1055,16 +1055,16 @@ Den anden selektionsmatrix som benyttes kan udtrække \(k\)-periode log-afkastet
 Anvender vi den på den betingede middelværdi fås
 \begin{equation}
         \frac{1}{k}\begin{pmatrix}
-        \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
-        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)} \right)
-        \end{pmatrix}=\frac{1}{k}\bm{M}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k}).
+        \mathbb{E}_t\left[ r_{0,t+1}^{(k)} \right]\\
+        \mathbb{E}_t\left[ \bm{r}_{t+1}^{(k)} \right]
+        \end{pmatrix}=\frac{1}{k}\bm{M}_r\mathbb{E}_t[\bm{z}_{t+1}+\dots+\bm{z}_{t+k}].
     \end{equation}
 Slutteligt anvendes den på den betingede varians
 \begin{equation}
-        \frac{1}{k}\mathbb{V}_t\begin{pmatrix}
+        \frac{1}{k}\mathbb{V}_t\begin{bmatrix}
         r_{0,t+1}^{(k)}\\
         \bm{r}_{t+1}^{(k)}
-        \end{pmatrix}=\frac{1}{k}\bm{\Sigma}_{rr}(k)=\frac{1}{k}\bm{M}_r\mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})\bm{M}_r'.\label{eq:bv}
+        \end{bmatrix}=\frac{1}{k}\bm{\Sigma}_{rr}(k)=\frac{1}{k}\bm{M}_r\mathbb{V}_t[\bm{z}_{t+1}+\dots+\bm{z}_{t+k}]\bm{M}_r'.\label{eq:bv}
     \end{equation}
 
 \subsection{Bytteforholdet for en VAR-investor}
@@ -1105,29 +1105,29 @@ I det følgende vil porteføljevalget under antagelsen, at investoren har potens
 
 Først antages, at afkastet på investorens portefølje er lognormal, dette betyder at \(W_{t+1}\) ligeledes er lognormal. Under antagelsen om potens nytte, kan vi omskrive Maksimeringsproblemet \eqref{eq:Nyttemaks} til
 \begin{align}
-&\max\mathbb{E}_t(\frac{W_{t+1}^{1-\gamma}-1}{1-\gamma}) \label{eq:CRRAmaks}\\
+&\max\mathbb{E}_t\left[\frac{W_{t+1}^{1-\gamma}-1}{1-\gamma}\right] \label{eq:CRRAmaks}\\
 &\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
 \end{align}
 
 Maksimering af ovenstående forventning er ækvivalent til at maksimere log af forventningen, eftersom log-funktionen er strengt voksende, se evt. Figur \ref{fig:Nyt}, som er tegnet på baggrund af log-funktionen. Derudover kan: \(\tfrac{1}{1-\gamma}\) og \(-1\) fjernes fra Maksimeringsproblemet, eftersom de er konstante og derfor ikke vil påvirke optimum. Givet af \(W_{t+1}\) er lognormal, kan resultatet fra Appendiks \ref{underligteo} anvendes, og dermed opnå
 \begin{align}
-&\max \log\left(\mathbb{E}_t(W_{t+1}^{1-\gamma})\right)=(1-\gamma){E}_t(w_{t+1})+\frac{1}{2}(1-\gamma)^2\sigma_{wt}^2 \label{eq:CRRAmakslog}\\
+&\max \log\left(\mathbb{E}_t\left[W_{t+1}^{1-\gamma}\right]\right)=(1-\gamma){E}_t\left[w_{t+1}\right]+\frac{1}{2}(1-\gamma)^2\sigma_{wt}^2 \label{eq:CRRAmakslog}\\
 &\text{ubb.}\,\,w_{t+1}=r_{p,t+1} + w_t.\notag
 \end{align}
 
 hvor \(\sigma_{wt}^2\) er den betingede varians af log formuen, \(w_{t+1}\). Derudover er budgetbegrænsningen ligeledes omskrevet til log-form. Her er \(r_{p,t+1}=\log(1+R_{p,t+1})\), dvs. logafkastet på porteføljen, også kendt som det kontinuert tilskrevne porteføljeafkast. Ved division af \((1-\gamma)\) og samtidig substitution af budgetbegrænsningen ind i objektfunktionen, opnåes følgende ubetingede maksimeringsproblem.
 \begin{equation}
-\max\mathbb{E}_t(r_{p,t+1}) + \frac{1}{2}(1-\gamma)\sigma_{pt}^2, \label{eq:CRRAmakslog2}
+\max\mathbb{E}_t\left[r_{p,t+1}\right] + \frac{1}{2}(1-\gamma)\sigma_{pt}^2, \label{eq:CRRAmakslog2}
 \end{equation}
 
 hvor \(\sigma_{pt}^2\) er den betingede varians af det kontinuert tilskrevne porteføljeafkast. Dette benytter faktummet at \(\mathbb{E}_t(w_t)=w_t\) er deterministisk og ikke påvirker optimum eller variansleddet. Her kan det bemærkes, at
 \begin{equation}
-\mathbb{E}(r_{p,t+1})+\frac{1}{2}\sigma_{pt}^2=\log(\mathbb{E}(1+R_{p,t+1})), \label{eq:portafkls}
+\mathbb{E}\left[r_{p,t+1}\right]+\frac{1}{2}\sigma_{pt}^2=\log(\mathbb{E}\left[1+R_{p,t+1}\right]), \label{eq:portafkls}
 \end{equation}
 
 fordi porteføljeafkastet er antaget til at være lognormal. Altså kan Maksimeringsproblemet \eqref{eq:CRRAmakslog2} omskrives til
 \begin{equation}
-\max\mathbb{E}_t(1+R_{p,t+1}) - \frac{1}{2}\gamma\sigma_{pt}^2. \label{eq:CRRAmakslog3}
+\max\mathbb{E}_t[1+R_{p,t+1}] - \frac{1}{2}\gamma\sigma_{pt}^2. \label{eq:CRRAmakslog3}
 \end{equation}
 
 Dermed opnåes det familiære maksimeringsproblem fra middelværdi-varians analysen, Sektion \ref{myoinv}. Altså vil investoren maksimere bytteforholdet mellem den forventede middelværdi og variansen på porteføljen. Denne afvejning er igen lineær, og \emph{RRA}-koefficienten \(\gamma\) spiller samme rolle som parameteren \(k\) i middelværdi-varians analysen. Fra ovenstående ses også, at variansen på porteføljen bliver straffet af en faktor på \(\tfrac{\text{RRA}}{2}\).
@@ -1148,12 +1148,12 @@ For at kunne løse Maksimeringsproblemet \eqref{eq:CRRAmakslog3}, må et nyttigt
 
 Her repræsenterer \(r_{t+1}\) log afkastet på det ene risikobærende aktiv, og \(r_{0,t+1}\) repræsenterer log afkastet på det risikofrie aktiv. Forskellen mellem log porteføljeafkastet og den lineære kombination af de individuelle logafkast er givet ved \(\alpha_t(1-\alpha_t)\tfrac{1}{2}\sigma_t^2\). Forskellen vil forsvinde, hvis vægtningen i det risikobærende aktiv er nul, eller hvis vægtningen i det risikofrie aktiv er nul. Ovenstående approksimation er eksakt i grænsen, ved benyttelse af kontinuerte \emph{diffusion processes} for priserne på aktiverne, og kan udledes ved brug af \emph{Itô's Lemma}, \citep{CampVicCha2003}. Ovenstående approksimation kan nu benyttes, og dermed kan Maksimeringsproblemet \eqref{eq:CRRAmakslog2} skrives i form af merafkast på porteføljen.
 \begin{equation}
-\max\alpha_t(\mathbb{E}_t(r_{t+1}) - r_{0,t+1}) + \frac{1}{2}\alpha_t(1-\alpha_t)\sigma_t^2 + \frac{1}{2}(1-\gamma)\alpha_t^2\sigma_t^2, \label{eq:CRRAmakslog4} 
+\max\alpha_t(\mathbb{E}_t[r_{t+1}] - r_{0,t+1}) + \frac{1}{2}\alpha_t(1-\alpha_t)\sigma_t^2 + \frac{1}{2}(1-\gamma)\alpha_t^2\sigma_t^2, \label{eq:CRRAmakslog4} 
 \end{equation}
 
 med den tilhørende løsning
 \begin{equation}
-\alpha_t=\frac{\mathbb{E}(r_{t+1}) - r_{0,t+1}+\frac{1}{2}\sigma_t^2}{\gamma\sigma_t^2}.
+\alpha_t=\frac{\mathbb{E}_t[r_{t+1}] - r_{0,t+1}+\frac{1}{2}\sigma_t^2}{\gamma\sigma_t^2}.
 \end{equation}
 
 Som tilmed er ækvivalent til den optimale vægtning, Ligning \eqref{eq:Statmaks}, fra middelværdi-varians analysen. I tilfældet, hvor investoren står overfor \(n>1\) risikobærende aktiver, vil Taylor approksimationen af den ikke-lineære funktion være givet ved
@@ -1163,12 +1163,12 @@ r_{p,t+1}-r_{0,t+1}\approx \bm{\alpha}'_t (\bm{r}_{t+1}-r_{0,t+1}\bm{\ell})+\fra
 
 Den optimale løsning vil være givet ved
 \begin{equation}
-\bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t(\bm{r}_{t+1})-r_{0,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right).\label{eq:Potmultalpha}
+\bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t[\bm{r}_{t+1}]-r_{0,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right).\label{eq:Potmultalpha}
 \end{equation}
 
 Som igen er ækvivalent med den optimale løsning, Ligning \eqref{eq:Multalpha}, for middelværdi-varians analysen i det multiple tilfælde. På samme måde som i middelværdi-varians analysen, har løsningen egenskaben, at koefficienten for relativ risikoaversion, \(\gamma\), kun påvirker den overordnede skalering af positionen i det risikobærende aktiv, men ikke kompositionen. Dette er ensbetydende med, at \textit{The Mutual Fund Seperation Theorem}, \citep{Tobin1958}, også holder i den lognormale model med potens nytte. Et mere generelt tilfælde end ovenstående, er når der ikke eksisterer et risikofrit aktiv, og man da i stedet må benytte et risikobærende \emph{benchmark}-afkast, \(r_{b,t+1}\), da bliver løsningen
 \begin{equation}
-\bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t(\bm{r}_{t+1})-r_{b,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right)+(1-\frac{1}{\gamma})(-\bm{\Sigma}_t^{-1}\bm{\sigma}_{b,t}).
+\bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t[\bm{r}_{t+1}]-r_{b,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right)+\left(1-\frac{1}{\gamma}\right)\left(-\bm{\Sigma}_t^{-1}\bm{\sigma}_{b,t}\right).
 \end{equation}
 
 \hypertarget{modkper}{%
@@ -1192,7 +1192,7 @@ I de følgende sektioner vil flere specialtilfælde af det multiple-periode setu
 
 I tilfældet uden periodisk rebalancering skal investoren evaluere \(k\)-periode afkastet, på samme måde som i tilfældet med én-periode. Udover antagelsen om lognormalitet og potens nytte, antages nu den restriktive betingelse, at alle aktivafkast er uafhængige og identisk fordelte over tid. Dette betyder, at det risikofrie \(k\)-periode logafkast er konstant lig \(kr_{0}\), det \(k\)-periode forventede log afkast for de risikobærende aktiver er \(k\mathbb{E}(\bm{r})\), kovariansmatricen af logafkastet på de risikobærende aktiver er konstant lig \(\bm{\Sigma}\) og siden alle afkast er ukorrellerede bliver kovariansmatricen over en \(k\)-periode lig \(k\bm{\Sigma}\). Givet at Taylor approksimationen, Ligning \eqref{eq:Multtaylor}, er tilstrækkelig approksimerende for den givne respektive periode er løsningen, Ligning \eqref{eq:Potmultalpha}, stadig optimal. Dette følger da alle middelværdier og kovarianserer skaleret med den samme faktor, \(k\)
 \begin{equation}
-\bm{\alpha}_t=\frac{1}{\gamma}(k\bm{\Sigma})^{-1}\left(k\mathbb{E}_t(\bm{r}_{t+1})-kr_{0,t+1}\bm{\ell}+\frac{1}{2}k\bm{\sigma}_t^2\right). \label{eq:Potmultalphak}
+\bm{\alpha}_t=\frac{1}{\gamma}(k\bm{\Sigma})^{-1}\left(k\mathbb{E}_t[\bm{r}_{t+1}]-kr_{0,t+1}\bm{\ell}+\frac{1}{2}k\bm{\sigma}_t^2\right). \label{eq:Potmultalphak}
 \end{equation}
 
 Altså vil investoren vælge den samme portefølje over hele deres investeringshorisont givet, at der ikke er mulighed for periodisk rebalancering.
@@ -1209,15 +1209,15 @@ r_{p2,t+2}-2r_0&=(r_{p,t+1}-r_0)+(r_{p,t+2}-r_0)\\
 \end{align}
 
 Ovenstående kan generaliseres til \(k\)-perioder. Den betingede varians af \(2\)-periode log porteføljeafkastet bliver
-\[\mathbb{V}_t(r_{p2,t+2})=\bm{\alpha}_t'\bm{\Sigma}\bm{\alpha}_t+\bm{\alpha}_{t+1}'\bm{\Sigma}\bm{\alpha}_{t+1},\]
+\[\mathbb{V}_t[r_{p2,t+2}]=\bm{\alpha}_t'\bm{\Sigma}\bm{\alpha}_t+\bm{\alpha}_{t+1}'\bm{\Sigma}\bm{\alpha}_{t+1},\]
 
 eftersom \(\bm{\alpha}_{t+1}\) også fastsættes på tidspunkt \(t\). Middelværdien af log porteføljeafkastet er
-\[\mathbb{E}(r_{p2,t+2})+\frac{1}{2}\mathbb{V}(r_{p2,t+2})=2r_0 + (\bm{\alpha}_t'+\bm{\alpha}_{t+1}')(\mathbb{E}(r)-r_0\bm{\ell}+\frac{1}{2}\bm{\sigma}^2).\]
+\[\mathbb{E}[r_{p2,t+2}]+\frac{1}{2}\mathbb{V}[r_{p2,t+2}]=2r_0 + (\bm{\alpha}_t'+\bm{\alpha}_{t+1}')(\mathbb{E}[r]-r_0\bm{\ell}+\frac{1}{2}\bm{\sigma}^2).\]
 
 Benyttelse af ovenstående momenter giver følgende maksimeringsproblem for \(2\)-periode porteføljeproblemet med periodisk rebalancering
 \begin{align}
-&\max\mathbb{E}_t(r_{p2,t+2}) + \frac{1}{2} \mathbb{V}_t(r_{p2,t+2})-\frac{1}{2}\gamma \mathbb{V}_t(r_{p2,t+2})\notag \\
-&=2r_0+(\bm{\alpha}_t'+\bm{\alpha}_{t+1}')(\mathbb{E}(r)-r_0\bm{\ell}+\frac{1}{2}\bm{\sigma}^2)-\frac{1}{2}\gamma (\bm{\alpha}_t'\bm{\Sigma}\bm{\alpha}_t+\bm{\alpha}_{t+1}'\bm{\Sigma}\bm{\alpha}_{t+1})
+&\max\mathbb{E}_t[r_{p2,t+2}] + \frac{1}{2} \mathbb{V}_t(r_{p2,t+2})-\frac{1}{2}\gamma \mathbb{V}_t[r_{p2,t+2}]\notag \\
+&=2r_0+(\bm{\alpha}_t'+\bm{\alpha}_{t+1}')\left(\mathbb{E}[r]-r_0\bm{\ell}+\frac{1}{2}\bm{\sigma}^2\right)-\frac{1}{2}\gamma (\bm{\alpha}_t'\bm{\Sigma}\bm{\alpha}_t+\bm{\alpha}_{t+1}'\bm{\Sigma}\bm{\alpha}_{t+1})
 \label{eq:CRRAmakslogk2periode}
 \end{align}
 
@@ -1234,8 +1234,8 @@ Investoren vælger altså vægte sådan, at
 \begin{align}
 \left\{\bm{\alpha}_{t+k-\tau}^\tau\right\}_{\tau=k}^{\tau=1}=
 \begin{cases}
-\arg\max\mathbb{E}_t(\frac{1}{1-\gamma}W_{t+k}^{1-\gamma}),\quad &\gamma\neq 1\\
-\arg\max\mathbb{E}_t(\log(W_{t+k})),\quad &\gamma=1.
+\arg\max\mathbb{E}_t\left[\frac{1}{1-\gamma}W_{t+k}^{1-\gamma}\right],\quad &\gamma\neq 1\\
+\arg\max\mathbb{E}_t\left[\log(W_{t+k})\right],\quad &\gamma=1.
 \end{cases}\label{eq:jurvaegt}
 \end{align}
 
@@ -1247,19 +1247,19 @@ W_{t+k}=W_t\exp(r_{p,t\to t+k}),\label{eq:formuetk}
 hvor \(r_{p,t\to t+k}=\sum_{i=1}^k r_{p,t+i}\) er \(k\)-periode log porteføljeafkastet mellem tidspunkt \(t\) og \(t+k\). Dette tillader, at vægtene \eqref{eq:jurvaegt}, kan omskrives til
 \begin{align}
 \left\{\bm{\alpha}_{t+k-\tau}^\tau\right\}_{\tau=k}^{\tau=1}=\begin{cases}
-\arg\max\mathbb{E}_t(\exp ((1-\gamma) r_{p,t\to t+k})),\quad &\gamma\neq 1\\
-\arg\max\mathbb{E}_t(r_{p,t\to t+k}),\quad &\gamma=1.
+\arg\max\mathbb{E}_t\left[\exp ((1-\gamma) r_{p,t\to t+k})\right],\quad &\gamma\neq 1\\
+\arg\max\mathbb{E}_t\left[r_{p,t\to t+k}\right],\quad &\gamma=1.
 \end{cases}\label{eq:jurvaegt2}
 \end{align}
 
 Som tidligere argumenteret vil en antagelse om rebalancering følge markedsobservationer, og det er ud fra denne antagelse at \citep{JurVic2011} løser det generelle \(k\)-periode porteføljeproblem ved benyttelse af baglæns optrævling. Løsningen er en diskretiseret version af \citep{Liu2007}, men mere fleksibel idet, at den kan håndtere et bredt spektrum af risikobærende aktiver og tilstandsvariable på samme tid. Derudover vil løsningen være eksakt i kontinuert tid, grundet den loglineære approksimation. Først udledes porteføljestrategien for den sidste periode, \(\tau=1\), da denne vægtning vil danne grundlaget for resten af rekursionen. Den optimale portefølje for sidste periode er den sædvanlige myopiske eller én-periode middelværdi-varians optimale portefølje, som tidligere præsenteret
-\[\bm{\alpha}_{t+k-1}^1=\frac{1}{\gamma}\bm{\Sigma}_{xx}^{-1}\left(\mathbb{E}_{t+k-1}(\bm{r}_{t+k}-r_{0,t+k}\bm{\ell})+\frac{1}{2}\bm{\sigma}_x^2 + (1-\gamma) \bm{\sigma}_{0x}\right),\]
+\[\bm{\alpha}_{t+k-1}^1=\frac{1}{\gamma}\bm{\Sigma}_{xx}^{-1}\left(\mathbb{E}_{t+k-1}\left[\bm{r}_{t+k}-r_{0,t+k}\bm{\ell}\right]+\frac{1}{2}\bm{\sigma}_x^2 + (1-\gamma) \bm{\sigma}_{0x}\right),\]
 
 hvor, at
-\[\mathbb{E}_{t+k-1}(\bm{r}_{t+k}-r_{0,t+k}\bm{\ell})=\bm{H}_x(\bm{\Phi}_0 + \bm{\Phi}_1 \bm{z}_{t+k-1}),\]
+\[\mathbb{E}_{t+k-1}\left[\bm{r}_{t+k}-r_{0,t+k}\bm{\ell}\right]=\bm{H}_x(\bm{\Phi}_0 + \bm{\Phi}_1 \bm{z}_{t+k-1}),\]
 
 og \(\bm{H}_x\) er selektionsmatricen, som vælger rækkerne hørende til vektoren af merafkast \(\bm{x}\) fra den relevante matrix. Den optimale portefølje kombinerer tangensporteføljen og global minimum varians porteføljen fra den efficiente rand, konstrueret af de én-periode forventede merafkast og kovariansmatricen af én-periode merafkastene. Tangensporteføljedelen er
-\[\bm{\Sigma}_{xx}^{-1}\mathbb{E}_{t+k-1}(\bm{r}_{t+k}-r_{0,t+k}\bm{\ell})+\frac{1}{2}\bm{\sigma}_x^2.\]
+\[\bm{\Sigma}_{xx}^{-1}\mathbb{E}_{t+k-1}\left[\bm{r}_{t+k}-r_{0,t+k}\bm{\ell}\right]+\frac{1}{2}\bm{\sigma}_x^2.\]
 
 Denne portefølje er afhængig af de tidsvarierende merafkast og kovariansmatricen af merafkastene, dette er ensbetydende med at porteføljen vil ændre sig over tid. Global minimum varians porteføljen består af den anden del
 \[\bm{\Sigma}_{xx}^{-1}\bm{\sigma}_{0x},\]
@@ -1268,8 +1268,8 @@ og afhænger kun af kovariansmatricen af merafkast, som forventet. Givet antagel
 
 Den generelle rekursive løsning til det dynamiske porteføljeproblem er givet ved
 \begin{align}
-\bm{\alpha}_{t+k-\tau}^\tau = &\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} \left( \mathbb{E}_{t+k-\tau} ( \bm{r}_{t+k-\tau+1} - r_{0,t+k-\tau+1} \bm{\ell} ) + \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma) \bm{\sigma}_{0x} \right) \notag\\
-&- (1-\frac{1}{\gamma} ) \bm{\Sigma}_{xx}^{-1} \bm{\Sigma}_x (B_1^{\tau-1'}+(B_2^{\tau-1}+B_3^{\tau-1'})\mathbb{E}_{t+k-\tau}(\bm{z}_{t+k-\tau+1})),\label{eq:jurvicalpha}
+\bm{\alpha}_{t+k-\tau}^\tau = &\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} \left( \mathbb{E}_{t+k-\tau} \left[ \bm{r}_{t+k-\tau+1} - r_{0,t+k-\tau+1} \bm{\ell} \right] + \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma) \bm{\sigma}_{0x} \right) \notag\\
+&- \left(1-\frac{1}{\gamma} \right) \bm{\Sigma}_{xx}^{-1} \bm{\Sigma}_x \left(B_1^{\tau-1'}+(B_2^{\tau-1}+B_3^{\tau-1'})\mathbb{E}_{t+k-\tau}[\bm{z}_{t+k-\tau+1}]\right),\label{eq:jurvicalpha}
 \end{align}
 
 hvor \(\bm{\Sigma}_x=\begin{pmatrix}\bm{\sigma}_0x & \bm{\Sigma} & \bm{\Sigma}_{xs}'\end{pmatrix}\) og \(B_1^{\tau-1}\), \(B_2^{\tau-1}\) samt \(B_3^{\tau-1}\) er funktioner afhængende af: den resterende investeringshorisont, \(\tau\), \emph{RRA}-parameteren, \(\gamma\), samt koefficeinterne fra VAR-modellen, \citep{JurVic2011}.
@@ -1384,10 +1384,10 @@ hvor \(\hat{S}_t=\sum_{j=1}^t \hat{u}_j\), \(\hat{u}_t\) er residualen hørende 
 Indtil videre er de økonometriske metoder og statistiske tests blevet beskrevet, som der anvendes i den empriske del af denne afhandling. Uden nogle yderligere restriktioner vil den præsenterede metodik kunne medføre en ikke-restringeret VAR model, som herefter vil kunne implementeres for porteføljevalget. Det er til gengæld urealistisk at tro, at en medtagelse af samtlige variable vil medføre en generel statistisk stærk model. Derfor vil denne sektion præsentere den generelle kvantitative og kvalitatitive metode til at specificere en mere sparsommelig model, som højst sandsynlig også vil have en stærkere performance på en eksogen stikprøve.
 
 En ikke-restringeret VAR model indeholdende samtlige variable vil givetvis have den højeste \emph{goodness-of-fit} relativt til alle restringerede modeller. Derudover ville en sådan model resultere i en række komplikationer. En sådan komplikation er eksempelvis multikollinaritet mellem de prædiktable variable. Eksempelvis kan korte og lange rentespænd muligvis fange den samme variation i merafkast, og en medtagelse af begge rentespænd vil derfor ikke være nødvendigt. Derudover kan for mange variable gøre VAR modellen højt parameteriseret, og dermed påvirke præcisionen af de estimerede koefficienter. En optimal model vil optimere det såkaldte \emph{bias-variance tradeoff}, og dermed fange regulariteterne i estimationsdatasættet og ligeledes generalisere til eksterne datasæt. Givet at denne afhandling kun er intereseret i variable som \emph{har} statistisk styrke til at forudsige afkast vil en række restriktioner automatisk føre til en sparsommelig model. Dette kan gøres på en lang række måder, men én af de absolut simpleste er den såkaldte \emph{Top-down} strategi, som også er kendt i statistik som \emph{backward-elimination}. En sådan strategi specificere en model baseret på relativ \emph{goodness-of-fit} gennem det valgte informations kriterie. Formelt modellerer informations kriteriet bytteforholdet mellem præcisionen for stikprøven og antallet af estimerede parametre. Generelt kan et sådant kriterie opskrives matematisk som
-\[\text{IC}=\log(\mid \hat{\Sigma}\mid)+k(\#\text{parametre}),\]
+\[\text{IC}=\log(\det(\hat{\Sigma}))+k(\#\text{parametre}),\]
 
 hvor \(\hat{\Sigma}\) repræsentere dne estimerede kovariansmatrix af residualerne og \(k\) vil afhænge af det valgte informationskriterie. Informationskriteriet vil dermed foretrække modeller med lav varians, men samtidig straffe modeller med inkludering af for mange variable. I denne afhandling benyttes det såkaldte \emph{Andreas Kracht Frandsen Information Criteria}, \emph{AKFIC}. Til forskel for det kendte \emph{Akaike Information Criteria} straffes modellen med en faktor på
-\[k=\frac{Q(0.05)}{T}=\frac{3.841}{T},\]
+\[k=\frac{F^{-1}_{\chi_{+}^2}(0.05)}{T}=\frac{3.841}{T},\]
 
 hvor \(F^{-1}_{\chi_{+}^2}(\cdot)\) er kvantilfunktionen for den ensidet \(\chi^2\)-fordeling. I stedet for en faktor på
 \[k=\frac{2}{T}.\]
@@ -1396,7 +1396,7 @@ hvor \(T\) repræsenterer stikprøvestørrelsen. I praksis implementeres \emph{T
 
 Processen køres kun for regressionerne for aktivafkastene på det fulde datasæt, for at have et kvantitativt bud på deres optimale prædiktionsvariable. Eftersom fokus er på porteføljeallokering, restringeres datasættet herefter til kun at indeholde variablene, der forbliver i modellen efter \emph{Top-down} processen. Dernæst holdes variablene op i mod de univariate og multiple regressioner samt korrelationsanalysen, for at undgå mulige multikollinaritetsproblemer. Derudover foretages en \emph{Variance Inflation Factor} analyse, som endnu et tjek for multikollinaritet. Analysen foretages i tre skridt. For samtlige forklarende variable fra \emph{Top-down} processen laves følgende regression
 \begin{equation}
-x_t^i=\alpha+\bm{\beta}^j + \bm{x}_t^{j}+\varepsilon_t. \label{eq:vifanareg}
+x_t^i=\alpha+\bm{\beta}^j\bm{x}_t^{j}+\varepsilon_t. \label{eq:vifanareg}
 \end{equation}
 
 Dernæst beregnes \emph{VIF}-værdien for hvert \(\beta^j\) som
@@ -2687,10 +2687,10 @@ Ved at følge modelselektionsproceduren fra Sektion \ref{sekmodelselek}, startes
 Ved at udføre samme procedure for det risikofrie aktiv, statsobligationer og virksomhedsobligationer endes ud den følgende temporale modelspecifikation.
 \begin{align*}
 r_{t+1}^{\text{rf}}&=\phi_0^{\text{rf}} + \phi_1^{\text{rf}} r_{t}^{\text{rf}} +  \phi_2^{\text{rf}} rx_{t}^{\text{a}} + \phi_3^{\text{rf}} rx_{t}^{\text{s}} + \phi_4^{\text{rf}} rx_{t}^{\text{v}} + \phi_5^{\text{rf}} x_{t}^{\text{bm}} + \phi_6^{\text{rf}} x_{t}^{\text{avar}} + \phi_7^{\text{rf}} x_{t}^{\text{smb}} + \phi_8^{\text{rf}} x_{t}^{\text{b}} + \phi_9^{\text{rf}} x_{t}^{\text{ys}}\\
-&\quad+ \phi_{10}^{\text{rf}} x_{t}^{\text{cs}}+ \phi_{11}^{\text{rf}} x_{t}^{\text{ds}} + \phi_{12}^{\text{rf}} x_{t}^{\text{fr}}\\
-rx_{t+1}^{\text{a}}&=\phi_0^{\text{a}} + \phi_1^{\text{a}} r_{t}^{\text{rf}} +  \phi_2^{\text{a}} rx_{t}^{\text{a}} + \phi_3^{\text{a}} rx_{t}^{\text{s}} + \phi_4^{\text{a}} rx_{t}^{\text{v}} + \phi_5^{\text{a}} x_{t}^{\text{bm}} + \phi_6^{\text{a}} x_{t}^{\text{smb}} + \phi_7^{\text{a}} x_{t}^{\text{b}} + \phi_8^{\text{a}} x_{t}^{\text{fr}}\\
-rx_{t+1}^{\text{s}}&=\phi_0^{\text{s}} + \phi_1^{\text{s}} r_{t}^{\text{rf}} +  \phi_2^{\text{s}} rx_{t}^{\text{a}} + \phi_3^{\text{s}} rx_{t}^{\text{s}} + \phi_4^{\text{s}} rx_{t}^{\text{v}} + \phi_5^{\text{s}} x_{t}^{\text{avar}} + \phi_6^{\text{s}} x_{t}^{\text{smb}} + \phi_7^{\text{s}} x_{t}^{\text{b}} + \phi_8^{\text{s}} x_{t}^{\text{ys}}+ \phi_{10}^{\text{s}} x_{t}^{\text{cs}}+ \phi_{11}^{\text{s}} x_{t}^{\text{fr}}\\
-rx_{t+1}^{\text{v}}&=\phi_0^{\text{v}}+ \phi_1^{\text{v}} r_{t}^{\text{rf}} +  \phi_2^{\text{v}} rx_{t}^{\text{a}} + \phi_3^{\text{v}} rx_{t}^{\text{s}} + \phi_4^{\text{v}} rx_{t}^{\text{v}} + \phi_5^{\text{v}} x_{t}^{\text{avar}} + \phi_6^{\text{v}} x_{t}^{\text{smb}} + \phi_7^{\text{v}} x_{t}^{\text{b}} + \phi_8^{\text{v}} x_{t}^{\text{ys}}+ \phi_9^{\text{v}} x_{t}^{\text{cs}} + \phi_{10}^{\text{v}} x_{t}^{\text{fr}}.
+&\quad+ \phi_{10}^{\text{rf}} x_{t}^{\text{cs}}+ \phi_{11}^{\text{rf}} x_{t}^{\text{ds}} + \phi_{12}^{\text{rf}} x_{t}^{\text{fr}}+v^{\text{rf}}\\
+rx_{t+1}^{\text{a}}&=\phi_0^{\text{a}} + \phi_1^{\text{a}} r_{t}^{\text{rf}} +  \phi_2^{\text{a}} rx_{t}^{\text{a}} + \phi_3^{\text{a}} rx_{t}^{\text{s}} + \phi_4^{\text{a}} rx_{t}^{\text{v}} + \phi_5^{\text{a}} x_{t}^{\text{bm}} + \phi_6^{\text{a}} x_{t}^{\text{smb}} + \phi_7^{\text{a}} x_{t}^{\text{b}} + \phi_8^{\text{a}} x_{t}^{\text{fr}}+v^{\text{a}}\\
+rx_{t+1}^{\text{s}}&=\phi_0^{\text{s}} + \phi_1^{\text{s}} r_{t}^{\text{rf}} +  \phi_2^{\text{s}} rx_{t}^{\text{a}} + \phi_3^{\text{s}} rx_{t}^{\text{s}} + \phi_4^{\text{s}} rx_{t}^{\text{v}} + \phi_5^{\text{s}} x_{t}^{\text{avar}} + \phi_6^{\text{s}} x_{t}^{\text{smb}} + \phi_7^{\text{s}} x_{t}^{\text{b}} + \phi_8^{\text{s}} x_{t}^{\text{ys}}+ \phi_{10}^{\text{s}} x_{t}^{\text{cs}}+ \phi_{11}^{\text{s}} x_{t}^{\text{fr}}+v^{\text{s}}\\
+rx_{t+1}^{\text{v}}&=\phi_0^{\text{v}}+ \phi_1^{\text{v}} r_{t}^{\text{rf}} +  \phi_2^{\text{v}} rx_{t}^{\text{a}} + \phi_3^{\text{v}} rx_{t}^{\text{s}} + \phi_4^{\text{v}} rx_{t}^{\text{v}} + \phi_5^{\text{v}} x_{t}^{\text{avar}} + \phi_6^{\text{v}} x_{t}^{\text{smb}} + \phi_7^{\text{v}} x_{t}^{\text{b}} + \phi_8^{\text{v}} x_{t}^{\text{ys}}+ \phi_9^{\text{v}} x_{t}^{\text{cs}} + \phi_{10}^{\text{v}} x_{t}^{\text{fr}}+v^{\text{v}}.
 \end{align*}
 
 Dermed haves et temporalt system, som herfra vil udtyndes kvalitativt. Disse kvalitative valg støttes først og fremmest af en \emph{VIF} analyse. Tabel \ref{tab:VIF-TAB} viser \emph{VIF} analysen for hver af de forklarende variable fra de fire regressionsligninger.
