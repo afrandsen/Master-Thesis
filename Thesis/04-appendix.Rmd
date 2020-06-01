@@ -25,16 +25,16 @@ I ovenstående er det ekstra led $R_{0,t+1}$ undladt idet, at det ikke ændrer m
 
 Ved differentiation af ovenstående funktion, $\mathcal{L}(\cdot)$, mht. $\alpha_t$ opnåes førsteordensbetingelsen
 \begin{align*}
-\frac{\partial \mathcal{L}}{\partial \alpha_t} &= \mathbb{E}_t(R_{t+1}) - R_{0,t+1} - \frac{k}{2}2\alpha\sigma_t^2=0\\
+\frac{\partial \mathcal{L}}{\partial \alpha_t} &= \mathbb{E}_t\left[R_{t+1}\right] - R_{0,t+1} - \frac{k}{2}2\alpha\sigma_t^2=0\\
 &\Updownarrow\\
-\alpha&=\frac{\mathbb{E}_t\left(R_{t+1}\right)-R_{0,t+1}}{k\sigma_t^2}.
+\alpha&=\frac{\mathbb{E}_t\left[R_{t+1}\right]-R_{0,t+1}}{k\sigma_t^2}.
 \end{align*}
 
 Dermed er den optimale portefølje udledt, for tilfældet med ét risikobærende aktiv. For udledningen af den optimale portefølje på tidspunkt $t$ i tilfældet med flere risikobærende aktiver, differentieres funktionen, fra Maksimeringsproblemet \@ref(eq:MultStatmaks) mht. $\bm{\alpha}_t$, dermed fås
 \begin{align*}
-\frac{\partial \mathcal{L}}{\partial \bm{\alpha}_t} &= (\mathbb{E}_t(\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}) - \frac{k}{2}2\bm{\Sigma_t}\bm{\alpha}_t = 0\\
+\frac{\partial \mathcal{L}}{\partial \bm{\alpha}_t} &= (\mathbb{E}_t\left[\bm{R}_{t+1}\right]- R_{0,t+1}\bm{\ell}) - \frac{k}{2}2\bm{\Sigma_t}\bm{\alpha}_t = 0\\
 &\Updownarrow\\
-\bm{\alpha}_t&=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t(\bm{R}_{t+1})-R_{0,t+1}\bm{\ell}).
+\bm{\alpha}_t&=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t\left[\bm{R}_{t+1}\right]-R_{0,t+1}\bm{\ell}).
 \end{align*}
 
 Her er de gængse regler for matrix differentiation og manipulation benyttet. 
@@ -369,8 +369,8 @@ Uden tab af generalitet, kan det $k$-periode dynamiske porteføljeproblem løses
 
 Investorens problem, i et to-periodes perspektiv, er at maksimere sin forventede nytte
 \begin{align*}
-\mathbb{E}_{t+k-2}[\frac{1}{1-\gamma} W_{t+k}^{1-\gamma}]&=\frac{1}{1-\gamma} W_{t+k-2}^{1-\gamma} \mathbb{E}_{t+k-2}[(1+R_{p,t+k-1})^{1-\gamma}(1+R_{p,t+k})^{1-\gamma}]\\
-&=\frac{1}{1-\gamma} W_{t+k-2}^{1-\gamma} \mathbb{E}_{t+k-2}[\exp((1-\gamma) r_{p,t+k-1}) \mathbb{E}_{t+k-1}[\exp((1-\gamma)r_{p,t+k})]],
+\mathbb{E}_{t+k-2}\left[\frac{1}{1-\gamma} W_{t+k}^{1-\gamma}\right]&=\frac{1}{1-\gamma} W_{t+k-2}^{1-\gamma} \mathbb{E}_{t+k-2}\left[(1+R_{p,t+k-1})^{1-\gamma}(1+R_{p,t+k})^{1-\gamma}\right]\\
+&=\frac{1}{1-\gamma} W_{t+k-2}^{1-\gamma} \mathbb{E}_{t+k-2}\left[\exp((1-\gamma) r_{p,t+k-1}) \mathbb{E}_{t+k-1}\left[\exp((1-\gamma)r_{p,t+k})\right]\right],
 \end{align*}
 
 ved at vælge følgen af vægte $\left\{\bm{\alpha}_{t+k-2}^2, \bm{\alpha}_{t+k-1}^1\right\}$. Variablene er indekseret med sænket skrift, som repræsenterer tidspunktet de bliver anvendt, og hævet skrift tid, der repræsenterer tid tilbage indtil investeringshorisonten.
@@ -379,11 +379,11 @@ ved at vælge følgen af vægte $\left\{\bm{\alpha}_{t+k-2}^2, \bm{\alpha}_{t+k-
 
 ### *Policy*-funktionen
 Maksimeringsproblemet på tidspunkt $(t+k-1)$ er uændret ift. problemet som blev beskrevet ovenfor.
-$$\max_{\bm{\alpha}_{t+k-1}^1} \mathbb{E}_{t+k-1}[\exp((1-\gamma)r_{p,t+k})] = \exp\left((1-\gamma) \mathbb{E}_{t+k-1}[r_{p,t+k}]+\frac{1}{2}(1-\gamma)^2 \mathbb{V}_{t+k-1}[r_{p,t+k}]\right).$$
+$$\max_{\bm{\alpha}_{t+k-1}^1} \mathbb{E}_{t+k-1}\left[\exp((1-\gamma)r_{p,t+k})\right] = \exp\left((1-\gamma) \mathbb{E}_{t+k-1}\left[r_{p,t+k}\right]+\frac{1}{2}(1-\gamma)^2 \mathbb{V}_{t+k-1}\left[r_{p,t+k}\right]\right).$$
 
 Ved brug af selektionsmatricerne $\bm{H}_x$ og $\bm{H}_0$, er de første to momenter af porteføljeafkastet givet ved
 \begin{align*}
-\mathbb{E}_{t+k-1}[r_{p,t+k}]&= \bm{\alpha}_{t+k-1}^{1\prime} \bm{H}_x (\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1}) + \bm{H}_0(\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1})+\frac{1}{2} \bm{\alpha}_{t+k-1}^{1\prime} (\bm{\sigma}_x^2-\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1})\\
+\mathbb{E}_{t+k-1}\left[r_{p,t+k}\right]&= \bm{\alpha}_{t+k-1}^{1\prime} \bm{H}_x (\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1}) + \bm{H}_0(\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1})+\frac{1}{2} \bm{\alpha}_{t+k-1}^{1\prime} (\bm{\sigma}_x^2-\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1})\\
 \mathbb{V}_{t+k-1}[r_{p,t+k}]&=\bm{\alpha}_{t+k-1}^{1\prime}\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1}+ \sigma_0^2 + 2\bm{\alpha}_{t+k-1}^{1\prime}\bm{\sigma}_{0x}
 \end{align*}
 

@@ -265,7 +265,7 @@ Dette kapitel præsenterede den grundliggende teori til porteføljeproblemet.
 # Afkastrelationer {#afkrel}
 I Kapitel \@ref(unteo), blev den grundliggende teori bag porteføljevalget beskrevet. Som beskrevet kræver de underliggende modeller, at afkast er lognormalfordelte, og af den grund må afkastserierne transformeres. Mere specifikt blev investoren med potens nytte bl.a. beskrevet, her var det et krav, at de anvendte variable var logbaseret. Dette er specielt anvendeligt når investorens porteføljevalg skal modelleres på lang sigt. Afkastprædiktabilitet lægger som navnet, op til at afkast *er* prædiktable. En forkastelse af *i.i.d.* antagelsen vil implicit medføre afkastprædiktabilitet. Dette kapitel vil fungere som en teoretisk gennemgang af udledningen af de specifikke aktivklasser som investoren står overfor, når porteføljevalget skal tages. For at udlede approksimative analytiske løsninger på tværs aktivklasser, vil den såkaldte loglineære relation af afkast blive anvendt, [@Campbell1988]. [@Campbell1988] viste i tilfældet af aktieafkast, hvordan en approksimativ loglineær relation af aktieafkast kunne etableres. På baggrund af denne relation har nyere litteratur anvendt deres metode på andre klasser af aktiver. At kunne etablere approksimative analytiske løsninger for alle aktivklasser er et afgørende element for at kunne skabe en robust VAR(1)-model i Kapitel \@ref(underligmodel). Sektion \@ref(opsafkrel) vil opsummere kapitlets fund.
 
-## Afkast og nutidsværdi-relationer {#afkognut}
+## Afkasts- og nutidsværdi-relationer {#afkognut}
 
 ### Definition af aktieafkast {#defaktafk}
 Denne Sektion har til formål at definere aktieafkast, dets logrepræsentation samt dets relation til udbytte. Udledningen af én-periode brutto aktieafkastet baseres på [@Campbell1988]. Først betragtes brutto aktieafkastet fra tidspunkt $t$ til $t+1$, og dernæst udledes dets én-periode log afkast via en førstordens Taylor approksimation. Lad $R_{t+1}$ noterer én-periode brutto aktieafkastet, og lad det være defineret som
@@ -530,7 +530,7 @@ På trods af den simplificerende antagelse om tidsinvariant varians ikke virker 
 
 Den ubetingede middelværdi og kovariansmatrix af $\bm{z}_{t+1}$ er givet ved
     \begin{align*}
-        \mathbb{E}_t(\bm{z}_{t+1}) &= (\bm{I}_m-\bm{\Phi}_1)^{-1}\bm{\Phi}_0\\
+        \mathbb{E}_t\left[\bm{z}_{t+1}\right] &= (\bm{I}_m-\bm{\Phi}_1)^{-1}\bm{\Phi}_0\\
         \text{vec}(\bm{\Sigma}_{zz}) &= (\bm{I}_{m^2}-\bm{\Phi}_1\otimes\bm{\Phi}_1)^{-1}\text{vec}(\bm{\Sigma}_v).
     \end{align*}
 Ovenstående ligninger ligger også til grund for determinantbetingelsen: hvis ikke determinanten af $\bm{\Phi}_1$ var begrænset af $-1$ og $1$, ville den ubetingede middelværdi og varians af $\bm{z}_{t+1}$ ikke være defineret.
@@ -558,7 +558,7 @@ Ved brug af sumoperatoren kan ovenstående skrives på kompakt form
     \end{equation}
 Nu kan de betingede $k$-periode momenter af tilstandsvektoren beregnes. Den betingende middelværdi er
     \begin{equation}
-        \mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})=\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t,
+        \mathbb{E}_t\left[\bm{z}_{t+1}+\dots+\bm{z}_{t+k}\right]=\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t,
     \end{equation}
 hvor antagelsen i \eqref{eq:2} benyttes.
 
@@ -566,14 +566,14 @@ hvor antagelsen i \eqref{eq:2} benyttes.
 
 Den betingede varians er
     \begin{align}
-        \mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})
+        \mathbb{V}_t\left[\bm{z}_{t+1}+\dots+\bm{z}_{t+k}\right]
         &=\mathbb{V}_t\left(\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t +\sum_{q=1}^k\left(\sum_{p=0}^{k-q}\bm{\Phi}_1^p \bm{v}_{t+q}\right)\right) \nonumber\\
         &=\mathbb{V}_t\left(\sum_{q=1}^k\left(\sum_{p=0}^{k-q} \bm{\Phi}_1^p \bm{v}_{t+q}\right)\right) \label{eq:3},
     \end{align}
 hvor de første to led i variansen forsvinder, da de er konstante eller kendte på tidspunkt $t$. Ved omskrivning af \eqref{eq:3} fås
     \begin{align*}
-        \mathbb{V}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})&=\mathbb{V}_t\big(\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\bm{v}_{t+1}+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\big)\bm{v}_{t+2}\\
-        &\hphantom{=}+\dots+\big(I+\Phi_1\big)\bm{v}_{t+k-1}+\bm{v}_{t+k}\big)\\
+        \mathbb{V}_t\left[\bm{z}_{t+1}+\dots+\bm{z}_{t+k}right]&=\mathbb{V}_t\big[\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\bm{v}_{t+1}+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\big)\bm{v}_{t+2}\\
+        &\hphantom{=}+\dots+\big(I+\Phi_1\big)\bm{v}_{t+k-1}+\bm{v}_{t+k}\big]\\
         &=\Sigma_v+\big(I+\bm{\Phi}_1\big)\Sigma_v(I+\bm{\Phi}_1)'+\big(I+\bm{\Phi}_1+\bm{\Phi}_1\bm{\Phi}_1\big)\Sigma_v\big(I+\bm{\Phi}_1+\bm{\Phi}_1\bm{\Phi}_1\big)'\\
         &\hphantom{=}+\dots+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\Sigma_v\big(I+\bm{\Phi}_1'+\dots+\bm{\Phi}_1^{k-1}\big)',
     \end{align*}
@@ -588,9 +588,9 @@ Vil vi have det forventede $k$-periode log-(mer)afkast pr. periode, kan følgend
 ved at anvende denne matrix på den betingede middelværdi fås da
     \begin{equation}
         \frac{1}{k}\begin{pmatrix}
-        \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
-        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}} \right)
-        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k}).
+        \mathbb{E}_t\left[ r_{0,t+1}^{(k)} \right]\\
+        \mathbb{E}_t\left[ \bm{r}_{t+1}^{(k)}-r_{0,t+1}^{(k)}\bm{\bm{\ell}} \right]
+        \end{pmatrix}=\frac{1}{k}\bm{H}_r\mathbb{E}_t[\bm{z}_{t+1}+\dots+\bm{z}_{t+k}].
     \end{equation}
 Anvendes den på den betingede varians fås
     \begin{equation}
@@ -612,9 +612,9 @@ Den anden selektionsmatrix som benyttes kan udtrække $k$-periode log-afkastet p
 Anvender vi den på den betingede middelværdi fås
     \begin{equation}
         \frac{1}{k}\begin{pmatrix}
-        \mathbb{E}_t\left( r_{0,t+1}^{(k)} \right)\\
-        \mathbb{E}_t\left( \bm{r}_{t+1}^{(k)} \right)
-        \end{pmatrix}=\frac{1}{k}\bm{M}_r\mathbb{E}_t(\bm{z}_{t+1}+\dots+\bm{z}_{t+k}).
+        \mathbb{E}_t\left[ r_{0,t+1}^{(k)} \right]\\
+        \mathbb{E}_t\left[ \bm{r}_{t+1}^{(k)} \right]
+        \end{pmatrix}=\frac{1}{k}\bm{M}_r\mathbb{E}_t[\bm{z}_{t+1}+\dots+\bm{z}_{t+k}].
     \end{equation}
 Slutteligt anvendes den på den betingede varians
     \begin{equation}
@@ -649,34 +649,34 @@ Her er $\bm{\Sigma}_v$ den betingede kovariansmatrix af $v_t$, $\lambda$ er vekt
 # Porteføljeteori {#porteteori}
 I dette kapitel udvides teorien fra Kapitel \@ref(unteo). Mere specifikt sammenkobles porteføljeteorien fra Sektion \@ref(myoinv) og nytteteorien fra Sektion \@ref(typnyt). Dette gøres på baggrund af *CRRA*-nytte, i tilfældet, hvor investoren kan rebalancere sin portefølje periodisk, og i det restringerede tilfælde, hvor ingen rebalancering er tilladt. Herefter beskrives den analytiske løsning til det dynamiske porteføljeproblem foreslået af [@JurVic2011].
 
-## CRRA Portefølje {#crraportef}
+## Den dynamiske portefølje {#crraportef}
 I det følgende vil porteføljevalget under antagelsen, at investoren har potens nytte, dvs. *CRRA*-nytte samt at afkastene på alle aktivklasser er lognormale.
-o
+
 Først antages, at afkastet på investorens portefølje er lognormal, dette betyder at $W_{t+1}$ ligeledes er lognormal. Under antagelsen om potens nytte, kan vi omskrive Maksimeringsproblemet \@ref(eq:Nyttemaks) til
 \begin{align}
-&\max\mathbb{E}_t(\frac{W_{t+1}^{1-\gamma}-1}{1-\gamma}) (\#eq:CRRAmaks)\\
+&\max\mathbb{E}_t\left[\frac{W_{t+1}^{1-\gamma}-1}{1-\gamma}\right] (\#eq:CRRAmaks)\\
 &\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
 \end{align}
 
 Maksimering af ovenstående forventning er ækvivalent til at maksimere log af forventningen, eftersom log-funktionen er strengt voksende, se evt. Figur \@ref(fig:Nyt), som er tegnet på baggrund af log-funktionen. Derudover kan: $\tfrac{1}{1-\gamma}$ og $-1$ fjernes fra Maksimeringsproblemet, eftersom de er konstante og derfor ikke vil påvirke optimum. Givet af $W_{t+1}$ er lognormal, kan resultatet fra Appendiks \@ref(underligteo) anvendes, og dermed opnå
 \begin{align}
-&\max \log\left(\mathbb{E}_t(W_{t+1}^{1-\gamma})\right)=(1-\gamma){E}_t(w_{t+1})+\frac{1}{2}(1-\gamma)^2\sigma_{wt}^2 (\#eq:CRRAmakslog)\\
+&\max \log\left(\mathbb{E}_t\left[W_{t+1}^{1-\gamma})\right]=(1-\gamma){E}_t\left[w_{t+1}\right]+\frac{1}{2}(1-\gamma)^2\sigma_{wt}^2 (\#eq:CRRAmakslog)\\
 &\text{ubb.}\,\,w_{t+1}=r_{p,t+1} + w_t.\notag
 \end{align}
 
 hvor $\sigma_{wt}^2$ er den betingede varians af log formuen, $w_{t+1}$. Derudover er budgetbegrænsningen ligeledes omskrevet til log-form. Her er $r_{p,t+1}=\log(1+R_{p,t+1})$, dvs. logafkastet på porteføljen, også kendt som det kontinuert tilskrevne porteføljeafkast. Ved division af $(1-\gamma)$ og samtidig substitution af budgetbegrænsningen ind i objektfunktionen, opnåes følgende ubetingede maksimeringsproblem.
 \begin{equation}
-\max\mathbb{E}_t(r_{p,t+1}) + \frac{1}{2}(1-\gamma)\sigma_{pt}^2, (\#eq:CRRAmakslog2)
+\max\mathbb{E}_t\left[r_{p,t+1}\right] + \frac{1}{2}(1-\gamma)\sigma_{pt}^2, (\#eq:CRRAmakslog2)
 \end{equation}
 
 hvor $\sigma_{pt}^2$ er den betingede varians af det kontinuert tilskrevne porteføljeafkast. Dette benytter faktummet at $\mathbb{E}_t(w_t)=w_t$ er deterministisk og ikke påvirker optimum eller variansleddet. Her kan det bemærkes, at
 \begin{equation}
-\mathbb{E}(r_{p,t+1})+\frac{1}{2}\sigma_{pt}^2=\log(\mathbb{E}(1+R_{p,t+1})), (\#eq:portafkls)
+\mathbb{E}\left[r_{p,t+1}\right]+\frac{1}{2}\sigma_{pt}^2=\log(\mathbb{E}\left[1+R_{p,t+1})\right], (\#eq:portafkls)
 \end{equation}
 
 fordi porteføljeafkastet er antaget til at være lognormal. Altså kan Maksimeringsproblemet \@ref(eq:CRRAmakslog2) omskrives til
 \begin{equation}
-\max\mathbb{E}_t(1+R_{p,t+1}) - \frac{1}{2}\gamma\sigma_{pt}^2. (\#eq:CRRAmakslog3)
+\max\mathbb{E}_t\left[1+R_{p,t+1}right] - \frac{1}{2}\gamma\sigma_{pt}^2. (\#eq:CRRAmakslog3)
 \end{equation}
 
 Dermed opnåes det familiære maksimeringsproblem fra middelværdi-varians analysen, Sektion \@ref(myoinv). Altså vil investoren maksimere bytteforholdet mellem den forventede middelværdi og variansen på porteføljen. Denne afvejning er igen lineær, og *RRA*-koefficienten $\gamma$ spiller samme rolle som parameteren $k$ i middelværdi-varians analysen. Fra ovenstående ses også, at variansen på porteføljen bliver straffet af en faktor på $\tfrac{\text{RRA}}{2}$.
@@ -694,12 +694,12 @@ $$r_{p,t+1}-r_{0,t+1}\approx \alpha_t (r_{t+1}-r_{0,t+1})+\frac{1}{2}\alpha_t(1-
 
 Her repræsenterer $r_{t+1}$ log afkastet på det ene risikobærende aktiv, og $r_{0,t+1}$ repræsenterer log afkastet på det risikofrie aktiv. Forskellen mellem log porteføljeafkastet og den lineære kombination af de individuelle logafkast er givet ved $\alpha_t(1-\alpha_t)\tfrac{1}{2}\sigma_t^2$. Forskellen vil forsvinde, hvis vægtningen i det risikobærende aktiv er nul, eller hvis vægtningen i det risikofrie aktiv er nul. Ovenstående approksimation er eksakt i grænsen, ved benyttelse af kontinuerte *diffusion processes* for priserne på aktiverne, og kan udledes ved brug af *Itô's Lemma*, [@CampVicCha2003]. Ovenstående approksimation kan nu benyttes, og dermed kan Maksimeringsproblemet \@ref(eq:CRRAmakslog2) skrives i form af merafkast på porteføljen.
 \begin{equation}
-\max\alpha_t(\mathbb{E}_t(r_{t+1}) - r_{0,t+1}) + \frac{1}{2}\alpha_t(1-\alpha_t)\sigma_t^2 + \frac{1}{2}(1-\gamma)\alpha_t^2\sigma_t^2, (\#eq:CRRAmakslog4) 
+\max\alpha_t(\mathbb{E}_t\left[r_{t+1}\right] - r_{0,t+1}) + \frac{1}{2}\alpha_t(1-\alpha_t)\sigma_t^2 + \frac{1}{2}(1-\gamma)\alpha_t^2\sigma_t^2, (\#eq:CRRAmakslog4) 
 \end{equation}
 
 med den tilhørende løsning
 \begin{equation}
-\alpha_t=\frac{\mathbb{E}(r_{t+1}) - r_{0,t+1}+\frac{1}{2}\sigma_t^2}{\gamma\sigma_t^2}.
+\alpha_t=\frac{\mathbb{E}\left[r_{t+1}\right] - r_{0,t+1}+\frac{1}{2}\sigma_t^2}{\gamma\sigma_t^2}.
 \end{equation}
 
 Som tilmed er ækvivalent til den optimale vægtning, Ligning \@ref(eq:Statmaks), fra middelværdi-varians analysen. I tilfældet, hvor investoren står overfor $n>1$ risikobærende aktiver, vil Taylor approksimationen af den ikke-lineære funktion være givet ved
@@ -734,7 +734,7 @@ I de følgende sektioner vil flere specialtilfælde af det multiple-periode setu
 ### Uden periodisk rebalancering
 I tilfældet uden periodisk rebalancering skal investoren evaluere $k$-periode afkastet, på samme måde som i tilfældet med én-periode. Udover antagelsen om lognormalitet og potens nytte, antages nu den restriktive betingelse, at alle aktivafkast er uafhængige og identisk fordelte over tid. Dette betyder, at det risikofrie $k$-periode logafkast er konstant lig $kr_{0}$, det $k$-periode forventede log afkast for de risikobærende aktiver er $k\mathbb{E}(\bm{r})$, kovariansmatricen af logafkastet på de risikobærende aktiver er konstant lig $\bm{\Sigma}$ og siden alle afkast er ukorrellerede bliver kovariansmatricen over en $k$-periode lig $k\bm{\Sigma}$. Givet at Taylor approksimationen, Ligning \@ref(eq:Multtaylor), er tilstrækkelig approksimerende for den givne respektive periode er løsningen, Ligning \@ref(eq:Potmultalpha), stadig optimal. Dette følger da alle middelværdier og kovarianserer skaleret med den samme faktor, $k$
 \begin{equation}
-\bm{\alpha}_t=\frac{1}{\gamma}(k\bm{\Sigma})^{-1}\left(k\mathbb{E}_t(\bm{r}_{t+1})-kr_{0,t+1}\bm{\ell}+\frac{1}{2}k\bm{\sigma}_t^2\right). (\#eq:Potmultalphak)
+\bm{\alpha}_t=\frac{1}{\gamma}(k\bm{\Sigma})^{-1}\left(k\mathbb{E}_t\left[\bm{r}_{t+1}\right]-kr_{0,t+1}\bm{\ell}+\frac{1}{2}k\bm{\sigma}_t^2\right). (\#eq:Potmultalphak)
 \end{equation}
 
 Altså vil investoren vælge den samme portefølje over hele deres investeringshorisont givet, at der ikke er mulighed for periodisk rebalancering.
@@ -749,15 +749,15 @@ r_{p2,t+2}-2r_0&=(r_{p,t+1}-r_0)+(r_{p,t+2}-r_0)\\
 \end{align}
 
 Ovenstående kan generaliseres til $k$-perioder. Den betingede varians af $2$-periode log porteføljeafkastet bliver
-$$\mathbb{V}_t(r_{p2,t+2})=\bm{\alpha}_t'\bm{\Sigma}\bm{\alpha}_t+\bm{\alpha}_{t+1}'\bm{\Sigma}\bm{\alpha}_{t+1},$$
+$$\mathbb{V}_t\left[r_{p2,t+2}\right]=\bm{\alpha}_t'\bm{\Sigma}\bm{\alpha}_t+\bm{\alpha}_{t+1}'\bm{\Sigma}\bm{\alpha}_{t+1},$$
 
 eftersom $\bm{\alpha}_{t+1}$ også fastsættes på tidspunkt $t$. Middelværdien af log porteføljeafkastet er
-$$\mathbb{E}(r_{p2,t+2})+\frac{1}{2}\mathbb{V}(r_{p2,t+2})=2r_0 + (\bm{\alpha}_t'+\bm{\alpha}_{t+1}')(\mathbb{E}(r)-r_0\bm{\ell}+\frac{1}{2}\bm{\sigma}^2).$$
+$$\mathbb{E}\left[r_{p2,t+2}\right]+\frac{1}{2}\mathbb{V}\left[r_{p2,t+2}\right]=2r_0 + (\bm{\alpha}_t'+\bm{\alpha}_{t+1}')(\mathbb{E}\left[r\right]-r_0\bm{\ell}+\frac{1}{2}\bm{\sigma}^2).$$
 
 Benyttelse af ovenstående momenter giver følgende maksimeringsproblem for $2$-periode porteføljeproblemet med periodisk rebalancering
 \begin{align}
-&\max\mathbb{E}_t(r_{p2,t+2}) + \frac{1}{2} \mathbb{V}_t(r_{p2,t+2})-\frac{1}{2}\gamma \mathbb{V}_t(r_{p2,t+2})\notag \\
-&=2r_0+(\bm{\alpha}_t'+\bm{\alpha}_{t+1}')(\mathbb{E}(r)-r_0\bm{\ell}+\frac{1}{2}\bm{\sigma}^2)-\frac{1}{2}\gamma (\bm{\alpha}_t'\bm{\Sigma}\bm{\alpha}_t+\bm{\alpha}_{t+1}'\bm{\Sigma}\bm{\alpha}_{t+1})
+&\max\mathbb{E}_t\left[r_{p2,t+2}\right] + \frac{1}{2} \mathbb{V}_t\left[r_{p2,t+2}\right]-\frac{1}{2}\gamma \mathbb{V}_t\left[r_{p2,t+2}\right]\notag \\
+&=2r_0+(\bm{\alpha}_t'+\bm{\alpha}_{t+1}')(\mathbb{E}\left[r\right]-r_0\bm{\ell}+\frac{1}{2}\bm{\sigma}^2)-\frac{1}{2}\gamma (\bm{\alpha}_t'\bm{\Sigma}\bm{\alpha}_t+\bm{\alpha}_{t+1}'\bm{\Sigma}\bm{\alpha}_{t+1})
 (\#eq:CRRAmakslogk2periode)
 \end{align}
 
@@ -773,8 +773,8 @@ Investoren vælger altså vægte sådan, at
 \begin{align}
 \left\{\bm{\alpha}_{t+k-\tau}^\tau\right\}_{\tau=k}^{\tau=1}=
 \begin{cases}
-\arg\max\mathbb{E}_t(\frac{1}{1-\gamma}W_{t+k}^{1-\gamma}),\quad &\gamma\neq 1\\
-\arg\max\mathbb{E}_t(\log(W_{t+k})),\quad &\gamma=1.
+\arg\max\mathbb{E}_t\left[\frac{1}{1-\gamma}W_{t+k}^{1-\gamma}\right],\quad &\gamma\neq 1\\
+\arg\max\mathbb{E}_t\left[\log(W_{t+k})\right],\quad &\gamma=1.
 \end{cases}(\#eq:jurvaegt)
 \end{align}
 
@@ -786,19 +786,19 @@ W_{t+k}=W_t\exp(r_{p,t\to t+k}),(\#eq:formuetk)
 hvor $r_{p,t\to t+k}=\sum_{i=1}^k r_{p,t+i}$ er $k$-periode log porteføljeafkastet mellem tidspunkt $t$ og $t+k$. Dette tillader, at vægtene \@ref(eq:jurvaegt), kan omskrives til
 \begin{align}
 \left\{\bm{\alpha}_{t+k-\tau}^\tau\right\}_{\tau=k}^{\tau=1}=\begin{cases}
-\arg\max\mathbb{E}_t(\exp ((1-\gamma) r_{p,t\to t+k})),\quad &\gamma\neq 1\\
-\arg\max\mathbb{E}_t(r_{p,t\to t+k}),\quad &\gamma=1.
+\arg\max\mathbb{E}_t\left[\exp ((1-\gamma) r_{p,t\to t+k})\right],\quad &\gamma\neq 1\\
+\arg\max\mathbb{E}_t\left[r_{p,t\to t+k}\right],\quad &\gamma=1.
 \end{cases}(\#eq:jurvaegt2)
 \end{align}
 
 Som tidligere argumenteret vil en antagelse om rebalancering følge markedsobservationer, og det er ud fra denne antagelse at [@JurVic2011] løser det generelle $k$-periode porteføljeproblem ved benyttelse af baglæns optrævling. Løsningen er en diskretiseret version af [@Liu2007], men mere fleksibel idet, at den kan håndtere et bredt spektrum af risikobærende aktiver og tilstandsvariable på samme tid. Derudover vil løsningen være eksakt i kontinuert tid, grundet den loglineære approksimation. Først udledes porteføljestrategien for den sidste periode, $\tau=1$, da denne vægtning vil danne grundlaget for resten af rekursionen. Den optimale portefølje for sidste periode er den sædvanlige myopiske eller én-periode middelværdi-varians optimale portefølje, som tidligere præsenteret
-$$\bm{\alpha}_{t+k-1}^1=\frac{1}{\gamma}\bm{\Sigma}_{xx}^{-1}\left(\mathbb{E}_{t+k-1}(\bm{r}_{t+k}-r_{0,t+k}\bm{\ell})+\frac{1}{2}\bm{\sigma}_x^2 + (1-\gamma) \bm{\sigma}_{0x}\right),$$
+$$\bm{\alpha}_{t+k-1}^1=\frac{1}{\gamma}\bm{\Sigma}_{xx}^{-1}\left(\mathbb{E}_{t+k-1}\left[\bm{r}_{t+k}-r_{0,t+k}\bm{\ell}\right]+\frac{1}{2}\bm{\sigma}_x^2 + (1-\gamma) \bm{\sigma}_{0x}\right),$$
 
 hvor, at
-$$\mathbb{E}_{t+k-1}(\bm{r}_{t+k}-r_{0,t+k}\bm{\ell})=\bm{H}_x(\bm{\Phi}_0 + \bm{\Phi}_1 \bm{z}_{t+k-1}),$$
+$$\mathbb{E}_{t+k-1}\left[\bm{r}_{t+k}-r_{0,t+k}\bm{\ell}\right]=\bm{H}_x(\bm{\Phi}_0 + \bm{\Phi}_1 \bm{z}_{t+k-1}),$$
 
 og $\bm{H}_x$ er selektionsmatricen, som vælger rækkerne hørende til vektoren af merafkast $\bm{x}$ fra den relevante matrix. Den optimale portefølje kombinerer tangensporteføljen og global minimum varians porteføljen fra den efficiente rand, konstrueret af de én-periode forventede merafkast og kovariansmatricen af én-periode merafkastene. Tangensporteføljedelen er
-$$\bm{\Sigma}_{xx}^{-1}\mathbb{E}_{t+k-1}(\bm{r}_{t+k}-r_{0,t+k}\bm{\ell})+\frac{1}{2}\bm{\sigma}_x^2.$$
+$$\bm{\Sigma}_{xx}^{-1}\mathbb{E}_{t+k-1}\left[\bm{r}_{t+k}-r_{0,t+k}\bm{\ell}\right]+\frac{1}{2}\bm{\sigma}_x^2.$$
 
 Denne portefølje er afhængig af de tidsvarierende merafkast og kovariansmatricen af merafkastene, dette er ensbetydende med at porteføljen vil ændre sig over tid. Global minimum varians porteføljen består af den anden del
 $$\bm{\Sigma}_{xx}^{-1}\bm{\sigma}_{0x},$$
@@ -807,8 +807,8 @@ og afhænger kun af kovariansmatricen af merafkast, som forventet. Givet antagel
 
 Den generelle rekursive løsning til det dynamiske porteføljeproblem er givet ved
 \begin{align}
-\bm{\alpha}_{t+k-\tau}^\tau = &\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} \left( \mathbb{E}_{t+k-\tau} ( \bm{r}_{t+k-\tau+1} - r_{0,t+k-\tau+1} \bm{\ell} ) + \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma) \bm{\sigma}_{0x} \right) \notag\\
-&- (1-\frac{1}{\gamma} ) \bm{\Sigma}_{xx}^{-1} \bm{\Sigma}_x (B_1^{\tau-1'}+(B_2^{\tau-1}+B_3^{\tau-1'})\mathbb{E}_{t+k-\tau}(\bm{z}_{t+k-\tau+1})),(\#eq:jurvicalpha)
+\bm{\alpha}_{t+k-\tau}^\tau = &\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} \left( \mathbb{E}_{t+k-\tau} \left[ \bm{r}_{t+k-\tau+1} - r_{0,t+k-\tau+1} \bm{\ell} \right] + \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma) \bm{\sigma}_{0x} \right) \notag\\
+&- (1-\frac{1}{\gamma} ) \bm{\Sigma}_{xx}^{-1} \bm{\Sigma}_x (B_1^{\tau-1'}+(B_2^{\tau-1}+B_3^{\tau-1'})\mathbb{E}_{t+k-\tau}\left[\bm{z}_{t+k-\tau+1})\right],(\#eq:jurvicalpha)
 \end{align}
 
 hvor $\bm{\Sigma}_x=\begin{pmatrix}\bm{\sigma}_0x & \bm{\Sigma} & \bm{\Sigma}_{xs}'\end{pmatrix}$ og $B_1^{\tau-1}$, $B_2^{\tau-1}$ samt $B_3^{\tau-1}$ er funktioner afhængende af: den resterende investeringshorisont, $\tau$, *RRA*-parameteren, $\gamma$, samt koefficeinterne fra VAR-modellen, [@JurVic2011].
