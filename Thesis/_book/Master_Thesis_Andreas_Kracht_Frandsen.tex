@@ -301,7 +301,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-05-28                  
+##  date     2020-06-01                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -408,12 +408,12 @@ Litterær programmering er blevet anvendt til at skrive/programmere denne afhand
 \hypertarget{unteo}{%
 \chapter{Underliggende teori}\label{unteo}}
 
-INTRO HER\ldots{}
+I dette kapitel introduceres den underliggende teori til det dynamiske porteføljeproblem: det statiske porteføljeproblem. Derudover defineres en række nyttefunktioner, som alle er defineret over terminalformue. Sektion \ref{myoinv} starter med en gennemgang af porteføljeproblemet for den myopiske investor, som først blev introduceret af \citep{Markowitz1952}. Dernæst fungerer Sektion \ref{preforris} som en introduktion til risikoaversion. Sektion \ref{nytdefover} belyser en række nyttefunktioner, som alle kan fungere i porteføljemodellering. Fordelingsmæssige resultater vedr. afkast tages hånd om i Sektion \ref{fordafafk}. Slutteligt opsummerer Sektion \ref{opsunteo} kapitlets fund.
 
 \hypertarget{myoinv}{%
 \section{Den myopiske investor}\label{myoinv}}
 
-Den myopiske investor vælger -- som navnet ligger op til -- sin portefølje under et én-periodes perspektiv, og foretager dermed et statisk bindende valg. Investoren forsøger at maksimere sin terminal formue, ved samtidig at forholde sig til sin risikoaversion. Dette forårsager, at alle efterfølgende perioder bliver ignoreret af investoren. Ergo skal han løse det statiske portefølje problem fra tidspunkt \(t\) til tidspunkt \(t+1\). I denne ene periode antages investeringsmulighederne at være: et risikobærende aktiv samt et risikofrit aktiv. Afkastene over den førstkommende periode for disse aktivklasser vil blive noteret som hhv. \(R_{t+1}\) med betinget middelværdi \(\mathbb{E}_t(R_{t+1})\)\footnote{Her benyttes den gængse notation \(\mathbb{E}(R_{t+1}\mid \mathcal{F}_t)=\mathbb{E}_t(R_{t+1})\) for filteret \(\mathcal{F}_t\).} samt betinget varians \(\mathbb{V}_t(R_{t+1})=\sigma_t^2\) og \(R_{0,t+1}\).
+Den myopiske investor vælger -- som navnet ligger op til -- sin portefølje under et én-periodes perspektiv, og foretager dermed et statisk bindende valg. Investoren forsøger at maksimere sin terminal formue, ved samtidig at forholde sig til sin risikoaversion. Dette forårsager, at alle efterfølgende perioder bliver ignoreret af investoren. Ergo skal han løse det statiske portefølje problem fra tidspunkt \(t\) til tidspunkt \(t+1\). I denne ene periode antages investeringsmulighederne at være: et risikobærende aktiv samt et risikofrit aktiv. Afkastene over den førstkommende periode for disse aktivklasser vil blive noteret som hhv. \(R_{t+1}\) med betinget middelværdi \(\mathbb{E}_t\left[R_{t+1}\right]\)\footnote{Her benyttes den gængse notation \(\mathbb{E}\left[R_{t+1}\mid \mathcal{F}_t\right]=\mathbb{E}_t\left[R_{t+1}\right]\) for filteret \(\mathcal{F}_t\).} samt betinget varians \(\mathbb{V}_t\left[R_{t+1}\right]=\sigma_t^2\) og \(R_{0,t+1}\).
 
 Det antages at investorens formue er fuldt allokeret når en del \(\alpha_t\) bliver placeret i det risikobærende aktiv og \((1-\alpha_t)\) i det risikofrie aktiv. Hermed bliver hans porteføljeafkast givet ved
 \begin{equation}
@@ -422,13 +422,13 @@ R_{p,t+1}=\alpha_t R_{t+1}+\left(1-\alpha_t\right)R_{0,t+1}.\label{eq:Portafk}
 
 Den betingede middelværdi af porteføljeafkastet bliver dermed
 \begin{align}
-\mathbb{E}_t[R_{p,t+1}]&=\alpha_t\mathbb{E}_t[R_{t+1}]+(1-\alpha_t)R_{0,t+1} \notag\\ 
+\mathbb{E}_t\left[R_{p,t+1}\right]&=\alpha_t\mathbb{E}_t\left[R_{t+1}\right]+(1-\alpha_t)R_{0,t+1} \notag\\ 
 &=R_{0,t+1}+ \alpha_t\left(R_{t+1} - R_{0,t+1}\right),\label{eq:Forvport}
 \end{align}
 
 og endeligt den betingede varians af porteføljeafkastet
 \begin{equation}
-\mathbb{V}_t[R_{p,t+1}]=\alpha_t^2\sigma_t^2.\label{eq:Varport}
+\mathbb{V}_t\left[R_{p,t+1}\right]=\alpha_t^2\sigma_t^2.\label{eq:Varport}
 \end{equation}
 
 Den simplificerende antagelse i \citep{Markowitz1952} er, at investorer kun forholder sig til de første to momenter, hvis vi modellerer denne afvejning lineært, opnår vi følgende maksimeringsproblem
@@ -442,33 +442,33 @@ hvor \(k\) er en skalering, som repræsenterer investorens risikoaversion. Ved a
 \end{equation}
 
 Porteføljeanalyse benytter ofte nøgletallet \emph{Sharpe Ratio}, også kendt som \emph{Market Price of Risk} i stokastisk finansiering, \citep{Bjork2009}. I porteføljeteori er det kendt som et performance-mål, som fortæller investoren om merafkastet i sin portefølje relativt til den risiko han har påtaget sig, altså
-\[S_t=\frac{\mathbb{E}_t[R_{t+1}]-R_{0,t+1}}{\sigma_t}.\]
+\[S_t=\frac{\mathbb{E}_t\left[R_{t+1}\right]-R_{0,t+1}}{\sigma_t}.\]
 
 Dette tillader, at vi kan omskrive Ligning \eqref{eq:Løsning} til
 \[\alpha_t=\frac{S_t}{k\sigma_t}.\]
 
 Forholdet mellem middelværdien og variansen er \(\tfrac{1}{k}\), eftersom vi kan udlede, at merafkastet på porteføljen er \(\tfrac{S_t^2}{k}\) og variansen er \(\tfrac{S_t^2}{k^2}\). \emph{Sharpe Ratio}'en på porteføljen er \(S_t\), og alle tænkelige porteføljer (afhængig af \(k\)) vil have samme \emph{Sharpe Ratio}, fordi de er eksponeret til det risikobærende aktiv, men i stadig større eller mindre grad.
 
-Altså er vægtningen i det risikobærende aktiv et forhold mellem: det forventede risikobærende merafkast over det risikofrie aktiv samt en skalering af det risikobærende aktivs varians. Vi kan uden problemer opskrive ovenstående løsning til tilfældet, hvor investoren står overfor \(n>1\) risikobærende aktiver. \(\bm{R}_{t+1}\) repræsenterer en \(n\times 1\) vektor af afkast for risikobærende aktiver, fra \(t\) til \(t+1\). Den betingede middelværdi bliver \(\mathbb{E}_t(\bm{R}_{t+1})\) og den betingede kovariansmatrix noteres som \(\mathbb{V}_t(\bm{R}_{t+1})=\bm{\Sigma}_t\). Herudover er \(\bm{\alpha}_t\) nu en \(n\times 1\) vektor af vægte i de risikobærende aktiver.
+Altså er vægtningen i det risikobærende aktiv et forhold mellem: det forventede risikobærende merafkast over det risikofrie aktiv samt en skalering af det risikobærende aktivs varians. Vi kan uden problemer opskrive ovenstående løsning til tilfældet, hvor investoren står overfor \(n>1\) risikobærende aktiver. \(\bm{R}_{t+1}\) repræsenterer en \(n\times 1\) vektor af afkast for risikobærende aktiver, fra \(t\) til \(t+1\). Den betingede middelværdi bliver \(\mathbb{E}_t\left[\bm{R}_{t+1}\right]\) og den betingede kovariansmatrix noteres som \(\mathbb{V}_t\left[\bm{R}_{t+1}\right]=\bm{\Sigma}_t\). Herudover er \(\bm{\alpha}_t\) nu en \(n\times 1\) vektor af vægte i de risikobærende aktiver.
 
 Den betingede middelværdi af porteføljeafkastet bliver dermed nu
 \begin{equation}
-\mathbb{E}_t[R_{p,t+1}]=R_{0,t+1}+\bm{\alpha}_t'(\mathbb{E}_t[\bm{R}_{t+1}]- R_{0,t+1}\bm{\ell}),
+\mathbb{E}_t\left[R_{p,t+1}\right]=R_{0,t+1}+\bm{\alpha}_t'(\mathbb{E}_t\left[\bm{R}_{t+1}\right]- R_{0,t+1}\bm{\ell}),
 \end{equation}
 
 den betingede varians af porteføljeafkastet bliver
 \begin{equation}
-\mathbb{V}_t[R_{p,t+1}]=\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t.
+\mathbb{V}_t\left[R_{p,t+1}\right]=\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t.
 \end{equation}
 
 Nu kan maksimeringsproblemet opskrives
 \begin{equation}
-\max_{\alpha_t} \bm{\alpha}_t'(\mathbb{E}_t[\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}] - \frac{k}{2}\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t, \label{eq:MultStatmaks}
+\max_{\alpha_t} \bm{\alpha}_t'(\mathbb{E}_t\left[\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}\right] - \frac{k}{2}\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t, \label{eq:MultStatmaks}
 \end{equation}
 
 Den optimale porteføljestrategi, givet som løsningen til Maksimeringsproblemet \eqref{eq:MultStatmaks} findes til at være
 \begin{equation}
-\bm{\alpha}_t=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t[\bm{R}_{t+1}]-R_{0,t+1}\bm{\ell}).\label{eq:Multalpha}
+\bm{\alpha}_t=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t\left[\bm{R}_{t+1}\right]-R_{0,t+1}\bm{\ell}).\label{eq:Multalpha}
 \end{equation}
 
 Løsningen er en generalisering af Ligning \eqref{eq:Løsning}. Derudover er det værd at bemærke, at løsningen er karakteriseret af \textit{The Mutual Fund Seperation Theorem}, \citep{Tobin1958}, som var en af mange videnskabelige bidrag James Tobin fik sin Nobelpris for i 1981, \citep{Nobel2020}. Essencen af Sætningen er, at alle investorer vil holde den eksakt samme portefølje af risikobærende aktiver samt en del i det risikofrie aktiv. Det eneste som adskiller investorer fra hinanden, er deres relative fordeling af total formue i den optimale risikobærende portefølje, som er fastsat ud fra deres egne risikopræferencer. Figur \ref{fig:AfkVol} viser de optimale porteføljestrategier i et afkast-volatilitets spektrum.
@@ -524,8 +524,8 @@ Altså vil investorer vælge en portefølje på den efficiente rand, som opnår 
 
 Selvom Markowitz' model er en hjørnesten inden for moderne porteføljeteori, er der flere mangler i den opsatte teoretiske ramme. Først og fremmest medfører Markowitz' antagelse om en lineær afvejning mellem kovarianser og afkast implicit antagelsen, at investorenes nyttefunktioner kan approksimeres af en anden ordens Taylor udvidelse over en bredt sprektrum af afkast. Derudover findes ingen beskrivelse for, hvordan parameteren \(k\) er koblet til investorens nyttefunktion. Disse mangler kan blive afhjulpet ved samtidig brug af specifikke nyttefunktioner og afkastfordelinger, som opfylder Taylor udvidelsen. Dette medfører at middelværdi-varians analysen kan benyttes for tre forskellige opsætninger, som bliver præsenteret i Sektion \ref{typnyt}, \citep{CampVic2003}.
 
-\hypertarget{pruxe6ferencer-for-risiko}{%
-\section{Præferencer for risiko}\label{pruxe6ferencer-for-risiko}}
+\hypertarget{preforris}{%
+\section{Præferencer for risiko}\label{preforris}}
 
 For et fast formueniveau \(w\in \mathbb{R}_+\) betragter vi en stokastisk variabel \(X\), hvor \(\mathbb{E}(X)=0\). Derfor kan også \(w+X\) betragtes som en stokastisk variabel, der repræsenterer en fremtidig formueplan med realiseret formue \(w+\mathbb{E}(X)\), hvis \(X\) bliver realiseret. Derfor kaldes \(X\) undertiden også et fair spil, derudover haves at \(\mathbb{E}(w+X)=w\).
 
@@ -533,22 +533,22 @@ En (strengt) risikoavers investor vil for alle \(w\in \mathbb{R}_+\) og alle \(X
 
 Generelt anses investorer (og andre individer for den sags skyld) at være risikoaverse, derfor vil fokus være på denne risikopræference.
 
-\hypertarget{nytte-defineret-over-formue}{%
-\section{Nytte defineret over formue}\label{nytte-defineret-over-formue}}
+\hypertarget{nytdefover}{%
+\section{Nytte defineret over formue}\label{nytdefover}}
 
-I Sektion \ref{myoinv}, introducerede vi en af de bærende antagelser i \citep{Markowitz1952}: at investorer kun forholder sig til middelværdien og variansen af porteføljeafkast, og ikke højere momenter. Vi kan tilsvarende antage, at investorer definerer deres nytte via formue på terminaltidspunktet. Dette tillader os at redefinere Maksimeringsproblemet \eqref{eq:Statmaks} til nedenstående
+I Sektion \ref{myoinv}, blev en af de bærende antagelser i \citep{Markowitz1952} introduceret: at investorer kun forholder sig til middelværdien og variansen af porteføljeafkast, og ikke højere momenter. Det kan tilsvarende antages, at investorer definerer deres nytte via formue på terminaltidspunktet. Dette tillader at redefinere Maksimeringsproblemet \eqref{eq:Statmaks} til nedenstående
 \begin{align}
 &\max\mathbb {E}_t(U(W_{t+1})) \label{eq:Nyttemaks}\\
 &\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
 \end{align}
 
-Hvor \(U(W_{t+1})\in\mathbb{R}_+\) er en konkav nyttefunktion. Investoren vil givet nyttefunktionens konkave krumning være risikoavers. Netop dette aspekt gør, at vi kan inkorporere risikoaversion, når investorens porteføljevalg skal foretages. For at fastlægge denne investorspecifikke risikoaversion benyttes derfor skalerede krumningsmål. Disse fundamentale risikoaversionsmål er kendt som \emph{Arrow-Pratt Målene for Risikoaversion}, \citep{Arrow1965} og \citep{Pratt1964}. Når nytte skal belyses, kan risikoaversion mht. den fremtidige formue \(W_{t+1}\) benyttes. Graden af krumningen på nyttefunktion giver os information om investorens risikopræferencer introduceret ovenfor. Vi antager at investorens nyttefunktion er strengt voksende i terminal formue -- altså er investoren grådig og foretrækker høj formue frem for en lav formue -- men i en faldende rate. Nyttefunktion vil altså have følgende karakteristika
+Hvor \(U(W_{t+1})\in\mathbb{R}_+\) er en konkav nyttefunktion. Investoren vil givet nyttefunktionens konkave krumning være risikoavers. Netop dette aspekt gør, at vi kan inkorporere risikoaversion, når investorens porteføljevalg skal foretages. For at fastlægge denne investorspecifikke risikoaversion benyttes derfor skalerede krumningsmål. Disse fundamentale risikoaversionsmål er kendt som \emph{Arrow-Pratt Målene for Risikoaversion}, \citep{Arrow1965} og \citep{Pratt1964}. Når nytte skal belyses, kan risikoaversion mht. den fremtidige formue \(W_{t+1}\) benyttes. Graden af krumningen på nyttefunktion giver information om investorens risikopræferencer introduceret ovenfor. Det antages at investorens nyttefunktion er strengt voksende i terminal formue -- altså er investoren grådig og foretrækker høj formue frem for en lav formue -- men i en faldende rate. Nyttefunktion vil altså have følgende karakteristika
 \[U'(W)>0\quad\text{og}\quad U''(W)<0.\]
 
-Hvor \(U'(W)\) og \(U''(W)\) er den hhv. første- og anden afledte mht. formuen \(W\). Når vi skal kvantificere denne risikoaversion, skal vi sikre, at målet er invariant overfor strengt positive affine transformationer. Dette er bl.a. opfyldt ved brug af \emph{Coefficient of Absolut Risk Aversion}, \citep{Arrow1965} og \citep{Pratt1964}. \emph{ARA} er defineret som den negative anden afledte af nyttefunktionen mht. formue, skaleret med den første afledte
+Hvor \(U'(W)\) og \(U''(W)\) er den hhv. første- og anden afledte mht. formuen \(W\). Når denne risikoaversion skal kvantificeres, skal det sikres, at målet er invariant overfor strengt positive affine transformationer. Dette er bl.a. opfyldt ved brug af \emph{Coefficient of Absolut Risk Aversion}, \citep{Arrow1965} og \citep{Pratt1964}. \emph{ARA} er defineret som den negative anden afledte af nyttefunktionen mht. formue, skaleret med den første afledte
 \[\text{ARA}(W)=-\frac{U''(W)}{U'(W)}.\]
 
-Selvom den anden afledte af nyttefunktionen er et mål for krumningen af nyttefunktionen, bliver vi nødt til at skalere for at eliminere afhængigheden af abitrære størrelser, som relaterer sig til målbarheden af nytte. \emph{ARA} måler investorens absolutte dollar værdi, som han er villig til at købe, for at undgå et tab på samme absolutte størrelse. Hvis \emph{ARA} er faldende medfører det at desto mere formue en investor har, desto mere risikosøgende bliver han, altså haves at \(\text{ARA}(W)<0\), og så fremdeles. Almindeligt menes det, at \emph{ARA} burde falde, eller i det mindste ikke stige, med formue. Et relateret mål er \emph{Coefficient of Relative Risk Aversion}, \emph{RRA}, som er samtidig tager højde for investorens formue
+Selvom den anden afledte af nyttefunktionen er et mål for krumningen af nyttefunktionen, er det nødvendigt at skalere for at eliminere afhængigheden af abitrære størrelser, som relaterer sig til målbarheden af nytte. \emph{ARA} måler investorens absolutte dollar værdi, som han er villig til at købe, for at undgå et tab på samme absolutte størrelse. Hvis \emph{ARA} er faldende medfører det at desto mere formue en investor har, desto mere risikosøgende bliver han, altså haves at \(\text{ARA}(W)<0\), og så fremdeles. Almindeligt menes det, at \emph{ARA} burde falde, eller i det mindste ikke stige, med formue. Et relateret mål er \emph{Coefficient of Relative Risk Aversion}, \emph{RRA}, som er samtidig tager højde for investorens formue
 \[\text{RRA}(W)=-\frac{WU''(W)}{U'(W)}.\]
 
 Her måles marginal nytten og dermed investorens risikoaversion over en procentdel af formuen. Samme inferens som for \emph{ARA} kan blive udtænkt for \emph{RRA}. \emph{RRA} måler den del af formuen, som investoren vil betale for at undgå et spil på en given størrelse relativt til formuen.
@@ -583,16 +583,16 @@ De tilsvarende reciprokke af ovenstående mål kaldes hhv. \emph{Coefficeint of 
   \draw [dashed] (-6, 20.5) -- (30, 20.5);
 \end{axis}
 \end{tikzpicture}
-\caption{Konkav nytte af formue.}
+\caption{Konkav nytte af formue. Her kunne $G$ opfattes som et tab eller en gevinst af et givet aktiv.}
 \label{fig:Nyt}
 \end{figure}
 
-Som redegjort ovenfor, er både \emph{ARA} samt \emph{RRA} essientielle mål til kvantificering af risikopræferencer og dermed til at opnå forståelse for nyttefunktionen hos den enkelte investor. Konstateringer udledt fra den langsigtede økonomiske adfærd fastslår, at \emph{RRA} ikke kan afhænge alene af formue. Dette kommer sig af, at formue og per capita forbrug er steget henover de seneste to århundreder. Det absolutte forhold mellem finansielle risici er ligeledes forøget -- siden disse risici er multiplikative -- mens den relative risici har været konstant. Samtidigt er der ikke fundet evidens baseret på afkast og renter, der har påvist en langsigtet tendens, som respons til denne vækst. Altså vil investorer betale de samme relative omkostninger for at undgå en given finansiel risiko uanset om de er velhavende eller ej, \citep{CampVic2003}. Dette foranlediger en til at tænke tanken, at \emph{RRA} er uafhængig af formue og bør være konstant, \citep{Chiappori2008}.
+Som redegjort ovenfor, er både \emph{ARA} samt \emph{RRA} essientielle mål til kvantificering af risikopræferencer og dermed til at opnå forståelse for nyttefunktionen hos den enkelte investor. Konstateringer udledt fra den langsigtede økonomiske adfærd fastslår, at \emph{RRA} ikke kan afhænge alene af formue. Dette kommer sig af, at formue og per capita forbrug er steget henover de seneste to århundreder. Det absolutte forhold mellem finansielle risici er ligeledes forøget -- siden disse risici er multiplikative -- mens de relative risici har været konstante. Samtidigt er der ikke fundet evidens baseret på afkast og renter, der har påvist en langsigtet tendens, som respons til denne vækst. Altså vil investorer betale de samme relative omkostninger for at undgå en given finansiel risiko uanset om de er velhavende eller ej, \citep{CampVic2003}. Dette foranlediger en til at tænke tanken, at \emph{RRA} er uafhængig af formue og bør være konstant, \citep{Chiappori2008}.
 
 \hypertarget{typnyt}{%
 \section{Typer af nyttefunktioner}\label{typnyt}}
 
-Antagelser omhandlende: formen af nyttefunktioner og fordelingen af afkast, er påkrævet, for at kunne skabe en traktabel model. Flere nyttefunktioner har vist sig relevante inden for middelværdi-varians analyse, \citep{CampVic2003}. Nogle af disse er eksponentiel nytte, potens nytte samt kvadratisk nytte. Fælles for disse er, at de definerer nytte over formue, udover disse findes andre mere eksotiske nyttefunktioner såsom Epstein-Zin nytte. I denne Sektion vil vi undersøge ovenstående nærmere, og ud fra et kvantitativt aspekt vælge nyttefunktionen, som denne afhandling vil arbejde videre med.
+Antagelser omhandlende: formen af nyttefunktioner og fordelingen af afkast, er påkrævet, for at kunne skabe en traktabel model. Flere nyttefunktioner har vist sig relevante inden for middelværdi-varians analyse, \citep{CampVic2003}. Nogle af disse er eksponentiel nytte, potens nytte samt kvadratisk nytte. Fælles for disse er, at de definerer nytte over formue, udover disse findes andre mere eksotiske nyttefunktioner såsom Epstein-Zin nytte. I denne sektion undersøges ovenstående nærmere, og ud fra et kvantitativt aspekt vælges nyttefunktionen, som denne afhandling vil arbejde videre med.
 
 Generelt vil en investors nytte -- defineret over formue -- afhænge af samtlige momenter relateret til formue. For at se dette laves en Taylor udvidelse af \(U(W_{t+1})\) omkring den forventede formue, \(\mathbb{E}(W_{t+1})\)
 \begin{align*}
@@ -600,13 +600,13 @@ U\left(W_{t+1}\right)=&U\left(\mathbb{E}\left[W_{t+1}\right]\right)+U'\left(\mat
 &+\sum_{n=3}^\infty \frac{1}{n!}U^{\left(n\right)}\left(\mathbb{E}\left[W_{t+1}\right]\right)\left(W_{t+1}-\mathbb{E}\left[W_{t+1}\right]\right),
 \end{align*}
 
-hvor \(U^{(n)}\) er den \(n\)'te afledte af \(U(\cdot)\). Tager vi nu den forventede værdi fås
+hvor \(U^{(n)}\) er den \(n\)'te afledte af \(U(\cdot)\). Tages nu den forventede værdi fås
 \begin{align*}
 \mathbb{E}\left[U\left(W_{t+1}\right]\right)=&U\left(\mathbb{E}\left[W_{t+1}\right]\right)+\frac{1}{2}U''\left(\mathbb{E}\left[W_{t+1}\right]\right)\mathbb{V}\left(W_{t+1}\right)\\
 &+\sum_{n=3}^\infty \frac{1}{n!} U^{\left(n\right)}\left(\mathbb{E}\left[W_{t+1}\right]\right)\mathbb{E}\left[\left(W_{t+1}-\mathbb{E}\left[W_{t+1}\right]\right)^n\right],
 \end{align*}
 
-hvor \(\mathbb{E}((W_{t+1}-\mathbb{E}(W_{t+1}))^n)\) er det centrale moment af orden \(n\). Fælles for disse momenter er, at de kvantificerer en investors villighed til at afgive eller optage diverse risici. Givetvis vil en grådig investor foretrække højere forventet formue end lavere, for faste centrale momenter af anden orden eller højere. En risikoavers investor, altså \(U''(W)<0\), vil foretrække lavere varians af formue fremfor højere, for fast forventet formue samt faste centrale momenter af tredje orden eller højere. Problemet opstår når de centrale momenter højere end eller lig tredje orden ikke er ens for alle alternativer. I så fald ville vi ikke kunne evaluere dem på baggrund af middelværdi og varians.
+hvor \(\mathbb{E}\left[(W_{t+1}-\mathbb{E}(W_{t+1}))^n\right]\) er det centrale moment af orden \(n\). Fælles for disse momenter er, at de kvantificerer en investors villighed til at afgive eller optage diverse risici. Givetvis vil en grådig investor foretrække højere forventet formue end lavere, for faste centrale momenter af anden orden eller højere. En risikoavers investor, altså \(U''(W)<0\), vil foretrække lavere varians af formue fremfor højere, for fast forventet formue samt faste centrale momenter af tredje orden eller højere. Problemet opstår når de centrale momenter højere end eller lig tredje orden ikke er ens for alle alternativer. I så fald ville man ikke kunne evaluere dem på baggrund af middelværdi og varians.
 
 \hypertarget{kvadratisk-nytte}{%
 \subsection{Kvadratisk nytte}\label{kvadratisk-nytte}}
@@ -621,7 +621,7 @@ Til forskel for nedenstående nyttefunktioner kræver kvadratisk nytte ikke ford
 Under kvadratisk nytte vil maksimering af forventet nytte, som i Maksimeringsproblemet \eqref{eq:Nyttemaks}, være ækvivalent til at maksimere en lineær kombination af middelværdi og varians, som i Maksimeringsproblemet \eqref{eq:Statmaks}. Middelværdien af Ligning \eqref{eq:Kvadnytte} giver den forventede nytte
 \[\mathbb{E}[U(W_{t+1})]=\mathbb{E}[W_{t+1}]-b(\mathbb{V}[W_{t+1}+\mathbb{E}[W_{t+1}]]),\]
 
-og er dermed en funktion afhængende af både forventet formue og variansen af formue \citep{Munk2017}. Herudover vil \emph{ARA} samt \emph{RRA} begge være stigende i formue under kvadratisk nytte. Som argumenteret ovenfor vil stigende \emph{ARA} være uhensigtmæssigt.
+og er dermed en funktion afhængende af både forventet formue og variansen af formue \citep{Munk2017}. Herudover vil \emph{ARA} samt \emph{RRA} begge være stigende i formue under kvadratisk nytte. Som argumenteret ovenfor vil stigende \emph{ARA} være uhensigtmæssig.
 
 \hypertarget{eksponentiel-nytte}{%
 \subsection{Eksponentiel nytte}\label{eksponentiel-nytte}}
@@ -631,10 +631,10 @@ Eksponentiel nytte antager at variablene i modellen er normalfordelt. Lad \(\the
 U(W_{t+1})=-\exp\left(-\theta W_{t+1}\right). \label{eq:Ekspnytte}
 \end{equation}
 
-Eksponentiel nytte antager, at \emph{ARA} er konstant lig \(\theta\), mens \emph{RRA} kan stige med formue. Dette aspekt gør også eksponentiel nytte foretrukket ift. kvadratisk nytte. Eksponentiel nytte er også kendt under navnet \emph{Constant Absolute Risk Aversion}. For en eksplicit opskrivning af forventningen af Ligning \eqref{eq:Ekspnytte} bemærker vi følgende
-\[W_{t+1}\sim \mathcal{N}\mu_p,\sigma_p^2)\]
+Eksponentiel nytte antager, at \emph{ARA} er konstant lig \(\theta\), mens \emph{RRA} kan stige med formue. Dette aspekt gør også eksponentiel nytte foretrukket ift. kvadratisk nytte. Eksponentiel nytte er også kendt under navnet \emph{Constant Absolute Risk Aversion}. For en eksplicit opskrivning af forventningen af Ligning \eqref{eq:Ekspnytte} bemærkes følgende
+\[W_{t+1}\sim \mathcal{N}\left(\mu_p,\sigma_p^2\right)\]
 
-altså er terminalnytten normalfordelt for enhver mulig portefølje, \(p\), givet at afkastene er normalfordelt. Regner vi derfor på forventningen, får vi
+altså er terminalnytten normalfordelt for enhver mulig portefølje, \(p\), givet at afkastene er normalfordelt. Regnes derfor på forventningen, fås
 \[\mathbb{E}(U(W_{t+1}))=-\exp\left(-\theta\mu_p+\frac{\theta^2}{2}\sigma_p^2\right).\]
 
 \hypertarget{potens-nytte}{%
@@ -649,7 +649,7 @@ U(W_{t+1})=\begin{cases} \frac{W_{t+1}^{1-\gamma}-1}{1-\gamma},\quad &\gamma\neq
 For \(\gamma\neq 1\) fås den forventede nytte til
 \[\log(\mathbb{E}(W_{t+1}))=\mathbb{E}(\log(W_{t+1}))+\frac{1}{2}\mathbb{V}(\log(W_{t+1})),\]
 
-hvor vi har anvendt det bærende resultat vedr. middelværdien af en lognormalfordelt stokastisk variabel, se evt. Appendiks ??. Logaritmefunktionen er en konkav funktion, dette betyder at middelværdien af log af en stokastisk variabel er mindre end log af middelværdien, og forskellen er stigende i variabiliteten af den stokastiske variabel. For \(\gamma \rightarrow 1\) haves
+hvor det bærende resultat vedr. middelværdien af en lognormalfordelt stokastisk variabel, se evt. Appendiks \ref{underligteo}, er anvendt. Logaritmefunktionen er en konkav funktion, dette betyder, at middelværdien af log af en stokastisk variabel er mindre end log af middelværdien, og forskellen er stigende i variabiliteten af den stokastiske variabel. For \(\gamma \rightarrow 1\) haves
 \[\mathbb{E}(U(W_{t+1}))=\mathbb{E}(\log(W_{t+1})).\]
 
 \hypertarget{sammenligning-af-nyttefunktioner}{%
@@ -661,38 +661,40 @@ Derudover vil valget mellem potens nytte og eksponentiel nytte også skabe de ov
 
 Antagelsen om normalfordelte afkast er tiltalende, men begrænser sig til et kortsigtet perspektiv, i det, at antagelsen ikke kan holde mere end én periode. F.eks. kan vi antage, at kvartalvise afkast er normalfordelte, men så vil afkastet over to kvartaler ikke være normalfordelt. Dette kommer sig af at de er produktet af to succesive normalfordelte afkast, og kun summen af normalfordelte variable er selv normalfordelt, ikke produktet. En antagelse om lognormalfordelte afkast vil modsat holde i en hver tidshorisont, siden produktet af to lognormale stokastiske variable selv er lognormal. Derudover vil en lognormal stokastisk variabel aldrig blive negativ, og dette er konsistent med de fleste finansielle aktivers begrænsede gældsforpligtelser.
 
-Lognormale afkast vil til gengæld ikke nemt kunne flyttes fra aktivniveau til porteføljeniveau. Dette kommer sig af, at en portefølje givetvis er en lineær kombination af individuelle aktiver. Hvis disse individuelle aktiver antages at have lognormale afkast, vil porteføljeafkastet være et vægtet gennemsnit af lognormale afkast, men et sådant gennemsnit er ikke selv lognormalt. Vi overkommer imidlertidigt dette problem ved at arbejde med korte intervaller. Ikke-lognormaliteten af porteføljeafkastet formindskes ved at benytte kortere og kortere intervaller. I kontinuert tid vil problemet forsvinde i grænsen, \citep{CampVic2003}.
+Lognormale afkast vil til gengæld ikke nemt kunne flyttes fra aktivniveau til porteføljeniveau. Dette kommer sig af, at en portefølje givetvis er en lineær kombination af individuelle aktiver. Hvis disse individuelle aktiver antages at have lognormale afkast, vil porteføljeafkastet være et vægtet gennemsnit af lognormale afkast, men et sådant gennemsnit er ikke selv lognormalt. Dette problem overkommes imidlertidigt ved at arbejde med korte intervaller. Ikke-lognormaliteten af porteføljeafkastet formindskes ved at benytte kortere og kortere intervaller. I kontinuert tid vil problemet forsvinde i grænsen, \citep{CampVic2003}.
 
-\hypertarget{fordeling-af-afkast}{%
-\section{Fordeling af afkast}\label{fordeling-af-afkast}}
+\hypertarget{fordafafk}{%
+\section{Fordeling af afkast}\label{fordafafk}}
 
-Brugen af afkast fremfor priser på aktiver, kommer sig af markedsinvariansen af afkast. Priser siges derimod at være kontrære, eller modsat rettede, \citep{Jondeau2007}. I bund og grund er priser \emph{unit root} processer, dvs. stød til tidsserien af priser har permant effekt, dette kaldes undertiden også for ikke-stationære processer. \emph{Unit root} processer siges også at have integration af orden \(1\), \(I(1)\). Afkast er derimod stationære processer, de har integration af orden \(0\), \(I(0)\), \citep{Verbeek2017}. For en ikke-stationær tidsserie vil momenterne ændre sig over tid, f.eks. vil middelværdien og variansen af en prisprocess på tidspunkt \(t\), afhænge af den foregående periodes pris, altså på tidspunkt \(t-1\). Den manglende markedsinvarians af prisprocesser holder dem ude af ligningen, da de grundet ovenstående ikke vil kunne producere \emph{i.i.d.} stokatiske variable.
+Brugen af afkast fremfor priser på aktiver, kommer sig af markedsinvariansen af afkast. Priser siges derimod at være kontrære, eller modsat rettede, \citep{Jondeau2007}. I bund og grund er priser \emph{unit root} processer, dvs. stød til tidsserien af priser har permant effekt, dette kaldes undertiden også for ikke-stationære processer. \emph{Unit root} processer siges også at have integration af første orden, \(I(1)\). Afkast er derimod stationære processer, de har integration af nulte orden, \(I(0)\), \citep{Verbeek2017}. For en ikke-stationær tidsserie vil momenterne ændre sig over tid, f.eks. vil middelværdien og variansen af en prisprocess på tidspunkt \(t\), afhænge af den foregående periodes pris, altså på tidspunkt \(t-1\). Den manglende markedsinvarians af prisprocesser holder dem ude af ligningen, da de grundet ovenstående ikke vil kunne producere \emph{i.i.d.} stokatiske variable.
 
-I det følgende vil vi adskille simple afkast og log\footnote{Gennem resten af denne afhandling vil log referer til den naturlige logaritme.} afkast gennem notation. Vi lader os notere det simple afkast som \(R_{t+1}\), som følger den gængse notation i litteraturen. Vi lader det simple brutto afkast være defineret som
+I det følgende vil vi adskille simple afkast og log\footnote{Gennem resten af denne afhandling vil log referer til den naturlige logaritme.} afkast gennem notation. Det simple afkast noteres som \(R_{t+1}\), som følger den gængse notation i litteraturen. Vi lader det simple brutto afkast være defineret som
 \[R_{t+1}\equiv\frac{P_{t+1}}{P_t},\]
 
 hvor \(P_t\in\mathbb{R}_+\) er prisen på et aktiv, på tidspunkt \(t\), og dermed \(R_t\in\mathbb{R}\). Det simple afkast \(R_t-1\) er den procentvise ændring over den respektive tidsperiode. Empiriske resultater har påvist, at simple afkast af aktiver udviser assymmetri og resulterer i højreskæve fordelinger bl.a. pga. de bagvedliggende virksomheder og/eller institutioneres begrænsede gældsforpligtelser. Derudover kan højreskævheden af simple afkast fremkomme på lang sigt grundet, at de er produktet af afkast over én-periode, som argumenteret for ovenfor.
 
-For at overkomme disse faldgruber af simple afkast, benyttes log afkastet. Log afkastet noteres som \(r_{t+1}\), og defineres som
+I et forsøg på at overkomme disse faldgruber af simple afkast, benyttes log afkastet. Log afkastet noteres som \(r_{t+1}\), og defineres som
 \[r_{t+1}\equiv\log(1+R_{t+1}),\]
 
-hvilket er en geometrisk og kontinuert følge. Logafkastet af aktiver vil skabe symmetriske fordelinger, som overholder dermed overholder markedsinvariansen.
+hvilket er en geometrisk og kontinuert følge, som dermed overholder markedsinvariansen.
 
-\hypertarget{opsummering}{%
-\section{Opsummering}\label{opsummering}}
+\hypertarget{opsunteo}{%
+\section{Opsummering}\label{opsunteo}}
 
-\hypertarget{afkastrelationer}{%
-\chapter{Afkastrelationer}\label{afkastrelationer}}
+Dette kapitel præsenterede den grundliggende teori til porteføljeproblemet.
 
-I Kapitel \ref{unteo}, blev den grundliggende teori for porteføljevalg beskrevet. Som beskrevet kræver de underliggende modeller, at afkast er lognormalfordelte, og af den grund må afkastserierne transformeres. Mere specifikt blev investoren med potens nytte bl.a. beskrevet, her var det et krav, at de anvendte variable var logbaseret. Dette er specielt anvendeligt når investorens porteføljevalg skal modelleres på lang sigt. Afkastprædiktabilitet lægger som navnet, op til at afkast \emph{er} prædiktable. En forkastelse af \emph{i.i.d.} antagelsen vil implicit medføre afkastprædiktabilitet. Dette kapitel vil fungere som en teoretisk gennemgang af udledningen af de specifikke aktivklasser som investoren står overfor, når porteføljevalget skal tages. For at udlede approksimative analytiske løsninger på tværs aktivklasser, vil den såkaldte loglineære relation af afkast blive anvendt, \citep{Campbell1988}. \citep{Campbell1988} viste i tilfældet af aktieafkast, hvordan en approksimativ loglineær relation af aktieafkast kunne etableres. På baggrund af denne relation har nyere litteratur anvendt deres metode på andre klasser af aktiver. At kunne etablere approksimative analytiske løsninger for alle aktivklasser er et afgørende element for at kunne skabe en robust VAR(1)-model i Kapitel ??. Sektion ?? vil opsummere kapitlets fund.
+\hypertarget{afkrel}{%
+\chapter{Afkastrelationer}\label{afkrel}}
 
-\hypertarget{afkast-og-nutidsvuxe6rdi-relationer}{%
-\section{Afkast og nutidsværdi-relationer}\label{afkast-og-nutidsvuxe6rdi-relationer}}
+I Kapitel \ref{unteo}, blev den grundliggende teori bag porteføljevalget beskrevet. Som beskrevet kræver de underliggende modeller, at afkast er lognormalfordelte, og af den grund må afkastserierne transformeres. Mere specifikt blev investoren med potens nytte bl.a. beskrevet, her var det et krav, at de anvendte variable var logbaseret. Dette er specielt anvendeligt når investorens porteføljevalg skal modelleres på lang sigt. Afkastprædiktabilitet lægger som navnet, op til at afkast \emph{er} prædiktable. En forkastelse af \emph{i.i.d.} antagelsen vil implicit medføre afkastprædiktabilitet. Dette kapitel vil fungere som en teoretisk gennemgang af udledningen af de specifikke aktivklasser som investoren står overfor, når porteføljevalget skal tages. For at udlede approksimative analytiske løsninger på tværs aktivklasser, vil den såkaldte loglineære relation af afkast blive anvendt, \citep{Campbell1988}. \citep{Campbell1988} viste i tilfældet af aktieafkast, hvordan en approksimativ loglineær relation af aktieafkast kunne etableres. På baggrund af denne relation har nyere litteratur anvendt deres metode på andre klasser af aktiver. At kunne etablere approksimative analytiske løsninger for alle aktivklasser er et afgørende element for at kunne skabe en robust VAR(1)-model i Kapitel \ref{underligmodel}. Sektion \ref{opsafkrel} vil opsummere kapitlets fund.
+
+\hypertarget{afkognut}{%
+\section{Afkasts- og nutidsværdi-relationer}\label{afkognut}}
 
 \hypertarget{defaktafk}{%
 \subsection{Definition af aktieafkast}\label{defaktafk}}
 
-I denne Sektion har til formål at definere aktieafkast, dets logrepræsentation samt dets relation til udbytte. Udledningen af én-periode brutto aktieafkastet baseres på \citep{Campbell1988}. Først betragtes brutto aktieafkastet fra tidspunkt \(t\) til \(t+1\), og dernæst udledes dets én-periode log afkast via en førstordens Taylor approksimation. Lad \(R_{t+1}\) noterer én-periode brutto aktieafkastet, og lad det være defineret som
+Denne Sektion har til formål at definere aktieafkast, dets logrepræsentation samt dets relation til udbytte. Udledningen af én-periode brutto aktieafkastet baseres på \citep{Campbell1988}. Først betragtes brutto aktieafkastet fra tidspunkt \(t\) til \(t+1\), og dernæst udledes dets én-periode log afkast via en førstordens Taylor approksimation. Lad \(R_{t+1}\) noterer én-periode brutto aktieafkastet, og lad det være defineret som
 \begin{equation}
 1+R_{t+1}=\frac{P_{t+1}+D_{t+1}}{P_t}, \label{eq:csaa}
 \end{equation}
@@ -702,15 +704,15 @@ her er \(P_t\) prisen af aktien på tidspunkt \(t\). \(D_t\) er udbytte på tids
 r_{t+1}\approx p_{t+1}+\log(1+\exp(d_{t+1}-p{t+1}))-p_t. \label{eq:csaa2}
 \end{equation}
 
-Det observeres, at det andet led på højre side af Ligning \eqref{eq:csaa2} er ikke-lineær. Dette løses ved at lave en førsteordens Taylor approksimation omkring middelværdien af \(d_{t+1}-p_{t+1}\)\footnote{Fordelene ved en sådan linearisering er, at det tillader en lineær statistisk analyse af aktieprisens bevægelser, som simplificerer det økonometriske arbejde. Derudover er der den generelle konsensus, at aktieafkast og udbytte følger en loglineær stokastisk process, og derfor er det nødvendigt at udarbejde en model, som er tilpasset denne antagelse.}, dermed kan det andet led skrives som
+Det observeres, at det andet led på højre side af Ligning \eqref{eq:csaa2} ikke er lineært. Dette løses ved at lave en førsteordens Taylor approksimation omkring middelværdien, \(\overline{d_{t+1}-p_{t+1}}\)\footnote{Fordelene ved en sådan linearisering er, at det tillader en lineær statistisk analyse af aktieprisens bevægelser, som simplificerer det økonometriske arbejde. Derudover er der den generelle konsensus, at aktieafkast og udbytte følger en loglineær stokastisk process, og derfor er det nødvendigt at udarbejde en model, som er tilpasset denne antagelse.}, dermed kan det andet led skrives som
 \begin{equation}
-f(\log(1+\exp(d_{t+1}-p_{t+1}))) = (1-\rho)(d_{t+1}-p_{t+1}) + c, \label{eq:csaa3}
+f(\log(1+\exp(\overline{d_{t+1}-p_{t+1}}))) = (1-\rho)(d_{t+1}-p_{t+1}) + c, \label{eq:csaa3}
 \end{equation}
 
 hvor \(\rho\) og \(c\) er såkaldte lineariseringsparametre, defineret som
 \begin{align*}
-\rho&=1+\exp(d_{t+1}-p_{t+1})\\
-c&=\log(1+\exp(d_{t+1}-p_{t+1}))-(1-\rho)(d_{t+1}-p_{t+1}).
+\rho&=1+\exp(\overline{d_{t+1}-p_{t+1}})\\
+c&=\log(1+\exp(\overline{d_{t+1}-p_{t+1}}))-(1-\rho)(\overline{d_{t+1}-p_{t+1}}).
 \end{align*}
 
 Indsættes Ligning \eqref{eq:csaa3} nu i Ligning \eqref{eq:csaa2}, kan det approksimative én-periode brutto aktie log afkast udledes til
@@ -733,14 +735,14 @@ kan der ved brug af rekursion, opnåes den såkaldte \emph{Dynamic Gordon Growth
 d_t-p_t=\sum_{j=0}^\infty \rho^j \mathbb{E}_t[r_{t+j+1}-\Delta d_{t+j+1}]-\frac{c}{1-\rho}. \label{eq:csaa6}
 \end{equation}
 
-Transversalitetsbetingelsen udeholder \emph{bobler} i \emph{Dynamic Gordon Growth Model}. Det følger igennem Ligning \eqref{eq:csaa6}, at ændringer i log \emph{Dividend-Price Ratio} må være grundet ændringer i: fremtidige afkast eller en ændring i forventningen til fremtidige udbyttebetalingenr eller en kombination af begge. Et vigtigt aspekt af ovenstående relation er, at den er udledt på baggrund af definitionen af afkast og ikke en økonomisk model. Derudover viser Ligning \eqref{eq:csaa6} baggrunden for at medtage log \emph{Dividend-Price Ratio}, som en forklarende variabel til responsvariablen aktieafkast: der må være en mellemliggende relation mellem bevægelser i aktieafkast eller vækst i udbyttebetalinger og ændringer i \emph{Dividend-Price Ratio}. Ligning \eqref{eq:csaa6} hævder, at log \emph{Dividend-Price Ratio} må bære på alt markedsinformation vedr. fremtidige bevægelser i aktieafkast eller udbytter.
+Transversalitetsbetingelsen udeholder \emph{bobler} i \emph{Dynamic Gordon Growth Model}. Det følger igennem Ligning \eqref{eq:csaa6}, at ændringer i log \emph{Dividend-Price Ratio} må være grundet ændringer i: fremtidige afkast eller en ændring i forventningen til fremtidige udbyttebetalinger eller en kombination af begge. Et vigtigt aspekt af ovenstående relation er, at den er udledt på baggrund af definitionen af afkast og ikke en økonomisk model. Derudover viser Ligning \eqref{eq:csaa6} baggrunden for at medtage log \emph{Dividend-Price Ratio}, som en forklarende variabel til responsvariablen aktieafkast: der må være en mellemliggende relation mellem bevægelser i aktieafkast eller vækst i udbyttebetalinger og ændringer i \emph{Dividend-Price Ratio}. Ligning \eqref{eq:csaa6} hævder, at log \emph{Dividend-Price Ratio} må bære på alt markedsinformation vedr. fremtidige bevægelser i aktieafkast eller udbytter.
 
-\hypertarget{definintion-af-obligationsafkast}{%
-\subsection{Definintion af obligationsafkast}\label{definintion-af-obligationsafkast}}
+\hypertarget{defafobl}{%
+\subsection{Definition af obligationsafkast}\label{defafobl}}
 
-Som en analog til det udledte resultat mellem aktieafkast og \emph{Dividend-Price Ratio} fra Sektion \ref{defaktafk}, eksisterer der en relation mellem obligationsafkast og rentespændet. Dvs. at rentespændet spiller en sammenlignelig rolle for \emph{Fixed Income} markederne, som \emph{Dividend-Price Ratio} gjorde det for aktiemarkedet \citep{Campbell1997}. Først etableres egenskaberne for nulkupon obligationer, for herefter at udarbejde relationen for kupon obligationer.
+Som en analog til det udledte resultat mellem aktieafkast og \emph{Dividend-Price Ratio} fra Sektion \ref{defaktafk}, eksisterer der en relation mellem obligationsafkast og rentespændet. Dvs. at rentespændet spiller en sammenlignelig rolle for \emph{Fixed Income} markederne, som \emph{Dividend-Price Ratio} gjorde det for aktiemarkederne \citep{Campbell1997}. Først etableres egenskaberne for nulkupon obligationer, for herefter at udarbejde relationen for kupon obligationer.
 
-Rentespændet prædiktabilitet af obligationsafkast kan be udledt, ved at betragte et marked bestående kun af nulkupon obligationer. Den nominelle pris på tidspunkt \(t\), for en nulkupon obligation med løbetid \(n\), noteres som \(P_t^n\). Den tilhørende effektive rente betegnes \(Y_t^n\). Ved tilbagediskontering af det fremtidige cashflow kan prisen i dag findes til
+Rentespændets prædiktabilitet af obligationsafkast kan blive udledt, ved at betragte et marked bestående kun af nulkupon obligationer. Den nominelle pris på tidspunkt \(t\), for en nulkupon obligation med løbetid \(n\), noteres som \(P_t^n\). Den tilhørende effektive rente betegnes \(Y_t^n\). Ved tilbagediskontering af det fremtidige cashflow kan prisen i dag findes til
 \begin{equation}
 P_t^n=\frac{1}{(1+Y_t^n)^n}. \label{eq:csba1}
 \end{equation}
@@ -755,7 +757,7 @@ Ved brug af Ligning \eqref{eq:csba1}, ses at én-periode brutto afkastet på obl
 1+R_{t+1}^n=\frac{P_{t+1}^{n-1}}{P_t^n}=\frac{(1+Y_t^n)^n}{(1+Y_t^{n-1})^{n-1}}. \label{eq:csba3}
 \end{equation}
 
-Ligning \eqref{eq:csba3} viser at \(n\)-periode afkastet bliver \(n-1\)-periode afksatet på tidspunkt \(t+1\). Dette kan lad sige gøre idet, at \(n\)-periode obligationen er holdt til en horisont \(n\). Ved at gå fra \(t\) til \(t+1\) er én-perioden af \(n\)-periode obligationen nu afsluttet, dermed bliver \(n\)-periode obligationen nu \(n-1\)-periode obligationen på tidspunkt \(t+1\). Ved at tage log på Ligning \eqref{eq:csba3}, bliver én-periode brutto afkastet for beholdningsperioden \(n\) lig
+Ligning \eqref{eq:csba3} viser at \(n\)-periode afkastet bliver \(n-1\)-periode afkastet på tidspunkt \(t+1\). Dette kan lad sige gøre idet, at \(n\)-periode obligationen er holdt til en horisont \(n\). Ved at gå fra \(t\) til \(t+1\) er den første periode af \(n\)-periode obligationen nu afsluttet, dermed bliver \(n\)-periode obligationen nu \(n-1\)-periode obligationen på tidspunkt \(t+1\). Ved at tage log på Ligning \eqref{eq:csba3}, bliver én-periode brutto afkastet for beholdningsperioden \(n\) lig
 \begin{equation}
 r_{t+1}^n=n y_t^n - (n-1) y_{t+1}^{n-1}. \label{eq:csba4}
 \end{equation}
@@ -770,7 +772,7 @@ Kombineres udtrykket for den effektive rente \(y_t^n\) samt implikationen for \(
 y_t^n = \frac{1}{n} \sum_{i=0}^{n-1} r_{t+1+i}^{n-1}. \label{eq:csba6}
 \end{equation}
 
-Ligning \eqref{eq:csba6} er det gennemsnitlige effektive rente afkast pr. periode, givet at obligationen er holdt til udløb, \(n\). Derudover kan Ligning \eqref{eq:csba6} omskrives i termer af rentespændet, eftersom
+Ligning \eqref{eq:csba6} viser, at den effektive rente er lig det gennemsnitlige afkast pr. periode, givet at obligationen er holdt til udløb, \(n\). Derudover kan Ligning \eqref{eq:csba6} omskrives i termer af rentespændet, eftersom
 \begin{equation}
 s_t^n\equiv y_t^n - y_t^1. \label{eq:csba7}
 \end{equation}
@@ -803,7 +805,7 @@ Fra Ligning \eqref{eq:csba11} og Ligning \eqref{eq:csaa4} ses, at udbytte og kup
 
 \begin{align*}
 k &= -\log(1-\rho)\log(\frac{1}{\rho-1})\\
-\rho&= \frac{1}{(1\exp(c-p??))}.
+\rho&= \frac{1}{(1\exp(\overline{c-p}))}.
 \end{align*}
 
 Hvis kuponobligationen bliver solgt til kurs pari, vil \(\rho\) reduceres til
@@ -824,7 +826,7 @@ Kombineres Ligning \eqref{eq:csba12} med Ligning \eqref{eq:csba13}, kan følgend
 y_{t}^{c,n}\approx (\frac{(1-\rho)}{(1-\rho^n)})\sum_{i=0}^{n-1} \rho^i r_{t+1+i}^{c,n-i}. \label{eq:csba14}
 \end{equation}
 
-Til forskel for nulkuponobligationen, hvor der eksisterer en eksakt relation mellem den effektive log rente og nulkupon obligations log afkastet, Ligning \eqref{eq:csba5}, eksisterer der kun en approksimativ relation for kuponobligationen. En forskel, som adskiller nulkuponobligationer fra kuponobligationer er varighedens betydning. For nulkuponobligationer vil løbetiden direkte måle længden af tid en investor har investeret sin formue i obligationen. For kuponobligationer vil løbetiden være et uperfekt mål til at måle denne længde af tid, som investoren holder obligationen, eller portefølje af obligationer, da meget af værdiforøgelsen sker før udløb, \citep{Campbell1997}. For kuponobligationer vil \emph{Macaulay} varighed være et bedre mål, \citep{Macaulay1938}. \emph{Macaulay} varighed ser kuponobligationer som en række af nulkuponobligationer, og er et vægtet gennemsnit af løbetiderne på de indirekte nulkuponobligationer. Ved benyttelse af kuponobligationens effektive rente, som diskonteringsfaktoren vil varigheden blive
+Til forskel for nulkuponobligationen, hvor der eksisterer en eksakt relation mellem den effektive log rente og nulkupon obligations log afkastet, Ligning \eqref{eq:csba5}, eksisterer der kun en approksimativ relation for kuponobligationen. En forskel, som adskiller nulkuponobligationer fra kuponobligationer er varighedens betydning. For nulkuponobligationer vil løbetiden direkte måle længden af tid en investor har investeret sin formue i obligationen. For kuponobligationer vil løbetiden være et uperfekt mål til at måle denne længde af tid, som investoren holder obligationen, eller portefølje af obligationer, da meget af værdiforøgelsen sker før udløb, \citep{Campbell1997}. For kuponobligationer vil \emph{Macaulay} varighed være et bedre mål, \citep{Macaulay1938}. \emph{Macaulay} varighed ser kuponobligationer som en række af nulkuponobligationer, og er et vægtet gennemsnit af løbetiderne på de indirekte nulkuponobligationer. Ved benyttelse af kuponobligationens effektive rente som diskonteringsfaktoren vil varigheden blive
 \begin{equation}
 D_t^{c,n}=\frac{C\sum_{i=1}^n \frac{i}{(1+Y_t^{c,n})} + \frac{n}{(1+Y_t^{c,n})^n}}{P_t^{c,n}}. \label{eq:csba15}
 \end{equation}
@@ -844,15 +846,15 @@ r_{t+1}^{c,n}\approx D^{c,n} y_t^{c,n} - (D^{c,n} - 1) y_{t+1}^{c,n-1}=D^{c,n}(y
 
 Ligning \eqref{eq:csba17} kan ligeledes sammenlignes med Ligning \eqref{eq:csaa4}, og blev først udledt af \citep{Campbell1983}. Men i dette tilfælde er ligningen et vægtet gennemsnit af varigheden på nuværende og fremtidige effektive renter. Ligning \eqref{eq:csba17} holder ligeledes for nulkuponobligationer, hvor varigheden erstatter løbetiden. Det andet lighedstegn viser ligeledes relationen til rentespændet, \(y_t^{c,n}- y_{t+1}^{n-1}\). Som der givetvis må resultere i en forventning om positiv korrelation mellem afkastet og rentespændet i den empiriske sektion.
 
-\hypertarget{potentielle-pruxe6diktabilitetsvariable}{%
-\section{Potentielle prædiktabilitetsvariable}\label{potentielle-pruxe6diktabilitetsvariable}}
+\hypertarget{potpradik}{%
+\section{Potentielle prædiktabilitetsvariable}\label{potpradik}}
 
-Denne Sektion er en forlængelse af Sektion ??, og fungerer som en undersøgelse og diskussion af variable med en potentiel prædiktionsevne. Med tiden er en lang række variable blevet foreslået til afkast prædiktabilitet. Generelt kan disse variable grupperes ind i en række kategorier. I det følgende vil tre grupper bliver præsenteret: finasielle variable, rentestruktursvariable og makroøkonomiske variable. Denne inddeling er også anvendt i eksisterende litteratur, se bl.a. \citep{Koijen2011}. Den følgende undersøgelse af potentielle prædiktions variable vil bestå af kvalitative samt kvantitative analyser, som på den måde kommer til at foregå analysen relateret til porteføljevalget. Dette tillader at studere den potentielle lineære relation mellem merafkastet på aktiverne og variablene, og på den måde give en dybere inferens af de valgte foreklarende variable, som da vil blive benyttet i at modellere det optimale porteføljevalg.
+Denne sektion er en forlængelse af Sektion \ref{afkognut}, og fungerer som en undersøgelse og diskussion af variable med en potentiel prædiktionsevne. Med tiden er en lang række variable blevet foreslået til afkast prædiktabilitet. Generelt kan disse variable grupperes ind i en række kategorier. I det følgende vil tre grupper bliver præsenteret: finasielle variable, rentestruktursvariable og makroøkonomiske variable. Denne inddeling er også anvendt i eksisterende litteratur, se bl.a. \citep{Koijen2011}. Den følgende undersøgelse af potentielle prædiktionsvariable vil bestå af kvalitative samt kvantitative analyser, som på den måde kommer til at foregå analysen relateret til porteføljevalget. Dette tillader at studere den potentielle lineære relation mellem merafkastet på aktiverne og variablene, og på den måde give en dybere inferens af de valgte foreklarende variable, som da vil blive benyttet i at modellere det optimale porteføljevalg.
 
 \hypertarget{finansielle-variable}{%
 \subsection{Finansielle variable}\label{finansielle-variable}}
 
-I Sektion ?? blev den fundamentale værdi af aktier benyttet til at argumentere for relation til \emph{Dividend-Price Ratio}. I denne sektion vil benyttes til at diskutere andre potentielle finasielle variable, som før har vist statistisk styrke i at prædiktere aktie afkast. Samtidig er det muligt, at disse variable fanger variation, som allerede er forklaret igennem nogle af de eksistende variable. Derudover kan disse variable også muligvis forklare variation i afkastet på nogle af de andre aktiver ud over aktieafkastet. I det følgende vil \emph{Price-Earnings Ratio}, \emph{Book-to-Market Ratio}, aktievariansen, \emph{Small Minus Big} og \emph{High Minus Low} blive undersøgt.
+I Sektion \ref{defaktafk} blev den fundamentale værdi af aktier benyttet til at argumentere for relation til \emph{Dividend-Price Ratio}. Denne sektion vil benyttes til at diskutere andre potentielle finasielle variable, som før har vist statistisk styrke i at prædiktere aktie afkast. Samtidig er det muligt, at disse variable fanger variation, som allerede er forklaret igennem nogle af de eksistende variable. Derudover kan disse variable også muligvis forklare variation i afkastet på nogle af de andre aktiver ud over aktieafkastet. I det følgende vil \emph{Price-Earnings Ratio}, \emph{Book-to-Market Ratio}, aktievariansen, \emph{Small Minus Big} og \emph{High Minus Low} blive undersøgt.
 
 \citep{Fama1988} finder, at både \emph{Dividend-Price Ratio} samt \emph{Price-Earnings Ratio} har statistisk styrke i at prædiktere forventede aktieafkast, og argumenterer for, at \emph{Dividend-Price Ratio} er mindre variabel end \emph{Price-Earnings Ratio} som indeholder en del støj. Derudover finder \citep{Lamont1998} evidens for, at den aggregerede \emph{Dividend Payout Ratio} prædikterer merafkast på både aktier og obligationer. \citep{Lamont1998} argumenterer modsat \citep{Fama1988}, at variansen fra \emph{Price-Earnings Ratio} ikke er støj, men derimod information om forventede afkast. Givet disse ovenstående fund, vil en medtagelse af \emph{Price-Earnings Ratio} være relevant for den følgende analyse.
 
@@ -863,7 +865,7 @@ Aktievariansen, som den bliver præsenteret her, er målt via metoden etableret 
 \sigma^2_t = \sum_{i=1}^{N_t} r_{i,t} + 2 \sum_{i=1}^{N_t-1} r_{i,t}r_{i+1,t} \label{eq:aktvar1}
 \end{equation}
 
-Fra Ligning \eqref{eq:aktvar1} ses, at den estimerede middelværdi af stikprøven ikke fratrækkes de daglige afkast. Dette gøres ikke eftersom det har vist sig at have meget lille effekt, \citep{Schwert1987}. Ideen med at medtage variansen er, at den gennemsnitlige varians holder informationen på variansen af hele markedet.
+Fra Ligning \eqref{eq:aktvar1} ses, at den estimerede middelværdi af stikprøven ikke fratrækkes de daglige afkast. Dette gøres ikke eftersom det har vist sig at have meget lille effekt, \citep{Schwert1987}. Ideen med at medtage variansen er, at den gennemsnitlige varians indeholder informationen på variansen af hele markedet.
 
 \emph{Small Minus Big} og \emph{High Minus Low} er ydereligere to finansielle variable/faktorer. Disse stammer fra \citep{French1993, Fama2015}, og mere specifikt deres \emph{Three Factor Model} samt \emph{Five Factor Model}. Disse variable anses for at være hhv. størrelsfaktoren på markedet og værdifaktoren på markedet. Faktorerne er skabt via en dannelse af seks markedsporteføljer. \citep{French1993} finder at begge faktorer signifikante i at prædiktere merafkastet på markedsporteføljen. Ved tilføjelse af yderligere to faktorer -- profitabilitesfaktoren og investeringsfaktoren -- finder \citep{Fama2015}, at \emph{High Minus Low} bliver redundant i deres underliggende model. Eftersom tidsserien for \emph{High Minus Low} er fuldstændig forklaret af de andre fire faktorer. De finder bl.a., at investeringsfaktoren har en meget negativ korrelation med \emph{High Minus Low} på \(-0.7\).
 
@@ -872,9 +874,9 @@ Fra Ligning \eqref{eq:aktvar1} ses, at den estimerede middelværdi af stikprøve
 
 I denne sektion undersøges fem rentestruktursvariable, som tidligere er foreslået i litteraturen. Disse er \emph{Yield Spread}, \emph{Term Spread}, \emph{Credit Spread}, \emph{Default Spread} og den nominelle rente.
 
-\emph{Term Spread} defineres som forskellen mellem den effektive lange rente og \emph{T-Bill} renten og er på den måde rentespændet mellem to obligationsinstrumenter med forskellige løbetider. Igennem dette rentespænd kan hældningen på rentekurven ligeldes findes. Basalt set vil rentekurven blive stejlere des højere værdien af rentespændet bliver. \citep{Fama1989} viser at en del af præmien i forventede afkast af hhv. aktier og obligationer er prædikteret gennem rentestrukturen. Disse afkast har vist sig at have forskellige konjukturmønstre. Altså vil det forventede afkast over aktier og obligationer bevæge sig kontracyklisk med de generelle konjukturer i økonomien. For at have en breddere del af rentekurven med, medtages ligeledes \emph{Yield Spread}. Denne variabel viser rentespændet på kort sigt, eftersom det ern forskellen mellem den effektive korte rente og \emph{T-Bill} renten.
+\emph{Term Spread} defineres som forskellen mellem den effektive lange rente og den 90-dages \emph{T-Bill}, og er på den måde rentespændet mellem to obligationsinstrumenter med forskellige løbetider. Igennem dette rentespænd kan hældningen på rentekurven ligeldes findes. Basalt set vil rentekurven blive stejlere des højere værdien af rentespændet bliver. \citep{Fama1989} viser at en del af præmien i forventede afkast af hhv. aktier og obligationer er prædikteret gennem rentestrukturen. Disse afkast har vist sig at have forskellige konjukturmønstre. Altså vil det forventede afkast over aktier og obligationer bevæge sig kontracyklisk med de generelle konjukturer i økonomien. For at have en breddere del af rentekurven med, medtages ligeledes \emph{Yield Spread}. Denne variabel viser rentespændet på kort sigt, eftersom det er forskellen mellem den effektive korte rente og den 90-dages \emph{T-Bill}.
 
-\emph{Credit Spread} defineres som forskellen mellem lavt ratede virksomhedsobligationernes effektive rente og den 90-dages \emph{T-Bill} rente. Dette følger metoden af \citep{Keim1986}. Kreditspændet er en ex ante variabel, som følger niveauet for lavt ratede obligationers priser. \citep{Keim1986} beviser, at variablen summerer ex ante information vedr forventede risikopræmier. På samme vis defineres \emph{Default Spread} som forskellen mellem lavt ratede virksomhedsobligationers effektive rente og højt ratede virksomhedsobligationerns effektive rente. \citep{Fama1989} finder bl.a. at \emph{Default Spread} fanger variation i forventede obligations- og aktieafkast. Derudover beskriver de, at de største bevægelser i denne variabel og i afkastene som variablen prædikterer er relateret til langstrækte økonomiske hændelser, som spænder over flere økonomiske konjukturer.
+\emph{Credit Spread} defineres som forskellen mellem lavt ratede virksomhedsobligationernes effektive rente og den 90-dages \emph{T-Bill} rente. Dette følger metoden af \citep{Keim1986}. Kreditspændet er en ex ante variabel, som følger niveauet for lavt ratede obligationers priser. \citep{Keim1986} beviser, at variablen summerer ex ante information vedr. forventede risikopræmier. På samme vis defineres \emph{Default Spread} som forskellen mellem lavt ratede virksomhedsobligationers effektive rente og højt ratede virksomhedsobligationerns effektive rente. \citep{Fama1989} finder bl.a. at \emph{Default Spread} fanger variation i forventede obligations- og aktieafkast. Derudover beskriver de, at de største bevægelser i denne variabel og i afkastene som variablen prædikterer er relateret til langstrækte økonomiske hændelser, som spænder over flere økonomiske konjukturer.
 
 Den nominelle (korte) rente har før vist at have statistisk styrke til at prædiktere afkast, \citep{Campbell2005}. Ved at inkludere både den nominelle rente (brutto) og realrenten (netto), fanges inflation i modellen, \citep{Campbell2005}.
 
@@ -885,17 +887,15 @@ Udover de finansielle variable og rentestruktursvariablene medtages én makroøk
 
 En relevant makroøkonomisk del til at forklare variationen i specielt obligationsafkast er finanspolitikken. \citep{Dai2005} undersøger specielt finanspolitikkens indflydelse ved at inkorpere \emph{Federal Funds Rate} som en forklarende variabel. De finder, at denne -- inkl. flere andre variable -- har statistisk styrke til at prædiktere obligationsafkast.
 
-\hypertarget{opsummering-1}{%
-\section{Opsummering}\label{opsummering-1}}
+\hypertarget{opsafkrel}{%
+\section{Opsummering}\label{opsafkrel}}
 
 Dette kapitel fungerede som et overblik over de approksimative og eksakte analytiske resultater på tværs af en række af aktiver. Ved benyttelse af den loglineære afkast approksimation af \citep{Campbell1988}, blev aktivklassernes nutidsværdi relateret til forventede fremtidige betalinger. Dette tilladte at prædiktiverelationer på tværs af aktivklasserne blev dannet, som er essentielle, når den mulige prædiktabilitet skal begrundes. Disse relationer vil derfor også kunne inkorporeres i den følgende VAR(1)-model. Derudover er en lang række variable ligeledes blevet præsenteret og diskuteret. Disse potentielle prædiktionsvariable er medtaget grundet tidligere litterære fund, som viser at prædiktabiliteten af afkast kan fanges af flere variable end de fundamentalt bundne variable.
 
 \hypertarget{varkapitel}{%
-\chapter{VAR}\label{varkapitel}}
+\chapter{Vector Autoregressive Model}\label{varkapitel}}
 
-LÆNGERE INTRO HER\ldots.
-
-I dette kapitel fastsættes den teoretiske ramme for den empiriske analyse. Dette gøres hovedsageligt ud fra teorien bag \citep{Userguide2004} med enkelte dele, som varierer.
+I dette kapitel præsenteres det dynamiske system, som har til formål at modellere afkastet og prædiktionsvariablene, til den empiriske analyse. Dette gøres hovedsageligt ud fra teorien bag \citep{Userguide2004} med enkelte dele, som varierer.
 
 \section{Sættet af investeringsmuligheder}
 
@@ -970,7 +970,7 @@ På trods af den simplificerende antagelse om tidsinvariant varians ikke virker 
 
 Den ubetingede middelværdi og kovariansmatrix af \(\bm{z}_{t+1}\) er givet ved
 \begin{align*}
-        \mathbb{E}_t(\bm{z}_{t+1}) &= (\bm{I}_m-\bm{\Phi}_1)^{-1}\bm{\Phi}_0\\
+        \mathbb{E}_t\left[\bm{z}_{t+1}\right] &= (\bm{I}_m-\bm{\Phi}_1)^{-1}\bm{\Phi}_0\\
         \text{vec}(\bm{\Sigma}_{zz}) &= (\bm{I}_{m^2}-\bm{\Phi}_1\otimes\bm{\Phi}_1)^{-1}\text{vec}(\bm{\Sigma}_v).
     \end{align*}
 Ovenstående ligninger ligger også til grund for determinantbetingelsen: hvis ikke determinanten af \(\bm{\Phi}_1\) var begrænset af \(-1\) og \(1\), ville den ubetingede middelværdi og varians af \(\bm{z}_{t+1}\) ikke være defineret.
@@ -1090,16 +1090,16 @@ Her er \(\bm{\Sigma}_v\) den betingede kovariansmatrix af \(v_t\), \(\lambda\) e
 
 \citep{Engsted2012} finder både kvantitative og kvalitative effekter ved brug af bias justerede koefficienter ift. de regulere OLS estimater. De viser bl.a. hvordan \emph{hedging} komponentet af porteføljeallokeringen ændrer sig for et kontinuum af risikoaversioner, hvor specielt mellemliggende risikoaversions værdier (\(\gamma=2\)) er særligt påvirket af biasjusteringen.\footnote{Se evt. Figur 1 i \citep{Engsted2012}.} Her bliver det optimale portefølgevalg påvirket, eftersom bias justeringen afstedkommer reducerede positioner for obligationer og aktier, gennem det intertemporale \emph{hedging demand}, mens positionen for kontanter forøges.
 
-\hypertarget{opsummering-2}{%
-\section{Opsummering}\label{opsummering-2}}
+\hypertarget{opsummering}{%
+\section{Opsummering}\label{opsummering}}
 
-\hypertarget{portefuxf8ljeteori}{%
-\chapter{Porteføljeteori}\label{portefuxf8ljeteori}}
+\hypertarget{porteteori}{%
+\chapter{Porteføljeteori}\label{porteteori}}
 
 I dette kapitel udvides teorien fra Kapitel \ref{unteo}. Mere specifikt sammenkobles porteføljeteorien fra Sektion \ref{myoinv} og nytteteorien fra Sektion \ref{typnyt}. Dette gøres på baggrund af \emph{CRRA}-nytte, i tilfældet, hvor investoren kan rebalancere sin portefølje periodisk, og i det restringerede tilfælde, hvor ingen rebalancering er tilladt. Herefter beskrives den analytiske løsning til det dynamiske porteføljeproblem foreslået af \citep{JurVic2011}.
 
 \hypertarget{crraportef}{%
-\section{CRRA Portefølje}\label{crraportef}}
+\section{Den dynamiske portefølje}\label{crraportef}}
 
 I det følgende vil porteføljevalget under antagelsen, at investoren har potens nytte, dvs. \emph{CRRA}-nytte samt at afkastene på alle aktivklasser er lognormale.
 
@@ -1109,7 +1109,7 @@ Først antages, at afkastet på investorens portefølje er lognormal, dette bety
 &\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
 \end{align}
 
-Maksimering af ovenstående forventning er ækvivalent til at maksimere log af forventningen, eftersom log-funktionen er strengt voksende, se evt. Figur \ref{fig:Nyt}, som er tegnet på baggrund af log-funktionen. Derudover kan: \(\tfrac{1}{1-\gamma}\) og \(-1\) fjernes fra Maksimeringsproblemet, eftersom de er konstante og derfor ikke vil påvirke optimum. Givet af \(W_{t+1}\) er lognormal, kan resultatet fra Appendiks ?? anvendes, og dermed opnå
+Maksimering af ovenstående forventning er ækvivalent til at maksimere log af forventningen, eftersom log-funktionen er strengt voksende, se evt. Figur \ref{fig:Nyt}, som er tegnet på baggrund af log-funktionen. Derudover kan: \(\tfrac{1}{1-\gamma}\) og \(-1\) fjernes fra Maksimeringsproblemet, eftersom de er konstante og derfor ikke vil påvirke optimum. Givet af \(W_{t+1}\) er lognormal, kan resultatet fra Appendiks \ref{underligteo} anvendes, og dermed opnå
 \begin{align}
 &\max \log\left(\mathbb{E}_t(W_{t+1}^{1-\gamma})\right)=(1-\gamma){E}_t(w_{t+1})+\frac{1}{2}(1-\gamma)^2\sigma_{wt}^2 \label{eq:CRRAmakslog}\\
 &\text{ubb.}\,\,w_{t+1}=r_{p,t+1} + w_t.\notag
@@ -1171,8 +1171,8 @@ Som igen er ækvivalent med den optimale løsning, Ligning \eqref{eq:Multalpha},
 \bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t(\bm{r}_{t+1})-r_{b,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right)+(1-\frac{1}{\gamma})(-\bm{\Sigma}_t^{-1}\bm{\sigma}_{b,t}).
 \end{equation}
 
-\hypertarget{model-for-k-perioder}{%
-\section{\texorpdfstring{Model for \(k\)-perioder}{Model for k-perioder}}\label{model-for-k-perioder}}
+\hypertarget{modkper}{%
+\section{\texorpdfstring{Model for \(k\)-perioder}{Model for k-perioder}}\label{modkper}}
 
 Analysen har indtil videre benyttet den restriktive antagelse, at investoren kun har en én-periodes investeringshorisont. Et mere realistisk tilfælde, er at antage, at investorens forventede nytte er udledt på baggrund af formuefordeling flere perioder fra nu. I den multiple-periode model, antages det at afkast på investeringer bliver geninvesteret, dette implicerer den nye budgetbegrænsning
 \begin{align}
@@ -1197,8 +1197,8 @@ I tilfældet uden periodisk rebalancering skal investoren evaluere \(k\)-periode
 
 Altså vil investoren vælge den samme portefølje over hele deres investeringshorisont givet, at der ikke er mulighed for periodisk rebalancering.
 
-\hypertarget{med-periodisk-rebalancering}{%
-\subsection{Med periodisk rebalancering}\label{med-periodisk-rebalancering}}
+\hypertarget{medperireb}{%
+\subsection{Med periodisk rebalancering}\label{medperireb}}
 
 Antagelsen om, at ingen rebalancering finder sted over tid, synes at være i modstrid med virkelige observationer. Derfor arbejdes videre med en teoretisk ramme, som tillader periodisk rebalancering af investorporteføljen. Den første som beskrev maksimering af nytte ift terminal formue var \citep{Mossin1968}, som beskriver problemet i diskrettid. \citep{Mossin1968} noterede sig, at enhver følge af portefølje beslutninger skal være betingede af resultatet fra tidligere perioder, men på samme tid tage hensyn til information vedr. de fremtidige fordelinger af afkast. \citep{Samuelson1969} udvidede denne teori til at medtage forbrug, mens \citep{Merton1969, Merton1971} beskrev en forbrugsbaseret model i kontinuert tid. I det følgende vil to eksempler med traktable løsninger blive præsenteret. Disse eksempler medfører, at investoren handler myopisk, selvom der er mulighed for rebalancering.
 
@@ -1225,8 +1225,8 @@ Ovenstående medfører, at investorer med \(\gamma>0\) vil vælge porteføljer m
 
 Den anden Samuelson-Merton betingelse som foranlediger til det myopiske porteføljevalg er baseret på faktummet, at en investor har log nytte, dvs. potens nytte, hvor \(\gamma=1\). Her vil porteføljevalget være myopisk, uanset om aktiv afkastene er \emph{i.i.d.} Argumenteret for dette er, at en log nytte investor vælger en portefølje, som maksimerer det forventede logafkast. Ligning \eqref{eq:sumportk} viser at \(k\)-periode log afkastet er summen af én-periode logafkast. Summen bliver maksimeret ved at maksimere hvert element seperat, siden at porteføljen frit kan blive valgt hver periode, altså vil hver én-periodes maksimering lede til det myopiske valg.
 
-\hypertarget{rekursiv-luxf8sning}{%
-\section{Rekursiv løsning}\label{rekursiv-luxf8sning}}
+\hypertarget{rekloes}{%
+\section{Rekursiv løsning}\label{rekloes}}
 
 I forlængelse af ovenstående modeller følges nu den analytiske løsning til det dynamiske porteføljeproblem foreslået af \citep{JurVic2011}. Her betragtes en investor med initial formue \(W_t\) på tidspunkt \(t\), som vælger en porteføljestrategi, der maksimerer den forventede nytte af formue \(k\) perioder frem i tiden, altså på tidspunkt \(t+k\). Investoren antages at have potens nytte med konstant risikoaversions parameter, \(\gamma\), og forbruger den akkumulerede nytte på terminaltidspunktet, \(t+k\).
 
@@ -1236,7 +1236,7 @@ Investoren vælger altså vægte sådan, at
 \begin{cases}
 \arg\max\mathbb{E}_t(\frac{1}{1-\gamma}W_{t+k}^{1-\gamma}),\quad &\gamma\neq 1\\
 \arg\max\mathbb{E}_t(\log(W_{t+k})),\quad &\gamma=1.
-\end{cases}
+\end{cases}\label{eq:jurvaegt}
 \end{align}
 
 Her er \(\tau\) den resterende tid til investeringshorisonten. Altså indekseres vægtenes på det tidspunkt de bliver valgt med sunket skrift, og med hævet skrift for den resterende tid til investeringshorisonten. Risikopræferencen for investoren indebærer, at \((1+R_{p,t+i})>0\) for \(i=1,\dots,k\). For de optimale vægte haves derfor
@@ -1244,12 +1244,12 @@ Her er \(\tau\) den resterende tid til investeringshorisonten. Altså indekseres
 W_{t+k}=W_t\exp(r_{p,t\to t+k}),\label{eq:formuetk}
 \end{equation}
 
-hvor \(r_{p,t\to t+k}=\sum_{i=1}^k r_{p,t+i}\) er \(k\)-periode log porteføljeafkastet mellem tidspunkt \(t\) og \(t+k\). Dette tillader at vægtene ??, kan omskrives til
+hvor \(r_{p,t\to t+k}=\sum_{i=1}^k r_{p,t+i}\) er \(k\)-periode log porteføljeafkastet mellem tidspunkt \(t\) og \(t+k\). Dette tillader, at vægtene \eqref{eq:jurvaegt}, kan omskrives til
 \begin{align}
 \left\{\bm{\alpha}_{t+k-\tau}^\tau\right\}_{\tau=k}^{\tau=1}=\begin{cases}
 \arg\max\mathbb{E}_t(\exp ((1-\gamma) r_{p,t\to t+k})),\quad &\gamma\neq 1\\
 \arg\max\mathbb{E}_t(r_{p,t\to t+k}),\quad &\gamma=1.
-\end{cases}
+\end{cases}\label{eq:jurvaegt2}
 \end{align}
 
 Som tidligere argumenteret vil en antagelse om rebalancering følge markedsobservationer, og det er ud fra denne antagelse at \citep{JurVic2011} løser det generelle \(k\)-periode porteføljeproblem ved benyttelse af baglæns optrævling. Løsningen er en diskretiseret version af \citep{Liu2007}, men mere fleksibel idet, at den kan håndtere et bredt spektrum af risikobærende aktiver og tilstandsvariable på samme tid. Derudover vil løsningen være eksakt i kontinuert tid, grundet den loglineære approksimation. Først udledes porteføljestrategien for den sidste periode, \(\tau=1\), da denne vægtning vil danne grundlaget for resten af rekursionen. Den optimale portefølje for sidste periode er den sædvanlige myopiske eller én-periode middelværdi-varians optimale portefølje, som tidligere præsenteret
@@ -1274,22 +1274,24 @@ Den generelle rekursive løsning til det dynamiske porteføljeproblem er givet v
 
 hvor \(\bm{\Sigma}_x=\begin{pmatrix}\bm{\sigma}_0x & \bm{\Sigma} & \bm{\Sigma}_{xs}'\end{pmatrix}\) og \(B_1^{\tau-1}\), \(B_2^{\tau-1}\) samt \(B_3^{\tau-1}\) er funktioner afhængende af: den resterende investeringshorisont, \(\tau\), \emph{RRA}-parameteren, \(\gamma\), samt koefficeinterne fra VAR-modellen, \citep{JurVic2011}.
 
-Ovenstående Ligning \eqref{eq:jurvicalpha} giver den fulde analytiske løsning til det intertemporale porteføljeproblem fra Ligning ??. Den optimale portefølje er en sum af to komponenter. Den første del af summen er identisk til den én-periode myopiske portefølje fra Ligning ??. Den anden del af summen, består af det såkaldte intertemporale \emph{hedging demand} for risikobærende aktiver, \citep{Merton1969, Merton1971, Merton1973}. Herudover viser løsning at den myopiske del af det totale porteføljevalg er uafhængigt af den resterende tid til investeringshorisonten, \(\tau\). Den viser også at den myopiske del er den totale porteføljedel for investorer med log nytte, \(\gamma=1\). Hvilket også er konsistent med intutionen givet i Sektion ??, at log nytte investorer ikke forholder sig til investeringshorisonten.
+Ovenstående Ligning \eqref{eq:jurvicalpha} giver den fulde analytiske løsning til det intertemporale porteføljeproblem fra Ligning \eqref{eq:jurvaegt2}. Den optimale portefølje er en sum af to komponenter. Den første del af summen er identisk til den én-periode myopiske portefølje fra Ligning \eqref{eq:Potmultalpha}. Den anden del af summen, består af det såkaldte intertemporale \emph{hedging demand} for risikobærende aktiver, \citep{Merton1969, Merton1971, Merton1973}. Herudover viser løsning at den myopiske del af det totale porteføljevalg er uafhængigt af den resterende tid til investeringshorisonten, \(\tau\). Den viser også at den myopiske del er den totale porteføljedel for investorer med log nytte, \(\gamma=1\). Hvilket også er konsistent med intutionen givet i Sektion \ref{medperireb}, at log nytte investorer ikke forholder sig til investeringshorisonten.
 
-Komponentet som repræsenterer det intertemporale \emph{hedging demand} består af to elementer. Det første element, \(\bm{\Sigma}_{xx}\bm{\Sigma}_x\), fanger -- gennem korrelationen med vektoren af tilstandsvariable -- muligheden for at aktiver kan \emph{hedge} imod ændringer i investeringsmuligheder. Det andet element, som består af \(1-\tfrac{1}{\gamma}\) og leddene ??, fanger effekten af ændringer i investeringsmuligheder på investorens marginal nytte. Derudover ses det fra Ligning \eqref{eq:jurvicalpha}, at dette sidste led er afhængig af den forventede værdi af alle tilstandsvariablene, \(\mathbb{E}_{t+k-\tau}[\bm{z}_{t+k-\tau+1}]\), samt afhængig af horisontlængden gennem \(B_1^{\tau-1}\), \(B_2^{\tau-2}\).
+Komponentet som repræsenterer det \emph{intertemporale hedging demand} er en funktion af \emph{RRA}-koefficienten, koefficienterne fra VAR-systemet og koefficienterne af \emph{value}-funktionen fra Appendiks \ref{optdynstrategi}, som selv er funktionern af koefficienterne fra VAR-systemet, og den tilbageværende investeringshorisont, \(\tau\). Altså er det gennem det \emph{intertemporale hedging demand}, at investeringshorisonten påvirker porteføljeallokeringen af den dynamiske rebalancerende investor.
 
 En begrænsning af den analytiske løsning udledt ovenfor, er manglen på kortsalgs bibetingelser. Altså, hvordan porteføljevægtene vil være anderledes, givet at investoren står overfor en kortsalgsrestriktion. For at drage inferens om en kortsalgs restringeret investor laves en sammenlingning, hvor porteføljevægtene fra Ligning \eqref{eq:jurvicalpha} trunkeres, givet at de er negative. Herefter normaliseres så porteføljenvægtningen benytter hele formuen. Nedenstående viser beregningen
-\[\alpha_{i,t}=\frac{\max(0,\alpha_{i,t})}{\sum_{i=1}^n \max(0,\alpha_{i,t})}.\]
+\begin{equation}
+\alpha_{i,t}=\frac{\max(0,\alpha_{i,t})}{\sum_{i=1}^n \max(0,\alpha_{i,t})}.\label{eq:kortsalgsrestr}
+\end{equation}
 
 På denne måde opnåes en repræsentativ portefølje, som kan benyttes til at besvare spørgsmålet, hvordan porteføljebeslutingen ændrer sig, ifm. en kortsalgsrestriktion.
 
-\hypertarget{opsummering-3}{%
-\section{Opsummering}\label{opsummering-3}}
+\hypertarget{opsummering-1}{%
+\section{Opsummering}\label{opsummering-1}}
 
 \part{Den empiriske analyse}
 
-\hypertarget{implementering}{%
-\chapter{Implementering}\label{implementering}}
+\hypertarget{imple}{%
+\chapter{Implementering}\label{imple}}
 
 Kapitel \ref{varkapitel} markerede slutningen af den underliggende teoretiske gennemgang samt diskussion. Nu tages fat på de nødvendige statistiske værktøjer, som er et nødvendige, for at kunne implementere den præsenterede porteføljemodel. Derfor vil dette kapitel lægge fundamentet for den empiriske del, som på den måde kan færdiggøre den optimale porteføljestrategi baseret på historiske data, der bliver gennemgået og gransket i Kapitel \ref{kapiteldatab}. Sektion \ref{sekpradik} vil præsentere de oftest anvendte lineære modeller til at teste afkastprædiktabilitet. Sektion \ref{sektestaftids} vil fungere som beskrivelse af de tests, som kan teste de anvendte tidsserier for de underliggende antagelser, der specielt er krævet af VAR-processen. Derudover vil Sektion \ref{sekmodelselek} sætte spørgsmåltegn ved højtparameteriserede modeller. Sektionen vil derfor diskutere problemet og præsentere et modelselektionsgrundlag, etableret for at kunne skabe en restringeret kvantiativ stærk model, som der -- ikke mindst -- samtidig er valgt ud fra en kvalitativ skepsis af undertegnede.
 
@@ -1298,16 +1300,16 @@ Kapitel \ref{varkapitel} markerede slutningen af den underliggende teoretiske ge
 
 Denne sektion vil dække en introduktion til testing af afkastprædiktabilitet. Da fokus er på porteføljeallokering, vil en dybdegående analyse ikke foretages i denne afhandling. Ved at følge den eksisterende litteratur, vil testene være baseret på lineære modeller. Først beskrives den univariate regressions model, som går forud for den multiple regression. Disse to lineære grundlag vil danne rammen for de empiriske undersøgelser i denne sektion. Derudover bliver generelle økonometriske problemer præsenteret for fuldstændighedens skyld.
 
-\hypertarget{univariat-regression}{%
-\subsection{Univariat regression}\label{univariat-regression}}
+\hypertarget{univarregr}{%
+\subsection{Univariat regression}\label{univarregr}}
 
 Den simpleste statistiske metode til at finde statistiske sammenhænge er gennem en univariat lineær regression. I et afkastprædiktablitets henseende vil man lave en regression af merafkast som responsvariabel på laggede forklarende variable. Dette vil give en indikation af relationens signifikans og størrelsesorden. Merafkast anvendes, eftersom analysen forsøger at påvise tidsvariation i risikopræmier og ikke i renter. Derudover er laggede foreklarende variable nødvendige, for at iscenesætte en realistisk følge informationer. Den simple univariat regression kan dermed præsenteres analytisk som
 \[y_t=\beta_0 + \beta_1 x_{t-1} + \varepsilon_t.\]
 
 hvor \(y_t\) er responsvariablen, som repræsenterer det realiserede merafkast på det undersøgte aktiv på tidspunkt \(t\). Den forklarende variabel, \(x_{t-1}\), er den foregående periodes realiserede værdi af variablen. Derudover haves fejlledet, \(\varepsilon_t\), som følger de generelle OLS betingelser. Den overordnede nulhypotese er, at ingen tidsvariation eksistrer i merafkast, dette vil betyde en \(\beta_1\) koefficient på nul. Altså vil en koefficient, signifikant forskellig fra nul, argumentere for prædiktabilitet. En diskusion af den ovenstående præsenterede ramme, kan findes i \citep{Stambaugh1999}.
 
-\hypertarget{multipel-regression}{%
-\subsection{Multipel regression}\label{multipel-regression}}
+\hypertarget{multregr}{%
+\subsection{Multipel regression}\label{multregr}}
 
 Som pointeret af \citep{Stambaugh1999} er der flere problemer med estimationen af den univariate regression. For at øge inferensen af estimationsresultaterne følges metoden af \citep{Goyal2007}, som består af en multipel regression. Den medfører en regression af responsvariablen, merafkast, på samtilige laggede forklarende variable. Altså kan den analytisk beskrives som
 \[y_t=\beta_0+\bm{\beta}_1\bm{x}_{t-1}+\bm{\varepsilon}_t,\]
@@ -1347,15 +1349,17 @@ Den følgende regression ligger bag \emph{Augmented Dickey-Fuller} testen, \cite
 hvor \(y_t\) er tidsserien på tidspunkt \(t\), \(\alpha\) er en kostant, \(\beta\) er koefficienten for en tids trend og \(p\) er lagordenen. Under nulhypotesen indeholder \(y_t\) en \emph{unit root}, dvs. \(\phi=0\). Dette er testet mod den alternative én-sidet hypotese at \(\phi<0\), altså at tidsserien er stationær. Den resulterende teststørrelse
 \[\text{ADF}=\frac{\hat{\phi}}{\hat{\sigma}_{\hat{\phi}}},\]
 
-evalueres herefter mod de kritiske værdier fra \emph{Dickey-Fuller} \(t\)-fordelingen. Testen vil udføres på alle variable, hvis enkelte variable ikke kan forkaste nulhypotesen tages den første forskel, og herefter vil de blive gentestet. Kan disse nye variable nu forkaste nulhypotesen, betegnes de som regel \emph{difference-stationary}. Dette er dog ikke sikkert og enkelte tidsserier kan sagtens være integreret af anden eller tredje orden. Stationaritetsantagelsen er imod forventning ikke et krav for VAR-processen. Fra generel økonomisk teori er det kendt, at de præsenterede variable fra Kapitel ?? vil være ikke-eksplosive. Derfor vil testresultatet ikke være alt afgørende for modelspecifikationen.
+evalueres herefter mod de kritiske værdier fra \emph{Dickey-Fuller} \(t\)-fordelingen. Testen vil udføres på alle variable, hvis enkelte variable ikke kan forkaste nulhypotesen tages den første forskel, og herefter vil de blive gentestet. Kan disse nye variable nu forkaste nulhypotesen, betegnes de som regel \emph{difference-stationary}. Dette er dog ikke sikkert og enkelte tidsserier kan sagtens være integreret af anden eller tredje orden. Stationaritetsantagelsen er imod forventning ikke et krav for VAR-processen. Fra generel økonomisk teori er det kendt, at de præsenterede variable fra Kapitel \ref{afkrel} vil være ikke-eksplosive. Derfor vil testresultatet ikke være alt afgørende for modelspecifikationen.
 
 \hypertarget{phillips-perron-test}{%
 \subsection{Phillips-Perron test}\label{phillips-perron-test}}
 
 Som \emph{Augmented Dickey-Fuller} er \emph{Phillips-Perron} testen en metode til at teste for en \emph{unit root} i en given tidsserie. Nulhypotesen er derfor \(\rho=1\) i nedenstående regression
-\[\Delta y_t = (\rho-1) y_{t-1} + \varepsilon_t.\]
+\begin{equation}
+\Delta y_t = (\rho-1) y_{t-1} + \varepsilon_t.\label{eq:philper}
+\end{equation}
 
-Som i \emph{Augmented Dickey-Fuller} testen løser \emph{Phillips-Perron} testen problemet, at processen som danner \(y_t\) muligvis har en højere orden af autokorrelation end tilladt i ovenstående Ligning ?? -- dette gør \(y_{t-1}\) endogen og vil ugyldiggøre den almindelige \emph{Dickey-Fuller} \(t\)-test. Hvorimod \emph{Augmented Dickey-Fuller} løser problemet ved at indtroducere lags i test-ligningen, laver \emph{Phillips-Perron} en ikke-parametrisk korrektion til \(t\)-test størrelsen. Derudover er testen robust overfor uspecificeret autokorrelation og heteroskedasticitet. Den fulde opskrivning af de to teststørrelser, \(Z(\hat{\alpha})\) og \(Z(t_{\hat{\alpha}})\), kan findes i \citep{Phillips1988}. Hvor den første teststørrelse, \(Z(\hat{\alpha})\), hører til Ligning ??, og den anden teststørrelse, \(Z(t_{\hat{\alpha}})\), hører til nedenstående regression, med en konstant og et ikke stokastisk led
+Som i \emph{Augmented Dickey-Fuller} testen løser \emph{Phillips-Perron} testen problemet, at processen som danner \(y_t\) muligvis har en højere orden af autokorrelation end tilladt i ovenstående Ligning \eqref{eq:philper} -- dette gør \(y_{t-1}\) endogen og vil ugyldiggøre den almindelige \emph{Dickey-Fuller} \(t\)-test. Hvorimod \emph{Augmented Dickey-Fuller} løser problemet ved at indtroducere lags i test-ligningen, laver \emph{Phillips-Perron} en ikke-parametrisk korrektion til \(t\)-test størrelsen. Derudover er testen robust overfor uspecificeret autokorrelation og heteroskedasticitet. Den fulde opskrivning af de to teststørrelser, \(Z(\hat{\alpha})\) og \(Z(t_{\hat{\alpha}})\), kan findes i \citep{Phillips1988}. Hvor den første teststørrelse, \(Z(\hat{\alpha})\), hører til Ligning \ref{philper}, og den anden teststørrelse, \(Z(t_{\hat{\alpha}})\), hører til nedenstående regression, med en konstant og et ikke stokastisk led
 \[\Delta y_t =\alpha + \beta t + (\rho-1) y_{t-1} + \varepsilon_t.\]
 
 Fordelen ved \emph{Phillips-Perron} testen er at den er ikke-parametrisk, dvs. den kræver ikke at vælge lagstørrelsen som i \emph{Augmented Dickey-Fuller}. Ulempen er derimod, at den baserer sig på asymptotisk teori. \citep{Davidson2004} finder, at \emph{Phillips-Perron} testen har værre performance for endelige stikprøver end \emph{Augmented Dickey-Fuller} testen.
@@ -1391,17 +1395,19 @@ hvor \(F^{-1}_{\chi_{+}^2}(\cdot)\) er kvantilfunktionen for den ensidet \(\chi^
 hvor \(T\) repræsenterer stikprøvestørrelsen. I praksis implementeres \emph{Top-down} strategien ved at undersøge én ligning fra VAR systemets ligninger af de fire aktiver. Først evalueres kriteriet for den ikke-restringerede regression, herefter fjernes én forklarende variabel af gangen og kriteriet bliver genberegnet. Dernæst vil den laveste \emph{AKFIC} værdi indikerer, hvilken variabel, der giver mindst ekstra information om variationen i responsvariablen, og er på den måde den bedste kandidat til fjernelse fra modellen. Denne midlertidige modelkandidat med laveste \emph{AKFIC} sammenlignes nu med den intielle model, givet at der ligeldes er forbedring ift. den intielle, vil denne midlertidige model nu være den nye basismodel. Denne process fortsætter rekursivt indtil ingen forklarende variable kan fjernes for at forbedre \emph{AKFIC} værdien.
 
 Processen køres kun for regressionerne for aktivafkastene på det fulde datasæt, for at have et kvantitativt bud på deres optimale prædiktionsvariable. Eftersom fokus er på porteføljeallokering, restringeres datasættet herefter til kun at indeholde variablene, der forbliver i modellen efter \emph{Top-down} processen. Dernæst holdes variablene op i mod de univariate og multiple regressioner samt korrelationsanalysen, for at undgå mulige multikollinaritetsproblemer. Derudover foretages en \emph{Variance Inflation Factor} analyse, som endnu et tjek for multikollinaritet. Analysen foretages i tre skridt. For samtlige forklarende variable fra \emph{Top-down} processen laves følgende regression
-\[x_t^i=\alpha+\bm{\beta}^j + \bm{x}_t^{j}+\varepsilon_t.\]
+\begin{equation}
+x_t^i=\alpha+\bm{\beta}^j + \bm{x}_t^{j}+\varepsilon_t. \label{eq:vifanareg}
+\end{equation}
 
 Dernæst beregnes \emph{VIF}-værdien for hvert \(\beta^j\) som
 \[\text{VIF}_i=\frac{1}{1-R_i^2},\]
 
-hvor \(R_i^2\) stammer fra regressionen i ovenstående Ligning ??. Det sidste skridt består i at undersøge størrelsesordenen af multikollinaritet, ved at tjekke størrelsen på \(\text{VIF}_i\). En generel regel er, at multikollinariteten er meget høj når \(\text{VIF}_i>10\). Kvadratroden af \(\text{VIF}\) indikerer, hvor meget standardfejlen øges, sammenlignet med tilfældet, hvor variablen hypotetisk ingen korrelation har til de andre variable i modellen. Skulle der være problemer med multikollinarietet fjernes evt. problematiske variable. Hvis de forklarende variable herefter er forskellige på tværs af aktivklasserne foretages en kvalitativ vurdering, som har til formål at udvælge en delmængde af de tilbageværende variable, som fuldt kommer til at indgå i VAR(1)-modellen.
+hvor \(R_i^2\) stammer fra regressionen i ovenstående Ligning \eqref{eq:vifanareg}. Det sidste skridt består i at undersøge størrelsesordenen af multikollinaritet, ved at tjekke størrelsen på \(\text{VIF}_i\). En generel regel er, at multikollinariteten er meget høj når \(\text{VIF}_i>10\). Kvadratroden af \(\text{VIF}\) indikerer, hvor meget standardfejlen øges, sammenlignet med tilfældet, hvor variablen hypotetisk ingen korrelation har til de andre variable i modellen. Skulle der være problemer med multikollinarietet fjernes evt. problematiske variable. Hvis de forklarende variable herefter er forskellige på tværs af aktivklasserne foretages en kvalitativ vurdering, som har til formål at udvælge en delmængde af de tilbageværende variable, som fuldt kommer til at indgå i VAR(1)-modellen.
 
 Slutteligt foretages en sidste \emph{Variance Inflation Factor} analyse, som et sidste tjek for multikollinaritet.
 
-\hypertarget{opsummering-4}{%
-\section{Opsummering}\label{opsummering-4}}
+\hypertarget{opsummering-2}{%
+\section{Opsummering}\label{opsummering-2}}
 
 \hypertarget{kapiteldatab}{%
 \chapter{Data beskrivelse}\label{kapiteldatab}}
@@ -1424,7 +1430,7 @@ Essencen af et risikofrit aktiv er at repræsentere et afkast med varians lig \(
 
 }
 
-\caption[short]{Tidsserie af log netto renten \\\raggedright Tidsserien spænder fra 2. kvartal 1954 til 4. kvartal 2018.}\label{fig:NET-TB-tids}
+\caption[Tidsserie af log netto renten.]{Tidsserie af log netto renten.}\label{fig:NET-TB-tids}
 \end{figure}
 
 I forlængelse af beskrivelsen af det risikofrie aktiv, viser Figur \ref{fig:INF-tids} et plot over tidsserien hørende til inflationsraten.
@@ -1608,7 +1614,7 @@ $rx_t^{\text{v}}$ & 74.307 & 0.000\\
 \hypertarget{pvariable}{%
 \section{Prædiktionsvariable}\label{pvariable}}
 
-Denne sektion har til formål at beskrive datagrundlaget for prædiktionsvariablene, som først blev beskrevet i Sektion ??. Disse variable består af en række finansielle indikatorer: \emph{Dividend-Price Ratio}, \emph{Price-Earnings Ratio}, \emph{Book-to-market Ratio}, \emph{High Minus Low}, \emph{Small Minus Big}, og variansen af aktieafkast. Derudover haves rentestruktursprædiktionsvariable: den nominelle rente, \emph{Term Spread}, \emph{Yield Spread}, \emph{Credit Spread} og \emph{Default Spread}. Én makroøkonomisk variabel udgør den sidste prædiktionsvariabel: \emph{Federal Funds Rate}. Udover beskrivelsen og begrundelsen beregningsmetoden for hver variabel, vil den tilhørende beskrivende statistik for hver variabel belyses.
+Denne sektion har til formål at beskrive datagrundlaget for prædiktionsvariablene, som først blev beskrevet i Sektion \ref{potpradik}. Disse variable består af en række finansielle indikatorer: \emph{Dividend-Price Ratio}, \emph{Price-Earnings Ratio}, \emph{Book-to-market Ratio}, \emph{High Minus Low}, \emph{Small Minus Big}, og variansen af aktieafkast. Derudover haves rentestruktursprædiktionsvariable: den nominelle rente, \emph{Term Spread}, \emph{Yield Spread}, \emph{Credit Spread} og \emph{Default Spread}. Én makroøkonomisk variabel udgør den sidste prædiktionsvariabel: \emph{Federal Funds Rate}. Udover beskrivelsen og begrundelsen beregningsmetoden for hver variabel, vil den tilhørende beskrivende statistik for hver variabel belyses.
 
 \hypertarget{dividend-price-ratio-x_ttextdp}{%
 \subsection{\texorpdfstring{Dividend-Price Ratio -- \(x_t^{\text{dp}}\)}{Dividend-Price Ratio -- x\_t\^{}\{\textbackslash text\{dp\}\}}}\label{dividend-price-ratio-x_ttextdp}}
@@ -2068,7 +2074,7 @@ $x_t^{\text{fr}}$ & 76.362 & 0.000\\
 \hypertarget{korr}{%
 \section{Korrelation}\label{korr}}
 
-Denne sektion rapporterer korrelationen mellem alle de ovennævnte variable, som inkluderer både aktivklasserne og prædtiktionsvariablene. Korrelation er opsummeret i Tabel \ref{tab:DES-KOR}. En analyse af korrelationen er en vigtig del af datainspektionen, specielt for multivariate processor -- som den introducerede VAR(1)-model fra Sektion ?? -- når den statistiske sammenhæng mellem flere variable skal uddybes. Ergo for bedre at kunne beskrive, hvordan en variabel påvirker en eller flere andre variabler, analyseres korrelationen på tværs af alle variable.
+Denne sektion rapporterer korrelationen mellem alle de ovennævnte variable, som inkluderer både aktivklasserne og prædtiktionsvariablene. Korrelation er opsummeret i Tabel \ref{tab:DES-KOR}. En analyse af korrelationen er en vigtig del af datainspektionen, specielt for multivariate processor -- som den introducerede VAR(1)-model fra Sektion \ref{varkapitel} -- når den statistiske sammenhæng mellem flere variable skal uddybes. Ergo for bedre at kunne beskrive, hvordan en variabel påvirker en eller flere andre variabler, analyseres korrelationen på tværs af alle variable.
 
 Fra Tabel \ref{tab:DES-KOR}, ses at alle log merafkast er ikke-negativt korreleret med den risikofrie netto rente. Samtidig bemærkes at korrelationen mellem obligationsmerafkastene er forholdsvis høj. Som forventet er korrelationen med den risikofrie brutto rente højest af alle variable. De finasielle variable har generelt lav korrelation med den risikofrie netto rente, det samme gør sig gældende for rentestruktursvariablene, mens den makroøkonomiske variabel \emph{Federal Funds Rate} har højere korrelation.
 
@@ -2112,13 +2118,13 @@ $x_t^{\text{fr}}$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 1.00\\
 \end{threeparttable}}
 \end{table}
 
-\hypertarget{stationaritet}{%
-\section{Stationaritet}\label{stationaritet}}
+\hypertarget{stationar}{%
+\section{Stationaritet}\label{stationar}}
 
 Som nævnt tidligere er stationaritet af de anvendte tidsserier et bærende element for validiteten af den endelige VAR(1)-model. I denne sektion vil en række testprocedure blive udført, for at kontrollere for stationaritet, på en mere formel måde end visuel inspektion. Tre forskellige test vil tilsammen skabe et grundlag for at afgøre om en eller flere af alle tilstandsvariablene skal ekskluderes fra den endelige VAR(1)-model. Disse er hhv. \emph{Augmented Dickey-Fuller} test, \emph{Phillips-Perron} test samt \emph{Kwiatkowski-Phillips-Schmidt-Shin}.
 
-\hypertarget{augmented-dickey-fuller-test-1}{%
-\subsection{Augmented Dickey-Fuller Test}\label{augmented-dickey-fuller-test-1}}
+\hypertarget{augdickful}{%
+\subsection{Augmented Dickey-Fuller Test}\label{augdickful}}
 
 \emph{Augmented Dickey-Fuller} test outputtet ses i Tabel \ref{tab:STAT}. Først og fremmest ses, at vi afvise hypotesen om ikke-stationaritet hos alle aktivklasserne -- på et signifikansniveau på \(\alpha=0.05\) -- når fokus er på de første par lags. Dette var også forventet givet en inspektion af de relevante tidsserie plots. Fokuseres dernæst på prædiktionsvariablene er det kun \emph{Dividend-Price Ratio}, \emph{Book-to-Market Ratio}, den nominelle rente samt \emph{Federal Funds Rate}, som ikke kan forkaste hypotesen om ikke-stationaritet. \emph{Price-Earnings} kan kun forkaste hypotesen for et signifikansniveau på \(\alpha=0.1\), uden lags. Hvorimod resten af prædiktionsvariablene forkaster hypotesen for alle lags. For at verificere, at de tre nævnte ovennævnte variable potentielt er eksplosive eller har en \emph{unit root}, tages den første forskel på tidsserierne. Herefter foretages testen igen. Outputtet fra denne re-testning ses i Tabel \ref{tab:STAT-DIFF}. Som det kan aflæses i tabellen er alle variablene integreret af første orden, \(I(1)\), eller stationære med hensyn til deres første forskel.
 
@@ -2189,8 +2195,8 @@ $x_t^{\text{fr}_{\Delta}}$ & -17.626 & 0.010 & -14.010 & 0.010 & -8.495 & 0.010 
 \end{threeparttable}}
 \end{table}
 
-\hypertarget{phillips-perron-test-1}{%
-\subsection{Phillips-Perron test}\label{phillips-perron-test-1}}
+\hypertarget{philper}{%
+\subsection{Phillips-Perron test}\label{philper}}
 
 Som en validering af resultaterne fra \emph{Augmented Dickey Fuller} test, foretages \emph{Phillips-Perron} testen. Outputtet fra denne ses i Tabel \ref{tab:STAT-PP}. Igen er det \emph{Dividend-Price Ratio}, \emph{Book-to-Market Ratio}, den nominelle rente samt \emph{Federal Funds Rate}, som er problematiske.
 
@@ -2231,8 +2237,8 @@ $x_t^{\text{fr}}$ & -14.944 & 0.272 & -2.895 & 0.199\\
 \end{threeparttable}
 \end{table}
 
-\hypertarget{kwiatkowski-phillips-schmidt-shin-test-1}{%
-\subsection{Kwiatkowski-Phillips-Schmidt-Shin test}\label{kwiatkowski-phillips-schmidt-shin-test-1}}
+\hypertarget{kwiatkow}{%
+\subsection{Kwiatkowski-Phillips-Schmidt-Shin test}\label{kwiatkow}}
 
 Som en ekstra validering foretages \emph{Kwiatkowski-Phillips-Schmidt-Shin} testen. Nulhypotesen er i dette tilfælde omvendt. Outputtet fra testen ses i Tabel \ref{tab:STAT-KPSS}. Det ses, at \emph{KPSS} testen modsiger resultaterne fra både \emph{Augmented Dickey-Fuller} testen og \emph{Phillips-Perron} testen, for visse variable. Dette er imidlertid et kendt problem, som generelt opstår grundet en begrænset stikprøvestørrelse.
 
@@ -2278,8 +2284,8 @@ $x_t^{\text{fr}}$ & 1.155 & 0.010 & 0.754 & 0.010\\
 
 Dette kapitel fungerede som en detaljeret data beskrivelse af alle undersøgte variable inkluderet til den videre analyse. Kapitlet indeholdte både beskrivende statistik samt plots og derudover beregninger og estimationsprocedure. Inspektion af autokorrelation i hver variabel viste, at log merafkastene ikke er udsat for autokorrelation, mens det risikofrie afkast udviser en smule autokorrelation. Derimod viste stort set alle prædiktionsvariable høj autokorrelation som generelt næsten var lig \(1\). Dette betyder at de generelt er meget vedvarende over tid. Dette kunne blive et problem for den videre analyse, idet, at de potentielt kan medfører bias pga. den endelige stikprøvestørrelse. En kvantitativ og kvalitativ vurdering af normaliteten af alle variable indebar, at næsten alle variable ikke udviser normalitet, dette kan tilgengæld være påvirket af stikprøvestørrelsen. Korrelationer blandt alle variable, følger generelt andre fund i eksisterende litteratur. Sidst foretog kapitlet en analyse af den mulige stationaritet blandt alle variable.
 
-\hypertarget{pruxe6diktabilitet}{%
-\chapter{Prædiktabilitet}\label{pruxe6diktabilitet}}
+\hypertarget{predikta}{%
+\chapter{Prædiktabilitet}\label{predikta}}
 
 Dette kapitel har til formål at teste for prædiktabilitet af afkastene i de introducerede aktivklasser fra Sektion \ref{aktivklasser}, ved benyttelse af de introducerede mulige prædiktionsvariable fra Sektion \ref{pvariable}. Prædiktabiliteten bliver testet i både et univariat og et multipelt øjemed. Dette tillader at teste for robusthed på tværs af prædiktionsvariablene og drage inferens af den mulige linearitet imellem merafkastene på aktivklasserne og de forklarende variable. Derudover vil testene giver et fingerpeg om graden af variationsforklaring, som de individuelle prædiktionsvariable måtte have, ift. responsvariablene. Disse regressioner vil have til formål at bidrage til delmængden af variable, som senere skal indgå i variabeludvælgelsen for VAR(1)-modellen. Det primære fokus vil være på de fundamentale variable, som før har vist særlig prædiktabilitets evner. Sekundært vil koefficienter, fortegn samt signifikans for hver individuel variabel blive beskrevet.
 
@@ -2295,7 +2301,7 @@ Den univariate analyse består af følgende regressioner
 
 hvor \(j\) er notationen for de \(3\) aktivklasser bestående af merafkast og \(i\) er notationen for de \(12\) prædiktionsvariable. Den statistiske signifikans for hver individuel koefficient vil kort blive vurderet, da dette vil give et fingerpeg om den mulige styrke, for hver forklarende variabel ift. prædiktion af fremtidige afkast. Mest opmærksomhed vil dog stadig være på aktivklassernes fundamentale relation til visse variable.
 
-Tabel \ref{tab:UNI-ak} rapporterer de univariate regressions resultater af log merafkastet på aktier, \(rx_{t+1}^a\), overfor den introducerede delmængde af mulige prædiktionsvariable. Det kendte nøgletal \emph{Dividend-Price Ratio} er ikke signifikant for hverken et \(5\%\) eller \(10\%\) signifikansniveau, med en tilhørende \(t\)-størrelse på 1.606. Af de resterende finansielle variable er det \emph{Price-Earnings Ratio}, \emph{Book-to-Market Ratio}, \emph{High Minus Low} og \emph{Small Minus Big} som prædiktrer merafkastet på aktier negativt. Af disse er det kun \emph{Small Minus Big} som påviser signifikans, med en \(t\)-størrelse på -2.671. Fortegnene for de finansielle variable er ækvivalente med tidligere i fund i litteraturen, eksempelvis \citep{Camp1987} og \citep{CampVicCha2003}. Den sidste signifikante variabel er \emph{Term-Spread} med \(t\)-størrelse på 2.152. På et \(10\%\) signifikansniveau vil også \emph{Yield Spread} være statistisk signifikant, og kunne derfor også være en mulig variabel til prædiktion af merafkastet på aktier. Størstedelen af rentestrukturs variablene prædikterer merafkastet positivt, med undtagelse af den nominelle rente og \emph{Default Spread}. Hvilket for rentespændende er ensbetydende med, at når spændet mellem langsigtede instrumenter og kortsigtede instrumenter stiger, vil en øgning i merafkastet på aktier, \(rx_{t+1}^s\), ligeledes ske i den næstkommende periode.
+Tabel \ref{tab:UNI-ak} rapporterer de univariate regressions resultater af merafkastet på aktier, \(rx_{t+1}^a\), overfor den introducerede delmængde af mulige prædiktionsvariable. Det kendte nøgletal \emph{Dividend-Price Ratio} er ikke signifikant for hverken et \(5\%\) eller \(10\%\) signifikansniveau, med en tilhørende \(t\)-størrelse på 1.606. Af de resterende finansielle variable er det \emph{Price-Earnings Ratio}, \emph{Book-to-Market Ratio}, \emph{High Minus Low} og \emph{Small Minus Big} som prædiktrer merafkastet på aktier negativt. Af disse er det kun \emph{Small Minus Big} som påviser signifikans, med en \(t\)-størrelse på -2.671. Fortegnene for de finansielle variable er ækvivalente med tidligere i fund i litteraturen, eksempelvis \citep{Camp1987} og \citep{CampVicCha2003}. Den sidste signifikante variabel er \emph{Term-Spread} med \(t\)-størrelse på 2.152. På et \(10\%\) signifikansniveau vil også \emph{Yield Spread} være statistisk signifikant, og kunne derfor også være en mulig variabel til prædiktion af merafkastet på aktier. Størstedelen af rentestrukturs variablene prædikterer merafkastet positivt, med undtagelse af den nominelle rente og \emph{Default Spread}. Hvilket for rentespændende er ensbetydende med, at når spændet mellem langsigtede instrumenter og kortsigtede instrumenter stiger, vil en øgning i merafkastet på aktier, \(rx_{t+1}^s\), ligeledes ske i den næstkommende periode.
 
 
 
@@ -2330,7 +2336,7 @@ $x_t^{\text{fr}}$ & \textbf{-0.386} & -0.697 & -0.075 & 0.158 & -2.445 & 0.015 &
 \end{threeparttable}
 \end{table}
 
-Ligedes rapporterer Tabel \ref{tab:UNI-s} de univariate regressions resultater af log merafkastet på statsobligationer, \(rx_{t+1}^s\), overfor den introducerede delmængde af mulige prædiktionsvariable. Mest overraskende er, at \emph{Yield Spread} ikke er signifikant, som den eneste af de fire rentespænds variable. Til gengæld prædikterer \emph{Yield Spread} merafkastet på statsobligationer positivt, hvilket også følger tidligere litteratur, \citep{Fama1987}. Dette er også tilfældet for de resterende rentespænd. Af alle rentestruktursvariablene er det kun \emph{Term Spread}, \emph{Credit Spread} og \emph{Default Spread} som er signifikante for denne stikprøve, med \(t\)-størrelser på hhv. 2.466, 4.297 og 2.858. En stigning i den nuværende \emph{Term Spread} kommer eksempelvis enten fra en forøgelse af den lange effektive rente, \(Y_t^{10}\), eller et fald i den korte effektive rente, \(Y_t^90\), eller en kombination af begge vil lede til en stigning i det fremtidige log merafkast på statsobligationer. Ift. de finansielle variable er det \emph{Small Minus Big}, som har statistisk styrke i den univariate opsætning, med \(t\)-størrelse på -2.702. \emph{Small Minus Big} prædikterer merafkastet negativt. Den makroøkonomiske variabel \emph{Federal Funds Rate} er ikke signifikant, og prædikterer merafkastet negativt.
+Ligedes rapporterer Tabel \ref{tab:UNI-s} de univariate regressions resultater af merafkastet på statsobligationer, \(rx_{t+1}^s\), overfor den introducerede delmængde af mulige prædiktionsvariable. Mest overraskende er, at \emph{Yield Spread} ikke er signifikant, som den eneste af de fire rentespænds variable. Til gengæld prædikterer \emph{Yield Spread} merafkastet på statsobligationer positivt, hvilket også følger tidligere litteratur, \citep{Fama1987}. Dette er også tilfældet for de resterende rentespænd. Af alle rentestruktursvariablene er det kun \emph{Term Spread}, \emph{Credit Spread} og \emph{Default Spread} som er signifikante for denne stikprøve, med \(t\)-størrelser på hhv. 2.466, 4.297 og 2.858. En stigning i den nuværende \emph{Term Spread} kommer eksempelvis enten fra en forøgelse af den lange effektive rente, \(Y_t^{10}\), eller et fald i den korte effektive rente, \(Y_t^90\), eller en kombination af begge vil lede til en stigning i det fremtidige log merafkast på statsobligationer. Ift. de finansielle variable er det \emph{Small Minus Big}, som har statistisk styrke i den univariate opsætning, med \(t\)-størrelse på -2.702. \emph{Small Minus Big} prædikterer merafkastet negativt. Den makroøkonomiske variabel \emph{Federal Funds Rate} er ikke signifikant, og prædikterer merafkastet negativt.
 
 \begin{table}[H]
 
@@ -2363,7 +2369,7 @@ $x_t^{\text{fr}}$ & -0.139 & -0.280 & 0.003 & 0.072 & -1.934 & 0.054 & 0.017\\
 \end{threeparttable}
 \end{table}
 
-De statistiske resultater for de univariate regressioner på det fremtidige log merafkast på virksomhedsobligationer, \(rx_{t+1}^v\), er rapporteret i Tabel \ref{tab:UNI-v}. Igen ses, at alle rentespænd prædikterer merafkastet positivt, og alle er signifikante på \(5\%\)-niveauet, specielt \emph{Credit Spread} med en \(t\)-størrelse på 5.063. Den samme inferens for \(rx_{t+1}^s\) kan blive udtænkt for \(rx_{t+1}^v\). Alle de finansielle variable, med undtagelse af \emph{Small Minus Big}, har ikke styrke til at forklare variationen i det fremtidige log merafkast på virksomhedsobligationer. Den makroøkonomiske variabel \emph{Federal Funds Rate} prædikterer merafkastet negativt, som også var tilfældet for statsobligations merafkastet, men denne gang er koefficienten signifikant med en \(t\)-størrelse på -2.739.
+De statistiske resultater for de univariate regressioner på det fremtidige merafkast på virksomhedsobligationer, \(rx_{t+1}^v\), er rapporteret i Tabel \ref{tab:UNI-v}. Igen ses, at alle rentespænd prædikterer merafkastet positivt, og alle er signifikante på \(5\%\)-niveauet, specielt \emph{Credit Spread} med en \(t\)-størrelse på 5.063. Den samme inferens for \(rx_{t+1}^s\) kan blive udtænkt for \(rx_{t+1}^v\). Alle de finansielle variable, med undtagelse af \emph{Small Minus Big}, har ikke styrke til at forklare variationen i det fremtidige log merafkast på virksomhedsobligationer. Den makroøkonomiske variabel \emph{Federal Funds Rate} prædikterer merafkastet negativt, som også var tilfældet for statsobligations merafkastet, men denne gang er koefficienten signifikant med en \(t\)-størrelse på -2.739.
 
 \begin{table}[H]
 
@@ -2401,9 +2407,9 @@ De ovenstående præsenterede univariate regressioner kaster tvivl på validitet
 \hypertarget{multreg}{%
 \section{Multiple regressioner}\label{multreg}}
 
-I denne sektion fortsættes analysen af variablene, som kan indgå i den endelige VAR(1)-model, ved brug af multiple regressioner. Altså antages det, at en eller flere variable forklarer variationen i log merafkastet på aktivklasserne. I det følgende vil tre robuste OLS estimationer blive undersøgt nærmere, idet, at standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. \(t\)-værdierne og \(p\)-værdierne er ligedes dannet på baggrund af de justerede standardfejl. Signifikansniveauet fastholdes på niveauet \(\alpha=0.05\). At inkludere alle variable i én multipel regression betegnes undertiden i litteraturen med det velvalgte navn \emph{Kitchen-Sink Regression}, \citep{Goyal2007}.
+I denne sektion fortsættes analysen af variablene, som kan indgå i den endelige VAR(1)-model, ved brug af multiple regressioner. Altså antages det, at en eller flere variable forklarer variationen i log merafkastet på aktivklasserne. I det følgende vil tre robuste OLS estimationer blive undersøgt nærmere, idet, at standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. \(t\)-værdierne og \(p\)-værdierne er ligedes dannet på baggrund af de justerede standardfejl. Signifikansniveauet fastholdes på niveauet \(\alpha=0.05\). At inkludere alle variable i én multipel regression betegnes undertiden i litteraturen med det velvalgte navn \emph{Kitchen-Sink Regression}, \citep{Goyal2007}. Derudover foretages en \emph{Step-AIC}-procedure, der giver anledning til en regression, af en delmængde af de foreklarende variable i de multiple regressioner. Dette anvendes kun som et supplement til modeltjekkene, og skal ikke ses som en modelselektion.
 
-Fokuseres først på log merafkastet på aktier, bemærkes det, at næsten alle de finansielle variable er yderst insignifikante. Kun \emph{Small Minus Big} kan prædiktere merafkastet signifikant, hvilket stemmer overens med den univariate analyse. Dette gør den med en negativ koefficient, som også er gældende for \emph{Price-Earnings Ratio} og \emph{High Minus Low}. Hvorimod resten af de finansielle variable har en positiv koefficient. Ift. rentestruktursvariablene ses at den nominelle rente er signifikant med en \(t\)-størrelse på 2.396. Den nominelle rente var til gengæld ikke signifikant i den univariate analyse. Den makroøkonomiske variabel er ligeledes signifikant -- med en \(t\)-størrelse på -2.419 -- hvilket den også var i det univariate setup.
+Fokuseres først på merafkastet på aktier, bemærkes det, at næsten alle de finansielle variable er yderst insignifikante. Kun \emph{Small Minus Big} kan prædiktere merafkastet signifikant, hvilket stemmer overens med den univariate analyse. Dette gør den med en negativ koefficient, som også er gældende for \emph{Price-Earnings Ratio} og \emph{High Minus Low}. Hvorimod resten af de finansielle variable har en positiv koefficient. Ift. rentestruktursvariablene ses at den nominelle rente er signifikant med en \(t\)-størrelse på 2.396. Den nominelle rente var til gengæld ikke signifikant i den univariate analyse. Den makroøkonomiske variabel er ligeledes signifikant -- med en \(t\)-størrelse på -2.419 -- hvilket den også var i det univariate setup.
 
 \begin{table}[H]
 
@@ -2432,7 +2438,7 @@ $x_t^{\text{ds}}$ & 0.898 & -9.399 & 11.195 & 5.228 & 0.172 & 0.864\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette er den justerede $R^2$.}
+\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er på ??, bemærk dette er den justerede $R^2$.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -2448,7 +2454,7 @@ Som et modeltjek viser Figur \ref{fig:MULT-ak-auto} seks af de mest sædvanlige 
 \caption{Visuel inspektion af Kitchen-Sink regressionen for merafkastet på aktier.}\label{fig:MULT-ak-auto}
 \end{figure}
 
-Figur \ref{fig:MULT-ak-step-auto} viser ligeledes seks af de mest sædvanlige modelinspektionsplots. Disse er dannet på baggrund af en \emph{Step AIC}-procedure. Hvor variablene iterativt er blevet fjernet fra \emph{Kitchen-Sink} regressionen, afhængig af om de gav anledning til en bedre model ved fjernelse. Overordnet set er det de samme tendenser der ses som i Figur \ref{fig:MULT-ak-auto}. Enkelte nye observations bliver fanget af \emph{Cook's Distance}.
+Som et mellemliggende tjek er der dannet en step optimeret multipel regression. Denne model er dannet på baggrund af en \emph{Step AIC}-procedure. Her er variablene iterativt blevet fjernet fra \emph{Kitchen-Sink} regressionen, afhængig af om de gav anledning til en bedre model ved fjernelse. Tabel \ref{tab:MULT-step-ak} viser den resulterende multiple regression.
 
 \begin{table}[H]
 
@@ -2473,10 +2479,12 @@ $x_t^{\text{cs}}$ & -2.508 & -5.023 & 0.007 & 1.277 & -1.964 & 0.051\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}
+\item \textit{Denne tabel rapporterer den beskrivende statistik af en AIC step optimeret multipel regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er på ??, bemærk dette er den justerede $R^2$.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+
+Figur \ref{fig:MULT-ak-step-auto} viser ligeledes seks af de mest sædvanlige modelinspektionsplots, denne gang for den step optimeret mutiple regression. Overordnet set er det de samme tendenser der ses som i Figur \ref{fig:MULT-ak-auto}. Enkelte nye observations bliver fanget af \emph{Cook's Distance}.
 
 \begin{figure}[H]
 
@@ -2487,7 +2495,7 @@ $x_t^{\text{cs}}$ & -2.508 & -5.023 & 0.007 & 1.277 & -1.964 & 0.051\\
 \caption{Visuel inspektion af den step optimerede regression for merafkastet på aktier.}\label{fig:MULT-ak-step-auto}
 \end{figure}
 
-Mht. log merafkastet på statsobligationer ses, at \emph{Small Minus Big} samt aktievariansen prædikterer merafkastet negativt, og som de eneste af finansielle variable, er de signifikante. For rentestruktursvariablene er det den nominelle rente samt \emph{Credit Spread}, som er signifikante, de prædikterer afkastet positivt. Her skal det nævnes, at der er stor sandsynlighed for multikollinaritet, da rentespændene indeholder meget af den samme information og er stærkt korrelerede. Derudover kan det nævnes at \emph{Credit Spread} er den eneste renstespændsvariabel med det korrekte fortegn. \emph{Federal Funds Rate} er ligeledes signifikant og bevæger sig kontracyklisk med en negativ koefficient.
+Mht. merafkastet på statsobligationer ses, at \emph{Small Minus Big} samt aktievariansen prædikterer merafkastet negativt, og som de eneste af finansielle variable, er de signifikante. For rentestruktursvariablene er det den nominelle rente samt \emph{Credit Spread}, som er signifikante, de prædikterer afkastet positivt. Her skal det nævnes, at der er stor sandsynlighed for multikollinaritet, da rentespændene indeholder meget af den samme information og er stærkt korrelerede. Derudover kan det nævnes at \emph{Credit Spread} er den eneste renstespændsvariabel med det korrekte fortegn. \emph{Federal Funds Rate} er ligeledes signifikant og bevæger sig kontracyklisk med en negativ koefficient.
 
 \begin{table}[H]
 
@@ -2504,7 +2512,7 @@ Mht. log merafkastet på statsobligationer ses, at \emph{Small Minus Big} samt a
 $x_t^{\text{dp}}$ & 0.017 & -0.011 & 0.046 & 0.015 & 1.191 & 0.235\\
 \rowcolor{gray!6}  $x_t^{\text{pe}}$ & -0.008 & -0.023 & 0.007 & 0.007 & -1.062 & 0.289\\
 $x_t^{\text{bm}}$ & -0.017 & -0.057 & 0.023 & 0.021 & -0.826 & 0.409\\
-\rowcolor{gray!6}  $x_t^{\sigma_{\text{a}}^2}$ & \textbf{-0.851} & -1.568 & -0.134 & 0.364 & -2.337 & 0.020\\
+\rowcolor{gray!6}  $x_t^{\text{avar}}$ & \textbf{-0.851} & -1.568 & -0.134 & 0.364 & -2.337 & 0.020\\
 $x_t^{\text{hml}}$ & 0.000 & -0.002 & 0.003 & 0.001 & 0.353 & 0.724\\
 \rowcolor{gray!6}  $x_t^{\text{smb}}$ & \textbf{-0.003} & -0.006 & -0.001 & 0.001 & -2.594 & 0.010\\
 $x_t^{\text{b}}$ & \textbf{ 2.387} & 0.073 & 4.701 & 1.175 & 2.032 & 0.043\\
@@ -2516,10 +2524,12 @@ $x_t^{\text{ds}}$ & -0.485 & -2.873 & 1.902 & 1.212 & -0.400 & 0.689\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\text{s}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}
+\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\text{s}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er på ??, bemærk dette er den justerede $R^2$.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+
+Figur \ref{fig:MULT-s-auto} viser modelinspektionsplottene for den multiple regression på merafkastet af statsobligationer. Residualerne har en acceptabel spredning, men for meget høje og meget lave værdier af responsvariablen observeres heteroskedasticitet. Igen skal stikprøvestørrelsen tages som et forbehold, når sådanne inspektionsplots skal undersøges. Enkelte observationer udviser høj \emph{leverage} og tilsvarende en høj \emph{Cook's Distance}.
 
 \begin{figure}[H]
 
@@ -2527,8 +2537,10 @@ $x_t^{\text{ds}}$ & -0.485 & -2.873 & 1.902 & 1.212 & -0.400 & 0.689\\
 
 }
 
-\caption{Visuel inspektion af Kitchen-Sink regressionen for merafkastet på aktier.}\label{fig:MULT-s-auto}
+\caption{Visuel inspektion af Kitchen-Sink regressionen for merafkastet på statsobligationer.}\label{fig:MULT-s-auto}
 \end{figure}
+
+Også for responsvariablen: merafkastet af statsobligationer er de forklarende variable iterativt blevet fjernet fra \emph{Kitchen-Sink} regressionen, gennem \emph{Step-AIC}-proceduren. Tabel \ref{tab:MULT-step-s} viser den resulterende multiple regression.
 
 \begin{table}[H]
 
@@ -2542,19 +2554,21 @@ $x_t^{\text{ds}}$ & -0.485 & -2.873 & 1.902 & 1.212 & -0.400 & 0.689\\
   & Koefficient & Nedre & Øvre & Standardfejl & $t$-værdi & $p$\\
 \midrule
 \rowcolor{gray!6}  Afskæring & \textbf{-0.020} & -0.032 & -0.009 & 0.006 & -3.491 & 0.001\\
-$x_t^{\sigma_{\text{a}}^2}$ & \textbf{-0.836} & -1.455 & -0.217 & 0.314 & -2.660 & 0.008\\
+$x_t^{\text{avar}}$ & \textbf{-0.836} & -1.455 & -0.217 & 0.314 & -2.660 & 0.008\\
 \rowcolor{gray!6}  $x_t^{\text{smb}}$ & \textbf{-0.004} & -0.006 & -0.001 & 0.001 & -2.827 & 0.005\\
-$x_t^{\text{tb}}$ & \textbf{ 2.664} & 0.425 & 4.903 & 1.137 & 2.343 & 0.020\\
+$x_t^{\text{b}}$ & \textbf{ 2.664} & 0.425 & 4.903 & 1.137 & 2.343 & 0.020\\
 \rowcolor{gray!6}  $x_t^{\text{ys}}$ & \textbf{-2.199} & -3.132 & -1.265 & 0.474 & -4.639 & 0.000\\
 $x_t^{\text{cs}}$ & \textbf{ 1.517} & 1.005 & 2.030 & 0.260 & 5.830 & 0.000\\
 \rowcolor{gray!6}  $x_t^{\text{fr}}$ & \textbf{-0.595} & -1.079 & -0.110 & 0.246 & -2.416 & 0.016\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}
+\item \textit{Denne tabel rapporterer den beskrivende statistik af en AIC step optimeret multipel regression ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er på ??, bemærk dette er den justerede $R^2$.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+
+Figur \ref{fig:MULT-s-step-auto} viser modelinspektionen for den step optimerede regression på merafkastet af statsobligationer.
 
 \begin{figure}[H]
 
@@ -2562,10 +2576,10 @@ $x_t^{\text{cs}}$ & \textbf{ 1.517} & 1.005 & 2.030 & 0.260 & 5.830 & 0.000\\
 
 }
 
-\caption{Visuel inspektion af den step optimerede regression for merafkastet på aktier.}\label{fig:MULT-s-step-auto}
+\caption{Visuel inspektion af den step optimerede regression for merafkastet på statsobligationer.}\label{fig:MULT-s-step-auto}
 \end{figure}
 
-Sidst ses i Tabel \ref{tab:MULT-v} at log merafkastet på virksomhedsobligationer er svært prædiktabelt i det multiple setup. Kun \emph{Small Minus Big} samt \emph{Federal Funds Rate} er signifikante med \(t\)-størrelser på hhv. -2.836 og -2.739. Igen ses at \emph{Credit Spread} er rentespændsvariablen, der har højest signifikans, hvilket følger den multiple regression mht. statsobligationerne.
+Sidst ses i Tabel \ref{tab:MULT-v}, at merafkastet på virksomhedsobligationer er svært prædiktabelt i det multiple setup. Kun \emph{Small Minus Big} samt \emph{Federal Funds Rate} er signifikante med \(t\)-størrelser på hhv. -2.836 og -2.739. Igen ses at \emph{Credit Spread} er rentespændsvariablen, der har højest signifikans, hvilket følger den multiple regression mht. statsobligationerne.
 
 \begin{table}[H]
 
@@ -2582,7 +2596,7 @@ Sidst ses i Tabel \ref{tab:MULT-v} at log merafkastet på virksomhedsobligatione
 $x_t^{\text{dp}}$ & 0.015 & -0.015 & 0.045 & 0.015 & 0.979 & 0.329\\
 \rowcolor{gray!6}  $x_t^{\text{pe}}$ & 0.000 & -0.026 & 0.026 & 0.013 & -0.021 & 0.983\\
 $x_t^{\text{bm}}$ & -0.011 & -0.057 & 0.035 & 0.023 & -0.476 & 0.635\\
-\rowcolor{gray!6}  $x_t^{\sigma_{\text{a}}^2}$ & -1.162 & -2.467 & 0.142 & 0.662 & -1.755 & 0.080\\
+\rowcolor{gray!6}  $x_t^{\text{avar}}$ & -1.162 & -2.467 & 0.142 & 0.662 & -1.755 & 0.080\\
 $x_t^{\text{hml}}$ & 0.002 & -0.001 & 0.005 & 0.001 & 1.203 & 0.230\\
 \rowcolor{gray!6}  $x_t^{\text{smb}}$ & \textbf{-0.004} & -0.007 & -0.001 & 0.001 & -2.836 & 0.005\\
 $x_t^{\text{b}}$ & 2.140 & -0.382 & 4.662 & 1.280 & 1.671 & 0.096\\
@@ -2594,10 +2608,12 @@ $x_t^{\text{ds}}$ & 1.754 & -1.147 & 4.656 & 1.473 & 1.191 & 0.235\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\text{v}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}
+\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\text{v}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er på ??, bemærk dette er den justerede $R^2$.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+
+Modeltjekket i Figur \ref{fig:MULT-v-auto} viser tilsvarende problemer for merafkasatet på virksomhedsobligationer som for de to andre risikobærende aktiver. For høje værdier af responsvariablen ses dog mindre grad af heteoriskedasticitet.
 
 \begin{figure}[H]
 
@@ -2605,8 +2621,10 @@ $x_t^{\text{ds}}$ & 1.754 & -1.147 & 4.656 & 1.473 & 1.191 & 0.235\\
 
 }
 
-\caption{Visuel inspektion af Kitchen-Sink regressionen for merafkastet på aktier.}\label{fig:MULT-v-auto}
+\caption{Visuel inspektion af Kitchen-Sink regressionen for merafkastet på virksomhedsobligationer.}\label{fig:MULT-v-auto}
 \end{figure}
+
+Tabel \ref{tab:MULT-step-v} viser den resulterende multiple regression efter \emph{Step-AIC}-proceduren for merafkastet på virksomhedsobligationer.
 
 \begin{table}[H]
 
@@ -2620,18 +2638,20 @@ $x_t^{\text{ds}}$ & 1.754 & -1.147 & 4.656 & 1.473 & 1.191 & 0.235\\
   & Koefficient & Nedre & Øvre & Standardfejl & $t$-værdi & $p$\\
 \midrule
 \rowcolor{gray!6}  Afskæring & -0.010 & -0.021 & 0.001 & 0.006 & -1.716 & 0.087\\
-$x_t^{\sigma_{\text{a}}^2}$ & -1.054 & -2.402 & 0.294 & 0.684 & -1.541 & 0.125\\
+$x_t^{\text{a}}$ & -1.054 & -2.402 & 0.294 & 0.684 & -1.541 & 0.125\\
 \rowcolor{gray!6}  $x_t^{\text{smb}}$ & \textbf{-0.005} & -0.007 & -0.002 & 0.001 & -3.635 & 0.000\\
-$x_t^{\text{tb}}$ & 1.967 & -0.324 & 4.258 & 1.163 & 1.691 & 0.092\\
+$x_t^{\text{b}}$ & 1.967 & -0.324 & 4.258 & 1.163 & 1.691 & 0.092\\
 \rowcolor{gray!6}  $x_t^{\text{ds}}$ & \textbf{ 4.075} & 2.224 & 5.926 & 0.940 & 4.337 & 0.000\\
 $x_t^{\text{fr}}$ & \textbf{-0.876} & -1.368 & -0.383 & 0.250 & -3.499 & 0.001\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}
+\item \textit{Denne tabel rapporterer den beskrivende statistik af en AIC step optimeret multipel regression ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er på ??, bemærk dette ikke er den justerede $R^2$.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
+
+Sidst viser Figur \ref{fig:MULT-v-step-auto} modelsinpektionsplottene fra den step optimerede multiple regression.
 
 \begin{figure}[H]
 
@@ -2639,28 +2659,30 @@ $x_t^{\text{fr}}$ & \textbf{-0.876} & -1.368 & -0.383 & 0.250 & -3.499 & 0.001\\
 
 }
 
-\caption{Visuel inspektion af den step optimerede regression for merafkastet på aktier.}\label{fig:MULT-v-step-auto}
+\caption{Visuel inspektion af den step optimerede regression for merafkastet på virksomhedsobligationer.}\label{fig:MULT-v-step-auto}
 \end{figure}
 
 \hypertarget{opsreg}{%
 \section{Opsummering}\label{opsreg}}
 
-\hypertarget{underliggende-model}{%
-\chapter{Underliggende model}\label{underliggende-model}}
+I dette kapitel blev prædiktabiliteten af merafkastet på de risikobærende aktiver testet. For at have et initielt bud på potentielle tilstandsvariable i VAR(1)-modellen. Derudover blev en \emph{Step-AIC}-procedure foretaget, som skulle ses som et supplement til modeltjekkene.
+
+\hypertarget{underligmodel}{%
+\chapter{Underliggende model}\label{underligmodel}}
 
 Dette kapitel har til formål at præsentere resultatet fra modelselektionproceduren, som blev præsenteret i Sektion \ref{sekmodelselek}. Derudover præsenterer kapitlet VAR(1)-modellens estimationsresultater i Sektion \ref{var1est}. Estimationen af VAR(1)-modellen er gennemført på den fulde stikprøve periode fra 1954 2. kvartal til 2018 4.kvartal, som tæller \(252\) kvartalsvise observationer. Den restringerede VAR(1)-model estimeres ved brug af Ligning \eqref{eq:1}, derudover estimeres de bias-justerede koefficienter ved brug af den analytiske bias formel af \citep{Pope1990}, dvs. Ligning \eqref{eq:bias}.
 
-\hypertarget{resultater-fra-modelselektionsproceduren}{%
-\section{Resultater fra modelselektionsproceduren}\label{resultater-fra-modelselektionsproceduren}}
+\hypertarget{resframodelsel}{%
+\section{Resultater fra modelselektionsproceduren}\label{resframodelsel}}
 
-For at formindske modelkompleksiteten i VAR-modellen udføres den beskrevne \emph{Top-down}/\emph{backward-elimination} analyse, fra Sektion ??. Eftersom afkastprædiktabilitetsanalysen var kendetegnet ved lave signifikans niveauer, forventes det, at \emph{AKFIC} analysen vil reducere antallet af relevante tilstandsvariable kraftigt. På denne måde vil en fuldt defineret VAR-process forhåbentligt stemme overens med de a priori teoretiske forventninger, og samtidig have et konservativt antal parametre, der givetvis vil følge det abduktive heuristiske parsimoni-princip kendt som \emph{Occam's Razor}\footnote{Den fordanskede udgave er næsten at foretrække: Ockhams ragekniv.} Derudover vil et reduceret system sandsynligvis signifikant formindske støjen af de estimerede koefficienter, som dermed vil lede til bedre eksterne stikprøve resultater\footnote{Givet at denne stikprøve er repræsentativ for modelleringsstikprøven.}
+For at formindske modelkompleksiteten i VAR-modellen udføres den beskrevne \emph{Top-down}/\emph{backward-elimination} analyse, fra Sektion \ref{sekmodelselek}. Eftersom afkastprædiktabilitetsanalysen var kendetegnet ved lave signifikans niveauer, forventes det, at \emph{AKFIC} analysen vil reducere antallet af relevante tilstandsvariable kraftigt. På denne måde vil en fuldt defineret VAR-process forhåbentligt stemme overens med de a priori teoretiske forventninger, og samtidig have et konservativt antal parametre, der givetvis vil følge det abduktive heuristiske parsimoni-princip kendt som \emph{Occam's Razor}\footnote{Den fordanskede udgave er næsten at foretrække: Ockhams ragekniv.} Derudover vil et reduceret system sandsynligvis signifikant formindske støjen af de estimerede koefficienter, som dermed vil lede til bedre eksterne stikprøve resultater\footnote{Givet at denne stikprøve er repræsentativ for modelleringsstikprøven.}
 
 For at opnå den nødvendige dynamik til implementering af porteføljeallokeringen, præsenteres først resultatet fra \emph{AKFIC} analysen og herefter estimeres sættet af restringerede VAR koefficienter fra det resulterende system. Slutteligt laves en kvalitativ analyse af \emph{goodness-of-fit} for den resulterende VAR model, for at opnå bedre forståelse af modellen.
 
-\hypertarget{akfic-analysen}{%
-\section{\texorpdfstring{\emph{AKFIC}-analysen}{AKFIC-analysen}}\label{akfic-analysen}}
+\hypertarget{akficana}{%
+\section{\texorpdfstring{\emph{AKFIC}-analysen}{AKFIC-analysen}}\label{akficana}}
 
-Ved at følge modelselektionsproceduren fra Sektion ??, startes med at restringere ligninger for aktier og obligationertyperne. Resultatet af de fire analyser er vist i Tabel \ref{tab:STEP-RF-TABLE}, Tabel \ref{tab:STEP-AKT-TABLE}, Tabel \ref{tab:STEP-S-TABLE} og Tabel \ref{tab:STEP-V-TABLE}. Den ikke-restringerede ligning for merafkastet af aktier har en \emph{AKFIC} værdi på -1260.5040333, som er den initielle basisværdi. Som hver af de laggede forklarende variable fjernes vil den resulterende \emph{AKFIC} værdi reporteres i den første række. Den laveste \emph{AKFIC} værdi resulterende fra fjernelse af én variabel markeres med fed, hvis den ligeledes forbedrer den initielle basis. Givet forbedring er denne værdi, nu også den nye basisværdi. Eksempelvis ses i første iteration at fjernelse af \emph{Dividend-Price Ratio} er har den laveste \emph{AKFIC} værdi på \(-1264.27\). Denne er ligeledes optimal eftersom den er lavere end basisværdien. Basisværdien opdateres nu og processen gentages. I den sidste række er den laveste \emph{AKFIC} værdi \(-1276.40\) og er resultatet af at fjerne \emph{Small Minus Big}, dette er til gengæld ikke optimalt da værdien ikke er lavere end basis. Processen stoppes derfor. Dermed opnåes en temporal ligning for aktiemerafkastet.
+Ved at følge modelselektionsproceduren fra Sektion \ref{sekmodelselek}, startes med at restringere ligninger for aktier og obligationertyperne. Resultatet af de fire analyser er vist i Tabel \ref{tab:STEP-RF-TABLE}, Tabel \ref{tab:STEP-AKT-TABLE}, Tabel \ref{tab:STEP-S-TABLE} og Tabel \ref{tab:STEP-V-TABLE}. Den ikke-restringerede ligning for merafkastet af aktier har en \emph{AKFIC} værdi på -1260.5040333, som er den initielle basisværdi. Som hver af de laggede forklarende variable fjernes vil den resulterende \emph{AKFIC} værdi reporteres i den første række. Den laveste \emph{AKFIC} værdi resulterende fra fjernelse af én variabel markeres med fed, hvis den ligeledes forbedrer den initielle basis. Givet forbedring er denne værdi, nu også den nye basisværdi. Eksempelvis ses i første iteration at fjernelse af \emph{Dividend-Price Ratio} er har den laveste \emph{AKFIC} værdi på \(-1264.27\). Denne er ligeledes optimal eftersom den er lavere end basisværdien. Basisværdien opdateres nu og processen gentages. I den sidste række er den laveste \emph{AKFIC} værdi \(-1276.40\) og er resultatet af at fjerne \emph{Small Minus Big}, dette er til gengæld ikke optimalt da værdien ikke er lavere end basis. Processen stoppes derfor. Dermed opnåes en temporal ligning for aktiemerafkastet.
 
 Ved at udføre samme procedure for det risikofrie aktiv, statsobligationer og virksomhedsobligationer endes ud den følgende temporale modelspecifikation.
 \begin{align*}
@@ -2687,7 +2709,7 @@ $r_t^{\text{rf}}$ & $rx_t^{\text{a}}$ & $rx_t^{\text{s}}$ & $rx_t^{\text{v}}$ & 
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra po1990 er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\item \textit{Denne tabel rapporterer \textit{Variance Inflation Factor} analysen for variablene udledt fra \textit{Top-down} analysen.}
 \end{tablenotes}
 \end{threeparttable}}
 \end{table}
@@ -2709,7 +2731,7 @@ $r_t^{\text{rf}}$ & $rx_t^{\text{a}}$ & $rx_t^{\text{s}}$ & $rx_t^{\text{v}}$ & 
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra po1990 er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\item \textit{Denne tabel rapporterer \textit{Variance Inflation Factor} analysen for de tilbageværende variablene udledt fra \textit{Top-down} analysen og den første \textit{Variance Inflation Factor} analyse.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -2738,7 +2760,7 @@ AKFIC & $x_t^{\text{dp}}$ & $x_t^{\text{pe}}$ & $x_t^{\text{bm}}$ & $x_t^{\text{
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra \citep{Pope1990} er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\item \textit{Denne tabel rapporterer resultaterne fra \textit{Top-down} modelselektionsanalysen for det risikofrie aktiv.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -2772,7 +2794,7 @@ AKFIC & $x_t^{\text{dp}}$ & $x_t^{\text{pe}}$ & $x_t^{\text{bm}}$ & $x_t^{\text{
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra \citep{Pope1990} er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\item \textit{Denne tabel rapporterer resultaterne fra \textit{Top-down} modelselektionsanalysen for merafkastet på aktier.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -2802,7 +2824,7 @@ AKFIC & $x_t^{\text{dp}}$ & $x_t^{\text{pe}}$ & $x_t^{\text{bm}}$ & $x_t^{\text{
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra \citep{Pope1990} er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\item \textit{Denne tabel rapporterer resultaterne fra \textit{Top-down} modelselektionsanalysen for merafkastet på statsobligationer.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -2832,7 +2854,7 @@ AKFIC & $x_t^{\text{dp}}$ & $x_t^{\text{pe}}$ & $x_t^{\text{bm}}$ & $x_t^{\text{
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra \citep{Pope1990} er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\item \textit{Denne tabel rapporterer resultaterne fra \textit{Top-down} modelselektionsanalysen for merafkastet på virksomhedsobligationer.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -2943,17 +2965,17 @@ $x_t^{\text{ys}}$ &  &  &  &  &  &  &  & 0.006\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
-\item \textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra Sektion ??. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra \citep{Pope1990} er i $(\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\cdot]$. Koefficienter markeret med \textbf{fed} implicerer signifikans, for et signifikansniveau på $\alpha=0.05$.}
+\item \textit{Denne tabel rapporterer VAR(1)-systemets fejlleds korrelationsmatrix og fejlleds standardafvigelser. Matricen er på øvre triangulær form, grundet symmetri. Elementerne udenfor diagonalen er fejlledskorrelationerne og diagonal indgangene er fejlleds standardafvigelserne.}
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 Tabel \ref{tab:COV-RES-TAB} viser kovariansstrukturen af stødene til VAR-systemet. For det risikofrie aktiv ses, at den laggede værdi af den nominelle rente sikrer \emph{mean aversion}, siden både koefficient estimaterne og stød til det fremtidige risikofrie afkast er positive. Ligeledes vil \emph{Book-to-Market Ratio} og \emph{Small Minus Big} give anledning til \emph{mean aversion}. Det korte rentespænd fremprovokerer \emph{mean reversion} i det risikofrie aktiv. For merafkastet på aktier, ses det omvendte. Det fremgår på trods af den ringe prædiktabilitet blandt tilstandsvariablene, at \emph{Book-to-market} samt \emph{Small Minus Big} skaber \emph{mean reversion}, siden deres koefficient og fejlkorrelationen er modsatrettede. Den nominelle rente skaber derimod \emph{mean aversion}. For det fremtidige merafkast på statsobligationer ses, at stød til \emph{Small Minus Big} er negativt korreleret med det fremtidige merafkast på statsobligationer, og medfører derfor \emph{mean reversion}. Dette er på linje med, hvad resultaterne fra \citep{Fama1989}. De finder bl.a. en kontracyklisk variation mellem aktier og obligationer. Stød til \emph{Yield Spread} udviser derimod positiv korrelation. \emph{Mean aversion}-effekten fra \emph{Yield Spread} må enten være pga.: en stigning i den lange rente, et fald i den korte rente eller en blanding af begge effekter. Fokuseres nu på det fremtidige merafkast af virksomhedsobligationer, ses at den laggede værdi af variablen \emph{Small Minus Big} medfører \emph{mean aversion}, mens det samme er tilfældet for \emph{Yield Spread}. Generelt ses at prædiktionsvariablene bliver \emph{mean reverting} givet deres indbyrdes relationer samt deres relationer til aktiverne. Dette understreger at antagelsen om stationaritet i systemet er overholdt, og dermed haves et stabilt system.
 
-\hypertarget{backtest-af-var1-model}{%
-\section{Backtest af VAR(1)-model}\label{backtest-af-var1-model}}
+\hypertarget{backtestvar}{%
+\section{Backtest af VAR(1)-model}\label{backtestvar}}
 
-For at få et overblik over den restringerede VAR models præcision. Præsenteres nedenfor en Figur hørende til hver variabel, hvor den estimerede regressions linje er holdt op imod den sande værdi fra tidsserierne. Den visuelle analyse er vist i Figur ?? til Figur ??. Som forventet ud fra \(R^2\) værdierne er specielt merafkastet på aktier og statsobligationer svær estimerbare. Det samme gør sig gældende for \emph{Small Minus Big}, mens de resterende prædiktionsvariable er modelleret meget præcist.
+For at få et overblik over den restringerede VAR models præcision. Præsenteres nedenfor en Figur hørende til hver variabel, hvor den estimerede regressions linje er holdt op imod den sande værdi fra tidsserierne. Den visuelle analyse er vist i Figur \ref{fig:BACKTEST-NET-TB} til Figur \ref{fig:BACKTEST-Y}. Som forventet ud fra \(R^2\) værdierne er specielt merafkastet på aktier og statsobligationer svær estimerbare. Det samme gør sig gældende for \emph{Small Minus Big}, mens de resterende prædiktionsvariable er modelleret meget præcist.
 
 \begin{figure}[H]
 
@@ -2961,7 +2983,7 @@ For at få et overblik over den restringerede VAR models præcision. Præsentere
 
 }
 
-\caption[short]{A.}\label{fig:BACKTEST-NET-TB}
+\caption[short]{Backtest af VAR(1)-estimaterne for det risikofrie aktiv.}\label{fig:BACKTEST-NET-TB}
 \end{figure}
 
 \begin{figure}[H]
@@ -2970,7 +2992,7 @@ For at få et overblik over den restringerede VAR models præcision. Præsentere
 
 }
 
-\caption[short]{A.}\label{fig:BACKTEST-AKT}
+\caption[short]{Backtest af VAR(1)-estimaterne for merafkastet på aktier.}\label{fig:BACKTEST-AKT}
 \end{figure}
 
 \begin{figure}[H]
@@ -2979,7 +3001,7 @@ For at få et overblik over den restringerede VAR models præcision. Præsentere
 
 }
 
-\caption[short]{A.}\label{fig:BACKTEST-S}
+\caption[short]{Backtest af VAR(1)-estimaterne for merafkastet på statsobligationer.}\label{fig:BACKTEST-S}
 \end{figure}
 
 \begin{figure}[H]
@@ -2988,7 +3010,7 @@ For at få et overblik over den restringerede VAR models præcision. Præsentere
 
 }
 
-\caption[short]{A.}\label{fig:BACKTEST-V}
+\caption[short]{Backtest af VAR(1)-estimaterne for merafkastet på virksomhedsobligationer.}\label{fig:BACKTEST-V}
 \end{figure}
 
 \begin{figure}[H]
@@ -2997,7 +3019,7 @@ For at få et overblik over den restringerede VAR models præcision. Præsentere
 
 }
 
-\caption[short]{A.}\label{fig:BACKTEST-BM}
+\caption[short]{Backtest af VAR(1)-estimaterne for prædiktionsvariablen Book-to-Market Ratio.}\label{fig:BACKTEST-BM}
 \end{figure}
 
 \begin{figure}[H]
@@ -3006,7 +3028,7 @@ For at få et overblik over den restringerede VAR models præcision. Præsentere
 
 }
 
-\caption[short]{A.}\label{fig:BACKTEST-SMB}
+\caption[short]{Backtest af VAR(1)-estimaterne for prædiktionsvariablen Small Minus Big.}\label{fig:BACKTEST-SMB}
 \end{figure}
 
 \begin{figure}[H]
@@ -3015,7 +3037,7 @@ For at få et overblik over den restringerede VAR models præcision. Præsentere
 
 }
 
-\caption[short]{A.}\label{fig:BACKTEST-B}
+\caption[short]{Backtest af VAR(1)-estimaterne for prædiktionsvariablen den nominelle rente.}\label{fig:BACKTEST-B}
 \end{figure}
 
 \begin{figure}[H]
@@ -3024,20 +3046,27 @@ For at få et overblik over den restringerede VAR models præcision. Præsentere
 
 }
 
-\caption[short]{A.}\label{fig:BACKTEST-Y}
+\caption[short]{Backtest af VAR(1)-estimaterne for prædiktionsvariablen Yield Spread.}\label{fig:BACKTEST-Y}
 \end{figure}
 
-\hypertarget{opsummering-5}{%
-\section{Opsummering}\label{opsummering-5}}
+Som et stationaritetstjek af den færdige VAR-model, undersøges stabiliteten af modellen. Eftersom en stabil VAR-model vil medføre en stationær VAR-model, \citep{Lutkepohl2005}. En VAR(1)-model er stabil, hvis det omvendte karateristiske polynomie
+\[\det\left(\bm{I} - \bm{\Phi}_1 z\right),\]
+hørende til VAR-processen, ikke har rødder, \(z\), i eller på den komplekse enhedscirkel. Dette er ækvivalent med at alle egenværdierne af matricen \(\Phi_1\) har modulus mindre end én.
+
+Tabel ?? viser modulus af egenværdierne fra matricen af koefficienter, \(\bm{\Phi}_1\). Her observeres, at ingen af de otte egenværdier har modulus større end én. Dermed er VAR(1)-modellen stabil og stationær.
+
+\hypertarget{opsundermodel}{%
+\section{Opsummering}\label{opsundermodel}}
 
 I dette kapitel blev modelselektionen fremlagt. Derudover blev VAR(1)-estimaterne præsenteret og analyseret. I VAR-processen viste merafkastet på statsobligationer sig svær at forudsige. Mens det risikofrie afkast havde den højeste \(R^2\) blandt aktiverne. Strukturen i VAR-systemet er essentielle for porteføljeallokeringerne, siden at parametrene afhænger af VAR(1) estimationsresultaterne. Derudover blev stikprøve-bias undersøgt, ved at bias-justere koefficienterne. Ganske små forskelle blev fundet mellem de regulære OLS estimater og de bias-justerede estimater. For fuldstændighedens skyld fortsættes dog med de bias-justerede estimater.
 
-\hypertarget{problemer-ved-estimation}{%
-\chapter{Problemer ved estimation}\label{problemer-ved-estimation}}
+\hypertarget{problemervedest}{%
+\chapter{Problemer ved estimation}\label{problemervedest}}
 
-INTRO HER + SEKTIONSINDDELING
+Middelværdi-varians optimering har vist sig meget sensitiv overfor den kvantitative størrelse af parametrene som indgår i vægtelsesberegningen for den relevante portefølje, dvs. forventede afkast, varianser og kovarianser. Som også er tilfældet i denne afhandling, er disse parametre estimeret via en tidsserie af afkast, men forventningen til disse estimater skal anskues skeptisk, idet de indeholder en væsentlig mængde usikkerhed. Derfor undersøger dette kapitel problemerne ved estimation af afkast. Først introduceres et Monte Carlo forsøg i Sektion \ref{simeks}, og resultaterne fra dette forsøg belyses i Sektion \ref{ressimeks}. Slutteligt gives en opsummering af kapitlets fund.
 
-Middelværdi-varians optimering har vist sig meget sensitiv overfor den kvantitative størrelse af parametrene som indgår i vægtelsesberegningen for den relevante portefølje, dvs. forventede afkast, varianser og kovarianser. Som også er tilfældet i denne afhandling, er disse parametre estimeret via en tidsserie af afkast, men forventningen til disse estimater skal anskues skeptisk, idet de indeholder en væsentlig mængde usikkerhed.
+\hypertarget{simeks}{%
+\section{Simuleringseksempel}\label{simeks}}
 
 Simuleringsforsøg har vist at porteføljer udvalgt på baggrund af Markowitz teorien med estimerede input har værre performance og er mindre efficiente end en \(\tfrac{1}{n}\) (ligevægtet) portefølje, \citep{Frankfurter1971}. Ligeledes viser \citep{Chopra1993}, at det er afgørende i en porteføljeanalyse at estimere forventede afkast præcist, men forventede afkast er alt andet lige svært prædiktable, \citep{Merton1980}. Videnskabelige artikler har foreslået ændringer til de statistiske metoder som ligger bag estimaterne, heriblandt foreslår \citep{Jorion1986} at benytte en Bayes-estimator i stedet for det aritmetiske gennemsnit, se evt. også \citep{MacKinlay2000}, \citep{Garlappi2007}, \citep{Kan2007}, \citep{Tu2011}.
 
@@ -3147,6 +3176,9 @@ Disse tre sæt af estimerede parametre, baseret på de tre tidsserier, er blevet
 \[\varepsilon_{i,j} = \frac{z_{0.975}\hat{\sigma}_{i,j}}{\sqrt{R}\hat{\mu}_{i,j}},\]
 
 hvor \(i=1,2,3\) repræsenterer aktiverne og \(j=1,2,3\) repræsenterer simuleringen. \(z_{0.975}\) er fraktilfunktionen fra standard normal fordelingen, for et signifikansniveau på \(\alpha=0.05\). \(R\) er antallet af observationer fra hver simulering, i dette forsøg er \(R=200\).
+
+\hypertarget{ressimeks}{%
+\section{Resultater fra simuleringseksemplet}\label{ressimeks}}
 
 Ud fra de sande parametre samt de estimerede parametre fra de tre tidsserier er global minimum varians porteføljen, tangensporteføljen, den optimale portefølje for en \emph{CRRA} investor med risikoaversions parameter lig hhv. \(1\), \(5\) og \(10\), samt den optimale portefølje for en \emph{CARA} investor med risikoaversions parameter lig hhv. \(1\), \(5\) og \(10\).
 
@@ -3284,18 +3316,20 @@ Tredje simulering overestimerer Aktiv 1 samt 2 og underestimerer Aktiv 3. Ranger
 \caption{Global minimum varians portføljen, tangensporteføljen samt for CRRA- og CARA-porteføljen for hhv. $\gamma=1$, $\gamma=4$ og $\gamma=8$ samt $\theta=1$, $\theta=4$ og $\theta=8$, beregnet ud for hhv. de sande og simulerede afkast. Bemærk at akserne er blevet $\log_{10}$ transformeret.}\label{fig:weight-exp}
 \end{figure}
 
-\hypertarget{opsummering-6}{%
-\section{Opsummering}\label{opsummering-6}}
+\hypertarget{opsummering-3}{%
+\section{Opsummering}\label{opsummering-3}}
 
-\hypertarget{allokering-af-aktiver}{%
-\chapter{Allokering af aktiver}\label{allokering-af-aktiver}}
+I dette kapitel blev problemerne ved estimation undersøgt gennem et Monte Carlo forsøg. I dette forsøg var den bagvedliggende fordeling af afkastene kendt på forhånd, men selv med denne information viste det sig, at selv små over- eller underestimationer påvirker én-periode porteføljeallokeringen i en signifikant grad. På tværs af alle porteføljetyper, heriblandt \emph{CARA}- og \emph{CRRA}-porteføljer, og på tværs af alle risikoaversioner.
 
-I dette kapitel vil teorien fra Del 2 samt de empiriske fund sammenkobles. Dette gøres ved at benytte VAR(1)-koefficienterne til porteføljevalget for den institutionelle investor. Den initielle analyse vil tage udgangspunkt i en investor med en moderat risikoaversion, \(\gamma=5\), en lang investeringshorisont på \(25\) år, \(k=200\). Derudover restringeres investoren ikke, og dermed tillades kortsalg. Dette vil ligeledes fungere som sammenligningsgrundlaget for de resterende analyser i dette kapitel. I Sektion ?? vil denne initielle portefølje blive undersøgt, når afkast er tidsvarierende. Her vil porteføljevalget for hele den tilgængelige periode bliver undersøgt, når der fokuseres på allokeringen i samtlige \emph{første} perioder. Dette giver mulighed for at undersøge investorens valg over samtlige recessioner.
+\hypertarget{alloafakt}{%
+\chapter{Allokering af aktiver}\label{alloafakt}}
 
-\hypertarget{portefuxf8ljevalg-med-tidsvarierende-afkast}{%
-\section{Porteføljevalg med tidsvarierende afkast}\label{portefuxf8ljevalg-med-tidsvarierende-afkast}}
+I dette kapitel vil teorien fra Del 2 samt de empiriske fund sammenkobles. Dette gøres ved at benytte VAR(1)-koefficienterne til porteføljevalget for den institutionelle investor. Den initielle analyse vil tage udgangspunkt i en investor med en moderat risikoaversion, \(\gamma=5\), en lang investeringshorisont på \(25\) år, \(k=200\). Derudover restringeres investoren ikke, og dermed tillades kortsalg. Dette vil ligeledes fungere som sammenligningsgrundlaget for de resterende analyser i dette kapitel. I Sektion \ref{portvalgmedtids} vil denne initielle portefølje blive undersøgt, når afkast er tidsvarierende. Her vil porteføljevalget for hele den tilgængelige periode bliver undersøgt, når der fokuseres på allokeringen i samtlige \emph{første} perioder. Dette giver mulighed for at undersøge investorens valg over samtlige recessioner.
 
-Ved benyttelse af VAR(1)-koefficientestimaterne fra Sektion ??, kan investorens valg porteføljeallokeringer undersøges, under antagelsen om tidsvarierende afkast. Det antages at investoren har moderat risikoaversion, \(\gamma=5\), en lang investeringshorisont, \(k=200\), og uden en kortsalgsrestriktion. Kombineres VAR(1)-estimaterne med de nævnte antagelser, kan dynamikken for investeringsmulighederne skabes. På denne måde kan allokeringsreglen, for det multivariate investeringsrum bestående af det risikofrie aktiv, aktier, statsobligationer og virksomhedsobligationer, etableres. Figur \ref{fig:AL-tids} viser den optimale første-periode allokering over tid for investoren med de ovennævnte antagelser. Figuren viser, hvordan investoren fordeler sin formue over de risikobærende afkast samt det risikofrie afkast over hele stikprøveperioden, 1954 2. kvartal til 2018 4. kvartal. De tilhørende recessionsperioder er -- som defineret af \citep{NBER2020} -- er ligeledes visualiseret. Ud fra en visuel inspektion ses det, at investoren under recessioner forsøger at øge sine eksponeringer i aktivklasser, som har relativt lave volatiliteter. De procentvise andele i hver aktiv viser sig at være ekstreme -- særligt i recessioner -- med et allokeringsinterval på \(\pm 2000\%\). Dette foranlediger én til at tænke på, hvordan transaktionsomkostninger ville have påvirket allokeringerne. Tilsyneladende sker det yderst sjældent, at investoren går kort i aktier. Ydermere ses det, at positionen i aktier øges halvvejs igennem en recession. Generelt udviser den optimale portføljeallokering betydelig intertemporal variation. Dette ses særligt for allokeringen mod obligationstyperne, som udviser de højeste variationer. Allokeringen over hele stikprøven er konsistent med \citep{JurVic2011}.
+\hypertarget{portvalgmedtids}{%
+\section{Porteføljevalg med tidsvarierende afkast}\label{portvalgmedtids}}
+
+Ved benyttelse af VAR(1)-koefficientestimaterne fra Sektion \ref{var1est}, kan investorens valg porteføljeallokeringer undersøges, under antagelsen om tidsvarierende afkast. Det antages at investoren har moderat risikoaversion, \(\gamma=5\), en lang investeringshorisont, \(k=200\), og uden en kortsalgsrestriktion. Kombineres VAR(1)-estimaterne med de nævnte antagelser, kan dynamikken for investeringsmulighederne skabes. På denne måde kan allokeringsreglen, for det multivariate investeringsrum bestående af det risikofrie aktiv, aktier, statsobligationer og virksomhedsobligationer, etableres. Figur \ref{fig:AL-tids} viser den optimale første-periode allokering over tid for investoren med de ovennævnte antagelser. Figuren viser, hvordan investoren fordeler sin formue over de risikobærende afkast samt det risikofrie afkast over hele stikprøveperioden, 1954 2. kvartal til 2018 4. kvartal. De tilhørende recessionsperioder er -- som defineret af \citep{NBER2020} -- er ligeledes visualiseret. Ud fra en visuel inspektion ses det, at investoren under recessioner forsøger at øge sine eksponeringer i aktivklasser, som har relativt lave volatiliteter. De procentvise andele i hver aktiv viser sig at være ekstreme -- særligt i recessioner -- med et allokeringsinterval på \(\pm 2000\%\). Dette foranlediger én til at tænke på, hvordan transaktionsomkostninger ville have påvirket allokeringerne. Tilsyneladende sker det yderst sjældent, at investoren går kort i aktier. Ydermere ses det, at positionen i aktier øges halvvejs igennem en recession. Generelt udviser den optimale portføljeallokering betydelig intertemporal variation. Dette ses særligt for allokeringen mod obligationstyperne, som udviser de højeste variationer. Allokeringen over hele stikprøven er konsistent med \citep{JurVic2011}.
 
 \begin{figure}[H]
 
@@ -3306,7 +3340,7 @@ Ved benyttelse af VAR(1)-koefficientestimaterne fra Sektion ??, kan investorens 
 \caption{Tidsserie af allokeringer.}\label{fig:AL-tids}
 \end{figure}
 
-For at lave en gennemgående analyse af investorens porteføljeallokeringer, separeres effekterne i Tabel \ref{tab:AL-KOMP}. Tabellen rapporter investorens komposition af tangens-, GMV-, \emph{myopic demand}- og \emph{intertemporal hedging demand}-porteføljen, ift. de tilgengælige investeringsmuligheder. Tabellen er skabt ud fra de nævnte antagelser om investoren. Tangensporteføljen for investoren er kraftigt skubbet mod aktier, statsobligationer og virksomhedsobligationer. Gennemsnitligt investeres hhv. \(173 \%\), \(74\%\) og \(92\%\) af formuen i disse aktiver. Disse lange positioner er finansieret af en stor kort position i det risikofrie aktiv, på hhv. \(-238\%\). For at understøtte disse fund, kan den beskrivende statistik fra Kapitel ?? samt VAR(1)-estimaterne fra Kapitel ?? medtages. Tabel \ref{tab:DES-AKTIVKLASSE} viser, at det gennemsnitlige merafkast på aktier er højere end det gennemsnitlige afkast på både stats- og virksomhedsobligationer. Tabel \ref{tab:DES-KOR} viser, at korrelationen mellem aktier og statsobligationer er negativ, \(-0.02\), og meget lav mellem aktier og virksomhedsobligationer, \(0.16\). Derimod er korrelationen mellem stats- og virksomhedsobligationer meget høj, \(0.85\). Dette betyder, at stats- og virksomhedsobligationer næsten er substitutter. Global minimum varians porteføljen har givetvis -- som forventet -- den højeste allokering mod aktivet med laveste volatilitet. Dette understøttes ligeledes af Tabel \ref{tab:DES-AKTIVKLASSE}. Gennemsnitligt viser det sig, at det er optimalt for investoren at holde en allokering i aktier på \(81\%\). En større del af allokeringen mod aktier og \emph{T-Bills} lader til at stamme fra det \emph{intertemporale hedging demand}. Hvilket betyder, at investoren kan \emph{hedge} variationer i fremtidige merafkast på aktier og afkast på \emph{T-Bills}, ved netop at holde disse aktiver. Dette understøttes ligeledes af fundende i Kapitel ?, hvor flere variable udviste \emph{mean reversion} overfor særligt merafkastet på aktier. Fokuseres på allokeringen mod obligationer, ses at investoren generelt foretrækker en lang position i statsobligationer.
+For at lave en gennemgående analyse af investorens porteføljeallokeringer, separeres effekterne i Tabel \ref{tab:AL-KOMP}. Tabellen rapporter investorens komposition af tangens-, GMV-, \emph{myopic demand}- og \emph{intertemporal hedging demand}-porteføljen, ift. de tilgengælige investeringsmuligheder. Tabellen er skabt ud fra de nævnte antagelser om investoren. Tangensporteføljen for investoren er kraftigt skubbet mod aktier, statsobligationer og virksomhedsobligationer. Gennemsnitligt investeres hhv. \(173 \%\), \(74\%\) og \(92\%\) af formuen i disse aktiver. Disse lange positioner er finansieret af en stor kort position i det risikofrie aktiv, på hhv. \(-238\%\). For at understøtte disse fund, kan den beskrivende statistik fra Kapitel \ref{kapiteldatab} samt VAR(1)-estimaterne fra Kapitel \ref{underligmodel} medtages. Tabel \ref{tab:DES-AKTIVKLASSE} viser, at det gennemsnitlige merafkast på aktier er højere end det gennemsnitlige afkast på både stats- og virksomhedsobligationer. Tabel \ref{tab:DES-KOR} viser, at korrelationen mellem aktier og statsobligationer er negativ, \(-0.02\), og meget lav mellem aktier og virksomhedsobligationer, \(0.16\). Derimod er korrelationen mellem stats- og virksomhedsobligationer meget høj, \(0.85\). Dette betyder, at stats- og virksomhedsobligationer næsten er substitutter. Global minimum varians porteføljen har givetvis -- som forventet -- den højeste allokering mod aktivet med laveste volatilitet. Dette understøttes ligeledes af Tabel \ref{tab:DES-AKTIVKLASSE}. Gennemsnitligt viser det sig, at det er optimalt for investoren at holde en allokering i aktier på \(81\%\). En større del af allokeringen mod aktier og \emph{T-Bills} lader til at stamme fra det \emph{intertemporale hedging demand}. Hvilket betyder, at investoren kan \emph{hedge} variationer i fremtidige merafkast på aktier og afkast på \emph{T-Bills}, ved netop at holde disse aktiver. Dette understøttes ligeledes af fundende i Kapitel ?, hvor flere variable udviste \emph{mean reversion} overfor særligt merafkastet på aktier. Fokuseres på allokeringen mod obligationer, ses at investoren generelt foretrækker en lang position i statsobligationer.
 
 Holdes den visuelle inspektion af Figur \ref{fig:AL-tids} op i mod opdelingen fra Tabel \ref{tab:AL-KOMP}, kan der argumenteres for, at investoren øger sin lange position i virksomhedsobligationer under igangværende recessioner. Som dermed må betyde, at investoren finansierer disse høje positioner gennem korte positioner i \emph{T-Bills} og statsobligationer.
 
@@ -3335,6 +3369,11 @@ Virksomhedsobligationer & 91.629 & -7.544 & 10.057 & 1.256\\
 \section{Effekten af horisontlængde og risikotolerance}\label{effekten-af-horisontluxe6ngde-og-risikotolerance}}
 
 Den initielle investor antoges at have en konstant investeringshorisont og en konstant risikoaversion. I denne sektion undersøges porteføljeallokeringen af den optimale portefølje for forskellige niveauer af risikoaversion og horisont længder. Tabel \ref{tab:AL-BIG} rapporterer porteføljevægte for investoren, for en serie af investeringshorisonter -- \(1\) kvartal til \(100\) kvartaler -- og en serie af risikoaversioner -- \(\gamma=2,5,10,20\).
+
+Betydelige forskelle i allokering mod statsobligationer observeres i Tabel \ref{tab:AL-BIG}. Dette lader til at være drevet af \emph{myopic demand}. For lave risikoaversioner har investoren en høj allokering mod statsobligationer. Som risikoaversionen stiger reduceres allokeringen i betydelig grad, endda til korte positioner for lange investeringshorisonter. Eksempelvis ses at \emph{myopic demand} er \(29.022\%\) og falder kun til \(25.128\%\) for den samme investor med en horisont på \(100\) kvartaler. Et sammenligneligt billede ses for virksomhedsobligationer, og er derfor ligeledes drevet af \emph{myopic demand}. Derudover kan det nævnes, at den totale eksponering mod obligationstyperne er en ikke-lineær funktion. Dette ses eftersom allokeringen mod obligationer er faldende for investeringshorisonter fra \(1\) kvartal til \(20\) kvartaler, og begynder herefter at stige fra horisonter på \(40\) kvartaler og frem. Dette undersøttes ligeledes af \citep{CampVic2003}, som undersøger porteføljeallokering og dens tilhørende standardafvigelse over tid. De finder samme bevægelsesmønstre for langsigtede obligationer over tid. Denne udvikling kan forklares af en faldende standardafvigelse over tid. Derudover kan det nævnes, at \citep{CampVic2003} ligeledes benytter kvartalsvise observationer.
+
+Allokeringen mod aktier udviser samme mønstre over tid og for forskellige risikoaversioner. Investoren ser ud til at foretrække en lang position. Positionen ser ud til at være drevet af \emph{intertemporal hedging demand}, eftersom positionen stiger i takt med investeringshorisonten. En stærkt faldende allokeringstrend ses, når investoren øger sin risikoaversion. \citep{CampVic2003} finder, at aktier er relative sikre aktiver, når en investor har mulighed for at holde dem på lang sigt. De finder bl.a. at standardafvigelsen af aktier falder under standardafvigelsen af obligationer holdt til udløb, når investeringshorisonten er mere end \(30\) år. Dette bevægelsesmønster for merafkastet på aktier kan blive skabt af en \emph{mean reverting} effekt i følge \citep{CampVic2003}.\\
+Undersøges positionerne i \emph{T-Bills} ses, at investoren benytter aktivet til at finansiere sine gearede investeringer, ved at holde en kort position. \emph{T-Bills} positionen udviser samme ikke-lineære mønster, som diskuteret for hos stats- og virksomhedsobligationer, men med den modsatte effekt. Dette kan være en effekt af at \emph{T-Bills} er den mest omkostningsefficiente metode, hvorpå investoren kan finansiere sine gearede positioner i de andre aktiver. Altså vil allokeringen mod \emph{T-Bills} være dikteret af allokeringerne i de andre aktiver eller af \emph{intertemporal hedging demand}. Størrelsesordenen af de korte positioner i \emph{T-Bills} reduceres som risikoaversionen stiger. En investor på med en høj risikoaversion, \(\gamma>10\), ses kun at have lange positioner i \emph{T-Bills} for alle investeringshorisonter.
 
 \begin{table}[H]
 
@@ -3370,6 +3409,8 @@ $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 \end{threeparttable}}
 \end{table}
 
+Som et supplement til Tabel \ref{tab:AL-BIG} viser Figur \ref{fig:HOR-ana} porteføljeallokeringen for et kontinum af investeringshorisonter.
+
 \begin{figure}[H]
 
 {\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/HOR-ana-1} 
@@ -3379,14 +3420,7 @@ $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 \caption{Horisontanalyse.}\label{fig:HOR-ana}
 \end{figure}
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/HOR-RES-ana-1} 
-
-}
-
-\caption{Horisontanalyse restringeret.}\label{fig:HOR-RES-ana}
-\end{figure}
+Derudover suppleres analysen af risikoaversionen med Figurerne \ref{fig:GAM-ana-t}, \ref{fig:GAM-ana-a}, \ref{fig:GAM-ana-s} og \ref{fig:GAM-ana-v}. Disse Figurer viser den totalte allokering for hhv. \emph{T-Bills}, aktier, statsobligationer og virksomhedsobligationer holdt op imod et kontinum af risikotolerancer, defineret som \(\tfrac{1}{\gamma}\), for \(\gamma>0\). Derudover vises \emph{myopic demand} ligeledes, der ses som rette linjer.
 
 \begin{figure}[H]
 
@@ -3394,7 +3428,7 @@ $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 
 }
 
-\caption{Risikotolerance analyse, T-Bills.}\label{fig:GAM-ana-t}
+\caption{Risikotolerance analyse for aktivet T-Bills.}\label{fig:GAM-ana-t}
 \end{figure}
 
 \begin{figure}[H]
@@ -3403,7 +3437,7 @@ $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 
 }
 
-\caption{Risikotolerance analyse, aktier.}\label{fig:GAM-ana-a}
+\caption{Risikotolerance analyse for aktivet aktier.}\label{fig:GAM-ana-a}
 \end{figure}
 
 \begin{figure}[H]
@@ -3412,7 +3446,7 @@ $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 
 }
 
-\caption{Risikotolerance analyse, statsobligationer.}\label{fig:GAM-ana-s}
+\caption{Risikotolerance analyse for aktivet statsobligationer.}\label{fig:GAM-ana-s}
 \end{figure}
 
 \begin{figure}[H]
@@ -3421,8 +3455,15 @@ $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 
 }
 
-\caption{Risikotolerance analyse, virksomhedsobligationer.}\label{fig:GAM-ana-v}
+\caption{Risikotolerance analyse for virksomhedsobligationer.}\label{fig:GAM-ana-v}
 \end{figure}
+
+\hypertarget{effekten-af-en-kortsalgsrestriktion}{%
+\section{Effekten af en kortsalgsrestriktion}\label{effekten-af-en-kortsalgsrestriktion}}
+
+For visse institutionelle investorer er kortsalg ikke tilladt. Derfor fjernes antagelsen om kortsalg ved at benytte Ligning \eqref{eq:kortsalgsrestr}. Dette tillader, at undersøge allokeringerne på tværs af investeringshorisonter og for en række risikoaversioner. Det dynamiske porteføljeproblem er stadig interessen for denne analyse. I det, at der stadig arbejdes under antagelsen, at investorens porteføljevægte er afhængige af tidsvarierende forventninger af afkast og volatiliteter.
+
+Figur \ref{fig:AL-RES-tids} viser den optimale første-periode allokering over tid for den intielle investor med den nye ovennævnte restriktion. Som det kan ses er allokeringen på visse aktiver nul i lange perioder.
 
 \begin{figure}[H]
 
@@ -3432,6 +3473,8 @@ $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 
 \caption{Tidsserie af allokeringer, med restringeret kortsalg.}\label{fig:AL-RES-tids}
 \end{figure}
+
+Tabel \ref{tab:AL-RES-BIG} rapporterer porteføljevægtene for den kortsalgsrestringerede investor, på tværs af investeringshorisonter og for forskellige tolerancer for risiko.
 
 \begin{table}[H]
 
@@ -3467,14 +3510,45 @@ $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 \end{threeparttable}}
 \end{table}
 
-\hypertarget{opsummering-7}{%
-\section{Opsummering}\label{opsummering-7}}
+Myopiske investorer med lav risikoaversion allokerer en større del mod virksomhedsobligationer. Des mere konservativ investoren bliver ses det, at allokeringen mod \emph{T-Bills} mere end fordobles, mens der generelt hensættes en mindre allokering mod risikobærende aktiver. Altså ses en dalende allokering mod aktier og begge obligationstyper, mens mere eksponering rettes mod aktivet med lav volatilitet. Generelt ses, at diversifikationsmulighederne udnyttes i langt mindre grad, des mere konservativ investoren bliver, til forskel fra den myopiske investor uden en kortsalgsrestriktion.
+
+Kontrolleres effekten af investeringshorisonten, vil risikoaverse og risikotolerante investorer dele en række egenskaber. Begge reducerer allokeringen mod \emph{T-Bills} som horisonten øges. For investoren med lav risikoaversion reduceres eksponeringen mindre end for den konvservative investor. Den moderate investor deler ligeledes denne egenskab, dog i mindre grad. For næsten alle risikoaversioner ses, at investoren har samme vægt i obligationstyperne som horisonten øges, mens at eksponeringen mod aktier øges gradvist. Den stigende eksponering mod aktier, kan være grundet den faldende aktie volatilitet, som kommer sig af \emph{mean reverison} i aktiepriser. Dette understøttes bl.a. af den lave første ordens autokorrelation på \(0.075\).\\
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{Master_Thesis_Andreas_Kracht_Frandsen_files/figure-latex/HOR-RES-ana-1} 
+
+}
+
+\caption{Horisontanalyse restringeret.}\label{fig:HOR-RES-ana}
+\end{figure}
+
+\hypertarget{opsummering-4}{%
+\section{Opsummering}\label{opsummering-4}}
+
+I dette kapitel blev den optimale porteføljeallokering undersøgt. Forskellene mellem investorer med lange og korte investeringshorisonter blev skitseret. Derudover blev risikoaversionen ligeledes analyseret.
 
 \hypertarget{diskussion}{%
 \chapter{Diskussion}\label{diskussion}}
 
+I dette kapitel bliver fundende fra de tidligere kapitler diskuteret og reflekteret. Dette gøres ved både at sætte spørgsmålstegn ved resultaterne og de anvendte metoder. Derudover vil andre relaterede emner belyses, som kan komplementerer fremtidige studier. Potentielle forbedringer til den forudgående analyse vil ligeledes blive præsenteret.
+
+Teoretiske antagelser har været et gennemgående tema igennem hele afhandlingen for at kunne estimere modellen, fastsat af \citep{JurVic2011}. Brugen af diskrettidsmodeller med approksimative analytiske løsninger, kan give anledning til, at VAR-modellen indeholder approksimations fejl. Disse potentielle approksimations fejl blev derimod ikke undersøgt, da modellen ikke valideres. Dette giver anledning til et andet bekymringsområde. Potens nytte defineret over terminalformue blev anvendt til udarbejdelsen af den analytiske porteføljevalgsløsning. Dette medfører en antagelse om konstant \emph{RRA} og konstant volatilitet over tid. Denne antagelse kan være uhensigtsmæssig, når porteføljevalget for en institutionel investor skal undersøges, eftersom det ikke separerer elasticiteten af intertemporal substitution fra risikoaversion. Dette løses netop af Epstein-Zin nytte, som separerer de to effekter, og på samme tid bevarer uafhængigheden af formue i \emph{RRA}, \citep{CampVicCha2003}.
+
+Dernæst kan det nævnes, at modellen er løst for en institutionel investor som står overfor flere eksogene afkast på aktiver og sætter på den måde spørgsmåltegn ved den generelle ligevægts antagelse, \citep{CampVic2001}. Dette sker eftersom allokeringen mod aktiverne er stærkt afhængigt af tilstandsvariablene. Dynamikken i allokeringerne for samtlige investorer ændrer sig sammen med stødene til tilstandsvariablene. Altså betyder dette, at allokeringsdynamikken er ens for alle investorer, hvilket ikke kan lade sig gøre under den generelle ligevægts antagelse.
+
+Et oplagt forlængende studie af denne afhandling ville være at medtage transaktionsomkostninger. Da eksklusion af disse kan have en signifikant betydning for nytten hos den individuelle investor, \citep{BalLyn1999}. Gearingsomkostninger og skatter\footnote{Og ikke mindst skattetyper.} er ligeldes udeholdt af denne afhandling, og på linje med transaktionsomkostninger kan de have tiltende effekter på porteføljevalget. Selvom en udeholdelse af forbrug, arbejdsindkomst og andre sammenlignelige cash flows ikke påvirker den institutionelle investor i høj grad, er det stadig usandsynligt, at de ikke har en marginal effekt på porteføljevalget. Dvs. i en realistisk opsætning ville det optimale porteføljevalg kunne påvirkes af risikoen hørende til disse cash flows.
+
+De anvendte prædiktionsvariable er alle dokumenteret grundigt i eksisterende litteratur omhandlende dynamisk porteføljeallokering eller afkastprædiktabilitet. Fra den præsenterede fundamentale relationer, må eksempelvis \emph{Dividend-Price Ratio} have statistisk styrke til at kunne forudsige merafkastet på aktier. Imod forventning finder denne afhandling at variablen har en ringe univariat prædiktabilits egenskab. Selv ved kontrol for andre variable, er \emph{Dividend-Price Ratio} stadig insignifikant. \citep{Cochrane2008} introducerer en stærkere metode -- fra et statistisk synspunkt -- til at teste for prædiktabilitet. Denne metode udnytter restriktionerne fra den loglineære relation, \citep{Campbell1988}, til at skabe en VAR(1)-model, som er restringeret til \emph{Dividend-Price Ratio}. På denne måde opnår \citep{Cochrane2008} approksimative afhængigheder, som er på linje med de log lineære relationer, og finder samtidig meget lidt evidens imod prædiktabilitet. Ved brug af denne metode fra \citep{Cochrane2008}, kunne prædiktabilitetsevnen af \emph{Dividend-Price Ratio} måske have været anderledes.
+
+På trods af dette, accepteres den underliggende usikkerhed i selektionsproceduren, som blev baseret på kvantitative \emph{Top-down} analyser og en kvalitativ selektion, baseret på økonomisk fornuft af undertegnede. I et forsøg på at reducere bias i modellen, bliver VAR(1)-modellens koefficienter bias-justeret, ved brug af proceduren foreslået af \citep{Pope1990}. Samtidig afvises ikke muligheden for potentielle spuriøse regressioner i undersøgelsen for afkastprædiktabilitet.
+
+En potentiel stor faldgrube for afhandlingen er størrelsen og ikke mindst kvaliteten af stikprøven. Ved brug af kvartalsvise data, blive visse variable skab ud fra glidende gennemsnit. Om en investor benytter denne information eller benytter de sande kvartalsvise værdier er uvis. Eksisterende litteratur benytter sommetider månedlige, halvårlige eller årlige data. Dette kan potentielt skabe mere præcise estimater, men kan også resultere i værre estimater. Præcisionen i estimater er særlig vigtig for aktivklassen aktier, idet, at de er aktivet med højest volatilitet for faste tidsintervaller. En større mængde af aktivklasser, vil naturligvis og kunne have påvirket porteføljeallokeringen. Dette leder også til et andet problem bag de valgte aktivklasser: de skaber ikke nødvendigvis de nødvendige horisonteffekter eller risikoaversionseffekter, som alternative aktivklasser måske kunne have skabt. Begrænsingen af aktivklasserne skete til gengæld af en simpel årsag: data mangel.
+
 \hypertarget{konklusion}{%
 \chapter{Konklusion}\label{konklusion}}
+
+Denne afhandling undersøgte det finansielle emne: dynamisk porteføljeallokering, ved at se porteføljeallokeringen fra en investors perspektiv. Dette blev undersøgt ved brug af en analytisk løsning til det dynamiske porteføljeproblem. Som antog, at investoren havde CRRA-nytte over terminalformue og stod overfor tidsvarierende afkast for en endelig investeringshorisont. Afhandlingen komplementerer eksisterende litteratur på en række punkter. Begrænsningen af den rene middelværdi-varians analyse er indlysende grundet dens fordelingsmæssige og statiske antagelser. Hvorimod en antagelse om CRRA-nytte og lognormale afkast kan udnytte approksimative løsninger. Afhandlingen benytter derudover ikke kun nutidsværdirelationer mellem aktivklasserne, men også variable fra akademisk litteratur, som før har vist prædiktabilitsegenskaber overfor afkast. Fordi afhandlingen var interesseret i allokeringen mod en række aktivklasser, antoges det, at dynamikken i de relevante tilstandsvariable fulgte en VAR(1)-process. Dette tillod at fange lineære afhængigheder mellem alle aktivklasser og prædiktionsvariable på samme tid. En kvalitativ og kvantitativ modelselektionsproceudre blev anvendt til at finde en delmængde af variable til den endelige VAR(1)-model, hvor variablene bl.a. skulle være signifikante på signifikansniveauet \(\alpha=0.05\), som udvalgt gennem \emph{AKFIC}. Ved dannelse af univariate samt multiple regressioner blev det konkluderet at afkastene på aktivklasserne var prædiktable til en vis grad. Specielt viste \emph{Book-to-Market Ratio}, \emph{Small Minus Big} og \emph{Yield Spread} at være de mest passende tilstandsvariable i den introducerede specifikation. Efter tilstandsvariablene var fastsat kunne VAR(1)-modellen estimeres. Her var kun en delmængde af koefficienterne stadig signifiankte. Derudover blev koefficienterne bias-justeret, men ingen signifkant forskel blev fundet, som dermed betød, at ingen stikprøve bias var tilstede. Strukturen fra VAR(1)-modellen er grundlæggende for porteføljeallokeringen, eftersom parameterene som investoren benytter til udvælgelsen afhænger af netop koefficientestimaterne. Dette tillod at undersøge forskellen mellem investorer med høj og lav risikoaversion, og derudover investorer med lang eller kort investeringshorisont. For fast risikoaversion, findes afhandlingen at aktier er drevet af det \emph{intertemporale hedging demand}, som investeringshorisonten udvides. Til forskel finder analysen at allokeringen mod obligationstyperne er drevet af \emph{myopic demand}, siden de er relativt stabile over tid. Investoren udnytter muligheden for at geare sin portefølje. For en lange række kombinationer af horisonter og risikoaversioner, finansierer investoren sine lange positioner ved at tage en kort position i \emph{T-Bills}. Ved at indføre en kortsalgsrestriktion bliver specielt eksponeringen mod \emph{T-Bills} påvirket, da investorens gearingsmuligheder fuldstændig fjernes.
 
 \hypertarget{appendix-appendiks}{%
 \appendix}
@@ -3482,15 +3556,22 @@ $\gamma$ & Aktiv & 1 & 4 & 8 & 20 & 40 & 60 & 80 & 100\\
 
 \part{Appendiks}
 
-\hypertarget{underliggende-teoretiske-resultater}{%
-\chapter{Underliggende teoretiske resultater}\label{underliggende-teoretiske-resultater}}
+\hypertarget{underligteo}{%
+\chapter{Underliggende teoretiske resultater}\label{underligteo}}
 
-Dette appendiks består af udledninger for de anvendte resultater gennem afhandlingen. Notationen som anvendes følger den generelle præsenterede notation fra tidligere kapitler.
+Dette appendiks består af statiske resultater og af udledninger for de anvendte resultater gennem afhandlingen. Notationen som anvendes følger den generelle præsenterede notation fra tidligere kapitler.
 
-\hypertarget{momenter-af-den-lognormale-fordeling}{%
-\section{Momenter af den lognormale fordeling}\label{momenter-af-den-lognormale-fordeling}}
+\hypertarget{momlognorm}{%
+\section{Momenter af den lognormale fordeling}\label{momlognorm}}
 
-Det præsenterede porteføljevalg i den empiriske analyse tog udgangspunkt i en investor med potens nytte. Dette udmyntede sig i antagelsen om lognormale afkast.
+Det præsenterede porteføljevalg i den empiriske analyse tog udgangspunkt i en investor med potens nytte. Dette udmyntede sig i antagelsen om lognormale afkast. Lad en stokastisk variabel \(Y=\exp(X)\sim \mathcal{LN}(\mu,\sigma^2)\) have den egenskab, at \(X=\log(Y)\sim\mathcal{N}(\mu,\sigma^2)\). Da vil den forventede værdi af \(Y\) være givet som
+\[\mathbb{E}[Y]=\exp\left(\mu+\frac{1}{2}\sigma^2\right).\]
+
+Variansen af \(Y\) vil være givet ved
+\[\mathbb{V}\left[Y\right]=\exp\left(2\mu+2\sigma^2\right)-\exp\left(2\mu+\sigma^2\right).\]
+
+Det \(n\)'te moment af \(Y\) kan skrives som
+\[\mathbb{E}\left[Y^n\right]=\exp\left(n\mu + \frac{1}{2}n^2\sigma^2\right).\]
 
 \hypertarget{udlmyo}{%
 \section{Udledning af den optimale myopiske portefølje}\label{udlmyo}}
@@ -3502,16 +3583,16 @@ I ovenstående er det ekstra led \(R_{0,t+1}\) undladt idet, at det ikke ændrer
 
 Ved differentiation af ovenstående funktion, \(\mathcal{L}(\cdot)\), mht. \(\alpha_t\) opnåes førsteordensbetingelsen
 \begin{align*}
-\frac{\partial \mathcal{L}}{\partial \alpha_t} &= \mathbb{E}_t(R_{t+1}) - R_{0,t+1} - \frac{k}{2}2\alpha\sigma_t^2=0\\
+\frac{\partial \mathcal{L}}{\partial \alpha_t} &= \mathbb{E}_t\left[R_{t+1}\right] - R_{0,t+1} - \frac{k}{2}2\alpha\sigma_t^2=0\\
 &\Updownarrow\\
-\alpha&=\frac{\mathbb{E}_t\left(R_{t+1}\right)-R_{0,t+1}}{k\sigma_t^2}.
+\alpha&=\frac{\mathbb{E}_t\left[R_{t+1}\right]-R_{0,t+1}}{k\sigma_t^2}.
 \end{align*}
 
 Dermed er den optimale portefølje udledt, for tilfældet med ét risikobærende aktiv. For udledningen af den optimale portefølje på tidspunkt \(t\) i tilfældet med flere risikobærende aktiver, differentieres funktionen, fra Maksimeringsproblemet \eqref{eq:MultStatmaks} mht. \(\bm{\alpha}_t\), dermed fås
 \begin{align*}
-\frac{\partial \mathcal{L}}{\partial \bm{\alpha}_t} &= (\mathbb{E}_t(\bm{R}_{t+1})- R_{0,t+1}\bm{\ell}) - \frac{k}{2}2\bm{\Sigma_t}\bm{\alpha}_t = 0\\
+\frac{\partial \mathcal{L}}{\partial \bm{\alpha}_t} &= (\mathbb{E}_t\left[\bm{R}_{t+1}\right]- R_{0,t+1}\bm{\ell}) - \frac{k}{2}2\bm{\Sigma_t}\bm{\alpha}_t = 0\\
 &\Updownarrow\\
-\bm{\alpha}_t&=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t(\bm{R}_{t+1})-R_{0,t+1}\bm{\ell}).
+\bm{\alpha}_t&=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t\left[\bm{R}_{t+1}\right]-R_{0,t+1}\bm{\ell}).
 \end{align*}
 
 Her er de gængse regler for matrix differentiation og manipulation benyttet.
@@ -3860,8 +3941,8 @@ y_t^{c,n}\approx (\frac{1-\rho}{1-\rho^n})\sum_{i=0}^{n-1}\rho^i r_{t+i+1}^{c,n-
 
 Og ved substitution kan det approksimative loglinære afkast fra Kapitel ?? udledes.
 
-\hypertarget{den-optimale-dynamiske-strategi}{%
-\chapter{Den optimale dynamiske strategi}\label{den-optimale-dynamiske-strategi}}
+\hypertarget{optdynstrategi}{%
+\chapter{Den optimale dynamiske strategi}\label{optdynstrategi}}
 
 Dette appendiks vil udlede den optimale porteføljestrategi, som beskrevet i Sektion ??. Udledningen vil følge \citep{JurVic2011} Appendiks C, som beskriver metoden, med enkelte dele som varierer.
 
@@ -3869,8 +3950,8 @@ Uden tab af generalitet, kan det \(k\)-periode dynamiske porteføljeproblem løs
 
 Investorens problem, i et to-periodes perspektiv, er at maksimere sin forventede nytte
 \begin{align*}
-\mathbb{E}_{t+k-2}[\frac{1}{1-\gamma} W_{t+k}^{1-\gamma}]&=\frac{1}{1-\gamma} W_{t+k-2}^{1-\gamma} \mathbb{E}_{t+k-2}[(1+R_{p,t+k-1})^{1-\gamma}(1+R_{p,t+k})^{1-\gamma}]\\
-&=\frac{1}{1-\gamma} W_{t+k-2}^{1-\gamma} \mathbb{E}_{t+k-2}[\exp((1-\gamma) r_{p,t+k-1}) \mathbb{E}_{t+k-1}[\exp((1-\gamma)r_{p,t+k})]],
+\mathbb{E}_{t+k-2}\left[\frac{1}{1-\gamma} W_{t+k}^{1-\gamma}\right]&=\frac{1}{1-\gamma} W_{t+k-2}^{1-\gamma} \mathbb{E}_{t+k-2}\left[(1+R_{p,t+k-1})^{1-\gamma}(1+R_{p,t+k})^{1-\gamma}\right]\\
+&=\frac{1}{1-\gamma} W_{t+k-2}^{1-\gamma} \mathbb{E}_{t+k-2}\left[\exp((1-\gamma) r_{p,t+k-1}) \mathbb{E}_{t+k-1}\left[\exp((1-\gamma)r_{p,t+k})\right]\right],
 \end{align*}
 
 ved at vælge følgen af vægte \(\left\{\bm{\alpha}_{t+k-2}^2, \bm{\alpha}_{t+k-1}^1\right\}\). Variablene er indekseret med sænket skrift, som repræsenterer tidspunktet de bliver anvendt, og hævet skrift tid, der repræsenterer tid tilbage indtil investeringshorisonten.
@@ -3882,11 +3963,11 @@ ved at vælge følgen af vægte \(\left\{\bm{\alpha}_{t+k-2}^2, \bm{\alpha}_{t+k
 \subsection{\texorpdfstring{\emph{Policy}-funktionen}{Policy-funktionen}}\label{policy-funktionen}}
 
 Maksimeringsproblemet på tidspunkt \((t+k-1)\) er uændret ift. problemet som blev beskrevet ovenfor.
-\[\max_{\bm{\alpha}_{t+k-1}^1} \mathbb{E}_{t+k-1}[\exp((1-\gamma)r_{p,t+k})] = \exp\left((1-\gamma) \mathbb{E}_{t+k-1}[r_{p,t+k}]+\frac{1}{2}(1-\gamma)^2 \mathbb{V}_{t+k-1}[r_{p,t+k}]\right).\]
+\[\max_{\bm{\alpha}_{t+k-1}^1} \mathbb{E}_{t+k-1}\left[\exp((1-\gamma)r_{p,t+k})\right] = \exp\left((1-\gamma) \mathbb{E}_{t+k-1}\left[r_{p,t+k}\right]+\frac{1}{2}(1-\gamma)^2 \mathbb{V}_{t+k-1}\left[r_{p,t+k}\right]\right).\]
 
 Ved brug af selektionsmatricerne \(\bm{H}_x\) og \(\bm{H}_0\), er de første to momenter af porteføljeafkastet givet ved
 \begin{align*}
-\mathbb{E}_{t+k-1}[r_{p,t+k}]&= \bm{\alpha}_{t+k-1}^{1\prime} \bm{H}_x (\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1}) + \bm{H}_0(\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1})+\frac{1}{2} \bm{\alpha}_{t+k-1}^{1\prime} (\bm{\sigma}_x^2-\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1})\\
+\mathbb{E}_{t+k-1}\left[r_{p,t+k}\right]&= \bm{\alpha}_{t+k-1}^{1\prime} \bm{H}_x (\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1}) + \bm{H}_0(\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1})+\frac{1}{2} \bm{\alpha}_{t+k-1}^{1\prime} (\bm{\sigma}_x^2-\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1})\\
 \mathbb{V}_{t+k-1}[r_{p,t+k}]&=\bm{\alpha}_{t+k-1}^{1\prime}\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1}+ \sigma_0^2 + 2\bm{\alpha}_{t+k-1}^{1\prime}\bm{\sigma}_{0x}
 \end{align*}
 
