@@ -4,11 +4,18 @@
 
 # Underliggende teoretiske resultater {#underligteo}
 
-Dette appendiks består af udledninger for de anvendte resultater gennem afhandlingen. Notationen som anvendes følger den generelle præsenterede notation fra tidligere kapitler.
+Dette appendiks består af statiske resultater og af udledninger for de anvendte resultater gennem afhandlingen. Notationen som anvendes følger den generelle præsenterede notation fra tidligere kapitler.
 
-## Momenter af den lognormale fordeling
+## Momenter af den lognormale fordeling {#momlognorm}
 
-Det præsenterede porteføljevalg i den empiriske analyse tog udgangspunkt i en investor med potens nytte. Dette udmyntede sig i antagelsen om lognormale afkast. Lad en stokastisk variabel $Y=\exp(X)\sim \mathcal{LN}(\mu,\sigma^2)$ have den egenskab, at $X=\log(Y)\sim\mathcal{N}(\mu,\sigma^2)$.
+Det præsenterede porteføljevalg i den empiriske analyse tog udgangspunkt i en investor med potens nytte. Dette udmyntede sig i antagelsen om lognormale afkast. Lad en stokastisk variabel $Y=\exp(X)\sim \mathcal{LN}(\mu,\sigma^2)$ have den egenskab, at $X=\log(Y)\sim\mathcal{N}(\mu,\sigma^2)$. Da vil den forventede værdi af $Y$ være givet som
+$$\mathbb{E}[Y]=\exp\left(\mu+\frac{1}{2}\sigma^2\right).$$
+
+Variansen af $Y$ vil være givet ved
+$$\mathbb{V}\left[Y\right]=\exp\left(2\mu+2\sigma^2\right)-\exp\left(2\mu+\sigma^2\right).$$
+
+Det $n$'te moment af $Y$ kan skrives som
+$$\mathbb{E}\left[Y^n\right]=\exp\left(n\mu + \frac{1}{2}n^2\sigma^2\right).$$
 
 ## Udledning af den optimale myopiske portefølje {#udlmyo}
 I denne Sektion udledes den optimale portefølje på tidspunkt $t$ givet ved: Ligning \@ref(eq:Løsning) og Ligning \@ref(eq:Multalpha) for hhv. tilfældet med et risikobærende aktiv, $n=1$, samt tilfældet med flere risikobærende aktiver, $n>1$. Ved indsættelse af den betingede middelværdi, Ligning \@ref(eq:Forvport), samt den betingede varians, Ligning \@ref(eq:Varport). Kan Maksimeringsproblemet \@ref(eq:Statmaks) omskrives til

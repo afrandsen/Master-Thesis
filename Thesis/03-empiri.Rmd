@@ -1422,7 +1422,7 @@ FIT_V_TABLE %>%
 De ovenstående præsenterede univariate regressioner kaster tvivl på validiteten af resultater i artikler, som taler for et bredt sæt af prædiktionsvariable. Derudover indikerer de univariate regressioner, at risikoen for stikprøveafhængighed også skal medtages i konstruktionen af den endelige VAR(1)-model, hvilket også bliver understreget af [@Goyal2007]. Samtidig kan disse simple regressioner ikke stå alene om en endelig konklusion, og derfor foretages en mere kompleks multipel regressions analyse i næste sektion, som foreslået af [@Goyal2007].
 
 ## Multiple regressioner {#multreg}
-I denne sektion fortsættes analysen af variablene, som kan indgå i den endelige VAR(1)-model, ved brug af multiple regressioner. Altså antages det, at en eller flere variable forklarer variationen i log merafkastet på aktivklasserne. I det følgende vil tre robuste OLS estimationer blive undersøgt nærmere, idet, at standardfejl er justeret for heteroskedasticitet og autokorrelation, [@Newey1987]. $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. Signifikansniveauet fastholdes på niveauet $\alpha=0.05$. At inkludere alle variable i én multipel regression betegnes undertiden i litteraturen med det velvalgte navn *Kitchen-Sink Regression*, [@Goyal2007]. Derudover foretages en *Step-AIC*-procedure, der giver anledning til en regression, af en delmængde af de foreklarende variable i de multiple regressioner. Dette anvendes kun som et supplement til modeltjekkene.
+I denne sektion fortsættes analysen af variablene, som kan indgå i den endelige VAR(1)-model, ved brug af multiple regressioner. Altså antages det, at en eller flere variable forklarer variationen i log merafkastet på aktivklasserne. I det følgende vil tre robuste OLS estimationer blive undersøgt nærmere, idet, at standardfejl er justeret for heteroskedasticitet og autokorrelation, [@Newey1987]. $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. Signifikansniveauet fastholdes på niveauet $\alpha=0.05$. At inkludere alle variable i én multipel regression betegnes undertiden i litteraturen med det velvalgte navn *Kitchen-Sink Regression*, [@Goyal2007]. Derudover foretages en *Step-AIC*-procedure, der giver anledning til en regression, af en delmængde af de foreklarende variable i de multiple regressioner. Dette anvendes kun som et supplement til modeltjekkene, og skal ikke ses som en modelselektion.
 
 Fokuseres først på merafkastet på aktier, bemærkes det, at næsten alle de finansielle variable er yderst insignifikante. Kun *Small Minus Big* kan prædiktere merafkastet signifikant, hvilket stemmer overens med den univariate analyse. Dette gør den med en negativ koefficient, som også er gældende for *Price-Earnings Ratio* og *High Minus Low*. Hvorimod resten af de finansielle variable har en positiv koefficient. Ift. rentestruktursvariablene ses at den nominelle rente er signifikant med en $t$-størrelse på `r round(FIT_M_TABLE$t[8], 3)`. Den nominelle rente var til gengæld ikke signifikant i den univariate analyse. Den makroøkonomiske variabel er ligeledes signifikant -- med en $t$-størrelse på `r round(FIT_M_TABLE$t[13], 3)` -- hvilket den også var i det univariate setup. 
 
@@ -1559,7 +1559,7 @@ for (i in 1:6) {
 g
 ```
 
-Også for responsvariablen: merafkastet på statsobligationer er de forklarende variable iterativt blevet fjernet fra *Kitchen-Sink* regressionen, gennem *Step-AIC*-proceduren. Tabel \@ref(tab:MULT-step-s) viser den resulterende multiple regression.
+Også for responsvariablen: merafkastet af statsobligationer er de forklarende variable iterativt blevet fjernet fra *Kitchen-Sink* regressionen, gennem *Step-AIC*-proceduren. Tabel \@ref(tab:MULT-step-s) viser den resulterende multiple regression.
 
 ```{r MULT-step-s, echo=FALSE}
 options(knitr.kable.NA = '')
@@ -1588,6 +1588,7 @@ FIT_M_S_STEP_TABLE %>%
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af en AIC step optimeret multipel regression ift. responsvariablen: merafkastet på statsobligationer, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er på ??, bemærk dette er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
+Figur \@ref(fig:MULT-s-step-auto) viser modelinspektionen for den step optimerede regression på merafkastet af statsobligationer.
 
 ```{r MULT-s-step-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af den step optimerede regression for merafkastet på statsobligationer.', fig.width=18, fig.asp=0.9, fig.pos='H'}
 g <- autoplot(step_S_OBL_model, which = 1:6, ncol = 2, label.size = 3, smooth.colour  = 'red', smooth.linetype = "dashed", ad.colour = "pink", label.vjust = -0.3, label.angle = -15) + theme_bw()
@@ -1676,6 +1677,8 @@ FIT_M_V_STEP_TABLE %>%
    kableExtra::add_header_above(c("$rx_{t+1}^{\\\\text{a}}$", " " = 1, "Konfidensinterval" = 2, " " = 3), escape = FALSE) %>% 
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af en AIC step optimeret multipel regression ift. responsvariablen: merafkastet på virksomhedsobligationer, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er på ??, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
+
+Sidst viser Figur \@ref(fig:MULT-v-step-auto) modelsinpektionsplottene fra den step optimerede multiple regression.
 
 ```{r MULT-v-step-auto, echo=FALSE, fig.align='center', fig.cap='Visuel inspektion af den step optimerede regression for merafkastet på virksomhedsobligationer.', fig.width=18, fig.asp=0.9, fig.pos='H'}
 g <- autoplot(step_V_OBL_model, which = 1:6, ncol = 2, label.size = 3, smooth.colour  = 'red', smooth.linetype = "dashed", ad.colour = "pink", label.vjust = -0.3, label.angle = -15) + theme_bw()
@@ -1925,7 +1928,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$r_{t}^{rf}$"))
+  ylab(TeX("$r_{t}^{rf}$")) +
+  xlab("År")
 ```
 
 ```{r BACKTEST-AKT, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for merafkastet på aktier.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
@@ -1945,7 +1949,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$r_{t}^{rf}$"))
+  ylab(TeX("$r_{t}^{rf}$")) +
+  xlab("År")
 ```
 
 ```{r BACKTEST-S, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for merafkastet på statsobligationer.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
@@ -1965,7 +1970,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$r_{t}^{rf}$"))
+  ylab(TeX("$r_{t}^{rf}$")) +
+  xlab("År")
 ```
 
 ```{r BACKTEST-V, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for merafkastet på virksomhedsobligationer.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
@@ -1985,7 +1991,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$r_{t}^{rf}$"))
+  ylab(TeX("$r_{t}^{rf}$")) +
+  xlab("År")
 ```
 
 ```{r BACKTEST-BM, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for prædiktionsvariablen Book-to-Market Ratio.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
@@ -2005,7 +2012,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$r_{t}^{rf}$"))
+  ylab(TeX("$r_{t}^{rf}$")) +
+  xlab("År")
 ```
 
 ```{r BACKTEST-SMB, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for prædiktionsvariablen Small Minus Big.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
@@ -2025,7 +2033,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$r_{t}^{rf}$"))
+  ylab(TeX("$r_{t}^{rf}$")) +
+  xlab("År")
 ```
 
 ```{r BACKTEST-B, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for prædiktionsvariablen den nominelle rente.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
@@ -2045,7 +2054,8 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$r_{t}^{rf}$"))
+  ylab(TeX("$r_{t}^{rf}$")) +
+  xlab("År")
 ```
 
 ```{r BACKTEST-Y, echo=FALSE, fig.align='center', fig.cap="Backtest af VAR(1)-estimaterne for prædiktionsvariablen Yield Spread.", fig.scap="short", fig.width=18, fig.height=5, fig.pos='H', warning=FALSE}
@@ -2065,10 +2075,17 @@ ggplot(data) +
   theme(
     panel.grid.minor = element_blank()
   ) + 
-  ylab(TeX("$r_{t}^{rf}$"))+
+  ylab(TeX("$r_{t}^{rf}$")) +
+  xlab("År")+
   scale_colour_brewer(palette = "Dark2") +
   scale_linetype_manual(values=c("longdash", "dotted"))
 ```
+
+Som et stationaritetstjek af den færdige VAR-model, undersøges stabiliteten af modellen. Eftersom en stabil VAR-model vil medføre en stationær VAR-model, [@Lutkepohl2006]. En VAR(1)-model er stabil, hvis det omvendte karateristiske polynomie
+$$\det\left(\bm{I} - \bm{\Phi}_1 z\right),$$
+hørende til VAR-processen, ikke har rødder, $z$, i eller på den komplekse enhedscirkel. Dette er ækvivalent med at alle egenværdierne af matricen $\Phi_1$ har modulus mindre end én.
+
+Tabel ?? viser modulus af egenværdierne fra matricen af koefficienter, $\bm{\Phi}_1$. Her observeres, at ingen af de otte egenværdier har modulus større end én. Dermed er VAR(1)-modellen stabil og stationær.
 
 ## Opsummering {#opsundermodel}
 I dette kapitel blev modelselektionen fremlagt. Derudover blev VAR(1)-estimaterne præsenteret og analyseret. I VAR-processen viste merafkastet på statsobligationer sig svær at forudsige. Mens det risikofrie afkast havde den højeste $R^2$ blandt aktiverne. Strukturen i VAR-systemet er essentielle for porteføljeallokeringerne, siden at parametrene afhænger af VAR(1) estimationsresultaterne. Derudover blev stikprøve-bias undersøgt, ved at bias-justere koefficienterne. Ganske små forskelle blev fundet mellem de regulære OLS estimater og de bias-justerede estimater. For fuldstændighedens skyld fortsættes dog med de bias-justerede estimater.
@@ -2507,7 +2524,7 @@ ggplot(data, aes(sd, r)) +
 
 I dette kapitel blev problemerne ved estimation undersøgt gennem et Monte Carlo forsøg. I dette forsøg var den bagvedliggende fordeling af afkastene kendt på forhånd, men selv med denne information viste det sig, at selv små over- eller underestimationer påvirker én-periode porteføljeallokeringen i en signifikant grad. På tværs af alle porteføljetyper, heriblandt *CARA*- og *CRRA*-porteføljer, og på tværs af alle risikoaversioner.
 
-# Allokering af aktiver
+# Allokering af aktiver {#alloafakt}
 I dette kapitel vil teorien fra Del 2 samt de empiriske fund sammenkobles. Dette gøres ved at benytte VAR(1)-koefficienterne til porteføljevalget for den institutionelle investor. Den initielle analyse vil tage udgangspunkt i en investor med en moderat risikoaversion, $\gamma=5$, en lang investeringshorisont på $25$ år, $k=200$. Derudover restringeres investoren ikke, og dermed tillades kortsalg. Dette vil ligeledes fungere som sammenligningsgrundlaget for de resterende analyser i dette kapitel. I Sektion \@ref(portvalgmedtids) vil denne initielle portefølje blive undersøgt, når afkast er tidsvarierende. Her vil porteføljevalget for hele den tilgængelige periode bliver undersøgt, når der fokuseres på allokeringen i samtlige *første* perioder. Dette giver mulighed for at undersøge investorens valg over samtlige recessioner.
 
 ## Porteføljevalg med tidsvarierende afkast {#portvalgmedtids}
@@ -2887,6 +2904,14 @@ I dette kapitel bliver fundende fra de tidligere kapitler diskuteret og reflekte
 Teoretiske antagelser har været et gennemgående tema igennem hele afhandlingen for at kunne estimere modellen, fastsat af [@JurVic2011]. Brugen af diskrettidsmodeller med approksimative analytiske løsninger, kan give anledning til, at VAR-modellen indeholder approksimations fejl. Disse potentielle approksimations fejl blev derimod ikke undersøgt, da modellen ikke valideres. Dette giver anledning til et andet bekymringsområde. Potens nytte defineret over terminalformue blev anvendt til udarbejdelsen af den analytiske porteføljevalgsløsning. Dette medfører en antagelse om konstant *RRA* og konstant volatilitet over tid. Denne antagelse kan være uhensigtsmæssig, når porteføljevalget for en institutionel investor skal undersøges, eftersom det ikke separerer elasticiteten af intertemporal substitution fra risikoaversion. Dette løses netop af Epstein-Zin nytte, som separerer de to effekter, og på samme tid bevarer uafhængigheden af formue i *RRA*, [@CampChanVic2003].
 
 Dernæst kan det nævnes, at modellen er løst for en institutionel investor som står overfor flere eksogene afkast på aktiver og sætter på den måde spørgsmåltegn ved den generelle ligevægts antagelse, [@CampVic2001]. Dette sker eftersom allokeringen mod aktiverne er stærkt afhængigt af tilstandsvariablene. Dynamikken i allokeringerne for samtlige investorer ændrer sig sammen med stødene til tilstandsvariablene. Altså betyder dette, at allokeringsdynamikken er ens for alle investorer, hvilket ikke kan lade sig gøre under den generelle ligevægts antagelse.
+
+Et oplagt forlængende studie af denne afhandling ville være at medtage transaktionsomkostninger. Da eksklusion af disse kan have en signifikant betydning for nytten hos den individuelle investor, [@Lynch1999]. Gearingsomkostninger og skatter^[Og ikke mindst skattetyper.] er ligeldes udeholdt af denne afhandling, og på linje med transaktionsomkostninger kan de have tiltende effekter på porteføljevalget. Selvom en udeholdelse af forbrug, arbejdsindkomst og andre sammenlignelige cash flows ikke påvirker den institutionelle investor i høj grad, er det stadig usandsynligt, at de ikke har en marginal effekt på porteføljevalget. Dvs. i en realistisk opsætning ville det optimale porteføljevalg kunne påvirkes af risikoen hørende til disse cash flows.
+
+De anvendte prædiktionsvariable er alle dokumenteret grundigt i eksisterende litteratur omhandlende dynamisk porteføljeallokering eller afkastprædiktabilitet. Fra den præsenterede fundamentale relationer, må eksempelvis *Dividend-Price Ratio* have statistisk styrke til at kunne forudsige merafkastet på aktier. Imod forventning finder denne afhandling at variablen har en ringe univariat prædiktabilits egenskab. Selv ved kontrol for andre variable, er *Dividend-Price Ratio* stadig insignifikant. [@Cochrane2008] introducerer en stærkere metode -- fra et statistisk synspunkt -- til at teste for prædiktabilitet. Denne metode udnytter restriktionerne fra den loglineære relation, [@Camp1988], til at skabe en VAR(1)-model, som er restringeret til *Dividend-Price Ratio*. På denne måde opnår [@Cochrane2008] approksimative afhængigheder, som er på linje med de log lineære relationer, og finder samtidig meget lidt evidens imod prædiktabilitet. Ved brug af denne metode fra [@Cochrane2008], kunne prædiktabilitetsevnen af *Dividend-Price Ratio* måske have været anderledes.
+
+På trods af dette, accepteres den underliggende usikkerhed i selektionsproceduren, som blev baseret på kvantitative *Top-down* analyser og en kvalitativ selektion, baseret på økonomisk fornuft af undertegnede. I et forsøg på at reducere bias i modellen, bliver VAR(1)-modellens koefficienter bias-justeret, ved brug af proceduren foreslået af [@Pope1990]. Samtidig afvises ikke muligheden for potentielle spuriøse regressioner i undersøgelsen for afkastprædiktabilitet. 
+
+En potentiel stor faldgrube for afhandlingen er størrelsen og ikke mindst kvaliteten af stikprøven. Ved brug af kvartalsvise data, blive visse variable skab ud fra glidende gennemsnit. Om en investor benytter denne information eller benytter de sande kvartalsvise værdier er uvis. Eksisterende litteratur benytter sommetider månedlige, halvårlige eller årlige data. Dette kan potentielt skabe mere præcise estimater, men kan også resultere i værre estimater. Præcisionen i estimater er særlig vigtig for aktivklassen aktier, idet, at de er aktivet med højest volatilitet for faste tidsintervaller. En større mængde af aktivklasser, vil naturligvis og kunne have påvirket porteføljeallokeringen. Dette leder også til et andet problem bag de valgte aktivklasser: de skaber ikke nødvendigvis de nødvendige horisonteffekter eller risikoaversionseffekter, som alternative aktivklasser måske kunne have skabt. Begrænsingen af aktivklasserne skete til gengæld af en simpel årsag: data mangel.
 
 # Konklusion
 
