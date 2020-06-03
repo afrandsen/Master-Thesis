@@ -377,10 +377,6 @@ step_table_v <- data.frame(dp=c(-1607.8, -1611.5, -1615.4, -1618.2,-1620.0, -162
                              fr=c(-1584.4,-1588.2,  -1592.0, -1595.4,-1599.2,   -1602.2,-1603.8  ))
 step_table_v <- cbind(min=apply(step_table_v, 1, FUN=min, na.rm=TRUE), step_table_v)
 
-
-
-
-
 data_v <- as.ts(data)
 # 
 data_sub <- subset(data_v, select = -c(DP, EP, AKT_VAR, HML, T_SPREAD, C_SPREAD, D_SPREAD, FR))

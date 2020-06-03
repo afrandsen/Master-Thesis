@@ -40,9 +40,9 @@ description: "Master's Theis of Andreas Kracht Frandsen, Aarhus University."
 
 # Forord {-}
 
-Kreditering: [starlogs.net/#afrandsen/master-thesis](http://starlogs.net/#afrandsen/master-thesis).
+*Credits*: [starlogs.net/#afrandsen/master-thesis](http://starlogs.net/#afrandsen/master-thesis).
 
-Dokumentet er i farver, men kan printes i sort/hvid uden at skabe visuelle mangler på plots, da linjer samt punkter har hhv. forskellige linjetyper og symboler.
+Dokumentet er i farver, men kan printes i sort/hvid uden at skabe visuelle mangler på figurer, da linjer samt punkter har hhv. forskellige linjetyper og symboler.
 
 Farver igennem hele dokumentet er sat via pakken *RColorBrewer* og dens tilhørende farvepalete *Dark2*. Denne farvepalette tillader, at personer med nedsat farvesyn uden problemer kan skelne linjer, punkter osv. fra samtlige plots. Derudover er paletten printervenlig samt LCD-venlig.
 

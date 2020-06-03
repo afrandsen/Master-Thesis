@@ -23,7 +23,7 @@ $$\max_{\alpha_t} \mathcal{L}=\alpha_t\left(R_{t+1} - R_{0,t+1}\right)-\frac{k}{
 
 I ovenstående er det ekstra led $R_{0,t+1}$ undladt idet, at det ikke ændrer maksimeringsproblemet.
 
-Ved differentiation af ovenstående funktion, $\mathcal{L}(\cdot)$, mht. $\alpha_t$ opnåes førsteordensbetingelsen
+Ved differentiation af ovenstående funktion, $\mathcal{L}(\cdot)$, mht. $\alpha_t$ opnås førsteordensbetingelsen
 \begin{align*}
 \frac{\partial \mathcal{L}}{\partial \alpha_t} &= \mathbb{E}_t\left[R_{t+1}\right] - R_{0,t+1} - \frac{k}{2}2\alpha\sigma_t^2=0\\
 &\Updownarrow\\
@@ -32,9 +32,9 @@ Ved differentiation af ovenstående funktion, $\mathcal{L}(\cdot)$, mht. $\alpha
 
 Dermed er den optimale portefølje udledt, for tilfældet med ét risikobærende aktiv. For udledningen af den optimale portefølje på tidspunkt $t$ i tilfældet med flere risikobærende aktiver, differentieres funktionen, fra Maksimeringsproblemet \@ref(eq:MultStatmaks) mht. $\bm{\alpha}_t$, dermed fås
 \begin{align*}
-\frac{\partial \mathcal{L}}{\partial \bm{\alpha}_t} &= (\mathbb{E}_t\left[\bm{R}_{t+1}\right]- R_{0,t+1}\bm{\ell}) - \frac{k}{2}2\bm{\Sigma_t}\bm{\alpha}_t = 0\\
+\frac{\partial \mathcal{L}}{\partial \bm{\alpha}_t} &= \left(\mathbb{E}_t\left[\bm{R}_{t+1}\right]- R_{0,t+1}\bm{\ell}\right) - \frac{k}{2}2\bm{\Sigma_t}\bm{\alpha}_t = 0\\
 &\Updownarrow\\
-\bm{\alpha}_t&=\frac{1}{k}\bm{\Sigma}_t^{-1}(\mathbb{E}_t\left[\bm{R}_{t+1}\right]-R_{0,t+1}\bm{\ell}).
+\bm{\alpha}_t&=\frac{1}{k}\bm{\Sigma}_t^{-1}\left(\mathbb{E}_t\left[\bm{R}_{t+1}\right]-R_{0,t+1}\bm{\ell}\right).
 \end{align*}
 
 Her er de gængse regler for matrix differentiation og manipulation benyttet. 
@@ -104,7 +104,7 @@ $$\lim_{x\to c} \frac{f'(x)}{g'(x)},$$
 eksisterer, da gælder følgende lighed
 $$\lim_{x\to c}\frac{f(x)}{g(x)}=\lim_{x\to c}\frac{f'(x)}{g'(x)}.$$
 
-Altså kan der opnåes et udtryk for grænsen, som kan evalueres. For $\gamma\rightarrow 1$ fås da
+Altså kan der opnås et udtryk for grænsen, som kan evalueres. For $\gamma\rightarrow 1$ fås da
 $$\lim_{\gamma\to 1}\frac{W_{t+1}^{1-\gamma}-1}{1-\gamma}=\lim_{\gamma\to 1}\frac{-W_{t+1}^{1-\gamma}\log\left(W_{t+1}\right)}{-1}=\log\left(W_{t+1}\right).$$
 
 Dermed er tilfældet udledt.
@@ -117,12 +117,12 @@ R_{p,t+1}-1 = \alpha_t(R_{t+1}- 1) + (1-\alpha_t)(R_{0,t+1}-1)=(R_{0,t+1} -1) + 
 
 Ligning \@ref(eq:logl1) kan omskrives til
 \begin{equation}
-\frac{R_{p,t+1}}{R_{0,t+1}} = 1 + \alpha_t (\frac{R_{t+1}}{R_{0,t+1}}-1), (\#eq:logl2)
+\frac{R_{p,t+1}}{R_{0,t+1}} = 1 + \alpha_t \left(\frac{R_{t+1}}{R_{0,t+1}}-1\right), (\#eq:logl2)
 \end{equation}
 
-og ved samtidig transformation ved benyttelse af logfunktionen, opnåes en ikke-lineær relation mellem log merafkastet på det risikobærende aktiv og log merafkastet på porteføljen
+og ved samtidig transformation ved benyttelse af logfunktionen, opnås en ikke-lineær relation mellem log merafkastet på det risikobærende aktiv og log merafkastet på porteføljen
 \begin{equation}
-r_{p,t+1} - r_{0,t+1} = \log (1+\alpha_t (\exp(r_{t+1}-r_{0,t+1})-1)). (\#eq:logl3)
+r_{p,t+1} - r_{0,t+1} = \log \left(1+\alpha_t (\exp(r_{t+1}-r_{0,t+1})-1)\right). (\#eq:logl3)
 \end{equation}
 
 Denne relation skaber problemerne i udledningen af porteføljeteorien, grundet dens ikke-linearitet. Som en approksimativ løsning kan en andenordens Taylor udvidelse omkring punktet, $r_{t+1}-r_{0,t+1}=0$, benyttes. Ovenstående relation defineres da nu $f_t(\cdot)$. Approksimationen bliver da
@@ -162,43 +162,43 @@ Definitionen af brutto aktieafkastet fra tidspunkt $t$ til $t+1$ er
 1+R_{t+1}=\frac{P_{t+1}+D_{t+1}}{P_t}.
 \end{equation}
 
-Ved at tage logfunktionen af Ligning ?? kan følgende udledning opnåes
+Ved at tage logfunktionen af Ligning ?? kan følgende udledning opnås
 \begin{align}
-\log(1+R_{t+1})&=\log(\frac{P_{t+1}+D_{t+1}}{P_t})\\
-&=\log(P_{t+1}+D_{t+1})-\log(P_t)\\
-&=\log(P_{t+1}(1+\frac{D_{t+1}}{P_{t+1}}))-\log(P_t)\\
-&=\log(P_{t+1})+\log(1+\exp(\log(D_{t+1})-\log(P_{t+1})))-\log(P_t).
+\log\left(1+R_{t+1}\right)&=\log\left(\frac{P_{t+1}+D_{t+1}}{P_t}\right)\\
+&=\log\left(P_{t+1}+D_{t+1}\right)-\log\left(P_t\right)\\
+&=\log\left(P_{t+1}\left(1+\frac{D_{t+1}}{P_{t+1}}\right)\right)-\log\left(P_t\right)\\
+&=\log\left(P_{t+1}\right)+\log\left(1+\exp\left(\log\left(D_{t+1}\right)-\log\left(P_{t+1}\right)\right)\right)-\log\left(P_t\right).
 \end{align}
 
 Dette tillader følgende form ved brug af lognotationen
-$$r_{t+1}=p_{t+1} +\log(1+\exp(d_{t+1}-p_{t+1}))-p_t$$
+$$r_{t+1}=p_{t+1} +\log\left(1+\exp(d_{t+1}-p_{t+1})\right)-p_t$$
 
-Ovenstående Ligning ?? viser den ikke-lineære relatioen mellem log afkastet og log udbyttet, altså er det andet led på højreside ikke-lineært, $\log(1+\exp(d_{t+1}-p_{t+1}))$. Ved brug af en første ordens Taylor udvidelse omkring middelværdien, $\overline{d_t-p_t}$, kan denne relation approksimeres. Herfra sættes $x=\log(1+\exp(d_{t+1}-p_{t+1}))$.
+Ovenstående Ligning ?? viser den ikke-lineære relatioen mellem log afkastet og log udbyttet, altså er det andet led på højreside ikke-lineært, $\log\left(1+\exp(d_{t+1}-p_{t+1})\right)$. Ved brug af en første ordens Taylor udvidelse omkring middelværdien, $\overline{d_t-p_t}$, kan denne relation approksimeres. Herfra sættes $x=\log\left(1+\exp(d_{t+1}-p_{t+1})\right)$.
 
 Her bliver den første afledte, $f'(x^*)$ fundet ved brug af kædereglen til
-$$f'(x^*)=\frac{1}{1+\exp(\overline{d_{t+1}-p_{t+1}})}\exp(\overline{d_{t+1}-p_{t+1}}).$$
+$$f'(x^*)=\frac{1}{1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)}\exp\left(\overline{d_{t+1}-p_{t+1}}\right).$$
 
 Dermed bliver første ordens Taylor udvidelsen
-$$f(x)=\log(1+\exp(\overline{d_{t+1}-p_{t+1}}))+\frac{1}{1+\exp(\overline{d_{t+1}-p_{t+1}})}\exp(\overline{d_{t+1}-p_{t+1}})((d_{t+1}-p_{t+1})- \overline{d_{t+1}-p_{t+1}}).$$
+$$f\left(x\right)=\log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right)+\frac{1}{1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)}\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\left(\left(d_{t+1}-p_{t+1}\right)- \overline{d_{t+1}-p_{t+1}}\right).$$
 
 Ved at definere følgende lineariseringsparametre
 \begin{align}
-\rho &=\frac{1}{1+\exp(\overline{d_{t+1}-p_{t+1}})}\\
-c&= \log(1+\exp(\overline{d_{t+1}-p_{t+1}})) - (1-\rho)(\overline{d_{t+1}-p_{t+1}}),
+\rho &=\frac{1}{1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)}\\
+c&= \log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right) - \left(1-\rho\right)\left(\overline{d_{t+1}-p_{t+1}}\right),
 \end{align}
 
-Kan $f(\log(1+\exp(\overline{d_{t+1}-p_{t+1}})))$ omskrives til
+Kan $f\left(\log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right)\right)$ omskrives til
 \begin{align}
-f(x)&=\log(1+\exp(\overline{d_{t+1}-p_{t+1}})) + \rho\exp(\overline{d_{t+1}-p_{t+1}}) (d_{t+1}-p_{t+1})-\rho \exp(\overline{d_{t+1}-p_{t+1}})(\overline{d_{t+1}-p_{t+1}})\\
-&=(1-\rho)(d_{t+1}-p_{t+1})+c.
+f\left(x\right)&=\log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right) + \rho\exp\left(\overline{d_{t+1}-p_{t+1}}\right) \left(d_{t+1}-p_{t+1}\right)-\rho \exp\left(\overline{d_{t+1}-p_{t+1}}\right)\left(\overline{d_{t+1}-p_{t+1}}\right)\\
+&=\left(1-\rho\right)\left(d_{t+1}-p_{t+1}\right)+c.
 \end{align}
 
-Indsættes Ligning ?? nu ind i Ligning ?? opnåes den lineære relation for én-periode log aktieafkastet.
+Indsættes Ligning ?? nu ind i Ligning ?? opnås den lineære relation for én-periode log aktieafkastet.
 
 \begin{align}
-r_{t+1}&\approx p_{t+1} + \log(1+\exp(\overline{d_{t+1}-p_{t+1}}))- p_t\\
-&\approx p_{t+1} + (1-\rho) (d_{t+1}-p_{t+1})- p_t + c\\
-&\approx \rho p_{t+1} + (1-\rho) d_{t+1} - p_t + c.
+r_{t+1}&\approx p_{t+1} + \log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right)- p_t\\
+&\approx p_{t+1} + \left(1-\rho\right) \left(d_{t+1}-p_{t+1}\right)- p_t + c\\
+&\approx \rho p_{t+1} + \left(1-\rho\right) d_{t+1} - p_t + c.
 \end{align}
 
 ### Dynamic Gordon Growth Model
@@ -210,7 +210,7 @@ r_{t+1}&\approx \rho p_{t+1} + (1-\rho) d_{t+1} - p_t + c\\
 &\approx \rho(p_{t+1}-d_{t+1})-d_{t+1}-p_t+d_t-d_t+c
 \end{align}
 
-Samles forskellen $\Delta d_{t+1}=d_{t+1}-d_t$, og løses dernæst for $d_t-p_t$, opnåes
+Samles forskellen $\Delta d_{t+1}=d_{t+1}-d_t$, og løses dernæst for $d_t-p_t$, opnås
 \begin{equation}
 d_t-p_t=\rho (d_{t+1}-p_{t+1})+r_{t+1}-\Delta d_{t+1}-c.
 \end{equation}
@@ -232,13 +232,13 @@ Summationen starter ligeledes i nul for at fange det første led uden $\rho$.
 
 Rentespændet mellem en obligation med lang løbetid og en obligation med kort løbetid spiller en vigtig rolle på *Fixed Income* markedet. For at forstå rentespændet rolle, betragtes først et marked bestående af nulkupon obligationer. På tidspunkt $t$ er prisen for en $n$-periode obligation med effektiv rente $Y_t^n$ lig
 \begin{equation}
-P_t^n=\frac{1}{(1+Y_t^n)^n}.
+P_t^n=\frac{1}{\left(1+Y_t^n\right)^n}.
 \end{equation}
 
-Tages logfunktionen på begge sider opnåes
+Tages logfunktionen på begge sider opnås
 \begin{align}
-\log(P_t^n)&=\log(\frac{1}{(1+Y_t^n)^n})\\
-&=-n\log(1+Y_t^n)\\
+\log\left(P_t^n\right)&=\log\left(\frac{1}{\left(1+Y_t^n\right)^n}\right)\\
+&=-n\log\left(1+Y_t^n\right)\\
 &=-n y_t^n\\
 &\Updownarrow\\
 y_t^n&=-\frac{1}{n}p_t^n.
@@ -246,14 +246,14 @@ y_t^n&=-\frac{1}{n}p_t^n.
 
 Benyttes Ligning ?? følger det nu, at én-periode bruto afkastet på obligationen fra $t$ fra $t+1$ bliver
 \begin{align}
-1+R_{t+1}^n=\frac{P_{t+1}^{n-1}}{P_t^n}\\
-&=\frac{\frac{1}{(1+Y_t^n)^n}}{\frac{1}{(1+Y_t^{n-1})^{n-1}}}.
+1+R_{t+1}^n&=\frac{P_{t+1}^{n-1}}{P_t^n}\\
+&=\frac{\frac{1}{\left(1+Y_t^n\right)^n}}{\frac{1}{\left(1+Y_t^{n-1}\right)^{n-1}}}.
 \end{align}
 
-Fra logresultatet opnåes
+Fra logresultatet opnås
 \begin{align}
 r_{t+1}^n&=p_{t+1}^{n-1}-p_t^n\\
-&=n y_t^n - (n-1) y_{t+1}^{n-1}.
+&=n y_t^n - \left(n-1\right) y_{t+1}^{n-1}.
 \end{align}
 
 Dermed bliver den effektive rente på tidspunkt $t$ for en obligationen med $n$-perioder til udløb lig
@@ -265,19 +265,19 @@ y_t^n &=\frac{1}{n}\left( r_{t+1}^n + (n-1) y_{t+1}^{n-1} \right).
 
 Som $n$-periode obligationen bliver en $n-1$-periode obligation på tidspunkt $t+1$, ændres relationen til
 \begin{align}
-r_{t+2}^{n-1}&=(n-1) y_{t+1}^{n-1} - (n-2) y_{t+2}^{n-2}\\
+r_{t+2}^{n-1}&=\left(n-1\right) y_{t+1}^{n-1} - \left(n-2\right) y_{t+2}^{n-2}\\
 &\Updownarrow\\
-(n-1) y_{t+1}^{n-1}&=r_{t+2}^{n-1} + (n-2) y_{t+2}^{n-2}.
+\left(n-1\right) y_{t+1}^{n-1}&=r_{t+2}^{n-1} + \left(n-2\right) y_{t+2}^{n-2}.
 \end{align}
 
-Fortsættes dette rul til én-periode før udløb, $t+n-1$, opnåes 
+Fortsættes dette rul til én-periode før udløb, $t+n-1$, opnås 
 \begin{equation}
-y_{t+n-1}^{1}=(n-(n-1))y_{t+n-1}^{n-(n-1)}=r_{t+n}^{n-(n-1)}=r_{t+n}^1.
+y_{t+n-1}^{1}=\left(n-\left(n-1\right)\right)y_{t+n-1}^{n-\left(n-1\right)}=r_{t+n}^{n-\left(n-1\right)}=r_{t+n}^1.
 \end{equation}
 
 Kombineres Ligning ?? og implikationen for den effektive rente, for herefter at tage den betingede forventning, giver det gennemsnitlige afkast per periode, hvis obligationen holdes til udløb
 \begin{align}
-y_t^n&=\frac{1}{n} (r_{t+1}^n + r_{t+2}^{n-1}+\cdots+r_{t+n}^1)\\
+y_t^n&=\frac{1}{n} \left(r_{t+1}^n + r_{t+2}^{n-1}+\cdots+r_{t+n}^1\right)\\
 &=\frac{1}{n}\sum_{i=0}^{n-1} r_{t+i+1}^{n-i}.
 \end{align}
 
@@ -285,31 +285,31 @@ y_t^n&=\frac{1}{n} (r_{t+1}^n + r_{t+2}^{n-1}+\cdots+r_{t+n}^1)\\
 
 For at udlede rentespændet fratrækkes $y_t^1$ på begge sider af Ligning ??, så
 \begin{align}
-y_t^n-y_t^1&=\frac{1}{n} \sum_{i=0}^{n-1} (r_{t+i+1}^{n-i}-y_t^1)\\
-&=\frac{1}{n} \sum_{i=0}^{n-1} ((y_{t+i}^1-y_t^1) + (r_{t+i+1}^{n-i}-y_t^1)).
+y_t^n-y_t^1&=\frac{1}{n} \sum_{i=0}^{n-1} \left(r_{t+i+1}^{n-i}-y_t^1\right)\\
+&=\frac{1}{n} \sum_{i=0}^{n-1} \left(\left(y_{t+i}^1-y_t^1\right) + \left(r_{t+i+1}^{n-i}-y_t^1\right)\right).
 \end{align}
 
 Dermed kan det første led på højre side af summationen skrives som
 \begin{align}
-\sum_{i=0}^{n-1}(y_{t+i}^1-y_t^1)&=(y_{t+1}^1 y_t^1) + (y_{t+2}-y_t^1)+\dots +(y_{t+n-1} y_t^1)\\
-&=(n-1)\Delta y_{t+1}^1+(n-2)\Delta y_{t+2}^1 + \dots+ \Delta y_{t+n-1}^1\\
-&=\sum_{i=1}^{n-1}  (n-1)\Delta y_{t+i}^1.
+\sum_{i=0}^{n-1}\left(y_{t+i}^1-y_t^1\right)&=\left(y_{t+1}^1 y_t^1\right) + \left(y_{t+2}-y_t^1\right)+\dots +\left(y_{t+n-1} y_t^1\right)\\
+&=\left(n-1\right)\Delta y_{t+1}^1+\left(n-2\right)\Delta y_{t+2}^1 + \dots+ \Delta y_{t+n-1}^1\\
+&=\sum_{i=1}^{n-1}  \left(n-1\right)\Delta y_{t+i}^1.
 \end{align}
 
 Dette kan skrives i termer af rentespændet, $s_t^n=y_t^n-y_t^1$, ved at tage den betingede forventning på tidspunkt $t$, sådan at
 \begin{equation}
-s_t^n=\frac{1}{n} \sum_{i=1}^{n-1} \mathbb{E}_t[(n-1)\Delta y_{t+i}^1] + \frac{1}{n} \sum_{i=0}^{n-1} \mathbb{E}_t[(r_{t+i+1}^{n-i} - y_t^1)].
+s_t^n=\frac{1}{n} \sum_{i=1}^{n-1} \mathbb{E}_t[\left(n-1\right)\Delta y_{t+i}^1] + \frac{1}{n} \sum_{i=0}^{n-1} \mathbb{E}_t[\left(r_{t+i+1}^{n-i} - y_t^1\right)].
 \end{equation}
 
 ## Varighed og renteimmunisering
 [@Macaulay1938] viser at den negative elasticitet af en kuponobligations pris mht. brutto renten giver varigheden
 \begin{equation}
-D_t^{c,n} = -\frac{\text{d} P_t^{c,n}}{\text{d}(1+Y_t^{c,n})}\frac{(1+Y_t^{c,n})}{P_t^{c,n}},
+D_t^{c,n} = -\frac{\text{d} P_t^{c,n}}{\text{d}\left(1+Y_t^{c,n}\right)}\frac{\left(1+Y_t^{c,n}\right)}{P_t^{c,n}},
 \end{equation}
 
 og er udledt gennem en andenordens Taylor approksimation
 \begin{equation}
-\frac{\text{d} P^{c,n}}{P^{c,n}}\approx \frac{\text{d} P^{c,n}}{\text{d} Y^{c,n}}\frac{\text{d} Y^{c,n}}{P^{c,n}}+\frac{1}{2}\frac{\text{d}^2 P^{c,n}}{\text{d} Y^{c,n,2}}\frac{(\text{d}Y^{c,n})^2}{P^{c,n}},
+\frac{\text{d} P^{c,n}}{P^{c,n}}\approx \frac{\text{d} P^{c,n}}{\text{d} Y^{c,n}}\frac{\text{d} Y^{c,n}}{P^{c,n}}+\frac{1}{2}\frac{\text{d}^2 P^{c,n}}{\text{d} Y^{c,n,2}}\frac{\left(\text{d}Y^{c,n}\right)^2}{P^{c,n}},
 \end{equation}
 
 hvor den første afledte er den modificerede varighed og den anden afledte er konveksiteten af kuponobligationen, [@Campbell1997].
@@ -320,44 +320,45 @@ På tidspunkt $t$ er afkastet på kuponobligationen med kuponbetaling $C$ lig
 1+R_{t+1}^{c,n}=\frac{P_{t+1}^{c,n} + C}{P_t^{c,n}}.
 \end{equation}
 
-Tages logfunktionen på begge sider opnåes
+Tages logfunktionen på begge sider opnås
 \begin{align}
-\log(1+R_{t+1}^{c,n})&=\\
-&=\log(\frac{P_{t+1}^{c,n} + C}{P_t^{c,n}})\\
-&=\log(P_{t+1}^{c,n} + C) - \log(P_t^{c,n})\\
-r_{t+1}^{c,n}&=\log(1+\exp(c- p_{t+1}^{c,n})) + p_{t+1}^{c,n} - p_t^{c,n}.
+\log\left(1+R_{t+1}^{c,n}\right)&=\\
+&=\log\left(\frac{P_{t+1}^{c,n} + C}{P_t^{c,n}}\right)\\
+&=\log\left(P_{t+1}^{c,n} + C\right) - \log\left(P_t^{c,n}\right)\\
+r_{t+1}^{c,n}&=\log\left(1+\exp\left(c- p_{t+1}^{c,n}\right)\right) + p_{t+1}^{c,n} - p_t^{c,n}.
 \end{align}
 
-I ovenstående Ligning ??, er $\log(1+\exp(c- p_{t+1}^{c,n}))$ ikke-lineær. For at løse dette anvendes en førsteordens Taylor approksimation omkring middelværdie, $\overline{c- p_{t+1}^{c,n}}$. Herfra sættes $x=\log(1+\exp(c- p_{t+1}^{c,n}))$. 
+I ovenstående Ligning ??, er $\log\left(1+\exp\left(c- p_{t+1}^{c,n}\right)\right)$ ikke-lineær. For at løse dette anvendes en førsteordens Taylor approksimation omkring middelværdie, $\overline{c- p_{t+1}^{c,n}}$. Herfra sættes $x=\log\left(1+\exp\left(c- p_{t+1}^{c,n}\right)\right)$. 
 
-Den første afledte, $f'(x^*)$, bliver fundet ved brug af kædereglen til
-$$f'(x^*)=\frac{1}{1+\exp(\overline{c- p_{t+1}^{c,n}})}\exp(\overline{c- p_{t+1}^{c,n}}).$$
+Den første afledte, $f'\left(x^*\right)$, bliver fundet ved brug af kædereglen til
+$$f'\left(x^*\right)=\frac{1}{1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)}\exp\left(\overline{c- p_{t+1}^{c,n}}\right).$$
 
 Dermed bliver førsteordens Taylor approksimationen
 \begin{align}
-f(x)&=\log(1+\exp(\overline{c- p_{t+1}^{c,n}}))+ \frac{1}{1+\exp(\overline{c- p_{t+1}^{c,n}})}\exp(\overline{c- p_{t+1}^{c,n}}) ((c-p_{t+1}^{c,n}) -(\overline{c- p_{t+1}^{c,n}}))\\
-&=\log(1+\exp(\overline{c- p_{t+1}^{c,n}})) + \frac{1}{1+\exp(\overline{c- p_{t+1}^{c,n}})}\exp(\overline{c- p_{t+1}^{c,n}}) (c-p_{t+1}^{c,n}) - \frac{1}{1+\exp(\overline{c- p_{t+1}^{c,n}})}\exp(\overline{c- p_{t+1}^{c,n}})(\overline{c- p_{t+1}^{c,n}}).
+f\left(x\right)&=\log\left(1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)\right)+ \frac{1}{1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)}\exp\left(\overline{c- p_{t+1}^{c,n}}\right) \left(\left(c-p_{t+1}^{c,n}\right) -\left(\overline{c- p_{t+1}^{c,n}}\right)\right)\\
+&=\log\left(1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)\right) + \frac{1}{1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)}\exp\left(\overline{c- p_{t+1}^{c,n}}\right) \left(c-p_{t+1}^{c,n}\right)\\
+\quad&- \frac{1}{1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)}\exp\left(\overline{c- p_{t+1}^{c,n}}\right)\left(\overline{c- p_{t+1}^{c,n}}\right).
 \end{align}
 
-Defineres lineariseringsparametrene $k$ og $\rho$ til
+Defineres lineariseringsparameterne $k$ og $\rho$ til
 \begin{align}
-\rho&=\frac{1}{(1+\exp(\overline{c- p_{t+1}^{c,n}})}\\
-k&=-\log(\rho)-(1-\rho)\log(\frac{1}{\rho-1}).
+\rho&=\frac{1}{1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)}\\
+k&=-\log\left(\rho\right)-\left(1-\rho\right)\log\left(\frac{1}{\rho-1}\right).
 \end{align}
 
-Kan der ved brug af rekursion opnåes følgende resultat
+Kan der ved brug af rekursion opnås følgende resultat
 \begin{equation}
-p_t^{c,n}=\sum_{i=0}^{n-1} \rho^i(k+(1-\rho)c - r_{t+i+1}^{c,n-i}).
+p_t^{c,n}=\sum_{i=0}^{n-1} \rho^i\left(k+\left(1-\rho\right)c - r_{t+i+1}^{c,n-i}\right).
 \end{equation}
 
 Kombineres dette nu med approksimationen for log af den effektive rente, som opfylder
 \begin{equation}
-p_t^{c,n}\approx\sum_{i=0}^{n-1} \rho^i(k+(1-\rho)c - y_t^{c,n}).
+p_t^{c,n}\approx\sum_{i=0}^{n-1} \rho^i\left(k+\left(1-\rho\right)c - y_t^{c,n}\right).
 \end{equation}
 
 Kan den effektive rente af $n$-periode kuponobligationen udledes til
 \begin{equation}
-y_t^{c,n}\approx (\frac{1-\rho}{1-\rho^n})\sum_{i=0}^{n-1}\rho^i r_{t+i+1}^{c,n-i}.
+y_t^{c,n}\approx \left(\frac{1-\rho}{1-\rho^n}\right)\sum_{i=0}^{n-1}\rho^i r_{t+i+1}^{c,n-i}.
 \end{equation}
 
 Og ved substitution kan det approksimative loglinære afkast fra Kapitel ?? udledes.
@@ -383,12 +384,12 @@ $$\max_{\bm{\alpha}_{t+k-1}^1} \mathbb{E}_{t+k-1}\left[\exp((1-\gamma)r_{p,t+k})
 
 Ved brug af selektionsmatricerne $\bm{H}_x$ og $\bm{H}_0$, er de første to momenter af porteføljeafkastet givet ved
 \begin{align*}
-\mathbb{E}_{t+k-1}\left[r_{p,t+k}\right]&= \bm{\alpha}_{t+k-1}^{1\prime} \bm{H}_x (\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1}) + \bm{H}_0(\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1})+\frac{1}{2} \bm{\alpha}_{t+k-1}^{1\prime} (\bm{\sigma}_x^2-\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1})\\
+\mathbb{E}_{t+k-1}\left[r_{p,t+k}\right]&= \bm{\alpha}_{t+k-1}^{1\prime} \bm{H}_x (\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1}) + \bm{H}_0(\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1})+\frac{1}{2} \bm{\alpha}_{t+k-1}^{1\prime} \left(\bm{\sigma}_x^2-\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1}\right)\\
 \mathbb{V}_{t+k-1}[r_{p,t+k}]&=\bm{\alpha}_{t+k-1}^{1\prime}\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1}+ \sigma_0^2 + 2\bm{\alpha}_{t+k-1}^{1\prime}\bm{\sigma}_{0x}
 \end{align*}
 
-Den følgende førsteordensbetingelse, fremkommer efter substituion af ovenstående momenter ind i Maksimeringsproblemet ?? og dernæst differentiation 
-$$\bm{H}_x(\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1})+\frac{1}{2}\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-1}^{1}+(1-\gamma) (\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1}+\bm{\sigma}_{0x})=0.$$
+Den følgende førsteordensbetingelse, fremkommer efter substituion af ovenstående momenter ind i Maksimeringsproblemet ?? og dernæst første ordens differentiation 
+$$\bm{H}_x\left(\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1}\right)+\frac{1}{2}\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-1}^{1}+\left(1-\gamma\right) \left(\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1}+\bm{\sigma}_{0x}\right)=0.$$
 
 Antages nu, at kovariansmatricen $\bm{\Sigma}_{xx}$ er ikke-singulær er ovenstående løst af
 $$\bm{\alpha}_{t+k-1}^{1}=\frac{1}{\gamma}\bm{\Sigma}_{xx}^{-1}\left(\bm{H}_x(\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1})+\frac{1}{2}\bm{\sigma}_x^2+(1-\gamma) \bm{\sigma}_{0x}\right).$$
@@ -409,52 +410,52 @@ Dette afslutter udledningen for *policy*-funktionen på tidspunkt $(t+k-1)$.
 ### *Value*-funktionen
 Udledningen for *value*-funktionen på tidspunkt $(t+k-1)$ startes med substitution af Ligning \@ref(eq:pol1p) ind i portefølje afkast momenterne. Dette gør, at de kan omskrives til funktioner af $A_i^1$ koefficienterne.
 \begin{align*}
-\mathbb{E}_{t+k-1}[r_{p,t+k}] &= (A_0^1 + A_1^1\bm{z}_{t+k-1})' (\bm{\Phi}_0^x +\bm{\Phi}_1^x\bm{z}_{t+k-1}) + (\bm{\Phi}_0^0 +\bm{\Phi}_1^0 \bm{z}_{t+k-1})\\
-&\quad+\frac{1}{2} (A_0^1 + A_1^1\bm{z}_{t+k-1})' (\bm{\sigma}_x^2-\bm{\Sigma}_{xx}(A_0^1 + A_1^1\bm{z}_{t+k-1}))\\
-&=\bm{\Phi}_0^0+ A_0^{1\prime} (\bm{\Phi}_0^x + \frac{1}{2} (\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} A_0^1)) + \bm{z}_{t+k-1}' A_1^{1\prime} (\bm{\Phi}_0^x + \frac{1}{2} (\bm{\sigma}_x^2  - \bm{\Sigma}_{xx} A_0^1))\\
-&\quad+ (\bm{\Phi}_1^0 + A_0^{1\prime} (\bm{\Phi}_1^x - \frac{1}{2} \bm{\Sigma}_{xx} A_1^1)) \bm{z}_{t+k-1} +\bm{z}_{+k-1t}' A_1^{1\prime} (\bm{\Phi}_1^x - \frac{1}{2} \bm{\Sigma}_{xx} A_1^1) \bm{z}_{t+k-1}\\
-\mathbb{V}_{t+k-1}[r_{p,t+k}]&=(A_0^1 + A_1^1\bm{z}_{t+k-1})'\bm{\Sigma}_{xx}(A_0^1 + A_1^1\bm{z}_{t+k-1})+ \bm{\sigma}_0^2 + 2(A_0^1 + A_1^1\bm{z}_{t+k-1})'\bm{\sigma}_{0x}\\
-&=\sigma_0^2 + A_0^{1\prime} (\bm{\Sigma}_{xx} A_0^1 + 2\bm{\sigma}_{0x}) + A_0^{1\prime}\bm{\Sigma}_{xx}A_1^1 \bm{z}_{t+k-1}\\
-&\quad+\bm{z}_{t+k-1}' A_1^{1\prime} (\bm{\Sigma}_{xx} A_0^1 + 2\bm{\sigma}_{0x}) + \bm{z}_{t+k-1}' A_1^{1\prime} \bm{\Sigma}_{xx} A_1^1 \bm{z}_{t+k-1}.
+\mathbb{E}_{t+k-1}[r_{p,t+k}] &= \left(A_0^1 + A_1^1\bm{z}_{t+k-1}\right)' \left(\bm{\Phi}_0^x +\bm{\Phi}_1^x\bm{z}_{t+k-1}\right) + \left(\bm{\Phi}_0^0 +\bm{\Phi}_1^0 \bm{z}_{t+k-1}\right)\\
+&\quad+\frac{1}{2} \left(A_0^1 + A_1^1\bm{z}_{t+k-1}\right)' \left(\bm{\sigma}_x^2-\bm{\Sigma}_{xx}\left(A_0^1 + A_1^1\bm{z}_{t+k-1}\right)\right)\\
+&=\bm{\Phi}_0^0+ A_0^{1\prime} \left(\bm{\Phi}_0^x + \frac{1}{2} \left(\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} A_0^1\right)\right) + \bm{z}_{t+k-1}' A_1^{1\prime} \left(\bm{\Phi}_0^x + \frac{1}{2} \left(\bm{\sigma}_x^2  - \bm{\Sigma}_{xx} A_0^1\right)\right)\\
+&\quad+ \left(\bm{\Phi}_1^0 + A_0^{1\prime} \left(\bm{\Phi}_1^x - \frac{1}{2} \bm{\Sigma}_{xx} A_1^1\right)\right) \bm{z}_{t+k-1} +\bm{z}_{+k-1t}' A_1^{1\prime} \left(\bm{\Phi}_1^x - \frac{1}{2} \bm{\Sigma}_{xx} A_1^1\right) \bm{z}_{t+k-1}\\
+\mathbb{V}_{t+k-1}[r_{p,t+k}]&=\left(A_0^1 + A_1^1\bm{z}_{t+k-1}\right)'\bm{\Sigma}_{xx}\left(A_0^1 + A_1^1\bm{z}_{t+k-1}\right)+ \bm{\sigma}_0^2 + 2\left(A_0^1 + A_1^1\bm{z}_{t+k-1}\right)'\bm{\sigma}_{0x}\\
+&=\sigma_0^2 + A_0^{1\prime} \left(\bm{\Sigma}_{xx} A_0^1 + 2\bm{\sigma}_{0x}\right) + A_0^{1\prime}\bm{\Sigma}_{xx}A_1^1 \bm{z}_{t+k-1}\\
+&\quad+\bm{z}_{t+k-1}' A_1^{1\prime} \left(\bm{\Sigma}_{xx} A_0^1 + 2\bm{\sigma}_{0x}\right) + \bm{z}_{t+k-1}' A_1^{1\prime} \bm{\Sigma}_{xx} A_1^1 \bm{z}_{t+k-1}.
 \end{align*}
 
-Siden hvert led i ovenstående summer er en skalar, kan ethvert komponent, i hvert led, frit udskiftes med dets transponerede. Dette medfører at leddene kan skrives ift. $\bm{z}_{t+k-1}$ og $\bm{z}_{t+k-1}'$. Indsættes ovenstående momenter nu i $(t+k-1)$ optimeringsfunktionen, opnåes en forventning af en eksponentiel polynomisk funktion af tilstandsvektoren, som kan beregnes i lukket form, for at opnå den maksimerede *value*-funktion
-$$\mathbb{E}_{t+k-1}[\exp((1-\gamma)r_{p,t+k}^*)] = \exp\left((1-\gamma) (B_0^1 + B_1^1 \bm{z}_{t+k-1}+\bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1})\right),$$
+Siden hvert led i ovenstående summer er en skalar, kan ethvert komponent, i hvert led, frit udskiftes med dets transponerede. Dette medfører at leddene kan skrives ift. $\bm{z}_{t+k-1}$ og $\bm{z}_{t+k-1}'$. Indsættes ovenstående momenter nu i $(t+k-1)$ optimeringsfunktionen, opnås en forventning af en eksponentiel polynomisk funktion af tilstandsvektoren, som kan beregnes i lukket form, for at opnå den maksimerede *value*-funktion
+$$\mathbb{E}_{t+k-1}\left[\exp((1-\gamma)r_{p,t+k}^*)\right] = \exp\left((1-\gamma) (B_0^1 + B_1^1 \bm{z}_{t+k-1}+\bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1})\right),$$
 
 hvor
 \begin{align*}
-B_0^1&=\bm{\Phi}_0^0 + A_0^{1\prime} (\bm{\Phi}_0^x + \frac{1}{2} \bm{\sigma}_x^2) + \frac{1-\gamma}{2}(\sigma_0^2 + 2 A_0^{1\prime} \bm{\sigma}_{0x}) - \frac{\gamma}{2} A_0^{1\prime} \bm{\Sigma}_{xx} A_0^1\\
-B_1^1&=\bm{\Phi}_1^0 + A_0^{1\prime}(\bm{\Phi}_1^x - \gamma \bm{\Sigma}_{xx} A_1^1) + (\bm{\Phi}_{0}^x + \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma)\bm{\sigma}_{0x})' A_1^1\\
-B_2^1&=A_1^{1\prime} (\bm{\Phi}_1^x - \frac{\gamma}{2} \bm{\Sigma}_{xx} A_1^1).
+B_0^1&=\bm{\Phi}_0^0 + A_0^{1\prime} \left(\bm{\Phi}_0^x + \frac{1}{2} \bm{\sigma}_x^2\right) + \frac{1-\gamma}{2}\left(\sigma_0^2 + 2 A_0^{1\prime} \bm{\sigma}_{0x}\right) - \frac{\gamma}{2} A_0^{1\prime} \bm{\Sigma}_{xx} A_0^1\\
+B_1^1&=\bm{\Phi}_1^0 + A_0^{1\prime}\left(\bm{\Phi}_1^x - \gamma \bm{\Sigma}_{xx} A_1^1\right) + \left(\bm{\Phi}_{0}^x + \frac{1}{2} \bm{\sigma}_x^2 + \left(1-\gamma\right)\bm{\sigma}_{0x}\right)' A_1^1\\
+B_2^1&=A_1^{1\prime} \left(\bm{\Phi}_1^x - \frac{\gamma}{2} \bm{\Sigma}_{xx} A_1^1\right).
 \end{align*}
 
 ## Tidspunkt $t+k-2$ ($\tau=2$)
 
 ### *Policy*-funktionen
 Det næstsidste periode problem, $(t+k-2)$, involverer at vælge porteføljevægtene $\bm{\alpha}_{t+k-2}^2$, som maksimerer den følgende funktion
-$$\frac{W_{t+k-2}^{1-\gamma}}{1-\gamma} \mathbb{E}_{t+k-2}[\exp((1-\gamma) r_{p,t+k-1}) \exp((1-\gamma) (B_0^1 + B_1^1 \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' B_2^1\bm{z}_{t+k-1}))]$$
+$$\frac{W_{t+k-2}^{1-\gamma}}{1-\gamma} \mathbb{E}_{t+k-2}\left[\exp\left(\left(1-\gamma\right) r_{p,t+k-1}\right) \exp\left(\left(1-\gamma\right) \left(B_0^1 + B_1^1 \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' B_2^1\bm{z}_{t+k-1}\right)\right)\right]$$
 
 Eftersom hverken $\tfrac{1}{1-\gamma}$ eller $W_{t+k-2}^{1-\gamma}$ påvirker optimum kan det fjernes fra optimeringsfunktionen. Ved brug af Taylor approksimationen, [@CampVicCha2003], kan $(t+k-1)$ log porteføljeafkastet beskrives som en funktion af $\bm{z}_{t+k-1}$. Dette tillader, at leddene kan samles i eksponentialet og derefter beregne forventningen. 
 
 $(t+k-1)$ log porteføljeafkastet approksimeres ved
 \begin{align*}
-r_{p,t+k-1}&=\bm{\alpha}_{t+k-2}^{2\prime} + \bm{x}_{t+k-1} + r_{0,t+k-1} + \frac{1}{2} \bm{\alpha}_{t+k-2}^{2\prime} (\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-2}^{2})\\
-           &=\begin{pmatrix} 1 & \bm{\alpha}_{t+k-2}^{2} & \bm{0}\end{pmatrix} \bm{z}_{t+k-1} + \frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} (\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-2}^{2}).
+r_{p,t+k-1}&=\bm{\alpha}_{t+k-2}^{2\prime} + \bm{x}_{t+k-1} + r_{0,t+k-1} + \frac{1}{2} \bm{\alpha}_{t+k-2}^{2\prime} \left(\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-2}^{2}\right)\\
+           &=\begin{pmatrix} 1 & \bm{\alpha}_{t+k-2}^{2} & \bm{0}\end{pmatrix} \bm{z}_{t+k-1} + \frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} \left(\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-2}^{2}\right).
 \end{align*}
 
 Ved substition af ovenstående ind i $(t+k-2)$ optimeringsfunktionen fås
 \begin{align*}
-\mathbb{E}_{t+k-2}[&\exp((1-\gamma)  (\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} (\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-2}^{2}) + B_0^1 + (B_1^1 + \begin{pmatrix} 1 & \bm{\alpha}_{t+k-2}^{2} & \bm{0}\end{pmatrix} ) \bm{z}_{t+k-1}\\
-                   &+ \bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1} ))].
+\mathbb{E}_{t+k-2}\Big[&\exp\Big(\Big(1-\gamma\Big)  \Big(\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} \Big(\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-2}^{2}\Big) + B_0^1 + \Big(B_1^1 + \begin{pmatrix} 1 & \bm{\alpha}_{t+k-2}^{2} & \bm{0}\end{pmatrix} \Big) \bm{z}_{t+k-1}\\
+                   &+ \bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1} \Big)\Big)\Big].
 \end{align*}
 
 Fra ovenstående ses, at investoren på tidspunkt $(t+k-2)$ ved, at kun de sidste to summer i eksponentialet er stokastiske. Derfor fokusers, for nu, på at evaluere den følgende funktion, givet investorens valg af $\bm{\alpha}_{t+k-2}^{2}$
-$$\mathbb{E}_{t+k-2}[ \exp( (1-\gamma) ((B_1^1 + \begin{pmatrix} 1 & \bm{\alpha}_{t+k-2}^{2} & \bm{0}\end{pmatrix} ) \bm{z}_{t+k-1} + \bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1}  )) ].$$
+$$\mathbb{E}_{t+k-2}[ \exp\left( \left(1-\gamma\right) \left(\left(B_1^1 + \begin{pmatrix} 1 & \bm{\alpha}_{t+k-2}^{2} & \bm{0}\end{pmatrix} \right) \bm{z}_{t+k-1} + \bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1}  \right)\right) ].$$
 
 Resultatet af denne beregning vil herefter substitueres ind i den oprindelige optimeringsfunktion, for at opnå forvetningen af *value*-funktionen betinget på investorens porteføljevalg, som herefter bliver maksimeret over $\bm{\alpha}_{t+k-2}^{2}$.
 
 Fordelingen af $\bm{z}_{t+k-1}$ betinget på tidspunkt $(t+k-2)$-informationen er givet ved
-$$\bm{z}_{t+k-1\mid t+k-2}\sim\mathcal{N}(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2},\bm{\Sigma}_v).$$
+$$\bm{z}_{t+k-1\mid t+k-2}\sim\mathcal{N}\left(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2},\bm{\Sigma}_v\right).$$
 
 Dette betyder også at Ligning ?? beregner den forventede værdi af det eksponentielle kvadratiske polynomium i en normalfordelt stokastisk variabel.
 
@@ -466,21 +467,21 @@ C_2^2 &= (1-\gamma) B_2^1.
 
 Kombineres ovenstående hjælpevariable med Ligning ?? og den betingende fordeling af $\bm{z}_{t+k-1}$ fås
 \begin{align*}
-\mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} ) ] = &\mathbb{E}_{t+k-2}[ \exp ( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} + \bm{v}_{t+k-2} )\\
-                                                                                                  &+ (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} + \bm{v}_{t+k-2})' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\\
-                                                                                                  &+ \bm{v}_{t+k-2}) ) ].
+\mathbb{E}_{t+k-2}\Big[ \exp\Big( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} \Big) ] = &\mathbb{E}_{t+k-2}[ \exp \Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} + \bm{v}_{t+k-2} \Big)\\
+                                                                                                  &+ \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} + \bm{v}_{t+k-2}\Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\\
+                                                                                                  &+ \bm{v}_{t+k-2}\Big) \Big) \Big].
 \end{align*}
 
 Ovenstående Ligning ?? har led i eksponentialet, som enten er konstanter, lineære kombinationer af $\bm{v}_{t+k-2}$ stødene eller kvadratiske i $\bm{v}_{t+k-2}$. Derfor kan vi omarrangere leddene som følger
 \begin{align*}
-\mathbb{E}_{t+k-2}[\exp(\cdot)] &= \exp( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ))\\
-                                &\,\,\quad \mathbb{E}_{t+k-2}[\exp( C_1^{2\prime} \bm{v}_{t+k-2}+ \bm{v}_{t+k-2}' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^{2} \bm{v}_{t+k-2}'\\
-                                &\,\,\quad+ \bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} )]\\
-                                &= \exp( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ))\\
-                                &\,\,\quad \mathbb{E}_{t+k-2}[\exp( C_1^{2\prime} \bm{v}_{t+k-2}+ \bm{v}_{t+k-2}' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^{2} \bm{v}_{t+k-2}')\\
-                                &\,\,\quad\exp(\bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} )]\\
-                                &=\exp( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ))\\
-                                &\,\,\quad \mathbb{E}_{t+k-2}[ \exp(\bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} ) \exp( C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2} )   \bm{v}_{t+k-2}],
+\mathbb{E}_{t+k-2}\Big[\exp\Big(\cdot\Big)\Big] &= \exp\Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)\Big)\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}\Big[\exp\Big( C_1^{2\prime} \bm{v}_{t+k-2}+ \bm{v}_{t+k-2}' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^{2} \bm{v}_{t+k-2}'\\
+                                &\,\,\quad+ \bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} \Big)\Big]\\
+                                &= \exp\Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)\Big)\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}\Big[\exp\Big( C_1^{2\prime} \bm{v}_{t+k-2}+ \bm{v}_{t+k-2}' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^{2} \bm{v}_{t+k-2}'\Big)\\
+                                &\,\,\quad\exp\Big(\bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} \Big)\Big]\\
+                                &=\exp\Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)\Big)\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}\Big[ \exp\Big(\bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} \Big) \exp\Big( C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2} \Big)   \bm{v}_{t+k-2}\Big],
 \end{align*}
 
 hvor $\Tilde{C}_2^{2}$ er gennemsnittet af ikke-tilde-matricen og dens egen transponerede. Ved brug af dette sikres, at resultatet ikke er afhængig af symmetrien af de underliggende matricer. Hvis den underliggende matrix er symmetrisk vil tilde-notationen blive droppet, siden den underliggende matrix og tilde-matricen da vil være identiske.
@@ -489,67 +490,67 @@ Herfra er der to måder at evaluere ovenstående forventning: den komplementære
 
 #### Komplementær approksimation
 Først beskrives den komplementære approksimation. Her bygger resultatet på, at alle led med orden højere end $\text{d}t$ har forsvindende sandsynlighed i grænsen, når tidsintervallet går mod nul. Altså vil kun de lineære led fra Ligning ?? være stokastiske. Altså er de lineære led af orden $\text{d}Z$, mens de kvadratiske led er af orden $\text{d}t$.
-$$\lim_{\Delta t \to 0}\frac{\exp( \bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} )}{\text{d}t}=\exp( \text{tr}(C_2^2 \bm{\Sigma}_v) ).$$
+$$\lim_{\Delta t \to 0}\frac{\exp\left( \bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} \right)}{\text{d}t}=\exp\left( \text{tr}\left(C_2^2 \bm{\Sigma}_v\right) \right).$$
 
 Dette medfører at Ligning ?? simplificeres til
 \begin{align*}
-\lim_{\Delta t \to 0}\mathbb{E}_{t+k-2}[\exp(\cdot)] &=\exp( C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}) +  \text{tr}(C_2^2 \bm{\Sigma}_v))\\
-                                &\,\,\quad \mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2} )   \bm{v}_{t+k-2}],
+\lim_{\Delta t \to 0}\mathbb{E}_{t+k-2}\Big[\exp\Big(\cdot\Big)\Big] &=\exp\Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big) +  \text{tr}\Big(C_2^2 \bm{\Sigma}_v\Big)\Big)\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}\Big[ \exp\Big( C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2} \Big)   \bm{v}_{t+k-2}\Big],
 \end{align*}
 
 her observeres, at forventningen i Ligning ?? er forventningen af en lognormal stokastisk variabel, som er givet ved
 \begin{align*}
-\lim_{\Delta t \to 0}&\mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2} )   \bm{v}_{t+k-2}]\\
-&=\exp(\frac{1}{2} (C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2})' \bm{\Sigma}_v (C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2})) 
+\lim_{\Delta t \to 0}&\mathbb{E}_{t+k-2}\Big[ \exp\Big( C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2} \Big)   \bm{v}_{t+k-2}\Big]\\
+&=\exp\Big(\frac{1}{2} \Big(C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2}\Big)' \bm{\Sigma}_v \Big(C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2}\Big)\Big) 
 \end{align*}
 
 Kombineres Ligning ?? og Ligning ?? ses, at Ligning ?? i grænsen for kontinuert tid er lig
 \begin{align*}
-\lim_{\Delta t \to 0} &\mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} )]\\
-                      &=\exp( \text{tr}(C_2^2\bm{\Sigma}_v) + D_0^{(t+k-2)} + \frac{1}{2} D_1^{(t+k-2)} \bm{\Sigma}_v^{-1} D_1^{(t+k-2)'} ),
+\lim_{\Delta t \to 0} &\mathbb{E}_{t+k-2}\Big[ \exp\Big( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} \Big)\Big]\\
+                      &=\exp\Big( \text{tr}\Big(C_2^2\bm{\Sigma}_v\Big) + D_0^{\Big(t+k-2\Big)} + \frac{1}{2} D_1^{\Big(t+k-2\Big)} \bm{\Sigma}_v^{-1} D_1^{\Big(t+k-2\Big)'} \Big),
 \end{align*}
 
 hvor
 \begin{align*}
-D_0^{(t+k-2)}&=C_1^{2\prime} (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} ) + (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} )' C_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \\
-D_1^{(t+k-2)}&=C_1^{2\prime} + 2(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2})' \Tilde{C}_2^{2}.
+D_0^{\left(t+k-2\right)}&=C_1^{2\prime} \left(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \right) + \left(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \right)' C_2^2 \left(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\right) \\
+D_1^{\left(t+k-2\right)}&=C_1^{2\prime} + 2\left(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\right)' \Tilde{C}_2^{2}.
 \end{align*}
 
 #### Eksakt evaluering
 Ved brug af den eksakte evaluering foreslået af [@CampVicCha2003] er en løsning på lukket form stadig tilgengælig. Ved brug af den etablerede notation kan Ligning (46) fra det Tekniske Appendiks til [@CampVicCha2003] anvendes, for at opnå følgende evaluering af forventningen
 \begin{align*}
-&\mathbb{E}_{t+k-2}[ \exp( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} ) ]\\
-&= \frac{\left| \bm{\Sigma}_v \right|^{-\tfrac{1}{2}}}{\left| (\bm{\Sigma}_v^{-1} - 2 D_2^{(t+k-2)}) \right|^{\tfrac{1}{2}}}\exp(D_0^{(t+k-2)} + \frac{1}{2} D_1^{(t+k-2)} (\bm{\Omega}^1)^{-1} D_1^{(t+k-2)\prime}),
+&\mathbb{E}_{t+k-2}\left[ \exp\left( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} \right) \right]\\
+&= \frac{\left| \bm{\Sigma}_v \right|^{-\tfrac{1}{2}}}{\left| \left(\bm{\Sigma}_v^{-1} - 2 D_2^{\left(t+k-2\right)}\right) \right|^{\tfrac{1}{2}}}\exp\left(D_0^{\left(t+k-2\right)} + \frac{1}{2} D_1^{\left(t+k-2\right)} \left(\bm{\Omega}^1\right)^{-1} D_1^{\left(t+k-2\right)\prime}\right),
 \end{align*}
 
 hvor følgende notation er introduceret
 \begin{align*}
 D_2^2&=C_2^2\\
-\bm{\Omega}^1&=(\bm{\Sigma}_v^{-1} - 2D_2^2)^{-1}=(\bm{\Sigma}_v^{-1}  - 2(1-\gamma) B_2^1)^{-1}.
+\bm{\Omega}^1&=\left(\bm{\Sigma}_v^{-1} - 2D_2^2\right)^{-1}=\left(\bm{\Sigma}_v^{-1}  - 2\left(1-\gamma\right) B_2^1\right)^{-1}.
 \end{align*}
 
-#### Optimalt porteføljevalg
+#### Optimalt porteføljevalg {#optimportaer}
 For et udlede den optimale portefølje strategi, droppes konstanten fra Ligning ??, siden dette ikke påvirker optimum. Altså ser investorens problem på tidspunkt $(t+k-2)$ således ud
-$$\max_{\bm{\alpha}_{t+k-2}^2}\mathcal{L}= ( (1-\gamma) (\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} (\bm{\sigma}_x^2 - \bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2) + B_0^1 + D_0^{(t+k-2)} + \frac{1}{2} D_1^{(t+k-2)} \bm{\Omega}^1 D_1^{(t+k-2)\prime})).$$
+$$\max_{\bm{\alpha}_{t+k-2}^2}\mathcal{L}= \left( \left(1-\gamma\right) \left(\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} \left(\bm{\sigma}_x^2 - \bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2\right) + B_0^1 + D_0^{\left(t+k-2\right)} + \frac{1}{2} D_1^{\left(t+k-2\right)} \bm{\Omega}^1 D_1^{\left(t+k-2\right)\prime}\right)\right).$$
 
 Førsteordensbetingelsen bliver da
 \begin{align*}
-\frac{\partial \mathcal{L}}{\partial\bm{\alpha}_{t+k-2}^2 }&=(1-\gamma) (\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2} + \frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 ) + \frac{1}{2} (\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2})' (\bm{\Omega}^1+\bm{\Omega}^{1\prime}) D_1^{(t+k-2)\prime}\\
-                                                           &=(1-\gamma) (\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2} + \frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 ) + (\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2})' \Tilde{\bm{\Omega}}^1 D_1^{(t+k-2)\prime} = 0.
+\frac{\partial \mathcal{L}}{\partial\bm{\alpha}_{t+k-2}^2 }&=\left(1-\gamma\right) \left(\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2} + \frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 \right) + \frac{1}{2} \left(\frac{\partial D_1^{\left(t+k-2\right)\prime}}{\partial \bm{\alpha}_{t+k-2}^2}\right)' \left(\bm{\Omega}^1+\bm{\Omega}^{1\prime}\right) D_1^{\left(t+k-2\right)\prime}\\
+                                                           &=\left(1-\gamma\right) \left(\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2} + \frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 \right) + \left(\frac{\partial D_1^{\left(t+k-2\right)\prime}}{\partial \bm{\alpha}_{t+k-2}^2}\right)' \Tilde{\bm{\Omega}}^1 D_1^{\left(t+k-2\right)\prime} = 0.
 \end{align*}
 
 På baggrund af notationen for $D_1^2$ kan dens afledte mht. porteføljevægtene, $\bm{\alpha}_{t+k-2}^2$, relateres til de risikobærende merafkast aktivers selektions matrix
-$$\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2} = (1-\gamma) \begin{pmatrix} \bm{0} \\ \bm{I}_{n-1} \\ \bm{0}\end{pmatrix}=(\frac{\partial D_1^{(t+k-2)\prime}}{\partial \bm{\alpha}_{t+k-2}^2})' = (1-\gamma)\bm{H}_x.$$
+$$\frac{\partial D_1^{\left(t+k-2\right)\prime}}{\partial \bm{\alpha}_{t+k-2}^2} = \left(1-\gamma\right) \begin{pmatrix} \bm{0} \\ \bm{I}_{n-1} \\ \bm{0}\end{pmatrix}=\left(\frac{\partial D_1^{\left(t+k-2\right)\prime}}{\partial \bm{\alpha}_{t+k-2}^2}\right)' = \left(1-\gamma\right)\bm{H}_x.$$
 
 Dette giver den følgende form for førsteordensbetingelsen
 \begin{align*}
-\frac{\partial \mathcal{L}}{\partial\bm{\alpha}_{t+k-2}^2 }&= \bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 +\bm{H}_x\Tilde{\bm{\Omega}}^{1}(C_1^2+ 2\Tilde{C}_2^2 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}))\\
-&=\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 + (1-\gamma)\Tilde{\bm{\Omega}}^{1} (\begin{pmatrix} 1\\ \bm{\alpha}_{t+k-2}^2 \\ \bm{0} \end{pmatrix} + B_1^{1\prime}\\
-&\quad + 2\Tilde{B}_2^1 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}))\\
-&=\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 + (1-\gamma)(\Tilde{\bm{\Omega}}_{x0}^{1} + \Tilde{\bm{\Omega}}_{xx}^{1} \bm{\alpha}_{t+k-2}^2 + \Tilde{\bm{\Omega}}_{x} B_1^{1\prime}\\
-&\quad + 2\Tilde{\bm{\Omega}}_{x}^1 \Tilde{B}_2^1 (\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}))\\
-&=((1-\gamma)\Tilde{\bm{\Omega}}_{xx}^{1} - \bm{\Sigma}_{xx} )  \bm{\alpha}_{t+k-2}^2 + \bm{\Phi}_0^x + (1-\gamma)(\Tilde{\bm{\Omega}}_{x0}^{1} + \Tilde{\bm{\Omega}}_{x}^{1}(B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0))+ \frac{1}{2} \bm{\sigma}_x^2\\
-&\quad + (\bm{\Phi}_1^x + 2(1-\gamma)\Tilde{\bm{\Omega}}_{x}^{1} \Tilde{B}_2^1\bm{\Phi}_1 )\bm{z}_{t+k-2}=0.
+\frac{\partial \mathcal{L}}{\partial\bm{\alpha}_{t+k-2}^2 }&= \bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 +\bm{H}_x\Tilde{\bm{\Omega}}^{1}\Big(C_1^2+ 2\Tilde{C}_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)\Big)\\
+&=\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 + \Big(1-\gamma\Big)\Tilde{\bm{\Omega}}^{1} \Big(\begin{pmatrix} 1\\ \bm{\alpha}_{t+k-2}^2 \\ \bm{0} \end{pmatrix} + B_1^{1\prime}\\
+&\quad + 2\Tilde{B}_2^1 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)\Big)\\
+&=\bm{\Phi}_0^x+\bm{\Phi}_1^x\bm{z}_{t+k-2}+\frac{1}{2} \bm{\sigma}_x^2 -\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2 + \Big(1-\gamma\Big)\Big(\Tilde{\bm{\Omega}}_{x0}^{1} + \Tilde{\bm{\Omega}}_{xx}^{1} \bm{\alpha}_{t+k-2}^2 + \Tilde{\bm{\Omega}}_{x} B_1^{1\prime}\\
+&\quad + 2\Tilde{\bm{\Omega}}_{x}^1 \Tilde{B}_2^1 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)\Big)\\
+&=\Big(\Big(1-\gamma\Big)\Tilde{\bm{\Omega}}_{xx}^{1} - \bm{\Sigma}_{xx} \Big)  \bm{\alpha}_{t+k-2}^2 + \bm{\Phi}_0^x + \Big(1-\gamma\Big)\Big(\Tilde{\bm{\Omega}}_{x0}^{1} + \Tilde{\bm{\Omega}}_{x}^{1}\Big(B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0\Big)\Big)+ \frac{1}{2} \bm{\sigma}_x^2\\
+&\quad + \Big(\bm{\Phi}_1^x + 2\Big(1-\gamma\Big)\Tilde{\bm{\Omega}}_{x}^{1} \Tilde{B}_2^1\bm{\Phi}_1 \Big)\bm{z}_{t+k-2}=0.
 \end{align*}
 
 Løsningen til ovenstående førsteordensbetingelse medfører et udtryk for den optimale portefølje på tidspunkt $(t+k-2)$ som en affin funktion af $\bm{z}_{t+k-2}$
@@ -557,45 +558,44 @@ $$\bm{\alpha}_{t+k-2}^2 = A_0^2 + A_1^2 \bm{z}_{t+k-2},$$
 
 hvor
 \begin{align*}
-A_0^2&=(\bm{\Sigma}_{xx} - (1-\gamma)\Tilde{\bm{\Omega}}_{xx}^1)^{-1} (\bm{\Phi}_0^x + \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma) (\Tilde{\bm{\Omega}}_{x0}^1 + \Tilde{\bm{\Omega}}_{x}^1 (B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0)))\\
-A_1^2&=(\bm{\Sigma}_{xx} - (1-\gamma)\Tilde{\bm{\Omega}}_{xx}^1)^{-1}(\bm{\Phi}_1^x+2(1-\gamma) \Tilde{\bm{\Omega}}_{x}^1 \Tilde{B} _2^{1}\bm{\Phi}_1).
+A_0^2&=\left(\bm{\Sigma}_{xx} - \left(1-\gamma\right)\Tilde{\bm{\Omega}}_{xx}^1\right)^{-1} \left(\bm{\Phi}_0^x + \frac{1}{2} \bm{\sigma}_x^2 + \left(1-\gamma\right) \left(\Tilde{\bm{\Omega}}_{x0}^1 + \Tilde{\bm{\Omega}}_{x}^1 \left(B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0\right)\right)\right)\\
+A_1^2&=\left(\bm{\Sigma}_{xx} - \left(1-\gamma\right)\Tilde{\bm{\Omega}}_{xx}^1\right)^{-1}\left(\bm{\Phi}_1^x+2\left(1-\gamma\right) \Tilde{\bm{\Omega}}_{x}^1 \Tilde{B} _2^{1}\bm{\Phi}_1\right).
 \end{align*}
 
 På samme vis kan beregniner baseret på Ligning ??, give følgende resultat
 \begin{align*}
-A_0^2&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} (\bm{\Phi}_0^x \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma ) (\bm{\Sigma}_{x0} + \bm{\Sigma}_x (B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0 )))\\
-A_1^2&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} (\bm{\Phi}_1^x + 2(1-\gamma) \bm{\Sigma}_x \Tilde{B}_2^{1}\bm{\Phi}_1).
+A_0^2&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} \left(\bm{\Phi}_0^x \frac{1}{2} \bm{\sigma}_x^2 + \left(1-\gamma \right) \left(\bm{\Sigma}_{x0} + \bm{\Sigma}_x \left(B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0 \right)\right)\right)\\
+A_1^2&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} \left(\bm{\Phi}_1^x + 2\left(1-\gamma\right) \bm{\Sigma}_x \Tilde{B}_2^{1}\bm{\Phi}_1\right).
 \end{align*}
 
 Ligning ?? og Ligning ?? er identiske med Ligning ?? og Ligning ??, bortset fra at $\Tilde{\bm{\Omega}}^1$ er udskiftet med $\bm{\Sigma}_v$.
 
 ### *Value*-funktionen
-Nu udledes de relevante udtryk for koefficienterne, $B_i^2$, i den maksimerede *value*-funktion. Dette gør, at der kan skabes et forhold mellem de foregående værdier af hhv. $A_i^1$ og $B_i^1$ koefficienterne. Ved indsættelse af den optimale porteføljeallokering for tidspunkt $(t+k-2)$ ind i *value*-funktionen, Ligning ??, og ved samtidig udeladelse af konstanter ganget på forventningen, opnåes det følgende udtryk
+Nu udledes de relevante udtryk for koefficienterne, $B_i^2$, i den maksimerede *value*-funktion. Dette gør, at der kan skabes et forhold mellem de foregående værdier af hhv. $A_i^1$ og $B_i^1$ koefficienterne. Ved indsættelse af den optimale porteføljeallokering for tidspunkt $\left(t+k-2\right)$ ind i *value*-funktionen, Ligning ??, og ved samtidig udeladelse af konstanter ganget på forventningen, opnås det følgende udtryk
 \begin{align*}
-&\mathbb{E}_{t+k-2}[ \exp( (1-\gamma)  r_{p,t+k-1})\exp ( (1-\gamma) (B_0^1 + B_1^1\bm{z}_{t+k-1}  + \bm{z}_{t+k-1}' B_2^1 \bm{z}_{t+k-1}  ))]\\
-&=\exp((1-\gamma)(\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} (\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-2}^2) + B_0^1 ) + D_0^{(t+k-2)} + \frac{1}{2} D_1^{(t+k-2)} \bm{\Omega}^1 D_1^{(t+k-2)\prime})\\
-&=\exp((1-\gamma)(B_0^2 + B_1^2 \bm{z}_{t+k-2} \bm{z}_{t+k-2}' B_2^2 \bm{z}_{t+k-2} )),
+&\mathbb{E}_{t+k-2}[ \exp\left( \left(1-\gamma\right)  r_{p,t+k-1}\right)\exp \left( \left(1-\gamma\right) \left(B_0^1 + B_1^1\bm{z}_{t+k-1}  + \bm{z}_{t+k-1}' B_2^1 \bm{z}_{t+k-1}  \right)\right)]\\
+&=\exp\left(\left(1-\gamma\right)\left(\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} \left(\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-2}^2\right) + B_0^1 \right) + D_0^{\left(t+k-2\right)} + \frac{1}{2} D_1^{\left(t+k-2\right)} \bm{\Omega}^1 D_1^{\left(t+k-2\right)\prime}\right)\\
+&=\exp\left(\left(1-\gamma\right)\left(B_0^2 + B_1^2 \bm{z}_{t+k-2} \bm{z}_{t+k-2}' B_2^2 \bm{z}_{t+k-2} \right)\right),
 \end{align*}
 
 hvor
 \begin{align*}
-B_0^2&=\bm{\Phi}_0^0 + A_0^{1\prime} (\bm{\Phi}_0^x + \frac{1}{2}\bm{\sigma}_x^2) + \frac{1-\gamma}{2} (\bm{\Omega}_{00}^1 + 2A_0^{1\prime}\Tilde{\bm{\Omega}}_{x0}^1)- \frac{1}{2} A_0^{1\prime} (\bm{\Sigma}_{xx} - (1-\gamma) \bm{\Omega}_{xx}^1) A_0^1 + B_0^1 \\
-&\quad + (B_1^1 + \bm{\Phi}_0' B_2^1)\bm{\Phi}_0 + (1-\gamma) B_1^1 (\Tilde{\bm{\Omega}}_1^{1\prime} + \frac{1}{2} \bm{\Omega}^1 B_1^{1\prime} + \Tilde{\bm{\Omega}}_x^{1\prime} A_0^1)+ (1-\gamma) \bm{\Phi}_0' (2\bm{\Lambda}^1 \bm{\Phi}_0 + \bm{\Xi}_1^{1\prime}\\
-&\quad + \bm{\Xi}_x^{1\prime} A_0^1 + \bm{\Gamma}^1 B_1^{1\prime})\\
-B_1^2&=\bm{\Phi}_1^1 + A_0^{1\prime} (\bm{\Phi}_1^x - (\bm{\Sigma}_{xx} - (1-\gamma) \Tilde{\bm{\Omega}}_{xx}^{1}) A_1^1) + ( \bm{\Phi}_0^x + \frac{1}{2} \bm{\sigma}_x^2 + (1-\gamma) \Tilde{\bm{\Omega}}_{x0}^{1})' A_1^1+ (B_1^1 + 2\bm{\Phi}_0' \Tilde{B}_2^1) \bm{\Phi}_1\\
-&\quad + (1-\gamma) (B_1^1 \Tilde{\bm{\Omega}}_{x}^{1\prime} + \bm{\Phi}_0' \bm{\Xi}_x^{1\prime}) A_1^1 + (1-\gamma) (4 \bm{\Phi}_0' \Tilde{\bm{\Lambda}}^1 + \bm{\Xi}_1^1 + A_0^{1\prime} \bm{\Xi}_x^1 + B_1^1 \bm{\Xi}^1) \bm{\Phi}_1\\
-B_2^2&= A_1^{1\prime} (\bm{\Phi}_1^x - \frac{1}{2} (\bm{\Sigma}_{xx} - (1-\gamma)\bm{\Omega}_{xx}^1) A_1^1) + \bm{\Phi}_1' (B_2^1 + 2(1-\gamma) \bm{\Lambda}^1) \bm{\Phi}_1 + (1-\gamma)\bm{\Phi}_1' \bm{\Xi}_x^{1\prime} A_1^1,
+B_0^2&=\bm{\Phi}_0^0 + A_0^{1\prime} \Big(\bm{\Phi}_0^x + \frac{1}{2}\bm{\sigma}_x^2\Big) + \frac{1-\gamma}{2} \Big(\bm{\Omega}_{00}^1 + 2A_0^{1\prime}\Tilde{\bm{\Omega}}_{x0}^1\Big)- \frac{1}{2} A_0^{1\prime} \Big(\bm{\Sigma}_{xx} - \Big(1-\gamma\Big) \bm{\Omega}_{xx}^1\Big) A_0^1 + B_0^1 \\
+&\quad + \Big(B_1^1 + \bm{\Phi}_0' B_2^1\Big)\bm{\Phi}_0 + \Big(1-\gamma\Big) B_1^1 \Big(\Tilde{\bm{\Omega}}_1^{1\prime} + \frac{1}{2} \bm{\Omega}^1 B_1^{1\prime} + \Tilde{\bm{\Omega}}_x^{1\prime} A_0^1\Big)+ \Big(1-\gamma\Big) \bm{\Phi}_0' \Big(2\bm{\Lambda}^1 \bm{\Phi}_0 + \bm{\Xi}_1^{1\prime}\\
+&\quad + \bm{\Xi}_x^{1\prime} A_0^1 + \bm{\Gamma}^1 B_1^{1\prime}\Big)\\
+B_1^2&=\bm{\Phi}_1^1 + A_0^{1\prime} \Big(\bm{\Phi}_1^x - \Big(\bm{\Sigma}_{xx} - \Big(1-\gamma\Big) \Tilde{\bm{\Omega}}_{xx}^{1}\Big) A_1^1\Big) + \Big( \bm{\Phi}_0^x + \frac{1}{2} \bm{\sigma}_x^2 + \Big(1-\gamma\Big) \Tilde{\bm{\Omega}}_{x0}^{1}\Big)' A_1^1+ \Big(B_1^1 + 2\bm{\Phi}_0' \Tilde{B}_2^1\Big) \bm{\Phi}_1\\
+&\quad + \Big(1-\gamma\Big) \Big(B_1^1 \Tilde{\bm{\Omega}}_{x}^{1\prime} + \bm{\Phi}_0' \bm{\Xi}_x^{1\prime}\Big) A_1^1 + \Big(1-\gamma\Big) \Big(4 \bm{\Phi}_0' \Tilde{\bm{\Lambda}}^1 + \bm{\Xi}_1^1 + A_0^{1\prime} \bm{\Xi}_x^1 + B_1^1 \bm{\Xi}^1\Big) \bm{\Phi}_1\\
+B_2^2&= A_1^{1\prime} \Big(\bm{\Phi}_1^x - \frac{1}{2} \Big(\bm{\Sigma}_{xx} - \Big(1-\gamma\Big)\bm{\Omega}_{xx}^1\Big) A_1^1\Big) + \bm{\Phi}_1' \Big(B_2^1 + 2\Big(1-\gamma\Big) \bm{\Lambda}^1\Big) \bm{\Phi}_1 + \Big(1-\gamma\Big)\bm{\Phi}_1' \bm{\Xi}_x^{1\prime} A_1^1,
 \end{align*}
 
 hvor de følgende hjælpematricer er anvendt $\bm{\Lambda}^1=\Tilde{B}_2^{1}\bm{\Omega}^1 \Tilde{B}_2^{1\prime}$, $\bm{\Gamma}^1=2\Tilde{B}_2^{1}\Tilde{\bm{\Omega}}^1$ samt $\bm{\Xi}^1=\bm{\Gamma}^{1\prime}$.
 
-I grænsen af kontinuert tid kan der ligeledes opnåes simplificerede udtryk, analoge til trykkene, som ledte til udledning af *policy*-funktionen. Ergo bliver udtrykkene nu
+I grænsen af kontinuert tid kan der ligeledes opnås simplificerede udtryk, analoge til trykkene, som ledte til udledning af *policy*-funktionen. Ergo bliver udtrykkene nu
 \begin{align*}
 B_0^2&=\bm{\Phi}_0^0 + A_0^{1\prime} \Big(\bm{\Phi}_0^x + \frac{1}{2}\bm{\sigma}_x^2\Big) + \frac{1-\gamma}{2} \Big(\bm{\Sigma}_{00}+ 2A_0^{1\prime} \bm{\Sigma}_{x0}\Big) - \frac{\gamma}{2} A_0^{1\prime} \bm{\Sigma}_{xx} A_0^1 + B_0^1 + \Big(B_1^1 + \bm{\Phi}_0' B_2^1\Big) \bm{\Phi }_0\\
 &\quad + \Big(1-\gamma\Big)B_1^1 \Big(\bm{\Sigma}_0' + \frac{1}{2} \bm{\Sigma} B_1^{1\prime} + \bm{\Sigma}_x' A_0^1\Big) + \Big(1-\gamma\Big) \bm{\Phi}_0' \Big(2\bm{\Lambda}^1 \bm{\Phi}_0 + \bm{\Xi}_0^{1\prime} + \bm{\Xi}_x^{1\prime} A_0^1 + \bm{\Gamma}^1 B_1^{1\prime}\Big)\\
 B_1^2&=\bm{\Phi}_1^1 + A_0^{1\prime} \Big(\bm{\Phi}_1^x -\gamma\bm{\Sigma}_{xx}\Big) A_1^1 + \Big(\bm{\Phi}_0^x + \frac{1}{2}\bm{\sigma}_x^2 + \Big(1-\gamma\Big) \bm{\Sigma}_{x0}\Big)' A_1^1 + \Big(B_1^1 + 2\bm{\Phi}_0' \Tilde{B}_2^1\Big)\bm{\Phi}_1 + \Big(1-\gamma\Big) \Big(B_1^1\bm{\Sigma}_x'\\
-&\quad + \bm{\Phi}_0' \bm{\Xi}_{x}^{1\prime}\Big) A_1^1\\
-&\quad + \Big(1-\gamma\Big) \Big(4 \bm{\Phi}_0' \Tilde{\bm{\Lambda}}^1 + \bm{\Xi}_1^1 + A_0^{1\prime} \bm{\Xi}_x^1 + B_1^1 \bm{\Xi}^1\Big)\bm{\Phi}_1,\\
+&\quad + \bm{\Phi}_0' \bm{\Xi}_{x}^{1\prime}\Big) A_1^1 + \Big(1-\gamma\Big) \Big(4 \bm{\Phi}_0' \Tilde{\bm{\Lambda}}^1 + \bm{\Xi}_1^1 + A_0^{1\prime} \bm{\Xi}_x^1 + B_1^1 \bm{\Xi}^1\Big)\bm{\Phi}_1,\\
 B_2^2&= A_1^{1\prime} \Big(\bm{\Phi}_1^x - \frac{\gamma}{2} \bm{\Sigma}_{xx} A_1^1\Big) + \bm{\Phi}_1' \Big(B_2^1 + 2\Big(1-\gamma\Big) \bm{\Lambda}^1\Big) \bm{\Phi}_1 + \Big(1-\gamma\Big) \bm{\Phi}_1' \bm{\Xi}_x^{1\prime} A_1^1,
 \end{align*}
 
