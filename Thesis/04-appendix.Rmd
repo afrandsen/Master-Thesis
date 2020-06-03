@@ -163,12 +163,12 @@ Definitionen af brutto aktieafkastet fra tidspunkt $t$ til $t+1$ er
 \end{equation}
 
 Ved at tage logfunktionen af Ligning ?? kan følgende udledning opnås
-\begin{align}
+\begin{align*}
 \log\left(1+R_{t+1}\right)&=\log\left(\frac{P_{t+1}+D_{t+1}}{P_t}\right)\\
 &=\log\left(P_{t+1}+D_{t+1}\right)-\log\left(P_t\right)\\
 &=\log\left(P_{t+1}\left(1+\frac{D_{t+1}}{P_{t+1}}\right)\right)-\log\left(P_t\right)\\
 &=\log\left(P_{t+1}\right)+\log\left(1+\exp\left(\log\left(D_{t+1}\right)-\log\left(P_{t+1}\right)\right)\right)-\log\left(P_t\right).
-\end{align}
+\end{align*}
 
 Dette tillader følgende form ved brug af lognotationen
 $$r_{t+1}=p_{t+1} +\log\left(1+\exp(d_{t+1}-p_{t+1})\right)-p_t$$
@@ -179,27 +179,31 @@ Her bliver den første afledte, $f'(x^*)$ fundet ved brug af kædereglen til
 $$f'(x^*)=\frac{1}{1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)}\exp\left(\overline{d_{t+1}-p_{t+1}}\right).$$
 
 Dermed bliver første ordens Taylor udvidelsen
-$$f\left(x\right)=\log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right)+\frac{1}{1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)}\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\left(\left(d_{t+1}-p_{t+1}\right)- \overline{d_{t+1}-p_{t+1}}\right).$$
+\begin{align*}
+f\left(x\right)&=\log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right)+\frac{1}{1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)}\\
+\quad\quad&\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\left(\left(d_{t+1}-p_{t+1}\right)- \overline{d_{t+1}-p_{t+1}}\right).
+\end{align*}
 
 Ved at definere følgende lineariseringsparametre
-\begin{align}
+\begin{align*}
 \rho &=\frac{1}{1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)}\\
 c&= \log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right) - \left(1-\rho\right)\left(\overline{d_{t+1}-p_{t+1}}\right),
-\end{align}
+\end{align*}
 
 Kan $f\left(\log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right)\right)$ omskrives til
-\begin{align}
-f\left(x\right)&=\log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right) + \rho\exp\left(\overline{d_{t+1}-p_{t+1}}\right) \left(d_{t+1}-p_{t+1}\right)-\rho \exp\left(\overline{d_{t+1}-p_{t+1}}\right)\left(\overline{d_{t+1}-p_{t+1}}\right)\\
+\begin{align*}
+f\left(x\right)&=\log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right) + \rho\exp\left(\overline{d_{t+1}-p_{t+1}}\right) \left(d_{t+1}-p_{t+1}\right)\\
+\quad\quad&-\rho \exp\left(\overline{d_{t+1}-p_{t+1}}\right)\left(\overline{d_{t+1}-p_{t+1}}\right)\\
 &=\left(1-\rho\right)\left(d_{t+1}-p_{t+1}\right)+c.
-\end{align}
+\end{align*}
 
 Indsættes Ligning ?? nu ind i Ligning ?? opnås den lineære relation for én-periode log aktieafkastet.
 
-\begin{align}
+\begin{align*}
 r_{t+1}&\approx p_{t+1} + \log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right)- p_t\\
 &\approx p_{t+1} + \left(1-\rho\right) \left(d_{t+1}-p_{t+1}\right)- p_t + c\\
 &\approx \rho p_{t+1} + \left(1-\rho\right) d_{t+1} - p_t + c.
-\end{align}
+\end{align*}
 
 ### Dynamic Gordon Growth Model
 

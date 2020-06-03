@@ -27,30 +27,30 @@ if (knitr::is_html_output()) {
 ```
 
 # Implementering {#imple}
-Kapitel \@ref(varkapitel) markerede slutningen af den underliggende teoretiske gennemgang samt diskussion. Nu tages fat på de nødvendige statistiske værktøjer, som er et nødvendige, for at kunne implementere den præsenterede porteføljemodel. Derfor vil dette kapitel lægge fundamentet for den empiriske del, som på den måde kan færdiggøre den optimale porteføljestrategi baseret på historiske data, der bliver gennemgået og gransket i Kapitel \@ref(kapiteldatab). Sektion \@ref(sekpradik) vil præsentere de oftest anvendte lineære modeller til at teste afkastprædiktabilitet. Sektion \@ref(sektestaftids) vil fungere som beskrivelse af de tests, som kan teste de anvendte tidsserier for de underliggende antagelser, der specielt er krævet af VAR-processen. Derudover vil Sektion \@ref(sekmodelselek) sætte spørgsmåltegn ved højtparameteriserede modeller. Sektionen vil derfor diskutere problemet og præsentere et modelselektionsgrundlag, etableret for at kunne skabe en restringeret kvantiativ stærk model, som der -- ikke mindst -- samtidig er valgt ud fra en kvalitativ skepsis af undertegnede.
+Kapitel \@ref(varkapitel) markerede afslutningen af den underliggende teoretiske gennemgang samt diskussion. Nu tages fat på de nødvendige statistiske værktøjer, som er nødvendige, for at kunne implementere den præsenterede porteføljemodel. Derfor vil dette kapitel lægge fundamentet for den empiriske del, som på den måde kan færdiggøre den optimale porteføljestrategi baseret på historiske data, der bliver gennemgået og gransket i Kapitel \@ref(kapiteldatab). Sektion \@ref(sekpradik) vil præsentere de oftest anvendte lineære modeller til at teste afkastprædiktabilitet. Sektion \@ref(sektestaftids) vil fungere som beskrivelse af de tests, som kan teste de anvendte tidsserier for de underliggende antagelser, der specielt er krævet af VAR-processen. Derudover vil Sektion \@ref(sekmodelselek) sætte spørgsmåltegn ved højtparameteriserede modeller. Sektionen vil derfor diskutere problemet og præsentere et modelselektionsgrundlag, etableret for at kunne skabe en restringeret kvantiativ stærk model. Der -- ikke mindst -- samtidig er valgt ud fra en kvalitativ skepsis af undertegnede.
 
-## Prædiktabilitstest {#sekpradik}
-Denne sektion vil dække en introduktion til testing af afkastprædiktabilitet. Da fokus er på porteføljeallokering, vil en dybdegående analyse ikke foretages i denne afhandling. Ved at følge den eksisterende litteratur, vil testene være baseret på lineære modeller. Først beskrives den univariate regressions model, som går forud for den multiple regression. Disse to lineære grundlag vil danne rammen for de empiriske undersøgelser i denne sektion. Derudover bliver generelle økonometriske problemer præsenteret for fuldstændighedens skyld. 
+## Prædiktabilitetstest {#sekpradik}
+Denne sektion vil dække en introduktion til testning af afkastprædiktabilitet. Da fokus er på porteføljeallokering, vil en dybdegående analyse ikke foretages i denne afhandling. Ved at følge den eksisterende litteratur, vil testene være baseret på lineære modeller. Først beskrives den univariate regressions model, som går forud for den multiple regression. Disse to lineære grundlag vil danne rammen for de empiriske undersøgelser i denne sektion. Derudover bliver generelle økonometriske problemer præsenteret for fuldstændighedens skyld. 
 
 ### Univariat regression {#univarregr}
-Den simpleste statistiske metode til at finde statistiske sammenhænge er gennem en univariat lineær regression. I et afkastprædiktablitets henseende vil man lave en regression af merafkast som responsvariabel på laggede forklarende variable. Dette vil give en indikation af relationens signifikans og størrelsesorden. Merafkast anvendes, eftersom analysen forsøger at påvise tidsvariation i risikopræmier og ikke i renter. Derudover er laggede foreklarende variable nødvendige, for at iscenesætte en realistisk følge informationer. Den simple univariat regression kan dermed præsenteres analytisk som
+Den simpleste statistiske metode til at finde statistiske sammenhænge er gennem en univariat lineær regression. I et afkastprædiktablitets henseende vil man lave en regression af merafkast som responsvariabel på laggede forklarende variable. Dette vil give en indikation af relationens signifikans og størrelsesorden. Merafkast anvendes, eftersom analysen forsøger at påvise tidsvariation i risikopræmier og ikke i renter. Derudover er laggede foreklarende variable nødvendige, for at iscenesætte en realistisk følge af informationer. Den simple univariat regression kan dermed præsenteres analytisk som
 $$y_t=\beta_0 + \beta_1 x_{t-1} + \varepsilon_t.$$
 
-hvor $y_t$ er responsvariablen, som repræsenterer det realiserede merafkast på det undersøgte aktiv på tidspunkt $t$. Den forklarende variabel, $x_{t-1}$, er den foregående periodes realiserede værdi af variablen. Derudover haves fejlledet, $\varepsilon_t$, som følger de generelle OLS betingelser. Den overordnede nulhypotese er, at ingen tidsvariation eksistrer i merafkast, dette vil betyde en $\beta_1$ koefficient på nul. Altså vil en koefficient, signifikant forskellig fra nul, argumentere for prædiktabilitet. En diskusion af den ovenstående præsenterede ramme, kan findes i [@Stambaugh1999].
+hvor $y_t$ er responsvariablen, som repræsenterer det realiserede merafkast på det undersøgte aktiv på tidspunkt $t$. Den forklarende variabel, $x_{t-1}$, er den foregående periodes realiserede værdi af variablen. Derudover haves fejlledet, $\varepsilon_t$, som følger de generelle OLS betingelser. Den overordnede nulhypotese er, at ingen tidsvariation eksisterer i merafkast, dette vil betyde en $\beta_1$ koefficient på nul. Altså vil en koefficient, signifikant forskellig fra nul, argumentere for prædiktabilitet. En diskusion af den ovenstående præsenterede ramme, kan findes i [@Stambaugh1999].
 
 ### Multipel regression {#multregr}
-Som pointeret af [@Stambaugh1999] er der flere problemer med estimationen af den univariate regression. For at øge inferensen af estimationsresultaterne følges metoden af [@Goyal2007], som består af en multipel regression. Den medfører en regression af responsvariablen, merafkast, på samtilige laggede forklarende variable. Altså kan den analytisk beskrives som
+Som pointeret af [@Stambaugh1999] er der flere problemer med estimationen af den univariate regression. For at øge inferensen af estimationsresultaterne følges metoden af [@Goyal2007], som består af en multipel regression. Den medfører en regression af responsvariablen, merafkast, på samtlige laggede forklarende variable. Altså kan den analytisk beskrives som
 $$y_t=\beta_0+\bm{\beta}_1\bm{x}_{t-1}+\bm{\varepsilon}_t,$$
 
-her er $\bm{x}_{t-1}$ vektoren af realisationer fra forklarende variable, på tidspunkt $t-1$. Nu er $\bm{\beta}_1$ vektoren af hældningskoefficienter for hver af de forklarende variable. Slutteligt er $\bm{\varepsilon}_t$ vektoren af fejlled. Fordelen ved en multipel regression er, at den muliggør biasreduktion -- som der ellers kan opstå i den univariate regression -- ved at inkludere tidligere udeladte variable. Denne fordel kommer dog med en omkostning, da multikollinaritet kan skabe en mere ustabil model.
+her er $\bm{x}_{t-1}$ vektoren af realisationer af de forklarende variable, på tidspunkt $t-1$. Nu er $\bm{\beta}_1$ vektoren af hældningskoefficienter for hver af de forklarende variable. Slutteligt er $\bm{\varepsilon}_t$ vektoren af fejlled. Fordelen ved en multipel regression er, at den muliggør biasreduktion -- som der ellers kan opstå i den univariate regression -- ved at inkludere tidligere udeladte variable. Denne fordel kommer dog med en omkostning, da multikollinaritet kan skabe en mere ustabil model.
 
 ## Test af tidsserier {#sektestaftids}
-Validiteten af VAR-modellen afhænger kraftigt af spørgsmålet om stationaritet og normalitet. Altså skal tilstandsvariablen i VAR-modellen være stationære tidsserier samt være normalfordelt. For ikke-stationære tidsserier kan autokorrelerede fejl resultere i ikke-efficiente estimationskoefficienter, som dermed vil lede til ugyldig inferens, og i sidste ende give forkerte værdier på en eksogen stikprøve, [@Granger1974]. For at et system er svagt stationært kræves det, at dets middelværdi og varians er konstant over tid. Altså skal de følgende betingelser overholdes
+Validiteten af VAR-modellen afhænger kraftigt af spørgsmålet om stationaritet og normalitet. Altså skal tilstandsvariablen i VAR-modellen være stationære tidsserier samt være normalfordelte. For ikke-stationære tidsserier kan autokorrelerede fejl resultere i ikke-efficiente estimationskoefficienter, som dermed vil lede til ugyldig inferens, og i sidste ende give forkerte værdier på en eksogen stikprøve, [@Granger1974]. For at et system er svagt stationært kræves det, at dets middelværdi og varians er konstant over tid. Altså skal de følgende betingelser overholdes
 \begin{align*}
 \mathbb{E}\left[\bm{z}_t\right]&=\bm{\mu},\quad\forall t\\
 \mathbb{E}\left[(\bm{z}_t-\bm{\mu}) (\bm{z}_{t-h}-\bm{\mu})'\right]&=\bm{\Sigma}_z(h),\quad \forall t\quad h=0,1,\dots,
 \end{align*}
-hvor den anden betingelse sikrer at autokovarianserne kun afhænger af perioden mellem de to vektorer, $h$, og ikke et specifikt tidspunkt $t$, [@Lutkepohl2005]. Stationaritets antagelsen holder dermed hvis tidsserien ikke udviser trend eller skift i middelværdi eller autokovarianser. Når en tidsserie ikke er stationær opstår muligheden for en *unit root*, hvilket ofte ses for finansielle og økonomiske tidsserier. Når en tidsserie besider en *unit root* kan stationaritets problemet fjernes ved at tage den første forskel af serien. Hvis denne første forskel nu er stationær, siges tidsserien at være integreret af første orden, $I(1)$. Problemet ved denne procedure er, at hældningskoefficienterne hørende til tidsserien i en givet model ikke vil være repræsenteret i niveauer. Dette gør fortolkningen en del sværere. Disse potentielle problemer vil blive undersøgt i de anvendte tidsserier i denne afhandling. Et væld af test kan anvendes til en sådan undersøgelse. I det følgende vil tre tests blive præsenteret.
+hvor den anden betingelse sikrer at autokovarianserne kun afhænger af perioden mellem de to vektorer, $h$, og ikke et specifikt tidspunkt $t$, [@Lutkepohl2005]. Stationaritets antagelsen holder dermed hvis tidsserien ikke udviser trend eller skift i middelværdi eller autokovarianser. Når en tidsserie ikke er stationær opstår muligheden for en *unit root*, hvilket ofte ses for finansielle og økonomiske tidsserier. Når en tidsserie besider en *unit root* kan stationaritets problemet fjernes ved at tage den første forskel af serien. Hvis denne første forskel nu er stationær, siges tidsserien at være integreret af første orden, $I(1)$. Problemet ved denne procedure er, at hældningskoefficienterne hørende til tidsserien i en givet model ikke vil være repræsenteret i niveauer. Dette gør fortolkningen en del sværere. Disse potentielle problemer vil blive undersøgt i de anvendte tidsserier i denne afhandling. Et væld af test kan anvendes til en sådan undersøgelse. I det følgende vil tre tests vedr. stationaritet blive præsenteret.
 
 ### Test af normalitet
 For at teste variablene for normalitetsantagelsen, benyttes den såkaldte *Jarque-Bera* test, [@Jarque1980]. Denne metode tester om den givne stikprøve har skævhed og kurtosis lig normalfordelingen. Dette er ligeledes nulhypotesen. Teststørrelsen er altid ikke-negativ, og store værdier signalerer at stikprøven ikke er normaltfordelt. Teststørrelsen er defineret som
@@ -68,10 +68,10 @@ Her er $\hat{\mu}_3$ og $\hat{\mu}_3$ er estimaterne af hhv. det tredje og fjerd
 Den følgende regression ligger bag *Augmented Dickey-Fuller* testen, [@Dickey1979]
 $$\Delta y_{t} = \alpha + \beta t + \phi y_{t-1} + \delta_1 \Delta y_{t-1} + \cdots + \delta_{p-1}\Delta y_{t-p+1} + \varepsilon_t,$$
 
-hvor $y_t$ er tidsserien på tidspunkt $t$, $\alpha$ er en kostant, $\beta$ er koefficienten for en tids trend og $p$ er lagordenen. Under nulhypotesen indeholder $y_t$ en *unit root*, dvs. $\phi=0$. Dette er testet mod den alternative én-sidet hypotese at $\phi<0$, altså at tidsserien er stationær. Den resulterende teststørrelse
+hvor $y_t$ er tidsserien på tidspunkt $t$, $\alpha$ er en kostant, $\beta$ er koefficienten for en tids trend og $p$ er lagordenen. Under nulhypotesen indeholder $y_t$ en *unit root*, dvs. $\phi=0$. Dette er testet mod den alternative én-sidet hypotese, $\phi<0$, altså at tidsserien er stationær. Den resulterende teststørrelse
 $$\text{ADF}=\frac{\hat{\phi}}{\hat{\sigma}_{\hat{\phi}}},$$
 
-evalueres herefter mod de kritiske værdier fra *Dickey-Fuller* $t$-fordelingen. Testen vil udføres på alle variable, hvis enkelte variable ikke kan forkaste nulhypotesen tages den første forskel, og herefter vil de blive gentestet. Kan disse nye variable nu forkaste nulhypotesen, betegnes de som regel *difference-stationary*. Dette er dog ikke sikkert og enkelte tidsserier kan sagtens være integreret af anden eller tredje orden. Stationaritetsantagelsen er imod forventning ikke et krav for VAR-processen. Fra generel økonomisk teori er det kendt, at de præsenterede variable fra Kapitel \@ref(afkrel) vil være ikke-eksplosive. Derfor vil testresultatet ikke være alt afgørende for modelspecifikationen.
+evalueres herefter mod de kritiske værdier fra *Dickey-Fuller* $t$-fordelingen. Testen vil udføres på alle variable, hvis enkelte variable ikke kan forkaste nulhypotesen tages den første forskel, og herefter vil de blive gentestet. Kan disse nye variable nu forkaste nulhypotesen, betegnes de som regel som *difference-stationary*. Dette er dog ikke sikkert og enkelte tidsserier kan sagtens være integreret af anden eller tredje orden. Stationaritetsantagelsen er imod forventning ikke et krav for VAR-processen. Fra generel økonomisk teori er det kendt, at de præsenterede variable fra Kapitel \@ref(afkrel) vil være ikke-eksplosive. Derfor vil testresultatet ikke være alt afgørende for modelspecifikationen.
 
 ### Phillips-Perron test
 Som *Augmented Dickey-Fuller* er *Phillips-Perron* testen en metode til at teste for en *unit root* i en given tidsserie. Nulhypotesen er derfor $\rho=1$ i nedenstående regression
@@ -79,7 +79,7 @@ Som *Augmented Dickey-Fuller* er *Phillips-Perron* testen en metode til at teste
 \Delta y_t = (\rho-1) y_{t-1} + \varepsilon_t.(\#eq:philper)
 \end{equation}
 
-Som i *Augmented Dickey-Fuller* testen løser *Phillips-Perron* testen problemet, at processen som danner $y_t$ muligvis har en højere orden af autokorrelation end tilladt i ovenstående Ligning \@ref(eq:philper) -- dette gør $y_{t-1}$ endogen og vil ugyldiggøre den almindelige *Dickey-Fuller* $t$-test. Hvorimod *Augmented Dickey-Fuller* løser problemet ved at indtroducere lags i test-ligningen, laver *Phillips-Perron* en ikke-parametrisk korrektion til $t$-test størrelsen. Derudover er testen robust overfor uspecificeret autokorrelation og heteroskedasticitet. Den fulde opskrivning af de to teststørrelser, $Z(\hat{\alpha})$ og $Z(t_{\hat{\alpha}})$, kan findes i [@Phillips1988]. Hvor den første teststørrelse, $Z(\hat{\alpha})$, hører til Ligning \@ref(philper), og den anden teststørrelse, $Z(t_{\hat{\alpha}})$, hører til nedenstående regression, med en konstant og et ikke stokastisk led
+Som i *Augmented Dickey-Fuller* testen løser *Phillips-Perron* testen problemet, at processen som danner $y_t$ muligvis har en højere orden af autokorrelation end tilladt i ovenstående Ligning \@ref(eq:philper) -- dette gør $y_{t-1}$ endogen og vil ugyldiggøre den almindelige *Dickey-Fuller* $t$-test. Hvorimod *Augmented Dickey-Fuller* løser problemet ved at indtroducere lags i test-ligningen, laver *Phillips-Perron* en ikke-parametrisk korrektion til $t$-test størrelsen. Derudover er testen robust overfor uspecificeret autokorrelation og heteroskedasticitet. Den fulde opskrivning af de to teststørrelser, $Z(\hat{\alpha})$ og $Z(t_{\hat{\alpha}})$, kan findes i [@Phillips1988]. Den første teststørrelse, $Z(\hat{\alpha})$, hører til Ligning \@ref(philper), og den anden teststørrelse, $Z(t_{\hat{\alpha}})$, hører til nedenstående regression, med en konstant og et ikke stokastisk led
 $$\Delta y_t =\alpha + \beta t + (\rho-1) y_{t-1} + \varepsilon_t.$$
 
 Fordelen ved *Phillips-Perron* testen er at den er ikke-parametrisk, dvs. den kræver ikke at vælge lagstørrelsen som i *Augmented Dickey-Fuller*. Ulempen er derimod, at den baserer sig på asymptotisk teori. [@Davidson2004] finder, at *Phillips-Perron* testen har værre performance for endelige stikprøver end *Augmented Dickey-Fuller* testen.
@@ -88,10 +88,10 @@ Fordelen ved *Phillips-Perron* testen er at den er ikke-parametrisk, dvs. den kr
 Til forskel for de to tidligere præsenterede økonometriske tests, er nulhypotesen i *Kwiatkowski-Phillips-Schmidt-Shin* testen, at den undersøgte tidsserie er stationær omkring en deterministisk trend, [@Kwiatkowski1992]. Altså er den alternative hypotese at tidsserien har en *unit root*. Testen tager udgangspunkt i nedenstående regression
 \begin{align}
 y_t&=\alpha+\beta t + \mu_t+\varepsilon_t\\
-&=\mu_t=\mu_{t-1}+\nu_t,
+\mu_t&=\mu_{t-1}+\nu_t,
 \end{align}
 
-hvor specielt $\nu_t\sim\mathcal{N}(0,\sigma_\nu ^2)$. Nulhypotesen vil på denne form formuleres som $H_0:\sigma_\nu^2=0$, som medfører, at $\mu_t$ er konstant. Teststørrelsen er *Lagrange Multiplier* eller Score teststatistikken for $\sigma_nu ^2=0$ mod alternativet $\sigma_nu ^2>0$. Den er givet ved
+hvor specielt $\nu_t\sim\mathcal{N}(0,\sigma_\nu ^2)$. Nulhypotesen vil på denne form formuleres som $H_0:\sigma_\nu^2=0$, som medfører, at $\mu_t$ er konstant. Teststørrelsen er *Lagrange Multiplier* eller Score teststatistikken for $\sigma_\nu ^2=0$ mod alternativet $\sigma_\nu ^2>0$. Den er givet ved
 $$\text{KPSS}=\frac{(T^{-2} \sum_{t=1}^T \hat{S}_t^2)}{\hat{\lambda}^2},$$
 
 hvor $\hat{S}_t=\sum_{j=1}^t \hat{u}_j$, $\hat{u}_t$ er residualen hørende til regressionen af $y_t$ og $\hat{\lambda}^2$ er et konsistent estimat af $u_t$ ved brug af $\hat{u}_t$. 
@@ -100,7 +100,7 @@ hvor $\hat{S}_t=\sum_{j=1}^t \hat{u}_j$, $\hat{u}_t$ er residualen hørende til 
 
 Indtil videre er de økonometriske metoder og statistiske tests blevet beskrevet, som der anvendes i den empriske del af denne afhandling. Uden nogle yderligere restriktioner vil den præsenterede metodik kunne medføre en ikke-restringeret VAR model, som herefter vil kunne implementeres for porteføljevalget. Det er til gengæld urealistisk at tro, at en medtagelse af samtlige variable vil medføre en generel statistisk stærk model. Derfor vil denne sektion præsentere den generelle kvantitative og kvalitatitive metode til at specificere en mere sparsommelig model, som højst sandsynlig også vil have en stærkere performance på en eksogen stikprøve. 
 
-En ikke-restringeret VAR model indeholdende samtlige variable vil givetvis have den højeste *goodness-of-fit* relativt til alle restringerede modeller. Derudover ville en sådan model resultere i en række komplikationer. En sådan komplikation er eksempelvis multikollinaritet mellem de prædiktable variable. Eksempelvis kan korte og lange rentespænd muligvis fange den samme variation i merafkast, og en medtagelse af begge rentespænd vil derfor ikke være nødvendigt. Derudover kan for mange variable gøre VAR modellen højt parameteriseret, og dermed påvirke præcisionen af de estimerede koefficienter. En optimal model vil optimere det såkaldte *bias-variance tradeoff*, og dermed fange regulariteterne i estimationsdatasættet og ligeledes generalisere til eksterne datasæt. Givet at denne afhandling kun er intereseret i variable som *har* statistisk styrke til at forudsige afkast vil en række restriktioner automatisk føre til en sparsommelig model. Dette kan gøres på en lang række måder, men én af de absolut simpleste er den såkaldte *Top-down* strategi, som også er kendt i statistik som *backward-elimination*. En sådan strategi specificere en model baseret på relativ *goodness-of-fit* gennem det valgte informations kriterie. Formelt modellerer informationskriteriet bytteforholdet mellem præcisionen for stikprøven og antallet af estimerede parametre. Et velkendt informationskriterie er *Akaike Information Criteria* dette kan matematisk opskrives som
+En ikke-restringeret VAR model indeholdende samtlige variable vil givetvis have den højeste *goodness-of-fit* relativt til alle restringerede modeller på stikprøven. Derudover ville en sådan model resultere i en række komplikationer. En sådan komplikation er eksempelvis multikollinaritet mellem de prædiktable variable. Eksempelvis kan korte og lange rentespænd muligvis fange den samme variation i merafkast, og en medtagelse af begge rentespænd vil derfor ikke være nødvendigt. Derudover kan for mange variable gøre VAR modellen højt parameteriseret, og dermed påvirke præcisionen af de estimerede koefficienter. En optimal model vil optimere det såkaldte *bias-variance tradeoff*, og dermed fange regulariteterne i estimationsdatasættet og ligeledes generalisere optimalt til eksterne datasæt. Givet at denne afhandling kun er intereseret i variable som *har* statistisk styrke til at forudsige afkast vil en række restriktioner automatisk føre til en sparsommelig model. Dette kan gøres på en lang række måder, men én af de absolut simpleste er den såkaldte *Top-down* strategi, som også er kendt i statistik som *backward-elimination*. En sådan strategi specificere en model baseret på relativ *goodness-of-fit* gennem det valgte informations kriterie. Formelt modellerer informationskriteriet bytteforholdet mellem præcisionen for stikprøven og antallet af estimerede parametre. Et velkendt informationskriterie er *Akaike Information Criteria* dette kan matematisk opskrives som
 $$\text{AIC}=2k-2\log(\mathcal{L}),$$
 
 hvor $k$ er antallet af estimerede parametere i modellen og $\mathcal{L}$ er maksimum af likelihood funktionen for den givne model. Informationskriteriet vil dermed foretrække modeller med lav varians, men samtidig straffe modeller med inkludering af for mange variable. I denne afhandling benyttes det såkaldte *Andreas Kracht Frandsen Information Criteria*, *AKFIC*. Til forskel for det kendte *Akaike Information Criteria* straffes modellen med en faktor på
@@ -114,9 +114,9 @@ $$-2\log(\mathcal{L}_0)-(-2\log(\mathcal{L}_1))>3.841.$$
 
 Ovenstående er teststørrelsen fra *Likelihood Ratio* testen. Fra *Wilks' Theorem* vides, at nulhypotesen forkastes, hvis teststørrelsen er større end den øvre $\alpha$-kvantil af $\chi^2(1)$-fordelingen. Altså betyder dette, at den større model vælges, når den har en lavere *AKFIC*. Som er ækvivalent med at teste nulhypotesen for den ekstra variabel med enm $p$-værdi på $5\%$.
 
-I praksis implementeres *Top-down* strategien ved at undersøge én ligning fra VAR systemets ligninger af de fire aktiver. Først evalueres kriteriet for den ikke-restringerede regression, herefter fjernes én forklarende variabel af gangen og kriteriet bliver genberegnet. Dernæst vil den laveste *AKFIC* værdi indikerer, hvilken variabel, der giver mindst ekstra information om variationen i responsvariablen, og er på den måde den bedste kandidat til fjernelse fra modellen. Denne midlertidige modelkandidat med laveste *AKFIC* sammenlignes nu med den intielle model, givet at der ligeldes er forbedring ift. den intielle, vil denne midlertidige model nu være den nye basismodel. Denne process fortsætter rekursivt indtil ingen forklarende variable kan fjernes for at forbedre *AKFIC* værdien. 
+I praksis implementeres *Top-down* strategien ved at undersøge én ligning fra VAR systemets ligninger af de fire aktiver. Først evalueres kriteriet for den ikke-restringerede regression, herefter fjernes én forklarende variabel af gangen og kriteriet bliver genberegnet. Dernæst vil den laveste *AKFIC* værdi indikerer, hvilken variabel, der giver mindst ekstra information om variationen i responsvariablen, og er på den måde den bedste kandidat til fjernelse fra modellen. Denne midlertidige modelkandidat med laveste *AKFIC* sammenlignes nu med den intielle model, givet at der ligeledes er forbedring ift. den intielle model, vil denne midlertidige model nu være den nye basismodel. Denne process fortsætter rekursivt indtil ingen forklarende variable kan fjernes for at forbedre *AKFIC* værdien. 
 
-Processen køres kun for regressionerne for aktivafkastene på det fulde datasæt, for at have et kvantitativt bud på deres optimale prædiktionsvariable. Eftersom fokus er på porteføljeallokering, restringeres datasættet herefter til kun at indeholde variablene, der forbliver i modellen efter *Top-down* processen. Dernæst holdes variablene op i mod de univariate og multiple regressioner samt korrelationsanalysen, for at undgå mulige multikollinaritetsproblemer. Derudover foretages en *Variance Inflation Factor* analyse, som endnu et tjek for multikollinaritet. Analysen foretages i tre skridt. For samtlige forklarende variable fra *Top-down* processen laves følgende regression
+Processen køres kun for regressionerne for aktivafkastene på det fulde datasæt, for at have et kvantitativt bud på deres optimale prædiktionsvariable. Dette gøres med kun to intielle restriktioner: den nominelle rente skal indgå, for at inkorporere inflation, derudover skal alle aktiverne indgå i regressionen. Eftersom fokus er på porteføljeallokering, restringeres datasættet herefter til kun at indeholde variablene, der forbliver i modellen efter *Top-down* processen. Dernæst holdes variablene op i mod de univariate og multiple regressioner samt korrelationsanalysen, for at undgå mulige multikollinaritetsproblemer. Derudover foretages en *Variance Inflation Factor* analyse, som endnu et tjek for multikollinaritet. Analysen foretages i tre skridt. For samtlige forklarende variable fra *Top-down* processen laves følgende regression
 \begin{equation}
 x_t^i=\alpha+\bm{\beta}^j\bm{x}_t^{j}+\varepsilon_t. (\#eq:vifanareg)
 \end{equation}
@@ -131,13 +131,13 @@ Slutteligt foretages en sidste *Variance Inflation Factor* analyse, som et sidst
 ## Opsummering
 
 # Data beskrivelse {#kapiteldatab}
-Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 2. kvartal til 2018 4. kvartal. Slut kvartalet er valgt grundet dataophør. Start kvartalet er valgt på baggrund af, at den amerikanske centralbank, *Federal Reserve System*, kort tid forinden, havde givet den amerikanske korte rente, lov til at variere frit i markedet. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion \@ref(aktivklasser) beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik. Sektion \@ref(pvariable) indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion \@ref(korr). Sektion \@ref(ops) giver en opsummering af kapitlets statistiske fund. Tidsserien for hver aktivklasse og prædiktionsvariabel visualiseres med tilhørende recessionsperioder som defineret af [@NBER2020].
+Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 2. kvartal til 2018 4. kvartal. Slut kvartalet er valgt grundet dataophør. Start kvartalet er valgt på baggrund af, at den amerikanske centralbank, *Federal Reserve System*, kort tid forinden, havde givet den amerikanske korte rente, lov til at variere frit i markedet. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion \@ref(aktivklasser) beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik samt *Jarque-Beta* testresultaterne. Sektion \@ref(pvariable) indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable samt testresultater. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion \@ref(korr). Sektion \@ref(ops) giver en opsummering af kapitlets statistiske fund. Tidsserien for hver aktivklasse og prædiktionsvariabel visualiseres med tilhørende recessionsperioder som defineret af [@NBER2020].
 
 ## Beskrivelse af aktivklasser{#aktivklasser}
 Mængden af aktivklasser, som pt. er tilgængelige på finansmarkedet har aldrig været større. Udover aktier og obligationer, findes et væld af eksponeringsområder og/eller finansielle produkter heriblandt ejendom, derivater, futures, forwards, kryptovaluta, valuta mm. For at holde denne analyse på et simpelt niveau medtages de mest anvendte aktivklasser for institutionelle og private investorer. Hvilket også er de mest anvendte i eksisterende litteratur, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. I det følgende vil egenskaberne for aktivklasserne: det risikofrie afkast, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer beskrives og derudover vil den tilhørende beskrivende statistik for hvert aktiv belyses.
 
 ### Det risikofrie afkast -- $r_{t+1}^{\textnormal{rf}}$
-Essencen af et risikofrit aktiv er at repræsentere et afkast med varians lig nul. Dette betegnes undertiden også som et sikkert afkast. Udover at give investoren muligheder for indlån, kan investoren også udvide sine investeringsmuligheder ved at låne til den risikofrie rente, dvs. have en kort position i det risikofrie aktiv. Et ofte valgt aktiv i litteraturen, som en proxy for det risikofrie aktiv, er de kortefristede statsværdipapirer, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. Disse betegnes i U.S.A. som *T-Bills*. Valget af netop dette aktiv sker på baggrund af den historiske og nuværende meget lave risiko for statskonkurser, [@Beers2017]. Eksempelvis gik den danske stat tilnærmelsesvis senest bankerot under *Statsbankerotten* i 1813 efter *Napoleonskrigene*. Derfor benyttes det amerikanske statspapir med kort løbetid, mere præcist anvendes den 90-dages amerikanske *T-Bill*, som en proxy for det risikofrie aktiv. Data over afkast er fra [@CRSPt90] hentet gennem [@WRDSt90]. Log netto afkastet af det risikofrie aktiv beregnes som log forskellen mellem det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill* og den kvartalsvise inflationsrate, målt via *Consumer Price Index*. Nettoafkastet har et kvartalsvist justeret afkast på `r round(DESCRIPTIVE$adj_mean[1]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[1]*100, 1)`$\%$. Som det kan ses på kvantilerne har det risikofrie afkast givet negativt afkast sommetider. Et histogram indikerer en højreskæv fordeling af afkast, hvilket også underbygges af en skævhed på `r round(DESCRIPTIVE$skew[1], 3)`. Med en kurtosis på `r round(DESCRIPTIVE$kurt[1], 3)` haves en leptokurtisk fordeling, med tykkere/længere haler og et smallere samt højere cetrum. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:NET-TB-tids) viser et plot over tidsserien, Figur \@ref(fig:NET-TB-AK) viser et plot over autokorrelationen for tidsserien og Figur \@ref(fig:NET-TB-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
+Essencen af et risikofrit aktiv er at repræsentere et afkast med varians lig nul. Dette betegnes undertiden også som et sikkert afkast. Udover at give investoren muligheder for indlån, kan investoren også udvide sine investeringsmuligheder ved at låne til den risikofrie rente, dvs. have en kort position i det risikofrie aktiv. Et ofte valgt aktiv i litteraturen, som en proxy for det risikofrie aktiv, er de kortefristede statsværdipapirer, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. Disse betegnes i U.S.A. som *T-Bills*. Valget af netop dette aktiv sker på baggrund af den historiske og nuværende meget lave risiko for statskonkurser, [@Beers2017]. Eksempelvis gik den danske stat tilnærmelsesvis senest bankerot under *Statsbankerotten* i 1813 efter *Napoleonskrigene*. Derfor benyttes det amerikanske statspapir med kort løbetid, mere præcist anvendes den 90-dages amerikanske *T-Bill*, som en proxy for det risikofrie aktiv. Data over afkast er fra [@CRSPt90] hentet gennem [@WRDSt90]. Log netto afkastet af det risikofrie aktiv beregnes som log forskellen mellem det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill* og den kvartalsvise inflationsrate, målt via *Consumer Price Index*. Nettoafkastet har et kvartalsvist justeret afkast på `r round(DESCRIPTIVE$adj_mean[1]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[1]*100, 1)`$\%$. Som det kan ses på kvantilerne har det risikofrie afkast givet negativt afkast sommetider. Et histogram indikerer en højreskæv fordeling af afkast, hvilket også underbygges af en skævhed på `r round(DESCRIPTIVE$skew[1], 3)`. Med en kurtosis på `r round(DESCRIPTIVE$kurt[1], 3)` haves en leptokurtisk fordeling, med tykkere/længere haler og et smallere samt højere cetrum. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:NET-TB-tids) viser et plot over tidsserien, Figur \@ref(fig:NET-TB-AK) viser et plot over autokorrelationen for tidsserien -- som ikke ser problematisk ud -- og Figur \@ref(fig:NET-TB-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r NET-TB-tids, echo=FALSE, fig.align='center', fig.cap="Tidsserie af log netto renten.", fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data) +
@@ -1793,6 +1793,8 @@ step_table_rf <- step_table_rf %>%
   mutate(ds = cell_spec(ds, "latex", bold = ifelse(ds == min, T, F))) %>% 
   mutate(fr = cell_spec(fr, "latex", bold = ifelse(fr == min, T, F)))
 
+step_table_rf$fr[5] <- "-2524.7"
+
 step_table_rf <- data.frame(lapply(step_table_rf, function(x) {
               gsub("NA", " ", x)
             }))
@@ -1803,7 +1805,7 @@ colnames(step_table_rf) <- c('AKFIC', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$'
 step_table_rf %>% 
   knitr::kable(caption = 'Top-down modelselektion på det risikofrie aktiv.',
                booktabs=TRUE,
-               align = c(rep('c', 10)),
+               align = c('l', rep('c', 9)),
                row.names = FALSE,
                escape = FALSE,
                #col.names = NULL,
@@ -1811,7 +1813,7 @@ step_table_rf %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer resultaterne fra \\\\textit{Top-down} modelselektionsanalysen for det risikofrie aktiv.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer resultaterne fra \\\\textit{Top-down} modelselektionsanalysen for det risikofrie aktiv. Den første kolonne rapporterer den mindste AKFIC-værdi i den tilhørende række.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r STEP-AKT-TABLE, echo=FALSE}
@@ -1829,6 +1831,8 @@ step_table_akt <- step_table_akt %>%
   mutate(ds = cell_spec(ds, "latex", bold = ifelse(ds == min, T, F))) %>% 
   mutate(fr = cell_spec(fr, "latex", bold = ifelse(fr == min, T, F)))
 
+step_table_akt$smb[9] <- "-1276.4"
+
 step_table_akt <- data.frame(lapply(step_table_akt, function(x) {
               gsub("NA", " ", x)
             }))
@@ -1839,7 +1843,7 @@ colnames(step_table_akt) <- c('AKFIC', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$
 step_table_akt %>% 
   knitr::kable(caption = 'Top-down modelselektion på merafkastet af aktier.',
                booktabs=TRUE,
-               align = c(rep('c', 10)),
+               align = c('l', rep('c', 9)),
                row.names = FALSE,
                escape = FALSE,
                #col.names = NULL,
@@ -1847,7 +1851,7 @@ step_table_akt %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer resultaterne fra \\\\textit{Top-down} modelselektionsanalysen for merafkastet på aktier.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer resultaterne fra \\\\textit{Top-down} modelselektionsanalysen for merafkastet på aktier. Den første kolonne rapporterer den mindste AKFIC-værdi i den tilhørende række.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r STEP-S-TABLE, echo=FALSE}
@@ -1865,6 +1869,8 @@ step_table_s <- step_table_s %>%
   mutate(ds = cell_spec(ds, "latex", bold = ifelse(ds == min, T, F))) %>% 
   mutate(fr = cell_spec(fr, "latex", bold = ifelse(fr == min, T, F)))
 
+step_table_s$smb[7] <- "-1725.1"
+
 step_table_s <- data.frame(lapply(step_table_s, function(x) {
               gsub("NA", " ", x)
             }))
@@ -1875,7 +1881,7 @@ colnames(step_table_s) <- c('AKFIC', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$',
 step_table_s %>% 
   knitr::kable(caption = 'Top-down modelselektion på merafkastet af statsobligationer.',
                booktabs=TRUE,
-               align = c(rep('c', 10)),
+               align = c('l', rep('c', 9)),
                row.names = FALSE,
                escape = FALSE,
                #col.names = NULL,
@@ -1883,7 +1889,7 @@ step_table_s %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer resultaterne fra \\\\textit{Top-down} modelselektionsanalysen for merafkastet på statsobligationer.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer resultaterne fra \\\\textit{Top-down} modelselektionsanalysen for merafkastet på statsobligationer. Den første kolonne rapporterer den mindste AKFIC-værdi i den tilhørende række.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r STEP-V-TABLE, echo=FALSE}
@@ -1904,6 +1910,8 @@ step_table_v <- step_table_v %>%
 step_table_v$pe[1] <- "-1608.6"
 step_table_v$bm[1:2] <- c("-1608.6", "-1612.4")
 
+step_table_v$smb[7] <- "-1621.4"
+
 step_table_v <- data.frame(lapply(step_table_v, function(x) {
               gsub("NA", " ", x)
             }))
@@ -1914,7 +1922,7 @@ colnames(step_table_v) <- c('AKFIC', '$x_t^{\\text{dp}}$', '$x_t^{\\text{pe}}$',
 step_table_v %>% 
   knitr::kable(caption = 'Top-down modelselektion på merafkastet af virksomhedsobligationer.',
                booktabs=TRUE,
-               align = c(rep('c', 10)),
+               align = c('l', rep('c', 9)),
                row.names = FALSE,
                escape = FALSE,
                #col.names = NULL,
@@ -1922,7 +1930,7 @@ step_table_v %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer resultaterne fra \\\\textit{Top-down} modelselektionsanalysen for merafkastet på virksomhedsobligationer.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer resultaterne fra \\\\textit{Top-down} modelselektionsanalysen for merafkastet på virksomhedsobligationer. Den første kolonne rapporterer den mindste AKFIC-værdi i den tilhørende række.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 \end{landscape}
 
@@ -1955,7 +1963,7 @@ VAR_TABLE %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position", "scale_down"),
                              full_width = F) %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra modelselektionsproceduren. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra (ref:po1990) er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer VAR(1) estimaterne for den dynamiske investor bestående af prævalgte variable fra modelselektionsproceduren. Den første række for hver tilstandsvariabel repræsenterer de estimerede koefficienter. De bias-justerede koefficienter fra (ref:po1990) er i $(\\\\cdot)$, som det ses i anden række for hver tilstandsvariabel. Endeligt viser tredje række for hver tilstandsvariabel $t$-test størrelserne i $[\\\\cdot]$. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Sidste kolonne rapporterer justerede $R^2$ størrelser samt $F$-teststørrelser i $\\\\langle\\\\cdot\\\\rangle$, evalueret på $d_1=8$ og $d_2=249$ frihedsgrader.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ```{r COV-RES-TAB, echo=FALSE}
@@ -2775,7 +2783,9 @@ ggplot(HOR_ANA) +
   labs(color = "Aktiv",
        linetype = "Aktiv",
        shape = "Aktiv",
-       size = "Aktiv")
+       size = "Aktiv")+
+  xlab("Horisont")+
+  ylab("Allokering")
 ```
 
 Derudover suppleres analysen af risikoaversionen med Figurerne \@ref(fig:GAM-ana-t), \@ref(fig:GAM-ana-a), \@ref(fig:GAM-ana-s) og \@ref(fig:GAM-ana-v). Disse Figurer viser den totalte allokering for hhv. *T-Bills*, aktier, statsobligationer og virksomhedsobligationer holdt op imod et kontinum af risikotolerancer, defineret som $\tfrac{1}{\gamma}$, for $\gamma>0$. Derudover vises *myopic demand* ligeledes, der ses som rette linjer. 
@@ -2790,8 +2800,8 @@ GAM_ANA_MYO <- data.frame(t(GAM_ANA_MYO), index=1/seq(1, 50, 0.1))
 colnames(GAM_ANA_MYO) <- c('A', 'B', 'C', 'D', 'index')
 
 ggplot(GAM_ANA) +
-  geom_line(aes(x=index, y=A, color = 'T-Bills', linetype = "T-Bills")) +
-  geom_line(data=GAM_ANA_MYO, aes(x=index, y=A, color = 'T-Bills2', linetype = "T-Bills2")) +
+  geom_line(aes(x=index, y=A, color = 'Total allokering', linetype = "Total allokering")) +
+  geom_line(data=GAM_ANA_MYO, aes(x=index, y=A, color = 'Myopic Demand', linetype = "Myopic Demand")) +
   coord_cartesian(xlim = c(1, 0),
                   ylim = c(min(GAM_ANA[,1]-0.05),
                            max(GAM_ANA[,1]+0.05))) +
@@ -2813,13 +2823,15 @@ ggplot(GAM_ANA) +
   labs(color = "Aktiv",
        linetype = "Aktiv",
        shape = "Aktiv",
-       size = "Aktiv")
+       size = "Aktiv")+
+  xlab("Risikotolerance")+
+  ylab("Allokering")
 ```
 
 ```{r GAM-ana-a, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse for aktivet aktier.', fig.width=18, fig.asp=0.2, fig.pos='H'}
 ggplot(GAM_ANA) +
-  geom_line(aes(x=index, y=B, color = 'Aktier', linetype = "Aktier")) +
-  geom_line(data=GAM_ANA_MYO, aes(x=index, y=B, color = 'Aktier', linetype = "Aktier2")) +
+ geom_line(aes(x=index, y=B, color = 'Total allokering', linetype = "Total allokering")) +
+  geom_line(data=GAM_ANA_MYO, aes(x=index, y=B, color = 'Myopic Demand', linetype = "Myopic Demand")) +
   coord_cartesian(xlim = c(1, 0),
                   ylim = c(min(GAM_ANA[,2]-0.05),
                            max(GAM_ANA[,2]+0.05))) +
@@ -2841,13 +2853,15 @@ ggplot(GAM_ANA) +
   labs(color = "Aktiv",
        linetype = "Aktiv",
        shape = "Aktiv",
-       size = "Aktiv")
+       size = "Aktiv")+
+  xlab("Risikotolerance")+
+  ylab("Allokering")
 ```
 
 ```{r GAM-ana-s, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse for aktivet statsobligationer.', fig.width=18, fig.asp=0.2, fig.pos='H'}
 ggplot(GAM_ANA) +
-  geom_line(aes(x=index, y=C, color = 'Statsobligationer', linetype = "Statsobligationer")) +
-  geom_line(data=GAM_ANA_MYO, aes(x=index, y=C, color = 'Statsobligationer2', linetype = "Statsobligationer2")) +
+  geom_line(aes(x=index, y=C, color = 'Total allokering', linetype = "Total allokering")) +
+  geom_line(data=GAM_ANA_MYO, aes(x=index, y=C, color = 'Myopic Demand', linetype = "Myopic Demand")) +
   coord_cartesian(xlim = c(1, 0),
                   ylim = c(min(GAM_ANA[,3]-0.05),
                            max(GAM_ANA[,3]+0.05))) +
@@ -2869,13 +2883,15 @@ ggplot(GAM_ANA) +
   labs(color = "Aktiv",
        linetype = "Aktiv",
        shape = "Aktiv",
-       size = "Aktiv")
+       size = "Aktiv")+
+  xlab("Risikotolerance")+
+  ylab("Allokering")
 ```
 
 ```{r GAM-ana-v, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse for virksomhedsobligationer.', fig.width=18, fig.asp=0.2, fig.pos='H'}
 ggplot(GAM_ANA) +
-  geom_line(aes(x=index, y=D, color = 'Virksomhedsobligationer', linetype = "Virksomhedsobligationer")) +
-  geom_line(data=GAM_ANA_MYO, aes(x=index, y=D, color = 'Virksomhedsobligationer2', linetype = "Virksomhedsobligationer2")) +
+  geom_line(aes(x=index, y=D, color = 'Total allokering', linetype = "Total allokering")) +
+  geom_line(data=GAM_ANA_MYO, aes(x=index, y=D, color = 'Myopic Demand', linetype = "Myopic Demand")) +
   coord_cartesian(xlim = c(1, 0),
                   ylim = c(min(GAM_ANA[,4]-0.05),
                            max(GAM_ANA[,4]+0.05))) +
@@ -2897,7 +2913,9 @@ ggplot(GAM_ANA) +
   labs(color = "Aktiv",
        linetype = "Aktiv",
        shape = "Aktiv",
-       size = "Aktiv")
+       size = "Aktiv")+
+  xlab("Risikotolerance")+
+  ylab("Allokering")
 ```
 
 ## Effekten af en kortsalgsrestriktion
@@ -3003,7 +3021,9 @@ ggplot(HOR_ANA_R) +
   labs(color = "Aktiv",
        linetype = "Aktiv",
        shape = "Aktiv",
-       size = "Aktiv")
+       size = "Aktiv")+
+  xlab("Horisont")+
+  ylab("Allokering")
 ```
 
 ## Opsummering

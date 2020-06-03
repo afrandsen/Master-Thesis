@@ -44,14 +44,14 @@ Forholdet mellem middelværdien og variansen er $\tfrac{1}{k}$, eftersom vi kan 
 Altså er vægtningen i det risikobærende aktiv et forhold mellem: det forventede risikobærende merafkast over det risikofrie aktiv samt en skalering af det risikobærende aktivs varians. Vi kan uden problemer opskrive ovenstående løsning til tilfældet, hvor investoren står overfor $n>1$ risikobærende aktiver. $\bm{R}_{t+1}$ repræsenterer en $n\times 1$ vektor af afkast for risikobærende aktiver, fra $t$ til $t+1$. Den betingede middelværdi bliver $\mathbb{E}_t\left[\bm{R}_{t+1}\right]$ og den betingede kovariansmatrix noteres som $\mathbb{V}_t\left[\bm{R}_{t+1}\right]=\bm{\Sigma}_t$. Herudover er $\bm{\alpha}_t$ nu en $n\times 1$ vektor af vægte i de risikobærende aktiver.
 
 Den betingede middelværdi af porteføljeafkastet bliver dermed nu
-\begin{equation}
+\begin{equation*}
 \mathbb{E}_t\left[R_{p,t+1}\right]=R_{0,t+1}+\bm{\alpha}_t'(\mathbb{E}_t\left[\bm{R}_{t+1}\right]- R_{0,t+1}\bm{\ell}),
-\end{equation}
+\end{equation*}
 
 den betingede varians af porteføljeafkastet bliver
-\begin{equation}
+\begin{equation*}
 \mathbb{V}_t\left[R_{p,t+1}\right]=\bm{\alpha}_t'\bm{\Sigma}_t\bm{\alpha}_t.
-\end{equation}
+\end{equation*}
 
 Nu kan maksimeringsproblemet opskrives
 \begin{equation}
@@ -410,7 +410,7 @@ vil i stedet give anledning til følgende approksimation
 D^{c,n}\approx \frac{(1-\rho^n)}{(1-\rho)} = \frac{1-(1+Y_t^{c,n})^{-n}}{1-(1+Y_t^{c,n})^{-1}}, (\#eq:csba16)
 \end{equation}
 
-hvor ligheden følger, da obligationen antages at handle til kurs pari. Den endelige loglineære relation kan nu findes, ved at indsætte Ligning \@ref(eq:csba13) og Ligning \@ref(eq:csba16) ind i Ligning \@ref(eq:csba11).
+hvor ligheden følger, da obligationen antages at handle til kurs pari. Den endelige loglineære relation kan nu findes, ved at indsætte Ligning \@ref(eq:csba13) og Ligning \@ref(eq:csba16) i Ligning \@ref(eq:csba11).
 \begin{equation}
 r_{t+1}^{c,n}\approx D^{c,n} y_t^{c,n} - \left(D^{c,n} - 1\right) y_{t+1}^{c,n-1}=D^{c,n}(y_t^{c,n}- y_{t+1}^{n-1}) + y_{t+1}^{n-1}  (\#eq:csba17)
 \end{equation}
@@ -418,7 +418,7 @@ r_{t+1}^{c,n}\approx D^{c,n} y_t^{c,n} - \left(D^{c,n} - 1\right) y_{t+1}^{c,n-1
 Ligning \@ref(eq:csba17) kan ligeledes sammenlignes med Ligning \@ref(eq:csaa4), og blev først udledt af [@Campbell1983]. Men i dette tilfælde er ligningen et vægtet gennemsnit af varigheden på nuværende og fremtidige effektive renter. Ligning \@ref(eq:csba17) holder ligeledes for nulkuponobligationer, hvor varigheden erstatter løbetiden. Det andet lighedstegn viser ligeledes relationen til rentespændet, $y_t^{c,n}- y_{t+1}^{n-1}$. Som der givetvis må resultere i en forventning om positiv korrelation mellem afkastet og rentespændet i den empiriske sektion.
 
 ## Potentielle prædiktabilitetsvariable {#potpradik}
-Denne sektion er en forlængelse af Sektion \@ref(afkognut), og fungerer som en undersøgelse og diskussion af variable med en potentiel prædiktionsevne. Med tiden er en lang række variable blevet foreslået til afkast prædiktabilitet. Generelt kan disse variable grupperes ind i en række kategorier. I det følgende vil tre grupper bliver præsenteret: finasielle variable, rentestruktursvariable og makroøkonomiske variable. Denne inddeling er også anvendt i eksisterende litteratur, se bl.a. [@Koijen2011]. Den følgende undersøgelse af potentielle prædiktionsvariable vil bestå af kvalitative samt kvantitative analyser, som på den måde kommer til at foregå analysen relateret til porteføljevalget. Dette tillader at studere den potentielle lineære relation mellem merafkastet på aktiverne og variablene, og på den måde give en dybere inferens af de valgte foreklarende variable, som da vil blive benyttet i at modellere det optimale porteføljevalg.
+Denne sektion er en forlængelse af Sektion \@ref(afkognut), og fungerer som en undersøgelse og diskussion af variable med en potentiel prædiktionsevne. Med tiden er en lang række variable blevet foreslået til prædiktabilitet af afkast. Generelt kan disse variable grupperes ind i en række kategorier. I det følgende vil tre grupper bliver præsenteret: finasielle variable, rentestrukturs variable og makroøkonomiske variable. Denne inddeling er også anvendt i eksisterende litteratur, se bl.a. [@Koijen2011]. Den følgende undersøgelse af potentielle prædiktionsvariable vil bestå af kvalitative samt kvantitative analyser, som på den måde kommer til at foregå analysen relateret til porteføljevalget. Dette tillader at studere den potentielle lineære relation mellem merafkastet på aktiverne og variablene, og på den måde give en dybere inferens af de valgte foreklarende variable, som da vil blive benyttet i at modellere det optimale porteføljevalg.
 
 ### Finansielle variable
 I Sektion \@ref(defaktafk) blev den fundamentale værdi af aktier benyttet til at argumentere for relation til *Dividend-Price Ratio*. Denne sektion vil benyttes til at diskutere andre potentielle finasielle variable, som før har vist statistisk styrke i at prædiktere aktie afkast. Samtidig er det muligt, at disse variable fanger variation, som allerede er forklaret igennem nogle af de eksistende variable. Derudover kan disse variable også muligvis forklare variation i afkastet på nogle af de andre aktiver ud over aktieafkastet. I det følgende vil *Price-Earnings Ratio*, *Book-to-Market Ratio*, aktievariansen, *Small Minus Big* og *High Minus Low* blive undersøgt.
@@ -432,26 +432,26 @@ Aktievariansen, som den bliver præsenteret her, er målt via metoden etableret 
 \sigma^2_t = \sum_{i=1}^{N_t} r_{i,t} + 2 \sum_{i=1}^{N_t-1} r_{i,t}r_{i+1,t} (\#eq:aktvar1)
 \end{equation}
 
-Fra Ligning \@ref(eq:aktvar1) ses, at den estimerede middelværdi af stikprøven ikke fratrækkes de daglige afkast. Dette gøres ikke eftersom det har vist sig at have meget lille effekt, [@Schwert1987]. Ideen med at medtage variansen er, at den gennemsnitlige varians indeholder informationen på variansen af hele markedet. 
+Fra Ligning \@ref(eq:aktvar1) ses, at den estimerede middelværdi af stikprøven ikke fratrækkes de daglige afkast. Dette gøres ikke eftersom, at det har vist sig at have meget lille effekt, [@Schwert1987]. Ideen med at medtage variansen er, at den gennemsnitlige varians indeholder informationen på variansen af hele markedet. 
 
-*Small Minus Big* og *High Minus Low* er ydereligere to finansielle variable/faktorer. Disse stammer fra [@French1993; @Fama2015], og mere specifikt deres *Three Factor Model* samt *Five Factor Model*. Disse variable anses for at være hhv. størrelsfaktoren på markedet og værdifaktoren på markedet. Faktorerne er skabt via en dannelse af seks markedsporteføljer. [@French1993] finder at begge faktorer signifikante i at prædiktere merafkastet på markedsporteføljen. Ved tilføjelse af yderligere to faktorer -- profitabilitesfaktoren og investeringsfaktoren -- finder [@Fama2015], at *High Minus Low* bliver redundant i deres underliggende model. Eftersom tidsserien for *High Minus Low* er fuldstændig forklaret af de andre fire faktorer. De finder bl.a., at investeringsfaktoren har en meget negativ korrelation med *High Minus Low* på $-0.7$.
+*Small Minus Big* og *High Minus Low* er ydereligere to finansielle variable/faktorer. Disse stammer fra [@French1993; @Fama2015], og mere specifikt deres *Three Factor Model* samt *Five Factor Model*. Disse variable anses for at være hhv. størrelsfaktoren på markedet og værdifaktoren på markedet. Faktorerne er skabt via en dannelse af seks markedsporteføljer. [@French1993] finder, at begge faktorer er signifikante i at prædiktere merafkastet på markedsporteføljen. Ved tilføjelse af yderligere to faktorer -- profitabilitesfaktoren og investeringsfaktoren -- finder [@Fama2015], at *High Minus Low* bliver redundant i deres underliggende model. Eftersom tidsserien for *High Minus Low* er fuldstændig forklaret af de andre fire faktorer. De finder bl.a., at investeringsfaktoren har en meget negativ korrelation med *High Minus Low* på $-0.7$.
 
 ### Rentestrukturs variable
 I denne sektion undersøges fem rentestruktursvariable, som tidligere er foreslået i litteraturen. Disse er *Yield Spread*, *Term Spread*, *Credit Spread*, *Default Spread* og den nominelle rente.
 
-*Term Spread* defineres som forskellen mellem den effektive lange rente og den 90-dages *T-Bill*, og er på den måde rentespændet mellem to obligationsinstrumenter med forskellige løbetider. Igennem dette rentespænd kan hældningen på rentekurven ligeldes findes. Basalt set vil rentekurven blive stejlere des højere værdien af rentespændet bliver. [@Fama1989] viser at en del af præmien i forventede afkast af hhv. aktier og obligationer er prædikteret gennem rentestrukturen. Disse afkast har vist sig at have forskellige konjukturmønstre. Altså vil det forventede afkast over aktier og obligationer bevæge sig kontracyklisk med de generelle konjukturer i økonomien. For at have en breddere del af rentekurven med, medtages ligeledes *Yield Spread*. Denne variabel viser rentespændet på kort sigt, eftersom det er forskellen mellem den effektive korte rente og den 90-dages *T-Bill*.
+*Term Spread* defineres som forskellen mellem den effektive lange rente og den 90-dages *T-Bill*, og er på den måde rentespændet mellem to obligationsinstrumenter med forskellige løbetider. Igennem dette rentespænd kan hældningen på rentekurven ligeledes findes. Basalt set vil rentekurven blive stejlere des højere værdien af rentespændet bliver. [@Fama1989] viser at en del af præmien i forventede afkast af hhv. aktier og obligationer er prædikteret gennem rentestrukturen. Disse afkast har vist sig at have forskellige konjukturmønstre. Altså vil det forventede afkast over aktier og obligationer bevæge sig kontracyklisk med de generelle konjukturer i økonomien. For at have en breddere del af rentekurven med, medtages ligeledes *Yield Spread*. Denne variabel viser rentespændet på kort sigt, eftersom det er forskellen mellem den effektive korte rente og den 90-dages *T-Bill*.
 
 *Credit Spread* defineres som forskellen mellem lavt ratede virksomhedsobligationernes effektive rente og den 90-dages *T-Bill* rente. Dette følger metoden af [@Keim1986]. Kreditspændet er en ex ante variabel, som følger niveauet for lavt ratede obligationers priser. [@Keim1986] beviser, at variablen summerer ex ante information vedr. forventede risikopræmier. På samme vis defineres *Default Spread* som forskellen mellem lavt ratede virksomhedsobligationers effektive rente og højt ratede virksomhedsobligationerns effektive rente. [@Fama1989] finder bl.a. at *Default Spread* fanger variation i forventede obligations- og aktieafkast. Derudover beskriver de, at de største bevægelser i denne variabel og i afkastene som variablen prædikterer er relateret til langstrækte økonomiske hændelser, som spænder over flere økonomiske konjukturer.
 
 Den nominelle (korte) rente har før vist at have statistisk styrke til at prædiktere afkast, [@Campbell2005]. Ved at inkludere både den nominelle rente (brutto) og realrenten (netto), fanges inflation i modellen, [@Campbell2005].
 
-### Makroøkonomsike variable
-Udover de finansielle variable og rentestruktursvariablene medtages én makroøkonomiske variabel. Denne variabel er *Federal Funds Rate*. En generel egenskab af makroøkonomiske variable er, at de ikke baserer sig på markedspriser. [@Cochrane2008] finder, at priserne som prædikterer afkast er korreleret med økonomiske konjukturcyklusser, med højere forventet afkast under lavkonjukturer.
+### Makroøkonomiske variable
+Udover de finansielle variable og rentestruktursvariablene medtages én makroøkonomisk variabel. Denne variabel er *Federal Funds Rate*. En generel egenskab af makroøkonomiske variable er, at de ikke baserer sig på markedspriser. [@Cochrane2008] finder, at priserne som prædikterer afkast er korreleret med økonomiske konjukturcyklusser, med højere forventet afkast under lavkonjukturer.
 
-En relevant makroøkonomisk del til at forklare variationen i specielt obligationsafkast er finanspolitikken. [@Dai2005] undersøger specielt finanspolitikkens indflydelse ved at inkorpere *Federal Funds Rate* som en forklarende variabel. De finder, at denne -- inkl. flere andre variable -- har statistisk styrke til at prædiktere obligationsafkast. 
+En relevant makroøkonomisk del til at forklare variationen i specielt obligationsafkast er finanspolitikken. [@Dai2005] undersøger specielt finanspolitikkens indflydelse ved at inkorporere *Federal Funds Rate* som en forklarende variabel. De finder, at denne -- inkl. flere andre variable -- har statistisk styrke til at prædiktere obligationsafkast. 
 
 ## Opsummering {#opsafkrel}
-Dette kapitel fungerede som et overblik over de approksimative og eksakte analytiske resultater på tværs af en række af aktiver. Ved benyttelse af den loglineære afkast approksimation af [@Campbell1988], blev aktivklassernes nutidsværdi relateret til forventede fremtidige betalinger. Dette tillod at prædiktive relationer på tværs af aktivklasserne blev dannet, som er essentielle, når den mulige prædiktabilitet skal begrundes. Disse relationer vil derfor også kunne inkorporeres i den følgende VAR(1)-model. Derudover er en lang række variable ligeledes blevet præsenteret og diskuteret. Disse potentielle prædiktionsvariable er medtaget grundet tidligere litterære fund, som viser at prædiktabiliteten af afkast kan fanges af flere variable end de fundamentalt bundne variable.
+Dette kapitel fungerede som et overblik over de approksimative og eksakte analytiske resultater på tværs af en række af aktiver. Ved benyttelse af den loglineære afkast approksimation af [@Campbell1988], blev aktivklassernes nutidsværdi relateret til forventede fremtidige betalinger. Dette tillod at prædiktive relationer på tværs af aktivklasserne blev dannet, som er essentielle, når den mulige prædiktabilitet skal begrundes. Disse relationer vil derfor også kunne inkorporeres i den følgende VAR(1)-model. Derudover er en lang række variable ligeledes blevet præsenteret og diskuteret. Disse potentielle prædiktionsvariable er medtaget grundet tidligere fund i litteraturen, som viser at prædiktabiliteten af afkast kan fanges af flere variable end de variable, som har en fundamental relation til afkast.
 
 # Vector Autoregressive Model {#varkapitel}
 
@@ -488,7 +488,7 @@ hvor hver variabel, $z_{i,t+1}$, afhænger lineært af en konstant, værdien af 
 
 \vspace{5mm}
 
-I matrixnotation fås da følgende kompakteopskrivning
+I matrixnotation fås da følgende kompakte opskrivning
     \begin{equation}\label{eq:1}
         \bm{z}_{t+1}=\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_t+\bm{v}_{t+1},
     \end{equation}
@@ -508,7 +508,7 @@ Slutteligt antages, at fejlleddet er normalfordelt
     \begin{equation}\label{eq:2}
         \bm{v}_{t+1}\overset{\text{i.i.d.}}{\sim}\mathcal{N}(0,\bm{\Sigma}_v),
     \end{equation}
-hvor middelværdien er $0$, som tidligere nævnt, og $\bm{\Sigma}_v$ er kovariansmatricen, som tillige er symmetrisk.
+hvor middelværdien er nul, som tidligere nævnt, og $\bm{\Sigma}_v$ er kovariansmatricen, som tillige er symmetrisk.
 
 For notationens skyld sættes
     \begin{equation*}
@@ -523,7 +523,7 @@ hvor indgangene på diagonalen er: variansen af netto afkastet på vores benchma
 
 \vspace{5mm}
 
-På trods af den simplificerende antagelse om tidsinvariant varians ikke virker empirisk sandsynlig, er antagelsen relativt uproblematisk givet, at fokus er på det langsigtede porteføljevalg hos investoren. [@Chacko2005] argumenterer -- ved brug af en realistisk kalibreret model af aktieafkast volatilitet -- at størrelsesordenen af volatiliteten af risiko ikke er stor nok til at have indvirkning på porteføljevalget for investorer med en lang investeringshorisont, relativt til porteføljevalg af investorer med en kort investeringshorisont. Herudover viser empiriske undersøgelser, at ændringer i risiko er kortvarige fænomener, [@Camp1987], men samtidig kan kovariansmatricen stadig ændre sig på tværs af investeringshorisonter.
+På trods af den simplificerende antagelse om tidsinvariant varians ikke virker empirisk sandsynlig, er antagelsen relativt uproblematisk givet, at fokus er på det langsigtede porteføljevalg hos investoren. [@Chacko2005] argumenterer for -- ved brug af en realistisk kalibreret model af aktieafkasts volatilitet -- at størrelsesordenen af volatiliteten af risiko ikke er stor nok til at have indvirkning på porteføljevalget for investorer med en lang investeringshorisont, relativt til porteføljevalg af investorer med en kort investeringshorisont. Herudover viser empiriske undersøgelser, at ændringer i risiko er kortvarige fænomener, [@Camp1987], men samtidig kan kovariansmatricen stadig ændre sig på tværs af investeringshorisonter.
 
 \vspace{5mm}
 
@@ -535,14 +535,14 @@ Den ubetingede middelværdi og kovariansmatrix af $\bm{z}_{t+1}$ er givet ved
 Ovenstående ligninger ligger også til grund for determinantbetingelsen: hvis ikke determinanten af $\bm{\Phi}_1$ var begrænset af $-1$ og $1$, ville den ubetingede middelværdi og varians af $\bm{z}_{t+1}$ ikke være defineret.
 
 \subsection{Betingede momenter for $k$-perioder}
-Nu udledes den betingede middelværdi og kovariansmatrix af $(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})$ for enhver horisont $k$. Dette gøres eftersom det akkumulerede $k$-periode afkast fremkommer ved at addere én-periode log-afkast over $k$ perioder. Ved rekursion af \eqref{eq:1} fås
+Nu udledes den betingede middelværdi og kovariansmatrix af $(\bm{z}_{t+1}+\dots+\bm{z}_{t+k})$ for enhver horisont $k$. Dette gøres eftersom det akkumulerede $k$-periode afkast fremkommer ved at tillægge én-periode log-afkast over $k$ perioder. Ved rekursion af Ligning \eqref{eq:1} fås
     \begin{align*}
         \bm{z}_{t+1}&=\bm{\Phi}_0+\bm{\Phi}_1 \bm{z}_t+\bm{v}_{t+1}\\
         \bm{z}_{t+2}&=\bm{\Phi}_0+\bm{\Phi}_1 \bm{z}_{t+1}+\bm{v}_{t+2}=\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_1 \bm{z}_t +\bm{\Phi}_1 \bm{v}_{t+1}+\bm{v}_{t+2}\\
         &\vdots\\
         \bm{z}_{t+k}&=\bm{\Phi}_0+\bm{\Phi}_1\bm{\Phi}_0+\bm{\Phi}_1^2\bm{\Phi}_0+\dots+\bm{\Phi}_1^{k-1}\bm{\Phi}_0+\bm{\Phi}_1^k \bm{z}_t+\bm{\Phi}_1^{k-1}\bm{v}_{t+1}+\bm{\Phi}_1^{k-2}\bm{v}_{t+2}+\dots+\bm{\Phi}_1 \bm{v}_{t+k-1}+\bm{v}_{t+k}.
     \end{align*}
-Herefter adderes udtrykkene for $\bm{z}_{t+1}$, $\bm{z}_{t+2},\dots,\bm{z}_{t+k}$ og det følger at
+Herefter tillægges udtrykkene for $\bm{z}_{t+1}$, $\bm{z}_{t+2},\dots,\bm{z}_{t+k}$ og det følger at
     \begin{align*}
         \bm{z}_{t+1}+\dots+\bm{z}_{t+k}=&\left(k+(k-1)\bm{\Phi}_1+(k-2)\bm{\Phi}_1^2+\dots+\bm{\Phi}_1^{k-1}\right)\Phi_0\\
         &+\left(\bm{\Phi}_1^k+\bm{\Phi}_1^{k-1}+\dots+\bm{\Phi}_1\right)\bm{z}_t\\
@@ -559,7 +559,7 @@ Nu kan de betingede $k$-periode momenter af tilstandsvektoren beregnes. Den beti
     \begin{equation}
         \mathbb{E}_t[\bm{z}_{t+1}+\dots+\bm{z}_{t+k}]=\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t,
     \end{equation}
-hvor antagelsen i \eqref{eq:2} benyttes.
+hvor antagelsen i Ligning \eqref{eq:2} benyttes.
 
 \vspace{5mm}
 
@@ -569,7 +569,7 @@ Den betingede varians er
         &=\mathbb{V}_t\left[\left(\sum_{i=0}^{k-1}(k-1)\bm{\Phi}_1^i\right)\bm{\Phi}_0+\left(\sum_{j=1}^k \bm{\Phi}_i^j\right)\bm{z}_t +\sum_{q=1}^k\left(\sum_{p=0}^{k-q}\bm{\Phi}_1^p \bm{v}_{t+q}\right)\right] \nonumber\\
         &=\mathbb{V}_t\left[\sum_{q=1}^k\left(\sum_{p=0}^{k-q} \bm{\Phi}_1^p \bm{v}_{t+q}\right)\right] \label{eq:3},
     \end{align}
-hvor de første to led i variansen forsvinder, da de er konstante eller kendte på tidspunkt $t$. Ved omskrivning af \eqref{eq:3} fås
+hvor de første to led i variansen forsvinder, da de er konstante eller kendte på tidspunkt $t$. Ved omskrivning af Ligning \eqref{eq:3} fås
     \begin{align*}
         \mathbb{V}_t[\bm{z}_{t+1}+\dots+\bm{z}_{t+k}]&=\mathbb{V}_t\big[\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-1}\big)\bm{v}_{t+1}+\big(I+\bm{\Phi}_1+\dots+\bm{\Phi}_1^{k-2}\big)\bm{v}_{t+2}\\
         &\hphantom{=}+\dots+\big(I+\Phi_1\big)\bm{v}_{t+k-1}+\bm{v}_{t+k}\big]\\
@@ -632,12 +632,12 @@ Herudover vil en VAR-investor måle risikoen for hvert aktiv -- på kort sigt --
 For det tredje vil VAR-investoren vide, at risikoen på lang sigt af hvert aktivs afkast vil være forskelligt fra hvert aktivs risiko på kort sigt. For den traditionelle investor med konstante forventede afkast (de historiske gennemsnit) vil variansen af hvert aktiv være proportional med den tid aktivet holdes i. Annualiserede varianser er uafhængige af tiden, som aktivet bliver holdt i, og derfor vil den traditionelle investor have et konstant tal, som sammenholder risikoen for alle perioder for aktivet. For VAR-investoren vil annualiserede varianser enten stige eller falde, når investeringsperioden øges. Et andet vigtig aspekt er, at annualiserede kovarianser også kan stige eller falde over investeringsperioden.
     
 ## Bias justeret VAR-model {#biasadjvar}
-Ved brug af den analytiske middelværdirette estimator foreslået af [@Pope1990], viser [@Engsted2012] at justering for bias i estimatorerne af middelværdi, i det multivariate setup, kan producere forskellige parameter estimater i den givne VAR($1$)-model. Benyttelse af ordinær lineær regressionsestimater kan resultere i bias pga. den begrænsede stikprøvestørrelse og af den årsag mislede inferensen gjort på baggrund af VAR($1$) estimaterne. Herudover kan variablene besidde autokorrelation, hvis de er udviser vedvarende effekter pga. stød til tidsserien. Den analytiske bias af OLS estimatoren, $\bm{\Phi}_1$, er udledt på baggrund af en Taylor udvidelse af høj orden. Dermed lader vi den analytiske bias, $\bm{B}_T$, være givet ved
+Ved brug af den analytiske middelværdirette estimator foreslået af [@Pope1990], viser [@Engsted2012] at justering for bias i estimatorerne af middelværdi, i det multivariate setup, kan producere forskellige parameter estimater i den givne VAR($1$)-model. Benyttelse af *Ordinary Least Squares* regressionsestimater kan resultere i bias pga. den begrænsede stikprøvestørrelse og af den årsag mislede inferensen gjort på baggrund af VAR($1$) estimaterne. Herudover kan variablene besidde autokorrelation, hvis de udviser vedvarende effekter pga. stød til tidsserien. Den analytiske bias af OLS estimatoren, $\bm{\Phi}_1$, er udledt på baggrund af en Taylor udvidelse af høj orden. Dermed lader vi den analytiske bias, $\bm{B}_T$, være givet ved
 \begin{equation}
 \bm{B}_T=-\frac{\bm{b}}{T}+ O\left(T^{-\frac{3}{2}}\right), \label{eq:bias}
 \end{equation}
 
-hvor $T$ er sample size og tælleren er lig
+hvor $T$ er stikprøvestørrelsen og tælleren er lig
 $$\bm{b}=\bm{\Sigma}_v\left(\left(\bm{I}-\bm{\Phi}_1'\right)^{-1}+\bm{\Phi}_1'\left(\bm{I}-\left(\bm{\Phi}_1'\right)^2\right)+\sum_{i=1}^m \lambda \left(\bm{I}-\lambda\bm{\Phi}_1'\right)^{-1}\right)\bm{\Sigma}_z^{-1}.$$
 
 Her er $\bm{\Sigma}_v$ den betingede kovariansmatrix af $v_t$, $\lambda$ er vektoren af egenværdier af $\bm{\Phi}_1$, $\bm{I}$ er identitetsvektoren og $m$ er antallet af tilstandsvariable i $\bm{z}$. Bias'en i Ligning \@ref(eq:bias) falder med raten $T^{-\frac{3}{2}}$, som $T\rightarrow \infty$. Den analytiske formel af [@Pope1990] giver ikke bias justerede afskæringer, $\bm{\Phi}_0$, men som [@Engsted2012] pointerer vil dette problem automatisk blive løst af de bias justerede hældninger. Dette sker eftersom det aritmetiske gennemsnit af en stationær variabel, er et ikke-biased estimat af den ubetingede sande middelværdi, og samtidig estimerer OLS præcis middelværdien af variablene i VAR-modellen, ved at fjerne første observation. Altså vil en VAR-model med bias justerede hældninger medføre ikke-biased estimater af $\bm{\Phi}_0$, givet modelrestriktionen, at de ubetingede middelværdier af variablene -- udledt fra VAR koefficienterne -- er lig deres aritmetiske gennemsnit
@@ -647,10 +647,10 @@ Her er $\bm{\Sigma}_v$ den betingede kovariansmatrix af $v_t$, $\lambda$ er vekt
 ## Opsummering
 
 # Porteføljeteori {#porteteori}
-I dette kapitel udvides teorien fra Kapitel \@ref(unteo). Mere specifikt sammenkobles porteføljeteorien fra Sektion \@ref(myoinv) og nytteteorien fra Sektion \@ref(typnyt). Dette gøres på baggrund af *CRRA*-nytte, i tilfældet, hvor investoren kan rebalancere sin portefølje periodisk, og i det restringerede tilfælde, hvor ingen rebalancering er tilladt. Herefter beskrives den analytiske løsning til det dynamiske porteføljeproblem foreslået af [@JurVic2011].
+I dette kapitel udvides teorien fra Kapitel \@ref(unteo). Mere specifikt sammenkobles porteføljeteorien fra Sektion \@ref(myoinv) og nytteteorien fra Sektion \@ref(typnyt). Dette gøres på baggrund af *CRRA*-nytte, i tilfældet, hvor investoren kan rebalancere sin portefølje periodisk og i det restringerede tilfælde, hvor ingen rebalancering er tilladt. Herefter beskrives den analytiske løsning til det dynamiske porteføljeproblem foreslået af [@JurVic2011].
 
 ## Den dynamiske portefølje {#crraportef}
-I det følgende vil porteføljevalget under antagelsen, at investoren har potens nytte, dvs. *CRRA*-nytte samt, at afkastene på alle aktivklasser er lognormale.
+I det følgende vil porteføljevalget udledes under antagelsen, at investoren har potens nytte dvs. *CRRA*-nytte samt, at afkastene på alle aktivklasser er lognormale.
 
 Først antages, at afkastet på investorens portefølje er lognormal, dette betyder at $W_{t+1}$ ligeledes er lognormal. Under antagelsen om potens nytte, kan vi omskrive Maksimeringsproblemet \@ref(eq:Nyttemaks) til
 \begin{align}
@@ -658,7 +658,7 @@ Først antages, at afkastet på investorens portefølje er lognormal, dette bety
 &\text{ubb.}\,\,W_{t+1}=(1+R_{p,t+1})W_t.\notag
 \end{align}
 
-Maksimering af ovenstående forventning er ækvivalent til at maksimere log af forventningen, eftersom log-funktionen er strengt voksende, se evt. Figur \@ref(fig:Nyt), som er tegnet på baggrund af log-funktionen. Derudover kan: $\tfrac{1}{1-\gamma}$ og $-1$ fjernes fra Maksimeringsproblemet, eftersom de er konstante og derfor ikke vil påvirke optimum. Givet af $W_{t+1}$ er lognormal, kan resultatet fra Appendiks \@ref(underligteo) anvendes og dermed opnå
+Maksimering af ovenstående forventning er ækvivalent til at maksimere log af forventningen, eftersom log-funktionen er strengt voksende, se evt. Figur \@ref(fig:Nyt), som er tegnet på baggrund af log-funktionen. Derudover kan: $\tfrac{1}{1-\gamma}$ og $-1$ fjernes fra Maksimeringsproblemet, eftersom de er konstante og derfor ikke vil påvirke optimum. Givet at $W_{t+1}$ er lognormal, kan resultatet fra Appendiks \@ref(underligteo) anvendes og dermed fås
 \begin{align}
 &\max \log\left(\mathbb{E}_t\left[W_{t+1}^{1-\gamma}\right]\right)=(1-\gamma){E}_t\left[w_{t+1}\right]+\frac{1}{2}(1-\gamma)^2\sigma_{wt}^2 (\#eq:CRRAmakslog)\\
 &\text{ubb.}\,\,w_{t+1}=r_{p,t+1} + w_t.\notag
@@ -679,7 +679,7 @@ fordi porteføljeafkastet er antaget til at være lognormal. Altså kan Maksimer
 \max\mathbb{E}_t[1+R_{p,t+1}] - \frac{1}{2}\gamma\sigma_{pt}^2. (\#eq:CRRAmakslog3)
 \end{equation}
 
-Dermed opnås det familiære maksimeringsproblem fra middelværdi-varians analysen, Sektion \@ref(myoinv). Altså vil investoren maksimere bytteforholdet mellem den forventede middelværdi og variansen på porteføljen. Denne afvejning er igen lineær, og *RRA*-koefficienten $\gamma$ spiller samme rolle som parameteren $k$ i middelværdi-varians analysen. Fra ovenstående ses også, at variansen på porteføljen bliver straffet af en faktor på $\tfrac{\text{RRA}}{2}$.
+Dermed opnås det familiære maksimeringsproblem fra middelværdi-varians analysen, Sektion \@ref(myoinv). Altså vil investoren maksimere bytteforholdet mellem den forventede middelværdi og variansen på porteføljen. Denne afvejning er igen lineær, og *RRA*-koefficienten, $\gamma$, spiller samme rolle som parameteren $k$ i middelværdi-varians analysen. Fra ovenstående ses også, at variansen på porteføljen bliver straffet af en faktor på $\tfrac{\text{RRA}}{2}$.
 
 Risikoaversion kan også analyseres på baggrund af Maksimeringsproblemet \@ref(eq:CRRAmakslog2).
 
@@ -713,16 +713,16 @@ Den optimale løsning vil være givet ved
 \end{equation}
 
 Som igen er ækvivalent med den optimale løsning, Ligning \@ref(eq:Multalpha), for middelværdi-varians analysen i det multivariate tilfælde. På samme måde som i middelværdi-varians analysen, har løsningen egenskaben, at koefficienten for relativ risikoaversion, $\gamma$, kun påvirker den overordnede skalering af positionen i det risikobærende aktiv, men ikke kompositionen. Dette er ensbetydende med, at \textit{The Mutual Fund Seperation Theorem}, [@Tobin1958], også holder i den lognormale model med potens nytte. Et mere generelt tilfælde end ovenstående, er når der ikke eksisterer et risikofrit aktiv, og man da i stedet må benytte et risikobærende *benchmark*-afkast, $r_{b,t+1}$, da bliver løsningen
-\begin{equation}
+\begin{equation*}
 \bm{\alpha}_t=\frac{1}{\gamma}\bm{\Sigma}^{-1}\left(\mathbb{E}_t[\bm{r}_{t+1}]-r_{b,t+1}\bm{\ell}+\frac{1}{2}\bm{\sigma}_t^2\right)+\left(1-\frac{1}{\gamma}\right)\left(-\bm{\Sigma}_t^{-1}\bm{\sigma}_{b,t}\right).
-\end{equation}
+\end{equation*}
 
 ## Model for $k$-perioder {#modkper}
 Analysen har indtil videre benyttet den restriktive antagelse, at investoren kun har en én-periodes investeringshorisont. Et mere realistisk tilfælde, er at antage, at investorens forventede nytte er udledt på baggrund af formuefordeling flere perioder fra nu. I flere-periode modellen, antages det, at afkast på investeringer bliver geninvesteret, dette implicerer den nye budgetbegrænsning
-\begin{align}
-W_{t+k}&=R_{pk,t+k}W_t \notag\\
+\begin{align*}
+W_{t+k}&=R_{pk,t+k}W_t\\
 &=R_{p,t+1}R_{p,t+2}\cdots R_{p,t+k}W_t.
-\end{align}
+\end{align*}
 
 hvor $k$ er investeringshorisonten og $R_{pk,t+k}$ noterer det kumulative afkast over perioderne fra $t$ til $t+k$. Ved brug af log, kan det kumulative $k$-periode afkast simplificeres til summen af $k$ én-periode log afkast
 \begin{equation}
@@ -743,10 +743,10 @@ Altså vil investoren vælge den samme portefølje over hele deres investeringsh
 Antagelsen om, at ingen rebalancering finder sted over tid, synes at være i modstrid med virkelige observationer. Derfor arbejdes videre med en teoretisk ramme, som tillader periodisk rebalancering af investorporteføljen. Den første som beskrev maksimering af nytte ift. terminal formue var [@Mossin1968], som beskriver problemet i diskrettid. [@Mossin1968] noterede sig, at enhver følge af portefølje beslutninger skal være betingede af resultatet fra tidligere perioder, men på samme tid tage hensyn til information vedr. de fremtidige fordelinger af afkast. [@Samuelson1969] udvidede denne teori til at medtage forbrug, mens [@Merton1969; @Merton1971] beskrev en forbrugsbaseret model i kontinuert tid. I det følgende vil to eksempler med traktable løsninger blive præsenteret. Disse eksempler medfører, at investoren handler myopisk, selvom der er mulighed for rebalancering.
 
 Først præsenteres den generelle potens nytte investor med *i.i.d.* afkast. Givet at investoren har potens nytte og at afkastene på aktiverne er *i.i.d.*, er det muligt at vise, at investorens porteføljevalg vil blive myopiske. Dette er også kendt som den første *Samuelson-Merton* betingelse. En intuitiv forklaring er som følger: Givet *i.i.d.* afkast vil investoren ikke opnå ny information vedr. log afkastfordelingen over tid. Dernæst haves at *RRA* er konstant, hvilket medfører at porteføljevalget er uafhængig af formueniveauet. Når forskellige porteføljestrategier, $\bm{\alpha}_t$ for $t=1,\dots,k$, tillades kan $2$-periode portefølje merafkastet omskrives til
-\begin{align}
+\begin{align*}
 r_{p2,t+2}-2r_0&=(r_{p,t+1}-r_0)+(r_{p,t+2}-r_0)\\
 &= \bm{\alpha}_t'(\bm{r}_{t+1}-r_0\bm{\ell})+\frac{1}{2}\bm{\alpha}_t'\bm{\sigma}^2-\frac{1}{2} \bm{\alpha}_t'\bm{\Sigma}\bm{\alpha}_t + \bm{\alpha}_{t+1}'(\bm{r}_{t+2}-r_0\bm{\ell})+\frac{1}{2}\bm{\alpha}_{t+1}'\bm{\sigma}^2-\frac{1}{2} \bm{\alpha}_{t+1}'\bm{\Sigma}\bm{\alpha}_{t+1}
-\end{align}
+\end{align*}
 
 Ovenstående kan generaliseres til $k$-perioder. Den betingede varians af $2$-periode log porteføljeafkastet bliver
 $$\mathbb{V}_t[r_{p2,t+2}]=\bm{\alpha}_t'\bm{\Sigma}\bm{\alpha}_t+\bm{\alpha}_{t+1}'\bm{\Sigma}\bm{\alpha}_{t+1},$$
@@ -763,7 +763,7 @@ Benyttelse af ovenstående momenter giver følgende maksimeringsproblem for $2$-
 
 Ovenstående medfører, at investorer med $\gamma>0$ vil vælge porteføljer med en lavere varians for et givet varians justeret forventet afkast. Men den justerede middelværdi afhænger kun af summen af de to vægte $(\bm{\alpha}_t'+\bm{\alpha}_{t+1}')$. Investorerne kan dermed justere de individuelle vægte og for den faste sum minimere variansen. I optimum vil variansen være minimeret ved at sætte $\bm{\alpha}_t=\bm{\alpha}_{t+1}$. Dette betyder, at ingen rebalancering er optimal på trods af muligheden i hver periode. Dette medfører altså, at den langsigtede investor handler myopisk, ***når*** afkastene på aktiverne er *i.i.d.* over tid. 
 
-Den anden Samuelson-Merton betingelse som foranlediger til det myopiske porteføljevalg er baseret på faktummet, at en investor har log nytte, dvs. potens nytte, hvor $\gamma=1$. Her vil porteføljevalget være myopisk, uanset om aktiv afkastene er *i.i.d.* Argumenteret for dette er, at en log nytte investor vælger en portefølje, som maksimerer det forventede logafkast. Ligning \@ref(eq:sumportk) viser at $k$-periode log afkastet er summen af én-periode logafkast. Summen bliver maksimeret ved at maksimere hvert element seperat, siden at porteføljen frit kan blive valgt hver periode, altså vil hver én-periodes maksimering lede til det myopiske valg.
+Den anden *Samuelson-Merton* betingelse som foranlediger til det myopiske porteføljevalg er baseret på faktummet, at en investor har log nytte, dvs. potens nytte, hvor $\gamma=1$. Her vil porteføljevalget være myopisk, uanset om aktiv afkastene er *i.i.d.* Argumenteret for dette er, at en log nytte investor vælger en portefølje, som maksimerer det forventede logafkast. Ligning \@ref(eq:sumportk) viser at $k$-periode log afkastet er summen af én-periode logafkast. Summen bliver maksimeret ved at maksimere hvert element seperat, siden at porteføljen frit kan blive valgt hver periode, altså vil hver én-periodes maksimering lede til det myopiske valg.
 
 ## Rekursiv løsning {#rekloes}
 
@@ -813,11 +813,11 @@ Den generelle rekursive løsning til det dynamiske porteføljeproblem er givet v
 
 hvor $\bm{\Sigma}_x=\begin{pmatrix}\bm{\sigma}_0x & \bm{\Sigma} & \bm{\Sigma}_{xs}'\end{pmatrix}$ og $B_1^{\tau-1}$, $B_2^{\tau-1}$ samt $B_3^{\tau-1}$ er funktioner afhængende af: den resterende investeringshorisont, $\tau$, *RRA*-parameteren, $\gamma$, samt koefficienterne fra VAR-modellen, [@JurVic2011]. Se Appendiks \@ref(optdynstrategi), for den fulde udledning.
 
-Ovenstående Ligning \@ref(eq:jurvicalpha) giver den fulde analytiske løsning til det intertemporale porteføljeproblem fra Ligning \@ref(eq:jurvaegt2). Den optimale portefølje er en sum af to komponenter. Den første del af summen er identisk til den én-periode myopiske portefølje fra Ligning \@ref(eq:Potmultalpha). Den anden del af summen, består af det såkaldte intertemporale *hedging demand* for risikobærende aktiver, [@Merton1969; @Merton1971; @Merton1973]. Herudover viser løsningen, at den myopiske del af det totale porteføljevalg er uafhængigt af den resterende tid til investeringshorisonten, $\tau$. Den viser også at den myopiske del er den totale porteføljedel for investorer med log nytte, $\gamma=1$. Hvilket også er konsistent med intutionen givet i Sektion \@ref(medperireb), at log nytte investorer ikke forholder sig til investeringshorisonten.
+Ovenstående Ligning \@ref(eq:jurvicalpha) giver den fulde analytiske løsning til det intertemporale porteføljeproblem fra Ligning \@ref(eq:jurvaegt2). Den optimale portefølje er en sum af to komponenter. Den første del af summen er identisk til den én-periode myopiske portefølje fra Ligning \@ref(eq:Potmultalpha). Den anden del af summen, består af det såkaldte *intertemporale hedging demand* for risikobærende aktiver, [@Merton1969; @Merton1971; @Merton1973]. Herudover viser løsningen, at den myopiske del af det totale porteføljevalg er uafhængigt af den resterende tid til investeringshorisonten, $\tau$. Den viser også at den myopiske del er den totale porteføljedel for investorer med log nytte, $\gamma=1$. Hvilket også er konsistent med intutionen givet i Sektion \@ref(medperireb), at log nytte investorer ikke forholder sig til investeringshorisonten.
 
 Komponentet som repræsenterer det *intertemporale hedging demand* er en funktion af *RRA*-koefficienten, koefficienterne fra VAR-systemet og koefficienterne af *value*-funktionen fra Appendiks \@ref(optdynstrategi), som selv er funktionern af koefficienterne fra VAR-systemet, og den tilbageværende investeringshorisont, $\tau$. Altså er det gennem det *intertemporale hedging demand*, at investeringshorisonten påvirker porteføljeallokeringen af den dynamiske rebalancerende investor.
 
-En begrænsning af den analytiske løsning udledt ovenfor, er manglen på kortsalgs bibetingelser. Altså, hvordan porteføljevægtene vil være anderledes, givet at investoren står overfor en kortsalgsrestriktion. For at drage inferens om en kortsalgs restringeret investor laves en sammenlingning, hvor porteføljevægtene fra Ligning \@ref(eq:jurvicalpha) trunkeres givet, at de er negative. Herefter normaliseres så de benytter hele formuen. Nedenstående viser beregningen
+En begrænsning af den analytiske løsning udledt ovenfor, er manglen på kortsalgs bibetingelser. Altså, hvordan porteføljevægtene vil være anderledes, givet at investoren står overfor en kortsalgsrestriktion. For at drage inferens om en kortsalgs restringeret investor laves en sammenlingning, hvor porteføljevægtene fra Ligning \@ref(eq:jurvicalpha) trunkeres givet, at de er negative. Herefter normaliseres så hele formuen benyttes. Nedenstående viser beregningen
 \begin{equation}
 \alpha_{i,t}=\frac{\max(0,\alpha_{i,t})}{\sum_{i=1}^n \max(0,\alpha_{i,t})}.(\#eq:kortsalgsrestr)
 \end{equation}
