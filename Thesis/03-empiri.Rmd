@@ -130,6 +130,8 @@ Slutteligt foretages en sidste *Variance Inflation Factor* analyse, som et sidst
 
 ## Opsummering
 
+I dette kapitel blev de nødvendige værktøjer til den videre analyse præsenteret. Heriblandt blev univariate og multiple regressioner, normalitetstest samt forskellige stationaritetstest defineret. Derudover blev en modelselektionsprocedure præsenteret, som både havde kvantitative og kvalitative aspekter. Disse værktøjer skal tilsammen udgøre grundlaget for den endelige VAR(1)-model.
+
 # Data beskrivelse {#kapiteldatab}
 Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte data -- mht. både aktivklasser og forklarende variable -- til den empiriske analyse. Alle variable består af kvartalsvise observationer over tidsperioden 1954 2. kvartal til 2018 4. kvartal. Slut kvartalet er valgt grundet dataophør. Start kvartalet er valgt på baggrund af, at den amerikanske centralbank, *Federal Reserve System*, kort tid forinden, havde givet den amerikanske korte rente, lov til at variere frit i markedet. Variablene er vist i niveauer. Kapitlet er organiseret som følger. Sektion \@ref(aktivklasser) beskriver detaljeret hver aktivklasse og dets tilhørende beskrivende statistik samt *Jarque-Beta* testresultaterne. Sektion \@ref(pvariable) indeholder en tilsvarende beskrivelse af de tilhørende tilstandsvariable samt testresultater. Korrelationen mellem aktivklasserne og tilstandsvariablene undersøges i Sektion \@ref(korr). Sektion \@ref(ops) giver en opsummering af kapitlets statistiske fund. Tidsserien for hver aktivklasse og prædiktionsvariabel visualiseres med tilhørende recessionsperioder som defineret af [@NBER2020].
 
@@ -137,7 +139,7 @@ Dette kapitel har til formål at give en uddybende beskrivelse af det anvendte d
 Mængden af aktivklasser, som pt. er tilgængelige på finansmarkedet har aldrig været større. Udover aktier og obligationer, findes et væld af eksponeringsområder og/eller finansielle produkter heriblandt ejendom, derivater, futures, forwards, kryptovaluta, valuta mm. For at holde denne analyse på et simpelt niveau medtages de mest anvendte aktivklasser for institutionelle og private investorer. Hvilket også er de mest anvendte i eksisterende litteratur, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. I det følgende vil egenskaberne for aktivklasserne: det risikofrie afkast, merafkastet på aktier, merafkastet på statsobligationer og merafkastet på virksomhedsobligationer beskrives og derudover vil den tilhørende beskrivende statistik for hvert aktiv belyses.
 
 ### Det risikofrie afkast -- $r_{t+1}^{\textnormal{rf}}$
-Essencen af et risikofrit aktiv er at repræsentere et afkast med varians lig nul. Dette betegnes undertiden også som et sikkert afkast. Udover at give investoren muligheder for indlån, kan investoren også udvide sine investeringsmuligheder ved at låne til den risikofrie rente, dvs. have en kort position i det risikofrie aktiv. Et ofte valgt aktiv i litteraturen, som en proxy for det risikofrie aktiv, er de kortefristede statsværdipapirer, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. Disse betegnes i U.S.A. som *T-Bills*. Valget af netop dette aktiv sker på baggrund af den historiske og nuværende meget lave risiko for statskonkurser, [@Beers2017]. Eksempelvis gik den danske stat tilnærmelsesvis senest bankerot under *Statsbankerotten* i 1813 efter *Napoleonskrigene*. Derfor benyttes det amerikanske statspapir med kort løbetid, mere præcist anvendes den 90-dages amerikanske *T-Bill*, som en proxy for det risikofrie aktiv. Data over afkast er fra [@CRSPt90] hentet gennem [@WRDSt90]. Log netto afkastet af det risikofrie aktiv beregnes som log forskellen mellem det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill* og den kvartalsvise inflationsrate, målt via *Consumer Price Index*. Nettoafkastet har et kvartalsvist justeret afkast på `r round(DESCRIPTIVE$adj_mean[1]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[1]*100, 1)`$\%$. Som det kan ses på kvantilerne har det risikofrie afkast givet negativt afkast sommetider. Et histogram indikerer en højreskæv fordeling af afkast, hvilket også underbygges af en skævhed på `r round(DESCRIPTIVE$skew[1], 3)`. Med en kurtosis på `r round(DESCRIPTIVE$kurt[1], 3)` haves en leptokurtisk fordeling, med tykkere/længere haler og et smallere samt højere cetrum. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:NET-TB-tids) viser et plot over tidsserien, Figur \@ref(fig:NET-TB-AK) viser et plot over autokorrelationen for tidsserien -- som ikke ser problematisk ud -- og Figur \@ref(fig:NET-TB-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
+Essencen af et risikofrit aktiv er at repræsentere et afkast med varians lig nul. Dette betegnes undertiden også som et sikkert afkast. Udover at give investoren muligheder for indlån, kan investoren også udvide sine investeringsmuligheder ved at låne til den risikofrie rente, dvs. have en kort position i det risikofrie aktiv. Et ofte valgt aktiv i litteraturen, som en proxy for det risikofrie aktiv, er de kortefristede statsværdipapirer, [@CampVic2003; @CampVic1999], [@JurVic2011], [@Engsted2012], [@CampVicCha2003]. Disse betegnes i U.S.A. som *T-Bills*. Valget af netop dette aktiv sker på baggrund af den historiske og nuværende meget lave risiko for statskonkurser, [@Beers2017]. Eksempelvis gik den danske stat tilnærmelsesvis senest bankerot under *Statsbankerotten* i 1813 efter *Napoleonskrigene*. Derfor benyttes det amerikanske statspapir med kort løbetid, mere præcist anvendes den 90-dages amerikanske *T-Bill*, som en proxy for det risikofrie aktiv. Data over afkast er fra [@CRSPt90] hentet gennem [@WRDSt90]. Log netto afkastet af det risikofrie aktiv beregnes som log forskellen mellem det kvartalsvise brutto afkast på den amerikanske 90-dages *T-Bill* og den kvartalsvise inflationsrate, målt via *Consumer Price Index*. Nettoafkastet har et kvartalsvist justeret afkast på `r round(DESCRIPTIVE$adj_mean[1]*100, 1)`$\%$ med en kvartalsvis volatilitet på `r round(DESCRIPTIVE$sd[1]*100, 1)`$\%$. Som det kan ses på kvantilerne har det risikofrie afkast givet negativt afkast sommetider. Et histogram indikerer en højreskæv fordeling af afkast, hvilket også underbygges af en skævhed på `r round(DESCRIPTIVE$skew[1], 3)`. Med en kurtosis på `r round(DESCRIPTIVE$kurt[1], 3)` haves en leptokurtisk fordeling, med tykkere/længere haler og et smallere samt højere centrum. Disse tal er konsistente med [@CampVic2003]. Figur \@ref(fig:NET-TB-tids) viser et plot over tidsserien, Figur \@ref(fig:NET-TB-AK) viser et plot over autokorrelationen for tidsserien -- som ikke ser problematisk ud -- og Figur \@ref(fig:NET-TB-HIST) viser et plot over histogrammet for tidsserien med tilhørende *kernel* tæthed samt tæthed for en normalfordelt stokastisk variabel med middelværdi og standard afvigelse lig ovenstående estimater.
 
 ```{r NET-TB-tids, echo=FALSE, fig.align='center', fig.cap="Tidsserie af log netto renten.", fig.width=18, fig.height=5, fig.pos='H'}
 ggplot(data) +
@@ -2014,8 +2016,18 @@ ggplot(data) +
   scale_linetype_manual(values=c("solid", "dashed"))+ 
   theme_bw()+
   theme(
-    panel.grid.minor = element_blank()
-  ) + 
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill = "white",
+                                     linetype="solid",
+                                     size = 0.1,
+                                     colour = "black"),
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size=20)
+  ) +  
   ylab(TeX("$r_{t}^{rf}$")) +
   xlab("År")+
   labs(color = "Aktiv",
@@ -2039,7 +2051,17 @@ ggplot(data) +
   scale_linetype_manual(values=c("solid", "dashed"))+ 
   theme_bw()+
   theme(
-    panel.grid.minor = element_blank()
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill = "white",
+                                     linetype="solid",
+                                     size = 0.1,
+                                     colour = "black"),
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size=20)
   ) + 
   ylab(TeX("$r_{t}^{rf}$")) +
   xlab("År")+
@@ -2064,7 +2086,17 @@ ggplot(data) +
   scale_linetype_manual(values=c("solid", "dashed"))+ 
   theme_bw()+
   theme(
-    panel.grid.minor = element_blank()
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill = "white",
+                                     linetype="solid",
+                                     size = 0.1,
+                                     colour = "black"),
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size=20)
   ) + 
   ylab(TeX("$r_{t}^{rf}$")) +
   xlab("År")+
@@ -2089,8 +2121,18 @@ ggplot(data) +
   scale_linetype_manual(values=c("solid", "dashed"))+ 
   theme_bw()+
   theme(
-    panel.grid.minor = element_blank()
-  ) + 
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill = "white",
+                                     linetype="solid",
+                                     size = 0.1,
+                                     colour = "black"),
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size=20)
+  ) +  
   ylab(TeX("$r_{t}^{rf}$")) +
   xlab("År")+
   labs(color = "Aktiv",
@@ -2114,7 +2156,17 @@ ggplot(data) +
   scale_linetype_manual(values=c("solid", "dashed"))+ 
   theme_bw()+
   theme(
-    panel.grid.minor = element_blank()
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill = "white",
+                                     linetype="solid",
+                                     size = 0.1,
+                                     colour = "black"),
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size=20)
   ) + 
   ylab(TeX("$r_{t}^{rf}$")) +
   xlab("År")+
@@ -2139,7 +2191,17 @@ ggplot(data) +
   scale_linetype_manual(values=c("solid", "dashed"))+ 
   theme_bw()+
   theme(
-    panel.grid.minor = element_blank()
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill = "white",
+                                     linetype="solid",
+                                     size = 0.1,
+                                     colour = "black"),
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size=20)
   ) + 
   ylab(TeX("$r_{t}^{rf}$")) +
   xlab("År")+
@@ -2164,7 +2226,17 @@ ggplot(data) +
   scale_colour_manual(values=c("black","red"))+
   scale_linetype_manual(values=c("solid", "dashed"))+ 
   theme(
-    panel.grid.minor = element_blank()
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill = "white",
+                                     linetype="solid",
+                                     size = 0.1,
+                                     colour = "black"),
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+    legend.position="bottom",
+    legend.key.size = unit(4, "line"),
+    legend.title = element_blank(),
+    legend.text=element_text(size=20)
   ) + 
   ylab(TeX("$r_{t}^{rf}$")) +
   xlab("År")+

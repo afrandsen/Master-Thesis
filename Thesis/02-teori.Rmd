@@ -206,7 +206,7 @@ U(W_{t+1})=aW_{t+1}-bW_{t+1}^2. (\#eq:Kvadnytte)
 Til forskel for nedenstående nyttefunktioner kræver kvadratisk nytte ikke fordelingsmæssige antagelser vedr. afkast af aktiverne. 
 
 Under kvadratisk nytte vil maksimering af forventet nytte, som i Maksimeringsproblemet \@ref(eq:Nyttemaks), være ækvivalent til at maksimere en lineær kombination af middelværdi og varians, som i Maksimeringsproblemet \@ref(eq:Statmaks). Middelværdien af Ligning \@ref(eq:Kvadnytte) giver den forventede nytte
-$$\mathbb{E}[U(W_{t+1})]=\mathbb{E}[W_{t+1}]-b(\mathbb{V}[W_{t+1}]+\mathbb{E}[W_{t+1}]^2),$$
+$$\mathbb{E}[U(W_{t+1})]=a\mathbb{E}[W_{t+1}]-b(\mathbb{V}[W_{t+1}]+\mathbb{E}[W_{t+1}]^2),$$
 
 og er dermed en funktion afhængende af både forventet formue og variansen af formue [@Munk2017]. Herudover vil *ARA* samt *RRA* begge være stigende i formue under kvadratisk nytte. Som argumenteret ovenfor vil stigende *ARA* være uhensigtmæssig. 
 
@@ -260,7 +260,7 @@ hvilket er en geometrisk og kontinuert følge, som dermed overholder markedsinva
 
 ## Opsummering {#opsunteo}
 
-Dette kapitel præsenterede den grundliggende teori til porteføljeproblemet. 
+Dette kapitel præsenterede den grundliggende teori til porteføljeproblemet. Essentielle koncepter som: den myopiske investor, definition af nytte, definition af risikoaversion og fordelinger af afkast blev præsenteret. Disse initielle fund forklarer brugen af log afkast, og hvorfor afkast antages til at være *i.i.d.*. Gennem *CRRA*-nytte kan en traktabel analyse derfor nu udføres. 
 
 # Afkastrelationer {#afkrel}
 I Kapitel \@ref(unteo), blev den grundliggende teori bag porteføljevalget beskrevet. Som beskrevet kræver de underliggende modeller, at afkast er lognormalfordelte, og af den grund må afkastserierne transformeres. Mere specifikt blev investoren med potens nytte bl.a. beskrevet, her var det et krav, at de anvendte variable var logbaseret. Dette er specielt anvendeligt, når investorens porteføljevalg skal modelleres på lang sigt. Afkastprædiktabilitet lægger som navnet, op til at afkast *er* prædiktable. En forkastelse af *i.i.d.* antagelsen vil implicit medføre afkastprædiktabilitet. Dette kapitel vil fungere som en teoretisk gennemgang af udledningen af de specifikke aktivklasser som investoren står overfor, når porteføljevalget skal tages. For at udlede approksimative analytiske løsninger på tværs aktivklasser, vil den såkaldte loglineære relation af afkast blive anvendt, [@Campbell1988]. [@Campbell1988] viste i tilfældet af aktieafkast, hvordan en approksimativ loglineær relation af aktieafkast kunne etableres. På baggrund af denne relation har nyere litteratur anvendt deres metode på andre klasser af aktiver. At kunne etablere approksimative analytiske løsninger for alle aktivklasser er et afgørende element for at kunne skabe en robust VAR(1)-model i Kapitel \@ref(underligmodel). Sektion \@ref(opsafkrel) vil opsummere kapitlets fund.
@@ -646,6 +646,8 @@ Her er $\bm{\Sigma}_v$ den betingede kovariansmatrix af $v_t$, $\lambda$ er vekt
 
 ## Opsummering
 
+Dette kapitel præsenterede det dynamiske system, som havde til formål at modellere afkast på baggrund af en række tilstandsvariable. Den definerede model var en såkaldt *Vector Autoregressive Model* af første orden. Derudover sluttede kapitlet af med en beskrivelse af, hvordan bias-justerede koefficientestimater i VAR(1)-modellen kunne opnås. Bias-justering af estimaterne har til formål at udlede en mere pålidelig portefølje allokering.
+
 # Porteføljeteori {#porteteori}
 I dette kapitel udvides teorien fra Kapitel \@ref(unteo). Mere specifikt sammenkobles porteføljeteorien fra Sektion \@ref(myoinv) og nytteteorien fra Sektion \@ref(typnyt). Dette gøres på baggrund af *CRRA*-nytte, i tilfældet, hvor investoren kan rebalancere sin portefølje periodisk og i det restringerede tilfælde, hvor ingen rebalancering er tilladt. Herefter beskrives den analytiske løsning til det dynamiske porteføljeproblem foreslået af [@JurVic2011].
 
@@ -825,3 +827,5 @@ En begrænsning af den analytiske løsning udledt ovenfor, er manglen på kortsa
 På denne måde opnås en repræsentativ portefølje, som kan benyttes til at besvare spørgsmålet, hvordan porteføljebeslutingen ændrer sig, ifm. en kortsalgsrestriktion.
 
 ## Opsummering
+
+Dette kapitel præsenterede det generelle tilfælde af dynamisk portefølje allokering defineret af [@CampVic2003], som undersøger en investor med endelige investeringshorisont og *CRRA*-nytte. Deres analyse er baseret på middelværdi-varians analysen af [@Markowitz1952], denne er til gengæld mangelfuld. Middelværdi-varians analysen modellere kun det statiske valg. For at kunne skabe en portefølje allokering ud fra antagelsen om tidsvarierende afkast, benyttes den teoretiske ramme præsenteret af [@JurVic2011]. Slutteligt præsenteres, hvordan en kortsalgsrestriktion kan medtages i modellen. 
