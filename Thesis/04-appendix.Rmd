@@ -159,10 +159,10 @@ Den fundamentale relation mellem aktieafkast og udbytte udledes i denne sektion.
 
 Definitionen af brutto aktieafkastet fra tidspunkt $t$ til $t+1$ er
 \begin{equation}
-1+R_{t+1}=\frac{P_{t+1}+D_{t+1}}{P_t}.
+1+R_{t+1}=\frac{P_{t+1}+D_{t+1}}{P_t}. (\#eq:fundaafk)
 \end{equation}
 
-Ved at tage logfunktionen af Ligning ?? kan følgende udledning opnås
+Ved at tage logaritmefunktionen på Ligning \@ref(eq:fundaafk) kan følgende udledning opnås
 \begin{align*}
 \log\left(1+R_{t+1}\right)&=\log\left(\frac{P_{t+1}+D_{t+1}}{P_t}\right)\\
 &=\log\left(P_{t+1}+D_{t+1}\right)-\log\left(P_t\right)\\
@@ -171,9 +171,11 @@ Ved at tage logfunktionen af Ligning ?? kan følgende udledning opnås
 \end{align*}
 
 Dette tillader følgende form ved brug af lognotationen
-$$r_{t+1}=p_{t+1} +\log\left(1+\exp(d_{t+1}-p_{t+1})\right)-p_t$$
+\begin{equation}
+r_{t+1}=p_{t+1} +\log\left(1+\exp(d_{t+1}-p_{t+1})\right)-p_t. (\#eq:logafknl)
+\end{equation}
 
-Ovenstående Ligning ?? viser den ikke-lineære relatioen mellem log afkastet og log udbyttet, altså er det andet led på højreside ikke-lineært, $\log\left(1+\exp(d_{t+1}-p_{t+1})\right)$. Ved brug af en første ordens Taylor udvidelse omkring middelværdien, $\overline{d_t-p_t}$, kan denne relation approksimeres. Herfra sættes $x=\log\left(1+\exp(d_{t+1}-p_{t+1})\right)$.
+Ovenstående Ligning \@ref(eq:logafknl) viser den ikke-lineære relation mellem log afkastet og log udbyttet, altså er det andet led på højreside ikke-lineært, $\log\left(1+\exp(d_{t+1}-p_{t+1})\right)$. Ved brug af en første ordens Taylor udvidelse omkring middelværdien, $\overline{d_t-p_t}$, kan denne relation approksimeres. Herfra sættes $x=\log\left(1+\exp(d_{t+1}-p_{t+1})\right)$.
 
 Her bliver den første afledte, $f'(x^*)$ fundet ved brug af kædereglen til
 $$f'(x^*)=\frac{1}{1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)}\exp\left(\overline{d_{t+1}-p_{t+1}}\right).$$
@@ -191,41 +193,40 @@ c&= \log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right) - \left(1-\rh
 \end{align*}
 
 Kan $f\left(\log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right)\right)$ omskrives til
-\begin{align*}
-f\left(x\right)&=\log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right) + \rho\exp\left(\overline{d_{t+1}-p_{t+1}}\right) \left(d_{t+1}-p_{t+1}\right)\\
-\quad\quad&-\rho \exp\left(\overline{d_{t+1}-p_{t+1}}\right)\left(\overline{d_{t+1}-p_{t+1}}\right)\\
-&=\left(1-\rho\right)\left(d_{t+1}-p_{t+1}\right)+c.
-\end{align*}
+\begin{align}
+f\left(x\right)&=\log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right) + \rho\exp\left(\overline{d_{t+1}-p_{t+1}}\right) \left(d_{t+1}-p_{t+1}\right)\notag\\
+\quad\quad&-\rho \exp\left(\overline{d_{t+1}-p_{t+1}}\right)\left(\overline{d_{t+1}-p_{t+1}}\right)\notag\\
+&=\left(1-\rho\right)\left(d_{t+1}-p_{t+1}\right)+c. (\#eq:tayaktafk)
+\end{align}
 
-Indsættes Ligning ?? nu ind i Ligning ?? opnås den lineære relation for én-periode log aktieafkastet.
-
-\begin{align*}
-r_{t+1}&\approx p_{t+1} + \log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right)- p_t\\
-&\approx p_{t+1} + \left(1-\rho\right) \left(d_{t+1}-p_{t+1}\right)- p_t + c\\
-&\approx \rho p_{t+1} + \left(1-\rho\right) d_{t+1} - p_t + c.
-\end{align*}
+Indsættes Ligning \@ref(eq:tayaktafk) nu ind i Ligning \@ref(eq:logafknl) opnås den lineære relation for én-periode log aktieafkastet.
+\begin{align}
+r_{t+1}&\approx p_{t+1} + \log\left(1+\exp\left(\overline{d_{t+1}-p_{t+1}}\right)\right)- p_t \notag\\
+&\approx p_{t+1} + \left(1-\rho\right) \left(d_{t+1}-p_{t+1}\right)- p_t + c \notag\\
+&\approx \rho p_{t+1} + \left(1-\rho\right) d_{t+1} - p_t + c. (\#eq:tildynggm)
+\end{align}
 
 ### Dynamic Gordon Growth Model
 
-Identiteten fra *Dynamic Gordon Growth Model* findes fra Ligning ??, og ved indsættelse af $d_t-d_t$
-\begin{align}
+Identiteten fra *Dynamic Gordon Growth Model* findes fra Ligning \@ref(eq:tildynggm), og ved indsættelse af $d_t-d_t$
+\begin{align*}
 r_{t+1}&\approx \rho p_{t+1} + (1-\rho) d_{t+1} - p_t + c\\
 &\approx \rho(p_{t+1}-d_{t+1})-d_{t+1}-p_t+c\\
 &\approx \rho(p_{t+1}-d_{t+1})-d_{t+1}-p_t+d_t-d_t+c
-\end{align}
+\end{align*}
 
 Samles forskellen $\Delta d_{t+1}=d_{t+1}-d_t$, og løses dernæst for $d_t-p_t$, opnås
 \begin{equation}
-d_t-p_t=\rho (d_{t+1}-p_{t+1})+r_{t+1}-\Delta d_{t+1}-c.
+d_t-p_t=\rho (d_{t+1}-p_{t+1})+r_{t+1}-\Delta d_{t+1}-c. (\#eq:deltadtpt)
 \end{equation}
 
-Tages nu den betingede forventning af Ligning ?? på tidspunkt $t$, og ved samtidig rekursion fås
-\begin{align}
+Tages nu den betingede forventning af Ligning \@ref(eq:deltadtpt) på tidspunkt $t$, og ved samtidig rekursion fås
+\begin{align*}
 \mathbb{E}_t[d_t-p_t]&=\mathbb{E}_t[\rho(d_{t+1}-p_{t+1}) + r_{t+1} -\Delta d_{t+1}-c]\\
 &=\mathbb{E}_t[\rho(\rho(d_{t+2}-p_{t+2}) + r_{t+2} -\Delta d_{t+2}-c) + r_{t+1} -\Delta d_{t+1} - c]\\
 &\,\,\vdots\\
 d_t-p_t&=\sum_{j=0}^\infty \rho^j \mathbb{E}_t[r_{t+j+1}-\Delta d_{t+j+1}] - \frac{c}{1-\rho}.
-\end{align}
+\end{align*}
 
 Hvor resultatet for en uendelig geometrisk række er anvendt samt transversalitetsbetingelsen, som udeholder økonomiske aktiebobler
 $$\lim_{n\to\infty} \rho^n \mathbb{E}_t[d_{t+n} - p_{t+n}]=0.$$
@@ -236,139 +237,140 @@ Summationen starter ligeledes i nul for at fange det første led uden $\rho$.
 
 Rentespændet mellem en obligation med lang løbetid og en obligation med kort løbetid spiller en vigtig rolle på *Fixed Income* markedet. For at forstå rentespændet rolle, betragtes først et marked bestående af nulkupon obligationer. På tidspunkt $t$ er prisen for en $n$-periode obligation med effektiv rente $Y_t^n$ lig
 \begin{equation}
-P_t^n=\frac{1}{\left(1+Y_t^n\right)^n}.
+P_t^n=\frac{1}{\left(1+Y_t^n\right)^n}. (\#eq:fundaobl)
 \end{equation}
 
 Tages logfunktionen på begge sider opnås
-\begin{align}
+\begin{align*}
 \log\left(P_t^n\right)&=\log\left(\frac{1}{\left(1+Y_t^n\right)^n}\right)\\
 &=-n\log\left(1+Y_t^n\right)\\
 &=-n y_t^n\\
 &\Updownarrow\\
 y_t^n&=-\frac{1}{n}p_t^n.
-\end{align}
+\end{align*}
 
-Benyttes Ligning ?? følger det nu, at én-periode bruto afkastet på obligationen fra $t$ fra $t+1$ bliver
-\begin{align}
+Benyttes Ligning \@ref(eq:fundaobl) følger det nu, at én-periode bruto afkastet på obligationen fra $t$ fra $t+1$ bliver
+\begin{align*}
 1+R_{t+1}^n&=\frac{P_{t+1}^{n-1}}{P_t^n}\\
 &=\frac{\frac{1}{\left(1+Y_t^n\right)^n}}{\frac{1}{\left(1+Y_t^{n-1}\right)^{n-1}}}.
-\end{align}
+\end{align*}
 
 Fra logresultatet opnås
-\begin{align}
+\begin{align*}
 r_{t+1}^n&=p_{t+1}^{n-1}-p_t^n\\
 &=n y_t^n - \left(n-1\right) y_{t+1}^{n-1}.
-\end{align}
+\end{align*}
 
 Dermed bliver den effektive rente på tidspunkt $t$ for en obligationen med $n$-perioder til udløb lig
-\begin{align}
+\begin{align*}
 r_{t+1}^n&=n y_t^n - ny_{t+1}^{n-1}+y_{t+1}^{n-1}\\
 &\Updownarrow\\
 y_t^n &=\frac{1}{n}\left( r_{t+1}^n + (n-1) y_{t+1}^{n-1} \right).
-\end{align}
+\end{align*}
 
 Som $n$-periode obligationen bliver en $n-1$-periode obligation på tidspunkt $t+1$, ændres relationen til
-\begin{align}
+\begin{align*}
 r_{t+2}^{n-1}&=\left(n-1\right) y_{t+1}^{n-1} - \left(n-2\right) y_{t+2}^{n-2}\\
 &\Updownarrow\\
 \left(n-1\right) y_{t+1}^{n-1}&=r_{t+2}^{n-1} + \left(n-2\right) y_{t+2}^{n-2}.
-\end{align}
+\end{align*}
 
 Fortsættes dette rul til én-periode før udløb, $t+n-1$, opnås 
-\begin{equation}
+\begin{equation*}
 y_{t+n-1}^{1}=\left(n-\left(n-1\right)\right)y_{t+n-1}^{n-\left(n-1\right)}=r_{t+n}^{n-\left(n-1\right)}=r_{t+n}^1.
-\end{equation}
+\end{equation*}
 
-Kombineres Ligning ?? og implikationen for den effektive rente, for herefter at tage den betingede forventning, giver det gennemsnitlige afkast per periode, hvis obligationen holdes til udløb
+Kombineres ovenstående rul og implikationen for den effektive rente. For herefter at tage den betingede forventning, fås
 \begin{align}
-y_t^n&=\frac{1}{n} \left(r_{t+1}^n + r_{t+2}^{n-1}+\cdots+r_{t+n}^1\right)\\
-&=\frac{1}{n}\sum_{i=0}^{n-1} r_{t+i+1}^{n-i}.
+y_t^n&=\frac{1}{n} \left(r_{t+1}^n + r_{t+2}^{n-1}+\cdots+r_{t+n}^1\right)\notag\\
+&=\frac{1}{n}\sum_{i=0}^{n-1} r_{t+i+1}^{n-i}. (\#eq:ytn)
 \end{align}
+
+Altså bliver den effektive rente lig det gennemsnitlige afkast per periode, hvis obligationen holdes til udløb.
 
 ## Rentespændet
 
-For at udlede rentespændet fratrækkes $y_t^1$ på begge sider af Ligning ??, så
-\begin{align}
+For at udlede rentespændet fratrækkes $y_t^1$ på begge sider af Ligning \@ref(eq:ytn), så
+\begin{align*}
 y_t^n-y_t^1&=\frac{1}{n} \sum_{i=0}^{n-1} \left(r_{t+i+1}^{n-i}-y_t^1\right)\\
 &=\frac{1}{n} \sum_{i=0}^{n-1} \left(\left(y_{t+i}^1-y_t^1\right) + \left(r_{t+i+1}^{n-i}-y_t^1\right)\right).
-\end{align}
+\end{align*}
 
 Dermed kan det første led på højre side af summationen skrives som
-\begin{align}
+\begin{align*}
 \sum_{i=0}^{n-1}\left(y_{t+i}^1-y_t^1\right)&=\left(y_{t+1}^1 y_t^1\right) + \left(y_{t+2}-y_t^1\right)+\dots +\left(y_{t+n-1} y_t^1\right)\\
 &=\left(n-1\right)\Delta y_{t+1}^1+\left(n-2\right)\Delta y_{t+2}^1 + \dots+ \Delta y_{t+n-1}^1\\
 &=\sum_{i=1}^{n-1}  \left(n-1\right)\Delta y_{t+i}^1.
-\end{align}
+\end{align*}
 
 Dette kan skrives i termer af rentespændet, $s_t^n=y_t^n-y_t^1$, ved at tage den betingede forventning på tidspunkt $t$, sådan at
-\begin{equation}
-s_t^n=\frac{1}{n} \sum_{i=1}^{n-1} \mathbb{E}_t[\left(n-1\right)\Delta y_{t+i}^1] + \frac{1}{n} \sum_{i=0}^{n-1} \mathbb{E}_t[\left(r_{t+i+1}^{n-i} - y_t^1\right)].
-\end{equation}
+\begin{equation*}
+s_t^n=\frac{1}{n} \sum_{i=1}^{n-1} \mathbb{E}_t[\left(n-1\right)\Delta y_{t+i}^1] + \frac{1}{n} \sum_{i=0}^{n-1} \mathbb{E}_t\left[\left(r_{t+i+1}^{n-i} - y_t^1\right)\right].
+\end{equation*}
 
 ## Varighed og renteimmunisering
 [@Macaulay1938] viser at den negative elasticitet af en kuponobligations pris mht. brutto renten giver varigheden
-\begin{equation}
+\begin{equation*}
 D_t^{c,n} = -\frac{\text{d} P_t^{c,n}}{\text{d}\left(1+Y_t^{c,n}\right)}\frac{\left(1+Y_t^{c,n}\right)}{P_t^{c,n}},
-\end{equation}
+\end{equation*}
 
-og er udledt gennem en andenordens Taylor approksimation
-\begin{equation}
+og er udledt gennem en anden ordens Taylor approksimation
+\begin{equation*}
 \frac{\text{d} P^{c,n}}{P^{c,n}}\approx \frac{\text{d} P^{c,n}}{\text{d} Y^{c,n}}\frac{\text{d} Y^{c,n}}{P^{c,n}}+\frac{1}{2}\frac{\text{d}^2 P^{c,n}}{\text{d} Y^{c,n,2}}\frac{\left(\text{d}Y^{c,n}\right)^2}{P^{c,n}},
-\end{equation}
+\end{equation*}
 
 hvor den første afledte er den modificerede varighed og den anden afledte er konveksiteten af kuponobligationen, [@Campbell1997].
 
 ## Loglineær approksimation af kuponobligations afkast
 På tidspunkt $t$ er afkastet på kuponobligationen med kuponbetaling $C$ lig
-\begin{equation}
+\begin{equation*}
 1+R_{t+1}^{c,n}=\frac{P_{t+1}^{c,n} + C}{P_t^{c,n}}.
-\end{equation}
+\end{equation*}
 
 Tages logfunktionen på begge sider opnås
 \begin{align}
-\log\left(1+R_{t+1}^{c,n}\right)&=\\
-&=\log\left(\frac{P_{t+1}^{c,n} + C}{P_t^{c,n}}\right)\\
-&=\log\left(P_{t+1}^{c,n} + C\right) - \log\left(P_t^{c,n}\right)\\
-r_{t+1}^{c,n}&=\log\left(1+\exp\left(c- p_{t+1}^{c,n}\right)\right) + p_{t+1}^{c,n} - p_t^{c,n}.
+\log\left(1+R_{t+1}^{c,n}\right)&=\log\left(\frac{P_{t+1}^{c,n} + C}{P_t^{c,n}}\right)\notag\\
+&=\log\left(P_{t+1}^{c,n} + C\right) - \log\left(P_t^{c,n}\right)\notag\\
+r_{t+1}^{c,n}&=\log\left(1+\exp\left(c- p_{t+1}^{c,n}\right)\right) + p_{t+1}^{c,n} - p_t^{c,n}.(\#eq:kuponliglog)
 \end{align}
 
-I ovenstående Ligning ??, er $\log\left(1+\exp\left(c- p_{t+1}^{c,n}\right)\right)$ ikke-lineær. For at løse dette anvendes en førsteordens Taylor approksimation omkring middelværdie, $\overline{c- p_{t+1}^{c,n}}$. Herfra sættes $x=\log\left(1+\exp\left(c- p_{t+1}^{c,n}\right)\right)$. 
+I ovenstående Ligning \@ref(eq:kuponliglog), er $\log\left(1+\exp\left(c- p_{t+1}^{c,n}\right)\right)$ ikke-lineær. For at løse dette anvendes en første ordens Taylor approksimation omkring middelværdien, $\overline{c- p_{t+1}^{c,n}}$. Herfra sættes $x=\log\left(1+\exp\left(c- p_{t+1}^{c,n}\right)\right)$. 
 
 Den første afledte, $f'\left(x^*\right)$, bliver fundet ved brug af kædereglen til
 $$f'\left(x^*\right)=\frac{1}{1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)}\exp\left(\overline{c- p_{t+1}^{c,n}}\right).$$
 
-Dermed bliver førsteordens Taylor approksimationen
-\begin{align}
+Dermed bliver første ordens Taylor approksimationen
+\begin{align*}
 f\left(x\right)&=\log\left(1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)\right)+ \frac{1}{1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)}\exp\left(\overline{c- p_{t+1}^{c,n}}\right) \left(\left(c-p_{t+1}^{c,n}\right) -\left(\overline{c- p_{t+1}^{c,n}}\right)\right)\\
 &=\log\left(1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)\right) + \frac{1}{1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)}\exp\left(\overline{c- p_{t+1}^{c,n}}\right) \left(c-p_{t+1}^{c,n}\right)\\
 \quad&- \frac{1}{1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)}\exp\left(\overline{c- p_{t+1}^{c,n}}\right)\left(\overline{c- p_{t+1}^{c,n}}\right).
-\end{align}
+\end{align*}
 
 Defineres lineariseringsparameterne $k$ og $\rho$ til
-\begin{align}
+\begin{align*}
 \rho&=\frac{1}{1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)}\\
 k&=-\log\left(\rho\right)-\left(1-\rho\right)\log\left(\frac{1}{\rho-1}\right).
-\end{align}
+\end{align*}
 
 Kan der ved brug af rekursion opnås følgende resultat
-\begin{equation}
+\begin{equation*}
 p_t^{c,n}=\sum_{i=0}^{n-1} \rho^i\left(k+\left(1-\rho\right)c - r_{t+i+1}^{c,n-i}\right).
-\end{equation}
+\end{equation*}
 
 Kombineres dette nu med approksimationen for log af den effektive rente, som opfylder
-\begin{equation}
+\begin{equation*}
 p_t^{c,n}\approx\sum_{i=0}^{n-1} \rho^i\left(k+\left(1-\rho\right)c - y_t^{c,n}\right).
-\end{equation}
+\end{equation*}
 
 Kan den effektive rente af $n$-periode kuponobligationen udledes til
-\begin{equation}
+\begin{equation*}
 y_t^{c,n}\approx \left(\frac{1-\rho}{1-\rho^n}\right)\sum_{i=0}^{n-1}\rho^i r_{t+i+1}^{c,n-i}.
-\end{equation}
+\end{equation*}
 
-Og ved substitution kan det approksimative loglinære afkast fra Kapitel ?? udledes.
+Og ved substitution kan det approksimative loglinære afkast fra Sektion \@ref(defafobl) udledes.
 
 # Den optimale dynamiske strategi {#optdynstrategi}
-Dette appendiks vil udlede den optimale porteføljestrategi, som beskrevet i Sektion ??. Udledningen vil følge [@JurVic2011] Appendiks C, som beskriver metoden, med enkelte dele som varierer.
+Dette appendiks vil udlede den optimale porteføljestrategi, som beskrevet i Sektion \@ref(rekloes). Udledningen vil følge [@JurVic2011] Appendiks C, som beskriver metoden, med enkelte dele som varierer.
 
 Uden tab af generalitet, kan det $k$-periode dynamiske porteføljeproblem løses, ved benyttelse af en rekursiv forlængelse af løsningen for optimalitetsproblemet hørende til de sidste to perioder. Først udledes porteføljestrategien i den sidste periode -- denne vil fungere som basis for den såkaldte *policy*-funktion i rekursionen -- samt den tilhørende *value* funktion. Herefter vil problemet i den foregående periode løses, dette problem er en funktion af koefficienterne fra *policy*- og *value*-funktionerne fra den sidste periode. Dette skaber det rekursive forhold mellem de to sidste tilstødende perioder, som herefter generalises til to generelle tilstødende perioder.
 
@@ -384,7 +386,9 @@ ved at vælge følgen af vægte $\left\{\bm{\alpha}_{t+k-2}^2, \bm{\alpha}_{t+k-
 
 ### *Policy*-funktionen
 Maksimeringsproblemet på tidspunkt $(t+k-1)$ er uændret ift. problemet som blev beskrevet ovenfor.
-$$\max_{\bm{\alpha}_{t+k-1}^1} \mathbb{E}_{t+k-1}\left[\exp((1-\gamma)r_{p,t+k})\right] = \exp\left((1-\gamma) \mathbb{E}_{t+k-1}\left[r_{p,t+k}\right]+\frac{1}{2}(1-\gamma)^2 \mathbb{V}_{t+k-1}\left[r_{p,t+k}\right]\right).$$
+\begin{equation}
+\max_{\bm{\alpha}_{t+k-1}^1} \mathbb{E}_{t+k-1}\left[\exp((1-\gamma)r_{p,t+k})\right] = \exp\left((1-\gamma) \mathbb{E}_{t+k-1}\left[r_{p,t+k}\right]+\frac{1}{2}(1-\gamma)^2 \mathbb{V}_{t+k-1}\left[r_{p,t+k}\right]\right).(\#eq:polmaks)
+\end{equation}
 
 Ved brug af selektionsmatricerne $\bm{H}_x$ og $\bm{H}_0$, er de første to momenter af porteføljeafkastet givet ved
 \begin{align*}
@@ -392,7 +396,7 @@ Ved brug af selektionsmatricerne $\bm{H}_x$ og $\bm{H}_0$, er de første to mome
 \mathbb{V}_{t+k-1}[r_{p,t+k}]&=\bm{\alpha}_{t+k-1}^{1\prime}\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1}+ \sigma_0^2 + 2\bm{\alpha}_{t+k-1}^{1\prime}\bm{\sigma}_{0x}
 \end{align*}
 
-Den følgende førsteordensbetingelse, fremkommer efter substituion af ovenstående momenter ind i Maksimeringsproblemet ?? og dernæst første ordens differentiation 
+Den følgende førsteordensbetingelse, fremkommer efter substituion af ovenstående momenter ind i Maksimeringsproblemet \@ref(eq:polmaks) og dernæst første ordens differentiation 
 $$\bm{H}_x\left(\bm{\Phi}_0 +\bm{\Phi}_1\bm{z}_{t+k-1}\right)+\frac{1}{2}\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-1}^{1}+\left(1-\gamma\right) \left(\bm{\Sigma}_{xx}\bm{\alpha}_{t+k-1}^{1}+\bm{\sigma}_{0x}\right)=0.$$
 
 Antages nu, at kovariansmatricen $\bm{\Sigma}_{xx}$ er ikke-singulær er ovenstående løst af
@@ -454,14 +458,16 @@ Ved substition af ovenstående ind i $(t+k-2)$ optimeringsfunktionen fås
 \end{align*}
 
 Fra ovenstående ses, at investoren på tidspunkt $(t+k-2)$ ved, at kun de sidste to summer i eksponentialet er stokastiske. Derfor fokusers, for nu, på at evaluere den følgende funktion, givet investorens valg af $\bm{\alpha}_{t+k-2}^{2}$
-$$\mathbb{E}_{t+k-2}[ \exp\left( \left(1-\gamma\right) \left(\left(B_1^1 + \begin{pmatrix} 1 & \bm{\alpha}_{t+k-2}^{2} & \bm{0}\end{pmatrix} \right) \bm{z}_{t+k-1} + \bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1}  \right)\right) ].$$
+\begin{equation}
+\mathbb{E}_{t+k-2}\left[ \exp\left( \left(1-\gamma\right) \left(\left(B_1^1 + \begin{pmatrix} 1 & \bm{\alpha}_{t+k-2}^{2} & \bm{0}\end{pmatrix} \right) \bm{z}_{t+k-1} + \bm{z}_{t+k-1}'B_2^1 \bm{z}_{t+k-1}  \right)\right) \right]. (\#eq:normfordeltstok)
+\end{equation}
 
-Resultatet af denne beregning vil herefter substitueres ind i den oprindelige optimeringsfunktion, for at opnå forvetningen af *value*-funktionen betinget på investorens porteføljevalg, som herefter bliver maksimeret over $\bm{\alpha}_{t+k-2}^{2}$.
+Resultatet af denne beregning vil herefter substitueres ind i den oprindelige optimeringsfunktion for at opnå forvetningen af *value*-funktionen betinget på investorens porteføljevalg, der herefter bliver maksimeret over $\bm{\alpha}_{t+k-2}^{2}$.
 
 Fordelingen af $\bm{z}_{t+k-1}$ betinget på tidspunkt $(t+k-2)$-informationen er givet ved
 $$\bm{z}_{t+k-1\mid t+k-2}\sim\mathcal{N}\left(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2},\bm{\Sigma}_v\right).$$
 
-Dette betyder også at Ligning ?? beregner den forventede værdi af det eksponentielle kvadratiske polynomium i en normalfordelt stokastisk variabel.
+Dette betyder også at Ligning \@ref(eq:normfordeltstok) beregner den forventede værdi af det eksponentielle kvadratiske polynomium i en normalfordelt stokastisk variabel.
 
 For at lette notationen indføres nu de følgende hjælpevariable
 \begin{align*}
@@ -469,50 +475,50 @@ C_1^2 &= (1-\gamma) \begin{pmatrix} 1\\ \bm{\alpha}_{t+k-2}^{2} \\ \bm{0} \end{p
 C_2^2 &= (1-\gamma) B_2^1.
 \end{align*}
 
-Kombineres ovenstående hjælpevariable med Ligning ?? og den betingende fordeling af $\bm{z}_{t+k-1}$ fås
-\begin{align*}
-\mathbb{E}_{t+k-2}\Big[ \exp\Big( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} \Big) ] = &\mathbb{E}_{t+k-2}[ \exp \Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} + \bm{v}_{t+k-2} \Big)\\
-                                                                                                  &+ \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} + \bm{v}_{t+k-2}\Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\\
-                                                                                                  &+ \bm{v}_{t+k-2}\Big) \Big) \Big].
-\end{align*}
+Kombineres ovenstående hjælpevariable med Ligning \@ref(eq:normfordeltstok) og den betingende fordeling af $\bm{z}_{t+k-1}$ fås
+\begin{align}
+\mathbb{E}_{t+k-2}\Big[ \exp\Big( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} \Big) ] = &\mathbb{E}_{t+k-2}[ \exp \Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} + \bm{v}_{t+k-2} \Big) \notag\\
+                                                                                                  &+ \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} + \bm{v}_{t+k-2}\Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\notag\\
+                                                                                                  &+ \bm{v}_{t+k-2}\Big) \Big) \Big]. (\#eq:midtk2)
+\end{align}
 
-Ovenstående Ligning ?? har led i eksponentialet, som enten er konstanter, lineære kombinationer af $\bm{v}_{t+k-2}$ stødene eller kvadratiske i $\bm{v}_{t+k-2}$. Derfor kan vi omarrangere leddene som følger
-\begin{align*}
-\mathbb{E}_{t+k-2}\Big[\exp\Big(\cdot\Big)\Big] &= \exp\Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)\Big)\\
-                                &\,\,\quad \mathbb{E}_{t+k-2}\Big[\exp\Big( C_1^{2\prime} \bm{v}_{t+k-2}+ \bm{v}_{t+k-2}' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^{2} \bm{v}_{t+k-2}'\\
-                                &\,\,\quad+ \bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} \Big)\Big]\\
-                                &= \exp\Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)\Big)\\
-                                &\,\,\quad \mathbb{E}_{t+k-2}\Big[\exp\Big( C_1^{2\prime} \bm{v}_{t+k-2}+ \bm{v}_{t+k-2}' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^{2} \bm{v}_{t+k-2}'\Big)\\
-                                &\,\,\quad\exp\Big(\bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} \Big)\Big]\\
-                                &=\exp\Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)\Big)\\
-                                &\,\,\quad \mathbb{E}_{t+k-2}\Big[ \exp\Big(\bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} \Big) \exp\Big( C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2} \Big)   \bm{v}_{t+k-2}\Big],
-\end{align*}
+Ovenstående Ligning \@ref(eq:midtk2) har led i eksponentialet, som enten er konstanter, lineære kombinationer af $\bm{v}_{t+k-2}$ stødene eller kvadratiske i $\bm{v}_{t+k-2}$. Derfor kan vi omarrangere leddene som følger
+\begin{align}
+\mathbb{E}_{t+k-2}\Big[\exp\Big(\cdot\Big)\Big] &= \exp\Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)\Big) \notag\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}\Big[\exp\Big( C_1^{2\prime} \bm{v}_{t+k-2}+ \bm{v}_{t+k-2}' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^{2} \bm{v}_{t+k-2}' \notag\\
+                                &\,\,\quad+ \bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} \Big)\Big]\notag\\
+                                &= \exp\Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)\Big)\notag\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}\Big[\exp\Big( C_1^{2\prime} \bm{v}_{t+k-2}+ \bm{v}_{t+k-2}' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^{2} \bm{v}_{t+k-2}'\Big)\notag\\
+                                &\,\,\quad\exp\Big(\bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} \Big)\Big]\notag\\
+                                &=\exp\Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)\Big)\notag\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}\Big[ \exp\Big(\bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} \Big) \exp\Big( C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2} \Big)   \bm{v}_{t+k-2}\Big], (\#eq:langlorteformel)
+\end{align}
 
 hvor $\Tilde{C}_2^{2}$ er gennemsnittet af ikke-tilde-matricen og dens egen transponerede. Ved brug af dette sikres, at resultatet ikke er afhængig af symmetrien af de underliggende matricer. Hvis den underliggende matrix er symmetrisk vil tilde-notationen blive droppet, siden den underliggende matrix og tilde-matricen da vil være identiske.
 
 Herfra er der to måder at evaluere ovenstående forventning: den komplementære approksimation og den eksakte evaluering. Den eksakte evaluering er først introduceret af [@CampVicCha2003]. Begge måder vil blive præsenteret, selvom de medfører empiriske resultater, som ikke er til at skelne mellem, [@JurVic2011]. 
 
 #### Komplementær approksimation
-Først beskrives den komplementære approksimation. Her bygger resultatet på, at alle led med orden højere end $\text{d}t$ har forsvindende sandsynlighed i grænsen, når tidsintervallet går mod nul. Altså vil kun de lineære led fra Ligning ?? være stokastiske. Altså er de lineære led af orden $\text{d}Z$, mens de kvadratiske led er af orden $\text{d}t$.
+Først beskrives den komplementære approksimation. Her bygger resultatet på, at alle led med orden højere end $\text{d}t$ har forsvindende sandsynlighed i grænsen, når tidsintervallet går mod nul. Altså vil kun de lineære led fra Ligning \@ref(eq:langlorteformel) være stokastiske. Altså er de lineære led af orden $\text{d}Z$, mens de kvadratiske led er af orden $\text{d}t$.
 $$\lim_{\Delta t \to 0}\frac{\exp\left( \bm{v}_{t+k-2}' C_2^2 \bm{v}_{t+k-2} \right)}{\text{d}t}=\exp\left( \text{tr}\left(C_2^2 \bm{\Sigma}_v\right) \right).$$
 
-Dette medfører at Ligning ?? simplificeres til
-\begin{align*}
-\lim_{\Delta t \to 0}\mathbb{E}_{t+k-2}\Big[\exp\Big(\cdot\Big)\Big] &=\exp\Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big) +  \text{tr}\Big(C_2^2 \bm{\Sigma}_v\Big)\Big)\\
-                                &\,\,\quad \mathbb{E}_{t+k-2}\Big[ \exp\Big( C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2} \Big)   \bm{v}_{t+k-2}\Big],
-\end{align*}
+Dette medfører at Ligning \@ref(eq:langlorteformel) simplificeres til
+\begin{align}
+\lim_{\Delta t \to 0}\mathbb{E}_{t+k-2}\Big[\exp\Big(\cdot\Big)\Big] &=\exp\Big( C_1^{2\prime} \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big) + \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2} \Big)' C_2^2 \Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big) +  \text{tr}\Big(C_2^2 \bm{\Sigma}_v\Big)\Big)\notag\\
+                                &\,\,\quad \mathbb{E}_{t+k-2}\Big[ \exp\Big( C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2} \Big)   \bm{v}_{t+k-2}\Big], (\#eq:llf2)
+\end{align}
 
-her observeres, at forventningen i Ligning ?? er forventningen af en lognormal stokastisk variabel, som er givet ved
-\begin{align*}
-\lim_{\Delta t \to 0}&\mathbb{E}_{t+k-2}\Big[ \exp\Big( C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2} \Big)   \bm{v}_{t+k-2}\Big]\\
-&=\exp\Big(\frac{1}{2} \Big(C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2}\Big)' \bm{\Sigma}_v \Big(C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2}\Big)\Big) 
-\end{align*}
+her observeres, at forventningen i Ligning \@ref(eq:llf2) er forventningen af en lognormal stokastisk variabel, som er givet ved
+\begin{align}
+\lim_{\Delta t \to 0}&\mathbb{E}_{t+k-2}\Big[ \exp\Big( C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2} \Big)   \bm{v}_{t+k-2}\Big]\notag\\
+&=\exp\Big(\frac{1}{2} \Big(C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2}\Big)' \bm{\Sigma}_v \Big(C_1^{2\prime} + 2\Big(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{t+k-2}\Big)' \Tilde{C}_2^{2}\Big)\Big) (\#eq:llf3)
+\end{align}
 
-Kombineres Ligning ?? og Ligning ?? ses, at Ligning ?? i grænsen for kontinuert tid er lig
-\begin{align*}
-\lim_{\Delta t \to 0} &\mathbb{E}_{t+k-2}\Big[ \exp\Big( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} \Big)\Big]\\
-                      &=\exp\Big( \text{tr}\Big(C_2^2\bm{\Sigma}_v\Big) + D_0^{\Big(t+k-2\Big)} + \frac{1}{2} D_1^{\Big(t+k-2\Big)} \bm{\Sigma}_v^{-1} D_1^{\Big(t+k-2\Big)'} \Big),
-\end{align*}
+Kombineres Ligning \@ref(eq:llf2) og Ligning \@ref(eq:llf3) ses, at Ligning \@ref(eq:normfordeltstok) i grænsen for kontinuert tid er lig
+\begin{align}
+\lim_{\Delta t \to 0} &\mathbb{E}_{t+k-2}\Big[ \exp\Big( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} \Big)\Big]\notag\\
+                      &=\exp\Big( \text{tr}\Big(C_2^2\bm{\Sigma}_v\Big) + D_0^{\Big(t+k-2\Big)} + \frac{1}{2} D_1^{\Big(t+k-2\Big)} \bm{\Sigma}_v^{-1} D_1^{\Big(t+k-2\Big)'} \Big),(\#eq:komapproks)
+\end{align}
 
 hvor
 \begin{align*}
@@ -522,10 +528,10 @@ D_1^{\left(t+k-2\right)}&=C_1^{2\prime} + 2\left(\bm{\Phi}_0+\bm{\Phi}_1\bm{z}_{
 
 #### Eksakt evaluering
 Ved brug af den eksakte evaluering foreslået af [@CampVicCha2003] er en løsning på lukket form stadig tilgengælig. Ved brug af den etablerede notation kan Ligning (46) fra det Tekniske Appendiks til [@CampVicCha2003] anvendes, for at opnå følgende evaluering af forventningen
-\begin{align*}
-&\mathbb{E}_{t+k-2}\left[ \exp\left( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} \right) \right]\\
-&= \frac{\left| \bm{\Sigma}_v \right|^{-\tfrac{1}{2}}}{\left| \left(\bm{\Sigma}_v^{-1} - 2 D_2^{\left(t+k-2\right)}\right) \right|^{\tfrac{1}{2}}}\exp\left(D_0^{\left(t+k-2\right)} + \frac{1}{2} D_1^{\left(t+k-2\right)} \left(\bm{\Omega}^1\right)^{-1} D_1^{\left(t+k-2\right)\prime}\right),
-\end{align*}
+\begin{align}
+&\mathbb{E}_{t+k-2}\left[ \exp\left( C_1^{2\prime} \bm{z}_{t+k-1} + \bm{z}_{t+k-1}' C_2^2 \bm{z}_{t+k-1} \right) \right]\notag\\
+&= \frac{\left| \bm{\Sigma}_v \right|^{-\tfrac{1}{2}}}{\left| \left(\bm{\Sigma}_v^{-1} - 2 D_2^{\left(t+k-2\right)}\right) \right|^{\tfrac{1}{2}}}\exp\left(D_0^{\left(t+k-2\right)} + \frac{1}{2} D_1^{\left(t+k-2\right)} \left(\bm{\Omega}^1\right)^{-1} D_1^{\left(t+k-2\right)\prime}\right), (\#eq:llf5)
+\end{align}
 
 hvor følgende notation er introduceret
 \begin{align*}
@@ -534,7 +540,7 @@ D_2^2&=C_2^2\\
 \end{align*}
 
 #### Optimalt porteføljevalg {#optimportaer}
-For et udlede den optimale portefølje strategi, droppes konstanten fra Ligning ??, siden dette ikke påvirker optimum. Altså ser investorens problem på tidspunkt $(t+k-2)$ således ud
+For et udlede den optimale portefølje strategi, droppes konstanten fra Ligning \@ref(eq:llf5), siden dette ikke påvirker optimum. Altså ser investorens problem på tidspunkt $(t+k-2)$ således ud
 $$\max_{\bm{\alpha}_{t+k-2}^2}\mathcal{L}= \left( \left(1-\gamma\right) \left(\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} \left(\bm{\sigma}_x^2 - \bm{\Sigma}_{xx}\bm{\alpha}_{t+k-2}^2\right) + B_0^1 + D_0^{\left(t+k-2\right)} + \frac{1}{2} D_1^{\left(t+k-2\right)} \bm{\Omega}^1 D_1^{\left(t+k-2\right)\prime}\right)\right).$$
 
 Førsteordensbetingelsen bliver da
@@ -561,18 +567,18 @@ Løsningen til ovenstående førsteordensbetingelse medfører et udtryk for den 
 $$\bm{\alpha}_{t+k-2}^2 = A_0^2 + A_1^2 \bm{z}_{t+k-2},$$
 
 hvor
-\begin{align*}
-A_0^2&=\left(\bm{\Sigma}_{xx} - \left(1-\gamma\right)\Tilde{\bm{\Omega}}_{xx}^1\right)^{-1} \left(\bm{\Phi}_0^x + \frac{1}{2} \bm{\sigma}_x^2 + \left(1-\gamma\right) \left(\Tilde{\bm{\Omega}}_{x0}^1 + \Tilde{\bm{\Omega}}_{x}^1 \left(B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0\right)\right)\right)\\
-A_1^2&=\left(\bm{\Sigma}_{xx} - \left(1-\gamma\right)\Tilde{\bm{\Omega}}_{xx}^1\right)^{-1}\left(\bm{\Phi}_1^x+2\left(1-\gamma\right) \Tilde{\bm{\Omega}}_{x}^1 \Tilde{B} _2^{1}\bm{\Phi}_1\right).
-\end{align*}
+\begin{align}
+A_0^2&=\left(\bm{\Sigma}_{xx} - \left(1-\gamma\right)\Tilde{\bm{\Omega}}_{xx}^1\right)^{-1} \left(\bm{\Phi}_0^x + \frac{1}{2} \bm{\sigma}_x^2 + \left(1-\gamma\right) \left(\Tilde{\bm{\Omega}}_{x0}^1 + \Tilde{\bm{\Omega}}_{x}^1 \left(B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0\right)\right)\right) (\#eq:a0fra1)\\
+A_1^2&=\left(\bm{\Sigma}_{xx} - \left(1-\gamma\right)\Tilde{\bm{\Omega}}_{xx}^1\right)^{-1}\left(\bm{\Phi}_1^x+2\left(1-\gamma\right) \Tilde{\bm{\Omega}}_{x}^1 \Tilde{B} _2^{1}\bm{\Phi}_1\right). (\#eq:a1fra1)
+\end{align}
 
-På samme vis kan beregniner baseret på Ligning ??, give følgende resultat
-\begin{align*}
-A_0^2&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} \left(\bm{\Phi}_0^x \frac{1}{2} \bm{\sigma}_x^2 + \left(1-\gamma \right) \left(\bm{\Sigma}_{x0} + \bm{\Sigma}_x \left(B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0 \right)\right)\right)\\
-A_1^2&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} \left(\bm{\Phi}_1^x + 2\left(1-\gamma\right) \bm{\Sigma}_x \Tilde{B}_2^{1}\bm{\Phi}_1\right).
-\end{align*}
+På samme vis kan beregninger baseret på Ligning \@ref(eq:komapproks), give følgende resultat
+\begin{align}
+A_0^2&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} \left(\bm{\Phi}_0^x \frac{1}{2} \bm{\sigma}_x^2 + \left(1-\gamma \right) \left(\bm{\Sigma}_{x0} + \bm{\Sigma}_x \left(B_1^{1\prime} + 2\Tilde{B}_2^{1}\bm{\Phi}_0 \right)\right)\right)(\#eq:a0fra2)\\
+A_1^2&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} \left(\bm{\Phi}_1^x + 2\left(1-\gamma\right) \bm{\Sigma}_x \Tilde{B}_2^{1}\bm{\Phi}_1\right).(\#eq:a1fra2)
+\end{align}
 
-Ligning ?? og Ligning ?? er identiske med Ligning ?? og Ligning ??, bortset fra at $\Tilde{\bm{\Omega}}^1$ er udskiftet med $\bm{\Sigma}_v$.
+Ligning \@ref(eq:a0fra1) og Ligning \@ref(eq:a1fra1) er identiske med Ligning \@ref(eq:a0fra2) og Ligning \@ref(eq:a1fra2), bortset fra at $\Tilde{\bm{\Omega}}^1$ er udskiftet med $\bm{\Sigma}_v$.
 
 ### *Value*-funktionen
 Nu udledes de relevante udtryk for koefficienterne, $B_i^2$, i den maksimerede *value*-funktion. Dette gør, at der kan skabes et forhold mellem de foregående værdier af hhv. $A_i^1$ og $B_i^1$ koefficienterne. Ved indsættelse af den optimale porteføljeallokering for tidspunkt $\left(t+k-2\right)$ ind i *value*-funktionen, Ligning ??, og ved samtidig udeladelse af konstanter ganget på forventningen, opnås det følgende udtryk
