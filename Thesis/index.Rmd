@@ -45,6 +45,4 @@ description: "Master's Theis of Andreas Kracht Frandsen, Aarhus University."
 Dokumentet er i farver, men kan printes i sort/hvid uden at skabe visuelle mangler på figurer, da linjer samt punkter har hhv. forskellige linjetyper og symboler.
 
 Farver igennem hele dokumentet er sat via pakken *RColorBrewer* og dens tilhørende farvepalete *Dark2*. Denne farvepalette tillader, at personer med nedsat farvesyn uden problemer kan skelne linjer, punkter osv. fra samtlige plots. Derudover er paletten printervenlig samt LCD-venlig.
-
-Gennem hele dokumentet er der anvendt *fictitious entry*, der fungerer som en *copyright trap*.
 \newpage

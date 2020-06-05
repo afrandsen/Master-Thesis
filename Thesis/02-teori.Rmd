@@ -1,7 +1,6 @@
 \part{Den teoretiske ramme}
 
 # Underliggende teori {#unteo}
-
 I dette kapitel introduceres den underliggende teori til det dynamiske porteføljeproblem: det statiske porteføljeproblem. Derudover defineres en række nyttefunktioner, som alle er defineret over terminalformue. Sektion \@ref(myoinv) starter med en gennemgang af porteføljeproblemet for den myopiske investor, som først blev introduceret af [@Markowitz1952]. Dernæst fungerer Sektion \@ref(preforris) som en introduktion til risikoaversion. Sektion \@ref(nytdefover) belyser en række nyttefunktioner, som alle kan fungere i porteføljemodellering. Fordelingsmæssige resultater vedr. afkast tages hånd om i Sektion \@ref(fordafafk). Slutteligt opsummerer Sektion \@ref(opsunteo) kapitlets fund. 
 
 ## Den myopiske investor{#myoinv}
@@ -194,7 +193,7 @@ hvor $U^{(n)}$ er den $n$'te afledte af $U(\cdot)$. Tages nu den forventede vær
 &+\sum_{n=3}^\infty \frac{1}{n!} U^{\left(n\right)}\left(\mathbb{E}\left[W_{t+1}\right]\right)\mathbb{E}\left[\left(W_{t+1}-\mathbb{E}\left[W_{t+1}\right]\right)^n\right],
 \end{align*}
 
-hvor $\mathbb{E}\left[(W_{t+1}-\mathbb{E}(W_{t+1}))^n\right]$ er det centrale moment af $n$'te orden. Fælles for disse momenter er, at de kvantificerer en investors villighed til at afgive eller optage diverse risici. Givetvis vil en grådig investor foretrække højere forventet formue end lavere, for faste centrale momenter af anden orden eller højere. En risikoavers investor, altså $U''(W)<0$, vil foretrække lavere varians af formue fremfor højere, for fast forventet formue samt for faste centrale momenter af tredje orden eller højere. Problemet opstår, når de centrale momenter højere end eller lig tredje orden ikke er ens for alle alternativer. I så fald ville man ikke kunne evaluere dem på baggrund af middelværdi og varians.
+hvor $\mathbb{E}\left[(W_{t+1}-\mathbb{E}(W_{t+1}))^n\right]$ er det centrale moment af $n$'te orden. Fælles for disse momenter er, at de kvantificerer en investors villighed til at afgive eller optage diverse risici. Givetvis vil en grådig investor foretrække højere forventet formue end lavere, for faste centrale momenter af anden orden eller højere. En risikoavers investor -- altså $U''(W)<0$ -- vil foretrække lavere varians af formue fremfor højere, for fast forventet formue samt for faste centrale momenter af tredje orden eller højere. Problemet opstår, når de centrale momenter højere end eller lig tredje orden ikke er ens for alle alternativer. I så fald ville man ikke kunne evaluere dem på baggrund af middelværdi og varians.
 
 ### Kvadratisk nytte
 
@@ -454,7 +453,6 @@ En relevant makroøkonomisk del til at forklare variationen i specielt obligatio
 Dette kapitel fungerede som et overblik over de approksimative og eksakte analytiske resultater på tværs af en række af aktiver. Ved benyttelse af den loglineære afkast approksimation af [@Campbell1988], blev aktivklassernes nutidsværdi relateret til forventede fremtidige betalinger. Dette tillod at prædiktive relationer på tværs af aktivklasserne blev dannet, som er essentielle, når den mulige prædiktabilitet skal begrundes. Disse relationer vil derfor også kunne inkorporeres i den følgende VAR(1)-model. Derudover er en lang række variable ligeledes blevet præsenteret og diskuteret. Disse potentielle prædiktionsvariable er medtaget grundet tidligere fund i litteraturen, som viser at prædiktabiliteten af afkast kan fanges af flere variable end de variable, som har en fundamental relation til afkast.
 
 # Vector Autoregressive Model {#varkapitel}
-
 I dette kapitel præsenteres det dynamiske system, som har til formål at modellere afkastet og prædiktionsvariablene, til den empiriske analyse. Dette gøres hovedsageligt ud fra teorien bag [@Userguide2004] med enkelte dele, som varierer. At kunne modellere afkast -- og på den måde implicit antage  tidsvarierende afkast -- er den fundamentale egenskab, som gør at Markowitz' portefølje teori fra Kapitel \@ref(unteo) kan udvides. Sektion \@ref(setafinv) definerer og etablerer den multivariate VAR(1)-model. Her udledes betingede momenter for responsvariablene og derudover udledes de betingede momenter af afkast. Sektion \@ref(biasadjvar) viser, hvordan bias-justering i VAR(1) koefficientestimaterne kan foretages, ved brug af metoden fra [@Engsted2012] og [@Pope1990]. 
 
 ## Sættet af investeringsmuligheder {#setafinv}
@@ -646,7 +644,7 @@ Her er $\bm{\Sigma}_v$ den betingede kovariansmatrix af $v_t$, $\lambda$ er vekt
 
 ## Opsummering
 
-Dette kapitel præsenterede det dynamiske system, som havde til formål at modellere afkast på baggrund af en række tilstandsvariable. Den definerede model var en såkaldt *Vector Autoregressive Model* af første orden. Derudover sluttede kapitlet af med en beskrivelse af, hvordan bias-justerede koefficientestimater i VAR(1)-modellen kunne opnås. Bias-justering af estimaterne har til formål at udlede en mere pålidelig portefølje allokering.
+Dette kapitel præsenterede det dynamiske system, som havde til formål at modellere afkast på baggrund af en række tilstandsvariable. Den definerede model var en såkaldt *Vector Autoregressive Model* af første orden. Derudover sluttede kapitlet af med en beskrivelse af, hvordan bias-justerede koefficientestimater i VAR(1)-modellen kunne opnås. Bias-justering af estimaterne har til formål at udlede en mere pålidelig porteføljeallokering.
 
 # Porteføljeteori {#porteteori}
 I dette kapitel udvides teorien fra Kapitel \@ref(unteo). Mere specifikt sammenkobles porteføljeteorien fra Sektion \@ref(myoinv) og nytteteorien fra Sektion \@ref(typnyt). Dette gøres på baggrund af *CRRA*-nytte, i tilfældet, hvor investoren kan rebalancere sin portefølje periodisk og i det restringerede tilfælde, hvor ingen rebalancering er tilladt. Herefter beskrives den analytiske løsning til det dynamiske porteføljeproblem foreslået af [@JurVic2011].
@@ -828,4 +826,4 @@ På denne måde opnås en repræsentativ portefølje, som kan benyttes til at be
 
 ## Opsummering
 
-Dette kapitel præsenterede det generelle tilfælde af dynamisk portefølje allokering defineret af [@CampVic2003], som undersøger en investor med endelige investeringshorisont og *CRRA*-nytte. Deres analyse er baseret på middelværdi-varians analysen af [@Markowitz1952], denne er til gengæld mangelfuld. Middelværdi-varians analysen modellere kun det statiske valg. For at kunne skabe en portefølje allokering ud fra antagelsen om tidsvarierende afkast, benyttes den teoretiske ramme præsenteret af [@JurVic2011]. Slutteligt præsenteres, hvordan en kortsalgsrestriktion kan medtages i modellen. 
+Dette kapitel præsenterede det generelle tilfælde af dynamisk porteføljeallokering defineret af [@CampVic2003], som undersøger en investor med endelige investeringshorisont og *CRRA*-nytte. Deres analyse er baseret på middelværdi-varians analysen af [@Markowitz1952], denne er til gengæld mangelfuld. Middelværdi-varians analysen modellere kun det statiske valg. For at kunne skabe en porteføljeallokering ud fra antagelsen om tidsvarierende afkast, benyttes den teoretiske ramme præsenteret af [@JurVic2011]. Slutteligt præsenteres, hvordan en kortsalgsrestriktion kan medtages i modellen. 

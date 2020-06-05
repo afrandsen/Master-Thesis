@@ -40,7 +40,7 @@ hvor $y_t$ er responsvariablen, som repræsenterer det realiserede merafkast på
 
 ### Multipel regression {#multregr}
 Som pointeret af [@Stambaugh1999] er der flere problemer med estimationen af den univariate regression. For at øge inferensen af estimationsresultaterne følges metoden af [@Goyal2007], som består af en multipel regression. Den medfører en regression af responsvariablen, merafkast, på samtlige laggede forklarende variable. Altså kan den analytisk beskrives som
-$$y_t=\beta_0+\bm{\beta}_1\bm{x}_{t-1}+\bm{\varepsilon}_t,$$
+$$y_t=\beta_0+\bm{\beta}_1'\bm{x}_{t-1}+\bm{\varepsilon}_t,$$
 
 her er $\bm{x}_{t-1}$ vektoren af realisationer af de forklarende variable, på tidspunkt $t-1$. Nu er $\bm{\beta}_1$ vektoren af hældningskoefficienter for hver af de forklarende variable. Slutteligt er $\bm{\varepsilon}_t$ vektoren af fejlled. Fordelen ved en multipel regression er, at den muliggør biasreduktion -- som der ellers kan opstå i den univariate regression -- ved at inkludere tidligere udeladte variable. Denne fordel kommer dog med en omkostning, da multikollinaritet kan skabe en mere ustabil model.
 
@@ -1431,6 +1431,11 @@ De ovenstående præsenterede univariate regressioner kaster tvivl på validitet
 ## Multiple regressioner {#multreg}
 I denne sektion fortsættes analysen af variablene, som kan indgå i den endelige VAR(1)-model, ved brug af multiple regressioner. Altså antages det, at en eller flere variable forklarer variationen i log merafkastet på aktivklasserne. I det følgende vil tre robuste OLS estimationer blive undersøgt nærmere, idet, at standardfejl er justeret for heteroskedasticitet og autokorrelation, [@Newey1987]. $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. Signifikansniveauet fastholdes på niveauet $\alpha=0.05$. At inkludere alle variable i én multipel regression betegnes undertiden i litteraturen med det velvalgte navn *Kitchen-Sink Regression*, [@Goyal2007]. Derudover foretages en *Step-AIC*-procedure^[Den eneste restriktion på proceduren er, at den nominelle rente skal indgå. Derfor vil step-proceduren ikke nødvendigvis skabe en model med bedre prædiktionsevne.], der giver anledning til en regression, af en delmængde af de foreklarende variable i de multiple regressioner. Dette anvendes kun som et supplement til modeltjekkene, og skal ikke ses som en modelselektion.
 
+Den multiple analyse består af følgende regressioner
+$$rx_{t+1}^j=\beta_{0}+\bm{\beta}_{1}'\bm{x}_{t}+\bm{\varepsilon}_{t+1},$$
+
+hvor $j$ er notationen for de $3$ aktivklasser bestående af merafkast.
+
 Fokuseres først på merafkastet på aktier, bemærkes det, at næsten alle de finansielle variable er yderst insignifikante. Kun *Small Minus Big* kan prædiktere merafkastet signifikant, hvilket stemmer overens med den univariate analyse. Dette gør den med en negativ koefficient, som også er gældende for *Price-Earnings Ratio* og *High Minus Low*. Hvorimod resten af de finansielle variable har en positiv koefficient. Ift. rentestrukturs variablene ses, at den nominelle rente er signifikant med en $t$-størrelse på `r round(FIT_M_TABLE$t[8], 3)`. Den nominelle rente var til gengæld ikke signifikant i den univariate analyse. Den makroøkonomiske variabel er ligeledes signifikant -- med en $t$-størrelse på `r round(FIT_M_TABLE$t[13], 3)` -- hvilket den også var i det univariate setup. 
 
 ```{r MULT-ak, echo=FALSE}
@@ -1703,10 +1708,9 @@ g
 
 ## Opsummering {#opsreg}
 
-I dette kapitel blev prædiktabiliteten af merafkastet på de risikobærende aktiver testet. For at have et initielt bud på potentielle tilstandsvariable i VAR(1)-modellen. Derudover blev en *Step-AIC*-procedure foretaget, som skulle ses som et supplement til modeltjekkene.
+I dette kapitel blev prædiktabiliteten af merafkastet på de risikobærende aktiver testet. For at have et initielt bud på potentielle tilstandsvariable i VAR(1)-modellen. Ydermere blev en inspektion af hver regression foretaget, ved benyttelse af diverse residualplots. Ligeledes blev en *Step-AIC*-procedure foretaget, som skulle ses som et supplement til modeltjekkene.
 
 # Underliggende model {#underligmodel}
-
 Dette kapitel har til formål at præsentere resultatet fra modelselektionproceduren, som blev præsenteret i Sektion \@ref(sekmodelselek). Derudover præsenterer kapitlet VAR(1)-modellens estimationsresultater i Sektion \@ref(var1est). Estimationen af VAR(1)-modellen er gennemført på den fulde stikprøve periode fra 1954 2. kvartal til 2018 4.kvartal, som tæller $252$ kvartalsvise observationer. Den restringerede VAR(1)-model estimeres ved brug af Ligning \@ref(eq:1), derudover estimeres de bias-justerede koefficienter ved brug af den analytiske bias formel af [@Pope1990], dvs. Ligning \@ref(eq:bias).
 
 ## Resultater fra modelselektionsproceduren {#resframodelsel}
@@ -2312,11 +2316,10 @@ roots %>%
 I dette kapitel blev modelselektionen fremlagt. Derudover blev VAR(1)-estimaterne præsenteret og analyseret. I VAR-processen viste merafkastet på statsobligationer sig svær at forudsige. Mens det risikofrie afkast havde den højeste $R^2$ blandt aktiverne. Strukturen i VAR-systemet er essentielle for porteføljeallokeringerne, siden at parametrene afhænger af VAR(1) estimationsresultaterne. Derudover blev stikprøve-bias undersøgt, ved at bias-justere koefficienterne. Ganske små forskelle blev fundet mellem de regulære OLS estimater og de bias-justerede estimater. For fuldstændighedens skyld fortsættes dog med de bias-justerede estimater.
 
 # Problemer ved estimation {#problemervedest}
+Middelværdi-varians optimering har vist sig meget sensitiv overfor den kvantitative størrelse af parametrene som indgår i vægtelsesberegningen for den relevante portefølje, dvs. forventede afkast, varianser og kovarianser. Som også er tilfældet i denne afhandling, er disse parametre estimeret via en tidsserie af afkast, men forventningen til disse estimater skal anskues skeptisk, idet de indeholder en væsentlig mængde usikkerhed. Derfor undersøger dette kapitel problemerne ved estimation af afkast. Først introduceres et Monte Carlo forsøg i Sektion \@ref(simeks), og resultaterne fra dette forsøg belyses i Sektion \@ref(ressimeks). Slutteligt gives en opsummering af kapitlets fund.
 
 ```{r script2, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Speciale.R"), include=FALSE, cache=TRUE}
 ```
-
-Middelværdi-varians optimering har vist sig meget sensitiv overfor den kvantitative størrelse af parametrene som indgår i vægtelsesberegningen for den relevante portefølje, dvs. forventede afkast, varianser og kovarianser. Som også er tilfældet i denne afhandling, er disse parametre estimeret via en tidsserie af afkast, men forventningen til disse estimater skal anskues skeptisk, idet de indeholder en væsentlig mængde usikkerhed. Derfor undersøger dette kapitel problemerne ved estimation af afkast. Først introduceres et Monte Carlo forsøg i Sektion \@ref(simeks), og resultaterne fra dette forsøg belyses i Sektion \@ref(ressimeks). Slutteligt gives en opsummering af kapitlets fund.
 
 ## Simuleringseksempel {#simeks}
 
@@ -2343,7 +2346,7 @@ ggplot(data, aes(index, sim)) +
   geom_hline(data=data2, aes(yintercept = simval, color = "Estimeret middelværdi", linetype = "Estimeret middelværdi")) +
   geom_line() +
   facet_wrap(~type, scales = "free_y", ncol = 1) +
-  xlab("Indeks")+
+  xlab("Kvartal")+
   ylab("Afkast")+
   scale_x_continuous(expand = c(0,0))+
   scale_y_continuous(expand = c(0,0))+
@@ -2685,10 +2688,10 @@ data %>%
    kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer: vægtene for hhv. global minimum varians porteføljen, tangensporteføljen, CRRA-porteføljen og CARA-portføljen ved brug af de simulerede momenter, fra tredje simulering. Derudover rapporterer tabellen det sande forventede afkast for hver af porteføljerne og den sande volatilitet for hver af porteføljerne. Samt de estimerede forventede afkast for hver af porteføljerne og den estimerede volatilitet for hver af porteføljerne. Porteføljerne er opgjort kvartalsvist, ergo de skal holdes over ét helt kvartal, for at opnå det forventede afkast. For CRRA- samt CARA-porteføljen er vægtene beregnet for en delmængde af risikoaversioner.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
-Ved brug af de sande momenter, hælder minimum varians porteføljen mod Aktiv 3, med den relative laveste varians. Se Tabel \@ref(tab:sum-true). Omtrent en tredjedel af porteføljen er eksponeret i Aktiv 1 og Aktiv 2 har den laveste vægtning givet dens høje relative varians. Tangensporteføljen består af to lange positioner i Aktiv 1 og Aktiv 2, tilsammen finansieret af en kort position i Aktiv 3, hvilket reflekterer rangeringen af aktiverne ift. deres *Sharpe Ratio*.
+Ved brug af de sande momenter, hælder minimum varians porteføljen mod Aktiv 3, med den relative laveste varians. Se Tabel \@ref(tab:sum-true). Omtrent en tredjedel af porteføljen er eksponeret i Aktiv 1 og Aktiv 2 har den laveste vægtning givet dens høje relative varians. Tangensporteføljen består af to lange positioner i Aktiv 1 og Aktiv 2, som tilsammen er finansieret af en kort position i Aktiv 3, hvilket reflekterer rangeringen af aktiverne ift. deres *Sharpe Ratio*.
 Fælles for alle tre simuleringer er, at de estimerede standard afvigelser og korrelationer er relativt tæt på de sande værdier. Som det til gengæld kan ses, er de forventede afkast langt sværere at estimere præcist. Hvilket er en essentiel faldgrube for middelværdi-varians porteføljeanalysen, da disse værdier er centrale for de udledte porteføljevægte.
 
-For første simulering ses, i Tabel \@ref(tab:sum-1), at det forventede afkast på Aktiv 1 og specielt Aktiv 2 er overestimeret, mens det for Aktiv 3 er underestimeret. Dette medfører en ekstrem tangensportefølje med en overvægtet lang position i Aktiv 2, en lang position i Aktiv 1 og en kort position i det underestimerede Aktiv 3. De sande forventede afkast af tangensporteføljen og de optimale porteføljer for første simulering er signifikant lavere end det forventede afkast baseret på estimaterne. Omvendt ses at den sande volatilitet kun er en anelse højere end den estimerede volatilitet på porteføljerne. Som illustreret af den grønne linje på Figur \@ref(fig:weight-exp), er det sande bytteforhold mellem middelværdi og volatilitet på de estimerede porteføljer ikke langt fra porteføljerne baseret på de sande parametre, som illusreret af den magenta farve linje.
+For første simulering ses, i Tabel \@ref(tab:sum-1), at det forventede afkast på Aktiv 1 og specielt Aktiv 2 er overestimeret, mens det for Aktiv 3 er underestimeret. Dette medfører en ekstrem tangensportefølje med en overvægtet lang position i Aktiv 2, en lang position i Aktiv 1 og en kort position i det underestimerede Aktiv 3. De sande forventede afkast af tangensporteføljen og de optimale porteføljer for første simulering er signifikant lavere end det forventede afkast baseret på estimaterne. Omvendt ses, at den sande volatilitet kun er en anelse højere end den estimerede volatilitet på porteføljerne. Som illustreret af den grønne linje på Figur \@ref(fig:weight-exp), er det sande bytteforhold mellem middelværdi og volatilitet på de estimerede porteføljer ikke langt fra porteføljerne baseret på de sande parametre, som illusreret af den magenta farve linje.
 
 For anden simulering er de estimerede forventede afkast alle underestimeret relativt meget, sammenlignet med første simuelering, se Tabel \@ref(tab:sum-2). Aktiv 2 er stadig mest attraktiv, men Aktiv 3 er nu mere attraktiv end Aktiv 1 grundet den højere *Sharpe Ratio*. Både den estimerede *CRRA*-portefølje, *CARA*-portefølje og tangensportefølje har en høj positiv vægt på Aktiv 2 og meget lave positioner i Aktiv 1 og 3. Alle disse porteføljer har et langt højere sandt forventet afkast og en relativt højere sand volatilitet end de forventede afkast og volatilitet baseret på estimaterne, grundet de store estimationsfejl. Den orange farvede linje på Figur \@ref(fig:weight-exp), viser portefølje bytteforholdene baseret på anden simulering.
 
@@ -2746,7 +2749,7 @@ ggplot(data, aes(sd, r)) +
 I dette kapitel blev problemerne ved estimation undersøgt gennem et Monte Carlo forsøg. I dette forsøg var den bagvedliggende fordeling af afkastene kendt på forhånd, men selv med denne information viste det sig, at selv små over- eller underestimationer påvirker én-periode porteføljeallokeringen i en signifikant grad. På tværs af alle porteføljetyper, heriblandt *CARA*- og *CRRA*-porteføljer, og på tværs af alle risikoaversioner.
 
 # Allokering af aktiver {#alloafakt}
-I dette kapitel vil teorien fra Del 2 samt de empiriske fund sammenkobles. Dette gøres ved at benytte VAR(1)-koefficienterne til porteføljevalget for den institutionelle investor. Den initielle analyse vil tage udgangspunkt i en investor med en moderat risikoaversion, $\gamma=5$, en lang investeringshorisont på $25$ år, $k=200$. Derudover restringeres investoren ikke, og dermed tillades kortsalg. Dette vil ligeledes fungere som sammenligningsgrundlaget for de resterende analyser i dette kapitel. I Sektion \@ref(portvalgmedtids) vil denne initielle portefølje blive undersøgt, når afkast er tidsvarierende. Her vil porteføljevalget for hele den tilgængelige periode bliver undersøgt, når der fokuseres på allokeringen i samtlige første-perioder. Dvs. tilfældet, hvor $A_0^{t+k}$ og $A_1^{t+k}$, se Appendiks \@ref(optimportaer). Dette giver mulighed for at undersøge investorens valg over samtlige recessioner.
+I dette kapitel vil teorien fra anden del samt de empiriske fund sammenkobles. Dette gøres ved at benytte VAR(1)-koefficienterne til porteføljevalget for den institutionelle investor. Den initielle analyse vil tage udgangspunkt i en investor med en moderat risikoaversion, $\gamma=5$ og en lang investeringshorisont på $25$ år, $k=100$. Derudover restringeres investoren ikke, og dermed tillades kortsalg. Dette vil ligeledes fungere som sammenligningsgrundlaget for de resterende analyser i dette kapitel. I Sektion \@ref(portvalgmedtids) vil denne initielle portefølje blive undersøgt, når afkast er tidsvarierende. Her vil porteføljevalget for hele den tilgængelige periode bliver undersøgt, når der fokuseres på allokeringen i samtlige første-perioder. Dvs. tilfældet, hvor $A_0^{t+k}$ og $A_1^{t+k}$, se Appendiks \@ref(optimportaer). Dette giver mulighed for at undersøge investorens valg over samtlige recessioner.
 
 ## Porteføljevalg med tidsvarierende afkast {#portvalgmedtids}
 ```{r script11, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Script.R"), include=FALSE, cache=TRUE}
@@ -2755,7 +2758,7 @@ I dette kapitel vil teorien fra Del 2 samt de empiriske fund sammenkobles. Dette
 ```{r script2, code = readLines("C:/Users/AKF/Documents/Matematik-Okonomi/5. Ar/2. Semester/Master-Thesis/Scripts/Portfolio.R"), include=FALSE, cache=TRUE}
 ```
 
-Ved benyttelse af VAR(1)-koefficientestimaterne fra Sektion \@ref(var1est), kan investorens valg af første-periode porteføljeallokeringer undersøges, under antagelsen om tidsvarierende afkast. Det antages at investoren har moderat risikoaversion, $\gamma=5$, en lang investeringshorisont, $k=200$, og uden en kortsalgsrestriktion. Kombineres VAR(1)-estimaterne med de nævnte antagelser, kan dynamikken for investeringsmulighederne skabes. På denne måde kan allokeringsreglen, for det multivariate investeringsrum bestående af det risikofrie aktiv, aktier, statsobligationer og virksomhedsobligationer, etableres. Figur \@ref(fig:AL-tids) viser den optimale første-periode allokering over tid for investoren med de ovennævnte antagelser. Figuren viser, hvordan investoren fordeler sin formue over de risikobærende afkast samt det risikofrie afkast over hele stikprøveperioden, 1954 2. kvartal til 2018 4. kvartal. De tilhørende recessionsperioder er -- som defineret af [@NBER2020] -- er ligeledes visualiseret. Ud fra en visuel inspektion ses det, at investoren under recessioner forsøger at øge sine eksponeringer i aktivklasser, som har relativt lave volatiliteter. De procentvise andele i hver aktiv viser sig at være ekstreme -- særligt i recessioner -- med et allokeringsinterval på $\pm 2000\%$. Dette foranlediger én til at tænke på, hvordan transaktionsomkostninger ville have påvirket allokeringerne. Tilsyneladende sker det yderst sjældent, at investoren går kort i aktier. Ydermere ses det, at positionen i aktier øges halvvejs igennem en recession. Generelt udviser den optimale portføljeallokering betydelig intertemporal variation. Dette ses særligt for allokeringen mod obligationstyperne, som udviser de højeste variationer. Allokeringen over hele stikprøven er konsistent med [@JurVic2011].
+Ved benyttelse af VAR(1)-koefficientestimaterne fra Sektion \@ref(var1est), kan investorens valg af første-periode porteføljeallokeringer undersøges, under antagelsen om tidsvarierende afkast. Det antages at investoren har moderat risikoaversion, $\gamma=5$, en lang investeringshorisont, $k=100$ og ikke har en kortsalgsrestriktion. Kombineres VAR(1)-estimaterne med de nævnte antagelser, kan dynamikken for investeringsmulighederne skabes. På denne måde kan allokeringsreglen, for det multivariate investeringsrum bestående af det risikofrie aktiv, aktier, statsobligationer og virksomhedsobligationer, etableres. Figur \@ref(fig:AL-tids) viser den optimale første-periode allokering over tid for investoren med de ovennævnte antagelser. Figuren viser, hvordan investoren fordeler sin formue over de risikobærende afkast samt det risikofrie afkast over hele stikprøveperioden, 1954 2. kvartal til 2018 4. kvartal. De tilhørende recessionsperioder er -- som defineret af [@NBER2020] -- er ligeledes visualiseret. Ud fra en visuel inspektion ses det, at investoren under recessioner forsøger at øge sine eksponeringer i aktivklasser, som har relativt lave volatiliteter. De procentvise andele i hver aktiv viser sig at være ekstreme -- særligt i recessioner -- med et allokeringsinterval på $\pm 2000\%$. Dette foranlediger én til at tænke på, hvordan transaktionsomkostninger ville have påvirket allokeringerne. Tilsyneladende sker det yderst sjældent, at investoren går kort i aktier. Ydermere ses det, at positionen i aktier øges halvvejs igennem en recession. Generelt udviser den optimale portføljeallokering betydelig intertemporal variation. Dette ses særligt for allokeringen mod obligationstyperne, som udviser de højeste variationer. Allokeringen over hele stikprøven er konsistent med [@JurVic2011].
 
 ```{r AL-tids, echo=FALSE, fig.align='center', fig.cap='Tidsserie af alle første-periode allokeringer.', fig.width=18, fig.asp=0.5, fig.pos='H'}
 alpha <- xts::xts(t(dynport$alphafixedT), index(NET_TB))
@@ -2794,9 +2797,9 @@ ggplot(alpha) +
   ylab("Allokering")
 ```
 
-For at lave en gennemgående analyse af investorens porteføljeallokeringer, separeres effekterne i Tabel \@ref(tab:AL-KOMP). Tabellen rapporter investorens komposition af tangens-, GMV-, *myopic demand*- og *intertemporal hedging demand*-porteføljen, ift. de tilgengælige investeringsmuligheder. Tabellen er skabt ud fra de nævnte antagelser om investoren. Tangensporteføljen for investoren er kraftigt skubbet mod aktier, statsobligationer og virksomhedsobligationer. Gennemsnitligt investeres hhv. $173 \%$, $74\%$ og $92\%$ af formuen i disse aktiver. Disse lange positioner er finansieret af en stor kort position i det risikofrie aktiv, på hhv. $-238\%$. For at understøtte disse fund, kan den beskrivende statistik fra Kapitel \@ref(kapiteldatab) samt VAR(1)-estimaterne fra Kapitel \@ref(underligmodel) medtages. Tabel \@ref(tab:DES-AKTIVKLASSE) viser, at det gennemsnitlige merafkast på aktier er højere end det gennemsnitlige afkast på både stats- og virksomhedsobligationer. Tabel \@ref(tab:DES-KOR) viser, at korrelationen mellem aktier og statsobligationer er negativ, $-0.02$, og meget lav mellem aktier og virksomhedsobligationer, $0.16$. Derimod er korrelationen mellem stats- og virksomhedsobligationer meget høj, $0.85$. Dette betyder, at stats- og virksomhedsobligationer næsten er substitutter. Global minimum varians porteføljen har givetvis -- som forventet -- den højeste allokering mod aktivet med laveste volatilitet. Dette understøttes ligeledes af Tabel \@ref(tab:DES-AKTIVKLASSE). Gennemsnitligt viser det sig, at det er optimalt for investoren at holde en allokering i aktier på $81\%$. En større del af allokeringen mod aktier og *T-Bills* lader til at stamme fra det *intertemporale hedging demand*. Hvilket betyder, at investoren kan *hedge* variationer i fremtidige merafkast på aktier og afkast på *T-Bills*, ved netop at holde disse aktiver. Dette understøttes ligeledes af fundende i Kapitel ?, hvor flere variable udviste *mean reversion* overfor særligt merafkastet på aktier. Fokuseres på allokeringen mod obligationer, ses at investoren generelt foretrækker en lang position i statsobligationer. 
+For at lave en gennemgående analyse af investorens porteføljeallokeringer, separeres effekterne i Tabel \@ref(tab:AL-KOMP). Tabellen rapporter investorens komposition af tangens-, GMV-, *myopic demand*- og *intertemporal hedging demand*-porteføljen, ift. de tilgengælige investeringsmuligheder. Tabellen er skabt ud fra de nævnte antagelser om investoren. Tangensporteføljen for investoren er kraftigt skubbet mod aktier, statsobligationer og virksomhedsobligationer. Gennemsnitligt investeres hhv. $173 \%$, $74\%$ og $92\%$ af formuen i disse aktiver. Disse lange positioner er finansieret af en stor kort position i det risikofrie aktiv, på hhv. $-238\%$. For at understøtte disse fund, kan den beskrivende statistik fra Kapitel \@ref(kapiteldatab) samt VAR(1)-estimaterne fra Kapitel \@ref(underligmodel) medtages. Tabel \@ref(tab:DES-AKTIVKLASSE) viser, at det gennemsnitlige merafkast på aktier er højere end det gennemsnitlige afkast på både stats- og virksomhedsobligationer. Tabel \@ref(tab:DES-KOR) viser, at korrelationen mellem aktier og statsobligationer er negativ, $-0.02$, og meget lav mellem aktier og virksomhedsobligationer, $0.16$. Derimod er korrelationen mellem stats- og virksomhedsobligationer meget høj, $0.85$. Dette betyder, at stats- og virksomhedsobligationer næsten er substitutter. Global minimum varians porteføljen har givetvis -- som forventet -- den højeste allokering mod aktivet med laveste volatilitet. Dette understøttes ligeledes af Tabel \@ref(tab:DES-AKTIVKLASSE). Gennemsnitligt viser det sig, at det er optimalt for investoren at holde en allokering i aktier på $81\%$^[Ikke gengivet her.]. En større del af allokeringen mod aktier og *T-Bills* lader til at stamme fra det *intertemporale hedging demand*. Hvilket betyder, at investoren kan *hedge* variationer i fremtidige merafkast på aktier og afkast på *T-Bills*, ved netop at holde disse aktiver. Dette understøttes ligeledes af fundende i Kapitel \@ref(underligmodel), hvor flere variable udviste *mean reversion* overfor særligt merafkastet på aktier. Fokuseres på allokeringen mod obligationer, ses at investoren generelt foretrækker en lang position i statsobligationer. 
 
-Holdes den visuelle inspektion af Figur \@ref(fig:AL-tids) op i mod opdelingen fra Tabel \@ref(tab:AL-KOMP), kan der argumenteres for, at investoren øger sin lange position i virksomhedsobligationer under igangværende recessioner. Som dermed må betyde, at investoren finansierer disse høje positioner gennem korte positioner i *T-Bills* og statsobligationer. 
+Holdes den visuelle inspektion af Figur \@ref(fig:AL-tids) op i mod opdelingen fra Tabel \@ref(tab:AL-KOMP), kan der argumenteres for, at investoren øger sin lange position i statsobligationer og virksomhedsobligationer under igangværende recessioner, dog ikke samtidigt. Som dermed må betyde, at investoren finansierer disse høje positioner gennem korte positioner i *T-Bills* og én af obligationstyperne. 
 
 ```{r AL-KOMP, echo=FALSE}
 options(knitr.kable.NA = '')
@@ -2818,7 +2821,7 @@ KOMP %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position"),
                              full_width = F)  %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer dekompositionen af first-period allokeringerne. Værdierne som er angivet, er de gennemsnitlige allokeringer.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer dekompositionen af first-period allokeringerne. Værdierne som er angivet, er de gennemsnitlige allokeringer. Allokeringerne er vist i procent.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 ## Effekten af horisontlængde og risikotolerance
@@ -2852,7 +2855,7 @@ BIG_TABLE %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position", "scale_down"),
                              full_width = F)  %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kompositionen af portefølje valget for den institutionelle investor over en lang række investeringshorisonter samt risikoaversioner. Allokeringerne er vist i procent.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 Som et supplement til Tabel \@ref(tab:AL-BIG) viser Figur \@ref(fig:HOR-ana) porteføljeallokeringen for et kontinum af investeringshorisonter. 
@@ -2892,7 +2895,7 @@ ggplot(HOR_ANA) +
   ylab("Allokering")
 ```
 
-Derudover suppleres analysen af risikoaversionen med Figurerne \@ref(fig:GAM-ana-t), \@ref(fig:GAM-ana-a), \@ref(fig:GAM-ana-s) og \@ref(fig:GAM-ana-v). Disse Figurer viser den totalte allokering for hhv. *T-Bills*, aktier, statsobligationer og virksomhedsobligationer holdt op imod et kontinum af risikotolerancer, defineret som $\tfrac{1}{\gamma}$, for $\gamma>0$. Derudover vises *myopic demand* ligeledes, der ses som rette linjer. 
+Derudover suppleres analysen af risikoaversionen med Figurerne \@ref(fig:GAM-ana-t), \@ref(fig:GAM-ana-a), \@ref(fig:GAM-ana-s) og \@ref(fig:GAM-ana-v). Disse Figurer viser den totalte allokering for hhv. *T-Bills*, aktier, statsobligationer og virksomhedsobligationer holdt op imod et kontinum af risikotolerancer, defineret som $\tfrac{1}{\gamma}$, for $\gamma>0$. Derudover vises *myopic demand* ligeledes, der ses som rette linjer. Fælles for alle fire figurer er, at de totale allokeringer er ikke-lineære funktioner af risikotolerancen.
 
 ```{r GAM-ana-t, echo=FALSE, fig.align='center', fig.cap='Risikotolerance analyse for aktivet T-Bills.', fig.width=18, fig.asp=0.2, fig.pos='H'}
 GAM_ANA <- data.frame(t(GAM_ANA), index=1/seq(1, 50, 0.1))
@@ -2906,7 +2909,7 @@ colnames(GAM_ANA_MYO) <- c('A', 'B', 'C', 'D', 'index')
 ggplot(GAM_ANA) +
   geom_line(aes(x=index, y=A, color = 'Total allokering', linetype = "Total allokering")) +
   geom_line(data=GAM_ANA_MYO, aes(x=index, y=A, color = 'Myopic Demand', linetype = "Myopic Demand")) +
-  coord_cartesian(xlim = c(1, 0),
+  coord_cartesian(xlim = c(min(GAM_ANA[, 5]), max(GAM_ANA[,5])),
                   ylim = c(min(GAM_ANA[,1]-0.05),
                            max(GAM_ANA[,1]+0.05))) +
   scale_linetype_manual(values=c("solid", "dashed", "dotted", "dotdash"))+
@@ -2936,7 +2939,7 @@ ggplot(GAM_ANA) +
 ggplot(GAM_ANA) +
  geom_line(aes(x=index, y=B, color = 'Total allokering', linetype = "Total allokering")) +
   geom_line(data=GAM_ANA_MYO, aes(x=index, y=B, color = 'Myopic Demand', linetype = "Myopic Demand")) +
-  coord_cartesian(xlim = c(1, 0),
+  coord_cartesian(xlim = c(min(GAM_ANA[, 5]), max(GAM_ANA[,5])),
                   ylim = c(min(GAM_ANA[,2]-0.05),
                            max(GAM_ANA[,2]+0.05))) +
   scale_linetype_manual(values=c("solid", "dashed", "dotted", "dotdash"))+
@@ -2966,7 +2969,7 @@ ggplot(GAM_ANA) +
 ggplot(GAM_ANA) +
   geom_line(aes(x=index, y=C, color = 'Total allokering', linetype = "Total allokering")) +
   geom_line(data=GAM_ANA_MYO, aes(x=index, y=C, color = 'Myopic Demand', linetype = "Myopic Demand")) +
-  coord_cartesian(xlim = c(1, 0),
+  coord_cartesian(xlim = c(min(GAM_ANA[, 5]), max(GAM_ANA[,5])),
                   ylim = c(min(GAM_ANA[,3]-0.05),
                            max(GAM_ANA[,3]+0.05))) +
   scale_linetype_manual(values=c("solid", "dashed", "dotted", "dotdash"))+
@@ -2996,7 +2999,7 @@ ggplot(GAM_ANA) +
 ggplot(GAM_ANA) +
   geom_line(aes(x=index, y=D, color = 'Total allokering', linetype = "Total allokering")) +
   geom_line(data=GAM_ANA_MYO, aes(x=index, y=D, color = 'Myopic Demand', linetype = "Myopic Demand")) +
-  coord_cartesian(xlim = c(1, 0),
+  coord_cartesian(xlim = c(min(GAM_ANA[, 5]), max(GAM_ANA[,5])),
                   ylim = c(min(GAM_ANA[,4]-0.05),
                            max(GAM_ANA[,4]+0.05))) +
   scale_linetype_manual(values=c("solid", "dashed", "dotted", "dotdash"))+
@@ -3079,7 +3082,7 @@ BIG_R_TABLE <- cbind(c(2, rep(NA, 3), 5, rep(NA, 3), 10, rep(NA, 3), 20, rep(NA,
 colnames(BIG_R_TABLE) <- c('$\\gamma$', 'Aktiv', '1', '4', '8', '20', '40', '60', '80', '100')
 
 BIG_R_TABLE %>% 
-  knitr::kable(caption = 'Komposition af porteføljen for flere horisonter og risikoaversioner, med en kortsalgs restriktion.',
+  knitr::kable(caption = 'Komposition af porteføljen for flere horisonter og risikoaversioner, med en kortsalgsrestriktion.',
                booktabs=TRUE,
                align = c('l', 'l', rep('r', 8)),
                row.names = FALSE,
@@ -3089,7 +3092,7 @@ BIG_R_TABLE %>%
    kableExtra::kable_styling(bootstrap_options = "striped",
                              latex_options = c("striped", "HOLD_position", "scale_down"),
                              full_width = F)  %>% 
-   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer den beskrivende statistik af den multiple regression ift. responsvariablen: merafkastet på aktier, $rx_{t+1}^{\\\\text{a}}$. Hver række repræsenterer et led i den mutiple regression. Dette gøres ud fra $259$ kvartalvise observationer, som spænder over kvartalerne fra 2. kvartal 1954 til 4. kvartal 2018. Koefficienter markeret med \\\\textbf{fed} implicerer signifikans, for et signifikansniveau på $\\\\alpha=0.05$. Standardfejl er justeret for heteroskedasticitet og autokorrelation, (ref:nw1987). Konfidensintervallerne for koefficienterne, $t$-værdierne og $p$-værdierne er ligedes dannet på baggrund af de justerede standardfejl. $R^2$ er ligedes rapporteret, bemærk dette ikke er den justerede $R^2$.}", threeparttable = T, escape = FALSE, general_title = "")
+   kableExtra::footnote(general = "\\\\textit{Denne tabel rapporterer kompositionen af portefølje valget for den institutionelle investor med en kortsalgsrestriktion over en lang række investeringshorisonter samt risikoaversioner. Allokeringerne er vist i procent.}", threeparttable = T, escape = FALSE, general_title = "")
 ```
 
 Myopiske investorer med lav risikoaversion allokerer en større del mod virksomhedsobligationer. Des mere konservativ investoren bliver ses det, at allokeringen mod *T-Bills* mere end fordobles, mens der generelt hensættes en mindre allokering mod risikobærende aktiver. Altså ses en dalende allokering mod aktier og begge obligationstyper, mens mere eksponering rettes mod aktivet med lav volatilitet. Generelt ses, at diversifikationsmulighederne udnyttes i langt mindre grad, des mere konservativ investoren bliver, til forskel fra den myopiske investor uden en kortsalgsrestriktion. 
@@ -3131,11 +3134,9 @@ ggplot(HOR_ANA_R) +
 ```
 
 ## Opsummering
-
-I dette kapitel blev den optimale porteføljeallokering undersøgt. Forskellene mellem investorer med lange og korte investeringshorisonter blev skitseret. Derudover blev risikoaversionen ligeledes analyseret. 
+I dette kapitel blev den optimale porteføljeallokering undersøgt. Forskellene mellem investorer med lange og korte investeringshorisonter blev skitseret. Derudover blev risikoaversion og en kortsalgsrestriktion analyseret. For aktivklassen aktier, viste det drivende komponent at være *intertemporal hedging demand*, da allokeringen til dette aktiv øges, når investeringshorisonten forlænges, og omvendt falder, når investoren bliver mere konservativ. Modsat er allokeringen mod særligt statsobligationer drevet af *myopic demand*, da allokeringen til dette aktiv er stabilt over investeringshorisonterne.
 
 # Diskussion {#disku}
-
 I dette kapitel bliver fundende fra de tidligere kapitler diskuteret og reflekteret. Dette gøres ved både at sætte spørgsmålstegn ved resultaterne og de anvendte metoder. Derudover vil andre relaterede emner belyses, som kan komplementerer fremtidige studier. Potentielle forbedringer til den forudgående analyse vil ligeledes blive præsenteret. 
 
 Teoretiske antagelser har været et gennemgående tema igennem hele afhandlingen for at kunne estimere modellen, fastsat af [@JurVic2011]. Brugen af diskrettidsmodeller med approksimative analytiske løsninger, kan give anledning til, at VAR-modellen indeholder approksimations fejl. Disse potentielle approksimations fejl blev derimod ikke undersøgt, da modellen ikke valideres. Dette giver anledning til et andet bekymringsområde. Potens nytte defineret over terminalformue blev anvendt til udarbejdelsen af den analytiske porteføljevalgsløsning. Dette medfører en antagelse om konstant *RRA* og konstant volatilitet over tid. Denne antagelse kan være uhensigtsmæssig, når porteføljevalget for en institutionel investor skal undersøges, eftersom det ikke separerer elasticiteten af intertemporal substitution fra risikoaversion. Dette løses netop af Epstein-Zin nytte, som separerer de to effekter, og på samme tid bevarer uafhængigheden af formue i *RRA*, [@CampVicCha2003].
@@ -3151,8 +3152,7 @@ På trods af dette, accepteres den underliggende usikkerhed i selektionsprocedur
 En potentiel stor faldgrube for afhandlingen er størrelsen og ikke mindst kvaliteten af stikprøven. Ved brug af kvartalsvise data, blive visse variable skab ud fra glidende gennemsnit. Om en investor benytter denne information eller benytter de sande kvartalsvise værdier er uvis. Eksisterende litteratur benytter sommetider månedlige, halvårlige eller årlige data. Dette kan potentielt skabe mere præcise estimater, men kan også resultere i værre estimater. Præcisionen i estimater er særlig vigtig for aktivklassen aktier, idet, at de er aktivet med højest volatilitet for faste tidsintervaller. En større mængde af aktivklasser, vil naturligvis og kunne have påvirket porteføljeallokeringen. Dette leder også til et andet problem bag de valgte aktivklasser: de skaber ikke nødvendigvis de nødvendige horisonteffekter eller risikoaversionseffekter, som alternative aktivklasser måske kunne have skabt. Begrænsingen af aktivklasserne skete til gengæld af en simpel årsag: data mangel.
 
 # Konklusion {#konklu}
-
-Denne afhandling undersøgte det finansielle emne: dynamisk porteføljeallokering, ved at se porteføljeallokeringen fra en investors perspektiv. Dette blev undersøgt ved brug af en analytisk løsning til det dynamiske porteføljeproblem. Som antog, at investoren havde CRRA-nytte over terminalformue og stod overfor tidsvarierende afkast for en endelig investeringshorisont. Afhandlingen komplementerer eksisterende litteratur på en række punkter. Begrænsningen af den rene middelværdi-varians analyse er indlysende grundet dens fordelingsmæssige og statiske antagelser. Hvorimod en antagelse om CRRA-nytte og lognormale afkast kan udnytte approksimative løsninger.
+Denne afhandling undersøgte det finansielle emne: dynamisk porteføljeallokering, ved at se porteføljeallokeringen fra en investors perspektiv. Dette blev undersøgt ved brug af en analytisk løsning til det dynamiske porteføljeproblem. Denne løsning antog, at investoren havde CRRA-nytte over terminalformue og stod overfor tidsvarierende afkast for en endelig investeringshorisont. Afhandlingen komplementerer eksisterende litteratur på en række punkter. Begrænsningen af den rene middelværdi-varians analyse er indlysende grundet dens fordelingsmæssige og statiske antagelser. Hvorimod en antagelse om CRRA-nytte og lognormale afkast kan udnytte approksimative løsninger.
 
 Afhandlingen benyttede derudover ikke kun nutidsværdirelationer mellem aktivklasserne, men også variable fra akademisk litteratur, som før har vist prædiktabilitsegenskaber overfor afkast. Fordi afhandlingen var interesseret i allokeringen mod en række aktivklasser, antoges det, at dynamikken i de relevante tilstandsvariable fulgte en VAR(1)-process. Dette tillod at fange lineære afhængigheder mellem alle aktivklasser og prædiktionsvariable på samme tid.
 

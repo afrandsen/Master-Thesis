@@ -37,7 +37,7 @@ Dermed er den optimale portefølje udledt, for tilfældet med ét risikobærende
 \bm{\alpha}_t&=\frac{1}{k}\bm{\Sigma}_t^{-1}\left(\mathbb{E}_t\left[\bm{R}_{t+1}\right]-R_{0,t+1}\bm{\ell}\right).
 \end{align*}
 
-Her er de gængse regler for matrix differentiation og manipulation benyttet. 
+Her er de gængse regler for matrix differentiation og matrix manipulation benyttet. 
 
 ## Udledning af *ARA* samt *RRA*
 I denne Sektion udledes *Absolute Risk Aversion* samt *Relative Risk Aversion* målene for de tre præsenterede nyttefunktioner: kvadratisk nytte, eksponentiel nytte (*CARA*) og potens nytte (*CRRA*). Fælles for alle nyttefunktionerne er, at de er fuldstændigt defineret over formue.
@@ -54,7 +54,7 @@ $$\text{ARA}(W)=-\frac{U''(W)}{U'(W)}.$$
 Altså vil kvadratisk nytte have følgende *ARA*
 $$\text{ARA}_k(W_{t+1})=\frac{2b}{a-2bW_{t+1}},$$
 
-hvor $k$ er notationen for kvadratisk. Fra ovenstående kan det ses, at *ARA* for kvadratisk nytte er stigende i $W_{t+1}$. Hvilket ikke er retsmæssigt, ift. den generelle holdning blandt emprisk litteratur. 
+hvor $k$ er notationen for kvadratisk. Fra ovenstående kan det ses, at *ARA* for kvadratisk nytte er stigende i $W_{t+1}$. Hvilket ikke er retsmæssigt, ift. den generelle holdning blandt eksisterende litteratur. 
 
 *Relative Risk Aversion* er defineret ved
 $$\text{RRA}(W)=-\frac{WU''(W)}{U'(W)}.$$
@@ -65,7 +65,7 @@ $$\text{RRA}_k(W_{t+1})= \frac{2bW_{t+1}}{a-2bW_{t+1}}.$$
 Endnu engang bemærkes det, at også *RRA* for kvadratisk nytte er stigende i $W_{t+1}$. 
 
 ### Eksponentiel nytte
-Eksponentiel nytte betegnes undertiden *Constant Absolute Risk Aversion*. Eksponentiel nytte antager at variablene i modellen er normalfordelt. Lad $\theta\in\mathbb{R}$ være parametren i modellen, da vil eksponentiel nytte være defineret ved
+Eksponentiel nytte betegnes undertiden *Constant Absolute Risk Aversion*. Eksponentiel nytte antager at variablene i modellen er normalfordelte. Lad $\theta\in\mathbb{R}$ være parametren i modellen, da vil eksponentiel nytte være defineret ved
 \begin{equation*}
 U(W_{t+1})=-\exp\left(-\theta W_{t+1}\right).
 \end{equation*}
@@ -79,9 +79,11 @@ $$\text{RRA}_e(W_{t+1})= \theta W_{t+1}.$$
 Fra ovenstående ses det, at *RRA* for eksponentiel nytte er proportional til $W_{t+1}$.
 
 ### Potens nytte
-Potens nytte kræver, at afkast af aktiverne og formue er lognormal fordelt. Potens nytte er bedre kendt under betegnelsen *Constant Relative Risk Aversion*. Lad parameteren $\gamma\in\mathbb{R}$ være givet, da er nyttefunktionen defineret for $W_{t+1}\geq 0$, som
-$$U(W_{t+1})=\begin{cases} \frac{W_{t+1}^{1-\gamma}-1}{1-\gamma},\quad \gamma\neq 1\\
-\log(W_{t+1}),\quad \gamma = 1. \end{cases}$$
+Potens nytte kræver, at afkast af aktiverne og formue er lognormalfordelte. Potens nytte er bedre kendt under betegnelsen *Constant Relative Risk Aversion*. Lad parameteren $\gamma\in\mathbb{R}$ være givet, da er nyttefunktionen defineret for $W_{t+1}\geq 0$, som
+\begin{align*}
+U(W_{t+1})=\begin{cases} \frac{W_{t+1}^{1-\gamma}-1}{1-\gamma},\quad &\gamma\neq 1\\
+\log(W_{t+1}),\quad &\gamma = 1. \end{cases}
+\end{align*}
 
 Potens nytte har følgende *ARA*
 $$\text{ARA}_p(W_{t+1})= \frac{\gamma W_{t+1}^{-\gamma-1}}{W_{t+1}^{-\gamma}}=\frac{\gamma}{W_{t+1}},$$
@@ -92,7 +94,7 @@ $$\text{RRA}_p(W_{t+1})= \gamma,$$
 som altså er konstant, dette ligger også til grund for *CRRA*-betegnelsen.
 
 ## Udledning af specialtilfældet for potens nytte
-I denne Sektion udledes specialtilfældet af Ligning \@ref(eq:Potnytte), dvs. nyttefunktions form for risikoaversion, $\gamma$, lig $1$. Ved brug af *l'Hôpital's regel*. Reglen er defineret for to funktioner, $f(\cdot)$ og $g(\cdot)$, som er differentiable på et åbent interval $I$, undtagen for et fast punkt $c\in I$. Hvis
+I denne Sektion udledes specialtilfældet af Ligning \@ref(eq:Potnytte), dvs. nyttefunktions form for risikoaversion $\gamma$ lig én. Ved brug af *l'Hôpital's regel*. Reglen er defineret for to funktioner, $f(\cdot)$ og $g(\cdot)$, som er differentiable på et åbent interval $I$, undtagen for et fast punkt $c\in I$. Hvis
 $$\lim_{x\to c} f(x)=\lim_{x\to c}g(x)=0\,\text{eller} \pm \infty,$$
 
 samt
@@ -346,7 +348,7 @@ f\left(x\right)&=\log\left(1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)\right)
 \quad&- \frac{1}{1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)}\exp\left(\overline{c- p_{t+1}^{c,n}}\right)\left(\overline{c- p_{t+1}^{c,n}}\right).
 \end{align*}
 
-Defineres lineariseringsparameterne $k$ og $\rho$ til
+Defineres lineariseringsparametrene $k$ og $\rho$ til
 \begin{align*}
 \rho&=\frac{1}{1+\exp\left(\overline{c- p_{t+1}^{c,n}}\right)}\\
 k&=-\log\left(\rho\right)-\left(1-\rho\right)\log\left(\frac{1}{\rho-1}\right).
