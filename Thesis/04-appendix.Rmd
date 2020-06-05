@@ -583,7 +583,7 @@ A_1^2&=\frac{1}{\gamma} \bm{\Sigma}_{xx}^{-1} \left(\bm{\Phi}_1^x + 2\left(1-\ga
 Ligning \@ref(eq:a0fra1) og Ligning \@ref(eq:a1fra1) er identiske med Ligning \@ref(eq:a0fra2) og Ligning \@ref(eq:a1fra2), bortset fra at $\Tilde{\bm{\Omega}}^1$ er udskiftet med $\bm{\Sigma}_v$.
 
 ### *Value*-funktionen
-Nu udledes de relevante udtryk for koefficienterne, $B_i^2$, i den maksimerede *value*-funktion. Dette gør, at der kan skabes et forhold mellem de foregående værdier af hhv. $A_i^1$ og $B_i^1$ koefficienterne. Ved indsættelse af den optimale porteføljeallokering for tidspunkt $\left(t+k-2\right)$ ind i *value*-funktionen, Ligning ??, og ved samtidig udeladelse af konstanter ganget på forventningen, opnås det følgende udtryk
+Nu udledes de relevante udtryk for koefficienterne, $B_i^2$, i den maksimerede *value*-funktion. Dette gør, at der kan skabes et forhold mellem de foregående værdier af hhv. $A_i^1$ og $B_i^1$ koefficienterne. Ved indsættelse af den optimale porteføljeallokering for tidspunkt $\left(t+k-2\right)$ ind i *value*-funktionen, og ved samtidig udeladelse af konstanter ganget på forventningen, opnås det følgende udtryk
 \begin{align*}
 &\mathbb{E}_{t+k-2}[ \exp\left( \left(1-\gamma\right)  r_{p,t+k-1}\right)\exp \left( \left(1-\gamma\right) \left(B_0^1 + B_1^1\bm{z}_{t+k-1}  + \bm{z}_{t+k-1}' B_2^1 \bm{z}_{t+k-1}  \right)\right)]\\
 &=\exp\left(\left(1-\gamma\right)\left(\frac{1}{2}\bm{\alpha}_{t+k-2}^{2\prime} \left(\bm{\sigma}_x^2 - \bm{\Sigma}_{xx} \bm{\alpha}_{t+k-2}^2\right) + B_0^1 \right) + D_0^{\left(t+k-2\right)} + \frac{1}{2} D_1^{\left(t+k-2\right)} \bm{\Omega}^1 D_1^{\left(t+k-2\right)\prime}\right)\\
