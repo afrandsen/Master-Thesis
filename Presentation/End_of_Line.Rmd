@@ -45,14 +45,16 @@ class: animated, fadeIn
 
 # Fejlrettelser
 
-130 sider + én mand = # mindre fejl
+130 sider + én mand = # mindre fejl.
 
 En række mindre fejl er blevet observeret af undertegnede.
 
  - Ift. multipel regression: Ikke vektor af fejlled.
  - Konfidensinterval ikke beskrevet på autokorrelationsplot.
  - Ligning for afkastrelation ift. kuponobligationer.
- - $x$-akse skulle ombyttes med $y$-akse på densitetsplot.
+ - Beskrivelse af $x$-akse skulle ombyttes med beskrivele af $y$-akse på densitetsplot.
+ - Grammatik.
+ - Aktie *Top-down* modelselektionens *AKFIC*-værdi i kolonne $x_t^{\text{cs}}$ ikke markeret med fed.
 
 ---
 
@@ -67,16 +69,14 @@ De væsentligste kritikpunkter i afhandlingen var:
  - Kvartalsvise data anvendes.
   - Visse variable skabes som glidende gennemsnit.
  - Længde af dataperiode.
- - Transaktionsomkostninger udeholdt.
+ - Transaktionsomkostninger, gearingsomkostninger, skatter m.m udeholdt.
  - *Life-cycle* problem udeholdt.
  - Konstant *RRA* og konstant risiko over tid.
- - Gearingsomkostninger, skatter m.m.
  - VAR(1)-modellen valideres ikke.
   - Modellen kunne indeholde approksimationsfejl, da den bygger på approksimative analytiske løsninger.
  - Ingen performance-mæssig evaluering.
   - Ville en simpel $\tfrac{1}{n}$-portefølje klare sig bedre?
  - Datakvalitet?
-  - Er data til at stole på?
  - Begrænset mængde af aktivklasser.
  - Sammenligning ift. en evt. benchmark model.
  - Kortsalgsrestriktionen sker ex-post.
@@ -89,7 +89,15 @@ class: animated, fadeIn
 
 # Vigtigste pointer
 
-
+Afhandlingen udfoldte en række empiriske resultater som er værd at pointere igen:
+ - Afkast er specielt prædiktable og tidsvarierende.
+ - Der eksisterer fundamentale relationer mellem afkast på visse aktivtyper og visse faktorer.
+ - Bias i VAR(1)-estimaterne var forholdsvis små.
+ - Estimationsfejl kab være afgørende for inferensen af porteføljerne.
+ - Investoren benytter specielt aktiver med lav risiko til at finansiere gearede positioner.
+ - IHD påvirker specielt aktier, da allokeringen vokser meget som investeringshorisonten øges.
+ - Myopic demand påvirker mere obligationstyperne, da allokeringen mod disse aktiver generelt holdes på samme niveau.
+ - Kortsalgsrestriktion skaber mere intertemporal variation for aktier, og trunkere visse vægte til nul over flere perioder.
 
 ---
 
@@ -214,6 +222,8 @@ og ville ligeledes give anledning til bias-justerede afskæringer.
 ???
 
 Hvorfor ikke en restringeret 0 VAR-model?
+
+Hvor ikke en VAR(p)? - Enhver VAR(p) kan skrives som en VAR(1).
 
 ---
 
@@ -603,6 +613,8 @@ class: animated, fadeIn
 
 # Modelselektion - &#128202;
 
+*Top-down* analysen fjerner mange variable.
+
 ```{r, fig.retina=3, echo=FALSE, fig.align="center"}
 knitr::include_graphics("C:/Users/AKF/Downloads/MOD_A.png")
 ```
@@ -612,6 +624,8 @@ knitr::include_graphics("C:/Users/AKF/Downloads/MOD_A.png")
 class: animated, fadeIn
 
 # Modelselektion - &#128202;
+
+*VIF*-analysen viser, at flere variable forklarer samme variation.
 
 ```{r, fig.retina=3, echo=FALSE, fig.align="center"}
 knitr::include_graphics("C:/Users/AKF/Downloads/VIF.png")
