@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Langsigtet investering i aktier</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Andreas Kracht Frandsen" />
+    <meta name="date" content="2020-06-14" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https:\\cdnjs.cloudflare.com\ajax\libs\animate.css\3.7.0\animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Langsigtet investering i aktier
+## <div class="line-block">En empirisk analyse af porteføljeallokering med rebalancering<br />
+# 📉 ⨉ ? = 📊</div>
+### Andreas Kracht Frandsen
+### 2020-06-14
+
+---
+
+
+class: animated, fadeIn
+
+# Dagsorden
+- Teoretiske resultater
+ - Myopisk porteføljeallokering
+ - Nytte over terminalformue
+ - Afkastrelationer
+ - Vector Autoregressive Process
+ - Dynamisk porteføljeallokering
+- Empirisk analyse
+ - Kort om data
+ - Normalitet
+ - Stationaritet
+ - Univariat analyse
+ - Multipel analyse
+ - Modelselektion
+ - Endelig model
+ - Allokering
+ 
+Spørgsmål er velkomne undervejs, såfremt undertegnede kan besvare dem.
+
+---
+
+class: animated, fadeIn
+
+# Fejlrettelser
+
+130 sider + én mand = # mindre fejl
+
+En række mindre fejl er blevet observeret af undertegnede.
+
+ - Ift. multipel regression: Ikke vektor af fejlled.
+ - Konfidensinterval ikke beskrevet på autokorrelationsplot.
+ - Ligning for afkastrelation ift. kuponobligationer.
+ - `\(x\)`-akse skulle ombyttes med `\(y\)`-akse på densitetsplot.
+
+---
+
+class: animated, fadeIn
+
+# Kritik af opgave
+
+De væsentligste kritikpunkter i afhandlingen var:
+ - Analysen var på baggrund af en institutionel investor, og *ikke* en privat.
+  - Dvs. menneskelig kapital og forbrug blev udeholdt.
+ - Ingen test af robusthed på eksterne datasæt.
+ - Kvartalsvise data anvendes.
+  - Visse variable skabes som glidende gennemsnit.
+ - Længde af dataperiode.
+ - Transaktionsomkostninger udeholdt.
+ - *Life-cycle* problem udeholdt.
+ - Konstant *RRA* og konstant risiko over tid.
+ - Gearingsomkostninger, skatter m.m.
+ - VAR(1)-modellen valideres ikke.
+  - Modellen kunne indeholde approksimationsfejl, da den bygger på approksimative analytiske løsninger.
+ - Ingen performance-mæssig evaluering.
+  - Ville en simpel `\(\tfrac{1}{n}\)`-portefølje klare sig bedre?
+ - Datakvalitet?
+  - Er data til at stole på?
+ - Begrænset mængde af aktivklasser.
+ - Sammenligning ift. en evt. benchmark model.
+ - Kortsalgsrestriktionen sker ex-post.
+
+Grundlæggende udgjorde afgrænsningerne de hovedsagelige kritikpunkter.
+
+---
+
+class: animated, fadeIn
+
+# Vigtigste pointer
+
+
+
+---
+
+class: animated, fadeIn
+
+# Teoretiske resultater
+
+De kommende slides vil repræsenterer den præsenterede teori fra Del II.
+
+Det forventes, at publikummet har *læst* det tidligere udsendte materiale.
+
+Slides'ne vil derfor ikke være udtyndende.
+
+---
+
+class: animated, fadeIn
+
+# Myopisk porteføljeallokering - &amp;#128201;
+
+Generelle (statiske) én-periode (Markowitz) problem
+
+`$$\max_{\alpha_t} \bf{\alpha}_t'(\mathbb{E}_t\left[\bf{R}_{t+1}\right]- R_{0,t+1}\bf{\ell}) - \frac{k}{2}\bf{\alpha}_t'\bf{\Sigma}_t\bf{\alpha}_t.$$`
+
+Lineær afvejning mellem forventede afkast og varians. `\(k\)` fungerer som en skalering.
+
+--
+
+Har følgende løsning
+
+`$$\bf{\alpha}_t=\frac{1}{k}\bf{\Sigma}_t^{-1}(\mathbb{E}_t\left[\bf{R}_{t+1}\right]-R_{0,t+1}\bf{\ell}).$$`
+
+--
+
+Nogen som sagde nytte? 	&amp;#129300;
+
+---
+
+background-image: url("https://www.nobelprize.org/images/markowitz-13420-portrait-medium.jpg")
+background-size: cover
+class: animated, fadeIn
+
+# &lt;span style="color: white;"&gt;Myopisk porteføljeallokering - &lt;/span&gt;&amp;#128201;
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+Her er Harry forresten.
+
+---
+
+class: animated, fadeIn
+
+# Nytte over terminalformue - &amp;#128201;
+
+I Sektion ?? blev nytten, `\(U(\cdot)\)`, defineret over terminalformue, `\(W_{t+1}\)`.
+
+For at kvantificere risikoaversionen hørende til investorens konkave nyttefunktion blev *ARA* samt *RRA* benyttet.
+
+Tre nyttefunktioner blev præsenteret:
+ - Kvadratisk nytte
+ - Eksponentiel nytte (*CARA*)
+ - Potens nytte (*CRRA*)
+
+Antagelsen om konstant *RRA* samt lognormale afkast var det afgørende element, da potens nytte blev valgt til videre brug.
+ - Lognomale afkast er horisontinvariante	&amp;#10003; 
+ - *CRRA* under sekulær vækst	&amp;#10003;
+ - Lineærekombination i porteføljeafkast (løses ved brug af en approksimation) &amp;#8274;
+
+---
+
+class: animated, fadeIn
+
+# Afkastrelationer - &amp;#128201;
+
+Ud fra nutidsværdien af aktier og hhv. nulkuponobligationer samt kuponobligationer blev følgende relationer bl.a. udledt
+`$$d_t-p_t=\sum_{j=0}^\infty \rho^j \mathbb{E}_t\left[r_{t+j+1}-\Delta d_{t+j+1}\right]-\frac{c}{1-\rho},$$`
+
+`$$r_{t+1}^n=n y_t^n - (n-1) y_{t+1}^{n-1},$$`
+
+`$$r_{t+1}^{c,n}\approx D^{c,n} y_t^{c,n} - \left(D^{c,n} - 1\right) y_{t+1}^{c,n-1}=D^{c,n}(y_t^{c,n}- y_{t+1}^{c,n-1}) + y_{t+1}^{c,n-1}.$$`
+
+Disse gav anledning til, at der måtte eksistere en fundamental relation imellem visse variable:
+ - Aktieafkast og udbytte
+ - Obligationsafkast og rentespænd
+
+Altså var forventningen til den univariate analyse herfra, at variable som inkorperer udbytte og rentespænd måtte have en statistisk signifikans i at prædiktere afkast.
+
+---
+
+class: animated, fadeIn
+
+# Vector Autoregressive Process - &amp;#128201;
+
+VAR(1)-processen skulle benyttes til at skabe et dynamisk system for aktivernes afkast. Benyttelse af en sådan model, ville selvfølgelig kun være strengt nødvendig, i tilfældet hvor afkastene var *tidsvarierende*!
+
+Systemet var fuldstændig defineret fra
+`$$\bf{z}_{t+1}=\bf{\Phi}_0+\bf{\Phi}_1\bf{z}_t+\bf{v}_{t+1}.$$`
+
+Herudover ville stabilitet- og stationaritetsbetingelsen være overholdt når
+`$$\det(\bf{\Phi}_1)\in(-1,1).$$`
+
+En lang række resultater blev udledt. Bias-justering i hældningskoefficienter blev ligeledes præsenteret. Denne bias var defineret som
+`$$\bf{B}_T=-\frac{\bf{b}}{T}+ O\left(T^{-\frac{3}{2}}\right),$$`
+ 
+og ville ligeledes give anledning til bias-justerede afskæringer.
+
+???
+
+Hvorfor ikke en restringeret 0 VAR-model?
+
+---
+
+class: animated, fadeIn
+
+# Dynamisk porteføljeallokering - &amp;#128201;
+
+Herfra blev flere optimeringsproblemer præsenteret de var:
+
+ - Én-periode *CRRA* problemet (uden tidsvarierende afkast).
+ - `\(k\)`-periode *CRRA* problemet, uden tidsvarierende afkast.
+  - Uden periodisk rebalancering.
+  - Med periodisk rebalancering.
+ - Det 'dynamiske' *CRRA* problem, med tidsvarierende afkast.
+
+Disse blev vist for hhv. et setup med ét risikobærende aktiv samt setuppet med flere risikobærende aktiver.
+
+---
+
+class: animated, fadeIn
+
+# Dynamisk porteføljeallokering - &amp;#128201;
+
+Nu vil undertegnede udlede den rekursive porteføljestrategi på tavlen.
+
+---
+
+class: animated, fadeIn
+
+# Dynamisk porteføljeallokering - &amp;#128201;
+
+~~Nu vil undertegnede udlede den rekursive porteføljestrategi på tavlen.~~ 
+
+--
+
+Fandeme nej. 
+
+Under *CRRA*-nytte, lognormale afkast og ikke mindst tidsvarierende afkast, blev det følgende porteføljeproblem beskrevet
+
+`$$\left\{\bf{\alpha}_{t+k-\tau}^\tau\right\}_{\tau=k}^{\tau=1}=
+\arg\max\mathbb{E}_t\left[\frac{1}{1-\gamma}W_{t+k}^{1-\gamma}\right],\quad \gamma\neq 1,$$`
+
+`$$\left\{\bf{\alpha}_{t+k-\tau}^\tau\right\}_{\tau=k}^{\tau=1}=\arg\max\mathbb{E}_t\left[\log(W_{t+k})\right],\quad \gamma=1.$$`
+
+Med tilhørende løsning
+
+`$$\bf{\alpha}_{t+k-\tau}^\tau = \frac{1}{\gamma} \bf{\Sigma}_{xx}^{-1} \left( \mathbb{E}_{t+k-\tau} \left[ \bf{r}_{t+k-\tau+1} - r_{0,t+k-\tau+1} \bf{\ell} \right] + \frac{1}{2} \bf{\sigma}_x^2 + (1-\gamma) \bf{\sigma}_{0x} \right)-\\ \quad\left(1-\frac{1}{\gamma} \right) \bf{\Sigma}_{xx}^{-1} \bf{\Sigma}_x \left(B_1^{\tau-1'}+(B_2^{\tau-1}+B_3^{\tau-1'})\mathbb{E}_{t+k-\tau}[\bf{z}_{t+k-\tau+1}]\right),$$`
+
+som kombinerer den én-periode myopiske portefølje og det *intertemporale hedging demand*. Udledningen af ovenstående findes i Appendiks C.
+
+---
+
+class: animated, fadeIn
+
+# Dynamisk porteføljeallokering - &amp;#128201;
+
+En trunkering for at inkorporere en kortsalgsrestriktion blev ligeledes præsenteret
+`$$\alpha_{i,t}=\frac{\max(0,\alpha_{i,t})}{\sum_{i=1}^n \max(0,\alpha_{i,t})},$$`
+
+her skal selvfølgelig huskes på, at korrektionen er ex-post.
+
+---
+
+class: animated, fadeIn
+
+# Empirisk analyse - &amp;#128202;
+
+De kommende slides vil repræsentere den empiriske analyse fra Del III.
+
+Kort fortalt:
+ - Få observationer.
+ - Skæve fordelinger.
+ - Ikke-normalitet.
+ - Generelt stationære.
+ - Høj absolut korrelation mellem variablene.
+ - Lineær sammenhæng mellem visse variable, men ikke umiddelbart for de forventede variable.
+ - Multipel regression viste, at meget lidt variation blev forklaret.
+ - VAR model var stabil og stationær.
+ - Allokering ændrer sig med investeringshorisont og risikotolerance.
+
+---
+
+class: animated, fadeIn
+
+# Kort om data - &amp;#128202;
+
+En gennemgående databeskrivelse blev foretaget. Aktiverne bestod af hhv.:
+ - Afkastet på en 90-dages amerikansk *T-Bill*.
+ - Merafkastet på et indeks repræsenterende *NYSE*, *AMEX*, *NASDAQ* markederne.
+ - Merafkastet på en 10-årige amerikansk statsobligation.
+ - Merafkastet på et indeks repræsenterende virksomhedsobligationer.
+
+Prædiktionsvariablene var:
+ - *Dividend-Price Ratio*, *Price-Earnings Ratio*, *Book-to-Market Ratio*, aktievariansen, *Small Minus Big*, *High Minus Low*, den nominelle rente, *Term Spread*, *Yield Spread*, *Credit Spread*, *Default Spread* og *Federal Funds Rate*.
+
+Dvs. mere end rigeligt til 259 kvartalsvise observationer!
+
+???
+
+Virksomhedsobligationsindekset?
+
+---
+
+class: animated, fadeIn
+
+# Kort om data - &amp;#128202;
+
+&lt;img src="End_of_Line_files/figure-html/NET-TB-tids-1.png" width="5400" style="display: block; margin: auto;" /&gt;&lt;img src="End_of_Line_files/figure-html/NET-TB-tids-2.png" width="5400" style="display: block; margin: auto;" /&gt;&lt;img src="End_of_Line_files/figure-html/NET-TB-tids-3.png" width="5400" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: animated, fadeIn
+
+# Kort om data - &amp;#128202;
+
+Der blev lavet beskrivende statistik. Først for aktivklasserne.
+
+&lt;img src="C:/Users/AKF/Downloads/STAT.png" width="525" style="display: block; margin: auto;" /&gt;
+
+
+???
+
+Justeret middelværdi?
+
+---
+
+class: animated, fadeIn
+
+# Kort om data - &amp;#128202;
+
+Dernæst for prædiktionsvariablene.
+
+&lt;img src="C:/Users/AKF/Downloads/STAT_T.png" width="528" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: animated, fadeIn
+
+# Korrelation - &amp;#128202;
+
+Korrelationen mellem alle variable.
+
+&lt;img src="C:/Users/AKF/Downloads/KORR.png" width="529" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: animated, fadeIn
+
+# Normalitet - &amp;#128202;
+
+På trods af de relativt få observationer, blev normalitetsbetingelsen alligevel tjekket.
+
+Først for aktivklasserne.
+
+&lt;img src="C:/Users/AKF/Downloads/JB.png" width="324" style="display: block; margin: auto;" /&gt;
+
+--
+
+Bliver forkastet med et brag som forventet.
+
+???
+
+Hvorfor så fortsætte analysen?
+
+---
+
+class: animated, fadeIn
+
+# Normalitet - &amp;#128202;
+
+Dernæst for prædiktionsvariablene.
+
+&lt;img src="C:/Users/AKF/Downloads/JB_T.png" width="249" style="display: block; margin: auto;" /&gt;
+
+--
+
+*Small Minus Big* faktoren udviser meget normalitetslighed! Cadeau til Fama og French.
+
+---
+
+
+class: animated, fadeIn
+
+# Stationaritet - &amp;#128202;
+
+Stationaritetsbetingelsen blev ligeledes undersøgt for hver tidsserie. *Augmented Dickey-Fuller* blev først præsenteret.
+
+&lt;img src="C:/Users/AKF/Downloads/ADF.png" width="525" style="display: block; margin: auto;" /&gt;
+
+???
+
+Hvorfor ikke anvende de første forskelle på visse variable?
+
+---
+
+class: animated, fadeIn
+
+# Univariat analyse - &amp;#128202;
+
+Den univariate analyse havde til opgave at finde evt. lineære sammenhænge mellem responsen (merafkast) og prædiktionsvariablene.
+
+&lt;img src="C:/Users/AKF/Downloads/UNI_A.png" width="472" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: animated, fadeIn
+
+# Multipel analyse - &amp;#128202;
+
+Den multiple analyse havde til formål at formindske bias ved inklusion af flere variable.
+
+&lt;img src="C:/Users/AKF/Downloads/MULT_A.png" width="462" style="display: block; margin: auto;" /&gt;
+
+Regressionens ulempe er multikollinearitet.
+
+???
+
+Hvorfor ikke anvende interaktion?
+
+---
+
+class: animated, fadeIn
+
+# Multipel analyse - &amp;#128202;
+
+Modeltjek blev ligeledes foretaget, her var enkelte observationer generelt *outliers* på tværs af alle de multiple regressioner.
+
+&lt;img src="C:/Users/AKF/Downloads/AUTO_A.png" width="538" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: animated, fadeIn
+
+# Modelselektion - &amp;#128202;
+
+Modelselektionen blev foretaget via en *Step-AKFIC*-procedure. Her blev hver VAR(1)-ligning trinvist optimeret.
+
+Der var få krav til selektionen:
+ - Den nominelle rente skulle inkluderes for at medtage inflation i systemet
+ - Samtlige aktiver skulle forklare variationen på tværs af alle aktiver og prædiktionsvariable.
+
+Derudover blev to VIF-analyse foretaget, som skulle afhjælpe multikollinearitet. For at have en balanceret model, blev en kvalititativ beslutning ligeledes taget.
+
+???
+
+Hvorfor ikke AIC?
+
+Hvorfor ikke forward selection?
+
+Hvorfor betingelserne?
+
+Hvorfor kvalitativ udvægelse?
+
+---
+
+class: animated, fadeIn
+
+# Modelselektion - &amp;#128202;
+
+&lt;img src="C:/Users/AKF/Downloads/MOD_A.png" width="623" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: animated, fadeIn
+
+# Modelselektion - &amp;#128202;
+
+&lt;img src="C:/Users/AKF/Downloads/VIF.png" width="528" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: animated, fadeIn
+
+# Endelig model - &amp;#128202;
+
+Efter modelselektionen blev den restringerede VAR(1)-model estimeret. Den endelige model bestod af de fire aktiver samt fire prædiktionsvariable.
+
+&lt;img src="C:/Users/AKF/Downloads/VAR.png" width="536" style="display: block; margin: auto;" /&gt;
+
+???
+
+Hvorfor reageres ikke på insignifikante variable?
+
+---
+
+class: animated, fadeIn
+
+# Endelig model - &amp;#128202;
+
+Fejlledenes korrelationsmatrix sammenholdt med koefficientestimaterne gav en indikation af den mulige *mean reversion*/*mean aversion* blandt variablene.
+
+&lt;img src="C:/Users/AKF/Downloads/VAR_F.png" width="400" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: animated, fadeIn
+
+# Monte Carlo studie - &amp;#128202;
+
+Dette kapitel fungerede som et modspil til afsnittene om afkastprædiktabilitet.
+
+&lt;img src="End_of_Line_files/figure-html/weight-exp-1.png" width="5400" style="display: block; margin: auto;" /&gt;
+
+Her blev påvist gennem simulation, hvordan præcisionen i momentestimaterne kan påvirke porteføljeallokeringerne. Dette var på baggrund af fuld information om den bagvedliggende fordeling af tidsserierne.
+
+---
+
+class: animated, fadeIn
+
+# Allokering - &amp;#128202;
+
+*First-period* allokeringer, dvs. for `\(A_0^{t+k}\)`, `\(A_1^{t+k}\)`, altså hvor den resterende horisontlængde er `\(t+k\)`.
+
+Investoren har horisont på `\(25\)` år og en moderat risikoaversion `\(\gamma=5\)`.
+
+&lt;img src="End_of_Line_files/figure-html/unnamed-chunk-14-1.png" width="5400" style="display: block; margin: auto;" /&gt;
+
+???
+
+Hvorfor ser vi ikke allokeringerne MED rebalancering?
+
+---
+
+class: animated, fadeIn
+
+# Allokering - &amp;#128202;
+
+Dekompositionen af *mean first-period*.
+
+&lt;img src="C:/Users/AKF/Downloads/DEKOMP.png" width="417" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: animated, fadeIn
+
+# Allokering - &amp;#128202;
+
+Horisontanalyse og analyse af risikotolerance.
+
+&lt;img src="C:/Users/AKF/Downloads/HORRIS.png" width="530" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: animated, fadeIn
+
+# Allokering - &amp;#128202;
+
+Kortsalgsrestriktion.
+
+&lt;img src="C:/Users/AKF/Downloads/KORTSALG.png" width="535" style="display: block; margin: auto;" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

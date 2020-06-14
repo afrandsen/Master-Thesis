@@ -293,7 +293,7 @@ Databehandling samt modelestimation er beregnet og kodet via statistikprogrammet
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       Europe/Paris                
-##  date     2020-06-05                  
+##  date     2020-06-13                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package       * version  date       lib source           
@@ -1308,9 +1308,9 @@ hvor \(y_t\) er responsvariablen, som repræsenterer det realiserede merafkast p
 \subsection{Multipel regression}\label{multregr}}
 
 Som pointeret af \citep{Stambaugh1999} er der flere problemer med estimationen af den univariate regression. For at øge inferensen af estimationsresultaterne følges metoden af \citep{Goyal2007}, som består af en multipel regression. Den medfører en regression af responsvariablen, merafkast, på samtlige laggede forklarende variable. Altså kan den analytisk beskrives som
-\[y_t=\beta_0+\bm{\beta}_1'\bm{x}_{t-1}+\bm{\varepsilon}_t,\]
+\[y_t=\beta_0+\bm{\beta}_1'\bm{x}_{t-1}+\varepsilon_t,\]
 
-her er \(\bm{x}_{t-1}\) vektoren af realisationer af de forklarende variable, på tidspunkt \(t-1\). Nu er \(\bm{\beta}_1\) vektoren af hældningskoefficienter for hver af de forklarende variable. Slutteligt er \(\bm{\varepsilon}_t\) vektoren af fejlled. Fordelen ved en multipel regression er, at den muliggør biasreduktion -- som der ellers kan opstå i den univariate regression -- ved at inkludere tidligere udeladte variable. Denne fordel kommer dog med en omkostning, da multikollinearitet kan skabe en mere ustabil model.
+her er \(\bm{x}_{t-1}\) vektoren af realisationer af de forklarende variable, på tidspunkt \(t-1\). Nu er \(\bm{\beta}_1\) vektoren af hældningskoefficienter for hver af de forklarende variable. Slutteligt er \(\varepsilon_t\) fejlledet. Fordelen ved en multipel regression er, at den muliggør biasreduktion -- som der ellers kan opstå i den univariate regression -- ved at inkludere tidligere udeladte variable. Denne fordel kommer dog med en omkostning, da multikollinearitet kan skabe en mere ustabil model.
 
 \hypertarget{sektestaftids}{%
 \section{Test af tidsserier}\label{sektestaftids}}
@@ -2413,7 +2413,7 @@ De ovenstående præsenterede univariate regressioner kaster tvivl på validitet
 I denne sektion fortsættes analysen af variablene, som kan indgå i den endelige VAR(1)-model, ved brug af multiple regressioner. Altså antages det, at en eller flere variable forklarer variationen i log merafkastet på aktivklasserne. I det følgende vil tre robuste OLS estimationer blive undersøgt nærmere, idet, at standardfejl er justeret for heteroskedasticitet og autokorrelation, \citep{Newey1987}. \(t\)-værdierne og \(p\)-værdierne er ligedes dannet på baggrund af de justerede standardfejl. Signifikansniveauet fastholdes på niveauet \(\alpha=0.05\). At inkludere alle variable i én multipel regression betegnes undertiden i litteraturen med det velvalgte navn \emph{Kitchen-Sink Regression}, \citep{Goyal2007}. Derudover foretages en \emph{Step-AIC}-procedure\footnote{Den eneste restriktion på proceduren er, at den nominelle rente skal indgå. Derfor vil step-proceduren ikke nødvendigvis skabe en model med bedre prædiktionsevne.}, der giver anledning til en regression, af en delmængde af de foreklarende variable i de multiple regressioner. Dette anvendes kun som et supplement til modeltjekkene, og skal ikke ses som en modelselektion.
 
 Den multiple analyse består af følgende regressioner
-\[rx_{t+1}^j=\beta_{0}+\bm{\beta}_{1}'\bm{x}_{t}+\bm{\varepsilon}_{t+1},\]
+\[rx_{t+1}^j=\beta_{0}+\bm{\beta}_{1}'\bm{x}_{t}+\varepsilon_{t+1},\]
 
 hvor \(j\) er notationen for de \(3\) aktivklasser bestående af merafkast.
 

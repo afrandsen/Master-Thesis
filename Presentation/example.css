@@ -1,0 +1,6 @@
+body { font-family: 'Palatino Linotype', serif; }
+h1, h2, h3 {
+  font-family: 'Palatino Linotype';
+  font-weight: normal;
+}
+.remark-code, .remark-inline-code { font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace; }
